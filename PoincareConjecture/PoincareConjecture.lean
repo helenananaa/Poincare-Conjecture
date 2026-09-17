@@ -1,5 +1,6 @@
 import PoincareConjecture.Basic
 import PoincareConjecture.Topology.FiberSaturation.NeckCoordinates
+import PoincareConjecture.Topology.FiberSaturation.Boundary
 
 /-!
 # PoincareConjecture

@@ -41,6 +41,16 @@ Limits, Kappa-Solutions, and Canonical Neighborhoods**, and Stage 4,
 the first-failure extension argument; the remaining chapters retain their
 existing order and roles.
 
+## Closed-collar component extension
+
+The main package also proves ambient-frontier pullback saturation, the cylinder
+component formula, the embedded collar component interval, and transfer of a
+component's relative frontier to the ambient frontier. The closed-collar
+blueprint node is **not yet marked complete**: identifying an endpoint fiber
+as a full ambient boundary component still requires the finite-family interface.
+See `blueprint/review/closed-collar-components-lean-review.md` and run
+`python3 tests/check_closed_collar.py` for the combined regression audit.
+
 ## Build
 
 ```bash
