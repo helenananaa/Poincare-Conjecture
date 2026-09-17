@@ -1,0 +1,24 @@
+import PoincareConjecture
+
+#print axioms PoincareConjecture.Topology.FiberSaturation.fiberSaturated_of_frontier
+#print axioms PoincareConjecture.Topology.FiberSaturation.FiberSaturated.eq_univ_prod_image
+#print axioms PoincareConjecture.Topology.FiberSaturation.eq_univ_prod_image_of_frontier
+#print axioms PoincareConjecture.Topology.FiberSaturation.exists_open_base
+#print axioms PoincareConjecture.Topology.FiberSaturation.fiberSaturated_univ_prod
+#print axioms PoincareConjecture.Topology.FiberSaturation.frontier_fiberSaturated_univ_prod
+#print axioms PoincareConjecture.Topology.FiberSaturation.open_connected_eq_Ioo
+#print axioms PoincareConjecture.Topology.FiberSaturation.exists_interval_of_compact_closure
+#print axioms PoincareConjecture.Topology.FiberSaturation.exists_open_ordConnected_base
+#print axioms PoincareConjecture.Topology.FiberSaturation.sphere2_connectedSpace
+#print axioms PoincareConjecture.Topology.FiberSaturation.sphere_neck_fiber_saturation
+#print axioms PoincareConjecture.Topology.FiberSaturation.sphere_neck_two_frontier_spheres
+#print axioms PoincareConjecture.Topology.FiberSaturation.sphere_neck_open_interval
+
+#check @PoincareConjecture.Topology.FiberSaturation.sphere_neck_open_interval
+#check @PoincareConjecture.Topology.FiberSaturation.sphere_neck_two_frontier_spheres
+
+#print axioms PoincareConjecture.Topology.FiberSaturation.fiber_saturation_from_spherical_frontier
+#print axioms PoincareConjecture.Topology.FiberSaturation.exists_closed_cylinder
+#print axioms PoincareConjecture.Topology.FiberSaturation.neck_coordinates_cylinder
+#check @PoincareConjecture.Topology.FiberSaturation.fiber_saturation_from_spherical_frontier
+#check @PoincareConjecture.Topology.FiberSaturation.neck_coordinates_cylinder

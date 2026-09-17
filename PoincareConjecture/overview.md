@@ -21,8 +21,11 @@ another single source.
   Douglas--Hildebrandt, and parabolic-flow results are explicit imported
   contracts with registered source locations and stated hypotheses; their
   classical source proofs remain within the human review boundary.
-- **Lean:** no live blueprint node is claimed formalized; all remain marked
-  `\notready`.
+- **Lean:** `lem:fiber-saturation-from-spherical-frontier` now has a checked
+  Lean declaration covering both clauses, with no additional project axioms.
+  The remaining main-route nodes are not claimed formalized. The new
+  closed-cylinder and neck-coordinate interfaces do not complete the smooth
+  collar or sphere-bundle classification.
 - **Expert approval:** not obtained or claimed.
 - **Route:** Morgan--Tian with explicitly cited Kleiner--Lott analytic
   interfaces where their hypotheses are stated in full.

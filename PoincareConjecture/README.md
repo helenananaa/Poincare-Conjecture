@@ -29,9 +29,11 @@ finite-net loop-width argument. The Hempel, Plateau--Morrey,
 Douglas--Hildebrandt, and parabolic-flow results are retained as explicit
 imported contracts with their exact registered Morgan--Tian/White/Topping/
 Perelman locations and all hypotheses consumed by later nodes; their classical
-source proofs remain part of the human review boundary. Live nodes remain
-marked `\notready`: this project makes no claim of Lean formalization or expert
-approval.
+source proofs remain part of the human review boundary. One live node,
+`lem:fiber-saturation-from-spherical-frontier`, is now mapped to a checked Lean
+theorem covering both clauses. The remaining main route is not formalized;
+no complete Poincare proof or expert approval is claimed. See
+`blueprint/review/fiber-saturation-lean-review.md` for the precise scope.
 
 Chapter 3 is organized into two implementation stages: Stage 3, **Blow-Up
 Limits, Kappa-Solutions, and Canonical Neighborhoods**, and Stage 4,
