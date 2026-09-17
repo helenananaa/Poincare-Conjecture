@@ -107,3 +107,14 @@ Topological regular-openness is an explicit boundary bridge; arbitrary smooth
 sphere-bundle identification and the diffeomorphism upgrade remain open.
 See `blueprint/review/torus-region-lean-review.md`. The cumulative verifier is
 `python3 tests/check_torus_region.py`; no new blueprint node is marked complete.
+
+## Intrinsic boundary bridge (conditional)
+
+The primary package proves the intrinsic-boundary/ambient-frontier comparison
+from explicit compatible ambient chart extensions, and converts the literal
+source boundary equation to regular-openness. Canonical half-space witnesses
+and a punctured-line counterexample are checked. The existence of such chart
+extensions from a general smooth codimension-zero embedding remains unproved;
+this does not replace the pending Lee Proposition 5.46 or complete a blueprint node.
+See `blueprint/review/boundary-regularity-lean-review.md` and run
+`python3 tests/check_boundary_regularity.py` for the cumulative verification.

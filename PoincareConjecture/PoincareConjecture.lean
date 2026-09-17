@@ -4,6 +4,7 @@ import PoincareConjecture.Topology.FiberSaturation.Boundary
 import PoincareConjecture.Topology.FiberSaturation.ProductPairing
 import PoincareConjecture.Topology.FiberSaturation.TorusComponents
 import PoincareConjecture.Topology.FiberSaturation.TorusRegionClassification
+import PoincareConjecture.Topology.FiberSaturation.BoundaryModels
 
 /-!
 # PoincareConjecture
