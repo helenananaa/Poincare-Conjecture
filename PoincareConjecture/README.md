@@ -97,3 +97,13 @@ lifted components with a stated finite-strip description. The arbitrary
 sphere-bundle and smooth-boundary bridges remain open, with no new blueprint
 completion flag. See `blueprint/review/mapping-torus-lean-review.md` and run
 `python3 tests/check_mapping_torus.py` for the cumulative audit.
+
+## Actual quotient-region closure
+
+The integer-deck development now derives the finite-strip description of an
+actual lifted component, proves that its image is the whole connected region,
+and identifies the actual closure before constructing its cylinder homeomorphism.
+Topological regular-openness is an explicit boundary bridge; arbitrary smooth
+sphere-bundle identification and the diffeomorphism upgrade remain open.
+See `blueprint/review/torus-region-lean-review.md`. The cumulative verifier is
+`python3 tests/check_torus_region.py`; no new blueprint node is marked complete.
