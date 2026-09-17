@@ -75,3 +75,14 @@ The generated `blueprint/blueprint-map-tab.html` is loaded only by this
 project's blueprint tab; the built-in dependency graph remains the canonical
 hgraph view. The map is a collapsed reader view of the same live semantic DAG,
 not a smaller proof graph.
+
+## Product-neck boundary pairing
+
+The primary package now also proves the topological product branch of the
+boundary-pairing interface: an actual closed-cylinder homeomorphism and the
+identification of the two endpoint spheres as entire frontier components.
+The new finite disjoint closed-family theorem supplies reusable component
+separation. No mapping-torus classification or smooth diffeomorphism is claimed.
+No additional blueprint node is marked complete. Details are in
+`blueprint/review/product-boundary-pairing-lean-review.md`. Run
+`python3 tests/check_product_pairing.py` for the cumulative build and audit.
