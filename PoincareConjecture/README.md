@@ -142,3 +142,12 @@ for a preexisting global homeomorphism. This does not prove existence of a
 periodic presentation for every abstract sphere bundle or smooth descent.
 See `blueprint/review/circle-presentation-lean-review.md`; run
 `python3 tests/check_presentation.py` for the 142-declaration cumulative audit.
+
+## Smooth cylinder comparisons
+
+The primary package now includes fixed-structure diffeomorphisms for standard
+closed cylinders and product regions. The periodic-region upgrade explicitly
+requires the given presentation to be a local smooth diffeomorphism; continuity
+alone is not substituted for this premise. No additional blueprint completion
+flag is set. See `blueprint/review/smooth-cylinder-lean-review.md` and run
+`python3 tests/check_smooth_cylinder.py` for the cumulative audit.
