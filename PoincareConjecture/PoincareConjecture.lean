@@ -2,6 +2,7 @@ import PoincareConjecture.Basic
 import PoincareConjecture.Topology.FiberSaturation.NeckCoordinates
 import PoincareConjecture.Topology.FiberSaturation.Boundary
 import PoincareConjecture.Topology.FiberSaturation.ProductPairing
+import PoincareConjecture.Topology.FiberSaturation.TorusComponents
 
 /-!
 # PoincareConjecture

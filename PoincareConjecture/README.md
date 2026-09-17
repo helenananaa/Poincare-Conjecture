@@ -86,3 +86,14 @@ separation. No mapping-torus classification or smooth diffeomorphism is claimed.
 No additional blueprint node is marked complete. Details are in
 `blueprint/review/product-boundary-pairing-lean-review.md`. Run
 `python3 tests/check_product_pairing.py` for the cumulative build and audit.
+
+## Mapping-torus quotient interfaces
+
+The primary package constructs the integer-deck quotient of a twisted cylinder,
+proves the sharp short-strip injectivity criterion, constructs short-strip
+image homeomorphisms, and excludes the full-period case when the projected
+closure has nonempty topological frontier. Disjointness is derived for genuine
+lifted components with a stated finite-strip description. The arbitrary
+sphere-bundle and smooth-boundary bridges remain open, with no new blueprint
+completion flag. See `blueprint/review/mapping-torus-lean-review.md` and run
+`python3 tests/check_mapping_torus.py` for the cumulative audit.
