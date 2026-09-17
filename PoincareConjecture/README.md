@@ -118,3 +118,16 @@ extensions from a general smooth codimension-zero embedding remains unproved;
 this does not replace the pending Lee Proposition 5.46 or complete a blueprint node.
 See `blueprint/review/boundary-regularity-lean-review.md` and run
 `python3 tests/check_boundary_regularity.py` for the cumulative verification.
+
+## Smooth embedding boundary bridge
+
+The local ambient set charts are now constructed from an actual equal-dimensional
+C-infinity smooth embedding into a boundaryless model, rather than assumed.
+Intrinsic interior and boundary are identified with the ambient image interior
+and frontier; closed image (or properness) supplies the global boundary equality.
+The smooth-closure adapter derives regular openness from the original intrinsic
+boundary equation and connects it to the quotient-region theorem. It still does
+not prove a smooth cylinder diffeomorphism or construct global sphere-bundle
+coordinates. No further blueprint node is marked complete. See
+`blueprint/review/smooth-embedding-boundary-lean-review.md` and run
+`python3 tests/check_smooth_embedding.py` for the cumulative 115-declaration audit.
