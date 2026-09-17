@@ -131,3 +131,14 @@ not prove a smooth cylinder diffeomorphism or construct global sphere-bundle
 coordinates. No further blueprint node is marked complete. See
 `blueprint/review/smooth-embedding-boundary-lean-review.md` and run
 `python3 tests/check_smooth_embedding.py` for the cumulative 115-declaration audit.
+
+## Continuous periodic presentation
+
+Global quotient coordinates can now be constructed from a supplied continuous
+sphere presentation, its circle base projection, fiberwise injectivity and
+one-step gluing. Openness is derived from compact fibers and Hausdorffness.
+The smooth-closure region theorem consumes these coordinates without asking
+for a preexisting global homeomorphism. This does not prove existence of a
+periodic presentation for every abstract sphere bundle or smooth descent.
+See `blueprint/review/circle-presentation-lean-review.md`; run
+`python3 tests/check_presentation.py` for the 142-declaration cumulative audit.

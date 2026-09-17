@@ -6,6 +6,7 @@ import PoincareConjecture.Topology.FiberSaturation.TorusComponents
 import PoincareConjecture.Topology.FiberSaturation.TorusRegionClassification
 import PoincareConjecture.Topology.FiberSaturation.BoundaryModels
 import PoincareConjecture.Topology.FiberSaturation.SmoothEmbeddingModels
+import PoincareConjecture.Topology.FiberSaturation.PresentedSmoothRegion
 
 /-!
 # PoincareConjecture
