@@ -173,3 +173,14 @@ No arbitrary smooth interval trivialization is supplied or claimed. No additiona
 blueprint completion flags are set. See the `closed-real-bridge-lean-review.md`
 and `abstract-boundary-components-lean-review.md` reviews. Reproduce with
 `python3 tests/check_abstract_pairing.py --fresh`.
+
+## Smooth real-interval trivialization
+
+Local smooth bundle charts now produce a smooth trivialization covering any
+closed real interval, via an explicit collar-matching coordinate correction.
+The correction retains the base coordinate and has a proved smooth inverse.
+The interval argument adapts Mathlib's topological exhaustion proof; it does
+not claim that a previously chosen topological trivialization is smooth.
+See `blueprint/review/smooth-interval-splice-lean-review.md`. Reproduce with
+`python3 tests/check_smooth_splice.py --fresh`. No periodic smooth seam or
+additional blueprint-node completion is claimed.
