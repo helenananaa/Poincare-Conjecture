@@ -198,3 +198,15 @@ circle bundle or yet prove the smooth all-real periodic extension. No new
 blueprint completion marker is added. See
 `blueprint/review/smooth-periodic-endmatching-lean-review.md` and run
 `python3 tests/check_periodic_endmatching.py --fresh` for cumulative verification.
+
+## Smooth all-integer extension
+
+`SmoothBundle.exists_equivariant_real_diffeomorph` constructs a global
+diffeomorphism from `Real × F` to a real-base bundle space from local smooth
+charts and a supplied smooth height-shifting deck diffeomorphism. It preserves
+height and satisfies the compatibility equation for every positive and
+negative integer period. No global parametrization or global inverse is assumed.
+The smooth pullback construction for an arbitrary circle bundle remains separate;
+no additional blueprint completion marker is set. See
+`blueprint/review/smooth-integer-extension-lean-review.md`. Validate with
+`python3 tests/check_integer_extension.py --fresh` in Linux or WSL.

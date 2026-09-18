@@ -14,6 +14,8 @@ import PoincareConjecture.Topology.FiberSaturation.AbstractBoundaryPairing
 
 import PoincareConjecture.Topology.FiberSaturation.SmoothIntervalTrivialization
 
+import PoincareConjecture.Topology.FiberSaturation.SmoothRealTrivialization
+
 /-!
 # PoincareConjecture
 
