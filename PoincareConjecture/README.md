@@ -210,3 +210,13 @@ The smooth pullback construction for an arbitrary circle bundle remains separate
 no additional blueprint completion marker is set. See
 `blueprint/review/smooth-integer-extension-lean-review.md`. Validate with
 `python3 tests/check_integer_extension.py --fresh` in Linux or WSL.
+
+## Smooth covering-pullback construction
+
+The covering pullback now has a checked atlas lifted from the unchanged original
+total-space structure, a local-diffeomorphic forgetful projection, and a constructed
+smooth natural deck map. The native `Bundle.Pullback` is linked by a proved
+diffeomorphism. Smooth compatibility of its local fiber trivializations remains
+a separate input to be established; it is not inferred from continuity.
+See `blueprint/review/smooth-cover-pullback-lean-review.md` and run
+`python3 tests/check_cover_pullback.py --fresh` for the 328-declaration audit.
