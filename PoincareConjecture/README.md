@@ -184,3 +184,17 @@ not claim that a previously chosen topological trivialization is smooth.
 See `blueprint/review/smooth-interval-splice-lean-review.md`. Reproduce with
 `python3 tests/check_smooth_splice.py --fresh`. No periodic smooth seam or
 additional blueprint-node completion is claimed.
+
+## Smooth periodic end matching
+
+Local smooth real-base bundle charts, together with a given smooth deck
+transformation covering translation by a positive period, now produce a
+smooth period chart whose two end collars differ by a single constructed
+fiber diffeomorphism. The inverse-chart seam formula and its local smooth
+invertibility are also proved. These results retain the original structures.
+
+They do not construct the smooth pullback atlas/deck map for an arbitrary
+circle bundle or yet prove the smooth all-real periodic extension. No new
+blueprint completion marker is added. See
+`blueprint/review/smooth-periodic-endmatching-lean-review.md` and run
+`python3 tests/check_periodic_endmatching.py --fresh` for cumulative verification.

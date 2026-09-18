@@ -1,4 +1,5 @@
 import PoincareConjecture.Basic
+import PoincareConjecture.Topology.FiberSaturation.SmoothPeriodicInverse
 import PoincareConjecture.Topology.FiberSaturation.NeckCoordinates
 import PoincareConjecture.Topology.FiberSaturation.Boundary
 import PoincareConjecture.Topology.FiberSaturation.ProductPairing
