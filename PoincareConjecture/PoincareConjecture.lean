@@ -9,6 +9,7 @@ import PoincareConjecture.Topology.FiberSaturation.SmoothEmbeddingModels
 import PoincareConjecture.Topology.FiberSaturation.PresentedSmoothRegion
 import PoincareConjecture.Topology.FiberSaturation.SmoothProductRegion
 import PoincareConjecture.Topology.FiberSaturation.AbstractBundleMappingTorus
+import PoincareConjecture.Topology.FiberSaturation.AbstractBoundaryPairing
 
 /-!
 # PoincareConjecture

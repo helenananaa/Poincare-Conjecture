@@ -161,3 +161,15 @@ base-compatible homeomorphism from the closed-cylinder quotient to the original
 total space. This is a topological result, not yet a smooth periodic presentation.
 See `blueprint/review/abstract-bundle-cut-lean-review.md`. Reproduce using
 `python3 tests/check_abstract_bundle.py`. No new blueprint completion flag is set.
+
+## Abstract bundle: real presentation and actual frontier components
+
+The closed seam quotient is compared with the real-axis orbit quotient, yielding
+a continuous real presentation directly from the abstract compact-fiber bundle.
+The sphere specialization also classifies regular-region closures and proves
+that their actual frontier consists of exactly two complete bundle fibers,
+each an entire nonempty connected component. These remain topological results.
+No arbitrary smooth interval trivialization is supplied or claimed. No additional
+blueprint completion flags are set. See the `closed-real-bridge-lean-review.md`
+and `abstract-boundary-components-lean-review.md` reviews. Reproduce with
+`python3 tests/check_abstract_pairing.py --fresh`.
