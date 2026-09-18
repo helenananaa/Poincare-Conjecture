@@ -151,3 +151,13 @@ requires the given presentation to be a local smooth diffeomorphism; continuity
 alone is not substituted for this premise. No additional blueprint completion
 flag is set. See `blueprint/review/smooth-cylinder-lean-review.md` and run
 `python3 tests/check_smooth_cylinder.py` for the cumulative audit.
+
+## Abstract circle bundle: topological cut and gluing
+
+`CircleBundle.abstract_sphere_bundle_closed_mappingTorus` starts from a standard
+abstract `FiberBundle`, not a supplied periodic map. It constructs a cut-cylinder
+parametrization, its endpoint homeomorphism, the exact seam relation, and a
+base-compatible homeomorphism from the closed-cylinder quotient to the original
+total space. This is a topological result, not yet a smooth periodic presentation.
+See `blueprint/review/abstract-bundle-cut-lean-review.md`. Reproduce using
+`python3 tests/check_abstract_bundle.py`. No new blueprint completion flag is set.
