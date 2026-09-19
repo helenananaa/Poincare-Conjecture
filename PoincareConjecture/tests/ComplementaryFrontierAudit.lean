@@ -1,0 +1,17 @@
+import PoincareConjecture
+
+#print axioms PoincareConjecture.Topology.FiberSaturation.exterior_piece_subset_component
+#print axioms PoincareConjecture.Topology.FiberSaturation.complementary_component_frontier_subset
+#print axioms PoincareConjecture.Topology.FiberSaturation.proper_complementary_component_frontier_nonempty
+#print axioms PoincareConjecture.Topology.FiberSaturation.NeckParameter
+#print axioms PoincareConjecture.Topology.FiberSaturation.neckCenter
+#print axioms PoincareConjecture.Topology.FiberSaturation.positiveCollar
+#print axioms PoincareConjecture.Topology.FiberSaturation.isPreconnected_positiveCollar
+#print axioms PoincareConjecture.Topology.FiberSaturation.center_mem_closure_positiveCollar
+#print axioms PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_frontier_saturated
+#print axioms PoincareConjecture.Topology.FiberSaturation.collarSection
+#print axioms PoincareConjecture.Topology.FiberSaturation.complementary_frontier_selection
+#print axioms PoincareConjecture.Topology.FiberSaturation.collared_complement_frontier_components
+#print axioms PoincareConjecture.Topology.FiberSaturation.sphere_collared_complement_frontier_components
+
+#check @PoincareConjecture.Topology.FiberSaturation.sphere_collared_complement_frontier_components

@@ -236,3 +236,16 @@ No full Poincare theorem, prescribed boundary parametrization extension or
 third-party acceptance is claimed. No new blueprint completion marker is set.
 See `blueprint/review/smooth-atlas-pullback-lean-review.md`; run
 `python3 tests/check_smooth_atlas_pullback.py --fresh` for the cumulative audit.
+
+## Complementary frontier selected from one-sided collars
+
+The primary package now proves that a proper complementary component of a
+closed region has frontier equal to a nonempty subcollection of the region's
+finite disjoint collared sphere frontier. Whole-section saturation is derived
+from the actual exterior half-collars, not assumed for the complementary component.
+Selected spheres are proved to be entire frontier connected components.
+The caller still supplies genuine one-sided collar embeddings; their existence
+from smooth or Ricci-flow geometry and the smooth complementary-closure structure
+are not claimed here. No additional blueprint completion flag has been set.
+See `blueprint/review/complementary-frontier-collars-lean-review.md` and run
+`python3 tests/check_complementary_frontier.py --fresh` for cumulative checks.
