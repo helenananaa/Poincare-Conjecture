@@ -164,20 +164,20 @@
     "math_role": "map"
   },
   {
-    "id": "metric-length-gluing",
-    "model": "grok",
     "depends_on": [
       "metric-chain-triangle",
       "metric-glued-map",
       "metric-epsilon-removal"
     ],
-    "source": "import PoincareConjecture.ParallelMath.SurgeryMetric.ChainTriangle\nimport PoincareConjecture.ParallelMath.SurgeryMetric.GluedMap\nimport PoincareConjecture.ParallelMath.SurgeryMetric.EpsilonRemoval\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Gluing local maps is globally Lipschitz when finite piece-chains approximate ambient distance. -/\ntheorem lipschitz_gluing_of_approximate_piece_chains\n    {ι X Y : Type*} [PseudoMetricSpace X] [PseudoMetricSpace Y]\n    (S : ι → Set X) (hcover : ∀ x : X, ∃ i, x ∈ S i)\n    (f : ι → X → Y) (cost : ι → X → X → ℝ) (L : ℝ≥0)\n    (hcompat : ∀ i j x, x ∈ S i → x ∈ S j → f i x = f j x)\n    (hlocal : ∀ i x y, x ∈ S i → y ∈ S i →\n      dist (f i x) (f i y) ≤ (L : ℝ)*cost i x y)\n    (hchains : ∀ x y : X, ∀ epsilon : ℝ, 0 < epsilon →\n      ∃ n : ℕ, ∃ z : Fin (n+1) → X, ∃ piece : Fin n → ι,\n        z 0 = x ∧ z (Fin.last n) = y ∧\n        (∀ i, z i.castSucc ∈ S (piece i) ∧ z i.succ ∈ S (piece i)) ∧\n        (∑ i : Fin n, cost (piece i) (z i.castSucc) (z i.succ)) ≤ dist x y + epsilon) :\n    ∃ F : X → Y, (∀ i x, x ∈ S i → F x = f i x) ∧ LipschitzWith L F :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "hint": "REDUCE: use the three integrated map/chain/epsilon lemmas. Glue F from compatibility; for each approximating chain sum local bounds and telescope; then remove epsilon. hchains is an explicit geometric chain approximation hypothesis, not the desired global map bound. The theorem does not assert that any arbitrary finite sphere cut automatically has hchains; that geometric producer remains separate.",
+    "id": "metric-length-gluing-v2",
+    "math_lane": "surgery-metric",
+    "math_role": "reduce",
+    "model": "grok",
+    "priority": 0,
+    "source": "import PoincareConjecture.ParallelMath.SurgeryMetric.ChainTriangle\nimport PoincareConjecture.ParallelMath.SurgeryMetric.GluedMap\nimport PoincareConjecture.ParallelMath.SurgeryMetric.EpsilonRemoval\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Gluing local maps is globally Lipschitz when finite piece-chains approximate ambient distance. -/\ntheorem lipschitz_gluing_of_approximate_piece_chains\n    {ι X Y : Type*} [PseudoMetricSpace X] [PseudoMetricSpace Y]\n    (S : ι → Set X) (hcover : ∀ x : X, ∃ i, x ∈ S i)\n    (f : ι → X → Y) (cost : ι → X → X → ℝ) (L : NNReal)\n    (hcompat : ∀ i j x, x ∈ S i → x ∈ S j → f i x = f j x)\n    (hlocal : ∀ i x y, x ∈ S i → y ∈ S i →\n      dist (f i x) (f i y) ≤ (L : ℝ)*cost i x y)\n    (hchains : ∀ x y : X, ∀ epsilon : ℝ, 0 < epsilon →\n      ∃ n : ℕ, ∃ z : Fin (n+1) → X, ∃ piece : Fin n → ι,\n        z 0 = x ∧ z (Fin.last n) = y ∧\n        (∀ i, z i.castSucc ∈ S (piece i) ∧ z i.succ ∈ S (piece i)) ∧\n        (∑ i : Fin n, cost (piece i) (z i.castSucc) (z i.succ)) ≤ dist x y + epsilon) :\n    ∃ F : X → Y, (∀ i x, x ∈ S i → F x = f i x) ∧ LipschitzWith L F :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
     "target_name": "PoincareConjecture.ParallelMath.lipschitz_gluing_of_approximate_piece_chains",
     "target_path": "PoincareConjecture/ParallelMath/SurgeryMetric/LengthGluing.lean",
-    "hint": "REDUCE: use the three integrated map/chain/epsilon lemmas. Glue F from compatibility; for each approximating chain sum local bounds and telescope; then remove epsilon. hchains is an explicit geometric chain approximation hypothesis, not the desired global map bound. The theorem does not assert that any arbitrary finite sphere cut automatically has hchains; that geometric producer remains separate.",
-    "timeout_seconds": 720,
-    "priority": 0,
-    "math_lane": "surgery-metric",
-    "math_role": "reduce"
+    "timeout_seconds": 720
   }
 ]
