@@ -206,7 +206,10 @@ class Controller:
             data=candidate.read_bytes()
             if len(data)>2_000_000: raise ValueError('candidate exceeds size limit')
             destination.write_bytes(data);result['sha256']=hashlib.sha256(data).hexdigest()
-        atomic_json(destination.with_suffix('.json'),result)
+        metadata_path=destination.with_suffix('.json')
+        if metadata_path==destination:
+            metadata_path=destination.with_name(destination.name+'.capture.json')
+        atomic_json(metadata_path,result)
         return result
 
     def _dependencies(self, task: dict) -> list[dict]:

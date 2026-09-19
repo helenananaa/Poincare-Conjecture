@@ -70,3 +70,16 @@ class PipelineTests(TestCase):
   with TemporaryDirectory() as tmp:
    s=Store(Path(tmp)/'s.db');s.init_project('p',{'repo':tmp,'integration_branch':'integration'})
    c=Controller(s,Path(tmp)/'state','p');self.assertNotEqual(c.worktree_lock,c.gitlock)
+
+class CaptureSidecarTests(TestCase):
+ def test_json_capture_does_not_overwrite_payload(self):
+  from unittest.mock import Mock
+  import json
+  with TemporaryDirectory() as tmp:
+   root=Path(tmp);c=Controller.__new__(Controller)
+   c._unit_info=Mock(return_value={'ActiveState':'inactive'})
+   src=root/'candidate.json';src.write_text('{"answer": 7}')
+   dst=root/'frozen.json'
+   capture=c._freeze_capture('unused-test-unit',src,dst,root)
+   self.assertEqual(json.loads(dst.read_text()),{'answer':7})
+   self.assertEqual(json.loads((root/'frozen.json.capture.json').read_text()),capture)
