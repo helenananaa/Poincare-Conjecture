@@ -63,3 +63,8 @@ _site/
 test/
 site/proof-map/dist/
 site/proof-map/node_modules/
+
+# Local parallel-agent state and authentication must never be committed.
+tools/lean_swarm/__pycache__/
+*.local.json
+.swarm-runtime/

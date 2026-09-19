@@ -1,3 +1,5 @@
+> **Development fork:** local checked contributions and parallel proof tooling are maintained by `helenananaa`. This is not a claim of a completed Poincare formalization. See [fork status and provenance](FORK_STATUS.md).
+
 <h1 align="center">Poincare Conjecture</h1>
 <p align="center">
   Frenzymath - PKU@AI4Math

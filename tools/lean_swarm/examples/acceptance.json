@@ -1,0 +1,35 @@
+[
+  {
+    "id": "transport",
+    "model": "luna",
+    "depends_on": [],
+    "target_name": "SwarmAcceptance.transport_closure",
+    "target_path": "tests/Swarm/Transport.lean",
+    "timeout_seconds": 420,
+    "hint": "Library lookup task: use the actual Homeomorph closure-image API. This is an engineering regression lemma.",
+    "source": "import Mathlib\nset_option autoImplicit false\nnamespace SwarmAcceptance\nopen Set\ntheorem transport_closure {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    (e : X ≃ₜ Y) (A : Set X) : e '' closure A = closure (e '' A) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend SwarmAcceptance\n"
+  },
+  {
+    "id": "period",
+    "model": "grok",
+    "depends_on": [],
+    "target_name": "SwarmAcceptance.periodic_remainder_identity",
+    "target_path": "tests/Swarm/Period.lean",
+    "timeout_seconds": 420,
+    "hint": "Use periodicity at every integer multiple; do not differentiate floor.",
+    "source": "import Mathlib\nset_option autoImplicit false\nnamespace SwarmAcceptance\nopen Set\ntheorem periodic_remainder_identity (f : ℝ → ℝ) (L t : ℝ)\n    (h : Function.Periodic f L) : f (t - (⌊t / L⌋ : ℤ) * L) = f t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend SwarmAcceptance\n"
+  },
+  {
+    "id": "consumer",
+    "model": "luna",
+    "depends_on": [
+      "transport",
+      "period"
+    ],
+    "target_name": "SwarmAcceptance.combined_regression",
+    "target_path": "tests/Swarm/Consumer.lean",
+    "timeout_seconds": 420,
+    "hint": "Use transport_closure for the first conjunct. Prove function equality with f using periodic_remainder_identity for the second, then use hf. Both imported producer files have already been checked and integrated.",
+    "source": "import tests.Swarm.Transport\nimport tests.Swarm.Period\nset_option autoImplicit false\nnamespace SwarmAcceptance\nopen Set\ntheorem combined_regression {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    (e : X ≃ₜ Y) (A : Set X) (f : ℝ → ℝ) (L : ℝ)\n    (hf : ContDiff ℝ ⊤ f) (hp : Function.Periodic f L) :\n    e '' closure A = closure (e '' A) ∧\n    ContDiff ℝ ⊤ (fun t : ℝ => f (t - (⌊t / L⌋ : ℤ) * L)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend SwarmAcceptance\n"
+  }
+]

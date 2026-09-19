@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Cite the specific version and local contribution used. This development fork includes substantial upstream work; cite the upstream project and original mathematical sources as appropriate."
+title: "Poincare-Conjecture: helenananaa development fork"
+authors:
+  - name: "helenananaa"
+    website: "https://github.com/helenananaa"
+repository-code: "https://github.com/helenananaa/Poincare-Conjecture"
+license: Apache-2.0
+version: "0.1.0"
+date-released: 2026-09-19
+abstract: "Partial Lean formalization contributions and fixed-goal multi-agent tooling; not a complete formalization of the Poincare conjecture."
+references:
+  - type: software
+    title: "Poincare-Conjecture upstream project"
+    authors:
+      - name: "frenzymath contributors"
+    repository-code: "https://github.com/frenzymath/Poincare-Conjecture"
