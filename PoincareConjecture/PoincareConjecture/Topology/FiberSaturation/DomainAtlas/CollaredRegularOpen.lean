@@ -25,17 +25,21 @@ theorem complementary_regularOpen_of_sphereCollars
       frontier (connectedComponentIn Cᶜ p) :=
 /- SWARM_PROOF_BEGIN -/
 by
-  let D := connectedComponentIn Cᶜ p
-  have hD : IsOpen D := hC.isOpen_compl.connectedComponentIn
-  have hfront : frontier (closure D) = frontier D := by
-    apply Subset.antisymm
-    · exact frontier_closure_subset
-    · intro y hy
-      obtain ⟨f, hf, hside, x, hxy⟩ := hcover y hy
-      have hx : f (x, neckCenter) ∈ frontier D := by rwa [hxy]
-      have hy' : f (x, neckCenter) ∈ frontier (closure D) :=
-        oneSidedCollar_center_mem_frontier_closure hf hside hx x
-      rwa [← hxy]
-  exact ⟨regularOpen_of_frontier_closure_eq hD hfront, hfront⟩
+  classical
+  by_cases hpin : p ∈ C
+  · exact (hp hpin).elim
+  ·
+    let D := connectedComponentIn Cᶜ p
+    have hD : IsOpen D := hC.isOpen_compl.connectedComponentIn
+    have hfront : frontier (closure D) = frontier D := by
+      apply Subset.antisymm
+      · exact frontier_closure_subset
+      · intro y hy
+        obtain ⟨f, hf, hside, x, hxy⟩ := hcover y hy
+        have hx : f (x, neckCenter) ∈ frontier D := by rwa [hxy]
+        have hy' : f (x, neckCenter) ∈ frontier (closure D) :=
+          oneSidedCollar_center_mem_frontier_closure hf hside hx x
+        rwa [← hxy]
+    exact ⟨regularOpen_of_frontier_closure_eq hD hfront, hfront⟩
 /- SWARM_PROOF_END -/
 end PoincareConjecture.Topology.FiberSaturation.DomainAtlas

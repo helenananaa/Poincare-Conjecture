@@ -1,0 +1,347 @@
+{
+  "date_utc": "2026-09-19T06:50:50.392081+00:00",
+  "project": "poincare-domain-atlas-20260919",
+  "starting_commit": "83a881a7002f86e59188fde63947b8d8ed76e7e1",
+  "model": "grok-4.6",
+  "registered_tasks": 14,
+  "production_targets": 12,
+  "regression_targets": 2,
+  "real_model_attempts": 14,
+  "luna_calls": 0,
+  "initial_independent_tasks": 6,
+  "runner_job_budget": 10,
+  "grok_model_cap": null,
+  "finished_all": true,
+  "aggregate_worker_seconds": 2814.818,
+  "master_contribution": "Mathematical task decomposition, trusted Core definitions, validation and integration; worker proof bodies are verified separately.",
+  "scope": "Constructs a smooth closed-domain structure from actual smooth ambient local set models, plus collar-derived regular openness and topological ambient product charts. Does not assert existence of all required smooth collars/local models for surgery regions, Ricci-flow estimates, surgery or a complete Poincare proof.",
+  "targets": [
+    {
+      "id": "ambient-bridge",
+      "description_zh": "原有环境模型接口的连接",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.domainCharted_hasAmbientModelCharts",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/AmbientBridge.lean",
+      "depends_on": [],
+      "seconds": 153.451,
+      "commit": "7b20cb61dbca479dafacf2f06015a5138765ad78",
+      "base_commit": "c454535ec5b12abfb17594ffb645d9d32740ecc7",
+      "sha256": "d70969581da0773107a74d4b34d66b9641199fd333bff7467a41966f5bc4a52e",
+      "original_worker_sha256": "d70969581da0773107a74d4b34d66b9641199fd333bff7467a41966f5bc4a52e",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "ambient-smooth",
+      "description_zh": "环境图册转换的光滑性",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.ambient_chart_transition_contDiffOn",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/AmbientSmooth.lean",
+      "depends_on": [],
+      "seconds": 228.362,
+      "commit": "c932967373260b104bf465ddac46c5c92fafd735",
+      "base_commit": "c454535ec5b12abfb17594ffb645d9d32740ecc7",
+      "sha256": "dd2c6d76dd76098c214ec1cb06278255b8d1a562b3976e14042eef92febfa691",
+      "original_worker_sha256": "dd2c6d76dd76098c214ec1cb06278255b8d1a562b3976e14042eef92febfa691",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "closed-domain",
+      "description_zh": "构造闭区域的光滑结构、嵌入及边界",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.exists_smoothClosedDomain_structure",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/ClosedDomain.lean",
+      "depends_on": [
+        "restrict-construction",
+        "manifold-family",
+        "inclusion-embedding",
+        "ambient-bridge"
+      ],
+      "seconds": 169.651,
+      "commit": "75792d0465471701853ab18e781f71ae4fbbda50",
+      "base_commit": "685ded8794ab588300299e930bbaa33c8b48ee36",
+      "sha256": "426ea80bf6d18e433de5ab71b4b15dc455e53762d15dc6d75023820bc49310f3",
+      "original_worker_sha256": "426ea80bf6d18e433de5ab71b4b15dc455e53762d15dc6d75023820bc49310f3",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "collar-closure-frontier",
+      "description_zh": "中心截面是补区域闭包的实际边界",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.oneSidedCollar_center_mem_frontier_closure",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/CollarClosureFrontier.lean",
+      "depends_on": [],
+      "seconds": 188.077,
+      "commit": "d94622af7a00ab4790ed19fa30f0b8087dc62515",
+      "base_commit": "c454535ec5b12abfb17594ffb645d9d32740ecc7",
+      "sha256": "72f94851b3a3a9c6f4d2cfc14fff1e9579afc4f5d465317081e90b1ebac39622",
+      "original_worker_sha256": "72f94851b3a3a9c6f4d2cfc14fff1e9579afc4f5d465317081e90b1ebac39622",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "collar-product-coordinates",
+      "description_zh": "实际 collar 与截面坐标的组合",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.oneSidedCollar_exists_ambient_product_chart",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/CollarProductCoordinates.lean",
+      "depends_on": [],
+      "seconds": 404.287,
+      "commit": "8b3dc50f7179520fd700f184f4c55506f3c91450",
+      "base_commit": "ceb1075237e246bd58b58812f092712244b227e5",
+      "sha256": "94b821fa5a899d09d013b978648495470c08cec255b5eea078ec0763e652644d",
+      "original_worker_sha256": "94b821fa5a899d09d013b978648495470c08cec255b5eea078ec0763e652644d",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "empty-domain-sanity",
+      "description_zh": "空区域回归实例",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "regression",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.empty_domain_structure_sanity",
+      "file": "tests/DomainAtlas/EmptyDomain.lean",
+      "depends_on": [
+        "closed-domain"
+      ],
+      "seconds": 84.677,
+      "commit": "3097ea13385add4b17086c56de479eb620ce6898",
+      "base_commit": "75792d0465471701853ab18e781f71ae4fbbda50",
+      "sha256": "d2c7bb312f1ac29e13c5997d1098c2882e63ee52c1b8ff0b89513e22453de7f8",
+      "original_worker_sha256": "d2c7bb312f1ac29e13c5997d1098c2882e63ee52c1b8ff0b89513e22453de7f8",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "inclusion-embedding",
+      "description_zh": "子区域包含映射是光滑嵌入",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.domainCharted_inclusion_smoothEmbedding",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/InclusionEmbedding.lean",
+      "depends_on": [
+        "manifold-family"
+      ],
+      "seconds": 248.499,
+      "commit": "685ded8794ab588300299e930bbaa33c8b48ee36",
+      "base_commit": "f8be95e41f0de336be15727ebcaec0087828a4b1",
+      "sha256": "8350b9bdb916f351f83074f950fb0e4119350df41b3e82a15ea5dde70bc26070",
+      "original_worker_sha256": "8350b9bdb916f351f83074f950fb0e4119350df41b3e82a15ea5dde70bc26070",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "manifold-family",
+      "description_zh": "从相容的限制图册得到 IsManifold",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.domainCharted_isManifold",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/ManifoldFamily.lean",
+      "depends_on": [
+        "ambient-smooth",
+        "transition-smooth"
+      ],
+      "seconds": 121.143,
+      "commit": "f8be95e41f0de336be15727ebcaec0087828a4b1",
+      "base_commit": "49415264e304b13b8d2aa90b00457abb207e322f",
+      "sha256": "17be04651e6c0b38c1e7349c2d78eee30713108b2863906f2e0acad2764f42cb",
+      "original_worker_sha256": "17be04651e6c0b38c1e7349c2d78eee30713108b2863906f2e0acad2764f42cb",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "model-range-sanity",
+      "description_zh": "标准模型范围的非空回归实例",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "regression",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.model_range_structure_sanity",
+      "file": "tests/DomainAtlas/ModelRange.lean",
+      "depends_on": [
+        "closed-domain"
+      ],
+      "seconds": 201.016,
+      "commit": "5fc55808a46189ecd6795a6c3fd11e17b58a8c2a",
+      "base_commit": "75792d0465471701853ab18e781f71ae4fbbda50",
+      "sha256": "55e203bf065ee7820ca3d80ac2748c01f446b6ee8d353b218faab069341dc583",
+      "original_worker_sha256": "55e203bf065ee7820ca3d80ac2748c01f446b6ee8d353b218faab069341dc583",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "regular-open",
+      "description_zh": "从球面 collar 覆盖推出正则开性",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.complementary_regularOpen_of_sphereCollars",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/CollaredRegularOpen.lean",
+      "depends_on": [
+        "collar-closure-frontier"
+      ],
+      "seconds": 117.626,
+      "commit": "41872d432ee298d06f4b3a55c3b08669aa058ada",
+      "base_commit": "d94622af7a00ab4790ed19fa30f0b8087dc62515",
+      "sha256": "015cee6c0cadd9247d91bcb6506cf75393b6313b80ffd66b2f02fee4e6c25cc9",
+      "original_worker_sha256": "ad72040611ed1fdf200ff5a647de463e82f1b71d43c2968d86da5593bbd7b1f3",
+      "coordinator_adjustment": "Coordinator handles the impossible p-in-C branch using hp to retain the frozen caller interface under strict unused-variable lint. The constructive branch is unchanged. Original Grok submission and hash retained.",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "restrict-construction",
+      "description_zh": "从环境局部集合模型构造限制坐标",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.exists_modelDomainChart",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/Restriction.lean",
+      "depends_on": [],
+      "seconds": 544.834,
+      "commit": "7f8a620f39d081bb87f7129cc6efe7fb5f0ff3b5",
+      "base_commit": "c454535ec5b12abfb17594ffb645d9d32740ecc7",
+      "sha256": "c77c6a16ee6dee3e6d73d5c0c152971c4130b1c91810717fc92bdcc939781ebe",
+      "original_worker_sha256": "c77c6a16ee6dee3e6d73d5c0c152971c4130b1c91810717fc92bdcc939781ebe",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "transition-domain",
+      "description_zh": "限制图册转换的正确作用域",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.transitionDomain_subset_ambient",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/TransitionDomain.lean",
+      "depends_on": [],
+      "seconds": 146.127,
+      "commit": "657ef3ef40d0f24163c6c216a7649349390c19ec",
+      "base_commit": "c454535ec5b12abfb17594ffb645d9d32740ecc7",
+      "sha256": "079ce64fa397990794e1bf9f1c63c823ae44f1b4b11f7e2bd208494e22e42a5f",
+      "original_worker_sha256": "079ce64fa397990794e1bf9f1c63c823ae44f1b4b11f7e2bd208494e22e42a5f",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "transition-formula",
+      "description_zh": "限制转换与环境转换的实际公式一致",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.transition_model_eq_ambient",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/TransitionFormula.lean",
+      "depends_on": [],
+      "seconds": 124.725,
+      "commit": "b33e5f1b01aab19f5b3d1c62e828cf46eab76375",
+      "base_commit": "c454535ec5b12abfb17594ffb645d9d32740ecc7",
+      "sha256": "d1a841b777f1016dc60de0a177085eebf3f4aa9dddd54cd82bbdd74fe641242e",
+      "original_worker_sha256": "d1a841b777f1016dc60de0a177085eebf3f4aa9dddd54cd82bbdd74fe641242e",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "transition-smooth",
+      "description_zh": "由环境光滑性得到限制转换光滑性",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "category": "production",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.restricted_transition_contDiffOn",
+      "file": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/TransitionSmooth.lean",
+      "depends_on": [
+        "transition-domain",
+        "transition-formula"
+      ],
+      "seconds": 82.343,
+      "commit": "49415264e304b13b8d2aa90b00457abb207e322f",
+      "base_commit": "657ef3ef40d0f24163c6c216a7649349390c19ec",
+      "sha256": "553c2636a51bcdbd464195753e0fe617ce85b91310bb344f11b6f78bcc5a9ab3",
+      "original_worker_sha256": "553c2636a51bcdbd464195753e0fe617ce85b91310bb344f11b6f78bcc5a9ab3",
+      "coordinator_adjustment": null,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "worker_stopped": true
+    }
+  ]
+}

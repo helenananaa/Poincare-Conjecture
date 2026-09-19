@@ -1,0 +1,116 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-19T06:53:58.730497+00:00",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "mathlib_commit": "520045ab14e26149ee970e2e617ca04b09bde5d6",
+  "sanity_suites": 20,
+  "source_hashes_stable": true,
+  "project_build_present_at_start": false,
+  "audited_previous_declarations": 364,
+  "step_exit_codes": [
+    {
+      "step": "toolchain",
+      "exit_code": 0
+    },
+    {
+      "step": "build",
+      "exit_code": 0
+    },
+    {
+      "step": "AbstractBoundaryPairingSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "AbstractBundleCutSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "BoundaryRegularitySanity",
+      "exit_code": 0
+    },
+    {
+      "step": "ClosedCollarSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "ClosedRealBridgeSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "ComplementaryFrontierSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "CoverPullbackSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "DomainAtlasSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "FiberSaturationSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "IntegerExtensionSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "PeriodicEndMatchingSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "PresentationSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "ProductPairingSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "RelativeProductSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "SmoothAtlasPullbackSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "SmoothCylinderSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "SmoothEmbeddingSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "SmoothSpliceSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "TorusRegionSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "TorusSanity",
+      "exit_code": 0
+    },
+    {
+      "step": "prior-axioms",
+      "exit_code": 0
+    },
+    {
+      "step": "new-axioms",
+      "exit_code": 0
+    },
+    {
+      "step": "upstream-validation",
+      "exit_code": 0
+    },
+    {
+      "step": "whitespace",
+      "exit_code": 0
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "tasks": [
+    {
+      "id": "restrict-construction",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.exists_modelDomainChart",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/Restriction.lean",
+      "status": "PASS",
+      "sha256": "c77c6a16ee6dee3e6d73d5c0c152971c4130b1c91810717fc92bdcc939781ebe",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "transition-domain",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.transitionDomain_subset_ambient",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/TransitionDomain.lean",
+      "status": "PASS",
+      "sha256": "079ce64fa397990794e1bf9f1c63c823ae44f1b4b11f7e2bd208494e22e42a5f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "transition-formula",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.transition_model_eq_ambient",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/TransitionFormula.lean",
+      "status": "PASS",
+      "sha256": "d1a841b777f1016dc60de0a177085eebf3f4aa9dddd54cd82bbdd74fe641242e",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "ambient-smooth",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.ambient_chart_transition_contDiffOn",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/AmbientSmooth.lean",
+      "status": "PASS",
+      "sha256": "dd2c6d76dd76098c214ec1cb06278255b8d1a562b3976e14042eef92febfa691",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "ambient-bridge",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.domainCharted_hasAmbientModelCharts",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/AmbientBridge.lean",
+      "status": "PASS",
+      "sha256": "d70969581da0773107a74d4b34d66b9641199fd333bff7467a41966f5bc4a52e",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "collar-closure-frontier",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.oneSidedCollar_center_mem_frontier_closure",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/CollarClosureFrontier.lean",
+      "status": "PASS",
+      "sha256": "72f94851b3a3a9c6f4d2cfc14fff1e9579afc4f5d465317081e90b1ebac39622",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "transition-smooth",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.restricted_transition_contDiffOn",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/TransitionSmooth.lean",
+      "status": "PASS",
+      "sha256": "553c2636a51bcdbd464195753e0fe617ce85b91310bb344f11b6f78bcc5a9ab3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "manifold-family",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.domainCharted_isManifold",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/ManifoldFamily.lean",
+      "status": "PASS",
+      "sha256": "17be04651e6c0b38c1e7349c2d78eee30713108b2863906f2e0acad2764f42cb",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "regular-open",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.complementary_regularOpen_of_sphereCollars",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/CollaredRegularOpen.lean",
+      "status": "PASS",
+      "sha256": "015cee6c0cadd9247d91bcb6506cf75393b6313b80ffd66b2f02fee4e6c25cc9",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "inclusion-embedding",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.domainCharted_inclusion_smoothEmbedding",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/InclusionEmbedding.lean",
+      "status": "PASS",
+      "sha256": "8350b9bdb916f351f83074f950fb0e4119350df41b3e82a15ea5dde70bc26070",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "closed-domain",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.exists_smoothClosedDomain_structure",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/ClosedDomain.lean",
+      "status": "PASS",
+      "sha256": "426ea80bf6d18e433de5ab71b4b15dc455e53762d15dc6d75023820bc49310f3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "collar-product-coordinates",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.oneSidedCollar_exists_ambient_product_chart",
+      "path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/CollarProductCoordinates.lean",
+      "status": "PASS",
+      "sha256": "94b821fa5a899d09d013b978648495470c08cec255b5eea078ec0763e652644d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "model-range-sanity",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.model_range_structure_sanity",
+      "path": "tests/DomainAtlas/ModelRange.lean",
+      "status": "PASS",
+      "sha256": "55e203bf065ee7820ca3d80ac2748c01f446b6ee8d353b218faab069341dc583",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "empty-domain-sanity",
+      "target": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.empty_domain_structure_sanity",
+      "path": "tests/DomainAtlas/EmptyDomain.lean",
+      "status": "PASS",
+      "sha256": "d2c7bb312f1ac29e13c5997d1098c2882e63ee52c1b8ff0b89513e22453de7f8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "model_calls": 0
+}
