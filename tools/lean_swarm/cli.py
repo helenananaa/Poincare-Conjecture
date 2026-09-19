@@ -33,7 +33,7 @@ def main():
     p=sub.add_parser('retry');p.add_argument('project');p.add_argument('task')
     p=sub.add_parser('recover');p.add_argument('project')
     p=sub.add_parser('integrate');p.add_argument('project');p.add_argument('task')
-    p=sub.add_parser('reverify');p.add_argument('project');p.add_argument('task')
+    p=sub.add_parser('reverify');p.add_argument('project');p.add_argument('task');p.add_argument('--reason',help='Explicit coordinator reason; original FAILED evidence and frozen hash remain checked')
     args=parser.parse_args();STATE_ROOT.mkdir(parents=True,exist_ok=True,mode=0o700);os.chmod(STATE_ROOT,0o700)
     store=Store(STATE_ROOT/'control.sqlite3')
     if args.command=='init':
@@ -62,7 +62,7 @@ def main():
             if any(r['status'] not in ('INTEGRATED','VERIFIED') for r in rows):return 2
         elif args.command=='recover':print(json.dumps(controller.recover()))
         elif args.command=='integrate':print(controller.integrate(args.task))
-        elif args.command=='reverify':controller.reverify(args.task)
+        elif args.command=='reverify':controller.reverify(args.task,args.reason)
     return 0
 
 if __name__=='__main__':

@@ -389,12 +389,15 @@ class Controller:
         print(json.dumps({'task':claim['task_id'],'status':status,'elapsed':result.get('elapsed_seconds'),
             'error':result.get('error')},ensure_ascii=False),flush=True)
 
-    def reverify(self, task_id: str) -> dict:
-        """Recheck an immutable captured submission after an infrastructure fix.
+    def reverify(self, task_id: str, reason: str | None=None) -> dict:
+        """Recheck an immutable FAILED submission after explicit coordinator review.
 
         The original FAILED result and its event are retained. TIMEOUT candidates
         cannot be promoted with this operation. No model is called.
         """
+        if reason is None:reason='Trusted verifier infrastructure repair; frozen submission unchanged'
+        if not isinstance(reason,str) or not reason.strip() or len(reason)>2000:
+            raise ValueError('review reason must be nonempty and at most 2000 characters')
         row=next(t for t in self.store.list_tasks(self.project) if t['id']==task_id)
         if row['status']!='FAILED':raise ValueError('reverify only accepts a FAILED task')
         attempt=next(a for a in self.store.list_attempts(self.project) if a['id']==row['attempt_id'])
@@ -419,7 +422,7 @@ class Controller:
         verification=self._compile(source,artifacts,task['target_path'],task['target_name'])
         updated=dict(result,verification=verification,verified_source=str(source),
                      reverified_without_model=True,original_failure=result,
-                     reverification_reason='Trusted verifier infrastructure repair; frozen submission unchanged')
+                     reverification_reason=reason)
         updated.pop('error',None)
         atomic_json(output/'report.json',updated)
         self.store.approve_reverification(attempt['id'],updated)
