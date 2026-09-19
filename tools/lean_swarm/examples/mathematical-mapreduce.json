@@ -1,0 +1,183 @@
+[
+  {
+    "id": "ode-explicit-derivative",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- The explicit integrating-factor candidate solves the scalar comparison ODE. -/\ntheorem comparisonSolution_hasDerivAt (q : ℝ → ℝ) (hq : Continuous q)\n    (k a s t : ℝ) :\n    HasDerivAt (comparisonSolution q k a s)\n      (-k - q t * comparisonSolution q k a s t) t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.comparisonSolution_hasDerivAt",
+    "target_path": "PoincareConjecture/ParallelMath/Extinction/ExplicitDerivative.lean",
+    "hint": "Use the interval-integral fundamental theorem for rateIntegral and for integral exp(rateIntegral). Differentiate the displayed explicit expression. Show exp(-A)*exp(A)=1 by exponential identities. q is an arbitrary continuous coefficient; do not assume the proposed solution already solves the ODE. This is the existence half of the loop-width ODE contract.",
+    "timeout_seconds": 720,
+    "priority": 10,
+    "math_lane": "extinction-ode",
+    "math_role": "map"
+  },
+  {
+    "id": "ode-initial-sensitivity",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Exact initial data and sensitivity to initial width, before any geometric interpretation. -/\ntheorem comparisonSolution_initial_and_sensitivity (q : ℝ → ℝ) (k a s : ℝ) :\n    comparisonSolution q k a s s = a ∧\n    ∀ a' t : ℝ, comparisonSolution q k a' s t - comparisonSolution q k a s t =\n      (a'-a)*Real.exp (-rateIntegral q s t) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.comparisonSolution_initial_and_sensitivity",
+    "target_path": "PoincareConjecture/ParallelMath/Extinction/InitialSensitivity.lean",
+    "hint": "Unfold the concrete integral definition and use the zero integral on s..s. Sensitivity is an algebraic identity, no continuity needed for this subtask. This exact formula is consumed by the ODE interface and error propagation.",
+    "timeout_seconds": 720,
+    "priority": 0,
+    "math_lane": "extinction-ode",
+    "math_role": "map"
+  },
+  {
+    "id": "ode-integrating-identity",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Every continuous scalar ODE solution has the exact integrating-factor identity. -/\ntheorem integratingFactor_identity (q w : ℝ → ℝ) (hq : Continuous q)\n    (k s t : ℝ) (hst : s ≤ t) (hw : ContinuousOn w (Icc s t))\n    (hd : ∀ x ∈ Ioo s t, HasDerivAt w (-k-q x*w x) x) :\n    Real.exp (rateIntegral q s t) * w t =\n      w s - k * ∫ x in s..t, Real.exp (rateIntegral q s x) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.integratingFactor_identity",
+    "target_path": "PoincareConjecture/ParallelMath/Extinction/IntegratingIdentity.lean",
+    "hint": "Use the product derivative of exp(rateIntegral)*w on the interior. The derivative is -k*exp(rateIntegral). Apply the FTC on [s,t] with endpoint continuity, or show the derivative of weighted w plus k times its primitive is zero. Handle s=t. This task is independent of the explicit candidate derivative; do not assume the desired integral identity.",
+    "timeout_seconds": 720,
+    "priority": 10,
+    "math_lane": "extinction-ode",
+    "math_role": "map"
+  },
+  {
+    "id": "ode-interface",
+    "model": "grok",
+    "depends_on": [
+      "ode-explicit-derivative",
+      "ode-initial-sensitivity",
+      "ode-integrating-identity"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Extinction.ExplicitDerivative\nimport PoincareConjecture.ParallelMath.Extinction.InitialSensitivity\nimport PoincareConjecture.ParallelMath.Extinction.IntegratingIdentity\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Existence, uniqueness on forward times, and monotone dependence on initial width. -/\ntheorem scalarComparison_solution_interface (q : ℝ → ℝ) (hq : Continuous q)\n    (k a s : ℝ) :\n    comparisonSolution q k a s s = a ∧\n    (∀ t : ℝ, HasDerivAt (comparisonSolution q k a s)\n      (-k-q t*comparisonSolution q k a s t) t) ∧\n    (∀ w : ℝ → ℝ, ContinuousOn w (Ici s) → w s = a →\n      (∀ t ∈ Ioi s, HasDerivAt w (-k-q t*w t) t) →\n      EqOn w (comparisonSolution q k a s) (Ici s)) ∧\n    (∀ a' : ℝ, a ≤ a' → ∀ t : ℝ,\n      comparisonSolution q k a s t ≤ comparisonSolution q k a' s t) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.scalarComparison_solution_interface",
+    "target_path": "PoincareConjecture/ParallelMath/Extinction/ComparisonInterface.lean",
+    "hint": "REDUCE: use all three integrated prerequisites. The identity determines w by division by positive exp(rateIntegral), giving the explicit formula. Monotonicity uses the exact sensitivity and exp positivity. Prove the forward-time restriction exactly; no claim about widths without a geometric evolution estimate.",
+    "timeout_seconds": 720,
+    "priority": 10,
+    "math_lane": "extinction-ode",
+    "math_role": "reduce"
+  },
+  {
+    "id": "power-barrier-derivative",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- The finite-extinction comparison barrier has the required differential equation. -/\ntheorem powerBarrier_hasDerivAt (alpha c a k t : ℝ)\n    (hbase : 0 < t+c) (halpha : alpha ≠ 1) :\n    HasDerivAt (powerBarrier alpha c a k)\n      (-k + alpha/(t+c) * powerBarrier alpha c a k t) t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.powerBarrier_hasDerivAt",
+    "target_path": "PoincareConjecture/ParallelMath/Extinction/PowerDerivative.lean",
+    "hint": "Differentiate positive-base real powers using HasDerivAt.rpow_const. Normalize products of powers only with the justified hbase. c itself need not be positive for this local derivative, only t+c. No need to prove the eventual-negativity task here.",
+    "timeout_seconds": 720,
+    "priority": 0,
+    "math_lane": "extinction-barrier",
+    "math_role": "map"
+  },
+  {
+    "id": "power-barrier-negative",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- A positive forcing term makes the sublinear-growth comparison barrier eventually negative. -/\ntheorem powerBarrier_eventually_negative (alpha c a k : ℝ)\n    (hc : 0 < c) (hk : 0 < k) (halpha0 : 0 < alpha) (halpha1 : alpha < 1) :\n    ∃ T : ℝ, 0 ≤ T ∧ ∀ t : ℝ, T ≤ t → powerBarrier alpha c a k t < 0 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.powerBarrier_eventually_negative",
+    "target_path": "PoincareConjecture/ParallelMath/Extinction/PowerNegative.lean",
+    "hint": "Use divergence of (t+c)^(1-alpha) as t tends to +infinity, since 1-alpha>0. The bracket eventually becomes negative and the prefactor is positive. It is enough to pick an explicit sufficiently large T, but do not incorrectly assert a nonpositive bound is strictly negative. This lemma is a scalar extinction ingredient, not the geometric evolution law.",
+    "timeout_seconds": 720,
+    "priority": 0,
+    "math_lane": "extinction-barrier",
+    "math_role": "map"
+  },
+  {
+    "id": "tensor-contraction",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Frobenius norm controls quadratic evaluation in a finite orthonormal frame. -/\ntheorem quadraticForm_sq_le {ι : Type*} [Fintype ι]\n    (A : ι → ι → ℝ) (v : ι → ℝ) :\n    (quadraticForm A v)^2 ≤ (∑ i, ∑ j, (A i j)^2) * (∑ i, (v i)^2)^2 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.quadraticForm_sq_le",
+    "target_path": "PoincareConjecture/ParallelMath/Tensor/QuadraticBound.lean",
+    "hint": "Apply finite Cauchy-Schwarz to the double sum against v_i*v_j, then factor sum_{i,j} v_i^2 v_j^2. No symmetry assumption on A. This is the order-zero tensor norm-to-vector estimate needed before epsilon-close can imply metric comparison.",
+    "timeout_seconds": 720,
+    "priority": 5,
+    "math_lane": "metric-tensor",
+    "math_role": "map"
+  },
+  {
+    "id": "metric-quadratic-comparison",
+    "model": "grok",
+    "depends_on": [
+      "tensor-contraction"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Tensor.QuadraticBound\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- A small coefficient error from the identity gives two-sided quadratic-form bounds. -/\ntheorem metric_comparison_of_frobenius_error {ι : Type*} [Fintype ι] [DecidableEq ι]\n    (A : ι → ι → ℝ) (epsilon : ℝ) (heps : 0 ≤ epsilon)\n    (herror : (∑ i, ∑ j, (A i j - if i=j then 1 else 0)^2) ≤ epsilon^2) :\n    ∀ v : ι → ℝ,\n      (1-epsilon)*(∑ i, (v i)^2) ≤ quadraticForm A v ∧\n      quadraticForm A v ≤ (1+epsilon)*(∑ i, (v i)^2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.metric_comparison_of_frobenius_error",
+    "target_path": "PoincareConjecture/ParallelMath/Tensor/MetricComparison.lean",
+    "hint": "Use integrated quadraticForm_sq_le on A-Id. Identify its evaluation as quadraticForm A v - sum v_i^2. Take the squared inequality to a two-sided bound, using epsilon>=0 and sum v_i^2>=0. This is a finite-dimensional tensor comparison; it does not itself identify the reference EpsilonClose tensor norm.",
+    "timeout_seconds": 720,
+    "priority": 0,
+    "math_lane": "metric-tensor",
+    "math_role": "map"
+  },
+  {
+    "id": "metric-positive-definite",
+    "model": "grok",
+    "depends_on": [
+      "metric-quadratic-comparison"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Tensor.MetricComparison\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- The small-error quantitative metric comparison supplies strict positivity. -/\ntheorem positive_quadraticForm_of_small_frobenius_error\n    {ι : Type*} [Fintype ι] [DecidableEq ι]\n    (A : ι → ι → ℝ) (epsilon : ℝ) (heps0 : 0 ≤ epsilon) (heps1 : epsilon < 1)\n    (herror : (∑ i, ∑ j, (A i j - if i=j then 1 else 0)^2) ≤ epsilon^2) :\n    ∀ v : ι → ℝ, v ≠ 0 → 0 < quadraticForm A v :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.positive_quadraticForm_of_small_frobenius_error",
+    "target_path": "PoincareConjecture/ParallelMath/Tensor/PositiveDefinite.lean",
+    "hint": "REDUCE: use the lower comparison bound and strict positivity of the sum of squares for a nonzero finite vector. No matrix symmetry is needed to establish this quadratic positivity assertion. The empty index type is handled by the v≠0 condition.",
+    "timeout_seconds": 720,
+    "priority": 0,
+    "math_lane": "metric-tensor",
+    "math_role": "reduce"
+  },
+  {
+    "id": "metric-chain-triangle",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Telescoping bound for a finite metric chain, including a zero-edge chain. -/\ntheorem finite_chain_dist_le {Y : Type*} [PseudoMetricSpace Y]\n    (n : ℕ) (z : Fin (n+1) → Y) :\n    dist (z 0) (z (Fin.last n)) ≤\n      ∑ i : Fin n, dist (z i.castSucc) (z i.succ) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.finite_chain_dist_le",
+    "target_path": "PoincareConjecture/ParallelMath/SurgeryMetric/ChainTriangle.lean",
+    "hint": "Find the correct finite triangle-inequality API or induct on n. Keep the exact Fin endpoints and allow n=0. This lemma is later used with chains crossing actual metric pieces.",
+    "timeout_seconds": 720,
+    "priority": 0,
+    "math_lane": "surgery-metric",
+    "math_role": "map"
+  },
+  {
+    "id": "metric-glued-map",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Compatible maps on a covering family define a map with the exact given restrictions. -/\ntheorem exists_map_of_compatible_cover {ι X Y : Type*}\n    (S : ι → Set X) (hcover : ∀ x : X, ∃ i, x ∈ S i)\n    (f : ι → X → Y)\n    (hcompat : ∀ i j x, x ∈ S i → x ∈ S j → f i x = f j x) :\n    ∃ F : X → Y, ∀ i x, x ∈ S i → F x = f i x :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.exists_map_of_compatible_cover",
+    "target_path": "PoincareConjecture/ParallelMath/SurgeryMetric/GluedMap.lean",
+    "hint": "Choose an index covering each point and use compatibility to show the exact restriction. Do not choose arbitrary target points or add Nonempty assumptions. This task constructs the glued map, rather than assuming it in the global Lipschitz theorem.",
+    "timeout_seconds": 720,
+    "priority": 0,
+    "math_lane": "surgery-metric",
+    "math_role": "map"
+  },
+  {
+    "id": "metric-epsilon-removal",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Remove the approximate-length error without requiring an actual minimizing path. -/\ntheorem le_mul_of_forall_length_error (d r L : ℝ) (hL : 0 ≤ L)\n    (h : ∀ epsilon : ℝ, 0 < epsilon → d ≤ L*(r+epsilon)) : d ≤ L*r :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.le_mul_of_forall_length_error",
+    "target_path": "PoincareConjecture/ParallelMath/SurgeryMetric/EpsilonRemoval.lean",
+    "hint": "Use epsilon approximation or order-topology limits; include L=0. This prevents falsely requiring existence of a shortest path in the length-metric gluing step.",
+    "timeout_seconds": 720,
+    "priority": 0,
+    "math_lane": "surgery-metric",
+    "math_role": "map"
+  },
+  {
+    "id": "metric-length-gluing",
+    "model": "grok",
+    "depends_on": [
+      "metric-chain-triangle",
+      "metric-glued-map",
+      "metric-epsilon-removal"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.SurgeryMetric.ChainTriangle\nimport PoincareConjecture.ParallelMath.SurgeryMetric.GluedMap\nimport PoincareConjecture.ParallelMath.SurgeryMetric.EpsilonRemoval\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Gluing local maps is globally Lipschitz when finite piece-chains approximate ambient distance. -/\ntheorem lipschitz_gluing_of_approximate_piece_chains\n    {ι X Y : Type*} [PseudoMetricSpace X] [PseudoMetricSpace Y]\n    (S : ι → Set X) (hcover : ∀ x : X, ∃ i, x ∈ S i)\n    (f : ι → X → Y) (cost : ι → X → X → ℝ) (L : ℝ≥0)\n    (hcompat : ∀ i j x, x ∈ S i → x ∈ S j → f i x = f j x)\n    (hlocal : ∀ i x y, x ∈ S i → y ∈ S i →\n      dist (f i x) (f i y) ≤ (L : ℝ)*cost i x y)\n    (hchains : ∀ x y : X, ∀ epsilon : ℝ, 0 < epsilon →\n      ∃ n : ℕ, ∃ z : Fin (n+1) → X, ∃ piece : Fin n → ι,\n        z 0 = x ∧ z (Fin.last n) = y ∧\n        (∀ i, z i.castSucc ∈ S (piece i) ∧ z i.succ ∈ S (piece i)) ∧\n        (∑ i : Fin n, cost (piece i) (z i.castSucc) (z i.succ)) ≤ dist x y + epsilon) :\n    ∃ F : X → Y, (∀ i x, x ∈ S i → F x = f i x) ∧ LipschitzWith L F :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "target_name": "PoincareConjecture.ParallelMath.lipschitz_gluing_of_approximate_piece_chains",
+    "target_path": "PoincareConjecture/ParallelMath/SurgeryMetric/LengthGluing.lean",
+    "hint": "REDUCE: use the three integrated map/chain/epsilon lemmas. Glue F from compatibility; for each approximating chain sum local bounds and telescope; then remove epsilon. hchains is an explicit geometric chain approximation hypothesis, not the desired global map bound. The theorem does not assert that any arbitrary finite sphere cut automatically has hchains; that geometric producer remains separate.",
+    "timeout_seconds": 720,
+    "priority": 0,
+    "math_lane": "surgery-metric",
+    "math_role": "reduce"
+  }
+]
