@@ -1,0 +1,568 @@
+{
+  "generated_utc": "2026-09-19T10:22:19.450077+00:00",
+  "project": "poincare-width-torus-mapreduce-20260919",
+  "counts": {
+    "distinct_targets": 19,
+    "initial_independent_targets": 10,
+    "actual_model_service_calls": 19,
+    "peak_service_intervals": 10,
+    "models": [
+      "grok"
+    ],
+    "scope": "Only this registered width/area/torus batch; excludes other active project batches, source scouting and coordinator sanity proofs."
+  },
+  "results": [
+    {
+      "id": "infimum-approximation",
+      "role": "map",
+      "line": "variational",
+      "depends_on": [],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "35856662cf6f8a768aac4583c39c6e62bbc357a5",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_nonneg_and_approx",
+      "path": "PoincareConjecture/ParallelMath/Variational/InfimumApproximation.lean",
+      "sha256": "0b49ef9d1b3cbf310b5485e848ca94ca343c94267d7efc926ddebbb8cc085170",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 124.017,
+      "timing": {
+        "finished_unix": 1789811213.444671,
+        "prepare_finished_unix": 1789811069.6551597,
+        "prepare_started_unix": 1789811068.9466314,
+        "service_started_unix": 1789811069.7295077,
+        "service_stopped_unix": 1789811202.077801,
+        "verification_finished_unix": 1789811213.4446685,
+        "verification_started_unix": 1789811202.0834742
+      }
+    },
+    {
+      "id": "admissible-transfer",
+      "role": "map",
+      "line": "variational",
+      "depends_on": [],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "71291dfc8388d7c127e30f498784a6c94fec6d5e",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_transfer",
+      "path": "PoincareConjecture/ParallelMath/Variational/AdmissibleTransfer.lean",
+      "sha256": "c7dd384ab4e6cb9d2fc14ec9f41101a22daa61f06d7db826aaa49bfe612bf9b8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 265.838,
+      "timing": {
+        "finished_unix": 1789811367.1068282,
+        "prepare_finished_unix": 1789811069.3409355,
+        "prepare_started_unix": 1789811068.8983486,
+        "service_started_unix": 1789811069.4292507,
+        "service_stopped_unix": 1789811356.3481984,
+        "verification_finished_unix": 1789811367.1068275,
+        "verification_started_unix": 1789811356.359287
+      }
+    },
+    {
+      "id": "peak-distortion",
+      "role": "map",
+      "line": "variational",
+      "depends_on": [],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "9dd6149b41949271b0aea4412da1a6abd8f4926c",
+      "target": "PoincareConjecture.ParallelMath.Variational.peakCost_transport",
+      "path": "PoincareConjecture/ParallelMath/Variational/PeakDistortion.lean",
+      "sha256": "c8d39188717b962c1f007a4ebec73d371ee18b3fa4e05997c4f556965cff272e",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 152.79,
+      "timing": {
+        "finished_unix": 1789811246.063533,
+        "prepare_finished_unix": 1789811070.3782861,
+        "prepare_started_unix": 1789811068.9791484,
+        "service_started_unix": 1789811070.4418933,
+        "service_stopped_unix": 1789811234.265199,
+        "verification_finished_unix": 1789811246.0635302,
+        "verification_started_unix": 1789811234.2701528
+      }
+    },
+    {
+      "id": "infimum-additive",
+      "role": "map",
+      "line": "variational",
+      "depends_on": [],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "57b4af56fe24159807e88206e7cf06438154facf",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_uniform_perturbation",
+      "path": "PoincareConjecture/ParallelMath/Variational/InfimumAdditive.lean",
+      "sha256": "d2bc84d1589b933033c41b3e53314b8bd0ab5107195fbee8b9839e5a00ea3c2a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 379.251,
+      "timing": {
+        "finished_unix": 1789811492.614305,
+        "prepare_finished_unix": 1789811071.884803,
+        "prepare_started_unix": 1789811069.0109131,
+        "service_started_unix": 1789811071.952489,
+        "service_stopped_unix": 1789811480.046665,
+        "verification_finished_unix": 1789811492.6143036,
+        "verification_started_unix": 1789811480.0601647
+      }
+    },
+    {
+      "id": "cost-growth",
+      "role": "map",
+      "line": "cost-variation",
+      "depends_on": [],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "3d133ad5244203356550def63e8e2167b1da82c9",
+      "target": "PoincareConjecture.ParallelMath.Variational.cost_twoSided_growth",
+      "path": "PoincareConjecture/ParallelMath/Variational/CostGrowth.lean",
+      "sha256": "4f60826a440655160f4d9fc71dcf898179fa4aa210134c5c030440a52a761da2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 494.199,
+      "timing": {
+        "finished_unix": 1789811613.2706184,
+        "prepare_finished_unix": 1789811071.106017,
+        "prepare_started_unix": 1789811068.9401577,
+        "service_started_unix": 1789811071.1784906,
+        "service_stopped_unix": 1789811604.4673553,
+        "verification_finished_unix": 1789811613.2706168,
+        "verification_started_unix": 1789811604.4784486
+      }
+    },
+    {
+      "id": "integral-jacobian",
+      "role": "map",
+      "line": "area",
+      "depends_on": [],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "82e5517a59db0ec404387dccd60590d915a74558",
+      "target": "PoincareConjecture.ParallelMath.Variational.integral_twoSided_distortion",
+      "path": "PoincareConjecture/ParallelMath/Variational/IntegralJacobian.lean",
+      "sha256": "a11906cb5b8fa5c84a4e9fb0a8f104ab2f284cd42538288e5787016ad58ddeed",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 173.94,
+      "timing": {
+        "finished_unix": 1789811269.5591366,
+        "prepare_finished_unix": 1789811071.4911473,
+        "prepare_started_unix": 1789811068.9725285,
+        "service_started_unix": 1789811071.5648441,
+        "service_stopped_unix": 1789811258.7955086,
+        "verification_finished_unix": 1789811269.5591347,
+        "verification_started_unix": 1789811258.803492
+      }
+    },
+    {
+      "id": "quadratic-discriminant",
+      "role": "map",
+      "line": "area",
+      "depends_on": [],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "98abe15bddb45edffe78d37d89a11cd0873964ba",
+      "target": "PoincareConjecture.ParallelMath.Variational.quadratic_nonneg_det",
+      "path": "PoincareConjecture/ParallelMath/Variational/QuadraticDiscriminant.lean",
+      "sha256": "b17ce46f2b34e36d4ae217fbd8d16422b5928c1a9694be7a2834db75f03a1614",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 293.694,
+      "timing": {
+        "finished_unix": 1789811402.7622397,
+        "prepare_finished_unix": 1789811072.6503778,
+        "prepare_started_unix": 1789811068.9952621,
+        "service_started_unix": 1789811072.727471,
+        "service_stopped_unix": 1789811390.0880718,
+        "verification_finished_unix": 1789811402.7622383,
+        "verification_started_unix": 1789811390.092813
+      }
+    },
+    {
+      "id": "plane-area-distortion",
+      "role": "reduce",
+      "line": "area",
+      "depends_on": [
+        "quadratic-discriminant"
+      ],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "9998a75dd4924162520aafa1c2336453fa70f110",
+      "target": "PoincareConjecture.ParallelMath.Variational.plane_area_distortion",
+      "path": "PoincareConjecture/ParallelMath/Variational/PlaneAreaDistortion.lean",
+      "sha256": "e1b3e3a32b533f78b72a8272c0466d1e118c88820ed744d9d158a011959cad15",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 203.932,
+      "timing": {
+        "finished_unix": 1789811761.4706511,
+        "prepare_finished_unix": 1789811520.677779,
+        "prepare_started_unix": 1789811509.931616,
+        "service_started_unix": 1789811520.739956,
+        "service_stopped_unix": 1789811743.0884373,
+        "verification_finished_unix": 1789811761.4706495,
+        "verification_started_unix": 1789811743.091118
+      }
+    },
+    {
+      "id": "minmax-transfer",
+      "role": "reduce",
+      "line": "variational",
+      "depends_on": [
+        "admissible-transfer",
+        "peak-distortion"
+      ],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "2585b8dc3b77e34291d08324de78a9f0e18feaef",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastPeak_transfer",
+      "path": "PoincareConjecture/ParallelMath/Variational/MinmaxTransfer.lean",
+      "sha256": "7673179ccb9157ce415990d746315d76135437e071dd1c23ac42443467b69cc3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 59.679,
+      "timing": {
+        "finished_unix": 1789811508.29874,
+        "prepare_finished_unix": 1789811412.627027,
+        "prepare_started_unix": 1789811387.9621093,
+        "service_started_unix": 1789811412.7141373,
+        "service_stopped_unix": 1789811477.6034384,
+        "verification_finished_unix": 1789811508.2987392,
+        "verification_started_unix": 1789811477.6062808
+      }
+    },
+    {
+      "id": "width-continuity",
+      "role": "reduce",
+      "line": "variational",
+      "depends_on": [
+        "admissible-transfer",
+        "infimum-approximation"
+      ],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "cb8f30c76e9797026e2b1384f62f34fe609b33d7",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_continuous_of_exp_distortion",
+      "path": "PoincareConjecture/ParallelMath/Variational/WidthContinuity.lean",
+      "sha256": "950b8e46bcfd8de382418bf52545165d624cb5a7e250d521e31d738f76c7dbb2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 552.973,
+      "timing": {
+        "finished_unix": 1789812038.810323,
+        "prepare_finished_unix": 1789811413.302828,
+        "prepare_started_unix": 1789811387.9573498,
+        "service_started_unix": 1789811413.3720856,
+        "service_stopped_unix": 1789812012.7964785,
+        "verification_finished_unix": 1789812038.8103223,
+        "verification_started_unix": 1789812012.8116555
+      }
+    },
+    {
+      "id": "least-area-reduce",
+      "role": "reduce",
+      "line": "area",
+      "depends_on": [
+        "integral-jacobian",
+        "admissible-transfer"
+      ],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "6d1de56f6367128bdcf5ad79a92ecc0df79ae9d1",
+      "target": "PoincareConjecture.ParallelMath.Variational.least_integral_distortion",
+      "path": "PoincareConjecture/ParallelMath/Variational/LeastAreaReduce.lean",
+      "sha256": "6a5d1108937ab00dd3acd76203e2983f4f6dc9db7195fa73791b27d848f8e8c9",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 167.073,
+      "timing": {
+        "finished_unix": 1789811620.6532502,
+        "prepare_finished_unix": 1789811413.0682411,
+        "prepare_started_unix": 1789811387.949402,
+        "service_started_unix": 1789811413.1404998,
+        "service_stopped_unix": 1789811593.591885,
+        "verification_finished_unix": 1789811620.6532493,
+        "verification_started_unix": 1789811593.595132
+      }
+    },
+    {
+      "id": "width-growth-reduce",
+      "role": "reduce",
+      "line": "cost-variation",
+      "depends_on": [
+        "cost-growth",
+        "admissible-transfer"
+      ],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "fe4955104985936756dbda145739d5cd85178b07",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_twoSided_growth",
+      "path": "PoincareConjecture/ParallelMath/Variational/WidthGrowthReduce.lean",
+      "sha256": "c541158a01f685a7b5d03ba48f3112582794b495b7cfb81efddd4df07fbb1539",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 114.475,
+      "timing": {
+        "finished_unix": 1789811837.9818094,
+        "prepare_finished_unix": 1789811683.8479989,
+        "prepare_started_unix": 1789811663.1859925,
+        "service_started_unix": 1789811683.9200008,
+        "service_stopped_unix": 1789811806.9432578,
+        "verification_finished_unix": 1789811837.9818084,
+        "verification_started_unix": 1789811806.945741
+      }
+    },
+    {
+      "id": "torus-projection",
+      "role": "map",
+      "line": "topology",
+      "depends_on": [],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "c2e1ae61cb14176ed10ff7ef84022bdaa3a52991",
+      "target": "PoincareConjecture.ParallelMath.TorusObstruction.mappingTorus_circle_projection",
+      "path": "ReferenceBridges/WidthTorus/CircleProjection.lean",
+      "sha256": "32c499c65c3f9a832070fa336e0a5f31b8124ef0cd8a8c009e8a4b2695db9cf2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 319.105,
+      "timing": {
+        "finished_unix": 1789811425.956092,
+        "prepare_finished_unix": 1789811070.0145915,
+        "prepare_started_unix": 1789811068.9344547,
+        "service_started_unix": 1789811070.0886793,
+        "service_stopped_unix": 1789811412.8668134,
+        "verification_finished_unix": 1789811425.956091,
+        "verification_started_unix": 1789811412.8798237
+      }
+    },
+    {
+      "id": "torus-generator",
+      "role": "map",
+      "line": "topology",
+      "depends_on": [],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "8c91d83eb352e9746d668afcc01912130c3c02cb",
+      "target": "PoincareConjecture.ParallelMath.TorusObstruction.mappingTorus_axial_loop",
+      "path": "ReferenceBridges/WidthTorus/AxialLoop.lean",
+      "sha256": "dc56271f33d63d7876b32999fc4feb033da17b9ac1b780739afac7adb89ee977",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 175.012,
+      "timing": {
+        "finished_unix": 1789811271.1201267,
+        "prepare_finished_unix": 1789811072.271056,
+        "prepare_started_unix": 1789811068.925656,
+        "service_started_unix": 1789811072.3571742,
+        "service_stopped_unix": 1789811260.6673772,
+        "verification_finished_unix": 1789811271.1201258,
+        "verification_started_unix": 1789811260.6742873
+      }
+    },
+    {
+      "id": "sphere-antipodal",
+      "role": "map",
+      "line": "topology",
+      "depends_on": [],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "8d509602cedddeb4a8a724aea255c4e20c5ce842",
+      "target": "PoincareConjecture.ParallelMath.TorusObstruction.exists_sphere2_antipodal_homeomorph",
+      "path": "ReferenceBridges/WidthTorus/Antipodal.lean",
+      "sha256": "a8e4a899c6004bee3b1e62701eb55173d061042bb25b61b22df7930bdf74afe4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 286.545,
+      "timing": {
+        "finished_unix": 1789811391.2492807,
+        "prepare_finished_unix": 1789811070.7343524,
+        "prepare_started_unix": 1789811069.0031888,
+        "service_started_unix": 1789811070.8083405,
+        "service_stopped_unix": 1789811378.4397147,
+        "verification_finished_unix": 1789811391.2492795,
+        "verification_started_unix": 1789811378.4538112
+      }
+    },
+    {
+      "id": "torus-obstruction",
+      "role": "reduce",
+      "line": "topology",
+      "depends_on": [
+        "torus-projection",
+        "torus-generator"
+      ],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "ea43072f771d96574efce84bbdf194343cf69bac",
+      "target": "PoincareConjecture.ParallelMath.TorusObstruction.mappingTorus_not_simplyConnected",
+      "path": "ReferenceBridges/WidthTorus/NonSimplyConnected.lean",
+      "sha256": "188329ce56156a522aa061489bfb817f6698cd4f0604b02142be4fc3f596ceb4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 294.094,
+      "timing": {
+        "finished_unix": 1789811943.3009086,
+        "prepare_finished_unix": 1789811599.4608362,
+        "prepare_started_unix": 1789811579.8805475,
+        "service_started_unix": 1789811599.5119946,
+        "service_stopped_unix": 1789811915.7870228,
+        "verification_finished_unix": 1789811943.3009076,
+        "verification_started_unix": 1789811915.7928689
+      }
+    },
+    {
+      "id": "twisted-bundle-reduce",
+      "role": "reduce",
+      "line": "topology",
+      "depends_on": [
+        "sphere-antipodal",
+        "torus-obstruction"
+      ],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "9e958575247bf18fdba2e7dba86a77bfb20acbb8",
+      "target": "PoincareConjecture.ParallelMath.TorusObstruction.twisted_sphere_bundle_obstruction",
+      "path": "ReferenceBridges/WidthTorus/TwistedBundle.lean",
+      "sha256": "63147db2fac6555f660c480e9b11850c75d84a2e74b86d428b340d1e3840b6ef",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 187.17,
+      "timing": {
+        "finished_unix": 1789812258.6861525,
+        "prepare_finished_unix": 1789812011.0882986,
+        "prepare_started_unix": 1789811974.1949904,
+        "service_started_unix": 1789812011.13369,
+        "service_stopped_unix": 1789812215.5342617,
+        "verification_finished_unix": 1789812258.6861517,
+        "verification_started_unix": 1789812215.5415707
+      }
+    },
+    {
+      "id": "area-to-width-reduce",
+      "role": "cross-branch-reduce",
+      "line": "area",
+      "depends_on": [
+        "plane-area-distortion",
+        "least-area-reduce"
+      ],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "09775b18d2945f0db89a202e3b8a97a12ac84e7e",
+      "target": "PoincareConjecture.ParallelMath.Variational.quadratic_area_leastCost_comparison",
+      "path": "PoincareConjecture/ParallelMath/Variational/AreaToWidth.lean",
+      "sha256": "3140e9783dc4eecbdb8d967382dc631ef80b4208ee61a16e8753e2ca19f71395",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 92.687,
+      "timing": {
+        "finished_unix": 1789811994.9470086,
+        "prepare_finished_unix": 1789811836.852303,
+        "prepare_started_unix": 1789811788.7678394,
+        "service_started_unix": 1789811836.904835,
+        "service_stopped_unix": 1789811938.1798368,
+        "verification_finished_unix": 1789811994.9470077,
+        "verification_started_unix": 1789811938.1821957
+      }
+    },
+    {
+      "id": "minmax-continuity-reduce",
+      "role": "cross-branch-reduce",
+      "line": "variational",
+      "depends_on": [
+        "peak-distortion",
+        "width-continuity"
+      ],
+      "status": "INTEGRATED",
+      "model": "grok",
+      "commit": "948ed1a66bbf58c50fffbd8bfd9e8f333c74d464",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastPeak_continuous_of_exp_distortion",
+      "path": "PoincareConjecture/ParallelMath/Variational/MinmaxContinuity.lean",
+      "sha256": "bbd36ae4634950a79c548cbc71d5311fcbabe777fb5e93cfde1cc09e01b601c0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "model_seconds": 84.849,
+      "timing": {
+        "finished_unix": 1789813155.9249175,
+        "prepare_finished_unix": 1789813027.125653,
+        "prepare_started_unix": 1789812991.650278,
+        "service_started_unix": 1789813027.1845844,
+        "service_stopped_unix": 1789813118.332223,
+        "verification_finished_unix": 1789813155.924916,
+        "verification_started_unix": 1789813118.3352497
+      }
+    }
+  ],
+  "checks": {
+    "independent_compilation_and_axioms": "PASS",
+    "nonattained_infimum_and_nontrivial_quotient_sanity": "PASS",
+    "main_package_build": "PASS",
+    "external_dependencies": "fixed pinned source/object cache reused, not globally rebuilt"
+  },
+  "limits": [
+    "Costs and admissible-family maps are explicitly supplied; actual minimal-surface existence, geometric width realization and surgery preservation of homotopy classes are not asserted.",
+    "Plane area comparison assumes the stated quadratic-form bound and integral measurability/integrability; it is not yet an unconditional comparison of all geometric surface areas.",
+    "The global-in-time width-continuity forms use uniform exponential control for all their time arguments. Restricted-time geometric applications still require the corresponding domain adapter.",
+    "Mapping-torus result proves non-simple-connectivity via a circle winding obstruction, not a full pi1 computation or diffeomorphism classification.",
+    "All statements have fixed original induced/quotient topology; no new mathematical axioms are added."
+  ]
+}

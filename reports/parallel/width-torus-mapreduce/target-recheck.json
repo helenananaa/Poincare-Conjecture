@@ -1,0 +1,234 @@
+{
+  "status": "PASS",
+  "tasks": [
+    {
+      "compile_passed": true,
+      "sha256": "0b49ef9d1b3cbf310b5485e848ca94ca343c94267d7efc926ddebbb8cc085170",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "infimum-approximation",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_nonneg_and_approx",
+      "path": "PoincareConjecture/ParallelMath/Variational/InfimumApproximation.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "c7dd384ab4e6cb9d2fc14ec9f41101a22daa61f06d7db826aaa49bfe612bf9b8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "admissible-transfer",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_transfer",
+      "path": "PoincareConjecture/ParallelMath/Variational/AdmissibleTransfer.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "c8d39188717b962c1f007a4ebec73d371ee18b3fa4e05997c4f556965cff272e",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "peak-distortion",
+      "target": "PoincareConjecture.ParallelMath.Variational.peakCost_transport",
+      "path": "PoincareConjecture/ParallelMath/Variational/PeakDistortion.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "d2bc84d1589b933033c41b3e53314b8bd0ab5107195fbee8b9839e5a00ea3c2a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "infimum-additive",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_uniform_perturbation",
+      "path": "PoincareConjecture/ParallelMath/Variational/InfimumAdditive.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "4f60826a440655160f4d9fc71dcf898179fa4aa210134c5c030440a52a761da2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "cost-growth",
+      "target": "PoincareConjecture.ParallelMath.Variational.cost_twoSided_growth",
+      "path": "PoincareConjecture/ParallelMath/Variational/CostGrowth.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "a11906cb5b8fa5c84a4e9fb0a8f104ab2f284cd42538288e5787016ad58ddeed",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "integral-jacobian",
+      "target": "PoincareConjecture.ParallelMath.Variational.integral_twoSided_distortion",
+      "path": "PoincareConjecture/ParallelMath/Variational/IntegralJacobian.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "b17ce46f2b34e36d4ae217fbd8d16422b5928c1a9694be7a2834db75f03a1614",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "quadratic-discriminant",
+      "target": "PoincareConjecture.ParallelMath.Variational.quadratic_nonneg_det",
+      "path": "PoincareConjecture/ParallelMath/Variational/QuadraticDiscriminant.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "e1b3e3a32b533f78b72a8272c0466d1e118c88820ed744d9d158a011959cad15",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "plane-area-distortion",
+      "target": "PoincareConjecture.ParallelMath.Variational.plane_area_distortion",
+      "path": "PoincareConjecture/ParallelMath/Variational/PlaneAreaDistortion.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "7673179ccb9157ce415990d746315d76135437e071dd1c23ac42443467b69cc3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "minmax-transfer",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastPeak_transfer",
+      "path": "PoincareConjecture/ParallelMath/Variational/MinmaxTransfer.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "950b8e46bcfd8de382418bf52545165d624cb5a7e250d521e31d738f76c7dbb2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "width-continuity",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_continuous_of_exp_distortion",
+      "path": "PoincareConjecture/ParallelMath/Variational/WidthContinuity.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "6a5d1108937ab00dd3acd76203e2983f4f6dc9db7195fa73791b27d848f8e8c9",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "least-area-reduce",
+      "target": "PoincareConjecture.ParallelMath.Variational.least_integral_distortion",
+      "path": "PoincareConjecture/ParallelMath/Variational/LeastAreaReduce.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "c541158a01f685a7b5d03ba48f3112582794b495b7cfb81efddd4df07fbb1539",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "width-growth-reduce",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_twoSided_growth",
+      "path": "PoincareConjecture/ParallelMath/Variational/WidthGrowthReduce.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "32c499c65c3f9a832070fa336e0a5f31b8124ef0cd8a8c009e8a4b2695db9cf2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "torus-projection",
+      "target": "PoincareConjecture.ParallelMath.TorusObstruction.mappingTorus_circle_projection",
+      "path": "ReferenceBridges/WidthTorus/CircleProjection.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "dc56271f33d63d7876b32999fc4feb033da17b9ac1b780739afac7adb89ee977",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "torus-generator",
+      "target": "PoincareConjecture.ParallelMath.TorusObstruction.mappingTorus_axial_loop",
+      "path": "ReferenceBridges/WidthTorus/AxialLoop.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "a8e4a899c6004bee3b1e62701eb55173d061042bb25b61b22df7930bdf74afe4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "sphere-antipodal",
+      "target": "PoincareConjecture.ParallelMath.TorusObstruction.exists_sphere2_antipodal_homeomorph",
+      "path": "ReferenceBridges/WidthTorus/Antipodal.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "188329ce56156a522aa061489bfb817f6698cd4f0604b02142be4fc3f596ceb4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "torus-obstruction",
+      "target": "PoincareConjecture.ParallelMath.TorusObstruction.mappingTorus_not_simplyConnected",
+      "path": "ReferenceBridges/WidthTorus/NonSimplyConnected.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "63147db2fac6555f660c480e9b11850c75d84a2e74b86d428b340d1e3840b6ef",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "twisted-bundle-reduce",
+      "target": "PoincareConjecture.ParallelMath.TorusObstruction.twisted_sphere_bundle_obstruction",
+      "path": "ReferenceBridges/WidthTorus/TwistedBundle.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "3140e9783dc4eecbdb8d967382dc631ef80b4208ee61a16e8753e2ca19f71395",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "area-to-width-reduce",
+      "target": "PoincareConjecture.ParallelMath.Variational.quadratic_area_leastCost_comparison",
+      "path": "PoincareConjecture/ParallelMath/Variational/AreaToWidth.lean"
+    },
+    {
+      "compile_passed": true,
+      "sha256": "bbd36ae4634950a79c548cbc71d5311fcbabe777fb5e93cfde1cc09e01b601c0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "id": "minmax-continuity-reduce",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastPeak_continuous_of_exp_distortion",
+      "path": "PoincareConjecture/ParallelMath/Variational/MinmaxContinuity.lean"
+    }
+  ],
+  "model_calls": 0
+}
