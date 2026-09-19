@@ -1,0 +1,151 @@
+[
+  {
+    "id": "affine-axis",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- A nondegenerate axial translation/scaling with its exact inverse. -/\ntheorem exists_affine_axis_diffeomorph (c a : ℝ) (ha : a ≠ 0) :\n    ∃ e : ℝ ≃ₘ[ℝ] ℝ, (∀ t, e t = c + a*t) ∧\n      (∀ t, e.symm t = (t-c)/a) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_affine_axis_diffeomorph",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/AffineAxis.lean",
+    "hint": "Build the explicit Equiv toFun=c+a*t, invFun=(t-c)/a and prove its inverse laws by field_simp/ring using ha. Its two maps are smooth by ContDiff.contMDiff and fun_prop. This API must cover a<0 as well as a>0.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "interval-orientation",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- A cut strictly inside any finite neck admits a two-sided normalized strip,\nincluding reversed axial orientation. -/\ntheorem exists_oriented_strip_width (a b c s : ℝ) (ha : a < c) (hb : c < b)\n    (hs : s = 1 ∨ s = -1) :\n    ∃ r : ℝ, 0 < r ∧\n      (∀ t ∈ Ioo (-1 : ℝ) 1, c + s*r*t ∈ Ioo a b) ∧\n      (∀ t : ℝ, (s * (c + s*r*t - c) ≤ 0 ↔ t ≤ 0)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_oriented_strip_width",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/IntervalOrientation.lean",
+    "hint": "Use half the minimum of the distances c-a and b-c as r. Split the two sign cases; derive strip inclusion and the side-equivalence with ordered-ring arithmetic. Strict endpoint margins and the sign of r matter.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "restrict-partial",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\nvariable {V W G X N : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n  [NormedAddCommGroup W] [NormedSpace ℝ W] [TopologicalSpace G]\n  [TopologicalSpace X] [TopologicalSpace N] [ChartedSpace V X] [ChartedSpace G N]\n  {J : ModelWithCorners ℝ W G}\n\n/-- Restrict a genuine partial diffeomorphism without altering its values. -/\ntheorem exists_partialDiffeomorph_restriction\n    (Φ : PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) J (X × ℝ) N ∞)\n    (S : Set (X × ℝ)) (hS : IsOpen S) :\n    ∃ Ψ : PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) J (X × ℝ) N ∞,\n      Ψ.source = Φ.source ∩ S ∧ (∀ z, Ψ z = Φ z) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_partialDiffeomorph_restriction",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/RestrictPartial.lean",
+    "hint": "Take Φ.toOpenPartialHomeomorph.restrOpen S hS. Reuse its partial equivalence and openness fields; its smoothness is the restriction of the original forward and inverse smoothness to the corresponding sources. No new topology or theorem assumptions.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "open-domain",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\nvariable {V W G X N : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n  [NormedAddCommGroup W] [NormedSpace ℝ W] [TopologicalSpace G]\n  [TopologicalSpace X] [TopologicalSpace N] [ChartedSpace V X] [ChartedSpace G N]\n  {J : ModelWithCorners ℝ W G}\n\n/-- A diffeomorphism between two actual open subspaces produces an ambient\npartial diffeomorphism with the exact source, target and map. -/\ntheorem exists_partialDiffeomorph_of_open_subspaces\n    (U : TopologicalSpace.Opens (X × ℝ)) (Q : TopologicalSpace.Opens N)\n    [Nonempty U]\n    (φ : Diffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) J U Q ∞) :\n    ∃ Ψ : PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) J (X × ℝ) N ∞,\n      Ψ.source = (U : Set (X × ℝ)) ∧ Ψ.target = (Q : Set N) ∧\n      (∀ z : U, Ψ z = (φ z : N)) ∧\n      (∀ y : Q, Ψ.symm y = (φ.symm y : X × ℝ)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_partialDiffeomorph_of_open_subspaces",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/OpenDomain.lean",
+    "hint": "Use the open subtype inclusion partial homeomorphisms and their inverses, compose with φ, and prove ContMDiffOn using the open-subspace subtypeVal smoothness equivalences. Nonempty Q follows from φ and Nonempty U. Search pinned Mathlib ContMDiff/Atlas and OpenPartialHomeomorph APIs. Only exact induced smooth structures are permitted.",
+    "timeout_seconds": 1200
+  },
+  {
+    "id": "image-cut",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\nvariable {V W G X N : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n  [NormedAddCommGroup W] [NormedSpace ℝ W] [TopologicalSpace G]\n  [TopologicalSpace X] [TopologicalSpace N] [ChartedSpace V X] [ChartedSpace G N]\n  {J : ModelWithCorners ℝ W G}\n\n/-- The actual local surgery-set image identity implies pointwise sidedness. -/\ntheorem neck_cut_membership_of_image\n    (Ψ : PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) J (X × ℝ) N ∞)\n    (C : Set N) (c s : ℝ)\n    (hcut : C ∩ Ψ.target = Ψ '' (Ψ.source ∩ {z | s*(z.2-c) ≤ 0})) :\n    ∀ z ∈ Ψ.source, Ψ z ∈ C ↔ s*(z.2-c) ≤ 0 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.neck_cut_membership_of_image",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/ImageCut.lean",
+    "hint": "Forward: combine C membership with Ψ.map_source, use hcut to obtain an image witness, then injectivity on source. Reverse: the point itself is an image witness. Do not infer sidedness from metric closeness or the word neck alone.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "native-axis",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Preserve the standard smooth sphere and convert only the one-dimensional\nEuclidean axis, followed by the reference product-to-R3 model transport. -/\ntheorem exists_native_axis_diffeomorph :\n    ∃ e : Diffeomorph ((𝓡 2).prod (𝓘(ℝ,ℝ))) NativeCylinderModel\n        (Sphere2 × ℝ) NativeCylinder ∞,\n      ∀ z, e z = (z.1, nativeAxis z.2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_native_axis_diffeomorph",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NativeAxis.lean",
+    "hint": "Use (PiLp.equivOfUnique 2 ℝ (fun _ : Fin 1 => ℝ)).symm as a continuous-linear diffeomorphism. Product with the identity sphere diffeomorphism gives the native product model; postcompose the identity diffeomorphism ContinuousLinearEquiv.toTransContinuousLinearEquiv with nativeModelEquiv. Preserve the original sphere and cylinder ChartedSpace instances.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "native-domain",
+    "model": "grok",
+    "depends_on": [
+      "native-axis"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.NativeAxis\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- The two finite neck parameterizations are genuinely diffeomorphic,\nwith the concrete coordinate formula, not merely abstractly equivalent. -/\ntheorem exists_native_domain_diffeomorph (epsilon : ℝ) :\n    ∃ e : Diffeomorph ((𝓡 2).prod (𝓘(ℝ,ℝ))) NativeCylinderModel\n        (scalarNeckDomain epsilon) (nativeNeckDomain epsilon) ∞,\n      ∀ z, e z = scalarToNative z :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_native_domain_diffeomorph",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NativeDomain.lean",
+    "hint": "Restrict the integrated global axis diffeomorphism to the two corresponding open domains. Define the inverse using the inverse global map, and verify membership by its coordinate equation. Smoothness follows from the open-subspace ContMDiff.subtypeVal_comp_iff API. Epsilon need not be positive here: empty domains must also work. Do not add Nonempty assumptions.",
+    "timeout_seconds": 1200
+  },
+  {
+    "id": "normalize-chart",
+    "model": "grok",
+    "depends_on": [
+      "affine-axis",
+      "interval-orientation",
+      "restrict-partial"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.AffineAxis\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.IntervalOrientation\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.RestrictPartial\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\nvariable {V W G X N : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n  [NormedAddCommGroup W] [NormedSpace ℝ W] [TopologicalSpace G]\n  [TopologicalSpace X] [TopologicalSpace N] [ChartedSpace V X] [ChartedSpace G N]\n  {J : ModelWithCorners ℝ W G}\n\n/-- Translate to a cut, scale to a safe subneck, and orient it to give a full\nnormalized partial diffeomorphism. No smoothness of piecewise/floor maps is used. -/\ntheorem exists_normalized_neck_chart\n    (Ψ : PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) J (X × ℝ) N ∞)\n    (a b c s : ℝ) (ha : a < c) (hb : c < b) (hs : s = 1 ∨ s = -1)\n    (hsource : Ψ.source = (univ : Set X) ×ˢ Ioo a b) :\n    ∃ r : ℝ, 0 < r ∧\n      (∀ t ∈ Ioo (-1 : ℝ) 1, c+s*r*t ∈ Ioo a b) ∧\n      (∀ t : ℝ, s*(c+s*r*t-c) ≤ 0 ↔ t ≤ 0) ∧\n      ∃ Φ : PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) J (X × ℝ) N ∞,\n        Φ.source = (univ : Set X) ×ˢ Ioo (-1 : ℝ) 1 ∧\n        (∀ z, Φ z = Ψ (z.1, c+s*r*z.2)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_normalized_neck_chart",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NormalizeChart.lean",
+    "hint": "Get r from exists_oriented_strip_width, then an affine real diffeomorphism with slope s*r. Compose its product with the identity on X, as a full PartialDiffeomorph, with Ψ. Restrict the source to the normalized open strip using the integrated restriction theorem. Prove exact source equality using strip inclusion. The forward formula holds globally because restriction preserves values.",
+    "timeout_seconds": 1000
+  },
+  {
+    "id": "oriented-collar",
+    "model": "grok",
+    "depends_on": [
+      "normalize-chart"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.NormalizeChart\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\nvariable {V W G X N : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n  [NormedAddCommGroup W] [NormedSpace ℝ W] [TopologicalSpace G]\n  [TopologicalSpace X] [TopologicalSpace N] [ChartedSpace V X] [ChartedSpace G N]\n  {J : ModelWithCorners ℝ W G}\n\n/-- Produce a genuine normalized one-sided smooth collar from an oriented\nfinite neck and its pointwise local cut description. -/\ntheorem exists_smoothCollar_of_oriented_neck\n    (Ψ : PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) J (X × ℝ) N ∞)\n    (C : Set N) (a b c s : ℝ) (ha : a < c) (hb : c < b)\n    (hs : s = 1 ∨ s = -1)\n    (hsource : Ψ.source = (univ : Set X) ×ˢ Ioo a b)\n    (hcut : ∀ z ∈ Ψ.source, Ψ z ∈ C ↔ s*(z.2-c) ≤ 0) :\n    ∃ Φ : PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) J (X × ℝ) N ∞,\n      Φ.source = (univ : Set X) ×ˢ Ioo (-1 : ℝ) 1 ∧\n      (∀ z ∈ Φ.source, Φ z ∈ C ↔ z.2 ≤ 0) ∧\n      (∀ x : X, Φ (x,0) = Ψ (x,c)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_smoothCollar_of_oriented_neck",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/OrientedCollar.lean",
+    "hint": "Use the normalized chart and its exact affine formula. Strip inclusion puts the affine point in Ψ.source, so hcut applies; its signed inequality is exactly the orientation lemma. At time zero the affine point is (x,c).",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "native-finite-chart",
+    "model": "grok",
+    "depends_on": [
+      "open-domain",
+      "native-domain"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.OpenDomain\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.NativeDomain\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Convert a finite native epsilon-neck parameterization into the real-axis\npartial chart consumed by the collar normalization, preserving its target region. -/\ntheorem exists_partialChart_of_native_neck\n    {W G N : Type*} [NormedAddCommGroup W] [NormedSpace ℝ W]\n    [TopologicalSpace G] [TopologicalSpace N] [ChartedSpace G N]\n    (J : ModelWithCorners ℝ W G) (epsilon : ℝ) (heps : 0 < epsilon)\n    (Q : TopologicalSpace.Opens N)\n    (φ : Diffeomorph NativeCylinderModel J (nativeNeckDomain epsilon) Q ∞) :\n    ∃ Ψ : PartialDiffeomorph ((𝓡 2).prod (𝓘(ℝ,ℝ))) J (Sphere2 × ℝ) N ∞,\n      Ψ.source = (univ : Set Sphere2) ×ˢ Ioo (-epsilon⁻¹) epsilon⁻¹ ∧\n      Ψ.target = (Q : Set N) ∧\n      (∀ z : scalarNeckDomain epsilon, Ψ z = (φ (scalarToNative z) : N)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_partialChart_of_native_neck",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NativeFiniteChart.lean",
+    "hint": "Compose the finite-domain diffeomorphism with φ, then use the integrated open-subspaces-to-partial theorem. Positive epsilon gives a nonempty domain, using a sphere point at axial zero and inv_pos. Keep target Q exact and prove the forward equation.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "native-collar",
+    "model": "grok",
+    "depends_on": [
+      "native-finite-chart",
+      "oriented-collar"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.NativeFiniteChart\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.OrientedCollar\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- A native finite epsilon-neck cut at any interior level yields the exact\nnormalized smooth collar needed by the complementary-closure theorem. -/\ntheorem exists_smoothCollar_of_native_neck_cut\n    {W G N : Type*} [NormedAddCommGroup W] [NormedSpace ℝ W]\n    [TopologicalSpace G] [TopologicalSpace N] [ChartedSpace G N]\n    (J : ModelWithCorners ℝ W G) (epsilon : ℝ) (heps : 0 < epsilon)\n    (Q : TopologicalSpace.Opens N)\n    (φ : Diffeomorph NativeCylinderModel J (nativeNeckDomain epsilon) Q ∞)\n    (C : Set N) (c s : ℝ) (hc : c ∈ Ioo (-epsilon⁻¹) epsilon⁻¹)\n    (hs : s = 1 ∨ s = -1)\n    (hcut : ∀ z : nativeNeckDomain epsilon, (φ z : N) ∈ C ↔ s*(z.1.2 0-c) ≤ 0) :\n    ∃ Φ : PartialDiffeomorph ((𝓡 2).prod (𝓘(ℝ,ℝ))) J (Sphere2 × ℝ) N ∞,\n      Φ.source = (univ : Set Sphere2) ×ˢ Ioo (-1 : ℝ) 1 ∧\n      (∀ z ∈ Φ.source, Φ z ∈ C ↔ z.2 ≤ 0) ∧\n      (∀ x : Sphere2, Φ (x,0) =\n        (φ (scalarToNative (⟨(x,c), ⟨mem_univ _, hc⟩⟩ : scalarNeckDomain epsilon)) : N)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_smoothCollar_of_native_neck_cut",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NativeCollar.lean",
+    "hint": "Use the native finite partial chart, translate hcut to all points of its source via scalarToNative and the forward equation, then apply exists_smoothCollar_of_oriented_neck. At the cut use its central equation and the partial chart formula. Epsilon-nearness itself does not imply hcut, which remains the explicit surgery-set input.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "finite-cut-closure",
+    "model": "grok",
+    "depends_on": [
+      "oriented-collar",
+      "image-cut"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.OrientedCollar\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.ImageCut\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- A cover of the actual continuing frontier by finite oriented neck cuts\nconstructs the smooth structure of any exterior component's actual closure. -/\ntheorem exists_smoothClosure_of_finite_neck_cut_cover\n    {V X N : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    [TopologicalSpace X] [TopologicalSpace N] [ChartedSpace V X] [ChartedSpace (V × ℝ) N]\n    [IsManifold (𝓘(ℝ,V)) ∞ X] [IsManifold (𝓘(ℝ,V × ℝ)) ∞ N]\n    [PreconnectedSpace X] [LocallyConnectedSpace N]\n    {C : Set N} (hC : IsClosed C) {p : N} (hp : p ∉ C)\n    (hcover : ∀ y ∈ frontier C,\n      ∃ Ψ : PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) (𝓘(ℝ,V × ℝ)) (X × ℝ) N ∞,\n      ∃ a b c s : ℝ, a < c ∧ c < b ∧ (s = 1 ∨ s = -1) ∧\n        Ψ.source = (univ : Set X) ×ˢ Ioo a b ∧\n        C ∩ Ψ.target = Ψ '' (Ψ.source ∩ {z | s*(z.2-c) ≤ 0}) ∧\n        ∃ x : X, Ψ (x,c) = y) :\n    ∃ cs : ChartedSpace (SmoothCollar.HalfSpace V) (closure (connectedComponentIn Cᶜ p)),\n      letI : ChartedSpace (SmoothCollar.HalfSpace V) (closure (connectedComponentIn Cᶜ p)) := cs\n      IsManifold (SmoothCollar.halfSpaceModel V) ∞ (closure (connectedComponentIn Cᶜ p)) ∧\n      IsSmoothEmbedding (SmoothCollar.halfSpaceModel V) (𝓘(ℝ,V × ℝ)) ∞\n        (Subtype.val : closure (connectedComponentIn Cᶜ p) → N) ∧\n      (Subtype.val : closure (connectedComponentIn Cᶜ p) → N) ''\n        (SmoothCollar.halfSpaceModel V).boundary (closure (connectedComponentIn Cᶜ p)) =\n          frontier (connectedComponentIn Cᶜ p) ∧\n      connectedComponentIn Cᶜ p = interior (closure (connectedComponentIn Cᶜ p)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_smoothClosure_of_finite_neck_cut_cover",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/FiniteCutClosure.lean",
+    "hint": "Apply the existing smoothCollar_cover closure construction. Derive frontier(component) subset frontier C using the actual complementary_component_frontier_subset hC hp theorem. For each covering finite cut use the image-cut lemma then the oriented-collar producer and preserve the central section. This closes the normalization/side-data adapter, not the existence of actual Ricci surgery necks.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "native-cut-closure",
+    "model": "grok",
+    "depends_on": [
+      "native-collar"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.NativeCollar\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Native spherical epsilon-neck parameterizations around the continuing\nfrontier suffice to construct the smooth complementary closure, with cut data explicit. -/\ntheorem exists_smoothClosure_of_native_neck_cut_cover\n    {N : Type*} [TopologicalSpace N]\n    [ChartedSpace (EuclideanSpace ℝ (Fin 2) × ℝ) N]\n    [IsManifold (𝓘(ℝ,EuclideanSpace ℝ (Fin 2) × ℝ)) ∞ N] [LocallyConnectedSpace N]\n    {C : Set N} (hC : IsClosed C) {p : N} (hp : p ∉ C)\n    (hcover : ∀ y ∈ frontier C, ∃ epsilon : ℝ, 0 < epsilon ∧\n      ∃ Q : TopologicalSpace.Opens N,\n      ∃ φ : Diffeomorph NativeCylinderModel (𝓘(ℝ,EuclideanSpace ℝ (Fin 2) × ℝ))\n          (nativeNeckDomain epsilon) Q ∞,\n      ∃ c s : ℝ, c ∈ Ioo (-epsilon⁻¹) epsilon⁻¹ ∧ (s = 1 ∨ s = -1) ∧\n        (∀ z : nativeNeckDomain epsilon, (φ z : N) ∈ C ↔ s*(z.1.2 0-c) ≤ 0) ∧\n        ∃ z : nativeNeckDomain epsilon, (φ z : N) = y ∧ z.1.2 0 = c) :\n    ∃ cs : ChartedSpace (SmoothCollar.HalfSpace (EuclideanSpace ℝ (Fin 2)))\n        (closure (connectedComponentIn Cᶜ p)),\n      letI : ChartedSpace (SmoothCollar.HalfSpace (EuclideanSpace ℝ (Fin 2)))\n        (closure (connectedComponentIn Cᶜ p)) := cs\n      IsManifold (SmoothCollar.halfSpaceModel (EuclideanSpace ℝ (Fin 2))) ∞\n        (closure (connectedComponentIn Cᶜ p)) ∧\n      IsSmoothEmbedding (SmoothCollar.halfSpaceModel (EuclideanSpace ℝ (Fin 2)))\n        (𝓘(ℝ,EuclideanSpace ℝ (Fin 2) × ℝ)) ∞\n        (Subtype.val : closure (connectedComponentIn Cᶜ p) → N) ∧\n      (Subtype.val : closure (connectedComponentIn Cᶜ p) → N) ''\n        (SmoothCollar.halfSpaceModel (EuclideanSpace ℝ (Fin 2))).boundary\n          (closure (connectedComponentIn Cᶜ p)) = frontier (connectedComponentIn Cᶜ p) ∧\n      connectedComponentIn Cᶜ p = interior (closure (connectedComponentIn Cᶜ p)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_smoothClosure_of_native_neck_cut_cover",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NativeCutClosure.lean",
+    "hint": "Apply the actual closure theorem with X=Sphere2 and V=EuclideanSpace R Fin2. Use frontier inclusion and the native collar producer. Prove the native center represented by (z.1.1,c) equals z using the axial equality and Fin1 extensionality, then preserve the center. Do not change the ambient ChartedSpace, add a smooth-closure assumption or use epsilon metric closeness as a substitute for cut data.",
+    "timeout_seconds": 1000
+  }
+]
