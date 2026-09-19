@@ -1,0 +1,80 @@
+[
+  {
+    "id": "dini-finite-jumps",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import MorganTianLib.Ch02.ForwardDifference\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff Bundle RealInnerProductSpace\n\n/-- Scalar forward comparison persists through a finite sequence of downward jumps. -/\ntheorem finite_forward_comparison\n    (n : ℕ) (time : ℕ → ℝ) (htime : StrictMono time)\n    (u : ℕ → ℝ → ℝ) (G : ℝ → ℝ) (psi : ℝ → ℝ → ℝ)\n    (hu : ∀ i < n, ContinuousOn (u i) (Icc (time i) (time (i+1))))\n    (hdu : ∀ i < n, ∀ t ∈ Ico (time i) (time (i+1)),\n      MorganTianLib.ForwardDiffQuotientLE (u i) t (psi t (u i t)))\n    (hpsi : ContDiffOn ℝ 1 (uncurry psi) (Icc (time 0) (time n) ×ˢ (univ : Set ℝ)))\n    (hG : ContinuousOn G (Icc (time 0) (time n)))\n    (hdG : ∀ t ∈ Ico (time 0) (time n), HasDerivWithinAt G (psi t (G t)) (Ici t) t)\n    (hinit : u 0 (time 0) ≤ G (time 0))\n    (hjumps : ∀ i, i+1 < n → u (i+1) (time (i+1)) ≤ u i (time (i+1))) :\n    ∀ i < n, ∀ t ∈ Icc (time i) (time (i+1)), u i t ≤ G t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Reference.finite_forward_comparison",
+    "target_path": "ReferenceBridges/ParallelMath/FiniteDini.lean",
+    "hint": "Induct on interval index. On each interval apply the ACTUAL MorganTianLib.le_of_forwardDiffQuotientLE theorem, restricting the smooth coefficient and barrier assumptions. At the next starting endpoint use the downward jump and the preceding terminal bound. n=0 is vacuous. No continuity across a downward jump is assumed. This is the scalar surgery-time gluing step, not the geometric width inequality.",
+    "timeout_seconds": 720,
+    "math_lane": "extinction-jumps",
+    "math_role": "map"
+  },
+  {
+    "id": "epsilon-family-reindex",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import MorganTianLib.Ch02.EpsilonClose\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff Bundle RealInnerProductSpace\n\n/-- Uniform spatial epsilon-closeness survives restriction or reindexing of time. -/\ntheorem epsilonCloseFamily_reindex {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n    [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n    {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H} [I.Boundaryless]\n    {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    {T U : Type*} {epsilon : ℝ} (g0 g : T → Riemannian.RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonCloseFamily epsilon g0 g) (f : U → T) :\n    MorganTianLib.EpsilonCloseFamily epsilon (g0 ∘ f) (g ∘ f) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Reference.epsilonCloseFamily_reindex",
+    "target_path": "ReferenceBridges/ParallelMath/EpsilonFamilyReindex.lean",
+    "hint": "Use the actual definition and preserve its single UNIFORM bound C across all indices. Do not replace EpsilonCloseFamily by pointwise EpsilonClose with possibly different constants. This is consumed by the backward-depth restriction task.",
+    "timeout_seconds": 720,
+    "math_lane": "evolving-neck",
+    "math_role": "map"
+  },
+  {
+    "id": "evolving-depth-restriction",
+    "model": "grok",
+    "depends_on": [
+      "epsilon-family-reindex"
+    ],
+    "source": "import MorganTianLib.Ch03.RicciFlow.EvolvingEpsilonNeck\nimport ReferenceBridges.ParallelMath.EpsilonFamilyReindex\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff Bundle RealInnerProductSpace\n\n/-- Restrict a real evolving epsilon-neck to a shorter backward interval, preserving its central neck. -/\ntheorem evolvingNeck_restrict_depth {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n    [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n    {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H} [I.Boundaryless]\n    {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    {epsilon tau : ℝ} {g : ℝ → Riemannian.RiemannianMetric I M} {J : Set ℝ}\n    {x : M} {t0 : J} (N : MorganTianLib.EvolvingEpsilonNeck epsilon g J x t0 tau)\n    (sigma : ℝ) (hsigma : 0 < sigma) (hle : sigma ≤ tau) :\n    ∃ N' : MorganTianLib.EvolvingEpsilonNeck epsilon g J x t0 sigma,\n      N'.centralNeck = N.centralNeck :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Reference.evolvingNeck_restrict_depth",
+    "target_path": "ReferenceBridges/ParallelMath/EvolvingDepth.lean",
+    "hint": "Construct the new structure by inclusion Ioc(-sigma,0) into Ioc(-tau,0). Reindex the metric families and every actual-time/pullback identity, keep centralNeck and center unchanged, and invoke the uniform-family reindex theorem. At zero time prove equality of the relevant subtype points by Subtype.ext. This restricts real geometric data, not a weakened replacement structure.",
+    "timeout_seconds": 720,
+    "math_lane": "evolving-neck",
+    "math_role": "map"
+  },
+  {
+    "id": "strong-neck-reduce",
+    "model": "grok",
+    "depends_on": [
+      "evolving-depth-restriction"
+    ],
+    "source": "import MorganTianLib.Ch03.RicciFlow.EvolvingEpsilonNeck\nimport ReferenceBridges.ParallelMath.EvolvingDepth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff Bundle RealInnerProductSpace\n\n/-- An evolving neck with at least one unit of backward depth supplies a genuine strong neck. -/\ntheorem strongNeck_of_depth_ge_one {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n    [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n    {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H} [I.Boundaryless]\n    {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    {epsilon tau : ℝ} {g : ℝ → Riemannian.RiemannianMetric I M} {J : Set ℝ}\n    {x : M} {t0 : J} (N : MorganTianLib.EvolvingEpsilonNeck epsilon g J x t0 tau)\n    (htau : 1 ≤ tau) :\n    ∃ N' : MorganTianLib.StrongEpsilonNeck epsilon g J x t0,\n      N'.centralNeck = N.centralNeck :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Reference.strongNeck_of_depth_ge_one",
+    "target_path": "ReferenceBridges/ParallelMath/StrongNeck.lean",
+    "hint": "REDUCE: use the actual shorter-depth constructor with sigma=1; retain the equality of central geometric necks. The existence of an evolving neck itself is a hypothesis, not supplied by this theorem.",
+    "timeout_seconds": 720,
+    "math_lane": "evolving-neck",
+    "math_role": "reduce"
+  },
+  {
+    "id": "sphere-circle-group",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import HatcherLib.Ch1.Circle\nimport HatcherLib.Ch1.Sphere\nimport PoincareConjecture.Topology.FiberSaturation.Sphere\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff Bundle RealInnerProductSpace\n\n/-- The product sphere bundle over the circle has infinite cyclic fundamental group. -/\ntheorem sphere2_circle_fundamentalGroup\n    (x : PoincareConjecture.Topology.FiberSaturation.Sphere2) :\n    Nonempty (FundamentalGroup\n      (PoincareConjecture.Topology.FiberSaturation.Sphere2 × HatcherLib.UnitCircle)\n      (x,0) ≃* Multiplicative ℤ) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Reference.sphere2_circle_fundamentalGroup",
+    "target_path": "ReferenceBridges/ParallelMath/SphereCircleGroup.lean",
+    "hint": "Use HatcherLib.standardSphereSimplyConnected 0 for the actual Sphere2 subtype, HatcherLib.fundamentalGroupProdMulEquiv, and HatcherLib.circleFundamentalGroupMulEquiv. Eliminate the trivial first factor using a group equivalence. Preserve the mathlib multiplication convention; do not accidentally substitute Hatcher PiOne without its opposite-group equivalence. This proves only the product bundle, not the twisted bundle.",
+    "timeout_seconds": 720,
+    "math_lane": "topology-product",
+    "math_role": "map"
+  },
+  {
+    "id": "sphere-circle-obstruction",
+    "model": "grok",
+    "depends_on": [
+      "sphere-circle-group"
+    ],
+    "source": "import ReferenceBridges.ParallelMath.SphereCircleGroup\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff Bundle RealInnerProductSpace\n\n/-- A simply connected space cannot be homeomorphic to the product sphere bundle. -/\ntheorem no_homeomorph_to_sphere2_circle\n    {N : Type*} [TopologicalSpace N] [SimplyConnectedSpace N] :\n    ¬ Nonempty (N ≃ₜ\n      (PoincareConjecture.Topology.FiberSaturation.Sphere2 × HatcherLib.UnitCircle)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Reference.no_homeomorph_to_sphere2_circle",
+    "target_path": "ReferenceBridges/ParallelMath/SphereCircleObstruction.lean",
+    "hint": "REDUCE: transport simple connectivity along a purported homeomorphism, so the product fundamental group must be subsingleton. The integrated group equivalence contradicts the nontriviality of Multiplicative Int. Supply a concrete or existing Sphere2 point. No classification of all sphere bundles or all closed 3-manifolds is claimed.",
+    "timeout_seconds": 720,
+    "math_lane": "topology-product",
+    "math_role": "reduce"
+  }
+]
