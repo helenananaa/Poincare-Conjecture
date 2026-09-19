@@ -239,5 +239,37 @@
     "priority": 5,
     "mathematical_role": "reduce",
     "mathematical_line": "topology"
+  },
+  {
+    "id": "area-to-width-reduce",
+    "model": "grok",
+    "depends_on": [
+      "plane-area-distortion",
+      "least-area-reduce"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Variational.PlaneAreaDistortion\nimport PoincareConjecture.ParallelMath.Variational.LeastAreaReduce\nimport PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Pointwise two-plane metric distortion passes through the Jacobian integral\nto the least area of an arbitrary nonempty admissible family. -/\ntheorem quadratic_area_leastCost_comparison {A Ω : Type*} [Nonempty A] [MeasurableSpace Ω]\n    (μ : Measure Ω) (J a b c : A → Ω → ℝ)\n    (hJ : ∀ p, Integrable (J p) μ)\n    (hJnew : ∀ p, Integrable (fun x => J p x * Real.sqrt (a p x*c p x-(b p x)^2)) μ)\n    (hn : ∀ p, ∀ᵐ x ∂μ, 0 ≤ J p x) (ε : ℝ) (hε0 : 0 ≤ ε) (hε1 : ε < 1)\n    (hform : ∀ p, ∀ᵐ x ∂μ, ∀ s t : ℝ,\n      (1-ε)*(s^2+t^2) ≤ a p x*s^2+2*b p x*s*t+c p x*t^2 ∧\n      a p x*s^2+2*b p x*s*t+c p x*t^2 ≤ (1+ε)*(s^2+t^2)) :\n    (1-ε) * leastCost (fun p => ∫ x, J p x ∂μ) ≤\n      leastCost (fun p => ∫ x, J p x * Real.sqrt (a p x*c p x-(b p x)^2) ∂μ) ∧\n    leastCost (fun p => ∫ x, J p x * Real.sqrt (a p x*c p x-(b p x)^2) ∂μ) ≤\n      (1+ε) * leastCost (fun p => ∫ x, J p x ∂μ) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.quadratic_area_leastCost_comparison",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/AreaToWidth.lean",
+    "hint": "Combine exactly plane_area_distortion and least_integral_distortion. The pointwise scalar Jacobian is already explicitly specified, not an assumed integral distortion. Use almost-everywhere filtering and nonnegativity of J for multiplication. This is the genuine reducer joining quadratic geometry to variational area; do not re-prove the component lemmas.",
+    "timeout_seconds": 660,
+    "priority": 10,
+    "mathematical_role": "cross-branch-reduce",
+    "mathematical_line": "area"
+  },
+  {
+    "id": "minmax-continuity-reduce",
+    "model": "grok",
+    "depends_on": [
+      "peak-distortion",
+      "width-continuity"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Variational.PeakDistortion\nimport PoincareConjecture.ParallelMath.Variational.WidthContinuity\nimport PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- A uniform distortion estimate yields continuity of infimum-supremum width,\nwithout attainment of either extrema or compactness of the parameter types. -/\ntheorem leastPeak_continuous_of_exp_distortion {A B : Type*} [Nonempty A] [Nonempty B]\n    (F : ℝ → A → B → ℝ) (hn : ∀ t a b, 0 ≤ F t a b)\n    (hb : ∀ t a, BddAbove (range (F t a))) (K : ℝ) (hK : 0 ≤ K)\n    (h : ∀ s t a b, F t a b ≤ Real.exp (K*|t-s|) * F s a b) :\n    Continuous (fun t => leastPeak (F t)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.leastPeak_continuous_of_exp_distortion",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/MinmaxContinuity.lean",
+    "hint": "Use peakCost_transport for each fixed admissible family to obtain the same exponential distortion of suprema. Check the nonnegative-supremum premise with Nonempty B and boundedness, then apply leastCost_continuous_of_exp_distortion. This is the loop-family minmax form; no minimizer or maximizer is assumed.",
+    "timeout_seconds": 660,
+    "priority": 10,
+    "mathematical_role": "cross-branch-reduce",
+    "mathematical_line": "variational"
   }
 ]
