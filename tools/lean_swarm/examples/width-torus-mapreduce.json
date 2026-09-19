@@ -1,0 +1,243 @@
+[
+  {
+    "id": "infimum-approximation",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Nonnegative cost families have an infimum and epsilon minimizers, without attainment. -/\ntheorem leastCost_nonneg_and_approx {A : Type*} [Nonempty A]\n    (f : A → ℝ) (hf : ∀ a, 0 ≤ f a) :\n    0 ≤ leastCost f ∧ (∀ a, leastCost f ≤ f a) ∧\n    ∀ ε : ℝ, 0 < ε → ∃ a, f a < leastCost f + ε :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.leastCost_nonneg_and_approx",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/InfimumApproximation.lean",
+    "hint": "Use the nonempty range and lower bound zero to apply the conditional completeness sInf API. Do not assume a minimizer exists. This supplies the epsilon-minimizing sequences needed in geometric width transport.",
+    "timeout_seconds": 660,
+    "priority": 0,
+    "mathematical_role": "map",
+    "mathematical_line": "variational"
+  },
+  {
+    "id": "admissible-transfer",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- A map of admissible families with controlled costs transports their infima.\nThe family map need not be injective, surjective, or attain either infimum. -/\ntheorem leastCost_transfer {A B : Type*} [Nonempty A] [Nonempty B]\n    (f : A → ℝ) (g : B → ℝ) (hf : ∀ a, 0 ≤ f a) (hg : ∀ b, 0 ≤ g b)\n    (T : A → B) (L δ : ℝ) (hL : 0 ≤ L)\n    (hcost : ∀ a, g (T a) ≤ L * f a + δ) :\n    leastCost g ≤ L * leastCost f + δ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.leastCost_transfer",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/AdmissibleTransfer.lean",
+    "hint": "Prove using infimum approximation, or order-completeness and scaling. Handle L=0 separately if needed. This is a general map of admissible geometries; do not silently assume T surjective or positive widths. Independent of the other worker tasks.",
+    "timeout_seconds": 660,
+    "priority": 0,
+    "mathematical_role": "map",
+    "mathematical_line": "variational"
+  },
+  {
+    "id": "peak-distortion",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Uniform parameterwise bounds pass to a bounded sweepout supremum. -/\ntheorem peakCost_transport {B C : Type*} [Nonempty B] [Nonempty C]\n    (f : B → ℝ) (g : C → ℝ) (hf : BddAbove (range f)) (hg : BddAbove (range g))\n    (T : B → C) (hsurj : Surjective T) (L δ : ℝ) (hL : 0 ≤ L)\n    (hcost : ∀ b, g (T b) ≤ L * f b + δ) :\n    peakCost g ≤ L * peakCost f + δ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.peakCost_transport",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/PeakDistortion.lean",
+    "hint": "Use the actual surjectivity only on the sweepout parameter map to cover every target parameter. The outer admissible-family map in the eventual minmax reducer will not require surjectivity.",
+    "timeout_seconds": 660,
+    "priority": 0,
+    "mathematical_role": "map",
+    "mathematical_line": "variational"
+  },
+  {
+    "id": "infimum-additive",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- A uniform additive cost perturbation controls infima even without minimizers. -/\ntheorem leastCost_uniform_perturbation {A : Type*} [Nonempty A]\n    (f g : A → ℝ) (hf : ∀ a, 0 ≤ f a) (hg : ∀ a, 0 ≤ g a)\n    (δ : ℝ) (hδ : 0 ≤ δ) (hclose : ∀ a, |f a - g a| ≤ δ) :\n    |leastCost f - leastCost g| ≤ δ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.leastCost_uniform_perturbation",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/InfimumAdditive.lean",
+    "hint": "Use two infimum comparisons or epsilon minimizers with bounded-below ranges. This is uniform in the full admissible family, not continuity of an attained minimizer.",
+    "timeout_seconds": 660,
+    "priority": 0,
+    "mathematical_role": "map",
+    "mathematical_line": "variational"
+  },
+  {
+    "id": "cost-growth",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- A nonnegative continuously differentiable cost has two-sided exponential\ncontrol from an absolute derivative bound, including the zero-cost case. -/\ntheorem cost_twoSided_growth (f f' : ℝ → ℝ) (a b K : ℝ) (hab : a ≤ b) (hK : 0 ≤ K)\n    (hf : ContinuousOn f (Icc a b)) (hn : ∀ t ∈ Icc a b, 0 ≤ f t)\n    (hd : ∀ t ∈ Icc a b, HasDerivAt f (f' t) t)\n    (hbnd : ∀ t ∈ Icc a b, |f' t| ≤ K * f t) :\n    Real.exp (-K*(b-a)) * f a ≤ f b ∧ f b ≤ Real.exp (K*(b-a)) * f a :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.cost_twoSided_growth",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/CostGrowth.lean",
+    "hint": "Use integrating factors and derivative sign monotonicity, or a forward/backward Gronwall comparison. Do not divide by f: f may vanish. K>=0 and the degenerate interval a=b must work.",
+    "timeout_seconds": 660,
+    "priority": 0,
+    "mathematical_role": "map",
+    "mathematical_line": "cost-variation"
+  },
+  {
+    "id": "integral-jacobian",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Pointwise nonnegative Jacobian distortion passes to the actual integral. -/\ntheorem integral_twoSided_distortion {Ω : Type*} [MeasurableSpace Ω]\n    (μ : Measure Ω) (f g : Ω → ℝ) (hf : Integrable f μ) (hg : Integrable g μ)\n    (a b : ℝ) (ha : 0 ≤ a) (hab : a ≤ b)\n    (hn : ∀ᵐ x ∂μ, 0 ≤ f x)\n    (hbound : ∀ᵐ x ∂μ, a * f x ≤ g x ∧ g x ≤ b * f x) :\n    0 ≤ ∫ x, g x ∂μ ∧ a * (∫ x, f x ∂μ) ≤ ∫ x, g x ∂μ ∧\n      (∫ x, g x ∂μ) ≤ b * (∫ x, f x ∂μ) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.integral_twoSided_distortion",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/IntegralJacobian.lean",
+    "hint": "Use integral_mono_ae and integral_const_mul with the supplied integrability. Do not replace actual integrals with formal cost certificates. Supports nonfinite measure spaces when integrable.",
+    "timeout_seconds": 660,
+    "priority": 0,
+    "mathematical_role": "map",
+    "mathematical_line": "area"
+  },
+  {
+    "id": "quadratic-discriminant",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Nonnegativity of every vector in a real quadratic plane controls its determinant. -/\ntheorem quadratic_nonneg_det (a b c : ℝ)\n    (h : ∀ s t : ℝ, 0 ≤ a*s^2 + 2*b*s*t + c*t^2) :\n    0 ≤ a ∧ 0 ≤ c ∧ b^2 ≤ a*c :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.quadratic_nonneg_det",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/QuadraticDiscriminant.lean",
+    "hint": "Derive a,c>=0 on the axes. For a>0 evaluate at s=-b,t=a and cancel a; for a=0 show b=0 by choosing a real s of the appropriate sign. No spectral theorem or inverse of a possibly singular matrix can be assumed.",
+    "timeout_seconds": 660,
+    "priority": 0,
+    "mathematical_role": "map",
+    "mathematical_line": "area"
+  },
+  {
+    "id": "plane-area-distortion",
+    "model": "grok",
+    "depends_on": [
+      "quadratic-discriminant"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Variational.QuadraticDiscriminant\nimport PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- A genuine quadratic-form distortion on an orthonormal two-plane bounds its area Jacobian. -/\ntheorem plane_area_distortion (a b c ε : ℝ) (hε0 : 0 ≤ ε) (hε1 : ε < 1)\n    (h : ∀ s t : ℝ, (1-ε)*(s^2+t^2) ≤ a*s^2 + 2*b*s*t + c*t^2 ∧\n      a*s^2 + 2*b*s*t + c*t^2 ≤ (1+ε)*(s^2+t^2)) :\n    1-ε ≤ Real.sqrt (a*c-b^2) ∧ Real.sqrt (a*c-b^2) ≤ 1+ε :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.plane_area_distortion",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/PlaneAreaDistortion.lean",
+    "hint": "Apply quadratic_nonneg_det to the lower-shifted form (a-(1-epsilon), b, c-(1-epsilon)). Use diagonal upper bounds for the upper determinant estimate and the shifted determinant plus trace lower bound for the lower estimate. Then use sqrt monotonicity. This conclusion is the geometric two-dimensional Jacobian factor, not only individual vector lengths.",
+    "timeout_seconds": 660,
+    "priority": 5,
+    "mathematical_role": "reduce",
+    "mathematical_line": "area"
+  },
+  {
+    "id": "minmax-transfer",
+    "model": "grok",
+    "depends_on": [
+      "admissible-transfer",
+      "peak-distortion"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Variational.PeakDistortion\nimport PoincareConjecture.ParallelMath.Variational.AdmissibleTransfer\nimport PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Transport a minmax sweepout family with independent maps on admissible\nsweepouts and their parameters; no minimizing sweepout is assumed. -/\ntheorem leastPeak_transfer {A B C D : Type*} [Nonempty A] [Nonempty B] [Nonempty C] [Nonempty D]\n    (F : A → B → ℝ) (G : C → D → ℝ)\n    (hF : ∀ a b, 0 ≤ F a b) (hG : ∀ c d, 0 ≤ G c d)\n    (bF : ∀ a, BddAbove (range (F a))) (bG : ∀ c, BddAbove (range (G c)))\n    (T : A → C) (P : A → B → D) (hP : ∀ a, Surjective (P a))\n    (L δ : ℝ) (hL : 0 ≤ L)\n    (hcost : ∀ a b, G (T a) (P a b) ≤ L * F a b + δ) :\n    leastPeak G ≤ L * leastPeak F + δ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.leastPeak_transfer",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/MinmaxTransfer.lean",
+    "hint": "Use peakCost_transport on each sweepout, then leastCost_transfer on the admissible family. Prove nonnegative supremum values using Nonempty parameter types. The outer T is deliberately not assumed surjective, matching forward surgery transport.",
+    "timeout_seconds": 660,
+    "priority": 5,
+    "mathematical_role": "reduce",
+    "mathematical_line": "variational"
+  },
+  {
+    "id": "width-continuity",
+    "model": "grok",
+    "depends_on": [
+      "admissible-transfer",
+      "infimum-approximation"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Variational.InfimumApproximation\nimport PoincareConjecture.ParallelMath.Variational.AdmissibleTransfer\nimport PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Uniform exponential distortion gives continuity of a variational width,\neven when no minimizer exists at any time. -/\ntheorem leastCost_continuous_of_exp_distortion {A : Type*} [Nonempty A]\n    (F : ℝ → A → ℝ) (hF : ∀ t a, 0 ≤ F t a) (K : ℝ) (hK : 0 ≤ K)\n    (hcontrol : ∀ s t a, F t a ≤ Real.exp (K*|t-s|) * F s a) :\n    Continuous (fun t => leastCost (F t)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.leastCost_continuous_of_exp_distortion",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/WidthContinuity.lean",
+    "hint": "First transfer the two exponential bounds to the infima using leastCost_transfer. At an arbitrary base time use a squeeze argument with fixed finite nonnegative width at that time, or bound absolute difference by (exp(K*abs(t-s))-1) times a local bound. Do not assume an attained infimum or interchange arbitrary infimum and limit without uniform control.",
+    "timeout_seconds": 660,
+    "priority": 5,
+    "mathematical_role": "reduce",
+    "mathematical_line": "variational"
+  },
+  {
+    "id": "least-area-reduce",
+    "model": "grok",
+    "depends_on": [
+      "integral-jacobian",
+      "admissible-transfer"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Variational.AdmissibleTransfer\nimport PoincareConjecture.ParallelMath.Variational.IntegralJacobian\nimport PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- An actual integral estimate for every admissible surface yields a\nleast-area estimate without assuming Plateau/minimal-surface existence. -/\ntheorem least_integral_distortion {A Ω : Type*} [Nonempty A] [MeasurableSpace Ω]\n    (μ : Measure Ω) (J J' : A → Ω → ℝ)\n    (hJ : ∀ a, Integrable (J a) μ) (hJ' : ∀ a, Integrable (J' a) μ)\n    (hpos : ∀ a, ∀ᵐ x ∂μ, 0 ≤ J a x) (l u : ℝ) (hl : 0 < l) (hlu : l ≤ u)\n    (hdist : ∀ a, ∀ᵐ x ∂μ, l * J a x ≤ J' a x ∧ J' a x ≤ u * J a x) :\n    l * leastCost (fun a => ∫ x, J a x ∂μ) ≤ leastCost (fun a => ∫ x, J' a x ∂μ) ∧\n      leastCost (fun a => ∫ x, J' a x ∂μ) ≤ u * leastCost (fun a => ∫ x, J a x ∂μ) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.least_integral_distortion",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/LeastAreaReduce.lean",
+    "hint": "Use integral_twoSided_distortion for each actual area integral, then leastCost_transfer in both directions (the reverse with reciprocal l). Do not introduce any geometric existence premise or declare that all Jacobians already satisfy this comparison.",
+    "timeout_seconds": 660,
+    "priority": 5,
+    "mathematical_role": "reduce",
+    "mathematical_line": "area"
+  },
+  {
+    "id": "width-growth-reduce",
+    "model": "grok",
+    "depends_on": [
+      "cost-growth",
+      "admissible-transfer"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Variational.AdmissibleTransfer\nimport PoincareConjecture.ParallelMath.Variational.CostGrowth\nimport PoincareConjecture.ParallelMath.Variational.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Variational\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Uniform variation bounds for a fixed admissible family transfer to its\nleast cost on a regular time slab, without differentiating the infimum. -/\ntheorem leastCost_twoSided_growth {A : Type*} [Nonempty A]\n    (F F' : A → ℝ → ℝ) (a b K : ℝ) (hab : a ≤ b) (hK : 0 ≤ K)\n    (hc : ∀ x, ContinuousOn (F x) (Icc a b))\n    (hn : ∀ x t, 0 ≤ F x t)\n    (hd : ∀ x t, t ∈ Icc a b → HasDerivAt (F x) (F' x t) t)\n    (hbnd : ∀ x t, t ∈ Icc a b → |F' x t| ≤ K * F x t) :\n    Real.exp (-K*(b-a)) * leastCost (fun x => F x a) ≤ leastCost (fun x => F x b) ∧\n      leastCost (fun x => F x b) ≤ Real.exp (K*(b-a)) * leastCost (fun x => F x a) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Variational\n",
+    "target_name": "PoincareConjecture.ParallelMath.Variational.leastCost_twoSided_growth",
+    "target_path": "PoincareConjecture/ParallelMath/Variational/WidthGrowthReduce.lean",
+    "hint": "Use cost_twoSided_growth independently for every member, then the infimum transfer principle twice. Never differentiate the infimum; it need not be differentiable or attained.",
+    "timeout_seconds": 660,
+    "priority": 5,
+    "mathematical_role": "reduce",
+    "mathematical_line": "cost-variation"
+  },
+  {
+    "id": "torus-projection",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.MappingTorus\nimport PoincareConjecture.Topology.FiberSaturation.Sphere\nimport HatcherLib.Ch1.Circle\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.TorusObstruction\nopen Set Function\nopen scoped Topology unitInterval\nopen PoincareConjecture.Topology.FiberSaturation\n\n/-- The actual mapping-torus quotient carries its canonical circle projection. -/\ntheorem mappingTorus_circle_projection {X : Type*} [TopologicalSpace X] (φ : X ≃ₜ X) :\n    ∃ P : C(MappingTorus.Space φ 1, HatcherLib.UnitCircle),\n      ∀ (x : X) (t : ℝ), P (MappingTorus.proj φ 1 (x,t)) = (t : HatcherLib.UnitCircle) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.TorusObstruction\n",
+    "target_name": "PoincareConjecture.ParallelMath.TorusObstruction.mappingTorus_circle_projection",
+    "target_path": "ReferenceBridges/WidthTorus/CircleProjection.lean",
+    "hint": "Descend the continuous second coordinate modulo integers through the existing quotient setoid. Check invariance under all integer deck iterates using AddCircle, not just one gluing step. The topology is the existing quotient topology.",
+    "timeout_seconds": 660,
+    "priority": 0,
+    "mathematical_role": "map",
+    "mathematical_line": "topology"
+  },
+  {
+    "id": "torus-generator",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.MappingTorus\nimport PoincareConjecture.Topology.FiberSaturation.Sphere\nimport HatcherLib.Ch1.Circle\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.TorusObstruction\nopen Set Function\nopen scoped Topology unitInterval\nopen PoincareConjecture.Topology.FiberSaturation\n\n/-- A path from x to its monodromy image closes to a real loop in the quotient. -/\ntheorem mappingTorus_axial_loop {X : Type*} [TopologicalSpace X]\n    (φ : X ≃ₜ X) (x : X) (γ : Path x (φ x)) :\n    ∃ q : Path (MappingTorus.proj φ 1 (x,0)) (MappingTorus.proj φ 1 (x,0)),\n      ∀ t : unitInterval, q t = MappingTorus.proj φ 1 (γ t,(t : ℝ)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.TorusObstruction\n",
+    "target_name": "PoincareConjecture.ParallelMath.TorusObstruction.mappingTorus_axial_loop",
+    "target_path": "ReferenceBridges/WidthTorus/AxialLoop.lean",
+    "hint": "Use the continuous quotient projection on the path (gamma(t),t). The endpoint (phi x,1) is one deck translate of (x,0). The stored convention is (x,t)~(phi x,t+1); preserve its direction.",
+    "timeout_seconds": 660,
+    "priority": 0,
+    "mathematical_role": "map",
+    "mathematical_line": "topology"
+  },
+  {
+    "id": "sphere-antipodal",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.MappingTorus\nimport PoincareConjecture.Topology.FiberSaturation.Sphere\nimport HatcherLib.Ch1.Circle\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.TorusObstruction\nopen Set Function\nopen scoped Topology unitInterval\nopen PoincareConjecture.Topology.FiberSaturation\n\n/-- The actual standard two-sphere admits its explicit antipodal homeomorphism. -/\ntheorem exists_sphere2_antipodal_homeomorph :\n    ∃ a : Sphere2 ≃ₜ Sphere2, ∀ x : Sphere2,\n      (a x : EuclideanSpace ℝ (Fin 3)) = -(x : EuclideanSpace ℝ (Fin 3)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.TorusObstruction\n",
+    "target_name": "PoincareConjecture.ParallelMath.TorusObstruction.exists_sphere2_antipodal_homeomorph",
+    "target_path": "ReferenceBridges/WidthTorus/Antipodal.lean",
+    "hint": "Use negation on the actual sphere subtype and its involution. Prove continuity in the induced topology. Do not replace Sphere2 with an abstract sphere or assume a smooth isotopy classification.",
+    "timeout_seconds": 660,
+    "priority": 0,
+    "mathematical_role": "map",
+    "mathematical_line": "topology"
+  },
+  {
+    "id": "torus-obstruction",
+    "model": "grok",
+    "depends_on": [
+      "torus-projection",
+      "torus-generator"
+    ],
+    "source": "import ReferenceBridges.WidthTorus.AxialLoop\nimport ReferenceBridges.WidthTorus.CircleProjection\nimport PoincareConjecture.Topology.FiberSaturation.MappingTorus\nimport PoincareConjecture.Topology.FiberSaturation.Sphere\nimport HatcherLib.Ch1.Circle\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.TorusObstruction\nopen Set Function\nopen scoped Topology unitInterval\nopen PoincareConjecture.Topology.FiberSaturation\n\n/-- Every nonempty path-connected mapping torus surjects onto the circle\nwinding generator, so it is not simply connected; no trivial monodromy is required. -/\ntheorem mappingTorus_not_simplyConnected {X : Type*} [TopologicalSpace X]\n    [Nonempty X] [PathConnectedSpace X] (φ : X ≃ₜ X) :\n    ¬ SimplyConnectedSpace (MappingTorus.Space φ 1) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.TorusObstruction\n",
+    "target_name": "PoincareConjecture.ParallelMath.TorusObstruction.mappingTorus_not_simplyConnected",
+    "target_path": "ReferenceBridges/WidthTorus/NonSimplyConnected.lean",
+    "hint": "Choose x and a path x→phi x. Use the two integrated producer theorems to build a quotient loop and a circle projection. Its image is HatcherLib.unitCircleWindingLoop 1 after endpoint casts. Under SimplyConnectedSpace it would be nullhomotopic, contradicting circleFundamentalGroupMulEquiv_windingLoop 1. Do not claim pi1 is Z in full generality: the fiber may itself have nontrivial pi1.",
+    "timeout_seconds": 660,
+    "priority": 5,
+    "mathematical_role": "reduce",
+    "mathematical_line": "topology"
+  },
+  {
+    "id": "twisted-bundle-reduce",
+    "model": "grok",
+    "depends_on": [
+      "sphere-antipodal",
+      "torus-obstruction"
+    ],
+    "source": "import ReferenceBridges.WidthTorus.NonSimplyConnected\nimport ReferenceBridges.WidthTorus.Antipodal\nimport PoincareConjecture.Topology.FiberSaturation.MappingTorus\nimport PoincareConjecture.Topology.FiberSaturation.Sphere\nimport HatcherLib.Ch1.Circle\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.TorusObstruction\nopen Set Function\nopen scoped Topology unitInterval\nopen PoincareConjecture.Topology.FiberSaturation\n\n/-- The antipodal mapping torus of the actual two-sphere cannot be homeomorphic\nto any simply connected space. This does not classify sphere diffeomorphisms. -/\ntheorem twisted_sphere_bundle_obstruction :\n    ∃ a : Sphere2 ≃ₜ Sphere2,\n      (∀ x : Sphere2, (a x : EuclideanSpace ℝ (Fin 3)) = -(x : EuclideanSpace ℝ (Fin 3))) ∧\n      ∀ (N : Type*) [TopologicalSpace N] [SimplyConnectedSpace N],\n        ¬ Nonempty (N ≃ₜ MappingTorus.Space a 1) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.TorusObstruction\n",
+    "target_name": "PoincareConjecture.ParallelMath.TorusObstruction.twisted_sphere_bundle_obstruction",
+    "target_path": "ReferenceBridges/WidthTorus/TwistedBundle.lean",
+    "hint": "Combine the explicit antipodal map with mappingTorus_not_simplyConnected and transport simple connectivity along a hypothetical homeomorphism. Establish the standard Sphere2 path connected/nonempty instances from the pinned sphere API. This is the twisted case absent from the previous product-only obstruction.",
+    "timeout_seconds": 660,
+    "priority": 5,
+    "mathematical_role": "reduce",
+    "mathematical_line": "topology"
+  }
+]
