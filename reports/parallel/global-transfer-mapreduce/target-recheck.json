@@ -1,0 +1,259 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "tasks": [
+    {
+      "id": "gram-shear",
+      "target": "PoincareConjecture.ParallelMath.Transfer.gramArea_triangular_change",
+      "path": "PoincareConjecture/ParallelMath/Transfer/GramShear.lean",
+      "status": "PASS",
+      "sha256": "d003091dcb8af479ef6abdb774a6a177d60c086d08aab1497529bcc9b6a15b10",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "gram-degenerate",
+      "target": "PoincareConjecture.ParallelMath.Transfer.gramArea_degenerate",
+      "path": "PoincareConjecture/ParallelMath/Transfer/GramDegenerate.lean",
+      "status": "PASS",
+      "sha256": "c0be2a556947514a289ec56ed344a11f16a5434e514a555abff5ef6bf40aa5fe",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "gram-frame",
+      "target": "PoincareConjecture.ParallelMath.Transfer.pair_degenerate_or_orthonormal",
+      "path": "PoincareConjecture/ParallelMath/Transfer/GramFrame.lean",
+      "status": "PASS",
+      "sha256": "de0aeaf192f27fb921f9b76d86654e36d12d3d2d75b1eb295ac6cfded6ad02f0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "gram-allpairs",
+      "target": "PoincareConjecture.ParallelMath.Transfer.gramArea_metric_comparison",
+      "path": "PoincareConjecture/ParallelMath/Transfer/GramComparison.lean",
+      "status": "PASS",
+      "sha256": "d69fe9ba954e5e79e82c72ddb66a892d961529ba8afa12615e9bfc9831b4d570",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-allpairs",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_all_pair_area",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonAllPairs.lean",
+      "status": "PASS",
+      "sha256": "31c9de4768332771118c09f400a967ebcbd15fcfc8bf3d32ce1547ffdcc2b527",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-surface-area",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_parametrized_area",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonSurfaceArea.lean",
+      "status": "PASS",
+      "sha256": "2ab4a7cc595d7c709790182dae1bb17ca94a190aa905dc258532daf3d4843fa8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "integral-domination",
+      "target": "PoincareConjecture.ParallelMath.Transfer.integrable_sqrt_gram_of_domination",
+      "path": "PoincareConjecture/ParallelMath/Transfer/IntegralDomination.lean",
+      "status": "PASS",
+      "sha256": "93dfbf7d0b3092981874e9569c0ae739b77c87a74f59fcec63c1e8c53fbaa547",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-area-integrable",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_area_integrable",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonAreaIntegrable.lean",
+      "status": "PASS",
+      "sha256": "e2dd991be70ae5150a26cece4f8b4c76ae6d2bae5c181c44bab3065f3e02fd67",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-least-surface",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_least_parametrized_area",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonLeastSurface.lean",
+      "status": "PASS",
+      "sha256": "8a345572cd6c7f01529127d265db4ef4df50e04e41b256dc02c0fea1e2951b2f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "local-time-infimum",
+      "target": "PoincareConjecture.ParallelMath.Transfer.leastCost_continuousOn_time_interval",
+      "path": "PoincareConjecture/ParallelMath/Transfer/LocalTimeInfimum.lean",
+      "status": "PASS",
+      "sha256": "30674fc04c37b7377bf7d09880dc69eb3acaec9f94b3b9ac12644ea1bed09e7b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "local-time-minmax",
+      "target": "PoincareConjecture.ParallelMath.Transfer.leastPeak_continuousOn_time_interval",
+      "path": "PoincareConjecture/ParallelMath/Transfer/LocalTimeMinmax.lean",
+      "status": "PASS",
+      "sha256": "671a384002b7181b1466c0d8a621ffaa25c4ecb192e941dd40211f327d1506ca",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "nonnull-invariant",
+      "target": "PoincareConjecture.ParallelMath.Transfer.nonNull_homotopic_iff",
+      "path": "PoincareConjecture/ParallelMath/Transfer/NonNullInvariant.lean",
+      "status": "PASS",
+      "sha256": "1021d11196b5eb651d7ef4466a846831f6dd404412dfd5a1e8cd8df978ebd62d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "homotopy-left-inverse",
+      "target": "PoincareConjecture.ParallelMath.Transfer.nonNull_comp_iff_of_left_homotopy_inverse",
+      "path": "PoincareConjecture/ParallelMath/Transfer/HomotopyLeftInverse.lean",
+      "status": "PASS",
+      "sha256": "0556528ab40bcbe3405b0353dfa3e2c9b699c2279afb1040d7ef519e0804bf71",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "homotopy-width-transport",
+      "target": "PoincareConjecture.ParallelMath.Transfer.nonNull_leastCost_transport",
+      "path": "PoincareConjecture/ParallelMath/Transfer/HomotopyWidthTransport.lean",
+      "status": "PASS",
+      "sha256": "1c24e694248172950e51647ea175b19114a5ed7d1672f1e60129f01686a2968d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "homotopic-transport",
+      "target": "PoincareConjecture.ParallelMath.Transfer.nonNull_comp_of_homotopic_transport",
+      "path": "PoincareConjecture/ParallelMath/Transfer/HomotopicTransport.lean",
+      "status": "PASS",
+      "sha256": "e312601f96cdd3d5c8a8a7e8509564c292261d171575e473aada01bea89bcd83",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "length-readback-v2",
+      "target": "PoincareConjecture.ParallelMath.Transfer.metricPathLength_eq_integral",
+      "path": "ReferenceBridges/GlobalTransfer/LengthReadback.lean",
+      "status": "PASS",
+      "sha256": "c3674099b9467d920b1aa7e1b07b1a62b6fef81e6ccdc854ef4e74ca18be9870",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "distance-readback-v2",
+      "target": "PoincareConjecture.ParallelMath.Transfer.metricEDist_eq_joining_inf",
+      "path": "ReferenceBridges/GlobalTransfer/DistanceReadback.lean",
+      "status": "PASS",
+      "sha256": "2e83183c1ded5d22e9867f4e9acfcafff39e13323c2e97a16e57427980f29d25",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-length-v2",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_path_length",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonLength.lean",
+      "status": "PASS",
+      "sha256": "5b4b4d5682fb8c77eeeba8c54f2e3749b5b22a05d24aa6105467f16ba66c5c12",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-distance-v2",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_riemannianEDist",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonDistance.lean",
+      "status": "PASS",
+      "sha256": "e926212206288e93ace4cd421b14d27a0b76d4d93937234d383e0cd513d9f52b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "uniform-minmax-lipschitz-repair",
+      "target": "PoincareConjecture.ParallelMath.Transfer.leastPeak_lipschitz",
+      "path": "PoincareConjecture/ParallelMath/Transfer/MinmaxLipschitz.lean",
+      "status": "PASS",
+      "sha256": "f71f753c6e404f5621b3df4c48c81466de0c79fa15c7413dff4cd94847aaa551",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "c1-nonnull-width",
+      "target": "PoincareConjecture.ParallelMath.Transfer.c1_nonNull_leastCost_transport",
+      "path": "PoincareConjecture/ParallelMath/Transfer/C1NonNullWidth.lean",
+      "status": "PASS",
+      "sha256": "66a43ea4a55dd863729cac4bf14b11a2637a727160f531abd188fa44c9c311b0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "model_calls": 0
+}

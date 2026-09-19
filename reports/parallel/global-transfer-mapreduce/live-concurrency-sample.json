@@ -1,0 +1,46 @@
+{
+  "unix": 1789814638.0850158,
+  "project": "poincare-global-transfer-n54960nw",
+  "active": [
+    {
+      "task": "gram-degenerate",
+      "unit": "lean-swarm-604130ae992e4b28ae04704d8c8f0b00.service"
+    },
+    {
+      "task": "gram-frame",
+      "unit": "lean-swarm-66092a41ef3940c98f7ad85aafdde972.service"
+    },
+    {
+      "task": "gram-shear",
+      "unit": "lean-swarm-e28703aa5d2342bca6177805f68d95c4.service"
+    },
+    {
+      "task": "homotopy-left-inverse",
+      "unit": "lean-swarm-5999a2e18c8d4c92ac14631f918abf95.service"
+    },
+    {
+      "task": "integral-domination",
+      "unit": "lean-swarm-2451aa6a00dd49f2b9429a807bdcc65f.service"
+    },
+    {
+      "task": "length-readback",
+      "unit": "lean-swarm-2bd2c9b4d8a54b33b6a6c0f14ac9aa4f.service"
+    },
+    {
+      "task": "distance-readback",
+      "unit": "lean-swarm-3b2446608b9340d185f1f55b86f63dd1.service"
+    },
+    {
+      "task": "local-time-infimum",
+      "unit": "lean-swarm-200e9722b1954b4fb704550d538b965c.service"
+    },
+    {
+      "task": "nonnull-invariant",
+      "unit": "lean-swarm-c77aa749e7d14600983bdd2519b764ae.service"
+    },
+    {
+      "task": "uniform-minmax-lipschitz",
+      "unit": "lean-swarm-f43229a0638b4f2e877b37621ed2a904.service"
+    }
+  ]
+}

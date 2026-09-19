@@ -1,0 +1,175 @@
+{
+  "nodes": [
+    {
+      "id": "gram-shear",
+      "lane": "area",
+      "role": "map"
+    },
+    {
+      "id": "gram-degenerate",
+      "lane": "area",
+      "role": "map"
+    },
+    {
+      "id": "gram-frame",
+      "lane": "area",
+      "role": "map"
+    },
+    {
+      "id": "gram-allpairs",
+      "lane": "area",
+      "role": "reduce"
+    },
+    {
+      "id": "epsilon-allpairs",
+      "lane": "area",
+      "role": "reduce"
+    },
+    {
+      "id": "epsilon-surface-area",
+      "lane": "area",
+      "role": "reduce"
+    },
+    {
+      "id": "epsilon-least-surface",
+      "lane": "area",
+      "role": "reduce"
+    },
+    {
+      "id": "local-time-infimum",
+      "lane": "time-width",
+      "role": "map"
+    },
+    {
+      "id": "local-time-minmax",
+      "lane": "time-width",
+      "role": "reduce"
+    },
+    {
+      "id": "nonnull-invariant",
+      "lane": "homotopy",
+      "role": "map"
+    },
+    {
+      "id": "homotopy-left-inverse",
+      "lane": "homotopy",
+      "role": "map"
+    },
+    {
+      "id": "homotopy-width-transport",
+      "lane": "homotopy",
+      "role": "reduce"
+    },
+    {
+      "id": "homotopic-transport",
+      "lane": "homotopy",
+      "role": "reduce"
+    },
+    {
+      "id": "integral-domination",
+      "lane": "area",
+      "role": "map"
+    },
+    {
+      "id": "epsilon-area-integrable",
+      "lane": "area",
+      "role": "reduce"
+    },
+    {
+      "id": "length-readback-v2",
+      "lane": "distance",
+      "role": "map"
+    },
+    {
+      "id": "distance-readback-v2",
+      "lane": "distance",
+      "role": "map"
+    },
+    {
+      "id": "epsilon-length-v2",
+      "lane": "distance",
+      "role": "reduce"
+    },
+    {
+      "id": "epsilon-distance-v2",
+      "lane": "distance",
+      "role": "reduce"
+    },
+    {
+      "id": "uniform-minmax-lipschitz-repair",
+      "lane": "time-width",
+      "role": "map"
+    },
+    {
+      "id": "c1-nonnull-width",
+      "lane": "homotopy",
+      "role": "cross-branch-reduce"
+    }
+  ],
+  "edges": [
+    [
+      "gram-shear",
+      "gram-allpairs"
+    ],
+    [
+      "gram-degenerate",
+      "gram-allpairs"
+    ],
+    [
+      "gram-frame",
+      "gram-allpairs"
+    ],
+    [
+      "gram-allpairs",
+      "epsilon-allpairs"
+    ],
+    [
+      "epsilon-allpairs",
+      "epsilon-surface-area"
+    ],
+    [
+      "epsilon-area-integrable",
+      "epsilon-least-surface"
+    ],
+    [
+      "local-time-infimum",
+      "local-time-minmax"
+    ],
+    [
+      "homotopy-left-inverse",
+      "homotopy-width-transport"
+    ],
+    [
+      "nonnull-invariant",
+      "homotopic-transport"
+    ],
+    [
+      "homotopy-left-inverse",
+      "homotopic-transport"
+    ],
+    [
+      "epsilon-surface-area",
+      "epsilon-area-integrable"
+    ],
+    [
+      "integral-domination",
+      "epsilon-area-integrable"
+    ],
+    [
+      "length-readback-v2",
+      "epsilon-length-v2"
+    ],
+    [
+      "distance-readback-v2",
+      "epsilon-distance-v2"
+    ],
+    [
+      "epsilon-length-v2",
+      "epsilon-distance-v2"
+    ],
+    [
+      "homotopy-left-inverse",
+      "c1-nonnull-width"
+    ]
+  ]
+}

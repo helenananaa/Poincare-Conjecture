@@ -1,0 +1,13 @@
+{
+  "path": "PoincareConjecture/PoincareConjecture/ParallelMath/Transfer/GramFrame.lean",
+  "target": "PoincareConjecture.ParallelMath.Transfer.pair_degenerate_or_orthonormal",
+  "before_sha256": "035fe8655261571f3d2c4e7aa7c16264951bc0cc867c8b1101dea39880b088d9",
+  "after_sha256": "de0aeaf192f27fb921f9b76d86654e36d12d3d2d75b1eb295ac6cfded6ad02f0",
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "statement_unchanged": true,
+  "reason": "Use the supplied symmetry explicitly to prove reversed orthogonality and then the required order. Genuine proof refactoring, no new hypothesis, no linter disabled; not counted as a new model task."
+}

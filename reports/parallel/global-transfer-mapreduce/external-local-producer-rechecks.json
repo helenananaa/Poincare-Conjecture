@@ -1,0 +1,42 @@
+[
+  {
+    "module": "PoincareConjecture.ParallelMath.Transfer.Core",
+    "sha256": "75fc033f47feefb3027b3701f7bbcab6e1d98a50b7958ec5010cf404ae1e64ca",
+    "exit_code": 0
+  },
+  {
+    "module": "ReferenceBridges.Quantitative.EpsilonC0",
+    "sha256": "ef77cdd9585e4f08c43084db69d635d19b9b0e818a362cb5ec8cc4f9eaedc082",
+    "exit_code": 0
+  },
+  {
+    "module": "ReferenceBridges.Quantitative.EpsilonMatrix",
+    "sha256": "543f73198f627c4c7beb13cf3c1ec44035443b5f695fecc1e66be8a750f761fe",
+    "exit_code": 0
+  },
+  {
+    "module": "ReferenceBridges.Quantitative.FrameParseval",
+    "sha256": "b3fe66c4a8bf19ebe872195295be299287bb6e6ca217b4f42e152cdf9efb6d13",
+    "exit_code": 0
+  },
+  {
+    "module": "ReferenceBridges.Quantitative.FrameExpansion",
+    "sha256": "335e5438f5b2770973f1dbf00c81393e0ba9c641eaa9551dd84f6499aa61721a",
+    "exit_code": 0
+  },
+  {
+    "module": "ReferenceBridges.Quantitative.EpsilonMetricComparison",
+    "sha256": "1234189679de73ff94a25cf096ef83f5f2133b42aa4657d19dc74e8b67161dde",
+    "exit_code": 0
+  },
+  {
+    "module": "ReferenceBridges.Quantitative.EpsilonSpeedComparison",
+    "sha256": "aa89d4bca1d07db25a21f594160afcdede020e5bbc98912f2e06a43d2c940c27",
+    "exit_code": 0
+  },
+  {
+    "module": "ReferenceBridges.GlobalTransfer.Core",
+    "sha256": "f699c119ad6855cdc3f69c13f27aafcfca09f3a4a19a854fc0b64f9972135eb3",
+    "exit_code": 0
+  }
+]

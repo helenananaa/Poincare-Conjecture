@@ -1,0 +1,20 @@
+{
+  "reason": "Core definition selected background tangent-space ENorm without the Bundle scope. The supplied g parameter was definitionally ignored. Corrected scoped instance selection, no axiom or mathematical assumption added. Original two attempts stopped, original downstream pair left superseded/not-run.",
+  "corrected_core_commit": "773f5deb4f5efdd1c757cfc7477a47130baea928",
+  "before_sha256": "f699c119ad6855cdc3f69c13f27aafcfca09f3a4a19a854fc0b64f9972135eb3",
+  "after_sha256": "ba8e3a340f9220b462e34af13293134e0236463c22232f7e0e31ee62af49edca",
+  "superseded_task_ids": [
+    "length-readback",
+    "distance-readback",
+    "epsilon-length",
+    "epsilon-distance"
+  ],
+  "replacement_task_ids": [
+    "length-readback-v2",
+    "distance-readback-v2",
+    "epsilon-length-v2",
+    "epsilon-distance-v2"
+  ],
+  "new_registry": "poincare-global-transfer-metric-v2-n54960nw",
+  "negative_test": "rfl cannot identify two arbitrary input metrics after correction; see MetricScopeProbe.lean. More direct readback and Euclidean checks run separately."
+}

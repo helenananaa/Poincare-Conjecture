@@ -1,0 +1,559 @@
+{
+  "status": "PASS",
+  "generated_utc": "2026-09-19T11:23:32.014312+00:00",
+  "canonical_mathematical_targets": 21,
+  "initial_independent_nodes": 10,
+  "actual_own_model_service_calls": 24,
+  "peak_own_service_intervals": 10,
+  "models": [
+    "grok"
+  ],
+  "luna_calls": 0,
+  "mathematical_lanes": {
+    "area": 9,
+    "time-width": 3,
+    "homotopy": 5,
+    "distance": 4
+  },
+  "counting_scope": "Only the two registered global-transfer projects. Other concurrent batches, source inspection, helper setup and coordinator sanity proofs are not counted. Reissued goals replace old versions, not new distinct mathematics.",
+  "superseded_attempts": [
+    {
+      "task": "length-readback",
+      "attempt": "2bd2c9b4-d8a5-4b33-b6a6-c0f14ac9aa4f",
+      "status": "FAILED",
+      "reason": "coordinator core definition corrected and task reissued",
+      "captured_sha256": "d145dac3afaca8f1eddfdd7b75ffe1ad1afbccc2d6b94bb1f593eb21c7c25a38"
+    },
+    {
+      "task": "distance-readback",
+      "attempt": "3b244660-8b93-40d1-85f1-f55b86f63dd1",
+      "status": "FAILED",
+      "reason": "coordinator core definition corrected and task reissued",
+      "captured_sha256": "c032a4e2724ba9f6f4864421b26b4eafc0a01e7fdf302d8fd9fdda1212dd4675"
+    },
+    {
+      "task": "uniform-minmax-lipschitz",
+      "attempt": "f43229a0-638b-4f2e-877b-37621ed2a904",
+      "status": "FAILED",
+      "reason": "original proof/client failure; local repair reissued",
+      "captured_sha256": "663a80f5edae397ece504aaabad092c2c60720f8a3107cb1444d4cbc0bc1e9e7"
+    }
+  ],
+  "core_rebuilds": [
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelMath/Transfer/Core.lean",
+      "sha256": "75fc033f47feefb3027b3701f7bbcab6e1d98a50b7958ec5010cf404ae1e64ca",
+      "rebuilt_from_source": true
+    },
+    {
+      "path": "PoincareConjecture/ReferenceBridges/GlobalTransfer/Core.lean",
+      "sha256": "ba8e3a340f9220b462e34af13293134e0236463c22232f7e0e31ee62af49edca",
+      "rebuilt_from_source": true
+    }
+  ],
+  "proof_maintenance": {
+    "path": "PoincareConjecture/PoincareConjecture/ParallelMath/Transfer/GramFrame.lean",
+    "target": "PoincareConjecture.ParallelMath.Transfer.pair_degenerate_or_orthonormal",
+    "before_sha256": "035fe8655261571f3d2c4e7aa7c16264951bc0cc867c8b1101dea39880b088d9",
+    "after_sha256": "de0aeaf192f27fb921f9b76d86654e36d12d3d2d75b1eb295ac6cfded6ad02f0",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "statement_unchanged": true,
+    "reason": "Use the supplied symmetry explicitly to prove reversed orthogonality and then the required order. Genuine proof refactoring, no new hypothesis, no linter disabled; not counted as a new model task."
+  },
+  "metric_definition_correction": {
+    "reason": "Core definition selected background tangent-space ENorm without the Bundle scope. The supplied g parameter was definitionally ignored. Corrected scoped instance selection, no axiom or mathematical assumption added. Original two attempts stopped, original downstream pair left superseded/not-run.",
+    "corrected_core_commit": "773f5deb4f5efdd1c757cfc7477a47130baea928",
+    "before_sha256": "f699c119ad6855cdc3f69c13f27aafcfca09f3a4a19a854fc0b64f9972135eb3",
+    "after_sha256": "ba8e3a340f9220b462e34af13293134e0236463c22232f7e0e31ee62af49edca",
+    "superseded_task_ids": [
+      "length-readback",
+      "distance-readback",
+      "epsilon-length",
+      "epsilon-distance"
+    ],
+    "replacement_task_ids": [
+      "length-readback-v2",
+      "distance-readback-v2",
+      "epsilon-length-v2",
+      "epsilon-distance-v2"
+    ],
+    "new_registry": "poincare-global-transfer-metric-v2-n54960nw",
+    "negative_test": "rfl cannot identify two arbitrary input metrics after correction; see MetricScopeProbe.lean. More direct readback and Euclidean checks run separately."
+  },
+  "targets": [
+    {
+      "id": "gram-shear",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "area",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Transfer.gramArea_triangular_change",
+      "path": "PoincareConjecture/ParallelMath/Transfer/GramShear.lean",
+      "dependencies": [],
+      "model": "grok",
+      "attempt_id": "e28703aa-5d23-42bc-a617-7805f68d95c4",
+      "source_sha256": "d003091dcb8af479ef6abdb774a6a177d60c086d08aab1497529bcc9b6a15b10",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "7bd3d72a8127cb9b4d4f0cd1524e2de4a8429ded",
+      "integrated_commit": "2b71784ed822aa42c107d131e00fe425c1b331db",
+      "client_seconds": 153.771
+    },
+    {
+      "id": "gram-degenerate",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "area",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Transfer.gramArea_degenerate",
+      "path": "PoincareConjecture/ParallelMath/Transfer/GramDegenerate.lean",
+      "dependencies": [],
+      "model": "grok",
+      "attempt_id": "604130ae-992e-4b28-ae04-704d8c8f0b00",
+      "source_sha256": "c0be2a556947514a289ec56ed344a11f16a5434e514a555abff5ef6bf40aa5fe",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "a1421c69a11158fe98714918e32b14342ef00be8",
+      "integrated_commit": "3b54d12ff4d0ed7af37dcc10bb5464b70c9f9c6d",
+      "client_seconds": 191.308
+    },
+    {
+      "id": "gram-frame",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "area",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Transfer.pair_degenerate_or_orthonormal",
+      "path": "PoincareConjecture/ParallelMath/Transfer/GramFrame.lean",
+      "dependencies": [],
+      "model": "grok",
+      "attempt_id": "66092a41-ef39-40c9-8f7a-d85aafdde972",
+      "source_sha256": "de0aeaf192f27fb921f9b76d86654e36d12d3d2d75b1eb295ac6cfded6ad02f0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "a1421c69a11158fe98714918e32b14342ef00be8",
+      "integrated_commit": "bb0642cde6765e18e9ae2657803a0b60173b942b",
+      "client_seconds": 229.547
+    },
+    {
+      "id": "gram-allpairs",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "area",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.gramArea_metric_comparison",
+      "path": "PoincareConjecture/ParallelMath/Transfer/GramComparison.lean",
+      "dependencies": [
+        "gram-shear",
+        "gram-degenerate",
+        "gram-frame"
+      ],
+      "model": "grok",
+      "attempt_id": "a7384e43-098f-40fe-92bb-3cfbd5095952",
+      "source_sha256": "d69fe9ba954e5e79e82c72ddb66a892d961529ba8afa12615e9bfc9831b4d570",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "bb0642cde6765e18e9ae2657803a0b60173b942b",
+      "integrated_commit": "7865970d43f27ea044faac531cd13e6747756773",
+      "client_seconds": 160.403
+    },
+    {
+      "id": "epsilon-allpairs",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "area",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_all_pair_area",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonAllPairs.lean",
+      "dependencies": [
+        "gram-allpairs"
+      ],
+      "model": "grok",
+      "attempt_id": "b229a2db-ac3b-43c9-b385-b7884e7db83f",
+      "source_sha256": "31c9de4768332771118c09f400a967ebcbd15fcfc8bf3d32ce1547ffdcc2b527",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "7865970d43f27ea044faac531cd13e6747756773",
+      "integrated_commit": "73ee796502ac4a1d7b3aa126826c1144026f87df",
+      "client_seconds": 96.386
+    },
+    {
+      "id": "epsilon-surface-area",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "area",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_parametrized_area",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonSurfaceArea.lean",
+      "dependencies": [
+        "epsilon-allpairs"
+      ],
+      "model": "grok",
+      "attempt_id": "088e9d52-9821-4328-a4bb-527f71b45533",
+      "source_sha256": "2ab4a7cc595d7c709790182dae1bb17ca94a190aa905dc258532daf3d4843fa8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "73ee796502ac4a1d7b3aa126826c1144026f87df",
+      "integrated_commit": "9e9019910c0ba9be12ac70070a1647f2f3455944",
+      "client_seconds": 119.377
+    },
+    {
+      "id": "epsilon-least-surface",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "area",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_least_parametrized_area",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonLeastSurface.lean",
+      "dependencies": [
+        "epsilon-area-integrable"
+      ],
+      "model": "grok",
+      "attempt_id": "1d98cbd9-af9f-4a86-b4be-aa2b09f96fe4",
+      "source_sha256": "8a345572cd6c7f01529127d265db4ef4df50e04e41b256dc02c0fea1e2951b2f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "f7707653913c908f5622e72b41e87fec3b2fe5b0",
+      "integrated_commit": "15a9caf8aa76ae3b806a400910683d28c7781962",
+      "client_seconds": 94.574
+    },
+    {
+      "id": "local-time-infimum",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "time-width",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Transfer.leastCost_continuousOn_time_interval",
+      "path": "PoincareConjecture/ParallelMath/Transfer/LocalTimeInfimum.lean",
+      "dependencies": [],
+      "model": "grok",
+      "attempt_id": "200e9722-b195-4b4f-b704-550d538b965c",
+      "source_sha256": "30674fc04c37b7377bf7d09880dc69eb3acaec9f94b3b9ac12644ea1bed09e7b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "a1421c69a11158fe98714918e32b14342ef00be8",
+      "integrated_commit": "8b3138d7e363cf1fd0995419ee2b85b9e4276cb7",
+      "client_seconds": 196.044
+    },
+    {
+      "id": "local-time-minmax",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "time-width",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.leastPeak_continuousOn_time_interval",
+      "path": "PoincareConjecture/ParallelMath/Transfer/LocalTimeMinmax.lean",
+      "dependencies": [
+        "local-time-infimum"
+      ],
+      "model": "grok",
+      "attempt_id": "dbaf0e56-8f4a-4635-8775-1b7fb609fbd1",
+      "source_sha256": "671a384002b7181b1466c0d8a621ffaa25c4ecb192e941dd40211f327d1506ca",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "8b3138d7e363cf1fd0995419ee2b85b9e4276cb7",
+      "integrated_commit": "29d18ca1b942abff3447157d633bec4f365ff715",
+      "client_seconds": 79.332
+    },
+    {
+      "id": "nonnull-invariant",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "homotopy",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Transfer.nonNull_homotopic_iff",
+      "path": "PoincareConjecture/ParallelMath/Transfer/NonNullInvariant.lean",
+      "dependencies": [],
+      "model": "grok",
+      "attempt_id": "c77aa749-e7d1-4600-983b-dd2519b764ae",
+      "source_sha256": "1021d11196b5eb651d7ef4466a846831f6dd404412dfd5a1e8cd8df978ebd62d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "a1421c69a11158fe98714918e32b14342ef00be8",
+      "integrated_commit": "61c789a3516a5b34675cdb57bf4d5ed643ab96f8",
+      "client_seconds": 103.219
+    },
+    {
+      "id": "homotopy-left-inverse",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "homotopy",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Transfer.nonNull_comp_iff_of_left_homotopy_inverse",
+      "path": "PoincareConjecture/ParallelMath/Transfer/HomotopyLeftInverse.lean",
+      "dependencies": [],
+      "model": "grok",
+      "attempt_id": "5999a2e1-8c8d-4c92-ac14-631f918abf95",
+      "source_sha256": "0556528ab40bcbe3405b0353dfa3e2c9b699c2279afb1040d7ef519e0804bf71",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "a1421c69a11158fe98714918e32b14342ef00be8",
+      "integrated_commit": "3bbb6abb2032e0e5652130c5887bc21f440d9fa9",
+      "client_seconds": 173.938
+    },
+    {
+      "id": "homotopy-width-transport",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "homotopy",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.nonNull_leastCost_transport",
+      "path": "PoincareConjecture/ParallelMath/Transfer/HomotopyWidthTransport.lean",
+      "dependencies": [
+        "homotopy-left-inverse"
+      ],
+      "model": "grok",
+      "attempt_id": "1dd916ea-d958-4b7c-92d9-29d900f15810",
+      "source_sha256": "1c24e694248172950e51647ea175b19114a5ed7d1672f1e60129f01686a2968d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "3bbb6abb2032e0e5652130c5887bc21f440d9fa9",
+      "integrated_commit": "60c5d2ec4197b975b3e7e59c32f42605ee353b15",
+      "client_seconds": 80.697
+    },
+    {
+      "id": "homotopic-transport",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "homotopy",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.nonNull_comp_of_homotopic_transport",
+      "path": "PoincareConjecture/ParallelMath/Transfer/HomotopicTransport.lean",
+      "dependencies": [
+        "nonnull-invariant",
+        "homotopy-left-inverse"
+      ],
+      "model": "grok",
+      "attempt_id": "9a68ee12-904b-4e4a-b27e-6d2fa37b4f7e",
+      "source_sha256": "e312601f96cdd3d5c8a8a7e8509564c292261d171575e473aada01bea89bcd83",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "3bbb6abb2032e0e5652130c5887bc21f440d9fa9",
+      "integrated_commit": "e1962515cb9b495f79e752e935a6fd46b4dc9e88",
+      "client_seconds": 90.611
+    },
+    {
+      "id": "integral-domination",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "area",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Transfer.integrable_sqrt_gram_of_domination",
+      "path": "PoincareConjecture/ParallelMath/Transfer/IntegralDomination.lean",
+      "dependencies": [],
+      "model": "grok",
+      "attempt_id": "2451aa6a-00dd-49f2-b942-9a807bdcc65f",
+      "source_sha256": "93dfbf7d0b3092981874e9569c0ae739b77c87a74f59fcec63c1e8c53fbaa547",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "a1421c69a11158fe98714918e32b14342ef00be8",
+      "integrated_commit": "144d518983e7fb09c69c2b6a3cf48a60ba2f771e",
+      "client_seconds": 107.367
+    },
+    {
+      "id": "epsilon-area-integrable",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "area",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_area_integrable",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonAreaIntegrable.lean",
+      "dependencies": [
+        "epsilon-surface-area",
+        "integral-domination"
+      ],
+      "model": "grok",
+      "attempt_id": "95e6fdf0-477f-47fe-84ba-594e7df767d4",
+      "source_sha256": "e2dd991be70ae5150a26cece4f8b4c76ae6d2bae5c181c44bab3065f3e02fd67",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "9e9019910c0ba9be12ac70070a1647f2f3455944",
+      "integrated_commit": "a981f08af3097c85f9cc281b141408dced7881f2",
+      "client_seconds": 88.085
+    },
+    {
+      "id": "length-readback-v2",
+      "project": "poincare-global-transfer-metric-v2-n54960nw",
+      "mathematical_lane": "distance",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Transfer.metricPathLength_eq_integral",
+      "path": "ReferenceBridges/GlobalTransfer/LengthReadback.lean",
+      "dependencies": [],
+      "model": "grok",
+      "attempt_id": "d279815e-6e81-44c9-b6cb-8d3cf5e7652d",
+      "source_sha256": "c3674099b9467d920b1aa7e1b07b1a62b6fef81e6ccdc854ef4e74ca18be9870",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "773f5deb4f5efdd1c757cfc7477a47130baea928",
+      "integrated_commit": "b4ea7f224bfa3ae19dc42b6681f0571dbe26cfb5",
+      "client_seconds": 197.746
+    },
+    {
+      "id": "distance-readback-v2",
+      "project": "poincare-global-transfer-metric-v2-n54960nw",
+      "mathematical_lane": "distance",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Transfer.metricEDist_eq_joining_inf",
+      "path": "ReferenceBridges/GlobalTransfer/DistanceReadback.lean",
+      "dependencies": [],
+      "model": "grok",
+      "attempt_id": "9f19af7a-5b2a-4c3a-a09d-435d182eb045",
+      "source_sha256": "2e83183c1ded5d22e9867f4e9acfcafff39e13323c2e97a16e57427980f29d25",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "773f5deb4f5efdd1c757cfc7477a47130baea928",
+      "integrated_commit": "21f89c5ceba1b51fadacf53c81668b6259ee9987",
+      "client_seconds": 214.924
+    },
+    {
+      "id": "epsilon-length-v2",
+      "project": "poincare-global-transfer-metric-v2-n54960nw",
+      "mathematical_lane": "distance",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_path_length",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonLength.lean",
+      "dependencies": [
+        "length-readback-v2"
+      ],
+      "model": "grok",
+      "attempt_id": "707b4a80-f27f-45e5-a88b-a7a4bd51216e",
+      "source_sha256": "5b4b4d5682fb8c77eeeba8c54f2e3749b5b22a05d24aa6105467f16ba66c5c12",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "b4ea7f224bfa3ae19dc42b6681f0571dbe26cfb5",
+      "integrated_commit": "b3b9782b17bee64f5d47967e313ec3903c99cf4d",
+      "client_seconds": 118.225
+    },
+    {
+      "id": "epsilon-distance-v2",
+      "project": "poincare-global-transfer-metric-v2-n54960nw",
+      "mathematical_lane": "distance",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_riemannianEDist",
+      "path": "ReferenceBridges/GlobalTransfer/EpsilonDistance.lean",
+      "dependencies": [
+        "distance-readback-v2",
+        "epsilon-length-v2"
+      ],
+      "model": "grok",
+      "attempt_id": "f51d43eb-d34e-42f3-8877-f3a9c3998a4e",
+      "source_sha256": "e926212206288e93ace4cd421b14d27a0b76d4d93937234d383e0cd513d9f52b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "b3b9782b17bee64f5d47967e313ec3903c99cf4d",
+      "integrated_commit": "337424adff570d1465cfba6165987c1995aa1bbe",
+      "client_seconds": 116.413
+    },
+    {
+      "id": "uniform-minmax-lipschitz-repair",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "time-width",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Transfer.leastPeak_lipschitz",
+      "path": "PoincareConjecture/ParallelMath/Transfer/MinmaxLipschitz.lean",
+      "dependencies": [],
+      "model": "grok",
+      "attempt_id": "5aef010b-5066-4ad2-b0ce-833791d00ebd",
+      "source_sha256": "f71f753c6e404f5621b3df4c48c81466de0c79fa15c7413dff4cd94847aaa551",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "49a411aa02f205d9f2b256ff0c95f3dae236cd90",
+      "integrated_commit": "e6532d52f7f8e258d6f6c8d83a9409e958495502",
+      "client_seconds": 150.396
+    },
+    {
+      "id": "c1-nonnull-width",
+      "project": "poincare-global-transfer-n54960nw",
+      "mathematical_lane": "homotopy",
+      "role": "cross-branch-reduce",
+      "target": "PoincareConjecture.ParallelMath.Transfer.c1_nonNull_leastCost_transport",
+      "path": "PoincareConjecture/ParallelMath/Transfer/C1NonNullWidth.lean",
+      "dependencies": [
+        "homotopy-left-inverse"
+      ],
+      "model": "grok",
+      "attempt_id": "095ca857-59f6-47c3-9476-b40bc7f4f9f1",
+      "source_sha256": "66a43ea4a55dd863729cac4bf14b11a2637a727160f531abd188fa44c9c311b0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "49a411aa02f205d9f2b256ff0c95f3dae236cd90",
+      "integrated_commit": "b88c2265a147c25e093dc5ec0f64da6793b98858",
+      "client_seconds": 105.449
+    }
+  ],
+  "checks": {
+    "independent_frozen_statement_rechecks": 21,
+    "transitive_axiom_whitelist": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "main_package_build": "PASS",
+    "reference_nondegenerate_and_singular_examples": "PASS",
+    "actual_flat_metric_and_identity_surface_examples": "PASS",
+    "metric_parameter_not_definitionally_ignored": "PASS",
+    "controller_unit_tests": 37,
+    "external_dependencies": "pinned cached dependencies reused; corrected local Core rebuilt from current source"
+  },
+  "all_own_services_stopped": true,
+  "scope_limits": [
+    "Parametrized area is the Gram area of actual mfderiv columns and its integral; no global surface atlas/area-form theorem or minimal-surface existence is asserted.",
+    "For nonsmooth maps the underlying mfderiv convention still applies; geometric use is for C1/smooth maps. Singular differential pairs are explicitly included.",
+    "Least-area comparison assumes a supplied nonempty family, reference integrability and target density measurability; it derives target integrability.",
+    "Metric conclusions use original extended distances and remain meaningful for disconnected endpoints/infinite lengths; no ambient metric-space compatibility premise is substituted.",
+    "Homotopy transfer assumes an actual left homotopy inverse and an explicit cost bound; it does not construct the Ricci surgery map or establish its geometric estimates.",
+    "No Poincare completion or main blueprint completion flag is claimed."
+  ]
+}
