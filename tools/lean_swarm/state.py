@@ -202,6 +202,10 @@ class Store:
                 raise ValueError(f"task {task_id!r} timeout_seconds must be a positive number")
             if not math.isfinite(float(timeout)) or timeout <= 0:
                 raise ValueError(f"task {task_id!r} timeout_seconds must be a positive number")
+        if "priority" in task:
+            priority=task["priority"]
+            if isinstance(priority,bool) or not isinstance(priority,int) or not -1000<=priority<=1000:
+                raise ValueError("priority must be an integer from -1000 through 1000")
         _json(task, f"task {task_id!r}")
         return dict(task)
 
@@ -380,6 +384,20 @@ class Store:
                 """,
                 (project_id,),
             ).fetchall()
+            # Prioritize explicit critical work, then tasks that unblock more descendants.
+            all_tasks={row["task_id"]:_object(row["payload_json"],"task payload") for row in
+                       connection.execute("SELECT task_id,payload_json FROM tasks WHERE project_id=?",(project_id,))}
+            children={key:set() for key in all_tasks}
+            for key,payload in all_tasks.items():
+                for dep in payload.get("depends_on",[]):children[dep].add(key)
+            def descendants(key):
+                seen=set();stack=list(children[key])
+                while stack:
+                    item=stack.pop()
+                    if item not in seen:seen.add(item);stack.extend(children[item])
+                return len(seen)
+            candidates=sorted(candidates,key=lambda row:(-all_tasks[row["task_id"]].get("priority",0),
+                              -descendants(row["task_id"]),row["task_id"]))
             selected: sqlite3.Row | None = None
             task_payload: dict[str, Any] | None = None
             for candidate in candidates:

@@ -25,7 +25,7 @@ def main():
     sub=parser.add_subparsers(dest='command',required=True)
     p=sub.add_parser('init');p.add_argument('project');p.add_argument('config',type=Path)
     p=sub.add_parser('enqueue');p.add_argument('project');p.add_argument('tasks',type=Path)
-    p=sub.add_parser('run');p.add_argument('project');p.add_argument('--jobs',type=int,default=4)
+    p=sub.add_parser('run');p.add_argument('project');p.add_argument('--jobs',type=int,default=12)
     p.add_argument('--integrate',action='store_true',help='Commit checked new files to integration only')
     p=sub.add_parser('status');p.add_argument('project')
     p=sub.add_parser('limits');p.add_argument('--luna',type=int,default=4);p.add_argument('--grok',type=grok_limit,default=0,help='unlimited (default), 0, or a positive model cap')

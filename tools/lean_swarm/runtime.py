@@ -155,6 +155,7 @@ class Controller:
         self.owner = f'{socket.gethostname()}:{os.getpid()}:{process_identity(os.getpid())}'
         self.gitlock = self.root / 'locks' / (hashlib.sha256(str(self.repo).encode()).hexdigest()+'.lock')
         self.artifacts = self.root / 'attempts'; self.artifacts.mkdir(parents=True, exist_ok=True)
+        self.worktree_lock = self.root / 'locks' / (hashlib.sha256(str(self.repo).encode()).hexdigest()+'.worktree.lock')
 
     def _environment(self, artifacts: Path | None = None) -> dict:
         env = dict(os.environ)
@@ -237,10 +238,17 @@ class Controller:
 
     def _prepare(self, claim: dict, folder: Path) -> dict:
         task=claim['task'];validate_task(task);work=folder/'work'
-        with file_lock(self.gitlock):
+        # Read integrated dependencies before selecting a commit. Worktree creation
+        # must not queue behind a full integration build of unrelated files.
+        deps=self._dependencies(task)
+        with file_lock(self.worktree_lock):
             base=git(self.repo,'rev-parse',self.cfg['integration_branch'])
+            rows={r['id']:r for r in self.store.list_tasks(self.project)}
+            for dep in deps:
+                commit=rows[dep['id']]['integrated_commit']
+                checked(['git','-C',str(self.repo),'merge-base','--is-ancestor',commit,base])
             checked(['git','-C',str(self.repo),'worktree','add','--detach',str(work),base])
-        package=work/self.cfg['package_dir'];deps=self._dependencies(task);dep_artifacts=folder/'trusted-deps'
+        package=work/self.cfg['package_dir'];dep_artifacts=folder/'trusted-deps'
         for dep in deps:self._compile(package/dep['target_path'],dep_artifacts,dep['target_path'],dep['target_name'])
         candidate=package/task['target_path']
         if not candidate.resolve().is_relative_to(package.resolve()):raise ValueError('task path escapes package')
@@ -279,10 +287,11 @@ class Controller:
         attempt=claim['attempt_id'];folder=self.artifacts/attempt;folder.mkdir(parents=True,exist_ok=True)
         unit='lean-swarm-'+attempt.replace('-','')+'.service'
         if not UNIT_RE.fullmatch(unit):raise ValueError('attempt ID must be a UUID')
-        task=claim['task'];status='FAILED';result={};started_service=False;stopped=True
+        task=claim['task'];status='FAILED';result={'timing':{'prepare_started_unix':time.time()}};started_service=False;stopped=True
         self.store.record_runtime(attempt,{'unit':unit,'folder':str(folder),'owner':self.owner})
         try:
             prepared=self._prepare(claim,folder);atomic_json(folder/'prepared.json',prepared)
+            result['timing']['prepare_finished_unix']=time.time()
             self.store.record_runtime(attempt,{'unit':unit,'folder':str(folder),
                 'workspace':prepared['workspace'],'base_commit':prepared['base_commit'],'owner':self.owner})
             timeout=task.get('timeout_seconds',420)
@@ -300,6 +309,8 @@ class Controller:
             started_service=True;stopped=False
             checked(cmd)
             start=time.monotonic();deadline=start+timeout
+            result['timing']['service_started_unix']=time.time()
+            atomic_json(folder/'timing.json',result['timing'])
             while True:
                 self.store.heartbeat(attempt);info=self._unit_info(unit)
                 if self.stop.is_set():status='INTERRUPTED';break
@@ -310,6 +321,7 @@ class Controller:
             result['elapsed_seconds']=round(time.monotonic()-start,3)
             result['capture']=self._freeze_capture(unit,Path(prepared['candidate']),folder/'frozen.lean',Path(prepared['workspace']))
             result['containment']=self._stop_unit(unit);stopped=True
+            result['timing']['service_stopped_unix']=time.time()
             logs=Path(prepared['spec']['logdir']);text=''
             for name in ('agent.jsonl','agent.stderr','leader.stderr'):
                 p=logs/name
@@ -317,6 +329,7 @@ class Controller:
             if any(q in text.lower() for q in QUOTA):
                 self.store.pause_model(task['model'],'Subscription quota reported by CLI');status='QUOTA'
             if status=='FINISHED':
+                result['timing']['verification_started_unix']=time.time()
                 verified=folder/'verified'/task['target_path'];verified.parent.mkdir(parents=True,exist_ok=True)
                 verified.write_text(reconstruct(task['source'],(folder/'frozen.lean').read_text()))
                 artifacts=folder/'verification-artifacts'
@@ -327,6 +340,7 @@ class Controller:
                     dp.write_bytes(source);self._compile(dp,artifacts,dep['target_path'],dep['target_name'])
                 result['verification']=self._compile(verified,artifacts,task['target_path'],task['target_name'])
                 result['verified_source']=str(verified);status='VERIFIED'
+                result['timing']['verification_finished_unix']=time.time()
         except Exception as exc:
             result['error']=str(exc)
             if status not in ('TIMEOUT','INTERRUPTED','QUOTA'):status='FAILED'
@@ -334,6 +348,8 @@ class Controller:
             if started_service and not stopped:
                 try:result['containment']=self._stop_unit(unit);stopped=True
                 except Exception as exc:result['containment_error']=str(exc)
+            result['timing']['finished_unix']=time.time()
+            atomic_json(folder/'timing.json',result['timing'])
             atomic_json(folder/'result.json',dict(result,status=status,task_id=claim['task_id']))
             if stopped:self.store.finish(attempt,status,result)
             else:
@@ -379,7 +395,9 @@ class Controller:
         return updated
 
     def integrate(self, task_id: str) -> str:
+        requested_unix=time.time()
         with file_lock(self.gitlock):
+            lock_acquired_unix=time.time()
             row=next(t for t in self.store.list_tasks(self.project) if t['id']==task_id)
             if row['status']=='INTEGRATED':return row['integrated_commit']
             if row['status']!='VERIFIED':raise ValueError('only VERIFIED tasks enter integration')
@@ -411,7 +429,7 @@ class Controller:
                 git(self.repo,'add','--',rel)
                 git(self.repo,'commit','-m','test(lean-swarm): integrate checked task '+task_id);committed=True
                 commit=git(self.repo,'rev-parse','HEAD');self.store.mark_integrated(self.project,task_id,commit)
-                atomic_json(checkdir/'integration.json',{'commit':commit,'task':task_id,'verification':report})
+                atomic_json(checkdir/'integration.json',{'commit':commit,'task':task_id,'verification':report,'timing':{'requested_unix':requested_unix,'lock_acquired_unix':lock_acquired_unix,'finished_unix':time.time()}})
             except Exception:
                 if not committed:
                     subprocess.run(['git','-C',str(self.repo),'reset','-q','HEAD','--',rel],check=False)
@@ -419,28 +437,88 @@ class Controller:
                 raise
             print('INTEGRATED',task_id,commit,flush=True);return commit
 
-    def run(self, jobs: int=4, integrate: bool=False) -> list[dict]:
+    def _resource_allows_claim(self) -> bool:
+        """Admission guard, not a Grok quota. Existing tasks are never killed here."""
+        reserve=int(self.cfg.get('min_available_memory_mb',8192))
+        try:
+            memory=dict(line.split(':',1) for line in Path('/proc/meminfo').read_text().splitlines())
+            return int(memory['MemAvailable'].split()[0]) >= reserve*1024
+        except (OSError,KeyError,ValueError):
+            return True  # The tested production host is Linux; keep pure tests portable.
+
+    def run(self, jobs: int=12, integrate: bool=False) -> list[dict]:
+        """Fill ready workers while one independent thread integrates verified results.
+
+        Integration remains single-writer and prerequisites still require INTEGRATED.
+        An unrelated full-project gate no longer stops the dispatcher from launching.
+        """
         if not 1<=jobs<=32:raise ValueError('dispatcher jobs must be in [1,32]')
-        attempted=set()
-        with concurrent.futures.ThreadPoolExecutor(max_workers=jobs) as pool:
+        attempted=set();integration_future=None;integration_task=None;blocked_since=None
+        telemetry_dir=self.root/'telemetry';telemetry_dir.mkdir(parents=True,exist_ok=True)
+        telemetry=telemetry_dir/(self.project+'-'+uuid.uuid4().hex+'.jsonl')
+        last_sample=0.0
+        with concurrent.futures.ThreadPoolExecutor(max_workers=jobs) as pool, \
+             concurrent.futures.ThreadPoolExecutor(max_workers=1) as integration_pool:
             futures=set()
-            while not self.stop.is_set():
-                if integrate:
-                    for row in self.store.list_tasks(self.project):
-                        if row['status']=='VERIFIED' and row['id'] not in attempted:
-                            attempted.add(row['id'])
-                            try:self.integrate(row['id'])
-                            except Exception as exc:print('INTEGRATION_BLOCKED',row['id'],str(exc),flush=True)
-                while len(futures)<jobs and not self.stop.is_set():
-                    claim=self.store.claim(self.project,self.owner)
-                    if claim is None:break
-                    futures.add(pool.submit(self.execute,claim))
-                if not futures:break
-                done,futures=concurrent.futures.wait(futures,timeout=1,return_when=concurrent.futures.FIRST_COMPLETED)
-                for future in done:future.result()
-        if integrate and not self.stop.is_set():
-            for row in self.store.list_tasks(self.project):
-                if row['status']=='VERIFIED' and row['id'] not in attempted:self.integrate(row['id'])
+            try:
+                while not self.stop.is_set():
+                    done={f for f in futures if f.done()};futures-=done
+                    for future in done:future.result()
+                    if integration_future is not None and integration_future.done():
+                        try:integration_future.result()
+                        except Exception as exc:
+                            print('INTEGRATION_BLOCKED',integration_task,str(exc),flush=True)
+                        integration_future=None
+                    rows=self.store.list_tasks(self.project)
+                    if integrate and integration_future is None:
+                        ready=[r for r in rows if r['status']=='VERIFIED' and r['id'] not in attempted]
+                        ready.sort(key=lambda r:(-r['payload'].get('priority',0),r['id']))
+                        if ready:
+                            integration_task=ready[0]['id'];attempted.add(integration_task)
+                            integration_future=integration_pool.submit(self.integrate,integration_task)
+                    resource_ok=self._resource_allows_claim()
+                    while len(futures)<jobs and not self.stop.is_set() and resource_ok:
+                        claim=self.store.claim(self.project,self.owner)
+                        if claim is None:break
+                        futures.add(pool.submit(self.execute,claim))
+                        resource_ok=self._resource_allows_claim()
+                    now=time.monotonic()
+                    if now-last_sample>=1:
+                        by_status={};by_id={r['id']:r for r in rows}
+                        ready_count=0;dependency_blocked=0
+                        for r in rows:
+                            by_status[r['status']]=by_status.get(r['status'],0)+1
+                            if r['status']=='QUEUED':
+                                if all(by_id[d]['status']=='INTEGRATED' for d in r['payload']['depends_on']):ready_count+=1
+                                else:dependency_blocked+=1
+                        record={'unix':time.time(),'project':self.project,'worker_budget':jobs,
+                            'worker_futures':len(futures),'integrating':integration_task if integration_future else None,
+                            'task_states':by_status,'dependency_ready':ready_count,'dependency_blocked':dependency_blocked,
+                            'resource_admission':resource_ok}
+                        with telemetry.open('a') as out:out.write(json.dumps(record)+'\n')
+                        last_sample=now
+                    if not futures and integration_future is None:
+                        pending=any(r['status']=='QUEUED' for r in rows)
+                        if not resource_ok and pending:
+                            if blocked_since is None:blocked_since=now
+                            if now-blocked_since>=60:
+                                print('RESOURCE_BLOCKED: finite batch stopped without altering queued tasks',flush=True);break
+                            time.sleep(.2);continue
+                        break
+                    blocked_since=None
+                    waiting=futures | ({integration_future} if integration_future is not None else set())
+                    concurrent.futures.wait(waiting,timeout=.2,return_when=concurrent.futures.FIRST_COMPLETED)
+            except BaseException:
+                self.stop.set()
+                raise
+            finally:
+                # Do not abandon live workers when the dispatcher encounters a fault.
+                for future in futures:
+                    try:future.result()
+                    except Exception as exc:print('WORKER_FAILED_DURING_JOIN',str(exc),flush=True)
+                if integration_future is not None:
+                    try:integration_future.result()
+                    except Exception as exc:print('INTEGRATION_BLOCKED',integration_task,str(exc),flush=True)
         return self.store.list_tasks(self.project)
 
     def recover(self) -> list[str]:

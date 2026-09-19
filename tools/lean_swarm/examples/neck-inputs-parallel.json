@@ -1,0 +1,68 @@
+[
+  {
+    "id": "affine-diffeomorph",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport Mathlib.Geometry.Manifold.Instances.Sphere\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.NeckAdapter\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Positive or negative axial affine normalization preserves the given smooth structures. -/\ntheorem exists_axial_affine_diffeomorph {V H X : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    [TopologicalSpace H] [TopologicalSpace X] [ChartedSpace H X]\n    (I : ModelWithCorners ℝ V H) [IsManifold I ∞ X]\n    (c r : ℝ) (hr : r ≠ 0) :\n    ∃ e : (X × ℝ) ≃ₘ⟮I.prod (𝓘(ℝ, ℝ)), I.prod (𝓘(ℝ, ℝ))⟯ (X × ℝ),\n      (∀ z, e z = (z.1, c + r*z.2)) ∧\n      (∀ z, e.symm z = (z.1, (z.2-c)/r)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.NeckAdapter\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_axial_affine_diffeomorph",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/AffineDiffeomorph.lean",
+    "hint": "Construct the one-dimensional affine Diffeomorph with explicit inverse, prove its smoothness from ContDiff linear arithmetic, and take prodCongr with the identity on X. Preserve all existing charted structures. Both signs of r are allowed. No new definitions outside the proof body.",
+    "timeout_seconds": 600,
+    "priority": 10
+  },
+  {
+    "id": "restrict-smooth-neck",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport Mathlib.Geometry.Manifold.Instances.Sphere\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.NeckAdapter\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Shrinking an actual smooth neck keeps its forward and inverse smoothness. -/\ntheorem exists_restricted_smooth_neck {V H X : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    [TopologicalSpace H] [TopologicalSpace X] [ChartedSpace H X]\n    (I : ModelWithCorners ℝ V H) [IsManifold I ∞ X]\n    {W G N : Type*} [NormedAddCommGroup W] [NormedSpace ℝ W]\n    [TopologicalSpace G] [TopologicalSpace N] [ChartedSpace G N]\n    (J : ModelWithCorners ℝ W G) [IsManifold J ∞ N]\n    (F : OpenPartialHomeomorph (X × ℝ) N) (c r : ℝ) (hr : 0 < r)\n    (hsource : (univ ×ˢ Ioo (c-r) (c+r) : Set (X × ℝ)) ⊆ F.source)\n    (hF : ContMDiffOn (I.prod (𝓘(ℝ, ℝ))) J ∞ F F.source)\n    (hFi : ContMDiffOn J (I.prod (𝓘(ℝ, ℝ))) ∞ F.symm F.target) :\n    ∃ E : OpenPartialHomeomorph (X × ℝ) N,\n      E.source = (univ ×ˢ Ioo (c-r) (c+r)) ∧\n      (∀ z, E z = F z) ∧ (∀ y, E.symm y = F.symm y) ∧\n      ContMDiffOn (I.prod (𝓘(ℝ, ℝ))) J ∞ E E.source ∧\n      ContMDiffOn J (I.prod (𝓘(ℝ, ℝ))) ∞ E.symm E.target :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.NeckAdapter\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_restricted_smooth_neck",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/RestrictSmoothNeck.lean",
+    "hint": "Use F.restrOpen on the explicit open strip; prove the exact source equality from hsource. Both underlying total maps remain the old maps. Transfer smoothness by source and target inclusion. Reference standard OpenPartialHomeomorph restriction APIs. This packages an actual restricted neck, not an assumed collar.",
+    "timeout_seconds": 600,
+    "priority": 5
+  },
+  {
+    "id": "axis-real-transport",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport Mathlib.Geometry.Manifold.Instances.Sphere\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.NeckAdapter\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- The native one-dimensional Euclidean neck axis is smoothly identified with Real. -/\ntheorem exists_native_axis_real_diffeomorph {V H X : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    [TopologicalSpace H] [TopologicalSpace X] [ChartedSpace H X]\n    (I : ModelWithCorners ℝ V H) [IsManifold I ∞ X] :\n    ∃ e : (X × EuclideanSpace ℝ (Fin 1)) ≃ₘ⟮I.prod (𝓡 1), I.prod (𝓘(ℝ, ℝ))⟯ (X × ℝ),\n      ∀ z, e z = (z.1, z.2 0) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.NeckAdapter\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_native_axis_real_diffeomorph",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/AxisRealTransport.lean",
+    "hint": "Use the canonical PiLp.equivOfUnique continuous linear equivalence from EuclideanSpace Real (Fin 1) to Real, turn it into a diffeomorphism for the trivial models, and take the product with the identity. This connects the native axis used by epsilon-necks without changing the cross-section smooth structure.",
+    "timeout_seconds": 600,
+    "priority": 10
+  },
+  {
+    "id": "central-embedding",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport Mathlib.Geometry.Manifold.Instances.Sphere\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.NeckAdapter\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- A compact cross-section in an actual open neck has a closed embedded central slice. -/\ntheorem neck_central_slice_isClosedEmbedding\n    {X N : Type*} [TopologicalSpace X] [CompactSpace X]\n    [TopologicalSpace N] [T2Space N]\n    (F : OpenPartialHomeomorph (X × ℝ) N) (c : ℝ)\n    (hcenter : ∀ x : X, (x,c) ∈ F.source) :\n    Topology.IsClosedEmbedding (fun x : X => F (x,c)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.NeckAdapter\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.neck_central_slice_isClosedEmbedding",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/CentralEmbedding.lean",
+    "hint": "Continuity of the restriction uses ContinuousOn F on its source and hcenter; injectivity uses F.injOn and the first projection. A continuous injection from a compact space into a Hausdorff space is a closed embedding. Do not assume global continuity of the total partial-homeomorphism map.",
+    "timeout_seconds": 600,
+    "priority": 0
+  },
+  {
+    "id": "uniform-tube",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport Mathlib.Geometry.Manifold.Instances.Sphere\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.NeckAdapter\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Compactness of the central slice gives a uniform positive-width collar inside an open neck. -/\ntheorem compact_cross_section_uniform_neck_width\n    {X : Type*} [TopologicalSpace X] [CompactSpace X]\n    (U : Set (X × ℝ)) (hU : IsOpen U) (c : ℝ)\n    (hcenter : ∀ x : X, (x,c) ∈ U) :\n    ∃ r : ℝ, 0 < r ∧ (univ ×ˢ Ioo (c-r) (c+r) : Set (X × ℝ)) ⊆ U :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.NeckAdapter\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.compact_cross_section_uniform_neck_width",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/UniformTube.lean",
+    "hint": "This is a genuine tube lemma, not a pointwise-radius assumption. Search compact-product neighborhood APIs (IsCompact, exists_prod_subset). Obtain a neighborhood of c uniform over compact univ X and then fit an open interval. Handle an empty cross-section correctly. No metric or finite dimensional assumptions on X.",
+    "timeout_seconds": 600,
+    "priority": 10
+  },
+  {
+    "id": "side-normalization",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport Mathlib.Geometry.Manifold.Instances.Sphere\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.NeckAdapter\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- A centered positive-width neck with an actual one-sided set relation supplies normalized collar data. -/\ntheorem exists_normalized_oneSided_neck\n    {X N : Type*} [TopologicalSpace X] [TopologicalSpace N]\n    (F : OpenPartialHomeomorph (X × ℝ) N) (C : Set N) (c r : ℝ) (hr : 0 < r)\n    (hsource : (univ ×ˢ Ioo (c-r) (c+r) : Set (X × ℝ)) ⊆ F.source)\n    (hside : ∀ z ∈ (univ ×ˢ Ioo (c-r) (c+r) : Set (X × ℝ)),\n      F z ∈ C ↔ z.2 ≤ c) :\n    ∃ f : X × NeckParameter → N,\n      Topology.IsOpenEmbedding f ∧\n      (∀ z, f z = F (z.1, c + r*(z.2 : ℝ))) ∧\n      (∀ z, f z ∈ C ↔ (z.2 : ℝ) ≤ 0) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.NeckAdapter\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_normalized_oneSided_neck",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/SideNormalization.lean",
+    "hint": "The forward map is explicit. Prove the scaled interval inclusion is an open embedding, its range lies in F.source, then restrict F to its source and compose open embeddings. Use r>0 for interval bounds and sign equivalence; do not assume smoothness of F or replace the exact side condition. A direct proof is allowed independently of the other worker tasks.",
+    "timeout_seconds": 600,
+    "priority": 0
+  }
+]
