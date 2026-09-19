@@ -1,0 +1,287 @@
+[
+  {
+    "id": "gram-shear",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Gram area scales by the absolute determinant of a triangular basis change, for any symmetric form. -/\ntheorem gramArea_triangular_change {V : Type*} [AddCommGroup V] [Module ℝ V]\n    (G : V →ₗ[ℝ] V →ₗ[ℝ] ℝ) (hs : ∀ x y, G x y = G y x)\n    (v w : V) (a b c : ℝ) :\n    gramArea G (a • v) (b • v + c • w) = |a*c| * gramArea G v w :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.gramArea_triangular_change",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/GramShear.lean",
+    "hint": "Expand the bilinear Gram determinant and show it is (a*c)^2 times the original determinant using ring and symmetry. Apply sqrt_mul to the nonnegative square factor, then sqrt_sq_eq_abs. The form may be indefinite: do not assume the original Gram determinant nonnegative; sqrt_mul works with the nonnegative factor.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "area",
+    "math_role": "map"
+  },
+  {
+    "id": "gram-degenerate",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Differential rank below two has zero Gram area in every bilinear form. -/\ntheorem gramArea_degenerate {V : Type*} [AddCommGroup V] [Module ℝ V] (G : V →ₗ[ℝ] V →ₗ[ℝ] ℝ) (v w : V)\n    (h : v = 0 ∨ ∃ t : ℝ, w = t • v) : gramArea G v w = 0 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.gramArea_degenerate",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/GramDegenerate.lean",
+    "hint": "Case split on v=0 or w=t*v and expand using LinearMap linearity. This ensures singular/branch points are included in later surface comparisons, rather than assumed absent.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "area",
+    "math_role": "map"
+  },
+  {
+    "id": "gram-frame",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Two vectors either have rank below two, or have explicit triangular coordinates in a reference-orthonormal pair. -/\ntheorem pair_degenerate_or_orthonormal {V : Type*} [AddCommGroup V] [Module ℝ V]\n    (G : V →ₗ[ℝ] V →ₗ[ℝ] ℝ) (hs : ∀ x y, G x y = G y x)\n    (hp : ∀ x : V, x ≠ 0 → 0 < G x x) (v w : V) :\n    (v = 0 ∨ ∃ t : ℝ, w = t • v) ∨\n    ∃ e f : V, ∃ a b c : ℝ, 0 < a ∧ 0 < c ∧\n      G e e = 1 ∧ G f f = 1 ∧ G e f = 0 ∧\n      v = a • e ∧ w = b • e + c • f :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.pair_degenerate_or_orthonormal",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/GramFrame.lean",
+    "hint": "Explicit Gram-Schmidt in two dimensions, without any compactness or attained extrema. If v nonzero let A=G v v>0, q=G v w/A, u=w-q*v. If u=0 use the dependent branch. Otherwise D=G u u>0, a=sqrt A,c=sqrt D,e=a^-1*v,f=c^-1*u,b=q*a. Derive G v u=0 algebraically, normalize and prove exact vector reconstruction. No finite dimensional or ambient inner-product structure is needed.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "area",
+    "math_role": "map"
+  },
+  {
+    "id": "gram-allpairs",
+    "model": "grok",
+    "depends_on": [
+      "gram-shear",
+      "gram-degenerate",
+      "gram-frame"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.GramShear\nimport PoincareConjecture.ParallelMath.Transfer.GramDegenerate\nimport PoincareConjecture.ParallelMath.Transfer.GramFrame\nimport PoincareConjecture.ParallelMath.Variational.PlaneAreaDistortion\nimport PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- A uniform quadratic metric bound controls area for arbitrary, possibly dependent pairs. -/\ntheorem gramArea_metric_comparison {V : Type*} [AddCommGroup V] [Module ℝ V]\n    (G0 G : V →ₗ[ℝ] V →ₗ[ℝ] ℝ)\n    (h0s : ∀ v w, G0 v w = G0 w v) (hs : ∀ v w, G v w = G w v)\n    (h0p : ∀ v : V, v ≠ 0 → 0 < G0 v v)\n    (ε : ℝ) (hε0 : 0 ≤ ε) (hε1 : ε < 1)\n    (hbound : ∀ v : V, (1-ε)*G0 v v ≤ G v v ∧ G v v ≤ (1+ε)*G0 v v)\n    (v w : V) :\n    (1-ε)*gramArea G0 v w ≤ gramArea G v w ∧\n      gramArea G v w ≤ (1+ε)*gramArea G0 v w :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.gramArea_metric_comparison",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/GramComparison.lean",
+    "hint": "Use the three integrated helpers. Degenerate case both areas vanish. Otherwise use the orthonormal pair and expand hbound at s*e+t*f to apply Variational.plane_area_distortion. gramArea G0 e f=1. Scale both sides by the nonnegative |a*c| using gramArea_triangular_change. Do not choose a globally continuous frame or assume v,w independent.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "area",
+    "math_role": "reduce"
+  },
+  {
+    "id": "epsilon-allpairs",
+    "model": "grok",
+    "depends_on": [
+      "gram-allpairs"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.GramComparison\nimport ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Actual epsilon-close metrics compare Gram areas of all tangent pairs, including rank-deficient ones. -/\ntheorem epsilonClose_all_pair_area {ε : ℝ} (g0 g : RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose ε g0 g) (p : M) (v w : TangentSpace I p) :\n    (1-ε)*gramArea (metricForm g0 p) v w ≤ gramArea (metricForm g p) v w ∧\n      gramArea (metricForm g p) v w ≤ (1+ε)*gramArea (metricForm g0 p) v w :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_all_pair_area",
+    "target_path": "ReferenceBridges/GlobalTransfer/EpsilonAllPairs.lean",
+    "hint": "Apply gramArea_metric_comparison to metricForm g0 p and metricForm g p, which definitionally evaluate to the actual metric tensors, with metric symmetry, positivity and the checked original epsilonClose_metric_comparison. Do not add any orthonormality assumptions.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "area",
+    "math_role": "reduce"
+  },
+  {
+    "id": "epsilon-surface-area",
+    "model": "grok",
+    "depends_on": [
+      "epsilon-allpairs"
+    ],
+    "source": "import ReferenceBridges.GlobalTransfer.EpsilonAllPairs\nimport ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Actual epsilon-close metrics control differential surface density and its extended integral without excluding singular points. -/\ntheorem epsilonClose_parametrized_area {ε : ℝ} (g0 g : RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose ε g0 g)\n    (F : EuclideanSpace ℝ (Fin 2) → M) (μ : Measure (EuclideanSpace ℝ (Fin 2))) :\n    (∀ x, (1-ε)*paramAreaDensity g0 F x ≤ paramAreaDensity g F x ∧\n      paramAreaDensity g F x ≤ (1+ε)*paramAreaDensity g0 F x) ∧\n    ENNReal.ofReal (1-ε) * (∫⁻ x, ENNReal.ofReal (paramAreaDensity g0 F x) ∂μ) ≤\n        ∫⁻ x, ENNReal.ofReal (paramAreaDensity g F x) ∂μ ∧\n    (∫⁻ x, ENNReal.ofReal (paramAreaDensity g F x) ∂μ) ≤\n      ENNReal.ofReal (1+ε) * (∫⁻ x, ENNReal.ofReal (paramAreaDensity g0 F x) ∂μ) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_parametrized_area",
+    "target_path": "ReferenceBridges/GlobalTransfer/EpsilonSurfaceArea.lean",
+    "hint": "First use epsilonClose_all_pair_area at the actual two mfderiv columns, then integrate with lintegral_mono, ofReal_mul and finite-constant lintegral scaling. The derivative is the usual mfderiv (zero at nondifferentiability); the geometric application is to smooth parametrized surfaces. No unjustified change of measure or of topology, and no assumed finite integral.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "area",
+    "math_role": "reduce"
+  },
+  {
+    "id": "epsilon-least-surface",
+    "model": "grok",
+    "depends_on": [
+      "epsilon-area-integrable"
+    ],
+    "source": "import ReferenceBridges.GlobalTransfer.EpsilonAreaIntegrable\nimport ReferenceBridges.GlobalTransfer.EpsilonSurfaceArea\nimport PoincareConjecture.ParallelMath.Variational.LeastAreaReduce\nimport ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** The actual derivative-area comparison passes to the least area of a fixed nonempty family of parametrized surfaces. -/\ntheorem epsilonClose_least_parametrized_area {ε : ℝ} (g0 g : RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose ε g0 g)\n    {A : Type*} [Nonempty A] (F : A → EuclideanSpace ℝ (Fin 2) → M)\n    (μ : Measure (EuclideanSpace ℝ (Fin 2)))\n    (h0 : ∀ a, Integrable (paramAreaDensity g0 (F a)) μ)\n    (hgm : ∀ a, AEStronglyMeasurable (paramAreaDensity g (F a)) μ) :\n    (1-ε)*Variational.leastCost (fun a => ∫ x, paramAreaDensity g0 (F a) x ∂μ) ≤\n      Variational.leastCost (fun a => ∫ x, paramAreaDensity g (F a) x ∂μ) ∧\n    Variational.leastCost (fun a => ∫ x, paramAreaDensity g (F a) x ∂μ) ≤\n      (1+ε)*Variational.leastCost (fun a => ∫ x, paramAreaDensity g0 (F a) x ∂μ) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_least_parametrized_area",
+    "target_path": "ReferenceBridges/GlobalTransfer/EpsilonLeastSurface.lean",
+    "hint": "First derive h1 : forall a, Integrable (paramAreaDensity g (F a)) mu using the integrated epsilonClose_area_integrable and hgm. Then Apply Variational.least_integral_distortion with l=1-epsilon,u=1+epsilon using the preceding actual density bound. Gram sqrt is nonnegative. This does not assume a minimizer, existence of a chosen homotopy class representative, or supply the explicit integrability premises.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "area",
+    "math_role": "reduce"
+  },
+  {
+    "id": "length-readback",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Read the genuine Riemannian path length as the explicit chosen metric-speed integral. -/\ntheorem metricPathLength_eq_integral (g : RiemannianMetric I M) (γ : ℝ → M) (a b : ℝ) :\n    metricPathLength g γ a b =\n      ∫⁻ t in Icc a b, ENNReal.ofReal (Real.sqrt\n        (g.metricInner (γ t) (mfderiv 𝓘(ℝ,ℝ) I γ t 1) (mfderiv 𝓘(ℝ,ℝ) I γ t 1))) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.metricPathLength_eq_integral",
+    "target_path": "ReferenceBridges/GlobalTransfer/LengthReadback.lean",
+    "hint": "Unfold metricPathLength with its explicit g bundle, use pathELength_eq_lintegral_mfderiv_Icc and the genuine Riemannian.enorm_tangent_eq_sqrt_metricInner from DoCarmoLib.Riemannian.Geodesic.HopfRinow.MetricBridge. Preserve mfderiv and the original model I. Avoid claiming the background E norm equals the metric norm.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "distance",
+    "math_role": "map"
+  },
+  {
+    "id": "distance-readback",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** The actual Riemannian distance is the infimum over real C1 joining curves; disconnected endpoints remain at infinity. -/\ntheorem metricEDist_eq_joining_inf (g : RiemannianMetric I M) (x y : M) :\n    metricEDist g x y = ⨅ γ : JoiningCurve I x y, metricPathLength g γ.1 0 1 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.metricEDist_eq_joining_inf",
+    "target_path": "ReferenceBridges/GlobalTransfer/DistanceReadback.lean",
+    "hint": "Install the g RiemannianBundle. Use Manifold.riemannianEDist_le_pathELength in one direction; in the other direction use exists_lt_of_riemannianEDist_lt for every strictly larger ENNReal bound. Do not assume joining curves exist or distances finite. All curves have the explicitly supplied C1 condition and exact endpoints.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "distance",
+    "math_role": "map"
+  },
+  {
+    "id": "epsilon-length",
+    "model": "grok",
+    "depends_on": [
+      "length-readback"
+    ],
+    "source": "import ReferenceBridges.GlobalTransfer.LengthReadback\nimport ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Actual epsilon-close metrics compare the genuine path lengths using square-root constants. -/\ntheorem epsilonClose_path_length {ε : ℝ} (g0 g : RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose ε g0 g) (γ : ℝ → M) (a b : ℝ) :\n    ENNReal.ofReal (Real.sqrt (1-ε)) * metricPathLength g0 γ a b ≤ metricPathLength g γ a b ∧\n    metricPathLength g γ a b ≤ ENNReal.ofReal (Real.sqrt (1+ε)) * metricPathLength g0 γ a b :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_path_length",
+    "target_path": "ReferenceBridges/GlobalTransfer/EpsilonLength.lean",
+    "hint": "Read both lengths using LengthReadback. Apply the already checked Quantitative.Reference.epsilonClose_speed_comparison pointwise to the actual velocity; ofReal multiplication and finite-constant lintegral scaling finish. Do not assume unit speed or finite path length.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "distance",
+    "math_role": "reduce"
+  },
+  {
+    "id": "epsilon-distance",
+    "model": "grok",
+    "depends_on": [
+      "distance-readback",
+      "epsilon-length"
+    ],
+    "source": "import ReferenceBridges.GlobalTransfer.DistanceReadback\nimport ReferenceBridges.GlobalTransfer.EpsilonLength\nimport ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Actual epsilon-close Riemannian metrics compare their original extended distances, not an assumed external distance. -/\ntheorem epsilonClose_riemannianEDist {ε : ℝ} (g0 g : RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose ε g0 g) (x y : M) :\n    ENNReal.ofReal (Real.sqrt (1-ε))*metricEDist g0 x y ≤ metricEDist g x y ∧\n    metricEDist g x y ≤ ENNReal.ofReal (Real.sqrt (1+ε))*metricEDist g0 x y :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_riemannianEDist",
+    "target_path": "ReferenceBridges/GlobalTransfer/EpsilonDistance.lean",
+    "hint": "Rewrite both original distances with metricEDist_eq_joining_inf; the admissible curve subtype is identical for the two metrics because topology and smooth structure were not changed. Apply epsilonClose_path_length and constant-times-iInf identities, proving the positive finite constants from 0<epsilon<1/2. Include empty path sets/infinite distance.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "distance",
+    "math_role": "reduce"
+  },
+  {
+    "id": "local-time-infimum",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Variational.WidthContinuity\nimport PoincareConjecture.ParallelMath.Variational.AdmissibleTransfer\nimport PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Uniform distortion only on a real time slab gives relative continuity of its least cost; no global-time extension is assumed. -/\ntheorem leastCost_continuousOn_time_interval {A : Type*} [Nonempty A]\n    (F : ℝ → A → ℝ) (a b K : ℝ) (hab : a ≤ b) (hK : 0 ≤ K)\n    (hn : ∀ t ∈ Icc a b, ∀ x, 0 ≤ F t x)\n    (hd : ∀ s ∈ Icc a b, ∀ t ∈ Icc a b, ∀ x,\n      F t x ≤ Real.exp (K*|t-s|)*F s x) :\n    ContinuousOn (fun t => Variational.leastCost (F t)) (Icc a b) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.leastCost_continuousOn_time_interval",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/LocalTimeInfimum.lean",
+    "hint": "Use leastCost_transfer in both directions inside the slab and squeeze on nhdsWithin, or extend time by the 1-Lipschitz clamp to [a,b] and use the already proved global result. Endpoints and a=b must work; do not ask for any condition on F outside the interval.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "time-width",
+    "math_role": "map"
+  },
+  {
+    "id": "uniform-minmax-lipschitz",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Variational.MinmaxTransfer\nimport PoincareConjecture.ParallelMath.Variational.InfimumAdditive\nimport PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Uniform parameterwise Lipschitz control gives a Lipschitz minmax value without attaining either extremum. -/\ntheorem leastPeak_lipschitz {T A B : Type*} [PseudoMetricSpace T] [Nonempty A] [Nonempty B]\n    (F : T → A → B → ℝ) (hn : ∀ t a b, 0 ≤ F t a b)\n    (hb : ∀ t a, BddAbove (range (F t a))) (K : NNReal)\n    (hL : ∀ a b, LipschitzWith K (fun t => F t a b)) :\n    LipschitzWith K (fun t => Variational.leastPeak (F t)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.leastPeak_lipschitz",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/MinmaxLipschitz.lean",
+    "hint": "Use two comparisons of suprema with additive error K*dist(s,t), then infima; or the conditional supremum/infimum Lipschitz APIs after proving all required bounds. Parameter types need not be compact, no minimizer exists in general. This gives a quantitative refinement, not only continuity.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "time-width",
+    "math_role": "map"
+  },
+  {
+    "id": "local-time-minmax",
+    "model": "grok",
+    "depends_on": [
+      "local-time-infimum"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.LocalTimeInfimum\nimport PoincareConjecture.ParallelMath.Variational.PeakDistortion\nimport PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Local-in-time exponential control gives relative continuity of the actual infimum-supremum expression. -/\ntheorem leastPeak_continuousOn_time_interval {A B : Type*} [Nonempty A] [Nonempty B]\n    (F : ℝ → A → B → ℝ) (a b K : ℝ) (hab : a ≤ b) (hK : 0 ≤ K)\n    (hn : ∀ t ∈ Icc a b, ∀ u v, 0 ≤ F t u v)\n    (hb : ∀ t ∈ Icc a b, ∀ u, BddAbove (range (F t u)))\n    (hd : ∀ s ∈ Icc a b, ∀ t ∈ Icc a b, ∀ u v,\n      F t u v ≤ Real.exp (K*|t-s|)*F s u v) :\n    ContinuousOn (fun t => Variational.leastPeak (F t)) (Icc a b) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.leastPeak_continuousOn_time_interval",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/LocalTimeMinmax.lean",
+    "hint": "Apply the integrated local-time-infimum theorem to the nonnegative peak costs and obtain the needed bound using Variational.peakCost_transport on the unchanged parameter B. Restrict all nonnegativity and boundedness uses to the time slab.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "time-width",
+    "math_role": "reduce"
+  },
+  {
+    "id": "nonnull-invariant",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Actual nullhomotopy is invariant under a homotopy of maps. -/\ntheorem nonNull_homotopic_iff {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {f g : C(X,Y)} (h : f.Homotopic g) : NonNull f ↔ NonNull g :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.nonNull_homotopic_iff",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/NonNullInvariant.lean",
+    "hint": "Unfold NonNull and compose h or h.symm with an alleged homotopy to a constant. No simply-connectedness or based-map assumption is needed.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "homotopy",
+    "math_role": "map"
+  },
+  {
+    "id": "homotopy-left-inverse",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- A map with a genuine left homotopy inverse preserves and reflects non-nullhomotopic maps. -/\ntheorem nonNull_comp_iff_of_left_homotopy_inverse\n    {X Y Z : Type*} [TopologicalSpace X] [TopologicalSpace Y] [TopologicalSpace Z]\n    (p : C(Y,Z)) (r : C(Z,Y)) (hr : (r.comp p).Homotopic (ContinuousMap.id Y))\n    (f : C(X,Y)) : NonNull (p.comp f) ↔ NonNull f :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.nonNull_comp_iff_of_left_homotopy_inverse",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/HomotopyLeftInverse.lean",
+    "hint": "One direction composes a nullhomotopy with p. For the other, a nullhomotopy of p∘f composes with r, and hr composed with f identifies r∘p∘f with f. Constants become const(r z). Do not assume p is injective or a homeomorphism; this covers the homotopy-equivalence part of surgery transport but does not produce the inverse geometrically.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "homotopy",
+    "math_role": "map"
+  },
+  {
+    "id": "homotopy-width-transport",
+    "model": "grok",
+    "depends_on": [
+      "homotopy-left-inverse"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.HomotopyLeftInverse\nimport PoincareConjecture.ParallelMath.Variational.AdmissibleTransfer\nimport PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- A left homotopy inverse supplies the actual map of nontrivial admissible maps needed for least-cost transfer. -/\ntheorem nonNull_leastCost_transport\n    {X Y Z : Type*} [TopologicalSpace X] [TopologicalSpace Y] [TopologicalSpace Z]\n    [Nonempty (NonNullMap X Y)]\n    (p : C(Y,Z)) (r : C(Z,Y)) (hr : (r.comp p).Homotopic (ContinuousMap.id Y))\n    (A : C(X,Y) → ℝ) (B : C(X,Z) → ℝ)\n    (hA : ∀ f : NonNullMap X Y, 0 ≤ A f.1)\n    (hB : ∀ f : NonNullMap X Z, 0 ≤ B f.1)\n    (L δ : ℝ) (hL : 0 ≤ L)\n    (hb : ∀ f : NonNullMap X Y, B (p.comp f.1) ≤ L*A f.1+δ) :\n    Variational.leastCost (fun f : NonNullMap X Z => B f.1) ≤\n      L*Variational.leastCost (fun f : NonNullMap X Y => A f.1)+δ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.nonNull_leastCost_transport",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/HomotopyWidthTransport.lean",
+    "hint": "Construct the actual subtype map f↦p∘f using the integrated homotopy-left-inverse theorem; derive Nonempty of the target admissible subtype from the supplied source witness. Then invoke leastCost_transfer. The witness class remains a real subtype of continuous maps, not an arbitrary predicate claiming preservation.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "homotopy",
+    "math_role": "reduce"
+  },
+  {
+    "id": "homotopic-transport",
+    "model": "grok",
+    "depends_on": [
+      "nonnull-invariant",
+      "homotopy-left-inverse"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.NonNullInvariant\nimport PoincareConjecture.ParallelMath.Transfer.HomotopyLeftInverse\nimport PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- A geometric comparison map homotopic to one with a left homotopy inverse preserves the same nontrivial maps. -/\ntheorem nonNull_comp_of_homotopic_transport\n    {X Y Z : Type*} [TopologicalSpace X] [TopologicalSpace Y] [TopologicalSpace Z]\n    (p q : C(Y,Z)) (r : C(Z,Y)) (hr : (r.comp p).Homotopic (ContinuousMap.id Y))\n    (hpq : p.Homotopic q) (f : C(X,Y)) (hf : NonNull f) : NonNull (q.comp f) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.nonNull_comp_of_homotopic_transport",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/HomotopicTransport.lean",
+    "hint": "Use the integrated left-homotopy-inverse result for p, compose hpq with the reflexive homotopy of f, and use nonNull_homotopic_iff. This is the exact topology obligation used when a quantitative surgery map is merely homotopic to a topological comparison.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "homotopy",
+    "math_role": "reduce"
+  },
+  {
+    "id": "integral-domination",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Pointwise domination by an integrable nonnegative density supplies integrability of a measurable new area density. -/\ntheorem integrable_sqrt_gram_of_domination {Ω : Type*} [MeasurableSpace Ω]\n    (μ : Measure Ω) (J J0 : Ω → ℝ) (hJ : AEStronglyMeasurable J μ)\n    (h0 : Integrable J0 μ) (C : ℝ) (hC : 0 ≤ C)\n    (h0n : ∀ᵐ x ∂μ, 0 ≤ J0 x)\n    (hb : ∀ᵐ x ∂μ, 0 ≤ J x ∧ J x ≤ C*J0 x) : Integrable J μ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.integrable_sqrt_gram_of_domination",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/IntegralDomination.lean",
+    "hint": "Use Integrable.mono with the integrable C*J0 dominating |J| almost everywhere. Do not assume J integrable as an input. The positive reference measure may be infinite.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "area",
+    "math_role": "map"
+  },
+  {
+    "id": "epsilon-area-integrable",
+    "model": "grok",
+    "depends_on": [
+      "epsilon-surface-area",
+      "integral-domination"
+    ],
+    "source": "import ReferenceBridges.GlobalTransfer.EpsilonSurfaceArea\nimport PoincareConjecture.ParallelMath.Transfer.IntegralDomination\nimport ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Finite reference area and measurable new differential density imply finite new area under actual epsilon-closeness. -/\ntheorem epsilonClose_area_integrable {ε : ℝ} (g0 g : RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose ε g0 g)\n    (F : EuclideanSpace ℝ (Fin 2) → M) (μ : Measure (EuclideanSpace ℝ (Fin 2)))\n    (h0 : Integrable (paramAreaDensity g0 F) μ)\n    (hm : AEStronglyMeasurable (paramAreaDensity g F) μ) :\n    Integrable (paramAreaDensity g F) μ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_area_integrable",
+    "target_path": "ReferenceBridges/GlobalTransfer/EpsilonAreaIntegrable.lean",
+    "hint": "Use epsilonClose_parametrized_area for the pointwise upper bound and integrable_sqrt_gram_of_domination with C=1+epsilon. Both densities are nonnegative by sqrt. Do not assume integrability of the target density.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "area",
+    "math_role": "reduce"
+  }
+]
