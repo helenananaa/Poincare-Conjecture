@@ -1,16 +1,16 @@
 [
   {
-    "id": "ode-explicit-derivative",
-    "model": "grok",
     "depends_on": [],
+    "hint": "LOCAL FINISHING TASK. The previous attempt below already derives the correct integral derivatives and algebraic derivative equality. Do not restart the library search. The remaining issue is unfolding the DEFINED function comparisonSolution: it is definitionally exactly exp(-rateIntegral)*(a-k*integral). Use `simpa only [comparisonSolution] using ...` or a final `change`/`rfl` for the pointwise function equality. Do not repeatedly use a large simp set or set_option. Compile the exact final source and then stop. Previous captured proof:\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- The explicit integrating-factor candidate solves the scalar comparison ODE. -/\ntheorem comparisonSolution_hasDerivAt (q : ℝ → ℝ) (hq : Continuous q)\n    (k a s t : ℝ) :\n    HasDerivAt (comparisonSolution q k a s)\n      (-k - q t * comparisonSolution q k a s t) t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  -- Integrating factor A(u) = ∫_s^u q, via FTC.\n  have hA : ∀ u, HasDerivAt (fun v => rateIntegral q s v) (q u) u := fun u =>\n    (hq.integral_hasStrictDerivAt s u).hasDerivAt\n  have hA_cont : Continuous (fun u => rateIntegral q s u) :=\n    continuous_iff_continuousAt.mpr fun u => (hA u).continuousAt\n  have hExp_cont : Continuous (fun x => Real.exp (rateIntegral q s x)) :=\n    Real.continuous_exp.comp hA_cont\n  -- Variation-of-constants integral I(u) = ∫_s^u exp(A(x)) dx, via FTC.\n  have hI : HasDerivAt (fun u => ∫ x in s..u, Real.exp (rateIntegral q s x))\n      (Real.exp (rateIntegral q s t)) t :=\n    (hExp_cont.integral_hasStrictDerivAt s t).hasDerivAt\n  have hexp : HasDerivAt (fun u => Real.exp (-rateIntegral q s u))\n      (Real.exp (-rateIntegral q s t) * (-q t)) t :=\n    (hA t).neg.exp\n  have hinner : HasDerivAt (fun u => a - k * ∫ x in s..u, Real.exp (rateIntegral q s x))\n      (-(k * Real.exp (rateIntegral q s t))) t :=\n    (hI.const_mul k).const_sub a\n  have hcancel : Real.exp (-rateIntegral q s t) * Real.exp (rateIntegral q s t) = 1 := by\n    rw [← Real.exp_add, neg_add_cancel, Real.exp_zero]\n  have hderiv :\n      Real.exp (-rateIntegral q s t) * (-q t) *\n          (a - k * ∫ x in s..t, Real.exp (rateIntegral q s x)) +\n        Real.exp (-rateIntegral q s t) * (-(k * Real.exp (rateIntegral q s t))) =\n      -k - q t * comparisonSolution q k a s t := by\n    simp [comparisonSolution, mul_neg, neg_mul, mul_assoc, sub_eq_add_neg]\n    rw [mul_left_comm (Real.exp (-rateIntegral q s t)) k, hcancel, mul_one]\n    ring\n  -- Rephrase via the little-o characterization so ℝ-module instance diamonds drop out.\n  refine HasDerivAt.of_isLittleO ?_\n  simpa [smul_eq_mul, comparisonSolution] using\n    ((hexp.fun_mul hinner).congr_deriv hderiv).isLittleO\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
+    "id": "ode-explicit-derivative-repair",
+    "math_lane": "extinction-ode",
+    "math_role": "map",
+    "model": "grok",
+    "priority": 10,
     "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- The explicit integrating-factor candidate solves the scalar comparison ODE. -/\ntheorem comparisonSolution_hasDerivAt (q : ℝ → ℝ) (hq : Continuous q)\n    (k a s t : ℝ) :\n    HasDerivAt (comparisonSolution q k a s)\n      (-k - q t * comparisonSolution q k a s t) t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
     "target_name": "PoincareConjecture.ParallelMath.comparisonSolution_hasDerivAt",
     "target_path": "PoincareConjecture/ParallelMath/Extinction/ExplicitDerivative.lean",
-    "hint": "Use the interval-integral fundamental theorem for rateIntegral and for integral exp(rateIntegral). Differentiate the displayed explicit expression. Show exp(-A)*exp(A)=1 by exponential identities. q is an arbitrary continuous coefficient; do not assume the proposed solution already solves the ODE. This is the existence half of the loop-width ODE contract.",
-    "timeout_seconds": 720,
-    "priority": 10,
-    "math_lane": "extinction-ode",
-    "math_role": "map"
+    "timeout_seconds": 420
   },
   {
     "id": "ode-initial-sensitivity",
@@ -39,21 +39,21 @@
     "math_role": "map"
   },
   {
-    "id": "ode-interface",
-    "model": "grok",
     "depends_on": [
-      "ode-explicit-derivative",
+      "ode-explicit-derivative-repair",
       "ode-initial-sensitivity",
       "ode-integrating-identity"
     ],
+    "hint": "REDUCE: use all three integrated prerequisites. The identity determines w by division by positive exp(rateIntegral), giving the explicit formula. Monotonicity uses the exact sensitivity and exp positivity. Prove the forward-time restriction exactly; no claim about widths without a geometric evolution estimate.",
+    "id": "ode-interface-v2",
+    "math_lane": "extinction-ode",
+    "math_role": "reduce",
+    "model": "grok",
+    "priority": 10,
     "source": "import PoincareConjecture.ParallelMath.Extinction.ExplicitDerivative\nimport PoincareConjecture.ParallelMath.Extinction.InitialSensitivity\nimport PoincareConjecture.ParallelMath.Extinction.IntegratingIdentity\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- Existence, uniqueness on forward times, and monotone dependence on initial width. -/\ntheorem scalarComparison_solution_interface (q : ℝ → ℝ) (hq : Continuous q)\n    (k a s : ℝ) :\n    comparisonSolution q k a s s = a ∧\n    (∀ t : ℝ, HasDerivAt (comparisonSolution q k a s)\n      (-k-q t*comparisonSolution q k a s t) t) ∧\n    (∀ w : ℝ → ℝ, ContinuousOn w (Ici s) → w s = a →\n      (∀ t ∈ Ioi s, HasDerivAt w (-k-q t*w t) t) →\n      EqOn w (comparisonSolution q k a s) (Ici s)) ∧\n    (∀ a' : ℝ, a ≤ a' → ∀ t : ℝ,\n      comparisonSolution q k a s t ≤ comparisonSolution q k a' s t) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
     "target_name": "PoincareConjecture.ParallelMath.scalarComparison_solution_interface",
     "target_path": "PoincareConjecture/ParallelMath/Extinction/ComparisonInterface.lean",
-    "hint": "REDUCE: use all three integrated prerequisites. The identity determines w by division by positive exp(rateIntegral), giving the explicit formula. Monotonicity uses the exact sensitivity and exp positivity. Prove the forward-time restriction exactly; no claim about widths without a geometric evolution estimate.",
-    "timeout_seconds": 720,
-    "priority": 10,
-    "math_lane": "extinction-ode",
-    "math_role": "reduce"
+    "timeout_seconds": 720
   },
   {
     "id": "power-barrier-derivative",
@@ -69,17 +69,17 @@
     "math_role": "map"
   },
   {
-    "id": "power-barrier-negative",
-    "model": "grok",
     "depends_on": [],
+    "hint": "Use divergence of (t+c)^(1-alpha) as t tends to +infinity, since 1-alpha>0. The bracket eventually becomes negative and the prefactor is positive. It is enough to pick an explicit sufficiently large T, but do not incorrectly assert a nonpositive bound is strictly negative. This lemma is a scalar extinction ingredient, not the geometric evolution law.\nLOCAL REPAIR, not a fresh search: the previous attempt below has the correct mathematical route. Only the last multiplication-order step failed. From hT0 t htT derive A/B < (t+c)^(1-alpha)-C, apply (div_lt_iff₀ hB).mp, then use multiplication commutativity. Do not rewrite div_lt_iff against A < B*x in the wrong order. Preserve the theorem exactly. The previous failed attempt was:\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- A positive forcing term makes the sublinear-growth comparison barrier eventually negative. -/\ntheorem powerBarrier_eventually_negative (alpha c a k : ℝ)\n    (hc : 0 < c) (hk : 0 < k) (halpha0 : 0 < alpha) (halpha1 : alpha < 1) :\n    ∃ T : ℝ, 0 ≤ T ∧ ∀ t : ℝ, T ≤ t → powerBarrier alpha c a k t < 0 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  have h1α : 0 < 1 - alpha := sub_pos.mpr halpha1\n  have hB : 0 < k / (1 - alpha) := div_pos hk h1α\n  have htend : Tendsto (fun t : ℝ => (t + c) ^ (1 - alpha)) atTop atTop :=\n    (tendsto_rpow_atTop h1α).comp (tendsto_atTop_add_const_right atTop c tendsto_id)\n  set A : ℝ := a / c ^ alpha\n  set B : ℝ := k / (1 - alpha)\n  set C : ℝ := c ^ (1 - alpha)\n  obtain ⟨T0, hT0⟩ := (htend.eventually_gt_atTop (A / B + C)).exists_forall_of_atTop\n  refine ⟨max (0 : ℝ) T0, le_max_left _ _, fun t ht => ?_⟩\n  have ht0 : 0 ≤ t := (le_max_left (0 : ℝ) T0).trans ht\n  have htT : T0 ≤ t := (le_max_right (0 : ℝ) T0).trans ht\n  have htc : 0 < t + c := add_pos_of_nonneg_of_pos ht0 hc\n  have hpre : 0 < (t + c) ^ alpha := Real.rpow_pos_of_pos htc _\n  have hbr : A - B * ((t + c) ^ (1 - alpha) - C) < 0 := by\n    refine sub_lt_zero.mpr ?_\n    rw [← div_lt_iff₀ hB, lt_sub_iff_add_lt]\n    exact hT0 t htT\n  simpa [powerBarrier, A, B, C] using mul_neg_of_pos_of_neg hpre hbr\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n\nCompiler error:\n/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean exited 1: /home/helenanana/.local/state/lean-swarm/attempts/ca08d055-46b9-45a2-a2f3-d40186e1ffeb/verified/PoincareConjecture/ParallelMath/Extinction/PowerNegative.lean:29:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  ?m.312 < ?m.311 * B\nin the target expression\n  A < B * ((t + c) ^ (1 - alpha) - C)\n\nalpha c a k : ℝ\nhc : 0 < c\nhk : 0 < k\nhalpha0 : 0 < alpha\nhalpha1 : alpha < 1\nh1α : 0 < 1 - alpha\nhtend : Tendsto (fun t => (t + c) ^ (1 - alpha)) atTop atTop\nA : ℝ := a / c ^ alpha\nB : ℝ := k / (1 - alpha)\nhB : 0 < B\nC : ℝ := c ^ (1 - alpha)\nT0 : ℝ\nhT0 : ∀ (b : ℝ), T0 ≤ b → A / B + C < (b + c) ^ (1 - alpha)\nt : ℝ\nht : max 0 T0 ≤ t\nht0 : 0 ≤ t\nhtT : T0 ≤ t\nhtc : 0 < t + c\nhpre : 0 < (t + c) ^ alpha\n⊢ A < B * ((t + c) ^ (1 - alpha) - C)\n",
+    "id": "power-barrier-negative-repair",
+    "math_lane": "extinction-barrier",
+    "math_role": "map",
+    "model": "grok",
+    "priority": 0,
     "source": "import PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath\nopen Set Function Filter\nopen scoped BigOperators Topology\n\n/-- A positive forcing term makes the sublinear-growth comparison barrier eventually negative. -/\ntheorem powerBarrier_eventually_negative (alpha c a k : ℝ)\n    (hc : 0 < c) (hk : 0 < k) (halpha0 : 0 < alpha) (halpha1 : alpha < 1) :\n    ∃ T : ℝ, 0 ≤ T ∧ ∀ t : ℝ, T ≤ t → powerBarrier alpha c a k t < 0 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath\n",
     "target_name": "PoincareConjecture.ParallelMath.powerBarrier_eventually_negative",
     "target_path": "PoincareConjecture/ParallelMath/Extinction/PowerNegative.lean",
-    "hint": "Use divergence of (t+c)^(1-alpha) as t tends to +infinity, since 1-alpha>0. The bracket eventually becomes negative and the prefactor is positive. It is enough to pick an explicit sufficiently large T, but do not incorrectly assert a nonpositive bound is strictly negative. This lemma is a scalar extinction ingredient, not the geometric evolution law.",
-    "timeout_seconds": 720,
-    "priority": 0,
-    "math_lane": "extinction-barrier",
-    "math_role": "map"
+    "timeout_seconds": 420
   },
   {
     "id": "tensor-contraction",
