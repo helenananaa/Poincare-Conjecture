@@ -1,0 +1,28 @@
+[
+  {
+    "path": "PoincareConjecture/PoincareConjecture/ParallelMath/Extinction/PowerNegative.lean",
+    "target": "PoincareConjecture.ParallelMath.powerBarrier_eventually_negative",
+    "before_sha256": "a9f4917588e9e60a7cebdae472417d493ba3918975cb745b6de8a120e4456187",
+    "after_sha256": "b1f09b6f3a2e84d1770e4058b8a625244940742ccc24ccad959eb9555843bf3c",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "statement_unchanged": true,
+    "note": "Coordinator preserves the exact theorem interface and constructive proof branch; adds an explicit impossible-input branch using the existing hypothesis. This is a lint-maintenance change, not a new mathematical target or model attempt."
+  },
+  {
+    "path": "PoincareConjecture/PoincareConjecture/ParallelMath/Variational/AdmissibleTransfer.lean",
+    "target": "PoincareConjecture.ParallelMath.Variational.leastCost_transfer",
+    "before_sha256": "f4b49ea360bc1c4c8695220cadf8cacb65410c1bd5d8598a3d308138a31a36fe",
+    "after_sha256": "c7dd384ab4e6cb9d2fc14ec9f41101a22daa61f06d7db826aaa49bfe612bf9b8",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "statement_unchanged": true,
+    "note": "Coordinator preserves the exact theorem interface and constructive proof branch; adds an explicit impossible-input branch using the existing hypothesis. This is a lint-maintenance change, not a new mathematical target or model attempt."
+  }
+]
