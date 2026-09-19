@@ -1,0 +1,35 @@
+[
+  {
+    "id": "collar-positive",
+    "model": "luna",
+    "depends_on": [],
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_mem_component_iff_pos",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/CollarPositiveSide.lean",
+    "timeout_seconds": 420,
+    "source": "import PoincareConjecture.Topology.FiberSaturation.OneSidedCollar\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnamespace PoincareConjecture.Topology.FiberSaturation\nopen Set\n\n/-- Once a central point contacts a complementary frontier, the positive\nhalf of its genuine collar is exactly that complementary component locally. -/\ntheorem oneSidedCollar_mem_component_iff_pos\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [PreconnectedSpace X]\n    {C : Set Y} {f : X × NeckParameter → Y} (hf : Topology.IsOpenEmbedding f)\n    (hside : ∀ z, f z ∈ C ↔ (z.2 : ℝ) ≤ 0) {p : Y} {x : X}\n    (hx : f (x, neckCenter) ∈ frontier (connectedComponentIn Cᶜ p))\n    (z : X × NeckParameter) :\n    f z ∈ connectedComponentIn Cᶜ p ↔ 0 < (z.2 : ℝ) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation\n",
+    "hint": "Architect proof route: let S=f image positiveCollar X. Existing isPreconnected_positiveCollar gives its preconnectedness. hside puts S in C complement. Every point in range f intersect C complement is in S. The open range, hx (via frontier_subset_closure), and existing exterior_piece_subset_component imply S subset connectedComponentIn. For the reverse implication use component subset complement and hside. The existing OneSidedCollar module contains closely related helper infrastructure; reuse it, but do not add assumptions."
+  },
+  {
+    "id": "collar-negative",
+    "model": "grok",
+    "depends_on": [],
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_negative_not_mem_closure",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/CollarNegativeSide.lean",
+    "timeout_seconds": 420,
+    "source": "import PoincareConjecture.Topology.FiberSaturation.OneSidedCollar\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnamespace PoincareConjecture.Topology.FiberSaturation\nopen Set\n\n/-- The negative side of a genuine one-sided collar has an open\nneighborhood inside C, so it cannot meet the closure of any complementary component. -/\ntheorem oneSidedCollar_negative_not_mem_closure\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y]\n    {C : Set Y} {f : X × NeckParameter → Y} (hf : Topology.IsOpenEmbedding f)\n    (hside : ∀ z, f z ∈ C ↔ (z.2 : ℝ) ≤ 0) {p : Y} (z : X × NeckParameter)\n    (hz : (z.2 : ℝ) < 0) :\n    f z ∉ closure (connectedComponentIn Cᶜ p) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation\n",
+    "hint": "Architect proof route: U={w : X × NeckParameter | (w.2 : Real)<0} is open by continuity of the parameter. Its image under the open embedding f is an open neighborhood of f z, entirely in C by hside. If f z were in closure of the complementary component, mem_closure_iff would give a point in this image and in the component, contradicting connectedComponentIn_subset. No global closedness/connectedness assumption is needed."
+  },
+  {
+    "id": "collar-closure",
+    "model": "luna",
+    "depends_on": [
+      "collar-positive",
+      "collar-negative"
+    ],
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_mem_closure_component_iff_nonneg",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/CollarClosureHalfSpace.lean",
+    "timeout_seconds": 420,
+    "source": "import PoincareConjecture.Topology.FiberSaturation.CollarPositiveSide\nimport PoincareConjecture.Topology.FiberSaturation.CollarNegativeSide\nimport PoincareConjecture.Topology.FiberSaturation.OneSidedCollar\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnamespace PoincareConjecture.Topology.FiberSaturation\nopen Set\n\n/-- In a selected genuine collar, the complementary closure is exactly\nthe nonnegative half-space. This is local topology, not a global smooth atlas. -/\ntheorem oneSidedCollar_mem_closure_component_iff_nonneg\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [PreconnectedSpace X]\n    {C : Set Y} {f : X × NeckParameter → Y} (hf : Topology.IsOpenEmbedding f)\n    (hside : ∀ z, f z ∈ C ↔ (z.2 : ℝ) ≤ 0) {p : Y} {x : X}\n    (hx : f (x, neckCenter) ∈ frontier (connectedComponentIn Cᶜ p))\n    (z : X × NeckParameter) :\n    f z ∈ closure (connectedComponentIn Cᶜ p) ↔ 0 ≤ (z.2 : ℝ) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation\n",
+    "hint": "Architect route: forward, a negative height contradicts oneSidedCollar_negative_not_mem_closure. Reverse, at positive height use oneSidedCollar_mem_component_iff_pos then subset_closure. At zero height show z.2=neckCenter by Subtype.ext, and use oneSidedCollar_frontier_saturated hf hside hx z.1 followed by frontier_subset_closure. Both new producer modules have already passed verification and integration."
+  }
+]
