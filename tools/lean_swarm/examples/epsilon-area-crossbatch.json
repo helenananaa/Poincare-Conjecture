@@ -1,0 +1,101 @@
+[
+  {
+    "id": "epsilon-plane-area",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import ReferenceBridges.Quantitative.EpsilonMetricComparison\nimport PoincareConjecture.ParallelMath.Variational.PlaneAreaDistortion\nimport Mathlib\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.GeometricArea\nopen Set Function Riemannian\nopen scoped Manifold ContDiff\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n/-- **Math.** Actual epsilon-close Riemannian metrics control the two-dimensional\narea Jacobian on every reference-orthonormal tangent plane. -/\ntheorem epsilonClose_plane_area {epsilon : ℝ} (g0 g : RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose epsilon g0 g) (p : M)\n    (v w : TangentSpace I p) (hv : g0.metricInner p v v = 1)\n    (hw : g0.metricInner p w w = 1) (hvw : g0.metricInner p v w = 0) :\n    1-epsilon ≤ Real.sqrt (g.metricInner p v v * g.metricInner p w w - (g.metricInner p v w)^2) ∧\n    Real.sqrt (g.metricInner p v v * g.metricInner p w w - (g.metricInner p v w)^2) ≤ 1+epsilon :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.GeometricArea\n",
+    "target_name": "PoincareConjecture.ParallelMath.GeometricArea.epsilonClose_plane_area",
+    "target_path": "ReferenceBridges/WidthTorus/EpsilonArea.lean",
+    "timeout_seconds": 660,
+    "priority": 10,
+    "mathematical_role": "cross-project-reduce",
+    "mathematical_line": "actual-epsilon-close-area",
+    "external_inputs": [
+      {
+        "project": "poincare-quantitative-mapreduce-20260919",
+        "task": "epsilon-c0",
+        "commit": "73d3f752f7991c712810868a7d5b8f3550361a34",
+        "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_zero_norm_bound",
+        "sha256": "ef77cdd9585e4f08c43084db69d635d19b9b0e818a362cb5ec8cc4f9eaedc082",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "project": "poincare-quantitative-mapreduce-20260919",
+        "task": "epsilon-matrix",
+        "commit": "5efcf53fb2ee71b34aab9bd8419925a3436f67ce",
+        "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.zero_metric_norm_eq_matrix_error",
+        "sha256": "543f73198f627c4c7beb13cf3c1ec44035443b5f695fecc1e66be8a750f761fe",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "project": "poincare-quantitative-mapreduce-20260919",
+        "task": "frame-parseval",
+        "commit": "00f9be4eda4e42fe9bbb957e59fafa6680fb0d89",
+        "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.metric_frame_parseval",
+        "sha256": "b3fe66c4a8bf19ebe872195295be299287bb6e6ca217b4f42e152cdf9efb6d13",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "project": "poincare-quantitative-mapreduce-20260919",
+        "task": "frame-expansion",
+        "commit": "9f042191b6f14acdf1b781e67e46fb8a30bd6807",
+        "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.metric_bilinear_frame_expansion",
+        "sha256": "335e5438f5b2770973f1dbf00c81393e0ba9c641eaa9551dd84f6499aa61721a",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "project": "poincare-quantitative-mapreduce-20260919",
+        "task": "epsilon-metric-reduce",
+        "commit": "c0141b82d4dfd843c736d28193e962ba6b1c3a0e",
+        "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_metric_comparison",
+        "sha256": "1234189679de73ff94a25cf096ef83f5f2133b42aa4657d19dc74e8b67161dde",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "project": "poincare-width-torus-mapreduce-20260919",
+        "task": "quadratic-discriminant",
+        "commit": "98abe15bddb45edffe78d37d89a11cd0873964ba",
+        "target": "PoincareConjecture.ParallelMath.Variational.quadratic_nonneg_det",
+        "sha256": "b17ce46f2b34e36d4ae217fbd8d16422b5928c1a9694be7a2834db75f03a1614",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "project": "poincare-width-torus-mapreduce-20260919",
+        "task": "plane-area-distortion",
+        "commit": "9998a75dd4924162520aafa1c2336453fa70f110",
+        "target": "PoincareConjecture.ParallelMath.Variational.plane_area_distortion",
+        "sha256": "e1b3e3a32b533f78b72a8272c0466d1e118c88820ed744d9d158a011959cad15",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    ],
+    "hint": "Two independently developed, integrated inputs are now available: PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_metric_comparison and PoincareConjecture.ParallelMath.Variational.plane_area_distortion. Apply the latter with a=g(v,v), b=g(v,w), c=g(w,w). For each pair of real scalars s,t, apply the former to s • v + t • w and expand the genuine metric bilinear form, using metricInner_add_left/right, metricInner_smul_left/right and metricInner_comm. Reference g0 orthonormality turns its norm square into s^2+t^2; ring normalizes g. EpsilonClose itself gives 0<epsilon<1/2, hence epsilon<1. Do not add a quadratic comparison hypothesis; it must come from the actual existing EpsilonClose definition. Reference source lives within this worktree at ../formalized-sources/DoCarmo/DoCarmoLib and ../formalized-sources/MorganTian/MorganTianLib; do not inspect binary object files."
+  }
+]
