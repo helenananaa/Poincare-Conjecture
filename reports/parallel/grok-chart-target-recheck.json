@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "tasks": [
+    {
+      "id": "frontier-zero",
+      "target": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_mem_frontier_iff_zero",
+      "path": "PoincareConjecture/Topology/FiberSaturation/CollarFrontierZero.lean",
+      "status": "PASS",
+      "sha256": "d987ae11445fcfdcef266da4873d9c86fe3f33dc3cc4828e164d0b0243cf9506",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "restriction-chart",
+      "target": "PoincareConjecture.Topology.FiberSaturation.openEmbedding_restrict_set_coordinates",
+      "path": "PoincareConjecture/Topology/FiberSaturation/RestrictOpenEmbedding.lean",
+      "status": "PASS",
+      "sha256": "ad650be353f1923ae251c0dd36017ac78bc53e619b4670211215a465a55c911b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "half-parameter",
+      "target": "PoincareConjecture.Topology.FiberSaturation.exists_halfCollar_parameter_homeomorph",
+      "path": "PoincareConjecture/Topology/FiberSaturation/CollarHalfParameter.lean",
+      "status": "PASS",
+      "sha256": "adc3950b7378618975effd9fb75725b3082d0b5ef27f632d9b2636b24464df21",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "closure-chart",
+      "target": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_exists_closure_chart",
+      "path": "PoincareConjecture/Topology/FiberSaturation/CollarClosureChart.lean",
+      "status": "PASS",
+      "sha256": "ad9517c2f9b37540cc5897cdfc9d509e785832d727d8e5f8fa7ab3eed2b529a4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "model_calls": 0
+}

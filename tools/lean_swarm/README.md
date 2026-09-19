@@ -36,7 +36,7 @@ python3 tools/lean_swarm/cli.py retry PROJECT TASK
 python3 tools/lean_swarm/cli.py resume-model grok
 ```
 
-任务卡是 JSON 列表，每项包含 `id`, `model`, `depends_on`, `source`, `target_name`, `target_path`，可选 `hint` 和 `timeout_seconds`。路径相对 Lean package。source 内恰有一对 `/- SWARM_PROOF_BEGIN -/`、`/- SWARM_PROOF_END -/`。需要改变陈述时使用新任务编号，不修改已注册的目标。
+任务卡是 JSON 列表，每项包含 `id`, `depends_on`, `source`, `target_name`, `target_path`；`model` 可选，省略时为 `grok`，也可显式指定 `luna`。另可提供 `hint` 和 `timeout_seconds`。路径相对 Lean package。source 内恰有一对 `/- SWARM_PROOF_BEGIN -/`、`/- SWARM_PROOF_END -/`。需要改变陈述时使用新任务编号，不修改已注册的目标。
 
 示例 `examples/acceptance.json` 是工程验收题，不是新的庞加莱里程碑；consumer 实际导入两个已集成的 producer 文件，检验依赖编译和串行集成。
 

@@ -1,0 +1,95 @@
+{
+  "date_utc": "2026-09-19T06:02:21.288185+00:00",
+  "project": "poincare-collar-chart-20260919",
+  "model_policy": {
+    "default": "grok",
+    "grok_model_quota": null,
+    "luna_managed_limit": 4,
+    "luna_hard_max": 8,
+    "runner_job_budget": 6,
+    "ready_producers": 3,
+    "real_model_calls": 4,
+    "all_worker_models": "grok"
+  },
+  "status": "PASS",
+  "targets": [
+    {
+      "id": "closure-chart",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "target": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_exists_closure_chart",
+      "file": "PoincareConjecture/Topology/FiberSaturation/CollarClosureChart.lean",
+      "model_seconds": 257.981,
+      "commit": "23e26df847aae9381f5b2d3a0c32e1a7bdd5ca28",
+      "source_sha256": "ad9517c2f9b37540cc5897cdfc9d509e785832d727d8e5f8fa7ab3eed2b529a4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "9605095b92c29cfeea379a5f518542d09b1bdadd",
+      "depends_on": [
+        "frontier-zero",
+        "restriction-chart",
+        "half-parameter"
+      ],
+      "worker_stopped": true
+    },
+    {
+      "id": "frontier-zero",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "target": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_mem_frontier_iff_zero",
+      "file": "PoincareConjecture/Topology/FiberSaturation/CollarFrontierZero.lean",
+      "model_seconds": 186.063,
+      "commit": "41e3df9361f26315920e77cb37dd396750cf4373",
+      "source_sha256": "d987ae11445fcfdcef266da4873d9c86fe3f33dc3cc4828e164d0b0243cf9506",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "e4296baecf15d9ec3e7d40accdf2ee231f13e57a",
+      "depends_on": [],
+      "worker_stopped": true
+    },
+    {
+      "id": "half-parameter",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "target": "PoincareConjecture.Topology.FiberSaturation.exists_halfCollar_parameter_homeomorph",
+      "file": "PoincareConjecture/Topology/FiberSaturation/CollarHalfParameter.lean",
+      "model_seconds": 339.703,
+      "commit": "d981a269074e7c9dae340df5c843589172451009",
+      "source_sha256": "adc3950b7378618975effd9fb75725b3082d0b5ef27f632d9b2636b24464df21",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "e4296baecf15d9ec3e7d40accdf2ee231f13e57a",
+      "depends_on": [],
+      "worker_stopped": true
+    },
+    {
+      "id": "restriction-chart",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "target": "PoincareConjecture.Topology.FiberSaturation.openEmbedding_restrict_set_coordinates",
+      "file": "PoincareConjecture/Topology/FiberSaturation/RestrictOpenEmbedding.lean",
+      "model_seconds": 407.903,
+      "commit": "9605095b92c29cfeea379a5f518542d09b1bdadd",
+      "source_sha256": "ad650be353f1923ae251c0dd36017ac78bc53e619b4670211215a465a55c911b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "base_commit": "e4296baecf15d9ec3e7d40accdf2ee231f13e57a",
+      "depends_on": [],
+      "worker_stopped": true
+    }
+  ],
+  "scope": "Explicit topological open-patch coordinates for the actual complementary closure; no smooth atlas, collar existence, surgery geometry or final Poincare theorem is asserted.",
+  "verification_scope": "Frozen proof bodies reconstructed in trusted statements, pinned library cache, independent target compilation and transitive axiom audit, integration build; not a full external-dependency rebuild."
+}

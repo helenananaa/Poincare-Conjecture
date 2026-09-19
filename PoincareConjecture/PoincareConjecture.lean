@@ -1,3 +1,4 @@
+import PoincareConjecture.Topology.FiberSaturation.CollarClosureChart
 import PoincareConjecture.Topology.FiberSaturation.CollarClosureHalfSpace
 import PoincareConjecture.Topology.FiberSaturation.ComplementaryBoundarySelection
 import PoincareConjecture.Basic
