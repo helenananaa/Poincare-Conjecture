@@ -1,3 +1,4 @@
+import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.ComplementClosure
 import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.CollarProductCoordinates
 import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.CollaredRegularOpen
 import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.ClosedDomain

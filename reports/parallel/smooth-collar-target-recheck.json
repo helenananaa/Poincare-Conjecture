@@ -1,0 +1,175 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "tasks": [
+    {
+      "id": "halfspace-range",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.halfSpaceModel_range_geometry",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/HalfSpaceRange.lean",
+      "status": "PASS",
+      "sha256": "fab0ab8599e5de8ac447387ece9bbec751c5a6a3d4d4e6a2d80ea297c4f5291d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "translate-chart",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.translated_chart_mem_maximalAtlas",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/TranslateChart.lean",
+      "status": "PASS",
+      "sha256": "24352428b6c7b8457c1506a5e8dfe9acc5dfeafcc9323227b862da5e57f118bd",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "interior-model",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.interior_point_has_ambient_model",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/InteriorModel.lean",
+      "status": "PASS",
+      "sha256": "fd85704e0843262bc9d469c952b42c4024040efd7c497a9c1fb9edd1b6444425",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "restrict-collar",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.collarRestriction_isOpenEmbedding",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/Restriction.lean",
+      "status": "PASS",
+      "sha256": "4511b4e38a8dc35c986ac792de7b2402f0b263112bfecff7eb27aab86eedaacb",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "product-chart-smooth",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.product_chart_contMDiffOn",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ProductChartSmooth.lean",
+      "status": "PASS",
+      "sha256": "55c52550b36e3b578c0688d962f80dcd59de8a69110caf071b44bed382705681",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "collar-coordinates-smooth",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.collarCoordinates_mem_maximalAtlas",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/CoordinatesSmooth.lean",
+      "status": "PASS",
+      "sha256": "61cfa5c6b46cb4478bcb9ae75111721ebf9a19180721c4100bba82c7247a9460",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "collar-coordinates-geometry",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.collarCoordinates_component_geometry",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/CoordinatesGeometry.lean",
+      "status": "PASS",
+      "sha256": "3fb8c4480d31f182aaf3e7ea645452f00ef0a29a07ef7109a23d4af8daa3e5c7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "boundary-local-model",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.smoothCollar_center_has_ambient_model",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/BoundaryModel.lean",
+      "status": "PASS",
+      "sha256": "c0751a6860b79eb18d0277988538ac6b517f12f5f286abf5c7b86665cdd05f5c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "regular-open-cover",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.smoothCollar_cover_regularOpen",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/RegularOpenCover.lean",
+      "status": "PASS",
+      "sha256": "1459d51499479ceac808f41a3458e551d07fcf5072dc4043678f269d69885b17",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "boundary-to-global",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_smoothClosedDomain_of_boundary_models",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/BoundaryToGlobal.lean",
+      "status": "PASS",
+      "sha256": "514aaff9028371a0877aefe770a1dc823ff31de72d9566c884efcc1b9f6b8529",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "smooth-complement-closure",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_smoothClosure_of_smoothCollar_cover",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ComplementClosure.lean",
+      "status": "PASS",
+      "sha256": "df31c71cc2012d1ddf9173323b90d1eae69defbfc560bce02b21b72b218d1fd2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "standard-collar",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_standard_smooth_strip_collar",
+      "path": "tests/SmoothCollar/StandardCollar.lean",
+      "status": "PASS",
+      "sha256": "d0f82653204ec69f0084db96fb88bdbec7a3694dce841221946b9f320fe82197",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "standard-component",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.standard_upper_component_geometry",
+      "path": "tests/SmoothCollar/StandardComponent.lean",
+      "status": "PASS",
+      "sha256": "22f8af4ad1e04a479889db0b9bd2bf5259777e1a48b9b41ec11dbb7db6a47306",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "standard-closure-sanity",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.standard_complement_smooth_structure",
+      "path": "tests/SmoothCollar/ClosureSanity.lean",
+      "status": "PASS",
+      "sha256": "04ffd0b49210572d6356c7a26b976fbc37c94c9c869a9a36cfa4107f887d798d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "model_calls": 0
+}

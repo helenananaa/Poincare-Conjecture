@@ -1,0 +1,336 @@
+{
+  "status": "PASS",
+  "project": "poincare-smooth-collar-20260919",
+  "generated_utc": "2026-09-19T08:03:28.523693+00:00",
+  "baseline_commit": "89be142ed5260378b1e6641ab65617bb999be4c1",
+  "targets": [
+    {
+      "id": "boundary-local-model",
+      "title_zh": "边界点的环境光滑局部模型",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.smoothCollar_center_has_ambient_model",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/BoundaryModel.lean",
+      "integrated_commit": "5efdae51eadef8de2693e64af7ed336b8fd0b10c",
+      "base_commit": "7648633af169e71cc0246949b92fa3f0db8259a6",
+      "depends_on": [
+        "collar-coordinates-smooth",
+        "collar-coordinates-geometry"
+      ],
+      "model_seconds": 260.782,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "c0751a6860b79eb18d0277988538ac6b517f12f5f286abf5c7b86665cdd05f5c",
+      "published_source_sha256": "c0751a6860b79eb18d0277988538ac6b517f12f5f286abf5c7b86665cdd05f5c",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "boundary-to-global",
+      "title_zh": "从边界模型补齐内部点并构造光滑区域",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_smoothClosedDomain_of_boundary_models",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/BoundaryToGlobal.lean",
+      "integrated_commit": "3b77ec16792563f9baf0aa93c1a8e33cf7b82760",
+      "base_commit": "7e5a9babfb651155f69f0d00182e197f843072b5",
+      "depends_on": [
+        "interior-model"
+      ],
+      "model_seconds": 128.06,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "514aaff9028371a0877aefe770a1dc823ff31de72d9566c884efcc1b9f6b8529",
+      "published_source_sha256": "514aaff9028371a0877aefe770a1dc823ff31de72d9566c884efcc1b9f6b8529",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "collar-coordinates-geometry",
+      "title_zh": "同一 collar 坐标的精确闭包集合模型",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.collarCoordinates_component_geometry",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/CoordinatesGeometry.lean",
+      "integrated_commit": "b1e0615c1791f6a5d0bbd7d69705341794fdf440",
+      "base_commit": "ebb2e511fb91d62443cc3a9e46bdad776db81461",
+      "depends_on": [
+        "restrict-collar",
+        "halfspace-range"
+      ],
+      "model_seconds": 353.631,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "3fb8c4480d31f182aaf3e7ea645452f00ef0a29a07ef7109a23d4af8daa3e5c7",
+      "published_source_sha256": "3fb8c4480d31f182aaf3e7ea645452f00ef0a29a07ef7109a23d4af8daa3e5c7",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "collar-coordinates-smooth",
+      "title_zh": "collar 坐标属于环境光滑最大图册",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.collarCoordinates_mem_maximalAtlas",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/CoordinatesSmooth.lean",
+      "integrated_commit": "7648633af169e71cc0246949b92fa3f0db8259a6",
+      "base_commit": "9b5ff9c569ddac54fec5792ccd6776d8989fa962",
+      "depends_on": [
+        "product-chart-smooth"
+      ],
+      "model_seconds": 429.276,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "61cfa5c6b46cb4478bcb9ae75111721ebf9a19180721c4100bba82c7247a9460",
+      "published_source_sha256": "61cfa5c6b46cb4478bcb9ae75111721ebf9a19180721c4100bba82c7247a9460",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "halfspace-range",
+      "title_zh": "公共半空间模型及其内部/边界",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.halfSpaceModel_range_geometry",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/HalfSpaceRange.lean",
+      "integrated_commit": "04aa69e9410b6bb56719ca61aeb9d43dc5581682",
+      "base_commit": "c67d3640f2d93c4d559de3ba87b860257167761f",
+      "depends_on": [],
+      "model_seconds": 271.359,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "fab0ab8599e5de8ac447387ece9bbec751c5a6a3d4d4e6a2d80ea297c4f5291d",
+      "published_source_sha256": "fab0ab8599e5de8ac447387ece9bbec751c5a6a3d4d4e6a2d80ea297c4f5291d",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "interior-model",
+      "title_zh": "内部点的同一模型坐标",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.interior_point_has_ambient_model",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/InteriorModel.lean",
+      "integrated_commit": "7e5a9babfb651155f69f0d00182e197f843072b5",
+      "base_commit": "41ca38d7dfdd8b0827fc92ba37e1d197279e7f3d",
+      "depends_on": [
+        "translate-chart"
+      ],
+      "model_seconds": 357.427,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "fd85704e0843262bc9d469c952b42c4024040efd7c497a9c1fb9edd1b6444425",
+      "published_source_sha256": "fd85704e0843262bc9d469c952b42c4024040efd7c497a9c1fb9edd1b6444425",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "product-chart-smooth",
+      "title_zh": "截面坐标与实参数的光滑组合",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.product_chart_contMDiffOn",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ProductChartSmooth.lean",
+      "integrated_commit": "9b5ff9c569ddac54fec5792ccd6776d8989fa962",
+      "base_commit": "c67d3640f2d93c4d559de3ba87b860257167761f",
+      "depends_on": [],
+      "model_seconds": 469.035,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "55c52550b36e3b578c0688d962f80dcd59de8a69110caf071b44bed382705681",
+      "published_source_sha256": "55c52550b36e3b578c0688d962f80dcd59de8a69110caf071b44bed382705681",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "regular-open-cover",
+      "title_zh": "由光滑 collar 覆盖导出正则开性",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.smoothCollar_cover_regularOpen",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/RegularOpenCover.lean",
+      "integrated_commit": "2448f783526ee69021f77cba85d9b9eaf00a78c6",
+      "base_commit": "ebb2e511fb91d62443cc3a9e46bdad776db81461",
+      "depends_on": [
+        "restrict-collar"
+      ],
+      "model_seconds": 261.485,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "1459d51499479ceac808f41a3458e551d07fcf5072dc4043678f269d69885b17",
+      "published_source_sha256": "1459d51499479ceac808f41a3458e551d07fcf5072dc4043678f269d69885b17",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "restrict-collar",
+      "title_zh": "真实全 collar 的标准区间限制",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.collarRestriction_isOpenEmbedding",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/Restriction.lean",
+      "integrated_commit": "ebb2e511fb91d62443cc3a9e46bdad776db81461",
+      "base_commit": "c67d3640f2d93c4d559de3ba87b860257167761f",
+      "depends_on": [],
+      "model_seconds": 326.754,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "4511b4e38a8dc35c986ac792de7b2402f0b263112bfecff7eb27aab86eedaacb",
+      "published_source_sha256": "4511b4e38a8dc35c986ac792de7b2402f0b263112bfecff7eb27aab86eedaacb",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "smooth-complement-closure",
+      "title_zh": "从真实光滑 collar 覆盖构造实际补闭包",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_smoothClosure_of_smoothCollar_cover",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ComplementClosure.lean",
+      "integrated_commit": "949a104c893683bdeeba5b1bf67a328ebe1b6945",
+      "base_commit": "5efdae51eadef8de2693e64af7ed336b8fd0b10c",
+      "depends_on": [
+        "boundary-local-model",
+        "regular-open-cover",
+        "boundary-to-global"
+      ],
+      "model_seconds": 110.978,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "df31c71cc2012d1ddf9173323b90d1eae69defbfc560bce02b21b72b218d1fd2",
+      "published_source_sha256": "df31c71cc2012d1ddf9173323b90d1eae69defbfc560bce02b21b72b218d1fd2",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "standard-closure-sanity",
+      "title_zh": "完整闭包构造的非空实例",
+      "role": "regression",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.standard_complement_smooth_structure",
+      "path": "tests/SmoothCollar/ClosureSanity.lean",
+      "integrated_commit": "869dee84d5d006a6c90b60743a260e298ddc7674",
+      "base_commit": "949a104c893683bdeeba5b1bf67a328ebe1b6945",
+      "depends_on": [
+        "standard-collar",
+        "standard-component",
+        "smooth-complement-closure"
+      ],
+      "model_seconds": 538.607,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "04ffd0b49210572d6356c7a26b976fbc37c94c9c869a9a36cfa4107f887d798d",
+      "published_source_sha256": "04ffd0b49210572d6356c7a26b976fbc37c94c9c869a9a36cfa4107f887d798d",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "standard-collar",
+      "title_zh": "非空欧氏光滑 strip collar 构造",
+      "role": "regression",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_standard_smooth_strip_collar",
+      "path": "tests/SmoothCollar/StandardCollar.lean",
+      "integrated_commit": "1c73fde27a7bc4b1e56bc4e97d139ee07ca4f7b3",
+      "base_commit": "96e42be519201eff908ddfea9fba0b5ead0840e2",
+      "depends_on": [],
+      "model_seconds": 243.478,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "d0f82653204ec69f0084db96fb88bdbec7a3694dce841221946b9f320fe82197",
+      "published_source_sha256": "d0f82653204ec69f0084db96fb88bdbec7a3694dce841221946b9f320fe82197",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "standard-component",
+      "title_zh": "非空欧氏补分量及其边界",
+      "role": "regression",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.standard_upper_component_geometry",
+      "path": "tests/SmoothCollar/StandardComponent.lean",
+      "integrated_commit": "5665b8c0692033fc7a7cfd375e7f8d2c3b3c8928",
+      "base_commit": "96e42be519201eff908ddfea9fba0b5ead0840e2",
+      "depends_on": [],
+      "model_seconds": 175.341,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "22f8af4ad1e04a479889db0b9bd2bf5259777e1a48b9b41ec11dbb7db6a47306",
+      "published_source_sha256": "22f8af4ad1e04a479889db0b9bd2bf5259777e1a48b9b41ec11dbb7db6a47306",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    },
+    {
+      "id": "translate-chart",
+      "title_zh": "环境光滑坐标的平移",
+      "role": "production",
+      "model": "grok",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.translated_chart_mem_maximalAtlas",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/TranslateChart.lean",
+      "integrated_commit": "41ca38d7dfdd8b0827fc92ba37e1d197279e7f3d",
+      "base_commit": "c67d3640f2d93c4d559de3ba87b860257167761f",
+      "depends_on": [],
+      "model_seconds": 295.092,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "grok_source_sha256": "24352428b6c7b8457c1506a5e8dfe9acc5dfeafcc9323227b862da5e57f118bd",
+      "published_source_sha256": "24352428b6c7b8457c1506a5e8dfe9acc5dfeafcc9323227b862da5e57f118bd",
+      "coordinator_maintenance": false,
+      "worker_stopped": true
+    }
+  ],
+  "attempt_count": 14,
+  "models": {
+    "grok": 14
+  },
+  "production_targets": 11,
+  "regression_targets": 3,
+  "luna_calls": 0,
+  "worker_budget": 10,
+  "grok_model_cap": null,
+  "all_attempts_stopped": true,
+  "all_dependencies_are_ancestors": true,
+  "scope": "Actual complementary closure smooth structure from a covering of its frontier by genuine smooth full collars; original subspace topology retained; no construction of the supplied collars from Ricci surgery data and no final Poincare theorem."
+}
