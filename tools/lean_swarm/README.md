@@ -86,3 +86,18 @@ python3 tools/lean_swarm/status_report.py --project poincare-neck-inputs-paralle
 报告明确区分槽位占用、agent 阶段与验证阶段；不把未接入注册表的外部会话自动算入。
 
 `reverify PROJECT TASK --reason TEXT` 也可用于协调器审查后的非零客户端退出：必须已有完整、哈希不变的冻结交卷，且独立重编译及公理审计通过。原失败记录与真实理由保留；TIMEOUT 仍不能通过此入口升级成功。CLI 的轮数上限失败不等同于已有 Lean 证明无效。
+
+## 用户资源策略：不自动全量重建（2026-09-19）
+
+按用户要求，普通批次只执行现有缓存上的增量构建、实际变更的依赖检查、
+目标独立重编译与公理审计。不会为每批任务清空构建缓存或自动重建全部参考包。
+`check_complementary_frontier.py` 必须明确传入 `--base-ref <已核验祖先>`，
+不再默认回溯到历史上游提交；未给基准时在启动编译前退出。
+
+`--fresh` 以及依赖选择器的全工程模式必须同时给出 `--allow-full-rebuild`。
+常规 agent 批次不要提供这个参数；只有用户明确要求完整重建才启用。
+`validate-lean-changes.sh` 默认不运行 `lake exe cache get`；确实需要下载缺失
+缓存时再明确提供 `--fetch-cache`，且不删除现有缓存。
+
+这些限制不把“未验证”改为“通过”：无法在增量范围内验证时报告阻塞，
+不跳过失败项、不删除公理审计，也不改变任何数学定理。

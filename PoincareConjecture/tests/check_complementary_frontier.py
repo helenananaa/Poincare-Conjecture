@@ -5,10 +5,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 p = argparse.ArgumentParser()
 p.add_argument('--output', type=Path)
-p.add_argument('--fresh', action='store_true')
-p.add_argument('--base-ref', default='bb91a091f0b968f8bbe8d861e025a88d82b161be',
-               help='Already checked ancestor used for dependency-aware change selection; historical default unchanged')
+p.add_argument('--fresh', action='store_true', help='Fresh main-package build; requires --allow-full-rebuild')
+p.add_argument('--allow-full-rebuild', action='store_true',
+               help='Explicit opt-in to fresh or whole-repository validation; never enable in routine agent batches')
+p.add_argument('--base-ref', required=True,
+               help='Explicit already-checked ancestor for incremental dependency selection; no historical default')
 a = p.parse_args()
+if a.fresh and not a.allow_full_rebuild:
+    p.error('--fresh is disabled for routine validation; explicit --allow-full-rebuild is required')
 r = Path(__file__).resolve().parents[1]
 validation_base = subprocess.check_output(
     ['git','rev-parse','--verify','--end-of-options',a.base_ref+'^{commit}'],cwd=r.parent,text=True).strip()
@@ -66,7 +70,9 @@ for text in [old,new]:
 assert len(closures) == 364,len(closures)
 gate = r.parent/'scripts/validate-lean-changes.sh'
 if gate.exists():
-    run('upstream-validation',['bash',str(gate),validation_base],r.parent)
+    gate_args=['bash',str(gate),validation_base]
+    if a.allow_full_rebuild:gate_args.append('--allow-full-rebuild')
+    run('upstream-validation',gate_args,r.parent)
     run('whitespace',['git','diff','--check'],r.parent)
 assert before == hashes(),'Sources changed during verification'
 report = dict(status='PASS',utc=datetime.now(timezone.utc).isoformat(),lean=version,

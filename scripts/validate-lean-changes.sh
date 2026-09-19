@@ -2,6 +2,19 @@
 # Build changed Lean packages and every local package that depends on them.
 set -euo pipefail
 
+# Resource policy: neither broad rebuilds nor cache downloads are implicit.
+allow_full_rebuild=0
+fetch_cache=0
+declare -a positional=()
+for arg in "$@"; do
+  case "$arg" in
+    --allow-full-rebuild) allow_full_rebuild=1 ;;
+    --fetch-cache) fetch_cache=1 ;;
+    *) positional+=("$arg") ;;
+  esac
+done
+set -- "${positional[@]}"
+
 repo_root=$(git rev-parse --show-toplevel)
 cd "$repo_root"
 
@@ -94,6 +107,12 @@ select_project() {
 }
 
 select_all() {
+  if (( ! allow_full_rebuild )); then
+    echo 'Full-repository validation is disabled by default.' >&2
+    echo 'Use an already-checked incremental base and keep standalone tests in their package.' >&2
+    echo 'Only after explicit approval, add --allow-full-rebuild to request a broad build.' >&2
+    exit 2
+  fi
   local project
   for project in "${project_order[@]}"; do
     selected["$project"]=1
@@ -103,11 +122,14 @@ select_all() {
 usage() {
   cat <<'EOF'
 Usage:
-  scripts/validate-lean-changes.sh --all
-  scripts/validate-lean-changes.sh <base-ref> [<head-ref>]
+  scripts/validate-lean-changes.sh <checked-base-ref> [<head-ref>]
+  scripts/validate-lean-changes.sh --all --allow-full-rebuild
+  Optional: --fetch-cache (off by default; never deletes build artifacts)
 
 With one ref, validates tracked and untracked working-tree changes since that
 ref. With two refs, validates the committed changes between them.
+An implicit whole-repository selection refuses before invoking Lake.
+Normal runs reuse existing caches and execute incremental lake build.
 EOF
 }
 
@@ -191,7 +213,9 @@ for project in "${project_order[@]}"; do
   printf '\n==> Building %s (%s)\n' "$project" "$root"
   (
     cd "$root"
-    lake exe cache get
+    if (( fetch_cache )); then
+      lake exe cache get
+    fi
     lake build
   )
 
