@@ -33,7 +33,6 @@ class FrozenProofTests(unittest.TestCase):
     def test_no_unrelated_unit_can_be_targeted(self):
         self.assertTrue(UNIT_RE.fullmatch('lean-swarm-'+'a'*32+'.service'))
         self.assertFalse(UNIT_RE.fullmatch('grok.service'));self.assertFalse(UNIT_RE.fullmatch('lean-swarm-*'))
-if __name__=='__main__':unittest.main()
 
 class LaunchFailureTests(unittest.TestCase):
     def test_partial_launch_failure_stops_unit_before_releasing_claim(self):
@@ -70,3 +69,48 @@ class LaunchFailureTests(unittest.TestCase):
             with patch('runtime.checked',side_effect=RuntimeError('launch error')),patch('runtime.Path.home',return_value=root),self.assertRaises(RuntimeError):
                 controller.execute(claim)
             store.finish.assert_not_called();self.assertTrue(controller.stop.is_set())
+
+class ArtifactNamespaceTests(unittest.TestCase):
+    def test_full_namespace_seed_and_private_output(self):
+        from tempfile import TemporaryDirectory
+        from pathlib import Path
+        from runtime import seed_artifact_namespace,detach_object_links
+        with TemporaryDirectory() as directory:
+            root=Path(directory);baseline=root/'baseline';artifacts=root/'artifacts'
+            old=baseline/'PoincareConjecture/Existing.olean';old.parent.mkdir(parents=True);old.write_bytes(b'pinned')
+            sibling=baseline/'PoincareConjecture/Sub/Helper.olean';sibling.parent.mkdir();sibling.write_bytes(b'helper')
+            seed_artifact_namespace(artifacts,'PoincareConjecture/New.lean',str(baseline))
+            self.assertFalse((artifacts/'PoincareConjecture').is_symlink())
+            linked=artifacts/'PoincareConjecture/Existing.olean';self.assertTrue(linked.is_symlink())
+            self.assertEqual((artifacts/'PoincareConjecture/Sub/Helper.olean').read_bytes(),b'helper')
+            detach_object_links(linked);linked.write_bytes(b'private replacement')
+            self.assertEqual(old.read_bytes(),b'pinned')
+            seed_artifact_namespace(artifacts,'PoincareConjecture/Other.lean',str(baseline))
+            self.assertEqual(linked.read_bytes(),b'private replacement')
+    def test_artifacts_reject_baseline_changes(self):
+        from tempfile import TemporaryDirectory
+        from pathlib import Path
+        from runtime import seed_artifact_namespace
+        with TemporaryDirectory() as directory:
+            artifacts=Path(directory)/'artifacts'
+            seed_artifact_namespace(artifacts,'tests/A.lean','/a')
+            with self.assertRaises(ValueError):seed_artifact_namespace(artifacts,'tests/B.lean','/b')
+    def test_reverification_preserves_failure_and_rejects_timeout(self):
+        from tempfile import TemporaryDirectory
+        from pathlib import Path
+        import sqlite3,json
+        from state import Store
+        with TemporaryDirectory() as directory:
+            db=Path(directory)/'state.sqlite3';store=Store(db);store.init_project('p',{})
+            one=task();one['id']='a';two=task();two['id']='b';store.add_tasks('p',[one,two])
+            first=store.claim('p','owner');store.finish(first['attempt_id'],'FAILED',{'error':'infrastructure'})
+            result={'verification':{'compile_passed':True},'reverified_without_model':True}
+            store.approve_reverification(first['attempt_id'],result)
+            self.assertEqual(store.list_tasks('p')[0]['status'],'VERIFIED')
+            with sqlite3.connect(db) as connection:
+                prior=connection.execute('SELECT previous_result_json FROM reverification_events').fetchone()[0]
+            self.assertEqual(json.loads(prior),{'error':'infrastructure'})
+            second=store.claim('p','owner');store.finish(second['attempt_id'],'TIMEOUT',{})
+            with self.assertRaises(ValueError):store.approve_reverification(second['attempt_id'],result)
+
+if __name__=='__main__':unittest.main()

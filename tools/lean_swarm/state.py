@@ -633,3 +633,37 @@ class Store:
                 """,
                 (project_id, task_id),
             )
+
+    def approve_reverification(self, attempt_id: str, result: dict[str, Any]) -> None:
+        """Record a trusted successful recheck while preserving the failed event.
+
+        This is not a retry, new model attempt, or approval of a timed-out task.
+        The verifier must recompile the immutable captured source before calling.
+        """
+        self._attempt_id(attempt_id)
+        if not isinstance(result, dict) or not result.get('verification',{}).get('compile_passed'):
+            raise ValueError('successful trusted compilation is required')
+        if not result.get('reverified_without_model'):
+            raise ValueError('reverification provenance is required')
+        encoded=_json(result,'reverification result')
+        with self._transaction() as connection:
+            row=connection.execute('SELECT * FROM attempts WHERE id = ?', (attempt_id,)).fetchone()
+            if row is None: raise KeyError(attempt_id)
+            latest=connection.execute(
+                'SELECT id FROM attempts WHERE project_id=? AND task_id=? ORDER BY started_at DESC,rowid DESC LIMIT 1',
+                (row['project_id'],row['task_id'])).fetchone()
+            task=connection.execute('SELECT status FROM tasks WHERE project_id=? AND task_id=?',
+                                    (row['project_id'],row['task_id'])).fetchone()
+            if row['status']!='FAILED' or task['status']!='FAILED' or latest['id']!=attempt_id:
+                raise ValueError('only the latest FAILED attempt may be reverified')
+            connection.execute('''
+                CREATE TABLE IF NOT EXISTS reverification_events (
+                    event_id TEXT PRIMARY KEY, attempt_id TEXT NOT NULL, recorded_at REAL NOT NULL,
+                    previous_result_json TEXT NOT NULL, result_json TEXT NOT NULL,
+                    FOREIGN KEY (attempt_id) REFERENCES attempts(id))
+            ''')
+            connection.execute('INSERT INTO reverification_events VALUES (?,?,?,?,?)',
+                (str(uuid.uuid4()),attempt_id,time.time(),row['result_json'],encoded))
+            connection.execute("UPDATE attempts SET status='VERIFIED',result_json=? WHERE id=?",(encoded,attempt_id))
+            connection.execute("UPDATE tasks SET status='VERIFIED' WHERE project_id=? AND task_id=?",
+                (row['project_id'],row['task_id']))

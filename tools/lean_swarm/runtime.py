@@ -95,6 +95,51 @@ def parse_axioms(output: str, target: str) -> list[str]:
     return sorted(used)
 
 
+def seed_artifact_namespace(artifacts: Path, relative: str, baseline_path: str) -> None:
+    """Create a complete, file-linked namespace view before writing new objects.
+
+    Lean resolves a module's package directory, not every object independently.
+    A partial first search root can hide the rest of that namespace in the pinned
+    cache. Only files are linked; directories are always private to this attempt.
+    """
+    parts = PurePosixPath(relative).parts
+    namespace = parts[0] if len(parts) > 1 else Path(relative).stem
+    if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*', namespace):
+        raise ValueError('unsupported module namespace')
+    artifacts.mkdir(parents=True, exist_ok=True)
+    marker = artifacts / ('.namespace-' + namespace + '.json')
+    identity = hashlib.sha256(baseline_path.encode()).hexdigest()
+    if marker.exists():
+        if json.loads(marker.read_text())['baseline_path_sha256'] != identity:
+            raise ValueError('artifact namespace is already tied to another baseline')
+        return
+    source = None
+    for root in baseline_path.split(os.pathsep):
+        if root and (Path(root) / namespace).is_dir():
+            source = (Path(root) / namespace).resolve(); break
+    if source is not None:
+        target = artifacts / namespace
+        if target.is_symlink(): raise ValueError('artifact namespace must not alias a source directory')
+        target.mkdir(parents=True, exist_ok=True)
+        for directory, dirs, files in os.walk(source):
+            destination = target / Path(directory).relative_to(source)
+            if destination.is_symlink(): raise ValueError('artifact subdirectory must be private')
+            destination.mkdir(parents=True, exist_ok=True)
+            for name in files:
+                link = destination / name
+                if not link.exists() and not link.is_symlink():
+                    link.symlink_to((Path(directory) / name).resolve())
+    atomic_json(marker, {'namespace':namespace,'baseline_path_sha256':identity,
+                         'source_present':source is not None})
+
+
+def detach_object_links(module: Path) -> None:
+    """Never write a generated object through a link into the pinned cache."""
+    for path in [module, module.with_suffix('.ilean'),
+                 Path(str(module)+'.private'), Path(str(module)+'.server')]:
+        if path.is_symlink(): path.unlink()
+
+
 def process_identity(pid: int) -> str | None:
     try:
         return Path(f'/proc/{pid}/stat').read_text().rsplit(') ', 1)[1].split()[19]
@@ -175,8 +220,9 @@ class Controller:
         return order
 
     def _compile(self, source: Path, artifacts: Path, relative: str, target: str | None=None) -> dict:
-        artifacts.mkdir(parents=True,exist_ok=True)
+        seed_artifact_namespace(artifacts,relative,self.cfg['lean_path'])
         module=artifacts/Path(relative).with_suffix('.olean');module.parent.mkdir(parents=True,exist_ok=True)
+        detach_object_links(module)
         cmd=[self.cfg['lean_bin']+'/lean','-j2','-DmaxHeartbeats=800000','-o',str(module),str(source)]
         output=checked(cmd,cwd=source.parent,env=self._environment(artifacts),timeout=180)
         result={'compile_passed':True,'sha256':hashlib.sha256(source.read_bytes()).hexdigest()}
@@ -294,6 +340,43 @@ class Controller:
                 self.stop.set();raise RuntimeError('containment uncertain; RUNNING claim retained for recovery')
         print(json.dumps({'task':claim['task_id'],'status':status,'elapsed':result.get('elapsed_seconds'),
             'error':result.get('error')},ensure_ascii=False),flush=True)
+
+    def reverify(self, task_id: str) -> dict:
+        """Recheck an immutable captured submission after an infrastructure fix.
+
+        The original FAILED result and its event are retained. TIMEOUT candidates
+        cannot be promoted with this operation. No model is called.
+        """
+        row=next(t for t in self.store.list_tasks(self.project) if t['id']==task_id)
+        if row['status']!='FAILED':raise ValueError('reverify only accepts a FAILED task')
+        attempt=next(a for a in self.store.list_attempts(self.project) if a['id']==row['attempt_id'])
+        metadata=attempt['metadata'];folder=Path(metadata['folder'])
+        self._stop_unit(metadata['unit'])
+        result=attempt['result'];capture=result.get('capture',{})
+        frozen=folder/'frozen.lean'
+        if not capture.get('candidate_present') or not frozen.exists():
+            raise ValueError('no captured submission to reverify')
+        if hashlib.sha256(frozen.read_bytes()).hexdigest()!=capture.get('sha256'):
+            raise ValueError('captured source no longer matches its original hash')
+        task=row['payload'];prepared=json.loads((folder/'prepared.json').read_text())
+        output=folder/('reverification-'+uuid.uuid4().hex);source=output/'source'/task['target_path']
+        source.parent.mkdir(parents=True,exist_ok=True)
+        source.write_text(reconstruct(task['source'],frozen.read_text()))
+        artifacts=output/'artifacts'
+        for dep in prepared['dependencies']:
+            rel=self.cfg['package_dir']+'/'+dep['target_path']
+            data=subprocess.check_output(['git','-C',str(self.repo),'show',prepared['base_commit']+':'+rel])
+            parent=output/'source'/dep['target_path'];parent.parent.mkdir(parents=True,exist_ok=True)
+            parent.write_bytes(data);self._compile(parent,artifacts,dep['target_path'],dep['target_name'])
+        verification=self._compile(source,artifacts,task['target_path'],task['target_name'])
+        updated=dict(result,verification=verification,verified_source=str(source),
+                     reverified_without_model=True,original_failure=result,
+                     reverification_reason='Trusted verifier infrastructure repair; frozen submission unchanged')
+        updated.pop('error',None)
+        atomic_json(output/'report.json',updated)
+        self.store.approve_reverification(attempt['id'],updated)
+        print('REVERIFIED_FROZEN_SUBMISSION',task_id,flush=True)
+        return updated
 
     def integrate(self, task_id: str) -> str:
         with file_lock(self.gitlock):
