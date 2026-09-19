@@ -1,0 +1,130 @@
+[
+  {
+    "id": "halfspace-range",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- The fixed model has exactly the geometric half-space, with its usual interior/frontier. -/\ntheorem halfSpaceModel_range_geometry {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V] :\n    range (halfSpaceModel V) = {z : V × ℝ | 0 ≤ z.2} ∧\n    interior (range (halfSpaceModel V)) = {z : V × ℝ | 0 < z.2} ∧\n    frontier (range (halfSpaceModel V)) = {z : V × ℝ | z.2 = 0} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.halfSpaceModel_range_geometry",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/HalfSpaceRange.lean",
+    "hint": "Unfold only as needed: forward map is Subtype.val, range is univ × Ici 0. Use product interior/closure and real interval geometry. This lemma identifies the shared model for ALL points; clamping outside the range must never be claimed smooth.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "translate-chart",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Translation of ambient coordinates preserves the original smooth atlas. -/\ntheorem translated_chart_mem_maximalAtlas\n    {E N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n    [TopologicalSpace N] [ChartedSpace E N] [IsManifold (𝓘(ℝ, E)) ∞ N]\n    (a : OpenPartialHomeomorph N E)\n    (ha : a ∈ IsManifold.maximalAtlas (𝓘(ℝ, E)) ∞ N) (v : E) :\n    a.trans (Homeomorph.addRight v).toOpenPartialHomeomorph ∈\n      IsManifold.maximalAtlas (𝓘(ℝ, E)) ∞ N :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.translated_chart_mem_maximalAtlas",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/TranslateChart.lean",
+    "hint": "Use mem_maximalAtlas_of_contMDiffOn. Translation and its inverse are globally ContDiff hence ContMDiff. Compose on the exact partial source/target. Use a.contMDiffOn from maximalAtlas membership. Do not change the ambient charted structure.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "interior-model",
+    "model": "grok",
+    "depends_on": [
+      "translate-chart"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.TranslateChart\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Every interior point admits a smooth local set model for the SAME corners model as the boundary. -/\ntheorem interior_point_has_ambient_model\n    {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n    [TopologicalSpace H] [TopologicalSpace N] [ChartedSpace E N]\n    [IsManifold (𝓘(ℝ, E)) ∞ N] (I : ModelWithCorners ℝ E H)\n    {K : Set N} {p : N} (hp : p ∈ interior K) :\n    ∃ e : OpenPartialHomeomorph N E,\n      p ∈ e.source ∧ e ∈ IsManifold.maximalAtlas (𝓘(ℝ, E)) ∞ N ∧\n      e.IsImage K (range I) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.interior_point_has_ambient_model",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/InteriorModel.lean",
+    "hint": "Choose v in interior(range I), translate chartAt E p by v-chartAt E p p using the integrated translated-chart lemma. Restrict its source to interior K and the preimage of interior(range I). This restricted neighborhood contains p and is open by OpenPartialHomeomorph.isOpen_inter_preimage. Both sides of IsImage hold everywhere on the restricted source. Use StructureGroupoid.restr_mem_maximalAtlas for the open restriction. A local target does NOT need to be the entire half-space.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "restrict-collar",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- The normalized restriction of an actual full open collar is an open embedding onto its target. -/\ntheorem collarRestriction_isOpenEmbedding\n    {X N : Type*} [TopologicalSpace X] [TopologicalSpace N]\n    (F : OpenPartialHomeomorph (X × ℝ) N)\n    (hsource : F.source = (univ : Set X) ×ˢ Ioo (-1 : ℝ) 1) :\n    Topology.IsOpenEmbedding (collarRestriction F) ∧ range (collarRestriction F) = F.target :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.collarRestriction_isOpenEmbedding",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/Restriction.lean",
+    "hint": "Use F.isOpenEmbedding_restrict on its source, composed with the explicit homeomorphism X × NeckParameter -> F.source. Mathlib has Homeomorph.Set.prod, subtype-product homeomorphisms, and Homeomorph.setCongr. Alternatively construct the explicit homeomorphism with correct induced topologies. Surjectivity onto F.target follows from F.symm, map_target and right_inv. The statement must also work for empty X; avoid introducing a Nonempty assumption.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "product-chart-smooth",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Cross-section chart times the real coordinate is smooth with smooth inverse,\nusing a vector-space product target rather than silently identifying model type tags. -/\ntheorem product_chart_contMDiffOn {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    {X : Type*} [TopologicalSpace X] [ChartedSpace V X]\n    [IsManifold (𝓘(ℝ, V)) ∞ X]\n    (a : OpenPartialHomeomorph X V)\n    (ha : a ∈ IsManifold.maximalAtlas (𝓘(ℝ, V)) ∞ X) :\n    let b := a.prod (Homeomorph.refl ℝ).toOpenPartialHomeomorph\n    ContMDiffOn ((𝓘(ℝ, V)).prod (𝓘(ℝ, ℝ))) (𝓘(ℝ, V × ℝ)) ∞ b b.source ∧\n    ContMDiffOn (𝓘(ℝ, V × ℝ)) ((𝓘(ℝ, V)).prod (𝓘(ℝ, ℝ))) ∞ b.symm b.target :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.product_chart_contMDiffOn",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ProductChartSmooth.lean",
+    "hint": "From ha get smoothness of a and a.symm. Compose each with projections, using correct source sets. Forward pair uses ContMDiffOn.prodMk_space into the vector-space model; inverse pair uses ContMDiffOn.prodMk into the product manifold. On the vector-space domain the projections are ContDiff hence ContMDiff. Do NOT change existing model structures or hide type-tag mismatches with new instances.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "collar-coordinates-smooth",
+    "model": "grok",
+    "depends_on": [
+      "product-chart-smooth"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.ProductChartSmooth\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Actual smooth collar coordinates belong to the ambient smooth maximal atlas. -/\ntheorem collarCoordinates_mem_maximalAtlas {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    {X N : Type*} [TopologicalSpace X] [TopologicalSpace N]\n    [ChartedSpace V X] [ChartedSpace (V × ℝ) N]\n    [IsManifold (𝓘(ℝ, V)) ∞ X] [IsManifold (𝓘(ℝ, V × ℝ)) ∞ N]\n    (Φ : PartialDiffeomorph ((𝓘(ℝ, V)).prod (𝓘(ℝ, ℝ)))\n      (𝓘(ℝ, V × ℝ)) (X × ℝ) N ∞)\n    (a : OpenPartialHomeomorph X V)\n    (ha : a ∈ IsManifold.maximalAtlas (𝓘(ℝ, V)) ∞ X) :\n    collarCoordinates Φ.toOpenPartialHomeomorph a ∈\n      IsManifold.maximalAtlas (𝓘(ℝ, V × ℝ)) ∞ N :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.collarCoordinates_mem_maximalAtlas",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/CoordinatesSmooth.lean",
+    "hint": "Compose the supplied partial diffeomorphism inverse with the integrated product-chart forward map; compose the product-chart inverse with Φ for the inverse direction. Use exact trans_source/trans_target and MapsTo. Then mem_maximalAtlas_of_contMDiffOn. No source-strip assumption is needed for smoothness itself.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "collar-coordinates-geometry",
+    "model": "grok",
+    "depends_on": [
+      "restrict-collar",
+      "halfspace-range"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Restriction\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.HalfSpaceRange\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Exact zero-contact collar coordinates straighten the actual complementary closure. -/\ntheorem collarCoordinates_component_geometry {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    {X N : Type*} [TopologicalSpace X] [TopologicalSpace N] [PreconnectedSpace X]\n    (F : OpenPartialHomeomorph (X × ℝ) N)\n    (hsource : F.source = (univ : Set X) ×ˢ Ioo (-1 : ℝ) 1)\n    {C : Set N} (hside : ∀ z ∈ F.source, F z ∈ C ↔ z.2 ≤ 0)\n    {p : N} {x : X} (hx : F (x, 0) ∈ frontier (connectedComponentIn Cᶜ p))\n    (a : OpenPartialHomeomorph X V) :\n    (∀ z : X × NeckParameter, z.1 ∈ a.source →\n      collarRestriction F z ∈ (collarCoordinates F a).source ∧\n      collarCoordinates F a (collarRestriction F z) = (a z.1, (z.2 : ℝ))) ∧\n    (collarCoordinates F a).IsImage (closure (connectedComponentIn Cᶜ p))\n      (range (halfSpaceModel V)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.collarCoordinates_component_geometry",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/CoordinatesGeometry.lean",
+    "hint": "Use integrated collarRestriction_isOpenEmbedding and halfSpaceModel_range_geometry. The restricted side hypothesis is inherited from hsource. Apply existing oneSidedCollar_mem_closure_component_iff_nonneg to the restriction. For y in the coordinate source, z=F.symm y is in the strip; represent it as X × NeckParameter, use F.right_inv and the explicit coordinate formula. For forward coordinates use F.left_inv on the strip. The target map is the DEFINED collarCoordinates, not an arbitrary existential homeomorphism.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "boundary-local-model",
+    "model": "grok",
+    "depends_on": [
+      "collar-coordinates-smooth",
+      "collar-coordinates-geometry"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.CoordinatesSmooth\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.CoordinatesGeometry\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- A genuine smooth full collar supplies the exact ambient smooth model at a contacted center. -/\ntheorem smoothCollar_center_has_ambient_model {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    {X N : Type*} [TopologicalSpace X] [TopologicalSpace N]\n    [ChartedSpace V X] [ChartedSpace (V × ℝ) N]\n    [IsManifold (𝓘(ℝ, V)) ∞ X] [IsManifold (𝓘(ℝ, V × ℝ)) ∞ N] [PreconnectedSpace X]\n    (Φ : PartialDiffeomorph ((𝓘(ℝ, V)).prod (𝓘(ℝ, ℝ)))\n      (𝓘(ℝ, V × ℝ)) (X × ℝ) N ∞)\n    (hsource : Φ.source = (univ : Set X) ×ˢ Ioo (-1 : ℝ) 1)\n    {C : Set N} (hside : ∀ z ∈ Φ.source, Φ z ∈ C ↔ z.2 ≤ 0)\n    {p : N} {x : X} (hx : Φ (x, 0) ∈ frontier (connectedComponentIn Cᶜ p)) :\n    ∃ e : OpenPartialHomeomorph N (V × ℝ),\n      Φ (x, 0) ∈ e.source ∧\n      e ∈ IsManifold.maximalAtlas (𝓘(ℝ, V × ℝ)) ∞ N ∧\n      e.IsImage (closure (connectedComponentIn Cᶜ p)) (range (halfSpaceModel V)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.smoothCollar_center_has_ambient_model",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/BoundaryModel.lean",
+    "hint": "Choose a = chartAt V x and e = collarCoordinates Φ.toOpenPartialHomeomorph a. Combine integrated geometry and smoothness. The center is the actual point Φ(x,0); its source membership must be proved, not assumed. This closes the formerly missing smooth-compatibility bridge for a supplied genuine smooth collar.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "regular-open-cover",
+    "model": "grok",
+    "depends_on": [
+      "restrict-collar"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Restriction\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.CollarClosureFrontier\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Full smooth collars covering the actual frontier force regular openness of the complement. -/\ntheorem smoothCollar_cover_regularOpen {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    {X N : Type*} [TopologicalSpace X] [TopologicalSpace N]\n    [ChartedSpace V X] [ChartedSpace (V × ℝ) N]\n    [IsManifold (𝓘(ℝ, V)) ∞ X] [IsManifold (𝓘(ℝ, V × ℝ)) ∞ N] [PreconnectedSpace X] [LocallyConnectedSpace N]\n    {C : Set N} (hC : IsClosed C) {p : N}\n    (hcover : ∀ y ∈ frontier (connectedComponentIn Cᶜ p),\n      ∃ Φ : PartialDiffeomorph ((𝓘(ℝ, V)).prod (𝓘(ℝ, ℝ)))\n          (𝓘(ℝ, V × ℝ)) (X × ℝ) N ∞,\n        Φ.source = (univ : Set X) ×ˢ Ioo (-1 : ℝ) 1 ∧\n        (∀ z ∈ Φ.source, Φ z ∈ C ↔ z.2 ≤ 0) ∧ ∃ x : X, Φ (x, 0) = y) :\n    frontier (closure (connectedComponentIn Cᶜ p)) = frontier (connectedComponentIn Cᶜ p) ∧\n    connectedComponentIn Cᶜ p = interior (closure (connectedComponentIn Cᶜ p)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.smoothCollar_cover_regularOpen",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/RegularOpenCover.lean",
+    "hint": "Use collarRestriction_isOpenEmbedding to convert each Φ into an actual normalized collar. The existing DomainAtlas.oneSidedCollar_center_mem_frontier_closure works for any preconnected X. Derive frontier D subset frontier(closure D) by covering; reverse inclusion is frontier_closure_subset. Closed C makes component D open via LocallyConnectedSpace. Use regularOpen_of_frontier_closure_eq. Note no p-outside-C assumption is needed; the empty component is handled correctly.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "boundary-to-global",
+    "model": "grok",
+    "depends_on": [
+      "interior-model"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.InteriorModel\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Smooth models at boundary points suffice: interior models are constructed, not assumed. -/\ntheorem exists_smoothClosedDomain_of_boundary_models\n    {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n    [TopologicalSpace H] [TopologicalSpace N] [ChartedSpace E N]\n    [IsManifold (𝓘(ℝ, E)) ∞ N] (I : ModelWithCorners ℝ E H)\n    {K : Set N} (hK : IsClosed K)\n    (hboundary : ∀ y ∈ frontier K, ∃ e : OpenPartialHomeomorph N E,\n      y ∈ e.source ∧ e ∈ IsManifold.maximalAtlas (𝓘(ℝ, E)) ∞ N ∧ e.IsImage K (range I)) :\n    ∃ cs : ChartedSpace H K,\n      letI : ChartedSpace H K := cs\n      IsManifold I ∞ K ∧ IsSmoothEmbedding I (𝓘(ℝ, E)) ∞ (Subtype.val : K → N) ∧\n      HasAmbientModelCharts I K ∧ (Subtype.val : K → N) '' I.boundary K = frontier K :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_smoothClosedDomain_of_boundary_models",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/BoundaryToGlobal.lean",
+    "hint": "Apply DomainAtlas.exists_smoothClosedDomain_structure. For each p:K split p.val ∈ interior K; use integrated interior_point_has_ambient_model. Otherwise p is in frontier K because K is closed. Use hboundary. Do not assume smooth structure on K as input.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "smooth-complement-closure",
+    "model": "grok",
+    "depends_on": [
+      "boundary-local-model",
+      "regular-open-cover",
+      "boundary-to-global"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.BoundaryModel\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.RegularOpenCover\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.BoundaryToGlobal\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Construct the actual complementary closure as a smooth domain from a covering\nof its frontier by genuine smooth one-sided full collars. No closure atlas or\nambient local-set-model assumption is supplied separately. -/\ntheorem exists_smoothClosure_of_smoothCollar_cover {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    {X N : Type*} [TopologicalSpace X] [TopologicalSpace N]\n    [ChartedSpace V X] [ChartedSpace (V × ℝ) N]\n    [IsManifold (𝓘(ℝ, V)) ∞ X] [IsManifold (𝓘(ℝ, V × ℝ)) ∞ N] [PreconnectedSpace X] [LocallyConnectedSpace N]\n    {C : Set N} (hC : IsClosed C) {p : N}\n    (hcover : ∀ y ∈ frontier (connectedComponentIn Cᶜ p),\n      ∃ Φ : PartialDiffeomorph ((𝓘(ℝ, V)).prod (𝓘(ℝ, ℝ)))\n          (𝓘(ℝ, V × ℝ)) (X × ℝ) N ∞,\n        Φ.source = (univ : Set X) ×ˢ Ioo (-1 : ℝ) 1 ∧\n        (∀ z ∈ Φ.source, Φ z ∈ C ↔ z.2 ≤ 0) ∧ ∃ x : X, Φ (x, 0) = y) :\n    ∃ cs : ChartedSpace (HalfSpace V) (closure (connectedComponentIn Cᶜ p)),\n      letI : ChartedSpace (HalfSpace V) (closure (connectedComponentIn Cᶜ p)) := cs\n      IsManifold (halfSpaceModel V) ∞ (closure (connectedComponentIn Cᶜ p)) ∧\n      IsSmoothEmbedding (halfSpaceModel V) (𝓘(ℝ, V × ℝ)) ∞\n        (Subtype.val : closure (connectedComponentIn Cᶜ p) → N) ∧\n      (Subtype.val : closure (connectedComponentIn Cᶜ p) → N) ''\n        (halfSpaceModel V).boundary (closure (connectedComponentIn Cᶜ p)) =\n          frontier (connectedComponentIn Cᶜ p) ∧\n      connectedComponentIn Cᶜ p = interior (closure (connectedComponentIn Cᶜ p)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_smoothClosure_of_smoothCollar_cover",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ComplementClosure.lean",
+    "hint": "Combine smoothCollar_cover_regularOpen, smoothCollar_center_has_ambient_model and exists_smoothClosedDomain_of_boundary_models. Build boundary models at frontier(closure D) using the derived frontier equality and hcover; then construct cs and transport the intrinsic-boundary equality from frontier(closure D) to frontier D. Preserve all original ambient and cross-section structures. This theorem MUST NOT claim construction of the supplied smooth collars themselves.",
+    "timeout_seconds": 900
+  }
+]
