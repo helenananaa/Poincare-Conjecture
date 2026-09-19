@@ -77,3 +77,10 @@ python3 -m unittest discover -s tools/lean_swarm -p 'test_*.py' -v
 每次尝试新增准备、服务启动、停止、验证完成时间；集成记录等待锁和结束时间。用户级 state/telemetry 中保留队列采样，区分 worker 数、依赖阻塞与资源门。`jobs=12` 只是预算，不能当作实际达到 12 个模型并发的证据。
 
 所有有限批次完成后退出，不建立跨对话持续派单服务。
+
+只读查看所有批次的就绪任务、依赖阻塞和阶段：
+```bash
+python3 tools/lean_swarm/status_report.py
+python3 tools/lean_swarm/status_report.py --project poincare-neck-inputs-parallel-20260919
+```
+报告明确区分槽位占用、agent 阶段与验证阶段；不把未接入注册表的外部会话自动算入。
