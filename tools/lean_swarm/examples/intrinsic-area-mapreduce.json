@@ -1,0 +1,279 @@
+[
+  {
+    "id": "extended-infimum",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Positive finite constants commute with infima, including an empty admissible family. -/\ntheorem ennreal_infimum_twoSided {A : Type*} (f g : A → ℝ≥0∞)\n    (l u : ℝ≥0∞) (hl0 : l ≠ 0) (hlt : l ≠ ⊤) (hu0 : u ≠ 0) (hut : u ≠ ⊤)\n    (h : ∀ a, l * f a ≤ g a ∧ g a ≤ u * f a) :\n    l * (⨅ a, f a) ≤ (⨅ a, g a) ∧ (⨅ a, g a) ≤ u * (⨅ a, f a) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.ennreal_infimum_twoSided",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/ExtendedInfimum.lean",
+    "hint": "Use ENNReal.mul_iInf_of_ne and iInf_mono. No Nonempty A is allowed: the empty path class must retain value infinity rather than the real-valued infimum convention.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of intrinsic-distance. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 5,
+    "math_line": "intrinsic-distance"
+  },
+  {
+    "id": "extended-balls",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Extended-distance comparisons give explicit ball inclusions without finiteness of distances. -/\ntheorem extended_distance_ball_sandwich {X : Type*} (d0 d1 : X → X → ℝ≥0∞)\n    (l u : ℝ≥0∞) (hl0 : l ≠ 0) (hlt : l ≠ ⊤) (hu0 : u ≠ 0) (hut : u ≠ ⊤)\n    (h : ∀ x y, l * d0 x y ≤ d1 x y ∧ d1 x y ≤ u * d0 x y)\n    (x : X) (r : ℝ≥0∞) :\n    {y | d0 x y < r/u} ⊆ {y | d1 x y < r} ∧\n    {y | d1 x y < r} ⊆ {y | d0 x y < r/l} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.extended_distance_ball_sandwich",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/ExtendedBalls.lean",
+    "hint": "Use the exact ENNReal strict-inequality/division equivalences with positive finite denominators. Preserve r=0, r=infinity, and infinite distances; do not convert to Real.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of intrinsic-distance. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "intrinsic-distance"
+  },
+  {
+    "id": "epsilon-path-integrals",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport MorganTianLib.Ch03.RicciFlow.DistanceVariation\nimport ReferenceBridges.Quantitative.EpsilonSpeedComparison\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport.Reference\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [MetricSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M] [I.Boundaryless]\n\n/-- **Math.** Actual epsilon-close metrics compare actual Riemannian path integrals; no finite-length assumption. -/\ntheorem epsilonClose_path_integral_twoSided {epsilon : ℝ}\n    (g0 g : Riemannian.RiemannianMetric I M) (h : MorganTianLib.EpsilonClose epsilon g0 g)\n    {x y : M} (gamma : Path x y) :\n    ENNReal.ofReal (Real.sqrt (1-epsilon)) * MorganTianLib.metricPathIntegral g0 gamma ≤\n      MorganTianLib.metricPathIntegral g gamma ∧\n    MorganTianLib.metricPathIntegral g gamma ≤\n      ENNReal.ofReal (Real.sqrt (1+epsilon)) * MorganTianLib.metricPathIntegral g0 gamma :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_path_integral_twoSided",
+    "target_path": "ReferenceBridges/Transport/EpsilonPathIntegrals.lean",
+    "hint": "Use the integrated epsilonClose_speed_comparison at (gamma t) and (mfderiv% gamma t 1). Pass the two inequalities through ENNReal.ofReal and the actual lintegral definition of metricPathIntegral. Pull finite constants through lintegral_const_mul'. No target length-comparison hypothesis may be added.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of intrinsic-distance. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "intrinsic-distance"
+  },
+  {
+    "id": "epsilon-intrinsic-distance",
+    "model": "grok",
+    "depends_on": [
+      "extended-infimum",
+      "epsilon-path-integrals"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport MorganTianLib.Ch03.RicciFlow.DistanceVariation\nimport ReferenceBridges.Quantitative.EpsilonSpeedComparison\nimport PoincareConjecture.ParallelMath.Transport.ExtendedInfimum\nimport ReferenceBridges.Transport.EpsilonPathIntegrals\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport.Reference\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [MetricSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M] [I.Boundaryless]\n\n/-- **Math.** Pointwise metric closeness controls the actual C1-path infimum, not an assumed distance comparison. -/\ntheorem epsilonClose_intrinsic_edist_twoSided {epsilon : ℝ}\n    (g0 g : Riemannian.RiemannianMetric I M) (h : MorganTianLib.EpsilonClose epsilon g0 g)\n    (x y : M) :\n    ENNReal.ofReal (Real.sqrt (1-epsilon)) * MorganTianLib.metricIntrinsicEDist g0 x y ≤\n      MorganTianLib.metricIntrinsicEDist g x y ∧\n    MorganTianLib.metricIntrinsicEDist g x y ≤\n      ENNReal.ofReal (Real.sqrt (1+epsilon)) * MorganTianLib.metricIntrinsicEDist g0 x y :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_intrinsic_edist_twoSided",
+    "target_path": "ReferenceBridges/Transport/EpsilonIntrinsicDistance.lean",
+    "hint": "Apply the new extended infimum lemma to the actual path family and its C1 proof index, using the new path-integral comparison. EpsilonClose gives 0<epsilon<1/2, so both square-root factors are positive finite. Do not assume existence of minimizing paths or finite distance.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of intrinsic-distance. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "intrinsic-distance"
+  },
+  {
+    "id": "epsilon-admissible-paths",
+    "model": "grok",
+    "depends_on": [
+      "extended-infimum",
+      "epsilon-path-integrals"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport MorganTianLib.Ch03.RicciFlow.DistanceVariation\nimport ReferenceBridges.Quantitative.EpsilonSpeedComparison\nimport PoincareConjecture.ParallelMath.Transport.ExtendedInfimum\nimport ReferenceBridges.Transport.EpsilonPathIntegrals\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport.Reference\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [MetricSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M] [I.Boundaryless]\n\n/-- **Math.** The same estimate holds for any fixed admissible path class, including an empty class. -/\ntheorem epsilonClose_admissible_path_infimum {epsilon : ℝ}\n    (g0 g : Riemannian.RiemannianMetric I M) (h : MorganTianLib.EpsilonClose epsilon g0 g)\n    {x y : M} (admissible : Path x y → Prop) :\n    ENNReal.ofReal (Real.sqrt (1-epsilon)) *\n        (⨅ gamma : {p : Path x y // admissible p}, MorganTianLib.metricPathIntegral g0 gamma.1) ≤\n      (⨅ gamma : {p : Path x y // admissible p}, MorganTianLib.metricPathIntegral g gamma.1) ∧\n    (⨅ gamma : {p : Path x y // admissible p}, MorganTianLib.metricPathIntegral g gamma.1) ≤\n      ENNReal.ofReal (Real.sqrt (1+epsilon)) *\n        (⨅ gamma : {p : Path x y // admissible p}, MorganTianLib.metricPathIntegral g0 gamma.1) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_admissible_path_infimum",
+    "target_path": "ReferenceBridges/Transport/EpsilonAdmissiblePaths.lean",
+    "hint": "Use the new infimum result on the subtype of admissible paths. This allows a fixed homotopy class or obstacle constraint without assuming it is nonempty. The class is unchanged when the metric changes; no equality between distinct path classes is assumed.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of intrinsic-distance. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "intrinsic-distance"
+  },
+  {
+    "id": "epsilon-ball-reduce",
+    "model": "grok",
+    "depends_on": [
+      "epsilon-intrinsic-distance",
+      "extended-balls"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport MorganTianLib.Ch03.RicciFlow.DistanceVariation\nimport ReferenceBridges.Quantitative.EpsilonSpeedComparison\nimport PoincareConjecture.ParallelMath.Transport.ExtendedBalls\nimport ReferenceBridges.Transport.EpsilonIntrinsicDistance\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport.Reference\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [MetricSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M] [I.Boundaryless]\n\n/-- **Math.** Intrinsic balls for the two actual metrics satisfy the sharp square-root radius inclusions. -/\ntheorem epsilonClose_intrinsic_ball_sandwich {epsilon : ℝ}\n    (g0 g : Riemannian.RiemannianMetric I M) (h : MorganTianLib.EpsilonClose epsilon g0 g)\n    (x : M) (r : ℝ≥0∞) :\n    {y | MorganTianLib.metricIntrinsicEDist g0 x y < r / ENNReal.ofReal (Real.sqrt (1+epsilon))} ⊆\n      {y | MorganTianLib.metricIntrinsicEDist g x y < r} ∧\n    {y | MorganTianLib.metricIntrinsicEDist g x y < r} ⊆\n      {y | MorganTianLib.metricIntrinsicEDist g0 x y < r / ENNReal.ofReal (Real.sqrt (1-epsilon))} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_intrinsic_ball_sandwich",
+    "target_path": "ReferenceBridges/Transport/EpsilonBalls.lean",
+    "hint": "Combine the new actual intrinsic-distance bound and extended-distance ball lemma, deriving positive finite constants from EpsilonClose. Do not replace the intrinsic metric with a preexisting unrelated MetricSpace distance.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of intrinsic-distance. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "intrinsic-distance"
+  },
+  {
+    "id": "psd-mixed",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** The mixed determinant term of two positive-semidefinite 2 by 2 forms is nonnegative. -/\ntheorem psd2_mixed_determinant_nonneg (a b c d e f : ℝ)\n    (ha : 0 ≤ a) (hc : 0 ≤ c) (hd : 0 ≤ d) (hf : 0 ≤ f)\n    (hb : b^2 ≤ a*c) (he : e^2 ≤ d*f) :\n    0 ≤ a*f + c*d - 2*b*e :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.psd2_mixed_determinant_nonneg",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/PSDMixed.lean",
+    "hint": "Let A=a*f and B=c*d. Both are nonnegative; (b*e)^2≤A*B by multiplying the determinant hypotheses; (A+B)^2≥4*A*B by a square. Split on b*e≤0, otherwise compare squares to obtain 2*b*e≤A+B. No strict positivity, division by pivots, or nonsingularity is allowed.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of degenerate-area. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_line": "degenerate-area"
+  },
+  {
+    "id": "psd-det-monotone",
+    "model": "grok",
+    "depends_on": [
+      "psd-mixed"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport PoincareConjecture.ParallelMath.Transport.PSDMixed\nimport PoincareConjecture.ParallelMath.Variational.QuadraticDiscriminant\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Loewner order on positive-semidefinite 2 by 2 forms implies determinant order, even if singular. -/\ntheorem psd2_determinant_monotone (a b c d e f : ℝ)\n    (hA : ∀ s t : ℝ, 0 ≤ a*s^2 + 2*b*s*t + c*t^2)\n    (hAB : ∀ s t : ℝ, a*s^2 + 2*b*s*t + c*t^2 ≤ d*s^2 + 2*e*s*t + f*t^2) :\n    a*c-b^2 ≤ d*f-e^2 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.psd2_determinant_monotone",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/PSDDetMonotone.lean",
+    "hint": "Apply the existing quadratic_nonneg_det to A and B-A. The new psd2_mixed_determinant_nonneg bounds the mixed term of A and B-A. Expand det(B)=det(A)+det(B-A)+mixed. No positive determinant hypothesis.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of degenerate-area. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "degenerate-area"
+  },
+  {
+    "id": "relative-gram-area",
+    "model": "grok",
+    "depends_on": [
+      "psd-det-monotone"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport PoincareConjecture.ParallelMath.Transport.PSDDetMonotone\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Quadratic-form distortion gives relative Gram area distortion without any reference orthonormality. -/\ntheorem relative_gram_area_distortion (a0 b0 c0 a b c epsilon : ℝ)\n    (he0 : 0 ≤ epsilon) (he1 : epsilon < 1)\n    (h0 : ∀ s t : ℝ, 0 ≤ a0*s^2 + 2*b0*s*t + c0*t^2)\n    (h : ∀ s t : ℝ,\n      (1-epsilon)*(a0*s^2+2*b0*s*t+c0*t^2) ≤ a*s^2+2*b*s*t+c*t^2 ∧\n      a*s^2+2*b*s*t+c*t^2 ≤ (1+epsilon)*(a0*s^2+2*b0*s*t+c0*t^2)) :\n    (1-epsilon)*Real.sqrt (a0*c0-b0^2) ≤ Real.sqrt (a*c-b^2) ∧\n      Real.sqrt (a*c-b^2) ≤ (1+epsilon)*Real.sqrt (a0*c0-b0^2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.relative_gram_area_distortion",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/RelativeGramArea.lean",
+    "hint": "Apply determinant monotonicity to (1-epsilon)A0≤A and A≤(1+epsilon)A0. The scaled determinants are squared constants times det(A0). Use nonnegativity from quadratic_nonneg_det and square-root identities. This proof must also cover det(A0)=0; do not divide by a0 or det(A0).\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of degenerate-area. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "degenerate-area"
+  },
+  {
+    "id": "dominated-integrability",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport PoincareConjecture.ParallelMath.Variational.IntegralJacobian\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Finite reference area and measurability suffice; target integrability is derived, not assumed. -/\ntheorem integrable_twoSided_from_reference {Omega : Type*} [MeasurableSpace Omega]\n    (mu : Measure Omega) (f g : Omega → ℝ) (hf : Integrable f mu)\n    (hg : AEStronglyMeasurable g mu) (l u : ℝ) (hl : 0 ≤ l) (hlu : l ≤ u)\n    (hn : ∀ᵐ x ∂mu, 0 ≤ f x)\n    (h : ∀ᵐ x ∂mu, l*f x ≤ g x ∧ g x ≤ u*f x) :\n    Integrable g mu ∧ l*(∫ x, f x ∂mu) ≤ ∫ x, g x ∂mu ∧\n      (∫ x, g x ∂mu) ≤ u*(∫ x, f x ∂mu) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.integrable_twoSided_from_reference",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/DominatedIntegrability.lean",
+    "hint": "Derive 0≤g and |g|≤u*f almost everywhere, then integrability by domination from hf.const_mul u and hg. Apply the previously proved integral_twoSided_distortion. Keep only target measurability, never add Integrable g as an assumption.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of degenerate-area. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "degenerate-area"
+  },
+  {
+    "id": "epsilon-arbitrary-pair",
+    "model": "grok",
+    "depends_on": [
+      "relative-gram-area"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport ReferenceBridges.Quantitative.EpsilonMetricComparison\nimport MorganTianLib.Ch02.EpsilonClose\nimport PoincareConjecture.ParallelMath.Transport.RelativeGramArea\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport.Reference\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** The actual metric controls the area of arbitrary tangent pairs, including rank-deficient pairs. -/\ntheorem epsilonClose_arbitrary_pair_area {epsilon : ℝ}\n    (g0 g : Riemannian.RiemannianMetric I M) (h : MorganTianLib.EpsilonClose epsilon g0 g)\n    (p : M) (v w : TangentSpace I p) :\n    (1-epsilon)*Real.sqrt (g0.metricInner p v v*g0.metricInner p w w-(g0.metricInner p v w)^2) ≤\n      Real.sqrt (g.metricInner p v v*g.metricInner p w w-(g.metricInner p v w)^2) ∧\n    Real.sqrt (g.metricInner p v v*g.metricInner p w w-(g.metricInner p v w)^2) ≤\n      (1+epsilon)*Real.sqrt (g0.metricInner p v v*g0.metricInner p w w-(g0.metricInner p v w)^2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_arbitrary_pair_area",
+    "target_path": "ReferenceBridges/Transport/EpsilonArbitraryPair.lean",
+    "hint": "Expand each metric on s•v+t•w using metricInner_add_left/right, smul laws and symmetry. Apply the new relative Gram-area result to the actual 2 by 2 Gram matrices using the checked epsilonClose_metric_comparison. No orthonormality, independence or immersion hypothesis may be added.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of degenerate-area. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "degenerate-area"
+  },
+  {
+    "id": "epsilon-integrated-area",
+    "model": "grok",
+    "depends_on": [
+      "epsilon-arbitrary-pair",
+      "dominated-integrability"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport ReferenceBridges.Quantitative.EpsilonMetricComparison\nimport MorganTianLib.Ch02.EpsilonClose\nimport ReferenceBridges.Transport.EpsilonArbitraryPair\nimport PoincareConjecture.ParallelMath.Transport.DominatedIntegrability\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport.Reference\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Actual metric closeness transfers finite parametrized area, without requiring target integrability separately. -/\ntheorem epsilonClose_integrated_pair_area {epsilon : ℝ}\n    (g0 g : Riemannian.RiemannianMetric I M) (h : MorganTianLib.EpsilonClose epsilon g0 g)\n    {Omega : Type*} [MeasurableSpace Omega] (mu : Measure Omega)\n    (p : Omega → M) (v w : ∀ z, TangentSpace I (p z))\n    (hf : Integrable (fun z => Real.sqrt (g0.metricInner (p z) (v z) (v z)*g0.metricInner (p z) (w z) (w z)-(g0.metricInner (p z) (v z) (w z))^2)) mu)\n    (hg : AEStronglyMeasurable (fun z => Real.sqrt (g.metricInner (p z) (v z) (v z)*g.metricInner (p z) (w z) (w z)-(g.metricInner (p z) (v z) (w z))^2)) mu) :\n    Integrable (fun z => Real.sqrt (g.metricInner (p z) (v z) (v z)*g.metricInner (p z) (w z) (w z)-(g.metricInner (p z) (v z) (w z))^2)) mu ∧\n      (1-epsilon)*(∫ z, Real.sqrt (g0.metricInner (p z) (v z) (v z)*g0.metricInner (p z) (w z) (w z)-(g0.metricInner (p z) (v z) (w z))^2) ∂mu) ≤ (∫ z, Real.sqrt (g.metricInner (p z) (v z) (v z)*g.metricInner (p z) (w z) (w z)-(g.metricInner (p z) (v z) (w z))^2) ∂mu) ∧\n      (∫ z, Real.sqrt (g.metricInner (p z) (v z) (v z)*g.metricInner (p z) (w z) (w z)-(g.metricInner (p z) (v z) (w z))^2) ∂mu) ≤ (1+epsilon)*(∫ z, Real.sqrt (g0.metricInner (p z) (v z) (v z)*g0.metricInner (p z) (w z) (w z)-(g0.metricInner (p z) (v z) (w z))^2) ∂mu) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_integrated_pair_area",
+    "target_path": "ReferenceBridges/Transport/EpsilonIntegratedArea.lean",
+    "hint": "Apply epsilonClose_arbitrary_pair_area pointwise, then integrable_twoSided_from_reference. Reference area is nonnegative because it is a square root, and all constants follow from the actual epsilon range. This applies to parametrized tangent pairs including branch/critical points; no frame field is assumed.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of degenerate-area. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "degenerate-area"
+  },
+  {
+    "id": "cost-open-derivative",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport PoincareConjecture.ParallelMath.Variational.CostGrowth\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Two-sided growth needs derivatives only inside the time interval, not at its endpoints. -/\ntheorem cost_growth_from_interior_derivatives (f f' : ℝ → ℝ) (a b K : ℝ)\n    (hab : a ≤ b) (hK : 0 ≤ K) (hf : ContinuousOn f (Icc a b))\n    (hn : ∀ t ∈ Icc a b, 0 ≤ f t)\n    (hd : ∀ t ∈ Ioo a b, HasDerivAt f (f' t) t)\n    (hbnd : ∀ t ∈ Ioo a b, |f' t| ≤ K*f t) :\n    Real.exp (-K*(b-a))*f a ≤ f b ∧ f b ≤ Real.exp (K*(b-a))*f a :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.cost_growth_from_interior_derivatives",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/CostOpenDerivative.lean",
+    "hint": "Adapt the existing cost_twoSided_growth proof using integrating factors and monotoneOn_of_deriv_nonneg / antitoneOn_of_deriv_nonpos. Those theorems only need derivatives in interior(Icc a b). Preserve the zero-cost and a=b cases; do not divide by f.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of local-time-width. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "local-time-width"
+  },
+  {
+    "id": "width-local-continuity",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport PoincareConjecture.ParallelMath.Variational.WidthContinuity\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Uniform exponential distortion on an arbitrary time set gives relative continuity of the infimum. -/\ntheorem leastCost_continuousOn_of_exp_distortion {A : Type*} [Nonempty A]\n    (F : ℝ → A → ℝ) (S : Set ℝ) (K : ℝ) (hK : 0 ≤ K)\n    (hn : ∀ t ∈ S, ∀ a, 0 ≤ F t a)\n    (hc : ∀ s ∈ S, ∀ t ∈ S, ∀ a, F t a ≤ Real.exp (K*|t-s|)*F s a) :\n    ContinuousOn (fun t => PoincareConjecture.ParallelMath.Variational.leastCost (F t)) S :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.leastCost_continuousOn_of_exp_distortion",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/WidthLocalContinuity.lean",
+    "hint": "Use the checked leastCost_transfer for each pair in S and squeeze the width between its value at s times exp(±K|t-s|), along nhdsWithin s S. All bounds need hold only on S. No extension outside S, minimizer, nonempty S or endpoint differentiability may be assumed.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of local-time-width. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "local-time-width"
+  },
+  {
+    "id": "peak-local-control",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport PoincareConjecture.ParallelMath.Variational.PeakDistortion\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Pointwise comparison on a time set passes to the actual parameter supremum. -/\ntheorem peakCost_exp_control_on {B : Type*} [Nonempty B]\n    (F : ℝ → B → ℝ) (S : Set ℝ) (K : ℝ)\n    (hn : ∀ t ∈ S, ∀ b, 0 ≤ F t b)\n    (hb : ∀ t ∈ S, BddAbove (range (F t)))\n    (hc : ∀ s ∈ S, ∀ t ∈ S, ∀ b, F t b ≤ Real.exp (K*|t-s|)*F s b) :\n    (∀ t ∈ S, 0 ≤ PoincareConjecture.ParallelMath.Variational.peakCost (F t)) ∧\n    ∀ s ∈ S, ∀ t ∈ S,\n      PoincareConjecture.ParallelMath.Variational.peakCost (F t) ≤\n        Real.exp (K*|t-s|)*PoincareConjecture.ParallelMath.Variational.peakCost (F s) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.peakCost_exp_control_on",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/PeakLocalControl.lean",
+    "hint": "Use the existing peakCost bound/transfer APIs or csSup_le and le_csSup. Nonempty B and explicit upper boundedness matter. No parameter attaining the supremum is given.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of local-time-width. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "local-time-width"
+  },
+  {
+    "id": "dini-inf-minimizer",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport MorganTianLib.Ch02.ForwardDifference\nimport PoincareConjecture.ParallelMath.Variational.InfimumApproximation\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport.Reference\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** At an attained minimum, the same competitor gives the upper right derivative bound for the infimum. -/\ntheorem leastCost_forwardDiff_of_minimizer {A : Type*} [Nonempty A]\n    (F : ℝ → A → ℝ) (s c : ℝ) (hn : ∀ t a, 0 ≤ F t a)\n    (a : A) (ha : F s a = PoincareConjecture.ParallelMath.Variational.leastCost (F s))\n    (hd : MorganTianLib.ForwardDiffQuotientLE (fun t => F t a) s c) :\n    MorganTianLib.ForwardDiffQuotientLE\n      (fun t => PoincareConjecture.ParallelMath.Variational.leastCost (F t)) s c :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.Reference.leastCost_forwardDiff_of_minimizer",
+    "target_path": "ReferenceBridges/Transport/DiniInfMinimizer.lean",
+    "hint": "For t>s the infimum at t is at most this competitor cost, and at s it equals that cost. Thus its right secant slope is at most the competitor slope. Combine eventually t>s with hd. Use explicit lower-boundedness of the cost range from hn. No differentiation of the infimum and no continuity assumption on the infimum.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of local-time-width. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "local-time-width"
+  },
+  {
+    "id": "dini-inf-approximate",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport MorganTianLib.Ch02.ForwardDifference\nimport PoincareConjecture.ParallelMath.Variational.InfimumApproximation\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport.Reference\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Uniform short-time approximate competitors yield a Dini bound without an attained minimizer. -/\ntheorem leastCost_forwardDiff_of_approximate_competitors {A : Type*} [Nonempty A]\n    (F : ℝ → A → ℝ) (s c : ℝ) (hn : ∀ t a, 0 ≤ F t a)\n    (happrox : ∀ eta : ℝ, 0 < eta → ∃ delta : ℝ, 0 < delta ∧\n      ∀ h : ℝ, 0 < h → h < delta → ∃ a : A,\n        F s a ≤ PoincareConjecture.ParallelMath.Variational.leastCost (F s)+eta*h ∧\n        F (s+h) a ≤ F s a+(c+eta)*h) :\n    MorganTianLib.ForwardDiffQuotientLE\n      (fun t => PoincareConjecture.ParallelMath.Variational.leastCost (F t)) s c :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.Reference.leastCost_forwardDiff_of_approximate_competitors",
+    "target_path": "ReferenceBridges/Transport/DiniInfApproximate.lean",
+    "hint": "For requested r>c choose eta=(r-c)/4. The chosen competitor has infimum deficit O(eta*h) and growth at most (c+eta)h; together the width secant slope is at most c+2eta<r. Translate 0<t-s<delta to a right-neighborhood filter. Do not assume a single minimizer works at all h.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of local-time-width. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "local-time-width"
+  },
+  {
+    "id": "minmax-local-reduce",
+    "model": "grok",
+    "depends_on": [
+      "cost-open-derivative",
+      "width-local-continuity",
+      "peak-local-control"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport PoincareConjecture.ParallelMath.Transport.CostOpenDerivative\nimport PoincareConjecture.ParallelMath.Transport.WidthLocalContinuity\nimport PoincareConjecture.ParallelMath.Transport.PeakLocalControl\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Endpoint-safe per-competitor time estimates give continuity of an actual inf-sup on a regular slab. -/\ntheorem leastPeak_continuousOn_from_derivative_bounds {A B : Type*} [Nonempty A] [Nonempty B]\n    (F F' : A → B → ℝ → ℝ) (a b K : ℝ) (hK : 0 ≤ K)\n    (hf : ∀ x y, ContinuousOn (F x y) (Icc a b))\n    (hn : ∀ x y t, t ∈ Icc a b → 0 ≤ F x y t)\n    (hd : ∀ x y t, t ∈ Ioo a b → HasDerivAt (F x y) (F' x y t) t)\n    (hbnd : ∀ x y t, t ∈ Ioo a b → |F' x y t| ≤ K*F x y t)\n    (hpeak : ∀ x t, t ∈ Icc a b → BddAbove (range (fun y => F x y t))) :\n    ContinuousOn (fun t => PoincareConjecture.ParallelMath.Variational.leastPeak\n      (fun x y => F x y t)) (Icc a b) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.leastPeak_continuousOn_from_derivative_bounds",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/MinmaxLocal.lean",
+    "hint": "For any s,t in Icc a b use cost_growth_from_interior_derivatives on the subinterval between s and t, with a case split on s≤t. Get the uniform exp(K|t-s|) bound without derivatives at the outer endpoints. Pass to each peak using peakCost_exp_control_on, then the infimum via leastCost_continuousOn_of_exp_distortion. Use the three integrated results, not their conclusions as hypotheses.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of local-time-width. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "local-time-width"
+  },
+  {
+    "id": "torus-covering",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport PoincareConjecture.Topology.FiberSaturation.TorusShortStrip\nimport Mathlib.Topology.Covering.Quotient\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** The actual infinite-cylinder quotient is a covering map; local injectivity alone is not the conclusion. -/\ntheorem mappingTorus_projection_isCoveringMap {X : Type*} [TopologicalSpace X]\n    (phi : X ≃ₜ X) (L : ℝ) (hL : 0 < L) :\n    IsCoveringMap (PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj phi L) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.mappingTorus_projection_isCoveringMap",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/TorusCovering.lean",
+    "hint": "Use the integer deck action and IsAddQuotientCoveringMap or its multiplicative counterpart. MappingTorus.deck_add/deck_zero give the action; proj_eq_iff gives fibers as orbits. A strip of radius L/4 around each height has disjoint nonzero deck translates by integer_shift_zero. Quotient.mk is a quotient map and each deck map continuous. Then invoke IsAddQuotientCoveringMap.isCoveringMap. Do not infer covering merely from being a local homeomorphism. All action instances may be local lets inside the proof.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of torus-covering. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 1200,
+    "priority": 0,
+    "math_line": "torus-covering"
+  },
+  {
+    "id": "torus-fiber-integers",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport PoincareConjecture.Topology.FiberSaturation.TorusShortStrip\nimport Mathlib.Topology.Covering.Quotient\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** Every fiber is explicitly enumerated by deck iterates of one chosen lift. -/\ntheorem mappingTorus_fiber_equiv_integers {X : Type*} [TopologicalSpace X]\n    (phi : X ≃ₜ X) (L : ℝ) (hL : 0 < L) (p : X × ℝ) :\n    ∃ e : ℤ ≃ {q : X × ℝ //\n      PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj phi L q =\n        PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj phi L p},\n      ∀ n : ℤ, (e n).1 =\n        PoincareConjecture.Topology.FiberSaturation.MappingTorus.deck phi L n p :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.mappingTorus_fiber_equiv_integers",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/TorusFiberIntegers.lean",
+    "hint": "The forward map sends n to deck n p. Its fiber membership is proj_deck. Surjectivity follows from proj_eq_iff with the right orientation; injectivity follows from equal second coordinates and L≠0, then injectivity of integer casts. Use Equiv.ofBijective to package it. Do not collapse the fiber to a bare nonempty type.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of torus-covering. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "torus-covering"
+  },
+  {
+    "id": "torus-universal-reduce",
+    "model": "grok",
+    "depends_on": [
+      "torus-covering",
+      "torus-fiber-integers"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Variational.Core\nimport PoincareConjecture.Topology.FiberSaturation.TorusShortStrip\nimport Mathlib.Topology.Covering.Quotient\nimport PoincareConjecture.ParallelMath.Transport.TorusCovering\nimport PoincareConjecture.ParallelMath.Transport.TorusFiberIntegers\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transport\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators ENNReal Manifold ContDiff\n\n/-- **Math.** For a simply connected fiber, this is a genuine simply connected covering with integer-enumerated fibers. -/\ntheorem mappingTorus_universal_cover_data {X : Type*} [TopologicalSpace X]\n    [SimplyConnectedSpace X] (phi : X ≃ₜ X) (L : ℝ) (hL : 0 < L) :\n    IsCoveringMap (PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj phi L) ∧\n      SimplyConnectedSpace (X × ℝ) ∧\n      ∀ p : X × ℝ, ∃ e : ℤ ≃ {q : X × ℝ //\n        PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj phi L q =\n          PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj phi L p},\n        ∀ n : ℤ, (e n).1 = PoincareConjecture.Topology.FiberSaturation.MappingTorus.deck phi L n p :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transport\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transport.mappingTorus_universal_cover_data",
+    "target_path": "PoincareConjecture/ParallelMath/Transport/TorusUniversal.lean",
+    "hint": "Combine the two integrated covering/fiber results. Establish SimplyConnectedSpace for X×Real from the known product and contractibility of Real, using standard Mathlib/Hatcher-free APIs. This theorem provides universal-cover data; do not claim a fundamental-group multiplication formula not actually proved.\nRead-only original source lives in ../formalized-sources and ../shared within your own checkout (not sibling projects). This task is part of torus-covering. Do not rewrite definitions or add assumptions. Run bash swarm-check.sh and finish promptly once the proof passes.",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_line": "torus-covering"
+  }
+]
