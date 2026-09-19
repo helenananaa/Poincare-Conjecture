@@ -6,6 +6,7 @@ parser.add_argument('--repo',type=Path,required=True)
 parser.add_argument('--config',type=Path,required=True)
 parser.add_argument('--output',type=Path,required=True)
 parser.add_argument('--cached-objects',type=Path)
+parser.add_argument('--extra-module',action='append',default=[],help='Additional pinned reference input module; may be repeated')
 args=parser.parse_args()
 R=args.repo.resolve();O=args.output.resolve();O.mkdir(parents=True,exist_ok=True)
 sys.path.insert(0,str(R/'tools/lean_swarm'));from runtime import seed_artifact_namespace,detach_object_links
@@ -28,6 +29,7 @@ def inspect(m):
  G[m]=deps;S[m]=p
  for d in deps:inspect(d)
 targets=['MorganTianLib.Ch02.ForwardDifference','MorganTianLib.Ch03.RicciFlow.EvolvingEpsilonNeck','HatcherLib.Ch1.Circle','HatcherLib.Ch1.Sphere','Shared.MetricGeometry.LengthSpace']
+targets += args.extra_module
 for t in targets:inspect(t)
 (O/'reference-graph.json').write_text(json.dumps(G,indent=2))
 env['LEAN_PATH']=str(out)+':'+basepath;env['LEAN_NUM_THREADS']='2'
