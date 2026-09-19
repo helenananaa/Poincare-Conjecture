@@ -1,0 +1,31 @@
+[
+  {
+    "id": "real-line-lengthspace",
+    "depends_on": [],
+    "source": "import Mathlib\nimport Shared.MetricGeometry.LengthSpace\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology\n/-- **Math.** The real line is a genuine length space for the original metric and path variation. -/\ntheorem real_line_lengthSpace : Shared.LengthSpace ℝ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.real_line_lengthSpace",
+    "target_path": "ReferenceBridges/Quantitative/RealLineLengthSpace.lean",
+    "hint": "Construct the actual Shared.LengthSpace instance: endpoint distance <= every pathLength is already proved in Shared.LengthSpace.edist_le_pathLength. For the opposite inequality choose Path.segment x y. Its affine coordinate map is monotone when x<=y and antitone otherwise; use MonotoneOn.eVariationOn_le (and symmetry/negation for the opposite orientation) or directly bound all partition sums by telescoping. Do not assume a LengthSpace instance on Real, do not change the metric, and do not choose only a one-point space.",
+    "model": "grok",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_lane": "length-space-gluing",
+    "math_role": "nonvacuity"
+  },
+  {
+    "id": "real-local-global",
+    "depends_on": [
+      "real-line-lengthspace",
+      "lipschitz-open-cover-reduce"
+    ],
+    "source": "import ReferenceBridges.Quantitative.RealLineLengthSpace\nimport ReferenceBridges.Quantitative.OpenCoverLipschitz\nimport Mathlib\nimport Shared.MetricGeometry.LengthSpace\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology\n/-- **Math.** A uniform local Lipschitz constant on real neighborhoods is global. -/\ntheorem real_uniform_local_lipschitz_is_global {Y : Type*} [PseudoMetricSpace Y]\n    (f : ℝ → Y) (L : NNReal)\n    (hlocal : ∀ x : ℝ, ∃ r : ℝ, 0 < r ∧ LipschitzOnWith L f (Metric.ball x r)) :\n    LipschitzWith L f :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.real_uniform_local_lipschitz_is_global",
+    "target_path": "ReferenceBridges/Quantitative/RealLocalGlobal.lean",
+    "hint": "Install only the already proved real_line_lengthSpace. Choose a positive radius at each real center from hlocal and use the integrated open-cover gluing theorem with the same map f on every ball. Show the glued map equals f pointwise from coverage, obtaining the actual global Lipschitz property. No global Lipschitz or chain approximation assumption may be added.",
+    "model": "grok",
+    "timeout_seconds": 900,
+    "priority": 0,
+    "math_lane": "length-space-gluing",
+    "math_role": "reduce"
+  }
+]
