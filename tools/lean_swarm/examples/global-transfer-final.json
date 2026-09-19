@@ -1,0 +1,30 @@
+[
+  {
+    "id": "uniform-minmax-lipschitz-repair",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.ParallelMath.Variational.MinmaxTransfer\nimport PoincareConjecture.ParallelMath.Variational.InfimumAdditive\nimport PoincareConjecture.ParallelMath.Transfer.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory\nopen scoped Topology BigOperators\n\n/-- Uniform parameterwise Lipschitz control gives a Lipschitz minmax value without attaining either extremum. -/\ntheorem leastPeak_lipschitz {T A B : Type*} [PseudoMetricSpace T] [Nonempty A] [Nonempty B]\n    (F : T → A → B → ℝ) (hn : ∀ t a b, 0 ≤ F t a b)\n    (hb : ∀ t a, BddAbove (range (F t a))) (K : NNReal)\n    (hL : ∀ a b, LipschitzWith K (fun t => F t a b)) :\n    LipschitzWith K (fun t => Variational.leastPeak (F t)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.leastPeak_lipschitz",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/MinmaxLipschitz.lean",
+    "hint": "Repair the already mostly correct proof below. The two errors are (1) get the actual pointwise real inequality from (hL a b).dist_le_mul u v, rewrite Real.dist_eq and use abs_le; avoid applying le_add_mul with the wrong orientation. (2) hpeak gives x<=y+delta while abs_le needs x-y<=delta; use sub_le_iff_le_add or linarith. Keep all original hypotheses and final target unchanged. Run the check and exit promptly. Previous failed service and frozen source are preserved.\nPrevious proof:\n\nby\n  refine LipschitzWith.of_dist_le_mul fun s t => ?_\n  have hδ : 0 ≤ (K : ℝ) * dist s t := mul_nonneg K.coe_nonneg dist_nonneg\n  have hnn : ∀ (u : T) (a : A), 0 ≤ Variational.peakCost (F u a) := fun u a => by\n    obtain ⟨b⟩ := ‹Nonempty B›\n    exact (hn u a b).trans (le_csSup (hb u a) (mem_range_self b))\n  have hpeak : ∀ (u v : T) (a : A),\n      Variational.peakCost (F u a) ≤\n        Variational.peakCost (F v a) + (K : ℝ) * dist u v := by\n    intro u v a\n    simpa using\n      Variational.peakCost_transport (F v a) (F u a) (hb v a) (hb u a)\n        (id : B → B) surjective_id (1 : ℝ) ((K : ℝ) * dist u v) zero_le_one\n        fun b => by linarith [(hL a b).le_add_mul u v]\n  have hclose : ∀ a,\n      |Variational.peakCost (F s a) - Variational.peakCost (F t a)| ≤\n        (K : ℝ) * dist s t := by\n    intro a\n    refine abs_le.mpr ⟨?_, hpeak s t a⟩\n    have hts := hpeak t s a\n    rw [dist_comm t s] at hts\n    linarith\n  simpa [Variational.leastPeak, Real.dist_eq] using\n    Variational.leastCost_uniform_perturbation\n      (fun a => Variational.peakCost (F s a))\n      (fun a => Variational.peakCost (F t a))\n      (hnn s) (hnn t) ((K : ℝ) * dist s t) hδ hclose\n",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "time-width",
+    "math_role": "map"
+  },
+  {
+    "id": "c1-nonnull-width",
+    "model": "grok",
+    "source": "import PoincareConjecture.ParallelMath.Transfer.HomotopyLeftInverse\nimport PoincareConjecture.ParallelMath.Variational.AdmissibleTransfer\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function\nopen scoped Manifold ContDiff\n/-- A C1 comparison map with a left homotopy inverse transports actual C1 non-null maps and their least costs. -/\ntheorem c1_nonNull_leastCost_transport\n    {ES EM EN : Type*} [NormedAddCommGroup ES] [NormedSpace ℝ ES]\n    [NormedAddCommGroup EM] [NormedSpace ℝ EM] [NormedAddCommGroup EN] [NormedSpace ℝ EN]\n    {HS HM HN : Type*} [TopologicalSpace HS] [TopologicalSpace HM] [TopologicalSpace HN]\n    (IS : ModelWithCorners ℝ ES HS) (IM : ModelWithCorners ℝ EM HM) (IN : ModelWithCorners ℝ EN HN)\n    {S M N : Type*} [TopologicalSpace S] [TopologicalSpace M] [TopologicalSpace N]\n    [ChartedSpace HS S] [ChartedSpace HM M] [ChartedSpace HN N]\n    [Nonempty {f : C(S,M) // ContMDiff IS IM 1 f ∧ NonNull f}]\n    (p : C(M,N)) (r : C(N,M)) (hp : ContMDiff IM IN 1 p)\n    (hr : (r.comp p).Homotopic (ContinuousMap.id M))\n    (A : C(S,M) → ℝ) (B : C(S,N) → ℝ)\n    (hA : ∀ f : {f : C(S,M) // ContMDiff IS IM 1 f ∧ NonNull f}, 0 ≤ A f.1)\n    (hB : ∀ f : {f : C(S,N) // ContMDiff IS IN 1 f ∧ NonNull f}, 0 ≤ B f.1)\n    (L δ : ℝ) (hL : 0 ≤ L)\n    (hb : ∀ f : {f : C(S,M) // ContMDiff IS IM 1 f ∧ NonNull f},\n      B (p.comp f.1) ≤ L*A f.1+δ) :\n    Variational.leastCost (fun f : {f : C(S,N) // ContMDiff IS IN 1 f ∧ NonNull f} => B f.1) ≤\n      L*Variational.leastCost (fun f : {f : C(S,M) // ContMDiff IS IM 1 f ∧ NonNull f} => A f.1)+δ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "depends_on": [
+      "homotopy-left-inverse"
+    ],
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.c1_nonNull_leastCost_transport",
+    "target_path": "PoincareConjecture/ParallelMath/Transfer/C1NonNullWidth.lean",
+    "timeout_seconds": 600,
+    "priority": 5,
+    "math_lane": "homotopy",
+    "math_role": "cross-branch-reduce",
+    "hint": "Construct the actual subtype map f->p.comp f. C1 regularity follows from hp.comp f.property.1; non-nullhomotopy from the integrated nonNull_comp_iff_of_left_homotopy_inverse. Derive target subtype Nonempty from the given source witness. Apply Variational.leastCost_transfer. This is stronger than a statement for all continuous maps: the C1 requirement must be preserved by actual differentiation rules, not another hypothesis. Do not change the underlying topology or invent a smooth retraction."
+  }
+]
