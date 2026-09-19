@@ -76,5 +76,34 @@
     "timeout_seconds": 720,
     "math_lane": "topology-product",
     "math_role": "reduce"
+  },
+  {
+    "id": "scalar-extinction-reduce",
+    "model": "grok",
+    "depends_on": [
+      "dini-finite-jumps"
+    ],
+    "source": "import PoincareConjecture.ParallelMath.Extinction.PowerDerivative\nimport PoincareConjecture.ParallelMath.Extinction.PowerNegative\nimport ReferenceBridges.ParallelMath.FiniteDini\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Reference\nopen Set Function Filter\nopen scoped Topology BigOperators\n/-- Scalar finite extinction with an arbitrary finite number of downward jumps.\nNo geometric width evolution or surgery finiteness is asserted by this lemma. -/\ntheorem finite_horizon_for_nonnegative_width (alpha c a k : ℝ)\n    (hc : 0 < c) (hk : 0 < k) (ha0 : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ T : ℝ, 0 < T ∧\n      ∀ (n : ℕ) (time : ℕ → ℝ) (u : ℕ → ℝ → ℝ),\n        0 < n → StrictMono time → time 0 = 0 → T ≤ time n →\n        (∀ i < n, ContinuousOn (u i) (Icc (time i) (time (i+1)))) →\n        (∀ i < n, ∀ t ∈ Ico (time i) (time (i+1)),\n          MorganTianLib.ForwardDiffQuotientLE (u i) t\n            (-k + alpha/(t+c)*u i t)) →\n        (∀ i < n, ∀ t ∈ Icc (time i) (time (i+1)), 0 ≤ u i t) →\n        u 0 0 ≤ a →\n        (∀ i, i+1 < n → u (i+1) (time (i+1)) ≤ u i (time (i+1))) → False :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Reference.finite_horizon_for_nonnegative_width",
+    "target_path": "ReferenceBridges/ParallelMath/FiniteExtinctionObstruction.lean",
+    "timeout_seconds": 900,
+    "priority": 5,
+    "math_lane": "extinction-ode",
+    "math_role": "cross-branch-reduce",
+    "external_integrated_dependencies": [
+      {
+        "project": "poincare-mathematical-mapreduce-20260919",
+        "id": "power-barrier-derivative",
+        "commit": "d39c45e25dc3c41cd26c11c649371905400004b3",
+        "path": "PoincareConjecture/ParallelMath/Extinction/PowerDerivative.lean"
+      },
+      {
+        "project": "poincare-mathematical-mapreduce-20260919",
+        "id": "power-barrier-negative-repair",
+        "commit": "2c82806e2c3ba14d3074aa8c7d8d5eda77d2d20b",
+        "path": "PoincareConjecture/ParallelMath/Extinction/PowerNegative.lean"
+      }
+    ],
+    "hint": "CROSS-BRANCH REDUCE: use the already integrated powerBarrier_hasDerivAt, powerBarrier_eventually_negative, and finite_forward_comparison. Choose T>0 beyond the eventual-negative threshold for powerBarrier alpha c a k. Its value at 0 is a (c>0), it solves G'=-k+alpha/(t+c)*G on t>=0, and is continuous there. For psi(t,y)=-k+alpha/(t+c)*y, prove ContDiffOn on [0,time n]×Real using t+c>0, not global differentiability across t=-c. Apply finite_forward_comparison, then take i=n-1 and t=time n; use n>0 to justify the indices and contradict nonnegativity because G(time n)<0. All time_i>=0 follow from StrictMono and time 0=0. Do not derive or assume geometric width facts. Reference sources for MorganTianLib are in ../formalized-sources/MorganTian/MorganTianLib within this same checkout; reading them is permitted. Preserve the theorem statement."
   }
 ]
