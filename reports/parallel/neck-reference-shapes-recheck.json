@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "tasks": [
+    {
+      "file": "PoincareConjecture/tests/NeckAdapter/ReferenceShapes.lean",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.native_neck_reference_shapes",
+      "status": "PASS",
+      "sha256": "e76dd723ef45b4721da0c590b8ae8825d17c1915db0a095d411c4ac4aff187eb",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "file": "PoincareConjecture/tests/NeckAdapter/MorganTianBridge.lean",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.reference_epsilonNeckStructure_smoothCollar",
+      "status": "PASS",
+      "sha256": "fab5ea8f28c3e7e3750d9b8a80b988b1574ea30e2af1b0e02787c11a63042409",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "reference_modules": 279,
+  "model_calls": 0
+}

@@ -1,0 +1,10 @@
+{
+  "file": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/NeckAdapter/RestrictSmoothNeck.lean",
+  "reason": "Whole-package strict regression found the supplied positive width hr unused. The impossible r=0 branch is explicitly excluded using hr, retaining the original constructive proof and exact caller statement. No linter was disabled and no assumption was added.",
+  "old_sha256": "425d77d3189de7d31a495cfe6879326d6d4307aac46cd48e24ab328086e6aff2",
+  "new_sha256": "9e34561bab4c2a60edf5f4155ca770727657ca2ef8c529b734386d54a2bb47ed",
+  "separate_parallel_batch": true,
+  "coordinator_maintenance": true,
+  "compile_status": "PASS",
+  "warning_count": 0
+}

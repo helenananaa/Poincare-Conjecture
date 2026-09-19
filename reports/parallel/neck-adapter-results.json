@@ -1,0 +1,344 @@
+{
+  "status": "PASS",
+  "date_utc": "2026-09-19T09:03:46.712133+00:00",
+  "baseline_commit": "bd6dc4e72115ea8c1b61571e155067c9b1209467",
+  "model_calls": 16,
+  "luna_calls": 0,
+  "targets": [
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "affine-axis",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "209680a67b56bd49942725a0a88be82b5630e081",
+      "base_commit": "138e7864aa4fe3114a622c06c5c52827c113f807",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_affine_axis_diffeomorph",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/AffineAxis.lean",
+      "source_sha256": "7f247f787a576eab968bba5fb4cda7e8e4def2f6586fbae0d38870dfbd9f46b8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [],
+      "seconds": 80.893,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "finite-cut-closure",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "2ccf2f7bfc576907589a78050cb28f8c3961dd21",
+      "base_commit": "acd01694571df185d86b2810431721c454c27410",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_smoothClosure_of_finite_neck_cut_cover",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/FiniteCutClosure.lean",
+      "source_sha256": "3ffad7f3d613e34f42ea6fc1a32515e384755ea21c3c644ff9bf8e0f903feef3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [
+        "oriented-collar",
+        "image-cut"
+      ],
+      "seconds": 173.766,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "image-cut",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "03eb9f23766e1e1b864ee0ce28104e0208303bd3",
+      "base_commit": "138e7864aa4fe3114a622c06c5c52827c113f807",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.neck_cut_membership_of_image",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/ImageCut.lean",
+      "source_sha256": "db299f88b5706d76e342e30a67c6a6e4db01d58910924670ead844e6bd3fa7b7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [],
+      "seconds": 119.434,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "interval-orientation",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "47746ef346260e7922190903a18981aa904e153f",
+      "base_commit": "138e7864aa4fe3114a622c06c5c52827c113f807",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_oriented_strip_width",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/IntervalOrientation.lean",
+      "source_sha256": "a9930ca87451eefe823c6d9deb9fd451fae00a5d46401d3b4ce0ed4f5392ad75",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [],
+      "seconds": 201.65,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "native-axis",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "a5e020d384db93f44998a9e1f31ac910c975cd24",
+      "base_commit": "138e7864aa4fe3114a622c06c5c52827c113f807",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_native_axis_diffeomorph",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NativeAxis.lean",
+      "source_sha256": "46769ed201c8f421ac38c8e4ac474407e83817bca977b6c9a86cab0587c6691a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [],
+      "seconds": 433.439,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "native-collar",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "320b4796ed3fb039d03ceb4da848600ea111e68e",
+      "base_commit": "8ca4a5df0d8da1d897e6189cbde4e46eb3319be9",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_smoothCollar_of_native_neck_cut",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NativeCollar.lean",
+      "source_sha256": "34ab61d9e2ee34d450a97bd1e61448499c945e40b2f287b6c9410274323f4868",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [
+        "native-finite-chart",
+        "oriented-collar"
+      ],
+      "seconds": 132.247,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "native-cut-closure",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "5345212fcba3b24b8450986cf53122129b4753c1",
+      "base_commit": "320b4796ed3fb039d03ceb4da848600ea111e68e",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_smoothClosure_of_native_neck_cut_cover",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NativeCutClosure.lean",
+      "source_sha256": "b046fc901db0469388337cff5542bf11257f9c200f1a08bcdc4c84c357eb8306",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [
+        "native-collar"
+      ],
+      "seconds": 409.028,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "native-domain",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "7fd626a7c6b273503a3a2c6c0e38e13f04685c4e",
+      "base_commit": "5946cced05cf93680973dcd16924899c41752098",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_native_domain_diffeomorph",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NativeDomain.lean",
+      "source_sha256": "abbe688cb3bdca119b201160ba8e9b603fb6a1eb5c884d13d5114705c0f20f31",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [
+        "native-axis"
+      ],
+      "seconds": 310.72,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "native-finite-chart",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "8ca4a5df0d8da1d897e6189cbde4e46eb3319be9",
+      "base_commit": "7fd626a7c6b273503a3a2c6c0e38e13f04685c4e",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_partialChart_of_native_neck",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NativeFiniteChart.lean",
+      "source_sha256": "727bb7465fa28d77ab7c980627d29d9f0f37bdf57a88253c5b98763cbb3e5a8a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [
+        "open-domain",
+        "native-domain"
+      ],
+      "seconds": 464.171,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "native-sphere-reverse-sanity",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "299dea0a37614c5af843fb63f9966a886c0c0582",
+      "base_commit": "320b4796ed3fb039d03ceb4da848600ea111e68e",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.native_sphere_reverse_neck_sanity",
+      "path": "tests/NeckAdapter/NativeSphereReverse.lean",
+      "source_sha256": "4cec85f5820724fdd7d38d60756ec516fc71a513970befc8bedeb299f7ca2335",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [
+        "native-collar"
+      ],
+      "seconds": 389.873,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "normalize-chart",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "598b3965014211e5511be7bd6b253fd5c0eba27c",
+      "base_commit": "29bab9872fa47f5d8c0d8345012f8e2773ceafc5",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_normalized_neck_chart",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/NormalizeChart.lean",
+      "source_sha256": "a6631a4fa15043ffa688bdc12739312666f78e40c1726da480bbf2027bdb6112",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [
+        "affine-axis",
+        "interval-orientation",
+        "restrict-partial"
+      ],
+      "seconds": 337.728,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "offcenter-reverse-sanity",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "a9b1d39acd60e164fc944fbf2ea9577419a6a594",
+      "base_commit": "acd01694571df185d86b2810431721c454c27410",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.offcenter_reverse_neck_sanity",
+      "path": "tests/NeckAdapter/OffCenterReverse.lean",
+      "source_sha256": "52eecb7d4026bb82d1da783eef36b56fe587390de9041ae1185c1ae27f7a0493",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [
+        "oriented-collar",
+        "restrict-partial"
+      ],
+      "seconds": 387.596,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "open-domain",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "21ae50c849109a74195bcfad43e3511e25511f83",
+      "base_commit": "138e7864aa4fe3114a622c06c5c52827c113f807",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_partialDiffeomorph_of_open_subspaces",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/OpenDomain.lean",
+      "source_sha256": "f429d8768756ebcfe40391e835d6bee791dc3ca4cc1424dc119a6976a1cd6389",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [],
+      "seconds": 526.522,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "oriented-collar",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "acd01694571df185d86b2810431721c454c27410",
+      "base_commit": "598b3965014211e5511be7bd6b253fd5c0eba27c",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_smoothCollar_of_oriented_neck",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/OrientedCollar.lean",
+      "source_sha256": "ab00a9916921460d79999cd74cf22dec94ec83c91d2216be012350e25e2d5c3c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [
+        "normalize-chart"
+      ],
+      "seconds": 76.864,
+      "stopped": true
+    },
+    {
+      "project": "poincare-neck-adapter-20260919",
+      "id": "restrict-partial",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "29bab9872fa47f5d8c0d8345012f8e2773ceafc5",
+      "base_commit": "138e7864aa4fe3114a622c06c5c52827c113f807",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.exists_partialDiffeomorph_restriction",
+      "path": "PoincareConjecture/Topology/FiberSaturation/SmoothNeck/RestrictPartial.lean",
+      "source_sha256": "cd2238fb4c4dfe9eaca8f50f881b55a4676fc7711e5ee77bb091d1f8beb0d244",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [],
+      "seconds": 150.342,
+      "stopped": true
+    },
+    {
+      "project": "poincare-native-reference-20260919",
+      "id": "reference-native-collar",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "commit": "51ddbe7cca7a15c76a3f9c1a99323dab6aec13f1",
+      "base_commit": "d65be3412760d4cbd26caf5f4a03c3afcd7a8dec",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.reference_epsilonNeckStructure_smoothCollar",
+      "path": "tests/NeckAdapter/MorganTianBridge.lean",
+      "source_sha256": "fab5ea8f28c3e7e3750d9b8a80b988b1574ea30e2af1b0e02787c11a63042409",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "depends_on": [],
+      "seconds": 125.7,
+      "stopped": true
+    }
+  ],
+  "reference_import": {
+    "status": "PASS",
+    "modules_built": 279,
+    "seconds": 583.95,
+    "target": "MorganTianLib.Ch02.EpsilonNeck"
+  },
+  "scope": "Finite-neck axial rescaling/orientation and actual imported MorganTian EpsilonNeckStructure parameterization adapter. Surgery-set sidedness, frontier coverage, ambient-model matching for global closure, Ricci evolution and final Poincare theorem remain explicit obligations."
+}

@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "tasks": [
+    {
+      "id": "reference-native-collar",
+      "target": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.reference_epsilonNeckStructure_smoothCollar",
+      "path": "tests/NeckAdapter/MorganTianBridge.lean",
+      "status": "PASS",
+      "sha256": "fab5ea8f28c3e7e3750d9b8a80b988b1574ea30e2af1b0e02787c11a63042409",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "model_calls": 0
+}

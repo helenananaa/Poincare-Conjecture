@@ -25,14 +25,17 @@ theorem exists_restricted_smooth_neck {V H X : Type*} [NormedAddCommGroup V] [No
       ContMDiffOn J (I.prod (𝓘(ℝ, ℝ))) ∞ E.symm E.target :=
 /- SWARM_PROOF_BEGIN -/
 by
-  let s : Set (X × ℝ) := univ ×ˢ Ioo (c - r) (c + r)
-  have hs : IsOpen s := isOpen_univ.prod isOpen_Ioo
-  refine ⟨F.restrOpen s hs, ?_, fun _ => rfl, fun _ => rfl, ?_, ?_⟩
-  · rw [OpenPartialHomeomorph.restrOpen_source]
-    exact inter_eq_right.mpr hsource
-  · exact hF.mono <| by
-      rw [OpenPartialHomeomorph.restrOpen_source]
-      exact inter_subset_left
-  · exact hFi.mono inter_subset_left
+  by_cases hrzero : r = 0
+  · exact ((ne_of_gt hr) hrzero).elim
+  ·
+    let s : Set (X × ℝ) := univ ×ˢ Ioo (c - r) (c + r)
+    have hs : IsOpen s := isOpen_univ.prod isOpen_Ioo
+    refine ⟨F.restrOpen s hs, ?_, fun _ => rfl, fun _ => rfl, ?_, ?_⟩
+    · rw [OpenPartialHomeomorph.restrOpen_source]
+      exact inter_eq_right.mpr hsource
+    · exact hF.mono <| by
+        rw [OpenPartialHomeomorph.restrOpen_source]
+        exact inter_subset_left
+    · exact hFi.mono inter_subset_left
 /- SWARM_PROOF_END -/
 end PoincareConjecture.Topology.FiberSaturation.NeckAdapter
