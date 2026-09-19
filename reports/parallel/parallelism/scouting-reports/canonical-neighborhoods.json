@@ -1,0 +1,245 @@
+{
+  "scope": "Blow-up limits, kappa-solutions, and canonical neighborhoods. Collar/topology work in PoincareConjecture/ is treated as a parallel branch and is not a dependency.",
+  "method_note": "Declarations below are parsed from Lean source in this checkout. File existence, grep hits, and absence of sorry were not treated as proof. No lake build was run, so axiom-freedom of cited proof terms is unverified.",
+  "inspected_files": [
+    "PoincareConjecture/blueprint/src/chapters/kappa-solutions-and-surgery-continuation.tex",
+    "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+    "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex",
+    "PoincareConjecture/blueprint/important-statements.yaml",
+    "PoincareConjecture/PoincareConjecture.lean",
+    "formalized-sources/MorganTian/blueprint/src/chapters/Ch05_ConvergenceResults.tex",
+    "formalized-sources/MorganTian/blueprint/src/chapters/Ch09_KappaAncientSolutions.tex",
+    "formalized-sources/MorganTian/blueprint/src/chapters/Ch03_BasicsOfRicciFlow.tex",
+    "formalized-sources/MorganTian/blueprint/src/chapters/Ch01_Preliminaries.tex",
+    "formalized-sources/MorganTian/MorganTianLib/Ch05.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch05/Foundations.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch05/GeometricLimitAssembly.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch05/CompactStageDiagonal.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/GradientFlow.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/Busemann.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/CurvatureOperator.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/VolumeInjectivityBridge.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/CutLocus.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/Basic.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeck.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeckConsequences.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/Soliton.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/SolitonScaleConsequences.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSolutions.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/TimeDependentGaugeFlow.lean",
+    "formalized-sources/KleinerLott/KleinerLott.lean",
+    "formalized-sources/KleinerLott/KleinerLott/Basic.lean",
+    "formalized-sources/KleinerLott/KleinerLott/RicciFlow/FlowData.lean",
+    "formalized-sources/KleinerLott/KleinerLott/RicciFlow/Noncollapsing.lean",
+    "formalized-sources/KleinerLott/KleinerLott/RicciFlow/PointSelection.lean",
+    "formalized-sources/KleinerLott/KleinerLott/RicciFlow/SmoothRicciFlow.lean",
+    "formalized-sources/KleinerLott/KleinerLott/RicciFlow/Pinching.lean",
+    "formalized-sources/KleinerLott/blueprint/src/chapters/part-i.tex"
+  ],
+  "existing_results": [
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "KleinerLott.IsKappaNoncollapsedOnScale",
+      "path": "formalized-sources/KleinerLott/KleinerLott/RicciFlow/Noncollapsing.lean",
+      "what": "definition, not a theorem",
+      "hypotheses": "flow : RicciFlowData M; n : Nat; T kappa rho : Real. For every x0 t0 r with 0 < r < rho, r^2 ≤ t0 < T, if HasCurvatureBoundOnParabolicBall x0 t0 r (r⁻¹)^2 then kappa * r^n ≤ volume t0 (ball t0 x0 r).",
+      "note": "Scalar RicciFlowData predicate. No completeness, nonnegativity, or ancient-time hypotheses. Not a kappa-solution."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "KleinerLott.exists_point_selection_of_smooth_complete_ricci_flow",
+      "path": "formalized-sources/KleinerLott/KleinerLott/RicciFlow/SmoothRicciFlow.lean",
+      "what": "theorem with a proof term in-file (lake-unverified)",
+      "hypotheses": "ConnectedSpace M; flow : SmoothCompleteRicciFlowOn (Icc 0 (epsilon^2)); 0 < alpha, A, epsilon; A * epsilon < (100 * finrank E)⁻¹; t ∈ Ioc 0 (epsilon^2); dist t x0 x ≤ epsilon; alpha/t + (epsilon⁻¹)^2 ≤ curvatureNorm x t. Conclusion: a high-curvature point controlling curvature by factor 4 inside its curvature-scale ball."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "KleinerLott.SmoothCompleteRicciFlowOn",
+      "path": "formalized-sources/KleinerLott/KleinerLott/RicciFlow/SmoothRicciFlow.lean",
+      "what": "structure",
+      "hypotheses": "Smooth metric family on J, RiemannCurvatureFamily matching Levi-Civita, Ricci-flow equation, induced Riemannian distance finite and equal to MetricFamily.dist, complete slices, continuous distance and curvature-norm."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.IsRicciFlowOn",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/Basic.lean",
+      "what": "structure",
+      "hypotheses": "J.OrdConnected, J.Nontrivial, IsSmoothMetricFamilyOn g J, IsRicciFlowEquationOn g J (HasDerivWithinAt of metricInner equals -2 ricciTensorAt)."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.HasNonnegativeCurvatureOperator",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch01/CurvatureOperator.lean",
+      "what": "definition on an algebraic curvature form B of a vector space V",
+      "hypotheses": "∀ φ : ⋀² V, 0 ≤ curvatureOperator hB φ φ. File states the |Rm| operator-norm inner product on ⋀² is not built."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.EvolvingEpsilonNeck / StrongEpsilonNeck / EpsilonCloseFamily",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeck.lean",
+      "what": "structures / abbreviation / definition",
+      "hypotheses": "IsRicciFlowOn; positive scalar curvature at center; AmbientEpsilonNeck at t0; normalized pullback equals R(x,t0) * phi^* g(t0 + R⁻¹ s); reference family is the standard shrinking cylinder (1-s)h0 + ds²; EpsilonCloseFamily of the two families. StrongEpsilonNeck is EvolvingEpsilonNeck with tau = 1."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.IsGradientShrinkerPotential.isSolitonGenerator",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/Soliton.lean",
+      "what": "theorem with a proof term in-file (lake-unverified)",
+      "hypotheses": "IsGradientShrinkerPotential g f lambda (smooth f, 0 < lambda, -Ric = Hess f - lambda g). Conclusion: IsSolitonGenerator g (grad f) lambda. File states claim:soliton-generation (the flow of Y_t) is not proved."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.ricciTensorAt_rescaledMetric_eq / isRicciFlowEquationOn_einsteinScale",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSolutions.lean",
+      "what": "theorems with proof terms in-file (lake-unverified)",
+      "hypotheses": "Positive constant rescaling leaves ricciTensorAt unchanged. An Einstein metric of constant lam with scale u, u' = -2 lam, u > 0, satisfies IsRicciFlowEquationOn."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.PartialGeometricLimitData / GeometricLimitData",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch05/Foundations.lean",
+      "what": "metric-space adapter structures, not C^∞ geometric limits",
+      "hypotheses": "Compact exhaustion, total injective basepoint-preserving embeddings, PullbackDistanceConverges on compact stages, plus regular-locus image coverage. File comment: source C^∞ clauses are left to a later manifold adapter."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.exists_compatibleSystem_unboundedConvergence_and_lengthSpace",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch05/CompactStageDiagonal.lean",
+      "what": "theorem assembling pointed GH limits of closed-ball models",
+      "hypotheses": "Radius-wise PointedGHConverges of ball models, nested closed-ball identifications, length-space instances. Metric GH only; no Ricci-flow or C^∞ metric conclusion."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.smoothVectorFieldFlow_bijective",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/GradientFlow.lean",
+      "what": "theorem with a proof term in-file (lake-unverified)",
+      "hypotheses": "SmoothVectorField X with a global integral curve through every point; T2Space M. Conclusion: each time-t map is bijective. File states diffeomorphism smoothness awaits initial-condition dependence, which is not available."
+    },
+    {
+      "kind": "natural_language_blueprint_claim",
+      "name": "def:kappa-solution / thm:two-dimensional-kappa-solutions-round / thm:asymptotic-gradient-shrinking-soliton / thm:three-dimensional-gradient-shrinker-classification / thm:kappa-solution-compactness / thm:kappa-solution-canonical-neighborhoods / thm:hamilton-compactness-generalized-flows / lem:gaussian-coordinates-convergence / thm:volume-injectivity-radius / thm:soul-structure-nonnegative-curvature",
+      "path": "PoincareConjecture/blueprint/src/chapters/{analytic-control-and-noncollapsing,kappa-solutions-and-surgery-continuation,foundations-and-interfaces}.tex and formalized-sources/MorganTian/blueprint/src/chapters/{Ch05,Ch09,Ch01}_*.tex",
+      "what": "LaTeX theorems/definitions marked \\notready. No matching Lean theorem names were found.",
+      "note": "These are source contracts, not parsed Lean results."
+    }
+  ],
+  "blockers": [
+    {
+      "missing": "Lean kappa-solution predicate (ancient + complete + nonflat + bounded nonnegative curvature operator + kappa-noncollapsing on all finite scales)",
+      "needed_by": "every Stage 3 classification/structure theorem in kappa-solutions-and-surgery-continuation.tex"
+    },
+    {
+      "missing": "C^∞ geometric-limit / Hamilton compactness producer. Ch05 supplies pointed GH only.",
+      "needed_by": "blow-up limits, kappa-solution compactness, asymptotic shrinker production (thm:hamilton-compactness-generalized-flows, thm:geometric-limit-existence, lem:gaussian-coordinates-convergence)"
+    },
+    {
+      "missing": "thm:volume-injectivity-radius as a Lean theorem. Only riemannianMeasure_ball_mem_Icc_of_metricTangentBall_jacobian_bounds exists, and it assumes Jacobian bounds rather than producing inj-radius from volume+curvature.",
+      "needed_by": "geometric-limit existence proof in Ch05_ConvergenceResults.tex"
+    },
+    {
+      "missing": "curvature-operator-norm |Rm| (inner product on ⋀² not built, per CurvatureOperator.lean)",
+      "needed_by": "bounded-curvature hypothesis in def:kappa-solution and volume-injectivity"
+    },
+    {
+      "missing": "reduced length and reduced volume (zero Lean hits)",
+      "needed_by": "thm:asymptotic-gradient-shrinking-soliton and Kleiner--Lott noncollapsing theorem 28.2"
+    },
+    {
+      "missing": "diffeomorphism smoothness of vector-field flow; global time-dependent diffeomorphism family generated by Y_t = X/σ(t)",
+      "needed_by": "claim:soliton-generation; TimeDependentFlowBox is local on compact M"
+    },
+    {
+      "missing": "canonical cap / C-component / ε-round component / strong canonical-neighborhood control as Lean types",
+      "needed_by": "lem:canonical-neighborhood-stability and thm:kappa-solution-canonical-neighborhoods. Only EpsilonNeck / EvolvingEpsilonNeck exist."
+    },
+    {
+      "missing": "soul theorem, curvature-null-splitting, Busemann superharmonicity (Busemann.lean has Lipschitz/ray identities only)",
+      "needed_by": "kappa-solution trichotomy, splitting at infinity, positive-curvature neck-scale bound"
+    }
+  ],
+  "readiness_summary": "No Stage 3 classification, compactness, or canonical-neighborhood existence theorem is ready to prove. PoincareConjecture Lean is collar/topology and can run in parallel. The three candidates below do not depend on that branch. If a task would only repackage a conclusion as a hypothesis, it was omitted.",
+  "candidate_tasks": [
+    {
+      "title": "Kappa-solution predicate on an existing smooth complete Ricci flow",
+      "readiness": "needs_definition",
+      "proposed_Lean_statement_or_precise_contract": "Define a Prop-valued structure, e.g. KleinerLott.IsKappaSolution or MorganTianLib.IsKappaSolution, on an existing flow object (prefer KleinerLott.SmoothCompleteRicciFlowOn (Iic 0) with toFlowData, or MorganTianLib.IsRicciFlowOn g (Iic 0)). Fields, all explicit: 0 < kappa; connectedness; every time-slice complete (already in SmoothCompleteRicciFlowOn.complete); nonflat (scalar curvature not identically zero on some slice); HasNonnegativeCurvatureOperator of the slice curvature form at every (p,t); a quantitative |Rm|-bound on every slice once curvature-operator-norm exists; IsKappaNoncollapsedOnScale flow.toFlowData (finrank E) T kappa rho for every finite rho (T covering the ancient interval). Do not include roundness, shrinker classification, soul, or canonical-neighborhood alternatives.",
+      "imports": [
+        "KleinerLott.RicciFlow.SmoothRicciFlow",
+        "KleinerLott.RicciFlow.Noncollapsing",
+        "MorganTianLib.Ch03.RicciFlow.Basic",
+        "MorganTianLib.Ch01.CurvatureOperator"
+      ],
+      "known_dependencies": [
+        "KleinerLott.SmoothCompleteRicciFlowOn",
+        "KleinerLott.IsKappaNoncollapsedOnScale",
+        "MorganTianLib.IsRicciFlowOn",
+        "MorganTianLib.HasNonnegativeCurvatureOperator"
+      ],
+      "missing_dependencies": [
+        "curvature-operator-norm |Rm| on ⋀²",
+        "nonflat predicate on a Ricci-flow family",
+        "adapter identifying MorganTian ricciTensorAt / curvature form with KleinerLott.RiemannCurvatureFamily",
+        "ancient-interval convention Iic 0 vs Iio 0 ∪ {0}"
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+        "formalized-sources/MorganTian/blueprint/src/chapters/Ch09_KappaAncientSolutions.tex",
+        "formalized-sources/KleinerLott/KleinerLott/RicciFlow/Noncollapsing.lean",
+        "formalized-sources/KleinerLott/KleinerLott/RicciFlow/SmoothRicciFlow.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/CurvatureOperator.lean"
+      ]
+    },
+    {
+      "title": "C^∞ Gaussian-coordinate compactness of curvature-bounded balls",
+      "readiness": "needs_definition",
+      "proposed_Lean_statement_or_precise_contract": "Source contract (blueprint lem:gaussian-coordinates-convergence, not a Lean theorem): given n-dimensional metric balls (B_k, h_k) of common radius r, covariant curvature bounds |∇^ℓ Rm(h_k)| ≤ C(ℓ) on each B_k, and the exponential map at the center a diffeomorphism from the tangent ball of radius r onto B_k, after isometric identification of the tangent spaces with Euclidean n-space the pulled-back metrics on the Euclidean ball subconverge in the C^∞ topology uniformly on compact subsets. This is the local Riemannian producer that Ch05.Foundations explicitly deferred; it does not assume Hamilton compactness or kappa-solutions. Do not wrap the C^∞ limit into a HasGeometricLimit hypothesis.",
+      "imports": [
+        "MorganTianLib.Ch05.Foundations",
+        "MorganTianLib.Ch01.ExpBallDiffeo",
+        "MorganTianLib.Ch01.CutLocus",
+        "MorganTianLib.Ch01.Metric"
+      ],
+      "known_dependencies": [
+        "MorganTianLib.PartialGeometricLimitData (metric GH adapter only)",
+        "MorganTianLib.metricExpBallDiffeomorph_of_le_injectivityRadius",
+        "MorganTianLib.injectivityRadius"
+      ],
+      "missing_dependencies": [
+        "C^∞ topology / Arzela–Ascoli on RiemannianMetric over a Euclidean ball",
+        "uniform C^ℓ bounds on metric coefficients in Gaussian coordinates from |∇^ℓ Rm| bounds",
+        "thm:volume-injectivity-radius if one wants to discharge the exp-diffeomorphism hypothesis from volume+curvature rather than assume it"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/blueprint/src/chapters/Ch05_ConvergenceResults.tex",
+        "formalized-sources/MorganTian/MorganTianLib/Ch05/Foundations.lean",
+        "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/VolumeInjectivityBridge.lean"
+      ]
+    },
+    {
+      "title": "Restrict an evolving epsilon-neck of depth at least one to a strong epsilon-neck",
+      "readiness": "ready_for_statement_review",
+      "proposed_Lean_statement_or_precise_contract": "theorem EvolvingEpsilonNeck.toStrongEpsilonNeck {epsilon : ℝ} {g : ℝ → RiemannianMetric I M} {J : Set ℝ} {x : M} {t0 : J} {tau : ℝ} (N : EvolvingEpsilonNeck epsilon g J x t0 tau) (htau : 1 ≤ tau) : StrongEpsilonNeck epsilon g J x t0. Construction: restrict referenceMetricFamily and normalizedMetricFamily along the inclusion evolvingEpsilonNeckTimeSet 1 ⊆ evolvingEpsilonNeckTimeSet tau (Ioc (-1) 0 ⊆ Ioc (-tau) 0); inherit flow, centralNeck, pullback identity, standard-cylinder identity, and EpsilonCloseFamily (quantified over the smaller parameter type). This is the truncation step in lem:canonical-neighborhood-stability(2). It does not assume caps, C-components, or kappa-solutions.",
+      "imports": [
+        "MorganTianLib.Ch03.RicciFlow.EvolvingEpsilonNeck",
+        "MorganTianLib.Ch02.EpsilonClose"
+      ],
+      "known_dependencies": [
+        "MorganTianLib.EvolvingEpsilonNeck",
+        "MorganTianLib.StrongEpsilonNeck",
+        "MorganTianLib.IsStandardShrinkingCylinderFamily",
+        "MorganTianLib.EpsilonCloseFamily",
+        "MorganTianLib.evolvingEpsilonNeckTimeSet"
+      ],
+      "missing_dependencies": [],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeck.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeckConsequences.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean",
+        "PoincareConjecture/blueprint/src/chapters/kappa-solutions-and-surgery-continuation.tex"
+      ]
+    }
+  ]
+}

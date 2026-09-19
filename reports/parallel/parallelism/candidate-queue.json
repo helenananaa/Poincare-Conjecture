@@ -1,0 +1,278 @@
+[
+  {
+    "scope": "analytic-control",
+    "title": "Produce the |nabla Rm|^2 evolution inequality from Ricci flow",
+    "worker_readiness_label": "ready_for_statement_review",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "Time derivative of |nabla Rm|^2 including connection/metric evolution and commutation of nabla with partial_t Rm",
+      "Star-product / cubic-to-linear bound converting Q(Rm,nabla Rm) into c|Rm||nabla Rm|^2"
+    ],
+    "evidence_paths": [
+      "formalized-sources/Topping/Topping/MaximumPrinciple/GradientEstimate.lean",
+      "formalized-sources/Topping/Topping/RicciFlow/CurvatureNormVariation.lean",
+      "formalized-sources/Topping/Topping/MaximumPrinciple/HigherDerivativeEstimate.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ShiFirstDerivative.lean",
+      "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex"
+    ]
+  },
+  {
+    "scope": "analytic-control",
+    "title": "Volume-ratio clause of local volume control, without injectivity radius",
+    "worker_readiness_label": "ready_for_statement_review",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "Explicit Ricci-trace lower bound Ric >= -(n-1)K g from sectional >= -K (or from the existing |Ric(v,v)| <= n K g(v,v), if that coarser constant is accepted)",
+      "Positive minimum of modelBallVolume_{-1}(s)/s^n on (0,1]",
+      "Transfer of Vol B(p,r0)>=v0 through rescaling to a unit-ball volume lower bound"
+    ],
+    "evidence_paths": [
+      "formalized-sources/MorganTian/MorganTianLib/Ch01/BishopGromovManifold.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch01/CurvatureNormManifold.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch01/MetricRescaling.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch01/VolumeInjectivityBridge.lean",
+      "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex"
+    ]
+  },
+  {
+    "scope": "analytic-control",
+    "title": "Define L-length on an ordinary Ricci-flow domain",
+    "worker_readiness_label": "needs_definition",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "Lean type for backward spacetime paths with time constraint t=T-tau",
+      "Scalar-curvature evaluation along such paths",
+      "Horizontal/spatial velocity relative to the time field (ordinary product case is enough)"
+    ],
+    "evidence_paths": [
+      "formalized-sources/MorganTian/blueprint/src/chapters/Ch06_ComparisonGeometry.tex",
+      "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+      "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ParabolicNeighborhood.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/Basic.lean"
+    ]
+  },
+  {
+    "scope": "canonical-neighborhoods",
+    "title": "Kappa-solution predicate on an existing smooth complete Ricci flow",
+    "worker_readiness_label": "needs_definition",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "curvature-operator-norm |Rm| on ⋀²",
+      "nonflat predicate on a Ricci-flow family",
+      "adapter identifying MorganTian ricciTensorAt / curvature form with KleinerLott.RiemannCurvatureFamily",
+      "ancient-interval convention Iic 0 vs Iio 0 ∪ {0}"
+    ],
+    "evidence_paths": [
+      "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+      "formalized-sources/MorganTian/blueprint/src/chapters/Ch09_KappaAncientSolutions.tex",
+      "formalized-sources/KleinerLott/KleinerLott/RicciFlow/Noncollapsing.lean",
+      "formalized-sources/KleinerLott/KleinerLott/RicciFlow/SmoothRicciFlow.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch01/CurvatureOperator.lean"
+    ]
+  },
+  {
+    "scope": "canonical-neighborhoods",
+    "title": "C^∞ Gaussian-coordinate compactness of curvature-bounded balls",
+    "worker_readiness_label": "needs_definition",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "C^∞ topology / Arzela–Ascoli on RiemannianMetric over a Euclidean ball",
+      "uniform C^ℓ bounds on metric coefficients in Gaussian coordinates from |∇^ℓ Rm| bounds",
+      "thm:volume-injectivity-radius if one wants to discharge the exp-diffeomorphism hypothesis from volume+curvature rather than assume it"
+    ],
+    "evidence_paths": [
+      "formalized-sources/MorganTian/blueprint/src/chapters/Ch05_ConvergenceResults.tex",
+      "formalized-sources/MorganTian/MorganTianLib/Ch05/Foundations.lean",
+      "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+      "formalized-sources/MorganTian/MorganTianLib/Ch01/VolumeInjectivityBridge.lean"
+    ]
+  },
+  {
+    "scope": "canonical-neighborhoods",
+    "title": "Restrict an evolving epsilon-neck of depth at least one to a strong epsilon-neck",
+    "worker_readiness_label": "ready_for_statement_review",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [],
+    "evidence_paths": [
+      "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeck.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeckConsequences.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean",
+      "PoincareConjecture/blueprint/src/chapters/kappa-solutions-and-surgery-continuation.tex"
+    ]
+  },
+  {
+    "scope": "finite-extinction",
+    "title": "Forward-Dini comparison with finitely many downward jumps",
+    "worker_readiness_label": "ready_for_statement_review",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [],
+    "evidence_paths": [
+      "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex",
+      "PoincareConjecture/blueprint/src/chapters/extinction-and-component-topology.tex",
+      "formalized-sources/MorganTian/MorganTianLib/Ch02/ForwardDifference.lean"
+    ]
+  },
+  {
+    "scope": "finite-extinction",
+    "title": "Loop-width comparison ODE integrating-factor formula",
+    "worker_readiness_label": "ready_for_statement_review",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [],
+    "evidence_paths": [
+      "PoincareConjecture/blueprint/src/chapters/extinction-and-component-topology.tex"
+    ]
+  },
+  {
+    "scope": "finite-extinction",
+    "title": "Coupled length and total-curvature exponential comparison",
+    "worker_readiness_label": "ready_for_statement_review",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "The geometric producers L'(t) ≤ ∫(C2-k²) ds and Θ' ≤ (C1+C2)Θ + C1 L remain unformalized (lem:curve-flow-length-total-curvature-evolution). This task is only the ODE comparison, not those identities."
+    ],
+    "evidence_paths": [
+      "PoincareConjecture/blueprint/src/chapters/curve-shrinking-estimates.tex",
+      "formalized-sources/MorganTian/blueprint/src/chapters/Ch18_FiniteTimeExtinction.tex"
+    ]
+  },
+  {
+    "scope": "neck-producers",
+    "title": "Normalize the finite neck cylinder onto Sphere × Ioo(-1,1)",
+    "worker_readiness_label": "ready_for_statement_review",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "ChartedSpace/IsManifold on EpsilonNeckSphere × Ioo(-1,1) if stated as a Diffeomorph",
+      "Bundled diffeomorphism EpsilonNeckAxis ≃ ℝ (the coordinate p.2 0 is used but not packaged)"
+    ],
+    "evidence_paths": [
+      "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/AffineTimeDiffeomorph.lean",
+      "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/Core.lean"
+    ]
+  },
+  {
+    "scope": "neck-producers",
+    "title": "Package a neck parametrization as a PartialDiffeomorph on Sphere × ℝ",
+    "worker_readiness_label": "needs_mathematical_design",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "Declared conversion Diffeomorph of an Opens subtype → PartialDiffeomorph of the ambient product",
+      "Decision whether N stays modeled by I or is recharted on V×ℝ",
+      "Axis type EuclideanSpace ℝ (Fin 1) versus ℝ"
+    ],
+    "evidence_paths": [
+      "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ComplementClosure.lean",
+      "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ProductChartSmooth.lean"
+    ]
+  },
+  {
+    "scope": "neck-producers",
+    "title": "Inhabit the round cylinder without assuming its curvature",
+    "worker_readiness_label": "needs_mathematical_design",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "Bridge from DCImmersedPatch curvature on punctured F to Levi-Civita of DCInducedMetric on EpsilonNeckSphere",
+      "Product-metric constructor on EpsilonNeckCylinderModel"
+    ],
+    "evidence_paths": [
+      "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSphereExamples.lean",
+      "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh6Sphere.lean"
+    ]
+  },
+  {
+    "scope": "surgery-continuation",
+    "title": "Order-zero quadratic-form comparison from EpsilonClose",
+    "worker_readiness_label": "ready_for_statement_review",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "A tensor-norm comparison |T(v,v)| <= |T|_{g0} |v|_{g0}^2 extracted from the orthonormal-frame contraction already used inside metricCovariantDerivativeNormSq (order 0). Orthonormal frames exist via Ch02/OrthoFrame exists_orthonormalFrame; that lemma was not re-parsed here as a completed proof."
+    ],
+    "evidence_paths": [
+      "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex"
+    ]
+  },
+  {
+    "scope": "surgery-continuation",
+    "title": "Round-cylinder RiemannianMetric on the transported neck domain",
+    "worker_readiness_label": "needs_definition",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "A RiemannianMetric transport along ContinuousLinearEquiv / model change from EpsilonNeckProductModel to EpsilonNeckCylinderModel. DCProductMetric inhabits the native product model; EpsilonClose contracts tensors on the inner-product model R^3.",
+      "Euclidean RiemannianMetric on EpsilonNeckAxis (or on EuclideanSpace R (Fin 1)) packaged for DCProductMetric."
+    ],
+    "evidence_paths": [
+      "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch02/LevelSetInducedMetric.lean",
+      "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh1.lean"
+    ]
+  },
+  {
+    "scope": "surgery-continuation",
+    "title": "Length-metric Lipschitz gluing of finitely many surgery pieces",
+    "worker_readiness_label": "ready_for_statement_review",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "If the intended consumer is a Riemannian 3-manifold after cutting along embedded two-spheres, the cut pieces as length spaces and the ambient Riemannian distance (MorganTianLib.canonicalMetricSpace) must be identified. That identification is not required to state or prove the abstract gluing lemma."
+    ],
+    "evidence_paths": [
+      "PoincareConjecture/blueprint/src/chapters/kappa-solutions-and-surgery-continuation.tex",
+      "shared/Shared/MetricGeometry/LengthSpace.lean",
+      "formalized-sources/MorganTian/MorganTianLib/Ch01/MetricRescalingInjectivity.lean"
+    ]
+  },
+  {
+    "scope": "topology-endgame",
+    "title": "Define the two sphere bundles over the circle (blueprint def:sphere-bundles-over-circle)",
+    "worker_readiness_label": "needs_definition",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "Antipodal Sphere2 ≃ₜ Sphere2 (and Sphere2 ≃ₘ Sphere2 if a diffeomorphism is required)",
+      "ChartedSpace/IsManifold on MappingTorus.Space Sphere2 if EMinus must be smooth in this task",
+      "lem:two-sphere-diffeomorphism-classes, which must not be folded into the definition"
+    ],
+    "evidence_paths": [
+      "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+      "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/MappingTorus.lean",
+      "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/AbstractBundleMappingTorus.lean",
+      "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/BundleMonodromy.lean"
+    ]
+  },
+  {
+    "scope": "topology-endgame",
+    "title": "Product clause of sphere-bundle fundamental group (blueprint lem:sphere-bundle-fundamental-group, E+ only)",
+    "worker_readiness_label": "ready_for_statement_review",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "PoincareConjecture SimplyConnectedSpace Sphere2 instance",
+      "def:sphere-bundles-over-circle if phrased as EPlus rather than the raw product; the product form does not wait on that definition",
+      "EMinus and its π₁ (waits on candidate 1)"
+    ],
+    "evidence_paths": [
+      "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+      "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Sphere.lean",
+      "formalized-sources/Hatcher/HatcherLib/Ch1/Sphere.lean",
+      "formalized-sources/Hatcher/HatcherLib/Ch1/Circle.lean"
+    ]
+  },
+  {
+    "scope": "topology-endgame",
+    "title": "Construction, not uniqueness, of a smooth connected sum (blueprint def:smooth-connected-sum)",
+    "worker_readiness_label": "needs_definition",
+    "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+    "missing_dependencies": [
+      "PoincareConjecture type of smoothly embedded closed 3-ball with spherical boundary",
+      "Quotient manifold structure for two codimension-zero pieces identified along boundary spheres",
+      "Orientation-reversing predicate on Diff(S²), deferrable if the gluing map is given data",
+      "lem:two-sphere-diffeomorphism-classes and 3D Schoenflies, which must not be hidden in the definition"
+    ],
+    "evidence_paths": [
+      "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+      "PoincareConjecture/PoincareConjecture/Basic.lean",
+      "PoincareConjecture/lakefile.lean"
+    ]
+  }
+]

@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "tasks": [
+    {
+      "id": "affine-diffeomorph",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_axial_affine_diffeomorph",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/AffineDiffeomorph.lean",
+      "status": "PASS",
+      "sha256": "753a207e64b6f53fafa2288acef4c6b184b0cc1e035097bf58823cb3fce901f8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "restrict-smooth-neck",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_restricted_smooth_neck",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/RestrictSmoothNeck.lean",
+      "status": "PASS",
+      "sha256": "425d77d3189de7d31a495cfe6879326d6d4307aac46cd48e24ab328086e6aff2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "axis-real-transport",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_native_axis_real_diffeomorph",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/AxisRealTransport.lean",
+      "status": "PASS",
+      "sha256": "14cc7f67e8cbce0bbb7a7ee777975e7073e95ace341d63c575228e6ac34ac95a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "central-embedding",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.neck_central_slice_isClosedEmbedding",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/CentralEmbedding.lean",
+      "status": "PASS",
+      "sha256": "aa2351b2085b5f5b4acd6eb204c1f7e594ec9217688743b6dfb9408959808dbf",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "uniform-tube",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.compact_cross_section_uniform_neck_width",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/UniformTube.lean",
+      "status": "PASS",
+      "sha256": "5eb0efd35a148b9135d7923b0d7aa43d55a7749db5fd46435244376f4633589a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "side-normalization",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_normalized_oneSided_neck",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/SideNormalization.lean",
+      "status": "PASS",
+      "sha256": "6b08700144272864eb336973e6db910c4455d10df920387400d9b4ab25992802",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "model_calls": 0
+}

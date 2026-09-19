@@ -1,0 +1,253 @@
+{
+  "scope": "Surgery reconstruction, restart, and continuation. Collar-branch Topology.FiberSaturation.SmoothCollar/ClosedCollar/DomainAtlas is treated as a parallel track and is not a dependency of the candidates below.",
+  "inspected_files": [
+    "PoincareConjecture/blueprint/src/chapters/kappa-solutions-and-surgery-continuation.tex",
+    "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex",
+    "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+    "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+    "PoincareConjecture/blueprint/important-statements.yaml",
+    "PoincareConjecture/blueprint/review/current-source-review.md",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/LevelSetInducedMetric.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/OrthoFrame.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeck.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeckConsequences.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EndpointPatching.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EndpointRestartPatching.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EndpointRestartControl.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/EndpointPatching.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSolutions.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSphereExamples.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/SmoothPatchingFlow.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EndpointLocalGerm.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/GeneralizedRicciFlow.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/Chapter1BasicRemaining.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/MetricRescaling.lean",
+    "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh1.lean",
+    "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh6Sphere.lean",
+    "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Metric/RiemannianMetric.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/NeckCoordinates.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Sphere.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ComplementaryComponent.lean",
+    "shared/Shared/MetricGeometry/LengthSpace.lean"
+  ],
+  "existing_results": [
+    {
+      "kind": "lean_structure",
+      "declaration": "MorganTianLib.EpsilonClose",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean",
+      "hypotheses": "Prop: 0 < epsilon < 1/2 and exists C < epsilon^2 such that forall p, epsilonClosenessDensity epsilon g0 g p <= C. Density is the order-0 g0-norm-squared of (g-g0) plus summed covariant derivatives through floor(1/epsilon). No comparison theorem is proved from this definition."
+    },
+    {
+      "kind": "lean_structure",
+      "declaration": "MorganTianLib.EpsilonNeckStructure",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "hypotheses": "Fields: finrank E = 3; diffeomorphism phi from epsilonNeckDomain epsilon; referenceMetric with IsRoundCylinderMetric; normalizedPullbackMetric equal pointwise to canonicalScalarCurvature g x times pullback of g; EpsilonClose of those two metrics; center on the s=0 slice. This is a data bundle, not a proved existence theorem."
+    },
+    {
+      "kind": "lean_def",
+      "declaration": "MorganTianLib.IsRoundCylinderMetric",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "hypotheses": "Conjunction: roundSphereMetric.leviCivitaConnection.IsConstantCurvature roundSphereMetric (1/2) AND the pointwise inner-product split into roundSphereMetric on the sphere factor plus Euclidean inner on the axis. No inhabitant is constructed. The first conjunct is not proved."
+    },
+    {
+      "kind": "lean_theorem",
+      "declaration": "MorganTianLib.roundSphereMetric_isConstantCurvature_of_unitRoundSphereMetric",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "hypotheses": "Assumes unitRoundSphereMetric.leviCivitaConnection.IsConstantCurvature unitRoundSphereMetric 1. Concludes the same for roundSphereMetric with constant 1/2 via rescaledMetric_isConstantCurvature. File comment states the unit-sphere producer is missing; this is not an unconditional curvature theorem."
+    },
+    {
+      "kind": "lean_structure",
+      "declaration": "MorganTianLib.EvolvingEpsilonNeck",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeck.lean",
+      "hypotheses": "Requires IsRicciFlowOn g J, tau>0, positive central scalar curvature, AmbientEpsilonNeck at t0, actual-time map t0 + R^{-1}*s landing in J, IsStandardShrinkingCylinderFamily, pointwise pullback identity, central-slice agreement, EpsilonCloseFamily. StrongEpsilonNeck is the tau=1 abbrev. No existence producer."
+    },
+    {
+      "kind": "lean_theorem",
+      "declaration": "MorganTianLib.EvolvingEpsilonNeck.actualTime_mem_domain",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeckConsequences.lean",
+      "hypotheses": "From a stored EvolvingEpsilonNeck: each rescaled time s has actual time in J intersect Ioc(t0 - R^{-1}*tau, t0). Affine-time bookkeeping only."
+    },
+    {
+      "kind": "lean_theorem",
+      "declaration": "MorganTianLib.SmoothEndpointRestart.isRicciFlowOn",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EndpointPatching.lean",
+      "hypotheses": "From SmoothEndpointRestart a b c gLeft gRight (a<b<c, IsRicciFlowOn on Ico a b and Ico b c, IsSmoothMetricFamilyOn of patchedMetricFamily on Ico a c, EndpointCoefficientLimits): concludes IsRicciFlowOn of the patched family on Ico a c. Same-manifold join; does not cut necks or insert caps."
+    },
+    {
+      "kind": "lean_theorem",
+      "declaration": "MorganTianLib.SmoothEndpointRestart.of_local_germ",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EndpointRestartPatching.lean",
+      "hypotheses": "a<b<c, IsRicciFlowOn gLeft (Ico a b), IsRicciFlowOn gRight (Ico b c), LocalSmoothEndpointGerm, EndpointCoefficientLimits. Assembles SmoothEndpointRestart. Germ and limits remain named inputs."
+    },
+    {
+      "kind": "lean_theorem",
+      "declaration": "MorganTianLib.smoothEndpointRestart_of_ricciQuadraticControlOn",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EndpointRestartControl.lean",
+      "hypotheses": "0<T<c, C>=0, IsRicciFlowOn gLeft (Ico 0 T) and gRight (Ico T c), RicciQuadraticControlOn on the left, supplied Tendsto of metric and Ricci coefficients to the right endpoint, SmoothEndpointExtension. Concludes SmoothEndpointRestart and positivity of the right metric at T. Does not produce the right-hand flow, the Ricci limit, or the smooth germ."
+    },
+    {
+      "kind": "lean_theorem",
+      "declaration": "MorganTianLib.isRicciFlowEquationOn_einsteinScale",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSolutions.lean",
+      "hypotheses": "IsEinsteinTensor g0 lam, positive scale u with HasDerivAt u (-2*lam). Concludes IsRicciFlowEquationOn of t |-> rescaledMetric g0 (u t)."
+    },
+    {
+      "kind": "lean_def",
+      "declaration": "MorganTianLib.shrinkingRoundSphereMetricFamily",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSphereExamples.lean",
+      "hypotheses": "For t<1, rescaledMetric roundSphereMetric (1-t). Unconditional metric-coefficient, distance, and sectional-curvature-rescaling identities. Not a 3-dimensional cylinder flow."
+    },
+    {
+      "kind": "lean_theorem",
+      "declaration": "MorganTianLib.spherePatch_sectionalCurvature_one",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSphereExamples.lean",
+      "hypotheses": "do Carmo immersed-patch data: tangent fields X,Y on punctured F, ||p||=1, orthonormal at p. Concludes induced curvature numerator 1. Not the bundled unitRoundSphereMetric.IsConstantCurvature statement."
+    },
+    {
+      "kind": "lean_theorem",
+      "declaration": "MorganTianLib.DCProductMetric_metricInner_mk",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/LevelSetInducedMetric.lean",
+      "hypotheses": "Unconditional: (DCProductMetric g1 g2).metricInner (p1,p2) (u1,u2) (u1',u2') = g1.metricInner p1 u1 u1' + g2.metricInner p2 u2 u2'. Product lives on I1.prod I2, not on EpsilonNeckCylinderModel."
+    },
+    {
+      "kind": "lean_def",
+      "declaration": "Riemannian.DCProductMetric",
+      "path": "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh1.lean",
+      "hypotheses": "Constructs a RiemannianMetric on M1 x M2 with model I1.prod I2 from two factor metrics."
+    },
+    {
+      "kind": "lean_def",
+      "declaration": "MorganTianLib.rescaledMetric",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch01/Chapter1BasicRemaining.lean",
+      "hypotheses": "Constant c>0 only: inner x := c • g.inner x. No pointwise conformal factor f : M -> R>0."
+    },
+    {
+      "kind": "lean_theorem",
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.neck_coordinates_cylinder",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/NeckCoordinates.lean",
+      "hypotheses": "Open J, homeomorphism e : N ~= Sphere2 x J, open connected U, FiberSaturated (e '' frontier U), compact closure U. Concludes U is a product cylinder in those coordinates. Homeomorphism only; no Ricci metric, no epsilon-neck, no surgery."
+    },
+    {
+      "kind": "lean_theorem",
+      "declaration": "Shared.edist_le_pathLength",
+      "path": "shared/Shared/MetricGeometry/LengthSpace.lean",
+      "hypotheses": "In a PseudoEMetricSpace, pathLength of any Path x y is at least edist x y. Shared.LengthSpace is the class asserting equality with the infimum. Not a surgery-piece gluing theorem."
+    },
+    {
+      "kind": "blueprint_nl_claim",
+      "declaration": "thm:local-neck-surgery / def:interpolating-surgery-metric / def:standard-surgery-cap-model",
+      "path": "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex",
+      "hypotheses": "All marked \notready. No matching Lean declarations. Interpolating tensor, standard cap g0 on R^3, and pinching/nonexpansion conclusions are natural-language only."
+    },
+    {
+      "kind": "blueprint_nl_claim",
+      "declaration": "lem:controlled-surgery-restart / thm:strong-canonical-neighborhood-extension / thm:finite-interval-surgery-bound / thm:all-time-controlled-surgery-flow / lem:single-surgery-connected-sum-reconstruction",
+      "path": "PoincareConjecture/blueprint/src/chapters/kappa-solutions-and-surgery-continuation.tex",
+      "hypotheses": "All marked \notready. Depend on def:controlled-ricci-flow-with-surgery, thm:local-neck-surgery, canonical-neighborhood producers, and Kleiner-Lott cutoff. None of those producers exist as Lean theorems."
+    }
+  ],
+  "blockers": [
+    {
+      "missing_producer": "unitRoundSphereMetric.leviCivitaConnection.IsConstantCurvature unitRoundSphereMetric 1",
+      "needed_by": "IsRoundCylinderMetric first conjunct; shrinking-cylinder Einstein/Ricci-flow identification; standard-cap constant-curvature 1/4 tip. do Carmo spherePatch_sectionalCurvature_one is an immersed-patch statement, not this bundled producer."
+    },
+    {
+      "missing_definition": "RiemannianMetric on epsilonNeckDomain modelled by EpsilonNeckCylinderModel witnessing the inner-product split of IsRoundCylinderMetric",
+      "needed_by": "Reference metric of an epsilon-neck; comparison target of EpsilonClose; interpolating surgery metric on s in [1,2] against eta g0. DCProductMetric exists only on the native product model I1.prod I2."
+    },
+    {
+      "missing_definition": "Pointwise conformal rescaling: given ContMDiff f : M -> R with 0 < f x, the metric x |-> f x • g.inner x",
+      "needed_by": "def:interpolating-surgery-metric uses e^{-2f} times a convex combination of pullback and g0, with f(s)=C0*delta*exp(-q/s) flat at 0. Only constant rescaledMetric exists."
+    },
+    {
+      "missing_definition": "Standard surgery-cap model (complete rotationally symmetric g0 on R^3, tip ball of sectional curvature 1/4, cylindrical isometry outside B(p0,A0))",
+      "needed_by": "thm:local-neck-surgery, lem:local-surgery-standard-cap-convergence, lem:controlled-surgery-restart, volume-loss, first-failure cap encounter."
+    },
+    {
+      "missing_definition": "Lean def:controlled-ricci-flow-with-surgery and def:ricci-flow-with-cutoff",
+      "needed_by": "Every Stage 4 continuation/reconstruction theorem. GeneralizedRicciFlow is a chartwise equation on a fixed spacetime, not a surgery spacetime with cutoff."
+    },
+    {
+      "missing_producer": "LocalSmoothEndpointGerm and EndpointCoefficientLimits from actual Ricci-flow estimates (not as hypotheses)",
+      "needed_by": "True analytic restart even on a fixed manifold. Current SmoothEndpointRestart* theorems consume these as named inputs."
+    }
+  ],
+  "readiness_summary": "No Stage 4 surgery-restart, first-failure, finite-surgery-count, all-time continuation, or one-surgery reconstruction theorem is ready. Those remain blueprint_nl_claim nodes marked \\notready. Endpoint restart in Lean is same-manifold patching with the analytic germ/limits assumed. Independent next work can proceed beside the collar branch on neck-metric comparison, cylinder-metric packaging, and length-space gluing.",
+  "candidate_tasks": [
+    {
+      "title": "Order-zero quadratic-form comparison from EpsilonClose",
+      "proposed_Lean_statement_or_precise_contract": "On a common manifold (intended instance: epsilonNeckDomain epsilon with EpsilonNeckCylinderModel), assume EpsilonClose epsilon g0 g. Then for every p and tangent v, |g.metricInner p v v - g0.metricInner p v v| <= Real.sqrt (metricCovariantDerivativeNormSq g0 g 0 p) * g0.metricInner p v v, and therefore g.metricInner p v v >= (1 - epsilon) * g0.metricInner p v v whenever the order-0 density is < epsilon^2 (which EpsilonClose supplies). Specialization: if S : EpsilonNeckStructure epsilon g x, the same comparison holds between S.normalizedPullbackMetric and S.referenceMetric. Do not assume IsRoundCylinderMetric, pinching, or a surgery cap. This is the source of the convention-corrected factor eta = 1 - delta used by radial nonexpansion, not a restatement of thm:local-neck-surgery.",
+      "imports": [
+        "MorganTianLib.Ch02.EpsilonClose",
+        "MorganTianLib.Ch02.EpsilonNeck",
+        "MorganTianLib.Ch02.OrthoFrame"
+      ],
+      "known_dependencies": [
+        "MorganTianLib.EpsilonClose",
+        "MorganTianLib.epsilonClosenessDensity",
+        "MorganTianLib.metricCovariantDerivativeNormSq",
+        "MorganTianLib.EpsilonNeckStructure.normalizedPullbackMetric",
+        "MorganTianLib.EpsilonNeckStructure.referenceMetric"
+      ],
+      "missing_dependencies": [
+        "A tensor-norm comparison |T(v,v)| <= |T|_{g0} |v|_{g0}^2 extracted from the orthonormal-frame contraction already used inside metricCovariantDerivativeNormSq (order 0). Orthonormal frames exist via Ch02/OrthoFrame exists_orthonormalFrame; that lemma was not re-parsed here as a completed proof."
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+        "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex"
+      ],
+      "readiness": "ready_for_statement_review"
+    },
+    {
+      "title": "Round-cylinder RiemannianMetric on the transported neck domain",
+      "proposed_Lean_statement_or_precise_contract": "Construct roundCylinderMetric (epsilon : R) : RiemannianMetric EpsilonNeckCylinderModel (epsilonNeckDomain epsilon) whose metricInner equals the split already written in IsRoundCylinderMetric (roundSphereMetric on the sphere factor plus Euclidean inner on the axis, transported by EuclideanSpace.finAddEquivProd). Prove only the inner-product identity, symmetry, positivity, von Neumann boundedness, and ContMDiff. Do not claim IsRoundCylinderMetric, because that also requires roundSphereMetric.leviCivitaConnection.IsConstantCurvature _ (1/2), which is not produced. Do not construct the standard surgery cap.",
+      "imports": [
+        "MorganTianLib.Ch02.EpsilonNeck",
+        "MorganTianLib.Ch02.LevelSetInducedMetric",
+        "DoCarmoLib.Riemannian.Manifold.DoCarmoCh1"
+      ],
+      "known_dependencies": [
+        "MorganTianLib.roundSphereMetric",
+        "MorganTianLib.epsilonNeckDomain",
+        "MorganTianLib.EpsilonNeckCylinderModel",
+        "Riemannian.DCProductMetric",
+        "MorganTianLib.DCProductMetric_metricInner_mk"
+      ],
+      "missing_dependencies": [
+        "A RiemannianMetric transport along ContinuousLinearEquiv / model change from EpsilonNeckProductModel to EpsilonNeckCylinderModel. DCProductMetric inhabits the native product model; EpsilonClose contracts tensors on the inner-product model R^3.",
+        "Euclidean RiemannianMetric on EpsilonNeckAxis (or on EuclideanSpace R (Fin 1)) packaged for DCProductMetric."
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/LevelSetInducedMetric.lean",
+        "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh1.lean"
+      ],
+      "readiness": "needs_definition"
+    },
+    {
+      "title": "Length-metric Lipschitz gluing of finitely many surgery pieces",
+      "proposed_Lean_statement_or_precise_contract": "Abstract length-space form of blueprint lem:length-metric-gluing, independent of Ricci flow and of collars. Let X be a length space covered by finitely many closed pieces X_1,...,X_m whose pairwise overlaps are the common boundary spheres (or, weaker: any finite closed cover). Let F_i : X_i -> Y be L-Lipschitz for the induced length metric of X_i, and assume F_i = F_j on X_i intersect X_j. Then the glued map F : X -> Y is L-Lipschitz for the ambient metric of X. Do not conclude a global Lipschitz bound from boundary agreement alone; the proof must use path subdivision and the length-space property. Do not mention homotopy type, connected sums, or controlled surgery flows.",
+      "imports": [
+        "Shared.MetricGeometry.LengthSpace",
+        "Mathlib.Topology.MetricSpace.Lipschitz"
+      ],
+      "known_dependencies": [
+        "Shared.LengthSpace (class: edist x y = inf pathLength)",
+        "Shared.pathLength",
+        "Shared.edist_le_pathLength"
+      ],
+      "missing_dependencies": [
+        "If the intended consumer is a Riemannian 3-manifold after cutting along embedded two-spheres, the cut pieces as length spaces and the ambient Riemannian distance (MorganTianLib.canonicalMetricSpace) must be identified. That identification is not required to state or prove the abstract gluing lemma."
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/kappa-solutions-and-surgery-continuation.tex",
+        "shared/Shared/MetricGeometry/LengthSpace.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/MetricRescalingInjectivity.lean"
+      ],
+      "readiness": "ready_for_statement_review"
+    }
+  ]
+}

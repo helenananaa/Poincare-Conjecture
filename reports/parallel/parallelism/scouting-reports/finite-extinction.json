@@ -1,0 +1,217 @@
+{
+  "scope": "Curve shrinking, sphere/loop width, and finite extinction. Reconnaissance only: no new proof claimed. PoincareConjecture Lean in this checkout is collar/fiber-saturation topology; Stages 5–6 exist as \\notready blueprint text, not Lean. MorganTianLib Lean ends at Ch01–Ch05 (no Ch18/Ch19). KleinerLott Lean is point-selection/pinching adapters, not extinction.",
+  "inspected_files": [
+    "PoincareConjecture/blueprint/src/chapters/curve-shrinking-estimates.tex",
+    "PoincareConjecture/blueprint/src/chapters/extinction-and-component-topology.tex",
+    "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex",
+    "PoincareConjecture/blueprint/src/content.tex",
+    "PoincareConjecture/blueprint/important-statements.yaml",
+    "PoincareConjecture/blueprint/review/current-source-review.md",
+    "PoincareConjecture/overview.md",
+    "PoincareConjecture/PoincareConjecture.lean",
+    "PoincareConjecture/PoincareConjecture/Basic.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Sphere.lean",
+    "formalized-sources/MorganTian/MorganTianLib.lean",
+    "formalized-sources/MorganTian/blueprint/src/chapters/Ch18_FiniteTimeExtinction.tex",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/ForwardDifference.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/CurveAcceleration.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/Basic.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/SpaceTime.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch04/ScalarComparison.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch04/ScalarMinimumBounds.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch04/ScalarMinimumRightDerivative.lean",
+    "formalized-sources/KleinerLott/KleinerLott.lean",
+    "formalized-sources/KleinerLott/KleinerLott/RicciFlow/FlowData.lean",
+    "formalized-sources/KleinerLott/KleinerLott/RicciFlow/Pinching.lean",
+    "formalized-sources/KleinerLott/KleinerLott/RicciFlow/SmoothRicciFlow.lean",
+    "formalized-sources/KleinerLott/KleinerLott/RicciFlow/PointSelection.lean",
+    "formalized-sources/Hatcher/HatcherLib/Ch0/HomotopyTheory.lean",
+    "formalized-sources/Hatcher/HatcherLib/Ch1/Sphere.lean",
+    "formalized-sources/Topping/Topping/ParabolicPDE/LinearParabolic.lean",
+    "formalized-sources/Topping/Topping/ParabolicPDE/SectionSchauder.lean"
+  ],
+  "declaration_status_convention": "Poincare blueprint items below are NATURAL-LANGUAGE claims (all marked \\notready). existing_results are PARSED Lean declarations with the hypotheses written in the source file. This scout did not compile Lean or print axioms; absence of sorry is not a completeness certificate.",
+  "existing_results": [
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.ForwardDiffQuotientLE",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/ForwardDifference.lean",
+      "hypotheses": "f : ℝ → ℝ, t c : ℝ. Predicate: ∀ r, c < r → ∀ᶠ z in 𝓝[>] t, slope f t z < r."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.le_of_forwardDiffQuotientLE",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/ForwardDifference.lean",
+      "hypotheses": "ContinuousOn f (Icc a b); ∀ t ∈ Ico a b, ForwardDiffQuotientLE f t (ψ t (f t)); ContDiffOn ℝ 1 (uncurry ψ) (Icc a b ×ˢ univ); ContinuousOn G (Icc a b); ∀ t ∈ Ico a b, HasDerivWithinAt G (ψ t (G t)) (Ici t) t; f a ≤ G a. Conclusion: ∀ t ∈ Icc a b, f t ≤ G t. Continuous (no-jump) case of blueprint thm:forward-dini-comparison."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.iSup_le_of_forwardDiff_max",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/ForwardDifference.lean",
+      "hypotheses": "X compact nonempty topological space; Continuous uncurry F and F'; ∀ x, ∀ s ∈ Ioo a b, HasDerivAt (F x) (F' x s) s; ContDiffOn ℝ 1 (uncurry ψ) on the strip; maximizers satisfy F' x t ≤ ψ t (iSup F · t); G solves G' = ψ(t,G) from the right with iSup F · a ≤ G a. Product-family form of time-slice max comparison, not the manifold vector-field form thm:time-slice-maximum-comparison."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.IsRicciFlowOn",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/Basic.lean",
+      "hypotheses": "structure on g : ℝ → RiemannianMetric I M and J : Set ℝ with J.OrdConnected, J.Nontrivial, IsSmoothMetricFamilyOn g J, and IsRicciFlowEquationOn (HasDerivWithinAt of metricInner equal to -2 ricciTensorAt)."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.scalarCurvatureMinimum_negative_lower_bound_of_isRicciFlowOn",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch04/ScalarMinimumBounds.lean",
+      "hypotheses": "Compact nonempty boundaryless manifold; IsRicciFlowOn g (Ico 0 T); t ∈ Ico 0 T; c ≤ 0; c ≤ scalarCurvatureMinimum (g 0). Conclusion: -(finrank E) * |c| / (2 * t * |c| + finrank E) ≤ scalarCurvatureMinimum (g t). Specializes to Rmin ≥ -6/(1+4t) if finrank=3 and c=-6, but only for smooth compact Ricci flow, not surgery."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "MorganTianLib.exists_hasCovDerivAlongAt_curveVelocity",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/CurveAcceleration.lean",
+      "hypotheses": "g : RiemannianMetric I M; γ : ℝ → M with ContMDiff 𝓘(ℝ,ℝ) I ∞ γ; t₀ : ℝ. Exists acceleration A with HasCovDerivAlongAt g γ (curveVelocity γ) t₀ A. Not a curve-shrinking flow."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "KleinerLott.RicciFlowData",
+      "path": "formalized-sources/KleinerLott/KleinerLott/RicciFlow/FlowData.lean",
+      "hypotheses": "structure with dist : ℝ → M → M → ℝ, curvatureNorm : M → ℝ → ℝ, volume : ℝ → Set M → ℝ. Scalar data only."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "KleinerLott.IsHamiltonIveyPinched",
+      "path": "formalized-sources/KleinerLott/KleinerLott/RicciFlow/Pinching.lean",
+      "hypotheses": "t : ℝ; scalarCurvature : P → ℝ; curvatureEigenvalues : P → Fin 3 → ℝ. Predicate 0 ≤ t and the 3D eigenvalue log inequality. Definition, not a theorem that a flow is pinched."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "KleinerLott.exists_point_selection_of_smooth_complete_ricci_flow_of_hopfRinow",
+      "path": "formalized-sources/KleinerLott/KleinerLott/RicciFlow/SmoothRicciFlow.lean",
+      "hypotheses": "ConnectedSpace M; SmoothCompleteRicciFlowOn (Icc 0 (epsilon^2)); 0 < alpha, A, epsilon; A*epsilon < (100*finrank E)⁻¹; t ∈ Ioc 0 (epsilon^2); dist t x₀ x ≤ epsilon; alpha/t + epsilon⁻² ≤ curvatureNorm x t; HasHopfRinowProperSlicesOn. Point selection, not extinction."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "HatcherLib.sphereSimplyConnected_of_two_le",
+      "path": "formalized-sources/Hatcher/HatcherLib/Ch1/Sphere.lean",
+      "hypotheses": "n : ℕ with 2 ≤ n. SimplyConnectedSpace of Metric.sphere (0 : EuclideanSpace ℝ (Fin (n+1))) 1. π1 only; no π2/π3."
+    },
+    {
+      "kind": "parsed_lean_declaration",
+      "name": "HatcherLib.PiOne",
+      "path": "formalized-sources/Hatcher/HatcherLib/Ch1/BasicConstructions.lean",
+      "hypotheses": "abbrev PiOne (x₀ : X) := MulOpposite (FundamentalGroup X x₀). No PiTwo/PiThree in HatcherLib."
+    },
+    {
+      "kind": "natural_language_blueprint_claim_not_lean",
+      "name": "thm:finite-time-extinction, thm:eventual-pi2-vanishing, thm:loop-width-forward-inequality, thm:controlled-curve-shrinking-existence, thm:parametric-curve-shrinking-wellposedness, def:two-sphere-width, def:loop-family-width, def:ramp-curve",
+      "path": "PoincareConjecture/blueprint/src/chapters/extinction-and-component-topology.tex and curve-shrinking-estimates.tex",
+      "hypotheses": "All marked \\notready. current-source-review.md records zero Lean mappings for the live 279-node route. PoincareConjecture.Basic is an empty namespace."
+    }
+  ],
+  "blockers": [
+    {
+      "missing": "Curve-shrinking flow type and gauged parabolic equation on S¹",
+      "needed_by": "thm:parametric-curve-shrinking-wellposedness, thm:curve-shrinking-short-time-existence, ramp global existence",
+      "notes": "Topping.ParabolicPDE.SectionSchauder records Holder/Schauder coefficient contracts and explicitly does not assert manifold PDE existence. LinearParabolic is a solver interface, not a proved circle quasilinear theorem."
+    },
+    {
+      "missing": "def:ramp-curve, product-circle unit field U, lifted ramp charts",
+      "needed_by": "thm:ramp-preservation, thm:ramp-curve-shrinking-global-existence, annular nondegeneration",
+      "notes": "MorganTian SpaceTime is Ricci-flow M×J, not M×S¹_λ product ramps. Petersen product lifts exist; no product Ricci(V,U)=0 declaration was found."
+    },
+    {
+      "missing": "Free loop space Λ₀X, spanning-disk area A_g, two-sphere width W2, loop-family width W_g(ξ)",
+      "needed_by": "def:two-sphere-width, def:loop-family-width, thm:loop-space-pi3-identification"
+    },
+    {
+      "missing": "π2 and π3 in local libraries; Hurewicz/Whitehead producers",
+      "needed_by": "thm:loop-space-pi3-identification, thm:noncompact-two-connected-cover-contractible, thm:late-component-nontrivial-pi3",
+      "notes": "HatcherLib stops at π1. PoincareConjecture.Topology.FiberSaturation.Sphere2 is a metric 2-sphere for neck saturation, not homotopy groups."
+    },
+    {
+      "missing": "Sacks–Uhlenbeck realization; Plateau/Douglas/White disk and annulus contracts",
+      "needed_by": "thm:two-sphere-width-realization, thm:plateau-disk-existence-regularity, thm:annular-douglas-minimizer",
+      "notes": "Blueprint treats these as imported classical boundaries. No corresponding Lean."
+    },
+    {
+      "missing": "def:controlled-ricci-flow-with-surgery, def:path-of-components, thm:all-time-controlled-surgery-flow, thm:finite-interval-surgery-bound",
+      "needed_by": "thm:finite-time-extinction, thm:eventual-pi2-vanishing, lem:extinction-scalar-curvature-lower-bound through surgery",
+      "notes": "The parsed 3D rational scalar bound is only for IsRicciFlowOn. Surgery passage is a separate missing producer. Do not wrap the existing negative-barrier theorem as a new task: finrank=3 and c=-6 already give -6/(1+4t) on smooth flows."
+    },
+    {
+      "missing": "MorganTianLib.le_of_forwardDiffQuotientLE_with_downward_jumps (no parsed declaration)",
+      "needed_by": "blueprint lem:forward-dini-comparison-with-downward-jumps, used by eventual π2 vanishing and finite extinction"
+    }
+  ],
+  "candidate_tasks": [
+    {
+      "title": "Forward-Dini comparison with finitely many downward jumps",
+      "blueprint_anchor": "lem:forward-dini-comparison-with-downward-jumps (NL claim in foundations-and-interfaces.tex; not Lean)",
+      "proposed_Lean_statement_or_precise_contract": "In MorganTianLib, using existing ForwardDiffQuotientLE: given a finite partition a = τ 0 < ⋯ < τ N = b, f continuous on each Ico (τ j) (τ (j+1)), f (τ j) ≤ liminf_{s↑τ j} f s at interior partition times, D⁺f ≤ ψ(t,f(t)) on each half-open piece, ψ C¹ on the strip, G C¹ solving G' = ψ(t,G) with f a ≤ G a, conclude ∀ t ∈ Icc a b, f t ≤ G t. Do not assume f continuous on the whole Icc.",
+      "imports": [
+        "MorganTianLib.Ch02.ForwardDifference",
+        "Mathlib.Analysis.Calculus.Deriv.MeanValue",
+        "Mathlib.Order.Filter.AtTopBot",
+        "Mathlib.Topology.Algebra.Order.LiminfLimsup"
+      ],
+      "known_dependencies": [
+        "MorganTianLib.le_of_forwardDiffQuotientLE (parsed; compile status not verified here)",
+        "MorganTianLib.ForwardDiffQuotientLE"
+      ],
+      "missing_dependencies": [],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex",
+        "PoincareConjecture/blueprint/src/chapters/extinction-and-component-topology.tex",
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/ForwardDifference.lean"
+      ],
+      "readiness": "ready_for_statement_review",
+      "independence": "Pure 1D analysis. No collar, surgery, curve shrinking, or widths. Can run beside the collar branch. Consumed later by W2 and W_ξ comparison."
+    },
+    {
+      "title": "Loop-width comparison ODE integrating-factor formula",
+      "blueprint_anchor": "def:loop-width-comparison-ode and lem:loop-width-ode-formula (NL; not Lean)",
+      "proposed_Lean_statement_or_precise_contract": "For continuous Rmin : ℝ → ℝ and a,t' : ℝ, let w solve w' = -2π - (1/2) Rmin(t) w with w(t') = a on an interval containing [t', t'']. Conclude w(t'') = exp(-B) * (a - 2π ∫_{t'}^{t''} exp(B_{t'}(s)) ds) with B_{t'}(t) = ∫_{t'}^t (1/2) Rmin. If a' ≥ a then w_{a'}(t'') - w_a(t'') = (a'-a) exp(-B) ≥ 0. State for an arbitrary continuous coefficient, not a Ricci-flow predicate, so the conclusion is not assumed in the hypotheses.",
+      "imports": [
+        "Mathlib.Analysis.Calculus.Deriv.Basic",
+        "Mathlib.Analysis.SpecialFunctions.ExpDeriv",
+        "Mathlib.MeasureTheory.Integral.IntervalIntegral.FundThmCalculus"
+      ],
+      "known_dependencies": [
+        "Mathlib ODE/integrating-factor and interval integrals (to be used, not re-proved as a Ricci-flow theorem)"
+      ],
+      "missing_dependencies": [],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/extinction-and-component-topology.tex"
+      ],
+      "readiness": "ready_for_statement_review",
+      "independence": "Scalar ODE only. Independent of collar, surgery spacetime, Plateau, and curve shrinking. Same ODE appears for W2 with 4π in place of 2π; keep 2π as the loop-width contract and do not encode extinction."
+    },
+    {
+      "title": "Coupled length and total-curvature exponential comparison",
+      "blueprint_anchor": "lem:coupled-length-curvature-comparison (NL in curve-shrinking-estimates.tex; not Lean)",
+      "proposed_Lean_statement_or_precise_contract": "Let L, Θ : ℝ → ℝ be absolutely continuous on Icc 0 T, nonnegative, with L' ≤ C2 * L and Θ' ≤ (C1+C2)*Θ + C1*L almost everywhere on Ico 0 T. Conclude L t ≤ L 0 * exp(C2 t) and Θ t + L t ≤ (Θ 0 + L 0) * exp((C1+C2) t) for t ∈ Icc 0 T. Hypotheses are ODE inequalities only: no curve, no Ricci flow, no ramp.",
+      "imports": [
+        "Mathlib.Analysis.Calculus.Deriv.Mul",
+        "Mathlib.MeasureTheory.Function.AbsolutelyContinuous",
+        "Mathlib.Analysis.SpecialFunctions.ExpDeriv"
+      ],
+      "known_dependencies": [
+        "Absolutely continuous 1D Gronwall / integrating factor in Mathlib"
+      ],
+      "missing_dependencies": [
+        "The geometric producers L'(t) ≤ ∫(C2-k²) ds and Θ' ≤ (C1+C2)Θ + C1 L remain unformalized (lem:curve-flow-length-total-curvature-evolution). This task is only the ODE comparison, not those identities."
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/curve-shrinking-estimates.tex",
+        "formalized-sources/MorganTian/blueprint/src/chapters/Ch18_FiniteTimeExtinction.tex"
+      ],
+      "readiness": "ready_for_statement_review",
+      "independence": "Pure ODE leaf of Stage 5. Does not wait on collar, surgery, or loop-space topology."
+    }
+  ],
+  "explicitly_not_candidates": [
+    "Wrapping scalarCurvatureMinimum_negative_lower_bound_of_isRicciFlowOn as a 3D -6/(1+4t) corollary: the conclusion is already the same formula.",
+    "thm:finite-time-extinction and thm:eventual-pi2-vanishing: blocked on surgery flow, widths, jump Dini, and imported topology.",
+    "Curve-shrinking wellposedness: blocked on a strongly parabolic circle solver; Topping currently supplies coefficient interfaces, not existence.",
+    "Sacks–Uhlenbeck / Plateau / Douglas / Hempel: imported blueprint boundaries, not next Lean proofs.",
+    "Any FiberSaturation/collar lemma: current collar branch; out of this scout's independent queue."
+  ],
+  "readiness_summary": "Three analysis leaves are ready_for_statement_review and can run beside the collar branch. No curve-shrinking, width, or extinction theorem is available as a parsed Lean result in PoincareConjecture. If those three ODE/comparison statements are rejected as too small, the next items are needs_definition (free loop space, π2/π3, ramp product geometry), not ready proofs."
+}

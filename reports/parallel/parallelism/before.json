@@ -1,0 +1,311 @@
+[
+  {
+    "project": "poincare-domain-atlas-20260919",
+    "tasks": 14,
+    "observed_model_interval_peak_estimate": 6,
+    "mean_model_concurrency_estimate": 2.068,
+    "batch_seconds_first_claim_to_last_commit": 1360.925,
+    "sum_client_seconds": 2814.818,
+    "client_only_critical_path_seconds": 968.779,
+    "time_fraction_at_most_one_active_model_estimate": 0.458,
+    "seconds_by_active_models_estimate": {
+      "0": 251.702,
+      "1": 371.626,
+      "2": 239.382,
+      "3": 267.521,
+      "4": 89.193,
+      "5": 43.911,
+      "6": 97.589
+    },
+    "tasks_detail": [
+      {
+        "task": "ambient-bridge",
+        "depends_on": [],
+        "client_seconds": 153.451,
+        "reservation_to_capture_seconds": 165.141,
+        "capture_to_integrated_seconds": 9.784,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "ambient-smooth",
+        "depends_on": [],
+        "client_seconds": 228.362,
+        "reservation_to_capture_seconds": 243.859,
+        "capture_to_integrated_seconds": 12.059,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "collar-closure-frontier",
+        "depends_on": [],
+        "client_seconds": 188.077,
+        "reservation_to_capture_seconds": 201.834,
+        "capture_to_integrated_seconds": 9.078,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "restrict-construction",
+        "depends_on": [],
+        "client_seconds": 544.834,
+        "reservation_to_capture_seconds": 581.799,
+        "capture_to_integrated_seconds": 10.11,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "transition-domain",
+        "depends_on": [],
+        "client_seconds": 146.127,
+        "reservation_to_capture_seconds": 156.986,
+        "capture_to_integrated_seconds": 8.92,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "transition-formula",
+        "depends_on": [],
+        "client_seconds": 124.725,
+        "reservation_to_capture_seconds": 134.548,
+        "capture_to_integrated_seconds": 13.355,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "transition-smooth",
+        "depends_on": [
+          "transition-domain",
+          "transition-formula"
+        ],
+        "client_seconds": 82.343,
+        "reservation_to_capture_seconds": 94.744,
+        "capture_to_integrated_seconds": 21.268,
+        "claim_delay_after_parents_seconds": 0.988
+      },
+      {
+        "task": "regular-open",
+        "depends_on": [
+          "collar-closure-frontier"
+        ],
+        "client_seconds": 117.626,
+        "reservation_to_capture_seconds": 129.566,
+        "capture_to_integrated_seconds": 15.31,
+        "claim_delay_after_parents_seconds": 0.125
+      },
+      {
+        "task": "collar-product-coordinates",
+        "depends_on": [],
+        "client_seconds": 404.287,
+        "reservation_to_capture_seconds": 430.967,
+        "capture_to_integrated_seconds": 21.924,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "manifold-family",
+        "depends_on": [
+          "ambient-smooth",
+          "transition-smooth"
+        ],
+        "client_seconds": 121.143,
+        "reservation_to_capture_seconds": 141.968,
+        "capture_to_integrated_seconds": 35.079,
+        "claim_delay_after_parents_seconds": 0.954
+      },
+      {
+        "task": "inclusion-embedding",
+        "depends_on": [
+          "manifold-family"
+        ],
+        "client_seconds": 248.499,
+        "reservation_to_capture_seconds": 280.858,
+        "capture_to_integrated_seconds": 46.728,
+        "claim_delay_after_parents_seconds": 0.414
+      },
+      {
+        "task": "closed-domain",
+        "depends_on": [
+          "restrict-construction",
+          "manifold-family",
+          "inclusion-embedding",
+          "ambient-bridge"
+        ],
+        "client_seconds": 169.651,
+        "reservation_to_capture_seconds": 210.345,
+        "capture_to_integrated_seconds": 52.932,
+        "claim_delay_after_parents_seconds": 0.723
+      },
+      {
+        "task": "empty-domain-sanity",
+        "depends_on": [
+          "closed-domain"
+        ],
+        "client_seconds": 84.677,
+        "reservation_to_capture_seconds": 119.977,
+        "capture_to_integrated_seconds": 60.332,
+        "claim_delay_after_parents_seconds": 0.691
+      },
+      {
+        "task": "model-range-sanity",
+        "depends_on": [
+          "closed-domain"
+        ],
+        "client_seconds": 201.016,
+        "reservation_to_capture_seconds": 242.513,
+        "capture_to_integrated_seconds": 64.79,
+        "claim_delay_after_parents_seconds": 0.697
+      }
+    ],
+    "measurement_notes": "Old logs have no exact service-start event. Active model intervals approximated from capture time minus elapsed client timer; mean spans first reservation to final integrated commit. Not API latency, nor a measured speedup. Critical path uses task client times only and excludes preparation, verification, resource contention and integration."
+  },
+  {
+    "project": "poincare-smooth-collar-20260919",
+    "tasks": 14,
+    "observed_model_interval_peak_estimate": 6,
+    "mean_model_concurrency_estimate": 1.855,
+    "batch_seconds_first_claim_to_last_commit": 2275.057,
+    "sum_client_seconds": 4221.305,
+    "client_only_critical_path_seconds": 1808.678,
+    "time_fraction_at_most_one_active_model_estimate": 0.6241,
+    "seconds_by_active_models_estimate": {
+      "0": 404.118,
+      "1": 1015.821,
+      "2": 170.937,
+      "3": 193.654,
+      "4": 315.186,
+      "5": 30.143,
+      "6": 145.198
+    },
+    "tasks_detail": [
+      {
+        "task": "halfspace-range",
+        "depends_on": [],
+        "client_seconds": 271.359,
+        "reservation_to_capture_seconds": 291.451,
+        "capture_to_integrated_seconds": 16.605,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "product-chart-smooth",
+        "depends_on": [],
+        "client_seconds": 469.035,
+        "reservation_to_capture_seconds": 503.435,
+        "capture_to_integrated_seconds": 12.614,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "restrict-collar",
+        "depends_on": [],
+        "client_seconds": 326.754,
+        "reservation_to_capture_seconds": 351.577,
+        "capture_to_integrated_seconds": 9.467,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "translate-chart",
+        "depends_on": [],
+        "client_seconds": 295.092,
+        "reservation_to_capture_seconds": 317.148,
+        "capture_to_integrated_seconds": 14.893,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "standard-collar",
+        "depends_on": [],
+        "client_seconds": 243.478,
+        "reservation_to_capture_seconds": 261.214,
+        "capture_to_integrated_seconds": 9.326,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "standard-component",
+        "depends_on": [],
+        "client_seconds": 175.341,
+        "reservation_to_capture_seconds": 188.113,
+        "capture_to_integrated_seconds": 8.419,
+        "claim_delay_after_parents_seconds": null
+      },
+      {
+        "task": "interior-model",
+        "depends_on": [
+          "translate-chart"
+        ],
+        "client_seconds": 357.427,
+        "reservation_to_capture_seconds": 388.047,
+        "capture_to_integrated_seconds": 18.233,
+        "claim_delay_after_parents_seconds": 0.719
+      },
+      {
+        "task": "collar-coordinates-geometry",
+        "depends_on": [
+          "restrict-collar",
+          "halfspace-range"
+        ],
+        "client_seconds": 353.631,
+        "reservation_to_capture_seconds": 387.568,
+        "capture_to_integrated_seconds": 22.927,
+        "claim_delay_after_parents_seconds": 0.506
+      },
+      {
+        "task": "regular-open-cover",
+        "depends_on": [
+          "restrict-collar"
+        ],
+        "client_seconds": 261.485,
+        "reservation_to_capture_seconds": 284.601,
+        "capture_to_integrated_seconds": 17.886,
+        "claim_delay_after_parents_seconds": 0.513
+      },
+      {
+        "task": "collar-coordinates-smooth",
+        "depends_on": [
+          "product-chart-smooth"
+        ],
+        "client_seconds": 429.276,
+        "reservation_to_capture_seconds": 463.942,
+        "capture_to_integrated_seconds": 15.392,
+        "claim_delay_after_parents_seconds": 0.666
+      },
+      {
+        "task": "boundary-to-global",
+        "depends_on": [
+          "interior-model"
+        ],
+        "client_seconds": 128.06,
+        "reservation_to_capture_seconds": 142.831,
+        "capture_to_integrated_seconds": 22.066,
+        "claim_delay_after_parents_seconds": 0.103
+      },
+      {
+        "task": "boundary-local-model",
+        "depends_on": [
+          "collar-coordinates-smooth",
+          "collar-coordinates-geometry"
+        ],
+        "client_seconds": 260.782,
+        "reservation_to_capture_seconds": 295.451,
+        "capture_to_integrated_seconds": 40.679,
+        "claim_delay_after_parents_seconds": 0.87
+      },
+      {
+        "task": "smooth-complement-closure",
+        "depends_on": [
+          "boundary-local-model",
+          "regular-open-cover",
+          "boundary-to-global"
+        ],
+        "client_seconds": 110.978,
+        "reservation_to_capture_seconds": 150.637,
+        "capture_to_integrated_seconds": 71.158,
+        "claim_delay_after_parents_seconds": 0.205
+      },
+      {
+        "task": "standard-closure-sanity",
+        "depends_on": [
+          "standard-collar",
+          "standard-component",
+          "smooth-complement-closure"
+        ],
+        "client_seconds": 538.607,
+        "reservation_to_capture_seconds": 615.211,
+        "capture_to_integrated_seconds": 103.968,
+        "claim_delay_after_parents_seconds": 0.822
+      }
+    ],
+    "measurement_notes": "Old logs have no exact service-start event. Active model intervals approximated from capture time minus elapsed client timer; mean spans first reservation to final integrated commit. Not API latency, nor a measured speedup. Critical path uses task client times only and excludes preparation, verification, resource contention and integration."
+  }
+]

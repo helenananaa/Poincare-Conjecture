@@ -1,0 +1,195 @@
+{
+  "scope": "Real neck-to-collar input production: produce PartialDiffeomorph one-sided collar data consumed by SmoothCollar from existing epsilon-neck declarations, without depending on current collar-cover proofs. No new proof claimed; project not compiled.",
+  "inspected_files": [
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/Core.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/BoundaryModel.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/BoundaryToGlobal.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ComplementClosure.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/CoordinatesGeometry.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/CoordinatesSmooth.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/HalfSpaceRange.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/InteriorModel.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ProductChartSmooth.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/RegularOpenCover.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/Restriction.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/TranslateChart.lean",
+    "PoincareConjecture/tests/SmoothCollar/StandardCollar.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/NeckCoordinates.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/OneSidedCollar.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Sphere.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Blueprint.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ComplementaryBoundarySelection.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ClosedCollar.lean",
+    "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex",
+    "PoincareConjecture/blueprint/review/smooth-collar-cover-lean-review.md",
+    "PoincareConjecture/blueprint/review/fiber-saturation-lean-review.md",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSphereExamples.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/AffineTimeDiffeomorph.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/Chapter1BasicRemaining.lean",
+    "formalized-sources/MorganTian/blueprint/src/chapters/Ch02_ManifoldsNonNegativeCurvature.tex",
+    "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh6Sphere.lean",
+    "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh6ConstantCurvature.lean"
+  ],
+  "existing_results": [
+    {
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_smoothClosure_of_smoothCollar_cover",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ComplementClosure.lean",
+      "kind": "parsed_Lean_theorem",
+      "compile_status": "not_verified",
+      "hypotheses": "X preconnected, charted on V, IsManifold 𝓘(ℝ,V) ∞; N locally connected, charted on V×ℝ, IsManifold 𝓘(ℝ,V×ℝ) ∞; C closed; every y in frontier(connectedComponentIn Cᶜ p) equals Φ(x,0) for a PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) (𝓘(ℝ,V×ℝ)) (X×ℝ) N ∞ with source univ ×ˢ Ioo(-1,1) and ∀ z ∈ source, Φ z ∈ C ↔ z.2 ≤ 0.",
+      "note": "Consumer. Collar cover is an input. Proof body present; not rebuilt."
+    },
+    {
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_standard_smooth_strip_collar",
+      "path": "PoincareConjecture/tests/SmoothCollar/StandardCollar.lean",
+      "kind": "parsed_Lean_theorem",
+      "compile_status": "not_verified",
+      "hypotheses": "V a normed real vector space.",
+      "note": "Identity strip on V×ℝ. Not produced from an epsilon-neck."
+    },
+    {
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.neck_coordinates_cylinder",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/NeckCoordinates.lean",
+      "kind": "parsed_Lean_theorem",
+      "compile_status": "not_verified",
+      "hypotheses": "J open in ℝ; e : N ≃ₜ (Sphere2 × J); U open connected; FiberSaturated (e '' frontier U); closure U compact.",
+      "note": "Homeomorphism transport only; not a smooth collar."
+    },
+    {
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_frontier_saturated",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/OneSidedCollar.lean",
+      "kind": "parsed_Lean_theorem",
+      "compile_status": "not_verified",
+      "hypotheses": "X preconnected; f : X × NeckParameter → Y open embedding; ∀ z, f z ∈ C ↔ (z.2 : ℝ) ≤ 0; some center on the complementary frontier.",
+      "note": "Consumes the side relation; does not produce it from a neck."
+    },
+    {
+      "declaration": "MorganTianLib.EpsilonNeckStructure",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "kind": "parsed_Lean_structure",
+      "hypotheses": "dim E = 3; Diffeomorph EpsilonNeckCylinderModel I (epsilonNeckDomain epsilon) N ∞; reference and normalized-pullback metrics; IsRoundCylinderMetric of the reference; pullback identity with canonicalScalarCurvature g x; EpsilonClose; x ∈ epsilonNeckSlice phi 0.",
+      "note": "Structure, not an existence theorem. N is the neck manifold. AmbientEpsilonNeck places it on an Opens carrier."
+    },
+    {
+      "declaration": "MorganTianLib.IsRoundCylinderMetric",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "kind": "parsed_Lean_def",
+      "hypotheses": "Prop on a metric g0 on epsilonNeckDomain epsilon.",
+      "note": "Conjunction of roundSphereMetric constant curvature 1/2 and a product-inner-product identity via finAddEquivProd. Curvature is baked into the predicate."
+    },
+    {
+      "declaration": "MorganTianLib.roundSphereMetric_isConstantCurvature_of_unitRoundSphereMetric",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+      "kind": "parsed_Lean_theorem",
+      "compile_status": "not_verified",
+      "hypotheses": "unitRoundSphereMetric.leviCivitaConnection.IsConstantCurvature unitRoundSphereMetric 1.",
+      "note": "Conditional adapter. File comment: unit-sphere producer not available."
+    },
+    {
+      "declaration": "Riemannian.sphere_sectionalCurvature_one",
+      "path": "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh6Sphere.lean",
+      "kind": "parsed_Lean_theorem",
+      "compile_status": "not_verified",
+      "hypotheses": "Tangent fields of spherePatch on punctured F; ‖p‖=1; orthonormal for opensEuclideanMetric (punctured F).",
+      "note": "Patch pairing, not IsConstantCurvature of unitRoundSphereMetric. ExactSphereExamples.lean names that missing bridge."
+    },
+    {
+      "declaration": "def:epsilon-neck-and-scale; lem:epsilon-neck-metric-control; prop:overlapping-epsilon-necks",
+      "path": "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex",
+      "kind": "natural_language_blueprint_claim",
+      "hypotheses": "All \\notready.",
+      "note": "NL only. Lean positiveEnd/negativeEnd are {s_N ≷ 0}, not blueprint far ends {|s_N|>0.9 ε⁻¹}. Morgan–Tian def:epsilon-neck is \\leanok on definitions; lem:epsilon-neck-separates has no Lean declaration."
+    }
+  ],
+  "blockers": [
+    "No producer of PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) (𝓘(ℝ,V×ℝ)) (X×ℝ) N ∞ with source univ ×ˢ Ioo(-1,1) and Φ z ∈ C ↔ z.2 ≤ 0 from EpsilonNeckStructure/AmbientEpsilonNeck. phi is a Diffeomorph of the finite-cylinder subtype onto the neck.",
+    "Model mismatch: neck uses EpsilonNeckCylinderModel (R²×R¹ transported to R³) and generic I; collar requires ChartedSpace (V×ℝ) N and product-to-vector-space models. product_chart_contMDiffOn exists only after Φ is given.",
+    "Missing unitRoundSphereMetric.leviCivitaConnection.IsConstantCurvature unitRoundSphereMetric 1, so IsRoundCylinderMetric cannot be inhabited except by assuming its first conjunct.",
+    "No constructed RiemannianMetric on epsilonNeckDomain epsilon matching the product formula in IsRoundCylinderMetric. LeeLib.prodMetric is another package and a native product manifold.",
+    "No geometric producer of hside relative to a continuation set C. Defining C as {axialCoordinate ≤ 0} is circular. def:local-neck-surgery-data is \\notready NL."
+  ],
+  "candidate_tasks": [
+    {
+      "title": "Normalize the finite neck cylinder onto Sphere × Ioo(-1,1)",
+      "proposed_Lean_statement_or_precise_contract": "No invented theorem name. Assume 0 < epsilon. Using the existing axis coordinate p.2 0, construct inverse maps between epsilonNeckDomain epsilon and EpsilonNeckSphere × Ioo(-1,1): p ↦ (p.1.1, ⟨epsilon * p.1.2 0, _⟩) and (σ,t) ↦ ⟨(σ, EuclideanSpace.single 0 (t * epsilon⁻¹)), _⟩, well-typed on {p | -epsilon⁻¹ < p.2 0 ∧ p.2 0 < epsilon⁻¹}. Prefer a Diffeomorph for EpsilonNeckProductModel versus (𝓡 2).prod (𝓡 1); if the target charted structure is not assembled, a Homeomorph/open-embedding contract on those types. Do not assume a collar PartialDiffeomorph or hside.",
+      "imports": [
+        "MorganTianLib.Ch02.EpsilonNeck",
+        "Mathlib.Geometry.Manifold.Diffeomorph",
+        "MorganTianLib.Ch03.RicciFlow.AffineTimeDiffeomorph"
+      ],
+      "known_dependencies": [
+        "MorganTianLib.epsilonNeckDomain",
+        "MorganTianLib.EpsilonNeckSphere",
+        "MorganTianLib.EpsilonNeckAxis",
+        "MorganTianLib.EpsilonNeckProductModel",
+        "MorganTianLib.affineTimeDiffeomorph"
+      ],
+      "missing_dependencies": [
+        "ChartedSpace/IsManifold on EpsilonNeckSphere × Ioo(-1,1) if stated as a Diffeomorph",
+        "Bundled diffeomorphism EpsilonNeckAxis ≃ ℝ (the coordinate p.2 0 is used but not packaged)"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/AffineTimeDiffeomorph.lean",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/Core.lean"
+      ],
+      "readiness": "ready_for_statement_review"
+    },
+    {
+      "title": "Package a neck parametrization as a PartialDiffeomorph on Sphere × ℝ",
+      "proposed_Lean_statement_or_precise_contract": "No invented theorem name. Native-model contract, independent of the collar branch: from phi : Diffeomorph EpsilonNeckCylinderModel I (epsilonNeckDomain epsilon) N ∞, produce a PartialDiffeomorph whose map extends phi along subtype val, with source the existing carrier of epsilonNeckDomain epsilon inside EpsilonNeckCylinder (or the normalized strip after task 1). For AmbientEpsilonNeck, compose with carrier → ambient N as an open embedding. Forbidden: assume already a PartialDiffeomorph with source univ × Ioo(-1,1). SmoothCollar models ChartedSpace (V×ℝ) N are a later transport, not a hidden assumption of this task.",
+      "imports": [
+        "MorganTianLib.Ch02.EpsilonNeck",
+        "Mathlib.Geometry.Manifold.Diffeomorph",
+        "Mathlib.Geometry.Manifold.LocalDiffeomorph"
+      ],
+      "known_dependencies": [
+        "MorganTianLib.EpsilonNeckStructure.phi",
+        "MorganTianLib.AmbientEpsilonNeck",
+        "MorganTianLib.epsilonNeckReflection"
+      ],
+      "missing_dependencies": [
+        "Declared conversion Diffeomorph of an Opens subtype → PartialDiffeomorph of the ambient product",
+        "Decision whether N stays modeled by I or is recharted on V×ℝ",
+        "Axis type EuclideanSpace ℝ (Fin 1) versus ℝ"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ComplementClosure.lean",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ProductChartSmooth.lean"
+      ],
+      "readiness": "needs_mathematical_design"
+    },
+    {
+      "title": "Inhabit the round cylinder without assuming its curvature",
+      "proposed_Lean_statement_or_precise_contract": "Two producers, not a restatement of IsRoundCylinderMetric. (A) Bridge to unitRoundSphereMetric.leviCivitaConnection.IsConstantCurvature unitRoundSphereMetric 1, then apply the existing adapter. Do not treat sphere_sectionalCurvature_one as that theorem. (B) Construct a RiemannianMetric on epsilonNeckDomain epsilon whose metricInner equals the product formula in IsRoundCylinderMetric. Forbidden: a wrapper that assumes the curvature conjunct and concludes IsRoundCylinderMetric.",
+      "imports": [
+        "MorganTianLib.Ch02.EpsilonNeck",
+        "MorganTianLib.Ch01.Chapter1BasicRemaining",
+        "DoCarmoLib.Riemannian.Manifold.DoCarmoCh6Sphere",
+        "MorganTianLib.Ch03.RicciFlow.ExactSphereExamples"
+      ],
+      "known_dependencies": [
+        "MorganTianLib.unitRoundSphereMetric",
+        "MorganTianLib.roundSphereMetric",
+        "MorganTianLib.rescaledMetric_isConstantCurvature",
+        "MorganTianLib.roundSphereMetric_isConstantCurvature_of_unitRoundSphereMetric",
+        "Riemannian.sphere_sectionalCurvature_one",
+        "Riemannian.AffineConnection.IsConstantCurvature"
+      ],
+      "missing_dependencies": [
+        "Bridge from DCImmersedPatch curvature on punctured F to Levi-Civita of DCInducedMetric on EpsilonNeckSphere",
+        "Product-metric constructor on EpsilonNeckCylinderModel"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSphereExamples.lean",
+        "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh6Sphere.lean"
+      ],
+      "readiness": "needs_mathematical_design"
+    }
+  ],
+  "readiness_summary": "Nothing is ready to prove as a SmoothCollar input theorem. One contract (axial strip normalization) is ready for statement review and can run beside the collar branch. Packaging phi as the collar PartialDiffeomorph, and inhabiting a genuine round cylinder, still need design. The side relation Φ z ∈ C ↔ z.2 ≤ 0 is blocked: surgery-neck data is blueprint-only, and defining C as {s_N ≤ 0} is circular. PoincareConjecture neck-metric-control and overlapping-necks remain NL \\notready claims, not parsed theorems."
+}

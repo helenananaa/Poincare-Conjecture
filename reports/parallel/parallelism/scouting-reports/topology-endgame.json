@@ -1,0 +1,219 @@
+{
+  "scope": "Global topology, sphere-boundary incidence, connected sums, and simple connectivity. Reconnaissance only. Collar-chart work (SmoothCollar, DomainAtlas, CollarClosure*) is a parallel branch, not a dependency of the candidates.",
+  "distinction": "Parsed Lean means a declaration in PoincareConjecture.Topology.FiberSaturation with the hypotheses written in source. Blueprint NL means a \\notready TeX node. Only lem:fiber-saturation-from-spherical-frontier has a \\lean tag and \\leanok. No sorry, file existence, or grep count is treated as a completeness certificate.",
+  "inspected_files": [
+    "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+    "PoincareConjecture/blueprint/important-statements.yaml",
+    "PoincareConjecture/blueprint/review/current-source-review.md",
+    "PoincareConjecture/blueprint/review/fiber-saturation-lean-review.md",
+    "PoincareConjecture/blueprint/review/closed-collar-components-lean-review.md",
+    "PoincareConjecture/blueprint/review/product-boundary-pairing-lean-review.md",
+    "PoincareConjecture/blueprint/review/relative-open-product-lean-review.md",
+    "PoincareConjecture/blueprint/review/abstract-boundary-components-lean-review.md",
+    "PoincareConjecture/blueprint/review/complementary-frontier-collars-lean-review.md",
+    "PoincareConjecture/blueprint/review/collar-closure-chart-lean-review.md",
+    "PoincareConjecture/overview.md",
+    "PoincareConjecture/PoincareConjecture.lean",
+    "PoincareConjecture/PoincareConjecture/Basic.lean",
+    "PoincareConjecture/lakefile.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Blueprint.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Basic.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Sphere.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Interval.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Ambient.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ClosedCollar.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Boundary.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/FrontierComponents.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/NeckCoordinates.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/CylinderHomeomorph.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ProductPairing.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothRelativeProduct.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/RelativeNeckPairing.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/AbstractBoundaryPairing.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/AbstractSmoothBundleRegion.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/AbstractBundleMappingTorus.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/MappingTorus.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/TorusRegionClassification.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/BundleMonodromy.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/OneSidedCollar.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ComplementaryComponent.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ComplementaryBoundarySelection.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/DomainAtlas/Core.lean",
+    "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/Core.lean",
+    "formalized-sources/Hatcher/HatcherLib/Ch1/VanKampen.lean",
+    "formalized-sources/Hatcher/HatcherLib/Ch1/AlgebraicConstructions.lean",
+    "formalized-sources/Hatcher/HatcherLib/Ch1/Sphere.lean",
+    "formalized-sources/Hatcher/HatcherLib/Ch1/Circle.lean"
+  ],
+  "existing_results": [
+    {
+      "kind": "parsed_lean_theorem",
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.fiber_saturation_from_spherical_frontier",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Blueprint.lean",
+      "hypotheses": "IsOpen J; U : Set (Sphere2 × J) open and IsPreconnected; FiberSaturated (frontier U) in the relative product. Compact nonempty-frontier clause is an implication. Unique endgame node with a \\lean tag."
+    },
+    {
+      "kind": "parsed_lean_theorem",
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.sphere_closed_collar_saturation",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ClosedCollar.lean",
+      "hypotheses": "Embedding f : Sphere2 × Icc a b → Y; D open; ∃ T, f ⁻¹' frontier D = univ ×ˢ T; a point of the open collar lies in D. Gives full-fiber cylinders over open OrdConnected A ⊆ (a,b) and a three-way alternative on every closed-collar fiber. Does not identify an endpoint fiber as a connected component of the ambient frontier."
+    },
+    {
+      "kind": "parsed_lean_theorem",
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.relative_fiber_boundary_pairing_product",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ProductPairing.lean",
+      "hypotheses": "J open OrdConnected; U : Set (Sphere2 × J) open, connected, FiberSaturated (frontier U), compact closure. Conclusion topological: closure U ≃ₜ Sphere2 × Icc 0 1 and the two endpoint fibers are the frontier components. No diffeomorphism, no bundle branch."
+    },
+    {
+      "kind": "parsed_lean_theorem",
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.relative_sphere_region_boundary_pairing",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/RelativeNeckPairing.lean",
+      "hypotheses": "Same product topology plus ChartedSpace/IsManifold on closure D and IsSmoothEmbedding of Subtype.val : closure D → Sphere2 × J. Does not construct that atlas."
+    },
+    {
+      "kind": "parsed_lean_theorem",
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.abstract_smooth_sphere_bundle_boundary_pairing",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/AbstractSmoothBundleRegion.lean",
+      "hypotheses": "Sphere2 FiberBundle over AddCircle L, L>0, locally smooth charts; D open connected; ChartedSpace/IsManifold on closure D; IsSmoothEmbedding of the inclusion; matching ranks; inclusion image of I.boundary = frontier D; ProjectionSaturated nonempty frontier. Closure already a manifold with boundary in the hypotheses."
+    },
+    {
+      "kind": "parsed_lean_theorem",
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.MappingTorus.sphere_bundle_quotient_regular_region",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/TorusRegionClassification.lean",
+      "hypotheses": "φ : Sphere2 ≃ₜ Sphere2; L>0; D open connected regular-open in MappingTorus.Space φ.symm L; FiberSaturated (proj ⁻¹' frontier D); nonempty frontier. Homeomorphism only."
+    },
+    {
+      "kind": "parsed_lean_theorem",
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.sphere_collared_complement_frontier_components",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ComplementaryBoundarySelection.lean",
+      "hypotheses": "Y Hausdorff locally connected; C closed; finite open embeddings f i : Sphere2 × NeckParameter → Y with f i z ∈ C ↔ (z.2 : ℝ) ≤ 0; frontier C = union of central sections; pairwise disjoint; p ∉ C; complementary component proper. Collars are inputs. No 1-vs-2 count."
+    },
+    {
+      "kind": "parsed_lean_theorem",
+      "declaration": "PoincareConjecture.Topology.FiberSaturation.proper_complementary_component_frontier_nonempty",
+      "path": "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/ComplementaryComponent.lean",
+      "hypotheses": "p ∉ C and connectedComponentIn Cᶜ p ≠ connectedComponent p. No collar or surgery."
+    },
+    {
+      "kind": "blueprint_nl_claim",
+      "declaration": "lem:closed-collar-fiber-saturation, lem:relative-fiber-boundary-pairing, lem:frontier-disappearing-component-classification, thm:morgan-tian-proposition-15-3, def:smooth-connected-sum, def:sphere-bundles-over-circle, thm:connected-sum-fundamental-group, lem:sphere-bundle-fundamental-group, thm:poincare-conjecture",
+      "path": "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+      "hypotheses": "Natural-language, all \\notready. No matching PoincareConjecture declaration. Nearby Lean lives in already-fibered models or assumes collars/atlases."
+    }
+  ],
+  "blockers": [
+    {
+      "missing": "Project producers for def:smooth-connected-sum, def:sphere-bundles-over-circle, def:spherical-space-form. PoincareConjecture/Basic.lean is empty. lakefile requires only mathlib, not Hatcher.",
+      "blocks": "Reconstruction, free-product, and Poincaré nodes after fiber saturation."
+    },
+    {
+      "missing": "Continuing region C_{t⁻} and finite displayed surgery spheres from a controlled flow. No such types under PoincareConjecture.Topology.",
+      "blocks": "lem:actual-disappearing-component-frontier-saturation and later disappearing-region classification. Complementary-frontier Lean assumes collars and the sphere cover."
+    },
+    {
+      "missing": "Smooth atlas on a complementary closure without taking ChartedSpace on closure D as a hypothesis (current collar branch).",
+      "blocks": "Using the pairing diffeomorphisms in an unfibered 3-manifold. Not proposed here."
+    },
+    {
+      "missing": "lem:two-sphere-diffeomorphism-classes; antipodal Sphere2 ≃ₜ Sphere2; 3D Schoenflies.",
+      "blocks": "Uniqueness of connected sums, E± as the two gluings of S²×I, M # S³ ≅ M, local capping identities."
+    },
+    {
+      "missing": "A PoincareConjecture van Kampen producer. HatcherLib.Ch1.VanKampen exists in the companion lake only.",
+      "blocks": "thm:connected-sum-fundamental-group as a project theorem."
+    },
+    {
+      "missing": "Geometric neck/cap producers from foundations (still blueprint-only).",
+      "blocks": "lem:maximal-overlap-incidence-no-branching. A graph wrapper whose hypotheses already force degree ≤ 2 is not independent work."
+    }
+  ],
+  "non_candidates": [
+    "Unifying product and bundle pairing in an ambient manifold whose hypotheses already place D in a product or circle bundle.",
+    "Calling an endpoint fiber a frontier component after assuming Fr(D) is already a finite disjoint displayed-sphere union (that is componentIn_finite_disjoint_closed).",
+    "lem:path-connected-implies-connected (Mathlib).",
+    "Further SmoothCollar/DomainAtlas work."
+  ],
+  "candidate_tasks": [
+    {
+      "title": "Define the two sphere bundles over the circle (blueprint def:sphere-bundles-over-circle)",
+      "proposed_Lean_statement_or_precise_contract": "Proposed contract, not an existing name: EPlus := Sphere2 × Circle (or AddCircle 1) with product smooth structure; EMinus := MappingTorus.Space of an antipodal homeomorphism of Sphere2, reusing MappingTorus / ClosedMappingTorus rather than a new quotient. Record compact, connected, nonempty. Out of scope: two-sphere mapping class, uniqueness of gluings, orientability of EMinus. Smooth structure on EMinus may remain topological if existing CircleBundle charts are not reused.",
+      "imports": [
+        "PoincareConjecture.Topology.FiberSaturation.Sphere",
+        "PoincareConjecture.Topology.FiberSaturation.MappingTorus",
+        "PoincareConjecture.Topology.FiberSaturation.AbstractBundleMappingTorus",
+        "Mathlib.Geometry.Manifold.Instances.Sphere",
+        "Mathlib.Topology.Instances.AddCircle.Real"
+      ],
+      "known_dependencies": [
+        "Sphere2, sphere2_connectedSpace",
+        "MappingTorus.Space, orbitSetoid, proj",
+        "CircleBundle.ClosedMappingTorus, monodromy, closedBundleHomeomorph (compares an existing FiberBundle to a glued cylinder; does not define EMinus)"
+      ],
+      "missing_dependencies": [
+        "Antipodal Sphere2 ≃ₜ Sphere2 (and Sphere2 ≃ₘ Sphere2 if a diffeomorphism is required)",
+        "ChartedSpace/IsManifold on MappingTorus.Space Sphere2 if EMinus must be smooth in this task",
+        "lem:two-sphere-diffeomorphism-classes, which must not be folded into the definition"
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/MappingTorus.lean",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/AbstractBundleMappingTorus.lean",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/BundleMonodromy.lean"
+      ],
+      "readiness": "needs_definition"
+    },
+    {
+      "title": "Product clause of sphere-bundle fundamental group (blueprint lem:sphere-bundle-fundamental-group, E+ only)",
+      "proposed_Lean_statement_or_precise_contract": "Proposed contract: for a basepoint of Sphere2 × Circle, FundamentalGroup (Sphere2 × Circle) p is isomorphic to Multiplicative ℤ. Route: S² simply connected, π₁(Circle) ≅ ℤ, π₁ of a product is the product of π₁. No EMinus, no general fiber-bundle LES, no Ricci flow. Do not import HatcherLib; PoincareConjecture does not depend on it. Prove any missing SimplyConnectedSpace Sphere2 instance from mathlib.",
+      "imports": [
+        "PoincareConjecture.Topology.FiberSaturation.Sphere",
+        "Mathlib.AlgebraicTopology.FundamentalGroupoid.FundamentalGroup",
+        "Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected",
+        "Mathlib.Topology.Covering.AddCircle"
+      ],
+      "known_dependencies": [
+        "Sphere2 with ConnectedSpace only",
+        "Mathlib SimplyConnectedSpace, FundamentalGroup, AddCircle covering",
+        "Companion only, not a project producer: HatcherLib.sphereSimplyConnected_of_two_le, Circle.endpointFiber, fundamentalGroupProdMulEquiv"
+      ],
+      "missing_dependencies": [
+        "PoincareConjecture SimplyConnectedSpace Sphere2 instance",
+        "def:sphere-bundles-over-circle if phrased as EPlus rather than the raw product; the product form does not wait on that definition",
+        "EMinus and its π₁ (waits on candidate 1)"
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Sphere.lean",
+        "formalized-sources/Hatcher/HatcherLib/Ch1/Sphere.lean",
+        "formalized-sources/Hatcher/HatcherLib/Ch1/Circle.lean"
+      ],
+      "readiness": "ready_for_statement_review"
+    },
+    {
+      "title": "Construction, not uniqueness, of a smooth connected sum (blueprint def:smooth-connected-sum)",
+      "proposed_Lean_statement_or_precise_contract": "Proposed contract: closed connected boundaryless smooth 3-manifolds M, N; smooth embeddings of closed 3-balls; an orientation-reversing diffeomorphism of the two boundary 2-spheres; quotient of the punctured disjoint union by that map; a smooth 3-manifold structure making the obvious maps diffeomorphisms onto opens; connectedness. Out of scope: independence of balls/gluing, associativity, M # S³ ≅ M, and the four local-capping identities (those need Smale, isotopy extension, and Schoenflies).",
+      "imports": [
+        "Mathlib.Geometry.Manifold.ContMDiff.Atlas",
+        "Mathlib.Geometry.Manifold.Instances.Sphere",
+        "PoincareConjecture.Topology.FiberSaturation.Sphere"
+      ],
+      "known_dependencies": [
+        "Mathlib smooth manifolds, spheres, embeddings",
+        "Sphere2 as a model boundary sphere"
+      ],
+      "missing_dependencies": [
+        "PoincareConjecture type of smoothly embedded closed 3-ball with spherical boundary",
+        "Quotient manifold structure for two codimension-zero pieces identified along boundary spheres",
+        "Orientation-reversing predicate on Diff(S²), deferrable if the gluing map is given data",
+        "lem:two-sphere-diffeomorphism-classes and 3D Schoenflies, which must not be hidden in the definition"
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+        "PoincareConjecture/PoincareConjecture/Basic.lean",
+        "PoincareConjecture/lakefile.lean"
+      ],
+      "readiness": "needs_definition"
+    }
+  ],
+  "readiness_summary": "One candidate is ready_for_statement_review: π₁(S² × S¹) ≅ ℤ, independent of the collar branch and of surgery. Two need_definition: E±, and a choice-dependent connected-sum construction. Nothing is proposed as a completed next theorem. If statement review requires a project SimplyConnectedSpace Sphere2 instance before the π₁ contract, then nothing in this slice is ready_for_statement_review."
+}

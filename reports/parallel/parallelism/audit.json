@@ -1,0 +1,922 @@
+{
+  "scope": "Own dispatch audit and independent proof/scout batch, excluding other conversations or external model sessions",
+  "starting_commit": "bd6dc4e72115ea8c1b61571e155067c9b1209467",
+  "before": [
+    {
+      "project": "poincare-domain-atlas-20260919",
+      "tasks": 14,
+      "observed_model_interval_peak_estimate": 6,
+      "mean_model_concurrency_estimate": 2.068,
+      "batch_seconds_first_claim_to_last_commit": 1360.925,
+      "sum_client_seconds": 2814.818,
+      "client_only_critical_path_seconds": 968.779,
+      "time_fraction_at_most_one_active_model_estimate": 0.458,
+      "seconds_by_active_models_estimate": {
+        "0": 251.702,
+        "1": 371.626,
+        "2": 239.382,
+        "3": 267.521,
+        "4": 89.193,
+        "5": 43.911,
+        "6": 97.589
+      },
+      "tasks_detail": [
+        {
+          "task": "ambient-bridge",
+          "depends_on": [],
+          "client_seconds": 153.451,
+          "reservation_to_capture_seconds": 165.141,
+          "capture_to_integrated_seconds": 9.784,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "ambient-smooth",
+          "depends_on": [],
+          "client_seconds": 228.362,
+          "reservation_to_capture_seconds": 243.859,
+          "capture_to_integrated_seconds": 12.059,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "collar-closure-frontier",
+          "depends_on": [],
+          "client_seconds": 188.077,
+          "reservation_to_capture_seconds": 201.834,
+          "capture_to_integrated_seconds": 9.078,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "restrict-construction",
+          "depends_on": [],
+          "client_seconds": 544.834,
+          "reservation_to_capture_seconds": 581.799,
+          "capture_to_integrated_seconds": 10.11,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "transition-domain",
+          "depends_on": [],
+          "client_seconds": 146.127,
+          "reservation_to_capture_seconds": 156.986,
+          "capture_to_integrated_seconds": 8.92,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "transition-formula",
+          "depends_on": [],
+          "client_seconds": 124.725,
+          "reservation_to_capture_seconds": 134.548,
+          "capture_to_integrated_seconds": 13.355,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "transition-smooth",
+          "depends_on": [
+            "transition-domain",
+            "transition-formula"
+          ],
+          "client_seconds": 82.343,
+          "reservation_to_capture_seconds": 94.744,
+          "capture_to_integrated_seconds": 21.268,
+          "claim_delay_after_parents_seconds": 0.988
+        },
+        {
+          "task": "regular-open",
+          "depends_on": [
+            "collar-closure-frontier"
+          ],
+          "client_seconds": 117.626,
+          "reservation_to_capture_seconds": 129.566,
+          "capture_to_integrated_seconds": 15.31,
+          "claim_delay_after_parents_seconds": 0.125
+        },
+        {
+          "task": "collar-product-coordinates",
+          "depends_on": [],
+          "client_seconds": 404.287,
+          "reservation_to_capture_seconds": 430.967,
+          "capture_to_integrated_seconds": 21.924,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "manifold-family",
+          "depends_on": [
+            "ambient-smooth",
+            "transition-smooth"
+          ],
+          "client_seconds": 121.143,
+          "reservation_to_capture_seconds": 141.968,
+          "capture_to_integrated_seconds": 35.079,
+          "claim_delay_after_parents_seconds": 0.954
+        },
+        {
+          "task": "inclusion-embedding",
+          "depends_on": [
+            "manifold-family"
+          ],
+          "client_seconds": 248.499,
+          "reservation_to_capture_seconds": 280.858,
+          "capture_to_integrated_seconds": 46.728,
+          "claim_delay_after_parents_seconds": 0.414
+        },
+        {
+          "task": "closed-domain",
+          "depends_on": [
+            "restrict-construction",
+            "manifold-family",
+            "inclusion-embedding",
+            "ambient-bridge"
+          ],
+          "client_seconds": 169.651,
+          "reservation_to_capture_seconds": 210.345,
+          "capture_to_integrated_seconds": 52.932,
+          "claim_delay_after_parents_seconds": 0.723
+        },
+        {
+          "task": "empty-domain-sanity",
+          "depends_on": [
+            "closed-domain"
+          ],
+          "client_seconds": 84.677,
+          "reservation_to_capture_seconds": 119.977,
+          "capture_to_integrated_seconds": 60.332,
+          "claim_delay_after_parents_seconds": 0.691
+        },
+        {
+          "task": "model-range-sanity",
+          "depends_on": [
+            "closed-domain"
+          ],
+          "client_seconds": 201.016,
+          "reservation_to_capture_seconds": 242.513,
+          "capture_to_integrated_seconds": 64.79,
+          "claim_delay_after_parents_seconds": 0.697
+        }
+      ],
+      "measurement_notes": "Old logs have no exact service-start event. Active model intervals approximated from capture time minus elapsed client timer; mean spans first reservation to final integrated commit. Not API latency, nor a measured speedup. Critical path uses task client times only and excludes preparation, verification, resource contention and integration."
+    },
+    {
+      "project": "poincare-smooth-collar-20260919",
+      "tasks": 14,
+      "observed_model_interval_peak_estimate": 6,
+      "mean_model_concurrency_estimate": 1.855,
+      "batch_seconds_first_claim_to_last_commit": 2275.057,
+      "sum_client_seconds": 4221.305,
+      "client_only_critical_path_seconds": 1808.678,
+      "time_fraction_at_most_one_active_model_estimate": 0.6241,
+      "seconds_by_active_models_estimate": {
+        "0": 404.118,
+        "1": 1015.821,
+        "2": 170.937,
+        "3": 193.654,
+        "4": 315.186,
+        "5": 30.143,
+        "6": 145.198
+      },
+      "tasks_detail": [
+        {
+          "task": "halfspace-range",
+          "depends_on": [],
+          "client_seconds": 271.359,
+          "reservation_to_capture_seconds": 291.451,
+          "capture_to_integrated_seconds": 16.605,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "product-chart-smooth",
+          "depends_on": [],
+          "client_seconds": 469.035,
+          "reservation_to_capture_seconds": 503.435,
+          "capture_to_integrated_seconds": 12.614,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "restrict-collar",
+          "depends_on": [],
+          "client_seconds": 326.754,
+          "reservation_to_capture_seconds": 351.577,
+          "capture_to_integrated_seconds": 9.467,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "translate-chart",
+          "depends_on": [],
+          "client_seconds": 295.092,
+          "reservation_to_capture_seconds": 317.148,
+          "capture_to_integrated_seconds": 14.893,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "standard-collar",
+          "depends_on": [],
+          "client_seconds": 243.478,
+          "reservation_to_capture_seconds": 261.214,
+          "capture_to_integrated_seconds": 9.326,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "standard-component",
+          "depends_on": [],
+          "client_seconds": 175.341,
+          "reservation_to_capture_seconds": 188.113,
+          "capture_to_integrated_seconds": 8.419,
+          "claim_delay_after_parents_seconds": null
+        },
+        {
+          "task": "interior-model",
+          "depends_on": [
+            "translate-chart"
+          ],
+          "client_seconds": 357.427,
+          "reservation_to_capture_seconds": 388.047,
+          "capture_to_integrated_seconds": 18.233,
+          "claim_delay_after_parents_seconds": 0.719
+        },
+        {
+          "task": "collar-coordinates-geometry",
+          "depends_on": [
+            "restrict-collar",
+            "halfspace-range"
+          ],
+          "client_seconds": 353.631,
+          "reservation_to_capture_seconds": 387.568,
+          "capture_to_integrated_seconds": 22.927,
+          "claim_delay_after_parents_seconds": 0.506
+        },
+        {
+          "task": "regular-open-cover",
+          "depends_on": [
+            "restrict-collar"
+          ],
+          "client_seconds": 261.485,
+          "reservation_to_capture_seconds": 284.601,
+          "capture_to_integrated_seconds": 17.886,
+          "claim_delay_after_parents_seconds": 0.513
+        },
+        {
+          "task": "collar-coordinates-smooth",
+          "depends_on": [
+            "product-chart-smooth"
+          ],
+          "client_seconds": 429.276,
+          "reservation_to_capture_seconds": 463.942,
+          "capture_to_integrated_seconds": 15.392,
+          "claim_delay_after_parents_seconds": 0.666
+        },
+        {
+          "task": "boundary-to-global",
+          "depends_on": [
+            "interior-model"
+          ],
+          "client_seconds": 128.06,
+          "reservation_to_capture_seconds": 142.831,
+          "capture_to_integrated_seconds": 22.066,
+          "claim_delay_after_parents_seconds": 0.103
+        },
+        {
+          "task": "boundary-local-model",
+          "depends_on": [
+            "collar-coordinates-smooth",
+            "collar-coordinates-geometry"
+          ],
+          "client_seconds": 260.782,
+          "reservation_to_capture_seconds": 295.451,
+          "capture_to_integrated_seconds": 40.679,
+          "claim_delay_after_parents_seconds": 0.87
+        },
+        {
+          "task": "smooth-complement-closure",
+          "depends_on": [
+            "boundary-local-model",
+            "regular-open-cover",
+            "boundary-to-global"
+          ],
+          "client_seconds": 110.978,
+          "reservation_to_capture_seconds": 150.637,
+          "capture_to_integrated_seconds": 71.158,
+          "claim_delay_after_parents_seconds": 0.205
+        },
+        {
+          "task": "standard-closure-sanity",
+          "depends_on": [
+            "standard-collar",
+            "standard-component",
+            "smooth-complement-closure"
+          ],
+          "client_seconds": 538.607,
+          "reservation_to_capture_seconds": 615.211,
+          "capture_to_integrated_seconds": 103.968,
+          "claim_delay_after_parents_seconds": 0.822
+        }
+      ],
+      "measurement_notes": "Old logs have no exact service-start event. Active model intervals approximated from capture time minus elapsed client timer; mean spans first reservation to final integrated commit. Not API latency, nor a measured speedup. Critical path uses task client times only and excludes preparation, verification, resource contention and integration."
+    }
+  ],
+  "after": {
+    "proofs_only": {
+      "peak_active_service_intervals": 6,
+      "mean_active_service_intervals": 3.458,
+      "span_seconds": 595.708,
+      "sum_service_seconds": 2059.679
+    },
+    "proofs_plus_source_scouts": {
+      "peak_active_service_intervals": 12,
+      "mean_active_service_intervals": 5.776,
+      "span_seconds": 836.864,
+      "sum_service_seconds": 4833.664
+    },
+    "live_sample": {
+      "sampled_unix": 1789806299.3714054,
+      "proof_workers": [
+        {
+          "id": "a0ea7e47-dfdc-4276-b8e9-4f70a2138d46",
+          "task_id": "affine-diffeomorph",
+          "unit": "lean-swarm-a0ea7e47dfdc4276b8e94f70a2138d46.service",
+          "active_state": "active"
+        },
+        {
+          "id": "241d3dc9-e8d5-4dcb-b5f7-b1837c66f918",
+          "task_id": "axis-real-transport",
+          "unit": "lean-swarm-241d3dc9e8d54dcbb5f7b1837c66f918.service",
+          "active_state": "active"
+        },
+        {
+          "id": "1fca6c2a-3511-44fa-9e79-adfc0d0ffb87",
+          "task_id": "central-embedding",
+          "unit": "lean-swarm-1fca6c2a351144fa9e79adfc0d0ffb87.service",
+          "active_state": "active"
+        },
+        {
+          "id": "929cb5cf-b3ca-4f22-8a43-69c41fa90d4d",
+          "task_id": "restrict-smooth-neck",
+          "unit": "lean-swarm-929cb5cfb3ca4f228a4369c41fa90d4d.service",
+          "active_state": "active"
+        },
+        {
+          "id": "2d309c89-4092-4bfe-9c46-3a21820d661d",
+          "task_id": "side-normalization",
+          "unit": "lean-swarm-2d309c8940924bfe9c463a21820d661d.service",
+          "active_state": "active"
+        },
+        {
+          "id": "cb731349-f3ab-467d-867c-18a370924fa6",
+          "task_id": "uniform-tube",
+          "unit": "lean-swarm-cb731349f3ab467d867c18a370924fa6.service",
+          "active_state": "active"
+        }
+      ],
+      "source_scouts": [
+        {
+          "id": "2db98580-504c-44af-b88e-5230c5ed3b3a",
+          "unit": "lean-swarm-2db98580504c44afb88e5230c5ed3b3a.service",
+          "scope": "canonical-neighborhoods",
+          "kind": "source_reconnaissance_not_proof",
+          "base_commit": "bd6dc4e72115ea8c1b61571e155067c9b1209467",
+          "started_unix": 1789806019.8320935,
+          "active_state": "active"
+        },
+        {
+          "id": "df9a70df-f652-4961-8692-5efbf5c7d19e",
+          "unit": "lean-swarm-df9a70dff652496186925efbf5c7d19e.service",
+          "scope": "surgery-continuation",
+          "kind": "source_reconnaissance_not_proof",
+          "base_commit": "bd6dc4e72115ea8c1b61571e155067c9b1209467",
+          "started_unix": 1789806020.6704652,
+          "active_state": "active"
+        },
+        {
+          "id": "c214f2f0-0632-4793-9bc1-d7138417789a",
+          "unit": "lean-swarm-c214f2f0063247939bc1d7138417789a.service",
+          "scope": "analytic-control",
+          "kind": "source_reconnaissance_not_proof",
+          "base_commit": "bd6dc4e72115ea8c1b61571e155067c9b1209467",
+          "started_unix": 1789806019.5939987,
+          "active_state": "active"
+        },
+        {
+          "id": "bb773641-98ea-4a5d-84d9-a989e6f5b273",
+          "unit": "lean-swarm-bb77364198ea4a5d84d9a989e6f5b273.service",
+          "scope": "neck-producers",
+          "kind": "source_reconnaissance_not_proof",
+          "base_commit": "bd6dc4e72115ea8c1b61571e155067c9b1209467",
+          "started_unix": 1789806019.3510404,
+          "active_state": "active"
+        },
+        {
+          "id": "457bc28c-2466-4199-92ac-22ccb6abbb3e",
+          "unit": "lean-swarm-457bc28c2466419992ac22ccb6abbb3e.service",
+          "scope": "topology-endgame",
+          "kind": "source_reconnaissance_not_proof",
+          "base_commit": "bd6dc4e72115ea8c1b61571e155067c9b1209467",
+          "started_unix": 1789806020.316735,
+          "active_state": "active"
+        },
+        {
+          "id": "b5fbb087-bc86-488a-a137-b72e59b3ceee",
+          "unit": "lean-swarm-b5fbb087bc86488aa137b72e59b3ceee.service",
+          "scope": "finite-extinction",
+          "kind": "source_reconnaissance_not_proof",
+          "base_commit": "bd6dc4e72115ea8c1b61571e155067c9b1209467",
+          "started_unix": 1789806020.077195,
+          "active_state": "active"
+        }
+      ],
+      "own_active_proofs": 6,
+      "own_active_scouts": 6
+    }
+  },
+  "proof_tasks": [
+    {
+      "id": "affine-diffeomorph",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_axial_affine_diffeomorph",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/AffineDiffeomorph.lean",
+      "commit": "d9f082e347f0f101218a344fd7557c8031b551fa",
+      "model_client_seconds": 219.691,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "sha256": "753a207e64b6f53fafa2288acef4c6b184b0cc1e035097bf58823cb3fce901f8",
+      "timing": {
+        "finished_unix": 1789806502.9340527,
+        "prepare_finished_unix": 1789806260.508069,
+        "prepare_started_unix": 1789806260.1743934,
+        "service_started_unix": 1789806260.5684998,
+        "service_stopped_unix": 1789806497.5298421,
+        "verification_finished_unix": 1789806502.9340515,
+        "verification_started_unix": 1789806497.5432036
+      }
+    },
+    {
+      "id": "axis-real-transport",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_native_axis_real_diffeomorph",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/AxisRealTransport.lean",
+      "commit": "417e0311b275f45a28e55d235c78d288286ae1c1",
+      "model_client_seconds": 553.692,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "sha256": "14cc7f67e8cbce0bbb7a7ee777975e7073e95ace341d63c575228e6ac34ac95a",
+      "timing": {
+        "finished_unix": 1789806861.6207733,
+        "prepare_finished_unix": 1789806260.8295765,
+        "prepare_started_unix": 1789806260.191849,
+        "service_started_unix": 1789806260.8908098,
+        "service_stopped_unix": 1789806856.2764163,
+        "verification_finished_unix": 1789806861.620772,
+        "verification_started_unix": 1789806856.291466
+      }
+    },
+    {
+      "id": "central-embedding",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.neck_central_slice_isClosedEmbedding",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/CentralEmbedding.lean",
+      "commit": "5946cced05cf93680973dcd16924899c41752098",
+      "model_client_seconds": 154.575,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "sha256": "aa2351b2085b5f5b4acd6eb204c1f7e594ec9217688743b6dfb9408959808dbf",
+      "timing": {
+        "finished_unix": 1789806434.7716482,
+        "prepare_finished_unix": 1789806262.5240755,
+        "prepare_started_unix": 1789806260.2416842,
+        "service_started_unix": 1789806262.6056638,
+        "service_stopped_unix": 1789806429.7043378,
+        "verification_finished_unix": 1789806434.7716475,
+        "verification_started_unix": 1789806429.714339
+      }
+    },
+    {
+      "id": "restrict-smooth-neck",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_restricted_smooth_neck",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/RestrictSmoothNeck.lean",
+      "commit": "9d71d94cdb59fee7e0657a6550d37a2f05cd8d71",
+      "model_client_seconds": 312.469,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "sha256": "425d77d3189de7d31a495cfe6879326d6d4307aac46cd48e24ab328086e6aff2",
+      "timing": {
+        "finished_unix": 1789806604.883651,
+        "prepare_finished_unix": 1789806261.7075593,
+        "prepare_started_unix": 1789806260.2314372,
+        "service_started_unix": 1789806261.78241,
+        "service_stopped_unix": 1789806596.3336277,
+        "verification_finished_unix": 1789806604.88365,
+        "verification_started_unix": 1789806596.3440874
+      }
+    },
+    {
+      "id": "side-normalization",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.exists_normalized_oneSided_neck",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/SideNormalization.lean",
+      "commit": "62fa15722ba6bbdbf2f9064bfcae236d47fdb21b",
+      "model_client_seconds": 371.358,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "sha256": "6b08700144272864eb336973e6db910c4455d10df920387400d9b4ab25992802",
+      "timing": {
+        "finished_unix": 1789806666.6365504,
+        "prepare_finished_unix": 1789806262.0804164,
+        "prepare_started_unix": 1789806260.257376,
+        "service_started_unix": 1789806262.1901228,
+        "service_stopped_unix": 1789806660.6825843,
+        "verification_finished_unix": 1789806666.6365485,
+        "verification_started_unix": 1789806660.703894
+      }
+    },
+    {
+      "id": "uniform-tube",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "target": "PoincareConjecture.Topology.FiberSaturation.NeckAdapter.compact_cross_section_uniform_neck_width",
+      "path": "PoincareConjecture/Topology/FiberSaturation/NeckAdapter/UniformTube.lean",
+      "commit": "68370bb5f4f816bc76b9d8d81320cb26d05a396d",
+      "model_client_seconds": 305.113,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "sha256": "5eb0efd35a148b9135d7923b0d7aa43d55a7749db5fd46435244376f4633589a",
+      "timing": {
+        "finished_unix": 1789806594.473076,
+        "prepare_finished_unix": 1789806261.2725601,
+        "prepare_started_unix": 1789806260.2018158,
+        "service_started_unix": 1789806261.3469977,
+        "service_stopped_unix": 1789806588.5370805,
+        "verification_finished_unix": 1789806594.4730747,
+        "verification_started_unix": 1789806588.5583298
+      }
+    }
+  ],
+  "source_scouts": [
+    {
+      "scope": "analytic-control",
+      "status": "REPORT_COMPLETE_NOT_A_PROOF",
+      "candidate_count": 3,
+      "missing_evidence_files": [],
+      "payload_sha256": "900335b43ae776352bd2a81c82d2db7e5753532b098095611bb6a485f4151113",
+      "service_started_unix": 1789806019.6607587,
+      "service_stopped_unix": 1789806486.721287
+    },
+    {
+      "scope": "canonical-neighborhoods",
+      "status": "REPORT_COMPLETE_NOT_A_PROOF",
+      "candidate_count": 3,
+      "missing_evidence_files": [],
+      "payload_sha256": "1442099982696ee9713f48504cc0984e68bb44ecd23bf2f1c988a72e8871a6d7",
+      "service_started_unix": 1789806019.8832035,
+      "service_stopped_unix": 1789806464.9038372
+    },
+    {
+      "scope": "finite-extinction",
+      "status": "REPORT_COMPLETE_NOT_A_PROOF",
+      "candidate_count": 3,
+      "missing_evidence_files": [],
+      "payload_sha256": "e006f90689eb124ef458a092af70bab14a98cc4f4effa243ee2f0ecf43ab00a0",
+      "service_started_unix": 1789806020.1370027,
+      "service_stopped_unix": 1789806366.5967517
+    },
+    {
+      "scope": "neck-producers",
+      "status": "REPORT_COMPLETE_NOT_A_PROOF",
+      "candidate_count": 3,
+      "missing_evidence_files": [],
+      "payload_sha256": "114872a892aeec35a7c1ab14ee51671714e4690b713b5c41324e9c6603f9da09",
+      "service_started_unix": 1789806019.4122548,
+      "service_stopped_unix": 1789806594.2623804
+    },
+    {
+      "scope": "surgery-continuation",
+      "status": "REPORT_COMPLETE_NOT_A_PROOF",
+      "candidate_count": 3,
+      "missing_evidence_files": [],
+      "payload_sha256": "bfeb3102301cceedfae918cbd954fcc94d3f8f8e3b6eade4113a8a1e51d7d3df",
+      "service_started_unix": 1789806020.7352731,
+      "service_stopped_unix": 1789806465.6967368
+    },
+    {
+      "scope": "topology-endgame",
+      "status": "REPORT_COMPLETE_NOT_A_PROOF",
+      "candidate_count": 3,
+      "missing_evidence_files": [],
+      "payload_sha256": "8883503545fc9d64af5f32b814e191a563461b2cf4f9894f464f4e95f5f50680",
+      "service_started_unix": 1789806020.3674011,
+      "service_stopped_unix": 1789806515.9994557
+    }
+  ],
+  "candidate_queue": [
+    {
+      "scope": "analytic-control",
+      "title": "Produce the |nabla Rm|^2 evolution inequality from Ricci flow",
+      "worker_readiness_label": "ready_for_statement_review",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "Time derivative of |nabla Rm|^2 including connection/metric evolution and commutation of nabla with partial_t Rm",
+        "Star-product / cubic-to-linear bound converting Q(Rm,nabla Rm) into c|Rm||nabla Rm|^2"
+      ],
+      "evidence_paths": [
+        "formalized-sources/Topping/Topping/MaximumPrinciple/GradientEstimate.lean",
+        "formalized-sources/Topping/Topping/RicciFlow/CurvatureNormVariation.lean",
+        "formalized-sources/Topping/Topping/MaximumPrinciple/HigherDerivativeEstimate.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ShiFirstDerivative.lean",
+        "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex"
+      ]
+    },
+    {
+      "scope": "analytic-control",
+      "title": "Volume-ratio clause of local volume control, without injectivity radius",
+      "worker_readiness_label": "ready_for_statement_review",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "Explicit Ricci-trace lower bound Ric >= -(n-1)K g from sectional >= -K (or from the existing |Ric(v,v)| <= n K g(v,v), if that coarser constant is accepted)",
+        "Positive minimum of modelBallVolume_{-1}(s)/s^n on (0,1]",
+        "Transfer of Vol B(p,r0)>=v0 through rescaling to a unit-ball volume lower bound"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/BishopGromovManifold.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/CurvatureNormManifold.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/MetricRescaling.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/VolumeInjectivityBridge.lean",
+        "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex"
+      ]
+    },
+    {
+      "scope": "analytic-control",
+      "title": "Define L-length on an ordinary Ricci-flow domain",
+      "worker_readiness_label": "needs_definition",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "Lean type for backward spacetime paths with time constraint t=T-tau",
+        "Scalar-curvature evaluation along such paths",
+        "Horizontal/spatial velocity relative to the time field (ordinary product case is enough)"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/blueprint/src/chapters/Ch06_ComparisonGeometry.tex",
+        "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ParabolicNeighborhood.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/Basic.lean"
+      ]
+    },
+    {
+      "scope": "canonical-neighborhoods",
+      "title": "Kappa-solution predicate on an existing smooth complete Ricci flow",
+      "worker_readiness_label": "needs_definition",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "curvature-operator-norm |Rm| on ⋀²",
+        "nonflat predicate on a Ricci-flow family",
+        "adapter identifying MorganTian ricciTensorAt / curvature form with KleinerLott.RiemannCurvatureFamily",
+        "ancient-interval convention Iic 0 vs Iio 0 ∪ {0}"
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+        "formalized-sources/MorganTian/blueprint/src/chapters/Ch09_KappaAncientSolutions.tex",
+        "formalized-sources/KleinerLott/KleinerLott/RicciFlow/Noncollapsing.lean",
+        "formalized-sources/KleinerLott/KleinerLott/RicciFlow/SmoothRicciFlow.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/CurvatureOperator.lean"
+      ]
+    },
+    {
+      "scope": "canonical-neighborhoods",
+      "title": "C^∞ Gaussian-coordinate compactness of curvature-bounded balls",
+      "worker_readiness_label": "needs_definition",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "C^∞ topology / Arzela–Ascoli on RiemannianMetric over a Euclidean ball",
+        "uniform C^ℓ bounds on metric coefficients in Gaussian coordinates from |∇^ℓ Rm| bounds",
+        "thm:volume-injectivity-radius if one wants to discharge the exp-diffeomorphism hypothesis from volume+curvature rather than assume it"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/blueprint/src/chapters/Ch05_ConvergenceResults.tex",
+        "formalized-sources/MorganTian/MorganTianLib/Ch05/Foundations.lean",
+        "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/VolumeInjectivityBridge.lean"
+      ]
+    },
+    {
+      "scope": "canonical-neighborhoods",
+      "title": "Restrict an evolving epsilon-neck of depth at least one to a strong epsilon-neck",
+      "worker_readiness_label": "ready_for_statement_review",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeck.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/EvolvingEpsilonNeckConsequences.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean",
+        "PoincareConjecture/blueprint/src/chapters/kappa-solutions-and-surgery-continuation.tex"
+      ]
+    },
+    {
+      "scope": "finite-extinction",
+      "title": "Forward-Dini comparison with finitely many downward jumps",
+      "worker_readiness_label": "ready_for_statement_review",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex",
+        "PoincareConjecture/blueprint/src/chapters/extinction-and-component-topology.tex",
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/ForwardDifference.lean"
+      ]
+    },
+    {
+      "scope": "finite-extinction",
+      "title": "Loop-width comparison ODE integrating-factor formula",
+      "worker_readiness_label": "ready_for_statement_review",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/extinction-and-component-topology.tex"
+      ]
+    },
+    {
+      "scope": "finite-extinction",
+      "title": "Coupled length and total-curvature exponential comparison",
+      "worker_readiness_label": "ready_for_statement_review",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "The geometric producers L'(t) ≤ ∫(C2-k²) ds and Θ' ≤ (C1+C2)Θ + C1 L remain unformalized (lem:curve-flow-length-total-curvature-evolution). This task is only the ODE comparison, not those identities."
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/curve-shrinking-estimates.tex",
+        "formalized-sources/MorganTian/blueprint/src/chapters/Ch18_FiniteTimeExtinction.tex"
+      ]
+    },
+    {
+      "scope": "neck-producers",
+      "title": "Normalize the finite neck cylinder onto Sphere × Ioo(-1,1)",
+      "worker_readiness_label": "ready_for_statement_review",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "ChartedSpace/IsManifold on EpsilonNeckSphere × Ioo(-1,1) if stated as a Diffeomorph",
+        "Bundled diffeomorphism EpsilonNeckAxis ≃ ℝ (the coordinate p.2 0 is used but not packaged)"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/AffineTimeDiffeomorph.lean",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/Core.lean"
+      ]
+    },
+    {
+      "scope": "neck-producers",
+      "title": "Package a neck parametrization as a PartialDiffeomorph on Sphere × ℝ",
+      "worker_readiness_label": "needs_mathematical_design",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "Declared conversion Diffeomorph of an Opens subtype → PartialDiffeomorph of the ambient product",
+        "Decision whether N stays modeled by I or is recharted on V×ℝ",
+        "Axis type EuclideanSpace ℝ (Fin 1) versus ℝ"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ComplementClosure.lean",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/SmoothCollar/ProductChartSmooth.lean"
+      ]
+    },
+    {
+      "scope": "neck-producers",
+      "title": "Inhabit the round cylinder without assuming its curvature",
+      "worker_readiness_label": "needs_mathematical_design",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "Bridge from DCImmersedPatch curvature on punctured F to Levi-Civita of DCInducedMetric on EpsilonNeckSphere",
+        "Product-metric constructor on EpsilonNeckCylinderModel"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ExactSphereExamples.lean",
+        "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh6Sphere.lean"
+      ]
+    },
+    {
+      "scope": "surgery-continuation",
+      "title": "Order-zero quadratic-form comparison from EpsilonClose",
+      "worker_readiness_label": "ready_for_statement_review",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "A tensor-norm comparison |T(v,v)| <= |T|_{g0} |v|_{g0}^2 extracted from the orthonormal-frame contraction already used inside metricCovariantDerivativeNormSq (order 0). Orthonormal frames exist via Ch02/OrthoFrame exists_orthonormalFrame; that lemma was not re-parsed here as a completed proof."
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+        "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex"
+      ]
+    },
+    {
+      "scope": "surgery-continuation",
+      "title": "Round-cylinder RiemannianMetric on the transported neck domain",
+      "worker_readiness_label": "needs_definition",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "A RiemannianMetric transport along ContinuousLinearEquiv / model change from EpsilonNeckProductModel to EpsilonNeckCylinderModel. DCProductMetric inhabits the native product model; EpsilonClose contracts tensors on the inner-product model R^3.",
+        "Euclidean RiemannianMetric on EpsilonNeckAxis (or on EuclideanSpace R (Fin 1)) packaged for DCProductMetric."
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonNeck.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch02/LevelSetInducedMetric.lean",
+        "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh1.lean"
+      ]
+    },
+    {
+      "scope": "surgery-continuation",
+      "title": "Length-metric Lipschitz gluing of finitely many surgery pieces",
+      "worker_readiness_label": "ready_for_statement_review",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "If the intended consumer is a Riemannian 3-manifold after cutting along embedded two-spheres, the cut pieces as length spaces and the ambient Riemannian distance (MorganTianLib.canonicalMetricSpace) must be identified. That identification is not required to state or prove the abstract gluing lemma."
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/kappa-solutions-and-surgery-continuation.tex",
+        "shared/Shared/MetricGeometry/LengthSpace.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/MetricRescalingInjectivity.lean"
+      ]
+    },
+    {
+      "scope": "topology-endgame",
+      "title": "Define the two sphere bundles over the circle (blueprint def:sphere-bundles-over-circle)",
+      "worker_readiness_label": "needs_definition",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "Antipodal Sphere2 ≃ₜ Sphere2 (and Sphere2 ≃ₘ Sphere2 if a diffeomorphism is required)",
+        "ChartedSpace/IsManifold on MappingTorus.Space Sphere2 if EMinus must be smooth in this task",
+        "lem:two-sphere-diffeomorphism-classes, which must not be folded into the definition"
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/MappingTorus.lean",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/AbstractBundleMappingTorus.lean",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/BundleMonodromy.lean"
+      ]
+    },
+    {
+      "scope": "topology-endgame",
+      "title": "Product clause of sphere-bundle fundamental group (blueprint lem:sphere-bundle-fundamental-group, E+ only)",
+      "worker_readiness_label": "ready_for_statement_review",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "PoincareConjecture SimplyConnectedSpace Sphere2 instance",
+        "def:sphere-bundles-over-circle if phrased as EPlus rather than the raw product; the product form does not wait on that definition",
+        "EMinus and its π₁ (waits on candidate 1)"
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+        "PoincareConjecture/PoincareConjecture/Topology/FiberSaturation/Sphere.lean",
+        "formalized-sources/Hatcher/HatcherLib/Ch1/Sphere.lean",
+        "formalized-sources/Hatcher/HatcherLib/Ch1/Circle.lean"
+      ]
+    },
+    {
+      "scope": "topology-endgame",
+      "title": "Construction, not uniqueness, of a smooth connected sum (blueprint def:smooth-connected-sum)",
+      "worker_readiness_label": "needs_definition",
+      "dispatcher_status": "NOT_ENQUEUED_REQUIRES_STATEMENT_AND_DEPENDENCY_REVIEW",
+      "missing_dependencies": [
+        "PoincareConjecture type of smoothly embedded closed 3-ball with spherical boundary",
+        "Quotient manifold structure for two codimension-zero pieces identified along boundary spheres",
+        "Orientation-reversing predicate on Diff(S²), deferrable if the gluing map is given data",
+        "lem:two-sphere-diffeomorphism-classes and 3D Schoenflies, which must not be hidden in the definition"
+      ],
+      "evidence_paths": [
+        "PoincareConjecture/blueprint/src/chapters/topological-endgame.tex",
+        "PoincareConjecture/PoincareConjecture/Basic.lean",
+        "PoincareConjecture/lakefile.lean"
+      ]
+    }
+  ],
+  "tested_scheduler_cases": 31,
+  "grok_model_limit": "unlimited",
+  "default_dispatch_jobs": 12,
+  "luna_default": 4,
+  "luna_hard_max": 8,
+  "min_available_memory_mb": 8192,
+  "limitations": [
+    "New batch is not a controlled speed benchmark against old batches; different task difficulty and dependency graphs.",
+    "Service concurrency includes agent tool use and provider waiting; it is not a count of simultaneous GPU inference.",
+    "Six source scouts are not six Lean proofs; their 18 proposals are not marked ready or completed.",
+    "Proof integration temporarily refused a dirty workspace; the unchanged verified source was integrated under the lock after reconciliation.",
+    "Scouting JSON sidecar collision was repaired by checking the unchanged original report against the recorded capture hash; a regression test now protects JSON captures.",
+    "Long proof dependencies still require architectural decomposition; no claim that parallelism is globally optimal."
+  ]
+}

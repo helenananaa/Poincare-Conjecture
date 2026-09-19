@@ -1,0 +1,220 @@
+{
+  "scope": "Reduced geometry, local estimates, compactness and noncollapsing. Reconnaissance only: independent next proof tasks that can run alongside the collar branch (PoincareConjecture topology). No new proof claimed.",
+  "inspected_files": [
+    "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+    "PoincareConjecture/blueprint/src/chapters/foundations-and-interfaces.tex",
+    "PoincareConjecture/blueprint/important-statements.yaml",
+    "formalized-sources/MorganTian/blueprint/src/chapters/Ch03_BasicsOfRicciFlow.tex",
+    "formalized-sources/MorganTian/blueprint/src/chapters/Ch06_ComparisonGeometry.tex",
+    "formalized-sources/MorganTian/blueprint/src/chapters/Ch08_NonCollapsed.tex",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/Basic.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ShiEstimates.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ShiFirstDerivative.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ShiCutoff.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ShiCutoffTransfer.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ShiInteriorBounds.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ShiBochner.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/MetricDistortion.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/MetricDistanceDistortion.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/VolumeDistortion.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/VolumeMeasureBridge.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/GlobalVolumeMeasureComparison.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ParabolicNeighborhood.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/LocalExistence.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/LocalExistence.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/GeneralizedRicciFlow.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/CurvatureEvolutionEnergy.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/CutLocus.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/VolumeInjectivityBridge.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/BishopGromovManifold.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/BishopGromovManifoldProducers.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/BishopGromovNormalized.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/CurvatureNormManifold.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/MetricRescaling.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch01/Chapter1VolumeRemaining.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch04/HamiltonMaximumCore.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch04/NormalizedInitialConditions.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch04/NormalizedVolumeBounds.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch05.lean",
+    "formalized-sources/MorganTian/MorganTianLib/Ch05/BoundedStageCompactness.lean",
+    "formalized-sources/Topping/Topping/MaximumPrinciple/CurvatureNormEvolution.lean",
+    "formalized-sources/Topping/Topping/MaximumPrinciple/GradientEstimate.lean",
+    "formalized-sources/Topping/Topping/MaximumPrinciple/HigherDerivativeEstimate.lean",
+    "formalized-sources/Topping/Topping/MaximumPrinciple/DerivativeEstimate.lean",
+    "formalized-sources/Topping/Topping/RicciFlow/CurvatureNormVariation.lean",
+    "formalized-sources/Topping/Topping/RicciFlow/Existence/ShortTimeExistence.lean",
+    "formalized-sources/Topping/Topping/ParabolicPDE/Compactness.lean"
+  ],
+  "existing_results": [
+    {
+      "kind": "lean_theorem_not_a_blueprint_claim",
+      "declaration": "MorganTianLib.bishop_gromov_manifold_ratio",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch01/BishopGromovManifold.lean",
+      "hypotheses": "Complete connected Riemannian manifold; compact-closure ball of radius R; Levi-Civita; Ricci lower bound Ric >= -(n-1)k g on the closed ball; measurable transported exponential Jacobian. Conclusion: actual/model ball-volume ratio is antitone on (0,R). Does not produce injectivity-radius lower bounds."
+    },
+    {
+      "kind": "lean_theorem_not_a_blueprint_claim",
+      "declaration": "MorganTianLib.riemannianMeasure_ball_mem_Icc_of_metricTangentBall_jacobian_bounds",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch01/VolumeInjectivityBridge.lean",
+      "hypotheses": "r <= injectivityRadius; pointwise Jacobian bounds c <= Jac <= C on the metric tangent ball. Conclusion: two-sided Riemannian volume bounds for Metric.ball p r. Explicitly does not supply the curvature-dependent Jacobian bound."
+    },
+    {
+      "kind": "lean_definition_not_a_theorem",
+      "declaration": "MorganTianLib.injectivityRadius",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch01/CutLocus.lean",
+      "hypotheses": "Infimum of cutTime over unit tangent vectors. Comment in-file: injectivity of exp on this ball is a theorem, not part of the definition. No quantitative inj-from-volume theorem was found."
+    },
+    {
+      "kind": "lean_theorem_not_a_blueprint_claim",
+      "declaration": "MorganTianLib.exists_metricDistortionConstant_of_curvatureOperatorNormLeOnTime",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/MetricDistortion.lean",
+      "hypotheses": "IsRicciFlowOn g (Icc 0 T); HasCurvatureOperatorNormLeOnTime g (Icc 0 T) K with K>=0. Conclusion: some A>0 with A^{-1} g(0) <= g(t) <= A g(0) as quadratic forms. Distance form: exists_metricDistanceDistortionConstant_of_curvatureOperatorNormLeOnTime."
+    },
+    {
+      "kind": "lean_theorem_not_a_blueprint_claim",
+      "declaration": "MorganTianLib.riemannianMeasure_exp_comparison_of_curvatureOperatorNormLeOnTime_global",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/GlobalVolumeMeasureComparison.lean",
+      "hypotheses": "Same flow and |Rm|<=K hypotheses; measurable set s (fixed, not a time-dependent geodesic ball). Two-sided exponential comparison of riemannianMeasure (g t) s versus (g 0) s."
+    },
+    {
+      "kind": "lean_theorem_not_a_blueprint_claim",
+      "declaration": "MorganTianLib.timeSliceBall_volume_lower_bound_of_normalized_curvature_le_two",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch04/NormalizedVolumeBounds.lean",
+      "hypotheses": "IsNormalizedInitialConditions on [0,T]; HasCurvatureOperatorNormLeOnTime = 2 on that slab; t<=1/16; 0<r<=1. Conclusion: later timeSliceBall has a dimension-only volume lower bound. Does not produce the curvature bound |Rm|<=2."
+    },
+    {
+      "kind": "lean_theorem_not_a_blueprint_claim",
+      "declaration": "Topping.exists_uniform_curvatureNormEvolution_const_of_morganTian_isRicciFlowOn",
+      "path": "formalized-sources/Topping/Topping/RicciFlow/CurvatureNormVariation.lean",
+      "hypotheses": "MorganTianLib.IsRicciFlowOn g J; Ksubseteq interior J; UniqueDiffWithinAt on K. Conclusion: some dimension-only c>=0 with HasCurvatureNormEvolutionInequalityOn g c K, i.e. d/dt |Rm|^2 <= Delta |Rm|^2 - 2|nabla Rm|^2 + c|Rm|^3. Compact-space uniform |Rm| bound exists as a further implication with an explicit ODE-denominator hypothesis."
+    },
+    {
+      "kind": "lean_theorem_conditional_on_unproduced_evolution",
+      "declaration": "Topping.gradRiemannNorm_le_of_evolution_inequalities",
+      "path": "formalized-sources/Topping/Topping/MaximumPrinciple/GradientEstimate.lean",
+      "hypotheses": "CompactSpace M; |Rm|<=m; T*m<=1; regularity of |nabla Rm|^2 and |Rm|^2; HasGradCurvatureNormSqInequalityOn; HasCurvatureNormEvolutionInequalityOn. Conclusion: |nabla Rm| <= C(c) m / sqrt(t). The first named evolution Prop is not produced from Ricci flow anywhere inspected. Parallel: MorganTianLib.shiFirstDerivativeBound_of_tower and Topping.HasShiTowerOn likewise take geometric tower inequalities as hypotheses."
+    }
+  ],
+  "blockers": [
+    {
+      "missing": "Producer of Topping.HasGradCurvatureNormSqInequalityOn (and of Topping.HasShiTowerOn / MorganTianLib.ShiTowerInequalitiesOn for geometric |nabla^j Rm|^2) from IsRicciFlowOn",
+      "needed_for": "Blueprint NL claim thm:local-ricci-flow-derivative-estimates; local Shi on parabolic neighborhoods. Analytic comparison already exists as an implication, not as a geometric theorem."
+    },
+    {
+      "missing": "Any Lean definition of L-length, reduced length l, L-geodesic, L-exp, reduced volume",
+      "needed_for": "Blueprint NL claims def:reduced-length, thm:reduced-exponential-regularity, thm:generalized-flow-noncollapsing-interface, and MT Ch06/Ch08. Workspace grep found none in Lean."
+    },
+    {
+      "missing": "Klingenberg loop / quantitative injectivityRadius lower bound from volume+curvature; curvature-dependent Jacobian lower bound feeding VolumeInjectivityBridge",
+      "needed_for": "Blueprint NL claim thm:local-volume-injectivity-radius-control (injectivity half). Volume half is closer: Bishop-Gromov exists, Jacobian-to-volume bridge exists, but inj-from-volume does not."
+    },
+    {
+      "missing": "Geometric ShiParabolicCutoff on a manifold time-slice ball (exponential-chart transfer of shiEuclideanCutoff with Laplacian/gradient bounds under |Rm| control)",
+      "needed_for": "Local (noncompact) Shi. ShiCutoff.lean states this construction is a separate geometric contract."
+    },
+    {
+      "missing": "Hamilton C^infty pointed Ricci-flow compactness; PDE solver existence (not assembly)",
+      "needed_for": "Blueprint NL claims thm:hamilton-compactness-generalized-flows and thm:normalized-short-time-ricci-flow existence. Ch05 supplies GH/stage compactness, not flow compactness. LocalExistence only transfers RicciDeTurckLocalSolution + HamiltonGaugeTransport."
+    }
+  ],
+  "candidate_tasks": [
+    {
+      "title": "Produce the |nabla Rm|^2 evolution inequality from Ricci flow",
+      "proposed_Lean_statement_or_precise_contract": "Do not invent a new theorem name. Discharge the existing predicate Topping.HasGradCurvatureNormSqInequalityOn g c J from MorganTianLib.IsRicciFlowOn (with UniqueDiffWithinAt on the target time set), analogously to the already-parsed producer Topping.exists_uniform_curvatureNormEvolution_const_of_morganTian_isRicciFlowOn for |Rm|^2. Contract: exist c>=0 depending only on dimension such that for every Ricci flow on J and every K subseteq J (or interior J) with UniqueDiffWithinAt, one has d/dt |nabla Rm|^2 <= Delta |nabla Rm|^2 + c |Rm| |nabla Rm|^2. Do not assume HasShiTowerOn, do not assume the Shi |nabla Rm| <= C/sqrt(t) conclusion, and do not hide the metric/connection time derivatives inside a certificate.",
+      "imports": [
+        "Topping.MaximumPrinciple.GradientEstimate",
+        "Topping.MaximumPrinciple.CurvatureNormEvolution",
+        "Topping.RicciFlow.CurvatureNormVariation",
+        "Topping.RicciFlow.CurvatureEvolutionDerived",
+        "MorganTianLib.Ch03.RicciFlow.Basic"
+      ],
+      "known_dependencies": [
+        "Topping.HasGradCurvatureNormSqInequalityOn (existing Prop)",
+        "Topping.exists_uniform_curvatureNormEvolution_const_of_morganTian_isRicciFlowOn",
+        "Topping.hasRiemannVariationOn_of_isRicciFlowOn / hasCurvatureEvolutionComponentsOn_of_isRicciFlowOn",
+        "Topping.curvatureBochnerIdentity",
+        "MorganTianLib.IsRicciFlowOn"
+      ],
+      "missing_dependencies": [
+        "Time derivative of |nabla Rm|^2 including connection/metric evolution and commutation of nabla with partial_t Rm",
+        "Star-product / cubic-to-linear bound converting Q(Rm,nabla Rm) into c|Rm||nabla Rm|^2"
+      ],
+      "evidence_paths": [
+        "formalized-sources/Topping/Topping/MaximumPrinciple/GradientEstimate.lean",
+        "formalized-sources/Topping/Topping/RicciFlow/CurvatureNormVariation.lean",
+        "formalized-sources/Topping/Topping/MaximumPrinciple/HigherDerivativeEstimate.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ShiFirstDerivative.lean",
+        "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex"
+      ],
+      "readiness": "ready_for_statement_review"
+    },
+    {
+      "title": "Volume-ratio clause of local volume control, without injectivity radius",
+      "proposed_Lean_statement_or_precise_contract": "Do not invent a filename or claim the full blueprint theorem. Precise contract using existing names: from HasCurvatureOperatorNormLeOn g (Metric.closedBall p r0) K, Vol_g(Metric.ball p r0) >= v0, and completeness/compact-closure as in bishop_gromov_manifold_ratio, produce v* = v*(n,K,r0,v0)>0 such that for 0<s<=min{r0,K^{-1/2}} (with the K=0 convention), riemannianMeasure (g) (ball p s) >= v* * s^n. Glue path: |Rm|<=K => sectional >= -K (neg_le_sectionalCurvatureAt_of_hasCurvatureOperatorNormLeAt) => Ricci lower bound of Bishop-Gromov shape => bishop_gromov_manifold_ratio after rescaledMetric_* so the comparison radius is 1. Exclude injectivityRadius; that half is blocked by missing Klingenberg.",
+      "imports": [
+        "MorganTianLib.Ch01.BishopGromovManifold",
+        "MorganTianLib.Ch01.BishopGromovManifoldProducers",
+        "MorganTianLib.Ch01.BishopGromovNormalized",
+        "MorganTianLib.Ch01.CurvatureNormManifold",
+        "MorganTianLib.Ch01.MetricRescaling",
+        "MorganTianLib.Ch03.RicciFlow.MetricDistortion"
+      ],
+      "known_dependencies": [
+        "MorganTianLib.bishop_gromov_manifold_ratio",
+        "MorganTianLib.neg_le_sectionalCurvatureAt_of_hasCurvatureOperatorNormLeAt",
+        "MorganTianLib.abs_ricciTensorAt_le_finrank_mul_of_hasCurvatureOperatorNormLeAt",
+        "MorganTianLib.rescaledMetric_ricciLowerBoundAt_iff",
+        "MorganTianLib.rescaledMetric_ball / rescaledMetric_riemannianEDist"
+      ],
+      "missing_dependencies": [
+        "Explicit Ricci-trace lower bound Ric >= -(n-1)K g from sectional >= -K (or from the existing |Ric(v,v)| <= n K g(v,v), if that coarser constant is accepted)",
+        "Positive minimum of modelBallVolume_{-1}(s)/s^n on (0,1]",
+        "Transfer of Vol B(p,r0)>=v0 through rescaling to a unit-ball volume lower bound"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/BishopGromovManifold.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/CurvatureNormManifold.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/MetricRescaling.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch01/VolumeInjectivityBridge.lean",
+        "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex"
+      ],
+      "readiness": "ready_for_statement_review"
+    },
+    {
+      "title": "Define L-length on an ordinary Ricci-flow domain",
+      "proposed_Lean_statement_or_precise_contract": "No Lean name exists; do not invent one as if it were already declared. Contract: on a product spacetime domain for an ordinary (nonsurgery) family g : R -> RiemannianMetric with IsRicciFlowOn g J, and a base point (x,T) with T in J, define the backward-time L-energy of a piecewise-smooth path gamma with t(gamma(tau))=T-tau by integral_0^{bar tau} sqrt(tau) * (scalarCurvature(gamma(tau)) + |X|^2) d tau, with X the spatial velocity relative to the time vector. Then define L_x and l_x = L_x/(2 sqrt(bar tau)) as infima over such paths staying in a declared smooth open set. Restrict to ordinary flows; do not encode surgery charts, unscathed regions, or reduced-volume monotonicity in the definition. L-geodesics, L-exp, and reduced volume are later consumers, not part of this definition.",
+      "imports": [
+        "MorganTianLib.Ch03.RicciFlow.Basic",
+        "MorganTianLib.Ch03.RicciFlow.SpaceTime",
+        "MorganTianLib.Ch03.RicciFlow.ParabolicNeighborhood",
+        "MorganTianLib.Ch03.RicciFlow.ScalarCurvatureSmooth"
+      ],
+      "known_dependencies": [
+        "MorganTianLib.IsRicciFlowOn",
+        "MorganTianLib.timeSliceBall / backwardParabolicNeighborhood",
+        "scalar curvature along a Ricci flow (Ch03 ScalarCurvatureSmooth / Topping ScalarSpacetimeSmooth)"
+      ],
+      "missing_dependencies": [
+        "Lean type for backward spacetime paths with time constraint t=T-tau",
+        "Scalar-curvature evaluation along such paths",
+        "Horizontal/spatial velocity relative to the time field (ordinary product case is enough)"
+      ],
+      "evidence_paths": [
+        "formalized-sources/MorganTian/blueprint/src/chapters/Ch06_ComparisonGeometry.tex",
+        "PoincareConjecture/blueprint/src/chapters/analytic-control-and-noncollapsing.tex",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/ParabolicNeighborhood.lean",
+        "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/Basic.lean"
+      ],
+      "readiness": "needs_definition"
+    }
+  ],
+  "not_ready": [
+    "Full blueprint thm:local-ricci-flow-derivative-estimates (local Shi): analytic tower is an implication; geometric evolution and manifold cutoff are missing.",
+    "Full blueprint thm:local-volume-injectivity-radius-control: injectivity half blocked by Klingenberg.",
+    "Blueprint thm:reduced-exponential-regularity and thm:generalized-flow-noncollapsing-interface: no reduced-geometry Lean objects.",
+    "Blueprint thm:hamilton-compactness-generalized-flows: Ch05 is GH/stage compactness, not Ricci-flow compactness.",
+    "Blueprint thm:normalized-short-time-ricci-flow: local existence is assembly-from-solver, not a solver; |Rm|<=2 on [0,2^{-5}] is not assembled from the existing |Rm| ODE bound into HasCurvatureOperatorNormLeOnTime."
+  ],
+  "collar_independence": "All three candidates live in MorganTian Ch01/Ch03/Ch04 and Topping maximum-principle/Ricci-flow files. They do not use PoincareConjecture/Topology collar, chart, or pairing modules."
+}
