@@ -52,8 +52,9 @@ by
       · dsimp [f]
         refine hnorm u c hc ?_
         exact (Real.mul_self_sqrt hD.le).symm
-      · dsimp [e, f]
-        rw [LinearMap.map_smul₂, map_smul, smul_eq_mul, smul_eq_mul, hvu]
+      · rw [hs e f]
+        dsimp [e, f]
+        rw [LinearMap.map_smul₂, map_smul, smul_eq_mul, smul_eq_mul, hs u v, hvu]
         ring
       · dsimp [e]
         rw [smul_inv_smul₀ ha.ne']
