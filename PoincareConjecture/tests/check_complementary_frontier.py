@@ -6,8 +6,13 @@ from pathlib import Path
 p = argparse.ArgumentParser()
 p.add_argument('--output', type=Path)
 p.add_argument('--fresh', action='store_true')
+p.add_argument('--base-ref', default='bb91a091f0b968f8bbe8d861e025a88d82b161be',
+               help='Already checked ancestor used for dependency-aware change selection; historical default unchanged')
 a = p.parse_args()
 r = Path(__file__).resolve().parents[1]
+validation_base = subprocess.check_output(
+    ['git','rev-parse','--verify','--end-of-options',a.base_ref+'^{commit}'],cwd=r.parent,text=True).strip()
+subprocess.run(['git','merge-base','--is-ancestor',validation_base,'HEAD'],cwd=r.parent,check=True)
 out = (a.output or r/'.lake/complementary-frontier-audit').resolve()
 out.mkdir(parents=True, exist_ok=True)
 lock = open(r/'.lake/complementary-frontier-validation.lock', 'a')
@@ -61,11 +66,11 @@ for text in [old,new]:
 assert len(closures) == 364,len(closures)
 gate = r.parent/'scripts/validate-lean-changes.sh'
 if gate.exists():
-    run('upstream-validation',['bash',str(gate),'bb91a091f0b968f8bbe8d861e025a88d82b161be'],r.parent)
+    run('upstream-validation',['bash',str(gate),validation_base],r.parent)
     run('whitespace',['git','diff','--check'],r.parent)
 assert before == hashes(),'Sources changed during verification'
 report = dict(status='PASS',utc=datetime.now(timezone.utc).isoformat(),lean=version,
-              contribution_parent=parent,mathlib_commit=mathlib,source_hashes_stable=True,
+              contribution_parent=parent,validation_base=validation_base,mathlib_commit=mathlib,source_hashes_stable=True,
               project_build_present_at_start=not fresh,sanity_suites=len(suites),results=results,
               transitive_axioms=closures,source_sha256=before,
               scope='Complementary-frontier selection from finite disjoint one-sided collars; no collar-existence, smooth-closure or complete Poincare claim.')
