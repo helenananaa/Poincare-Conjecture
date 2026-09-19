@@ -4,7 +4,7 @@
 
 ## 已实现的边界
 
-所有 CLI 调度进程共用 `~/.local/state/lean-swarm/control.sqlite3`。SQLite 原子事务负责领取任务、跨项目和跨进程的并发上限、依赖检查、额度暂停和失败记录。Luna 默认 4、可配置上限 8；Grok 默认 4。上限只统计本系统管理的任务，不统计用户另行启动的会话。过期心跳本身不会释放一个可能仍在执行的任务。
+所有 CLI 调度进程共用 `~/.local/state/lean-swarm/control.sqlite3`。SQLite 原子事务负责领取任务、跨项目和跨进程的并发上限、依赖检查、额度暂停和失败记录。Luna 默认 4、可配置上限 8；Grok 默认不设置模型级并发上限（数据库中 0 表示 unlimited）。上限只统计本系统管理的任务，不统计用户另行启动的会话。过期心跳本身不会释放一个可能仍在执行的任务。
 
 任务卡注册后不可修改；依赖必须达到 INTEGRATED 才能解锁下游。每次尝试创建独立 Git worktree。worker 只允许填充固定定理的 proof body，不允许改定义、依赖版本、公共接口或现有生产文件。需要改变架构的任务必须先单独审查。
 
@@ -20,7 +20,7 @@
 
 ```bash
 python3 tools/lean_swarm/cli.py status poincare-acceptance-20260919
-python3 tools/lean_swarm/cli.py limits --luna 4 --grok 4
+python3 tools/lean_swarm/cli.py limits --luna 4 --grok unlimited
 python3 tools/lean_swarm/cli.py run poincare-acceptance-20260919 --jobs 4 --integrate
 ```
 
@@ -63,3 +63,7 @@ python3 -m unittest discover -s tools/lean_swarm -p 'test_*.py' -v
 完整命名空间缓存视图采用文件级链接，输出目录私有；写新的 `.olean` 前断开相应文件链接，不修改被固定的依赖缓存。这避免新模块局部目录遮住原有同名命名空间。
 
 本仓库已验证的固定目标可用 `verify_cards.py --config CONFIG --cards CARDS...` 在不调用模型的情况下重新检查。`fault_checks.py` 和 `containment_checks.py` 是真实 systemd/cgroup 故障测试，接受 `--config CONFIG --output NEW_DIRECTORY`，只启动合成进程，不消耗模型额度。
+
+## Grok 优先与无模型级上限
+
+新任务省略 `model` 时默认使用 Grok；已注册任务保持原分配。`limits --luna 4 --grok unlimited` 取消 Grok 的模型级上限，但不会取消 `run --jobs N` 的实际工作进程预算、依赖门或额度暂停。不要一次启动超过本机内存与编译能力的任务。Luna 仍有最多 8 个受管理并发的限制。

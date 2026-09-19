@@ -132,6 +132,41 @@ class StoreTests(unittest.TestCase):
         retried = self.store.claim("p", "owner-2")
         self.assertNotEqual(retried["attempt_id"], first["attempt_id"])
 
+    def test_grok_unlimited_is_persistent_and_not_64(self) -> None:
+        self.store.set_limits(luna=2, grok=0)
+        self.store.add_tasks("p", [_task(f"g{i:03}", "grok") for i in range(70)])
+        restarted = Store(self.db)
+        claims = [restarted.claim("p", "owner") for _ in range(70)]
+        self.assertTrue(all(claims))
+        self.assertEqual(len({c["attempt_id"] for c in claims}), 70)
+        self.assertIsNone(restarted.claim("p", "owner"))
+
+    def test_grok_unlimited_still_obeys_pause_and_dependencies(self) -> None:
+        self.store.set_limits(luna=1, grok=0)
+        self.store.add_tasks("p", [_task("a", "grok"), _task("b", "grok", ["a"])])
+        self.store.pause_model("grok", "subscription quota")
+        self.assertIsNone(self.store.claim("p", "owner"))
+        self.store.resume_model("grok")
+        c = self.store.claim("p", "owner")
+        self.assertEqual(c["task_id"], "a")
+        self.assertIsNone(self.store.claim("p", "owner"))
+        self.store.finish(c["attempt_id"], "VERIFIED", {})
+        self.assertIsNone(self.store.claim("p", "owner"))
+        self.store.mark_integrated("p", "a", "base")
+        self.assertEqual(self.store.claim("p", "owner")["task_id"], "b")
+
+    def test_grok_default_and_luna_guard(self) -> None:
+        task = _task("implicit")
+        del task["model"]
+        self.store.add_tasks("p", [task])
+        self.assertEqual(self.store.list_tasks("p")[0]["model"], "grok")
+        for invalid in (0, 9, True, -1):
+            with self.assertRaises(ValueError):
+                self.store.set_limits(luna=invalid, grok=0)
+        with self.assertRaises(ValueError):
+            self.store.set_limits(luna=4, grok=-1)
+        self.store.set_limits(luna=8, grok=0)
+
     def test_invalid_transitions(self) -> None:
         self.store.add_tasks("p", [_task("a")])
         with self.assertRaises(ValueError):

@@ -8,6 +8,18 @@ from state import Store
 from runtime import Controller,validate_task
 STATE_ROOT=Path.home()/'.local/state/lean-swarm'
 
+def grok_limit(value: str) -> int:
+    """Zero is the persistent no-quota sentinel; worker resource budgets remain separate."""
+    if value.lower() in ("unlimited", "none"):
+        return 0
+    try:
+        result = int(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("use unlimited, 0, or a positive integer") from exc
+    if not 0 <= result < 2**63:
+        raise argparse.ArgumentTypeError("use unlimited, 0, or a nonnegative SQLite integer")
+    return result
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     sub=parser.add_subparsers(dest='command',required=True)
@@ -16,7 +28,7 @@ def main():
     p=sub.add_parser('run');p.add_argument('project');p.add_argument('--jobs',type=int,default=4)
     p.add_argument('--integrate',action='store_true',help='Commit checked new files to integration only')
     p=sub.add_parser('status');p.add_argument('project')
-    p=sub.add_parser('limits');p.add_argument('--luna',type=int,default=4);p.add_argument('--grok',type=int,default=4)
+    p=sub.add_parser('limits');p.add_argument('--luna',type=int,default=4);p.add_argument('--grok',type=grok_limit,default=0,help='unlimited (default), 0, or a positive model cap')
     p=sub.add_parser('resume-model');p.add_argument('model',choices=['luna','grok'])
     p=sub.add_parser('retry');p.add_argument('project');p.add_argument('task')
     p=sub.add_parser('recover');p.add_argument('project')
@@ -35,7 +47,7 @@ def main():
         for task in tasks:validate_task(task)
         store.add_tasks(args.project,tasks);print('ENQUEUED',len(tasks))
     elif args.command=='limits':
-        store.set_limits(args.luna,args.grok);print('GLOBAL_MANAGED_LIMITS',json.dumps({'luna':args.luna,'grok':args.grok}))
+        store.set_limits(args.luna,args.grok);print('GLOBAL_MANAGED_LIMITS',json.dumps({'luna':args.luna,'grok': 'unlimited' if args.grok == 0 else args.grok}))
     elif args.command=='resume-model':store.resume_model(args.model)
     elif args.command=='retry':store.retry(args.project,args.task)
     elif args.command=='status':

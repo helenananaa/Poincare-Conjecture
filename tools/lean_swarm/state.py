@@ -158,7 +158,7 @@ class Store:
                 """
             )
             connection.execute("INSERT OR IGNORE INTO limits(model, max_active) VALUES ('luna', 4)")
-            connection.execute("INSERT OR IGNORE INTO limits(model, max_active) VALUES ('grok', 4)")
+            connection.execute("INSERT OR IGNORE INTO limits(model, max_active) VALUES ('grok', 0)")
 
     @staticmethod
     def _project_id(project_id: str) -> str:
@@ -176,6 +176,8 @@ class Store:
     def _task(task: dict[str, Any]) -> dict[str, Any]:
         if not isinstance(task, dict):
             raise ValueError("each task must be a dict")
+        task = dict(task)
+        task.setdefault("model", "grok")
         required = ("id", "model", "depends_on", "source", "target_name", "target_path")
         missing = [key for key in required if key not in task]
         if missing:
@@ -243,12 +245,15 @@ class Store:
     @staticmethod
     def _limit_value(model: str, value: int) -> int:
         Store._model(model)
-        maximum = 8 if model == "luna" else 64
-        if isinstance(value, bool) or not isinstance(value, int) or not 1 <= value <= maximum:
-            raise ValueError(f"{model} limit must be an integer from 1 through {maximum}")
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise ValueError("model limit must be an integer")
+        if model == "luna" and not 1 <= value <= 8:
+            raise ValueError("luna limit must be an integer from 1 through 8")
+        if model == "grok" and not 0 <= value < 2**63:
+            raise ValueError("grok limit must be nonnegative; 0 means unlimited")
         return value
 
-    def set_limits(self, luna: int = 4, grok: int = 4) -> None:
+    def set_limits(self, luna: int = 4, grok: int = 0) -> None:
         """Set persistent global concurrency limits for both models."""
 
         luna = self._limit_value("luna", luna)
@@ -379,7 +384,7 @@ class Store:
             task_payload: dict[str, Any] | None = None
             for candidate in candidates:
                 model = candidate["model"]
-                if model in paused or active.get(model, 0) >= limits[model]:
+                if model in paused or (limits[model] != 0 and active.get(model, 0) >= limits[model]):
                     continue
                 payload = _object(candidate["payload_json"], "task payload")
                 dependency_ids = payload.get("depends_on", [])
