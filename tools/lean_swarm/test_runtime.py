@@ -34,3 +34,39 @@ class FrozenProofTests(unittest.TestCase):
         self.assertTrue(UNIT_RE.fullmatch('lean-swarm-'+'a'*32+'.service'))
         self.assertFalse(UNIT_RE.fullmatch('grok.service'));self.assertFalse(UNIT_RE.fullmatch('lean-swarm-*'))
 if __name__=='__main__':unittest.main()
+
+class LaunchFailureTests(unittest.TestCase):
+    def test_partial_launch_failure_stops_unit_before_releasing_claim(self):
+        from unittest.mock import Mock,patch
+        from tempfile import TemporaryDirectory
+        from pathlib import Path
+        from uuid import uuid4
+        from runtime import Controller
+        with TemporaryDirectory() as directory:
+            root=Path(directory);store=Mock()
+            store.get_project.return_value={'repo':directory,'integration_branch':'integration','lean_bin':'/usr/bin','lean_path':'','package_dir':'Package'}
+            controller=Controller(store,root,'test');work=root/'work';work.mkdir()
+            controller._prepare=Mock(return_value={'workspace':str(work),'base_commit':'base','candidate':str(work/'candidate.lean'),'dependencies':[],'spec':{'logdir':str(work)}})
+            controller._stop_unit=Mock(return_value={'cgroup_populated':False})
+            claim={'attempt_id':str(uuid4()),'task_id':'job','task':task()}
+            with patch('runtime.checked',side_effect=RuntimeError('launch failed after partial unit creation')),patch('runtime.Path.home',return_value=root):
+                controller.execute(claim)
+            controller._stop_unit.assert_called_once()
+            self.assertEqual(store.finish.call_args.args[1],'FAILED')
+
+    def test_uncertain_containment_keeps_running_claim(self):
+        from unittest.mock import Mock,patch
+        from tempfile import TemporaryDirectory
+        from pathlib import Path
+        from uuid import uuid4
+        from runtime import Controller
+        with TemporaryDirectory() as directory:
+            root=Path(directory);store=Mock()
+            store.get_project.return_value={'repo':directory,'integration_branch':'integration','lean_bin':'/usr/bin','lean_path':'','package_dir':'Package'}
+            controller=Controller(store,root,'test');work=root/'work';work.mkdir()
+            controller._prepare=Mock(return_value={'workspace':str(work),'base_commit':'base','candidate':str(work/'candidate.lean'),'dependencies':[],'spec':{'logdir':str(work)}})
+            controller._stop_unit=Mock(side_effect=RuntimeError('processes remain'))
+            claim={'attempt_id':str(uuid4()),'task_id':'job','task':task()}
+            with patch('runtime.checked',side_effect=RuntimeError('launch error')),patch('runtime.Path.home',return_value=root),self.assertRaises(RuntimeError):
+                controller.execute(claim)
+            store.finish.assert_not_called();self.assertTrue(controller.stop.is_set())

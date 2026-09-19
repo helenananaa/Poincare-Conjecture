@@ -144,7 +144,7 @@ class Controller:
             raise RuntimeError('containment has not stopped; slot remains reserved')
         return {'before':info,'after':final,'cgroup_populated':populated}
 
-    def _freeze_capture(self, unit: str, candidate: Path, destination: Path) -> dict:
+    def _freeze_capture(self, unit: str, candidate: Path, destination: Path, root: Path | None=None) -> dict:
         info = self._unit_info(unit); frozen=False
         if info.get('ActiveState') == 'active':
             result = subprocess.run(['sudo','-n','systemctl','freeze',unit],text=True,
@@ -154,6 +154,8 @@ class Controller:
         result={'captured_unix':time.time(),'frozen_before_capture':frozen,
                 'candidate_present':candidate.is_file()}
         if candidate.is_symlink(): raise ValueError('candidate must not be a symlink')
+        if root is not None and not candidate.resolve().is_relative_to(root.resolve()):
+            raise ValueError('candidate escapes its worktree through a parent symlink')
         if candidate.is_file():
             data=candidate.read_bytes()
             if len(data)>2_000_000: raise ValueError('candidate exceeds size limit')
@@ -194,7 +196,9 @@ class Controller:
             checked(['git','-C',str(self.repo),'worktree','add','--detach',str(work),base])
         package=work/self.cfg['package_dir'];deps=self._dependencies(task);dep_artifacts=folder/'trusted-deps'
         for dep in deps:self._compile(package/dep['target_path'],dep_artifacts,dep['target_path'],dep['target_name'])
-        candidate=package/task['target_path'];candidate.parent.mkdir(parents=True,exist_ok=True)
+        candidate=package/task['target_path']
+        if not candidate.resolve().is_relative_to(package.resolve()):raise ValueError('task path escapes package')
+        candidate.parent.mkdir(parents=True,exist_ok=True)
         candidate.write_text(task['source'])
         mathlib=package/'Mathlib'
         if not mathlib.exists():mathlib.symlink_to(self.cfg['mathlib_source'],target_is_directory=True)
@@ -245,7 +249,10 @@ class Controller:
                 '-p','NoNewPrivileges=yes','-p','ProtectSystem=strict','-p','ProtectHome=read-only',
                 '-p','PrivateTmp=yes','-p','ReadWritePaths='+' '.join(writable),
                 '/usr/bin/python3',str(Path(__file__).resolve()),'_job',str(folder/'job.json')]
-            checked(cmd);started_service=True;stopped=False
+            if self.stop.is_set():
+                status='INTERRUPTED';raise InterruptedError('controller stopped before service launch')
+            started_service=True;stopped=False
+            checked(cmd)
             start=time.monotonic();deadline=start+timeout
             while True:
                 self.store.heartbeat(attempt);info=self._unit_info(unit)
@@ -255,7 +262,7 @@ class Controller:
                     status='FINISHED' if info.get('ExecMainStatus')=='0' else 'FAILED';break
                 time.sleep(.5)
             result['elapsed_seconds']=round(time.monotonic()-start,3)
-            result['capture']=self._freeze_capture(unit,Path(prepared['candidate']),folder/'frozen.lean')
+            result['capture']=self._freeze_capture(unit,Path(prepared['candidate']),folder/'frozen.lean',Path(prepared['workspace']))
             result['containment']=self._stop_unit(unit);stopped=True
             logs=Path(prepared['spec']['logdir']);text=''
             for name in ('agent.jsonl','agent.stderr','leader.stderr'):
@@ -301,6 +308,7 @@ class Controller:
             if hashlib.sha256(source.read_bytes()).hexdigest()!=attempt['result']['verification']['sha256']:
                 raise ValueError('verified source changed after verification')
             task=row['payload'];rel=self.cfg['package_dir']+'/'+task['target_path'];target=self.repo/rel
+            if not target.resolve().is_relative_to(self.repo):raise ValueError('integration target escapes repository')
             if target.exists():
                 if target.read_bytes()==source.read_bytes():
                     commit=git(self.repo,'rev-parse','HEAD');self.store.mark_integrated(self.project,task_id,commit)
