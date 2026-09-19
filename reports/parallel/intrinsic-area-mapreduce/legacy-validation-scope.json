@@ -1,0 +1,9 @@
+{
+  "reason": "The report-only ReferenceSanity.lean matched the fallback *.lean selector, causing all historical source packages to rebuild. Stop only this finalizer subtree, keep all partial logs, relocate the test, then validate dependencies since the checked batch baseline.",
+  "root_pid": 243144,
+  "unix": 1789816622.0115948,
+  "finalizer_already_exited": true,
+  "historical_gate_outcome": "TIMEOUT_AFTER_600_SECONDS",
+  "historical_log_sha256": "15ddc7ede86c1565cb522b98cfc9ff8ad8d7d0ba6d169195026a7b91d8f2845a",
+  "retry_scope": "Same main builds, sanity and axiom tests; dependency-aware selection from the recorded checked starting commit. Historical default remains available."
+}

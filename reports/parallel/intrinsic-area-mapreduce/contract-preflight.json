@@ -1,0 +1,13 @@
+{
+  "contracts": 21,
+  "checked": 21,
+  "errors": [],
+  "blocked": [],
+  "status": "PASS",
+  "stub_objects_never_in_production_path": true,
+  "extra_contracts": [
+    "epsilon-least-area-reduce",
+    "variational-extinction-reduce"
+  ],
+  "extra_contracts_typecheck": "PASS"
+}

@@ -1,0 +1,2144 @@
+{
+  "status": "PASS",
+  "targets": [
+    "MorganTianLib.Ch02.ForwardDifference",
+    "MorganTianLib.Ch03.RicciFlow.EvolvingEpsilonNeck",
+    "HatcherLib.Ch1.Circle",
+    "HatcherLib.Ch1.Sphere",
+    "Shared.MetricGeometry.LengthSpace",
+    "MorganTianLib.Ch03.RicciFlow.DistanceVariation"
+  ],
+  "source_modules": 355,
+  "source_checks": [
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.FlowDependence",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "b445139da8030768f8e8f68da0be36880dffe94633dcaac048ef340cc9b98a9c"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.LinearODE",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d7b09b8e7f769cf11f8f1e38e5c90f2c16fafc9dd90422287ebe8a256daecdc6"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.BumpExtension",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "623661bb0111bea4f2e65bcbee0487924688db90d1cf85559e2b0a1c13d03dbb"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.CovariantCurvatureAlong",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "c3898678ac7ce0c805a00adb1b0bc471527f3c2f2881bd698f211a5f4dfdba17"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.VariationalEquation",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "710f76c047a34923dc8f307783d8bd6d4244b15532b3efb582cac06a17e93ea7"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.SuperpositionSmooth",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "dd695279bf5ff8af3a2cd46f5247a929d3a47eb8709f275961e8806424d269f9"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiEquationODE",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "7c71bdd3158a1e67c57cc3ca1e2e922efe8b005b5fe5fc9496138e7fac8bb3ea"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh4Sectional",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "36043878154fd849e0145420287f19b0c4b4564ca19ddd4b7c095c9a29e7fc9d"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.HadamardLemma",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ad7cf58b9787390411e44be5d26c27aa8d498af07f1f15496e9e709dfece694d"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.FlowSmoothDependence",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "7d3ef8284462af74dbe9fabed87d57d0486d9c7b1f9724d0ab7b7c7294a9582d"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh4Ricci",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2ec95239bca18f5c44d9c83adc6e0b3d3051a851cb28b1e9b302ddbffafc31d0"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiNonpositiveCurvature",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "28f7f9db1b88406968436958a99d3cbb89831c3627468daac07b9d9403e031b1"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh4SectionalPair",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "cfe8817e666660c7d20c2de3fe6256f508217d1d58cce0a1544476c5a2ede9bf"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.TangentBundle.LocallyConstant",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "fbb66ab2931445f7a8bda8713d1c84af749a9f6ef790b1d789818d0c84680ab9"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Util.Chart.FlatChartDerivs",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "cdf5e6005e311ca6de1953fe856d6ba612b5c5be16cf41ca2743efdb5d600173"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.TangentBundle.TangentSmooth",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "376dd77ffb7c913d87f093663e16e8b89a88419fa3934bb4ef2e589c6a894cfd"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh0",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "e4c729bea737cc1e52c1b6e37bcc3033722076a2053039e4c532740faa18d40d"
+    },
+    {
+      "module": "HatcherLib.Ch0.HomotopyTheory",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "e9ae1836746963077e8ef98da374f76ae3642b2372d14551739820392c008991"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ComparisonFunctions",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "18fd057a281b633aa6d9d8ca589f79ef6913491451028f11237b733648b2c718"
+    },
+    {
+      "module": "MorganTianLib.Ch01.CurvatureCommutation",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "09a7689f5fca0e3eee0c484c1e8dc86e7dfa5c6d154e807a4aa8ef0fb7f46c3d"
+    },
+    {
+      "module": "MorganTianLib.Ch01.CurvatureOperator",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "26ebfffdafa1aaefceea28f20fb86d91196bd3b842efe0440eb13a19ba2cc3dc"
+    },
+    {
+      "module": "MorganTianLib.Ch01.CurvatureNormSectional",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "99dbe0d8a205f6f2029c7d46eb313e0f6ba12031a936a03356d071db981c9f6b"
+    },
+    {
+      "module": "MorganTianLib.Ch01.Einstein",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "986e915af1934f2d3118a05d7edbb3572fefd0b3eb8b049a5b8bbb0075548303"
+    },
+    {
+      "module": "HatcherLib.Ch1.BasicConstructions",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "e1f2c42a823810892de6388a2ddc6c80ba3b25e57235622dea348dfd25e8185c"
+    },
+    {
+      "module": "HatcherLib.Ch1.AlgebraicConstructions",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "69c3a6a77e4c12b150339a2c203d61024309666d5fd2684b0ea5a4ac2efd4a58"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ChartVariation",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "da4f6642df062c88fcc4f7ab687cf476b974f0708d3c94f01e4ab7bc50b5391b"
+    },
+    {
+      "module": "HatcherLib.Ch1.BasedHomotopy",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "e935646684f249f200f4318ba77a488eafc93a1da173a03e96fb0b1adf6488cf"
+    },
+    {
+      "module": "HatcherLib.Ch1.Contractible",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "fac45e52e47df1f460ea851379833bf641183f2aa8063f7123a0b516adecc22b"
+    },
+    {
+      "module": "MorganTianLib.Ch01.InvGramTrace",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "7916a206c2a1165452e2218838e081ff288674b39b400e13626a1441b1daf4db"
+    },
+    {
+      "module": "HatcherLib.Ch1.CoveringSpaces",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "4b432ba76e93faa4dd9e0b8012b1c599f22c287c5a22bf1c03d3af9b4d59dff6"
+    },
+    {
+      "module": "MorganTianLib.Ch01.EnergyVariation",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "e0292779cca7988f0a3521f14bea9f6f5af3e22f3f8b12d2653b7b5c0f76fa25"
+    },
+    {
+      "module": "MorganTianLib.Ch01.MatrixCalculus",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "e11aa741d78842c7d98d8afa9e2e3833eb70590416c238a9defac98f15d99db9"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ScalarComparison",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d7638368471ff34bc7e1b5a7f23cec8fa6c1c94c1fb04eb09e42991b08d49fb7"
+    },
+    {
+      "module": "HatcherLib.Ch1.VanKampen",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "cca32556eed9dd9b570d0b5863a2442454b0f49c5ca8c2f55a08be9dac82bc48"
+    },
+    {
+      "module": "HatcherLib.Ch1.Circle",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "973e17d9e8eeb3667d96e08b20078b18d93e7922a43e1ee28a1e038485c9a493"
+    },
+    {
+      "module": "MorganTianLib.Ch01.PowerRatio",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "f4474c9b9a8ab404024bd90a803e6adbede2c6f7fb4c27201f13ddcd23a48f71"
+    },
+    {
+      "module": "HatcherLib.Ch1.HomotopyApplications",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "753e0834758e510f2fe2ce4c1a5f4c98cba9203a05fd4aef4af3a1e4967d2fc0"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JacobiODE",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "463653fb522e8a6caabd02884fec13d95bd09e60fb9e846c8ecd7da98e767818"
+    },
+    {
+      "module": "MorganTianLib.Ch01.IndexForm",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "84768bd7d02691c5fe2bb2eb7d6cf54acceea15944a51b49f21b8cc22a3326a4"
+    },
+    {
+      "module": "MorganTianLib.Ch01.SecondVariation",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "9c9be412eeb8abb3f7000edc270e7e6c0e0dbafa64fe04ef65b8076f56cd8e0d"
+    },
+    {
+      "module": "HatcherLib.Ch1.Sphere",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "aae33e7fc1424e763a0aa887a56f28860e55ca084d3d6ecb52cf9765ee43d433"
+    },
+    {
+      "module": "MorganTianLib.Ch01.OperatorRiccati",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "eb280355014b6bd641ae496271a174af7d1938371a1d55f095580d7880b594af"
+    },
+    {
+      "module": "MorganTianLib.Ch01.SectionalCurvature",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "4e44f4c5894afe8fad485a206ffc1a20f35192dcf1a59102a85b54dc1f36a31b"
+    },
+    {
+      "module": "MorganTianLib.Ch01.IndexFormNegative",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "7682b3015db2597f1b0673c3722cd0a450959105fbf4ac1853302d95b01b20b5"
+    },
+    {
+      "module": "MorganTianLib.Ch01.SturmContinuation",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "904ee348f4bb11d931698c2dcd3b7bb18955d0dc00f45fe666f2aa35b0542a28"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JacobiMatrix",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "2a74e2b0779012cd9c730af1f70873616a77d27c85c57d435c6382340626eb65"
+    },
+    {
+      "module": "MorganTianLib.Ch01.VectorSturm",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "7f28cf2354344df80d84a068b29955c4eb18b06d535a0e4fa51318296025b2c9"
+    },
+    {
+      "module": "MorganTianLib.Ch02.Busemann",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "4ca98e246c6744862cdfc580313f64e6ba221eec8429d9e62d88240356f5d447"
+    },
+    {
+      "module": "MorganTianLib.Ch02.Ends",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "3764fc99d35266d9cc641fee9ab56a5987a0b54a34ab52672016c4b2ea9a2ba6"
+    },
+    {
+      "module": "MorganTianLib.Ch01.SmoothExtension",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "8a3d0a1f5c41c4d659e628d27a3a31ebe38ad69721023c7fcecb00d783502a63"
+    },
+    {
+      "module": "MorganTianLib.Ch02.GeodesicLimits",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "41c2141b9b145ce2caafb96c8b19a391a404b32ba0cffaea3794a9b06559ab2a"
+    },
+    {
+      "module": "MorganTianLib.Ch02.EndsLine",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "fec1ba2724282bbeba5c39678e811d5fc4600013d15b9e65f0de035436aa08e7"
+    },
+    {
+      "module": "MorganTianLib.Ch02.SliceChartStraightening",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "aa5d8b6fe474c1ef81e79ac34007bd6f41b8b17f6fe0bd7779cb13af86be96cd"
+    },
+    {
+      "module": "Shared.Algebraic.Auxiliary.OrthonormalBasisDiagonal",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2bb74c08dfe7d43cb07d0da6d9b5134272b9a32fc9cf0b3d457986466a60a4f6"
+    },
+    {
+      "module": "Shared.Algebraic.BilinearForm.Basic",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "7cd289ef4cf2104b1eb08236908a0f53eaaf2b308896d5f4abaa1fcd33dba80a"
+    },
+    {
+      "module": "Shared.Algebraic.BilinearForm.Riesz",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "4bb8914a213f66c9e93f239c5bdba140aee5de1d34ad83a064c82cdb2ca46017"
+    },
+    {
+      "module": "Shared.Topology.FiberBundleT2",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "529c23f5e5819f689c27f096404325bc8e6491c59421ab8a42116b3301ce9277"
+    },
+    {
+      "module": "Shared.Util.Linter.AnchorPurity",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d5a0ec419762623d49d70b0893f81c0959d66c60e18173eead74b3567afb8334"
+    },
+    {
+      "module": "Shared.Util.Linter.MathTag",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "60c985a1e7b0495d896bb8ceaae2f6101df658a472be9b1afd7cb4949e2987d0"
+    },
+    {
+      "module": "Shared.Util.Linter.Naming",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "384175b87e5255357a1b2cf174073df50341d3ae2813e244d67aa88b114ed574"
+    },
+    {
+      "module": "Shared.Util.Linter",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "e283e04f07e4712bde619e23f8e0c8ebebc5f968893c9482823ce2bd1df1ae09"
+    },
+    {
+      "module": "Shared.Util.Attributes",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "e7230d995ce092ac5bbc27bd1b9e86368a2d7e232c7802338d2398b7b8bb3d37"
+    },
+    {
+      "module": "DoCarmoLib.MetricGeometry.ProperExhaustion",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "16f63f068c47e4350d5aee2ecc0afc3dab885545d5a493b18e4bdbafecfaf821"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Metric.RiemannianMetric",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "cf1beb3f9b256d967e6429ad0fee99c0cecb62fdee68417bfd0bf8b5cd3a8b23"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh1",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d74867bd5bb7472f3ef570038796e929faf179f29340b4ab2cb236961c82ef0d"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Metric.RiemannianDistance",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ebc614ce0569a2c63e8491614c92576b5114bf63c1fb148413e7f6d5093d6c8b"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.TensorBundle.SmoothOrthoFrame.ChartBasis",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "88ac34a3bbc658e8802b4ec0e72a515fe629649565d6e1770d65616419166659"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.TensorBundle.SmoothOrthoFrame.Orthonormality",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "82986bd9c86841126d0e63bcba0175faf0fbb9254e4d399617650eea543d3960"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.TensorBundle.SmoothOrthoFrame",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "6722c712d5e5595addd61018a19bc7fd792c17d30c68e3265bbcf0bcf6f08fb1"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.TensorBundle.MusicalIso",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "67afbd5f8c76d01359ac54c2cdce69d41056bad8cf45f9c93b0180e415d369ee"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Connection.ChartChristoffel",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "a504727527109d61a933f9830de25f97ea7d959449c02c228382687b2fc7519f"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Connection.ChartChristoffelSmooth",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "edd70720b82e5fb79a355041d601de2285b12111bc9eac213e4c80fc1374988b"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.Equation",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "28fb8f2cdfb73ebc5774274bd0fbad2e3a00750b4528ee53fd75966972377c52"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.CovariantDerivative",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "026ea2fe2ee46d582d7d5fcc9d84512f416498c2e763faf4f5e62769c7ee5780"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.Existence",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "9cb535a6abf5c9125095aef49e5c0e49d6f60432677810332260bd49e4f13358"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.FiberScaling",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "53c55ca28cc9cfdd84f9eca0bda19115cc24a15757a878faec374441bcf963c4"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.HopfRinow.MetricBridge",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "9c9c956e18265cfb6508746f809c6e41d90ed65f4e24a369b4466606eb999359"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Connection.ChartChristoffelChange",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "bbf5a1c825858f6f20794c9e2f6e5633382327663e6cca5f88f3519e5ae9ce9b"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.EquationTransfer",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "e6041a30ec796022905718a70dedd29b7d150f956d141599e4103932919a4c0e"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.FlowGeodesic",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "005387eba4595a43eeba9c591ea4db14b2a5fcd529bf617db773f26d616fd44b"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.SymmetryLemma",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2b7f4b746e2c69c16d3f53a5ce75bcc02780cccb3cfc0984733d88d83b011778"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.Uniqueness",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "c9313d58127e1f61f28d546fe0827ad769905d7b5f92c827bea3e68bfa1222b6"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.MaximalInterval",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "0d1e6989f9bd34197ce761eb6c947d206a68c64f8c4051918930b69341935e61"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.Defs",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2559737b6e7eee5e39ca83a21cebc5db05c7b9bdfc70e5059561b02be3313e31"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.Homogeneity",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "f7f721204cc6a5a6bbe749f98b46b6bea3bb21e9eef3fd24297098f8eb9789e2"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.InitialVelocity",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "a03a98dcd6eb762c03ce0b45490d437e16ea3460c304c72bc2b3256ca547d0f8"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.Ray",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "75ad3ba3f5ba8bd593a46a4b056ac1df0fe5858a354aa3fc2205ba70b212bcb0"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.ChartFlow",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ec84c4877a55acdb7c23bcd10dab426a58c1ec5e0a129a7d7741c8547838ca59"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.FlowHomogeneity",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "76e9ea81ca520fce9ff30b1abb3ea2d048464914b5413b85b0f7c531fefb43e8"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.UniformExistence",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "0f5c42394025108c7c64a8824f10f4491447ceb936879cfc40c4ea9a197542c4"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.StrictDerivative",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "bcaabf3bf109b56edf0e85d33be32c990dc3ce1ba621149032020200d7543bbd"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.FlowC1Dependence",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "17538e9455b8475c1afd22f0c7090947836cfea6b5645494b3bf4d6ded4237c7"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.StrictDerivativeBall",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "6065fc0fca9e3cf16e794ed72a5345508ca392fbe42b21a4d8414e029c723df2"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.LocalDiffeo",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "6a307d3d960acb5f3bb29391312ad8c78a983e6e91979c9fede7b464b8c2d6bc"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.TotallyNormal",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "95bf6d8d8f1b1548c0dc36340fac9c40a80260c62ebb8aa1976c20f4eb1799b1"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.FlowC2Dependence",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2af2c9ec30aa7e8f67d181aaadbe2b77bf0a096a2db52656c1f22a8e0576c706"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.C2Ball",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "effdd59c04efdf8ab66bb0525dbb745ef4c84a8b4935d000f9caf8f4f11e7451"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.C2LocalDiffeo",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ef459120f9ba3530f98808cb1b0005879ca6f7a01a968b8d4838e8e9f68c0c96"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.MovingBaseRayODE",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2b3e2c4f8886fcbb04f8db27b3a4c527aa884de4363d46ad5ddbd707da3849da"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.RayODE",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ffd555f1e542f121b6ad076742dbbf679dcb6960ccab502dc07f78fa36ce7988"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.GaussLemma",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "302d4448635b94482b946498e1f54875bc7256d7d051cf06d03e45d942a86181"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhood",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "1bacf4539d7e23d68f50487c79a14e724836e0d8d140e24b34dd9bd36c779205"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodContinuity",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "226a82dca10c3d1871420907d8bc3d35d6d7c080240e72d24d6abff5128f0414"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.Minimizing",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "0aa90a4023f878a08a1fc9add32060c287afecffdd13a17de0fdeae69454eb33"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.MinimizingPiecewise",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "9002208a528ab6df14fceb81a19c481440e6e81d882a49cca76e83d36834fd34"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.MovingBaseGauss",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ee649492bf53b9cd87b8c819fbe7b92e0a2c27961c9142559f1e4bbc9ed9b7e1"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.MovingBaseExpReading",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "db3cf5099b660e5dc66954e97d9bf286b47db807e737efe1ee3f13e90527fc71"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.RayGeodesic",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "8edade52dcf5739607871d6201ca03fdc2400c102b27ac653ce976bd0b414294"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.FlowCInftyDependence",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "27ab1451c32c7a0b51df99273877274cc4e2c7bde61ae4d534d237696f672ea4"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.HopfRinow.CurveReadback",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "017fdd40c63cb4006ea6024ed5f03d92ceb07ec41a7a5790c299f7dc204100a0"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.ChartCurvatureVector",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "67832b54ac0c03f05534f158d7fb6a6684342647ce4649a84d56dadd35d780b7"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowStepContDiff",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "e82c87ebc902f08adf5fc3df48ec58eeaea25aa6f1d60d01490d1606dcb051c4"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.Geodesics",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "60442985632f5c04409d932899787854119c466f96fcaf8cdde05281167750c1"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.PairJacobiField",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "c12418e755d42cae858f8ef05dd2c6a3b6eb8734f0943b382391afee7712e41d"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.ParallelFrame",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "8ebbfb047b30b1e5bb016da3b5148a84edad474afeaedb44d2aebd2647ce2000"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FrameReduction",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "423342c158d6917a4935228c80e38eab1547d76fbc1700cfb8a49d7a3dd87cb6"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiField",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "6d7f93f154edd8021171ab15cc6dcab3742aa285bdfab5523ce0ea9e2a536491"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.ChartCurvatureContraction",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "e3df6516b7813fe607d30d9f78b6c34f717192cb2fd3c908fefbfcfa31577330"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.SprayLinearization",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "96f5547a075dd132ff183463f5c31b8666214d80d5ab9e7450df7b846901d956"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowStep",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "354395ef12a067c32a64c3436e129d1428bbe34e2b37f14a1956ee5992943e03"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowStateChart",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "a6c06ac1319c5d754f34344439e177ff902e33f3c86b514afc5757d29c4d35b2"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.SurfaceCurvatureCommutation",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "bb3780b33b1db76d0ab46be474a02082103bd787342a57b20cf348c8e132e922"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh2",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "f026bc278aa434cba148cf42e3f32396c4966bfa6f0881b80f1c5910293bde60"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Connection.ChristoffelBridge",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "e54feb7a7db0343a1f43dabe21569e621d715535076776cb47cac7688a80e7e7"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Connection.ChartFrameBridge",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "11265c60e45ba83c3a7047d3d1721c26bd72b84201a5707d5cc4c9e5ba61ebd2"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh4",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "5d0561514b541bb2f845b84d9a9df449431320d0aada96933db7c0bbcbae6dfc"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh4Tensor",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "07a31d144269ea866cc0ce3f0370879d18ef3c9b506483f4a4f7e3470b513789"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh6",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "faf4570bd89a8fad6fe84950ec40b3a7e98e8e8586e699f40fda5f744222ed8f"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh6Fundamental",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "0564e513f056416b95284f7d8309e79f61e9a1f5a041025405bb3ab0b08734bc"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh6Locality",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "4b5006beb67f03eb673730696f1b82d8ccf31adf988d3a81ebcf3a371d351171"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Connection.ChartCurvature",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "4b3d9f954b0a2294504ba9e79c1597bb906152e02aeeb2ef9c9834a9c580146c"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Connection.CurvaturePointwise",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "3e4b88077f02586da66e5ab41e3fce8f01655c96e068df14d0f8bbdd77d41c81"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Connection.ChartCurvatureMovingPoint",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "aa75ec56c1d6d3a2798545df06e6e0576d7239eaecb1502bced6df49f59dde45"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.ChartCurvatureNaturality",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "9cb43672c10b302e60ac6d063a7c60c5b1c3281d5a9d7f8ff3729d2b3e43cd1e"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh6Pointwise",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "f3e6e507882d50adb9c90a0a5a34b3fe31df98259119ddea4fbf4c172dce80d4"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.DoCarmoCh6ConstantCurvature",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "1f165c2ae88765ad79a27f904f5eff0959c2ff92166b435ae612fa3baf1fb4c9"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.ExpandingMap",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "9fe2491ac07932e8e47e8be9ebb3e889023b95ec98832962d652619c82144985"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.CoveringMap",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "1624fcc0ff672e538d035cab509b1c84e3e2c0d07ac0f2d1d5a82837208d402e"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.PathLifting",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "cbc3652327d24ac758f0fa4e678c1fd89d54d15dedc77b75bd4fc3e9f0b72845"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.CoveringMapBridge",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "f8b59ce7398556fecf6848b2ac13e5ecd8bac0f82539070a5c83b8431f9182e4"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.CoveringMapConclusion",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "7194980f27101433c664df6c99cd22b5090ecc1fde272b212c59bef6c8dff304"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.CoveringDiffeomorph",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "b2519b39f9ca39d288bf6790c93bfc33ddc0cd3e58921bd41e02055c1c04e766"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.PullbackMetric",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "a09ebe84445f23404aafb222b5f7eb3ab8bc13502d315ae9527bbe914d2d49ac"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Connection.PullbackChristoffel",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "71eb49b07bfda1c5ce450d3ffff09e3f6f6d9f43f8527a4b99a1d69f587c3366"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Connection.PullbackChristoffelLaw",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "fcd093905bc79f36b7742d366fd80a547036e6ae23e2ceb1c3e1be85b5e46dd0"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.PullbackGeodesicTransfer",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "0d4fe87601f21b667088dc3b6bc52cd774058b7aa80ac8b97ec18a6d8f6eadf7"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ChartCurvature",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "492678d5bb1d7ff569032c469d1fa9408defafa3ccb339f797a7b9dc115d0ebf"
+    },
+    {
+      "module": "MorganTianLib.Ch01.TraceRiccati",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "cb8626f39f7be24460cc4ceda38d488700d8a7b33096083c0d7c27e08be8679e"
+    },
+    {
+      "module": "MorganTianLib.Ch01.CurvatureTensor",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "49fb45235b45d215c572b88876912736217634623a282807130a680a2aa40595"
+    },
+    {
+      "module": "MorganTianLib.Ch01.Hessian",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "eedda37d9bc8c2c091c5aafc276915ad26321b881cc86fb10e0ded19fdfa8305"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JacobiField",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "455c560ff3a0747dd8df4a5e516d707272ba25900566cfcfcf1c0f106a741504"
+    },
+    {
+      "module": "MorganTianLib.Ch02.ForwardDifference",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "fc83546cfdd706caf6e09bf74f0c663b85810d75680828c449f7dd9b0a2dd3cb"
+    },
+    {
+      "module": "MorganTianLib.Ch01.Metric",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "41ee31b8a3ce9ed688f319eafe9def9106ff1af0960b04eaf1cf38fc5a31c8f7"
+    },
+    {
+      "module": "MorganTianLib.Ch01.Geodesics",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "992da7fbdf587958d340b263c172b064d81e1b1d40c21dcaea64759373e71416"
+    },
+    {
+      "module": "MorganTianLib.Ch01.LeviCivita",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "63cc536aef8126cc5e03e3c484b50ab08839d3a78349d69438df08fb55a1c6a4"
+    },
+    {
+      "module": "MorganTianLib.Ch01.OrthoFrame",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "1f91b3d1da0a88d282f065e64c9a0aaf49bb1afcbcc7d66b85e7fead93f9aeb7"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ParallelFrame",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "358dc63c13a41375b6fb18afa395c6ff250c2f6706ef180e948500d5b0de531d"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FrameReduction",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ede3a3576c8103e94d58675ae6076086eaf82c408aec40a89ee55ce9c9357086"
+    },
+    {
+      "module": "MorganTianLib.Ch01.PointwiseCurvature",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "cdb5c07906d02f3ee9ba4979babd9e619724a1d6b92c1338ec06dd66c7055c4e"
+    },
+    {
+      "module": "MorganTianLib.Ch01.CurvatureFrameBridge",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "c7b205a3fc477476c475c119e6f9fe1fc8be4fd8ea9f33b8625b6726a1c30651"
+    },
+    {
+      "module": "MorganTianLib.Ch01.CurvatureNormManifold",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d49c8becaa37e7f0d55340ee17bfaa85dc58c32bfc6c1b9d8ec067692c48e1ab"
+    },
+    {
+      "module": "MorganTianLib.Ch01.CurvatureSectionalBound",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d1cb2e16d7c424cb34386805d7018e3dbdedf0c7681bf4ddf30584c1c7419fa0"
+    },
+    {
+      "module": "MorganTianLib.Ch01.SecondBianchi",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "3a3c4c16215d09badd001b3849618551b4394e9259f863ef4c85f27d70da7722"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ManifoldCurvature",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "b7df550c747d87f0ad93a7bae353c65610c0b8d6ea9c413543eb40468a2d2cff"
+    },
+    {
+      "module": "MorganTianLib.Ch01.SecondCov",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "1e1a8875743f1ebdc2d853c9522703002273639db6f33815f582562f5aa60a47"
+    },
+    {
+      "module": "MorganTianLib.Ch01.SprayLinearization",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "4223cf14a37530b96f0f9eba961163ad0f5414d5dd1d5a9bb6b6fc7b7c408ae6"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FlowStep",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "11feed8ad59c3b1622bffc28e15ecb48283dce1e4b664464eadbb4c15c677955"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FlowStateChart",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "74e82dcfa0c84b45d5ee3091d4407b8a7e1090a85b577c2744d952b4da8dfe06"
+    },
+    {
+      "module": "MorganTianLib.Ch02.CovDerivAlongCurve",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2b20eaf64228ba86227f3ed97c7b77639c8de312927bad160ff6c9feacf8584c"
+    },
+    {
+      "module": "MorganTianLib.Ch02.CurveAcceleration",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "7d30da8678995f13dff4ed3c32802869594087e450e6b8808486763f95293baa"
+    },
+    {
+      "module": "MorganTianLib.Ch02.EpsilonClose",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "04178cc0fa376c432b586f9574b9493d641b6a3f2dbd5e86ceab377d71beda6f"
+    },
+    {
+      "module": "MorganTianLib.Ch02.Gradient",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "b12f6510c9c5fe5dc172eaf0947f856a9a43905a673772350fd147ff7bdf3968"
+    },
+    {
+      "module": "MorganTianLib.Ch02.Laplacian",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "62f58f3ccc47c7b038695971198e47cc650b1ad868789fcb187de383d27ccc3c"
+    },
+    {
+      "module": "MorganTianLib.Ch02.HessianNormSq",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "52b0ed5b253221d58e9d51a5566dfab9d6c982f183ee82020242eafeab5eccc9"
+    },
+    {
+      "module": "MorganTianLib.Ch02.GradientNormSq",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "895baf8393e70710fcdc9380ed4881bfac243ff08b014022a30ecb1f33833aeb"
+    },
+    {
+      "module": "MorganTianLib.Ch02.LaplacianCoord",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "5b7d13f337de275aab62f9435cfe5250cf6b619d2c777c4b4ce79da91b9b5064"
+    },
+    {
+      "module": "MorganTianLib.Ch02.LaplacianExtremum",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "fd2cf8b161e19e70fa4a831e90f8b090213bc30d0bd6018d4f06a1fb1111db4e"
+    },
+    {
+      "module": "MorganTianLib.Ch02.OrthoFrame",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "22f40499898dd42580d92f0bffb898bddd696280201d02b01f5247b35b977ee3"
+    },
+    {
+      "module": "MorganTianLib.Ch02.RicciTrace",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "564e1dcce6ce3b569715143acb71ce7745652e3929df95c732fd688138e01518"
+    },
+    {
+      "module": "MorganTianLib.Ch02.TraceCommutation",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "8f9ede402bc11088e0e72a7a65eef08c7091d14ed9aa450395b49506e958c78d"
+    },
+    {
+      "module": "MorganTianLib.Ch02.Bochner",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "8a3661b839dc123ea8f376f6b8c0cf3d668c3e67f902b9f283ae511ddc492ee0"
+    },
+    {
+      "module": "MorganTianLib.Ch02.ChartGradientParallel",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "6d73391892b1c95b10be07a9924bd55464c32123059fc8ef64c57da4f54b9ee7"
+    },
+    {
+      "module": "MorganTianLib.Ch02.FrameBridge",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "778161fadedb7b3df83e3c76415c70519e3c89173557c23601f5593f3968c502"
+    },
+    {
+      "module": "MorganTianLib.Ch02.GradientFlowLine",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "6ec752c45f56e2932b5230a85a0413dc88fa0214a1620d3534778cfe9f053b32"
+    },
+    {
+      "module": "MorganTianLib.Ch01.PieceSecondVariation",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "c7d44260077cdb7a25f67dd38785142bed91497082972400c2cf7f4f38f8e36f"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ChartMetricCompatible",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "377fdb0d6d861f77e1deb0fa96bb0c9b3fb11a070b087b1240462b32aea596a7"
+    },
+    {
+      "module": "Shared.MetricGeometry.LengthSpace",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "c4a21a0b469642703d650726ce875078f8f7a4824ee104dd8bdb35196ac97d15"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.HopfRinow.EVariationLePathELength",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "4342ae7984b99723b9995947c70e5d5f511711e896beecf6a0f262c60695922d"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.HopfRinow.ConstantSpeed",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "e5f47bd284491e29bce6e8c68d0da75900343d76e50f41d2f16830ce93f34d75"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.DataTransfer",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "0fe8c9271916bc4810328c8d9d09517cd5505912bd4842b880d4a5b95562d803"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.HopfRinow.GramBound",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "a39daa9c830bd5e61458143156458a08808f464c3fb01b0731791482b1449dbb"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.MinimizingEquality",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "dd5003e5210f4a794abc84b235aed58ed7162fd5b281293908e170bd33cd1672"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.NormalBallEDist",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ccc0f4ae11904bc97ed0234fab014cac9d76c0e87e4fc27cd042aeef3216ae34"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.MinimizingEqualityManifold",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "80df0dfc083009011e7341f77798c58713a63036bcf6a4118830f205cd41eff0"
+    },
+    {
+      "module": "MorganTianLib.Ch01.PieceEnergyDeriv",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "0af8ffa085575ace7a91a78b117bb21ee726b4601f177a7ba4a88408698d456c"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.SegmentUpperBound",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d247dd1319121bdaa0a22fe105052a660401efb24121e274d8aabd87296c0a08"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.CornerRigidity",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "83fdc2dacf013480e9b08823f09e6053e6728909cf000c8ca78ada6c0eb90689"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.IntrinsicUniqueness",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d752e34fcba9376531a7af63fb602db00b64962166827626fcadc5fc083f3ade"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.Completeness",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "82329cb89b67864dd20dabb0e99371c01c885864267aaeab95a43fc8952894bc"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.Intrinsic",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "3a031532aab62ab5f93fdac592eb7019aff4904e266575641fa7ed1fb744a1a3"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.MinimizingGeodesic",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2bba46119b1003bcafbd3077a68170251c787efd672544a922b09cee561a4a70"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.FlowReadback",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "8c29226cf1255d59988d6f81d63916ce77828f2210aaed855caccb94232b0de4"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodAssembly",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "02748dca56702c4464d5645031954241ed81037155e1a1062ec188ef6ff3edd2"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodStrict",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "f1e9bcbd062ad19dec1b2144bc8229f23d58d081b9faee747466fe0b0d526683"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhood42",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "a78c8286d5a97e78b1414a76ebe9d26756d6a37e72ff3ec12748cea098602537"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodProp",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "55fd2c1d0b4e4227a450a1e355d00bbca80a03f27feb87aee89f8beb34485c91"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodInterior",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "b63ff7670b594fba7860484d7d0576214c449274126ce86a348dbb07aef65bff"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodAdmissible",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "efb76b029b46d7d32418a3a0d1070906a9b14ebaeff3515c59128603b5aa7727"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.TotallyNormalDiffeo",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "205d3558495416e353673ace25a857b5387c38d4ddb9af02c04138f4cbe953d9"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodVelocity",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "014797826a4644598f875720c0b97632645e5a4e4a05e2a1988fba711ff7baec"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.MovingBaseNormalBallEDist",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "cab48017cf93c104414d9716267e2955635f0fc8fa4845e06458f9ba4ebeb721"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.UniformSegmentLength",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "3d0ca7d48ef66769ef4b8b25cebd42a12c3cd733b75078ee49006441445e2a0c"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodJoin",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "e446a5ac48f1e74b91cfca632c66c2cad1c068dd171cf18d9f93e4da7668947f"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodConvex",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "723ba7521e93110b1d45fce859093962ab80aa955fa4c3ecd101b9b1737ac572"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.MovingBaseProp36LowerBound",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "5028beb7adea4f28c7cad6c8aca092c12702c503dd4b2760e1d034d65bbe50e6"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodProp42",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "dd71131513aca396616f14c101f2879b0115ae20b38c6f60109f835a7ac95bf3"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodUniqueness",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "aa7d468e2ebd708421777dd9c2e4316d696bedeb0adc9826e957670334f43d9f"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ConvexNeighborhoodHuniq",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "857553639ac61eb6ae56957fcf82fc997c7c9faa69d24499414a06f911cbc847"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.GrowthInduction",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ca5fb651c1f3517c9b39d5f257dcc187dfeb8bec53013e17b8f7cd91ef5ad196"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.GlobalExp",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "13c0a9bcec036e97ab2b9b8c4e40c92df91e1290b1d0cc30fc804e0e15d3d212"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.ProperAssembly",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "113ceea0eb14588bfdf3b0baaefd2882d35f8caed5343662c4a9798ff8ef0763"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.EndpointContinuity",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "00837e0e911c0670af045423b82d10fbc703988122b9cf1ce9b5fa916f48e333"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.EndpointContinuityGlobal",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "a7c8678684f5086ed88bf0c75fe83f931053d031e6e5be3da8dd496db8880c9a"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Geodesic.HopfRinow",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "28a6c777e9823f7939aa37430e290d131e9cb345571f3ee3a9cae386db26b2d7"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiManifold",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "9540f661dc265fac5370efe44825d6652e3d3ee3554aeb4106255f0f2db4fdae"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.ChartPartition",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "3b9d6b07012993dcbec68ff38b5411212264a3fda54165f2b22aea392d4fdc7e"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiChartTransfer",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "be62de97547cfa936585a4febf2ce8c51fd8ba7bf15c11f8d6e84e43f1606a61"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiExistence",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "00e6a62dfd13d262a1f5f34bdd5228e28b7464002ca6a9565f8c9da8134f551d"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiRestriction",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "f73a5e868a78704e8cc0acc7a48686a6fb57f8e3161b1a1554d3be4820a75d6b"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.ParallelFieldAlong",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "bd9c929736a2684686b4faf66aae0ae6c97128576aaf8f8856ad62a5aa71f29e"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.StateTransition",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "eab89e73307abf2b2d97d4fa38f55c2c3cc9d999e219b0a66cf0bcc19b83d8e8"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowGluing",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "04c6a3b508285536d351140779ec8494399bda3d4172436a86abab7f75164981"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowComposition",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "78505205884a6607950a0af4f996786c14bb953c6ba2f7c4c0809840660b5236"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowStepManifold",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "eb0411c8a770494b71e2c0d2da341accb2227132312675d662b53f170270f943"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.GeodesicTranslation",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2a320f92d2a246278a953bbe9deec63bddbc212f2ab5c6e1f5be14d53e58f6e6"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowStepManifoldAt",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "6d57398248b0d7bd5d40641f7585f1e32c6316f29f9c552f1f7b2416d4520dc9"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowStepContDiffBall",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "9b2f28a13e679855c4b133819e2d521399967a37c91c6f028401eb42ce541db6"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowStepManifoldBall",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "78a26b70f4947d791841078d04f3f9cf734d535007a3e456675f640c58400392"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowStepPartition",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "a9d74e3aaef34e6b86438dca6b7233f7e3c4d5302500f9c3f359d161a21ff8be"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowStepPartitionContDiff",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2381e5724c71c1f2895e1537c28ae29d89ec7545813b0188a0bd93232295b71f"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.GeodesicOfState",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "f2cc2b1f02813d3db5f2da7696566b0e91c045d4c0576f76aaa6a612d63a38e2"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JunctionStep",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "0eef13321a276c12e689a89daa0a56f981d21224425b3fd54866458904006070"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowChainAssembly",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "b829d82dd7e9de87caa6502b0f992a0b22754dc6ea209bc088e67ca1d8ea7a60"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowChainNbhd",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "8196e75f0448957c70f9ba8c09fb6c79cacac6bccf81fc9233fb124fbe0ccc46"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.ExpDifferential",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "f5341c1b522e27298c8a991b0599cbd0917ef0901dbc352b4af6e4ff55aaf5fd"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.ConjugateDifferential",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "26301f0b81b644c11e54c9a9584b919e347b955a4227ce9bdd8dbeec41d6d0c9"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.ExpLocalDiffeo",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "b795ac8305a70dd8b74b7a56cc3040ce5069a021afe19eb0879a96240a30743a"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.FlowChainContDiff",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "201638d61336d7381aefbf9d6239f0fed796f1e446aa03ad328aacc9d3fa68e9"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.CInftyGlobal",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "cf5ab173c52ef5bae733a70c4f5351befedf26c40979a978e27a747142c0f3f3"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiNonpositiveManifold",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "be729eb6ef4b1a4f9f7413d8f381669622b077d4752d4a468fe3e0239fd69ae8"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiVelocityPairing",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "3fe2b7d7fd23fda97de1026919f58c9cfba73a1f69e20c62949c7c43f7461125"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiDimension",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "98e9aa014545cad2b7ae9d211d9d66194b15bf27e33c0361be6975443aa0dae8"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiSectionalCurvature",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "304b5257dee9a8ba0f5aaae4906873619f1d79bfb7c4a66d8ba187787b279336"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiConstantCurvature",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "7ee1f4027003c9f54486018e0b3e31743e4047ab2fce8ff5eb7d051cc7ce1c3c"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiConstantCurvatureSolution",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "0420a928069657af923b69c639a6f5cde260af59e6c5db3941401ec978976e26"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiVelocityField",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d0598ffaa3e75b284d6416d5af2d093e8ea09b89f402e2e2ab1ab4bf623db544"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiConstantCurvatureConjugate",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "8eef22aac733c7f459da479770544f2ef95f645acf74bc3cad43f41d6b394b93"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.JacobiConstCurvatureNorm",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "a7fb4e770d47329934ed0ae6838845b4be4aa320b1bd83a260e77e257ae54bdc"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.CartanExpNormTransfer",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "20da5f9057eadd09e7ab4917c472933a10c7eb9d0b947538267dafb1f649b1f5"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.HadamardAssembly",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "8e79257f1d10e438cbbbe749794dd811439b017416dbeb040cc4fd687a0911fc"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.HadamardModelSpace",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ec917bbb0d0391c7b18681a959232f9723b2041e5d7ab7bab3de34ba17d16e9d"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.HadamardPoleRays",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "85032a2acf435064557200352dff3206285c7cdb0670ac52b4fe9ab119cc4433"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.HadamardPoleClosure",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "46d5a675494bbf3275c07e9a57f68863f52ee5a10652b72c0368e06f18dffd41"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Manifold.HadamardNonpos",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "c10f4222aff6741a8e950907005bcbe89a298c6e8e1b8b4e686e2a48079be576"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.CartanLocalIsometry",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "deb883db620de79de5f3b04181a59a371d47eae95de539c1a90fee0b22104b36"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Jacobi.CartanMFDerivBridge",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "4c18de4674620ef675903de55e54917e109989f82acd7d016fd3716dcabe1aa2"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JacobiManifold",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "f4c4b15782266eb334ca4d8c15bea3d3403364a66fb8929ef889800005192799"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ChartPartition",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "3c4cad886c570257addccebf715cc4961a5c74f2c47d540ef0c5e1fc22dfe264"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JacobiRiccati",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "80fb66cffd64858b18a58f0b67bcc580458c23cbace3410842e74feadc8f3c52"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JacobiChartTransfer",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "c86a669409864e2891f2e0c0447942a8c7f338f00543a3f7184384599704cd6f"
+    },
+    {
+      "module": "MorganTianLib.Ch03.RicciFlow.Basic",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "358b5ddaf500d44fc4320bae26ccc82790843f07b05b7ae758d7bb6f0b47b431"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JacobiExistence",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "7220a3b2daa9862aaaebde8a955682a7185c34db57ba5552f6a2739ec52078d1"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JacobiRescale",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "072dbf4ebb393d05602e0ced4e088fe7b9b99b95943aff248486cf022514a229"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JacobiRestriction",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d0a1cf67fa20b9522eb9d1094039a543e32e27b659b97a23f1ee40b0361ce4c2"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JacobiInterior",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "4a7654e52d2588933b4685d32342c5afb753103564f77465756c0029e49c53c2"
+    },
+    {
+      "module": "MorganTianLib.Ch01.GaussLemma",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "b005919d146a21cb9d5cb98d2015bf1c10a6357aba68062efe8e8ac80e745901"
+    },
+    {
+      "module": "DoCarmoLib.Riemannian.Exponential.MinimizingPathPiecewise",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "73ea0f611cd4ea0371aeca17661f3d8f0d01332da06558f7bc03b3c61c307bdb"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ChartPartitionSlack",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "8103cd96d774c00835ffa4b630b286fe11992994dc7729a24cab5f97dc53dce1"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ParallelTransfer",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "06b208e481b4bd9473c6351effd77f351f251a8f45caf6e266de9f13103a4a26"
+    },
+    {
+      "module": "MorganTianLib.Ch01.RadialComparison",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "35a72d38fc7bc43cf6a7c55fe01766e710024dfdba777f19938d916811c11dda"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ChartPartitionCorner",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "5f3dcf805a0ff61a94bf2281a437000caf28add9feeb56ef10c096184bc93d96"
+    },
+    {
+      "module": "MorganTianLib.Ch01.StateTransition",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "91244ca544ae87012e5a1677e024dc399fb86b571c8dc8da8dd0dc7af10986d8"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FlowGluing",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "9e2c7fec2b8fe9cd89eea28148016163ef23c1e38081d2159887cfeb84f4ad72"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FlowComposition",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "47723a4ae0e32fec92a5b4b1cbfaf62c5e1c30034e3bffe4cfe455cacf2f4fcc"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FlowStepManifold",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "87e865cb888b5828dfff6988ca0b0357ca7b7c336995146edd89f813f19cded3"
+    },
+    {
+      "module": "MorganTianLib.Ch01.GeodesicTranslation",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d41e6d6c2e8b9cda2cc57bb918d18539b8b8060ea708c3272817104e4ae4d329"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FlowStepManifoldAt",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "9a33fba3d8c99da328eac58f85c62324a19fec9662685b02da738095fc070e78"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FlowStepManifoldBall",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "bd7f1fff36f4c1503590dafc016e96a220f374f807ae59335ef888e1952dc906"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FlowStepPartition",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "34f059b31bdd00157b5380341c4dbf6be306873ca8c6a5abaa09c25c6ebc0e09"
+    },
+    {
+      "module": "MorganTianLib.Ch01.GeodesicOfState",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "380336fc738ceed2c728bccae2b223895fd7fcc04da4791297daa5d5431490d4"
+    },
+    {
+      "module": "MorganTianLib.Ch01.GlobalExp",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d8cbaf0711a38db6a2699bcb45f576abc378da3e758d2651303562307161bd47"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ConstantGeodesicJacobi",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "b389c189eceda60e8f70042c70c1ed327cc36d290cc295df67fd4b0f891043d5"
+    },
+    {
+      "module": "MorganTianLib.Ch01.Chapter1BasicRemaining",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "e6855b54c02e7b69d97a4021764bd76d59c84960b4fc34ab8ecc1978a4f596c1"
+    },
+    {
+      "module": "MorganTianLib.Ch01.BrokenEnergy",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "90ec93b9b9bd38da8bf1f612456984b521b32820cb6ef48c2d1840446b76454f"
+    },
+    {
+      "module": "MorganTianLib.Ch01.RadialJacobiExists",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "4ae788ba86347bbd6afc99d8005c4f88c2e09aef80471d42465feaf8e0570981"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ParallelAlong",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "eb5a2a8d06cc38699074fdaeae51338364371b355385e7097d319c2f75a462ef"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JunctionStep",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "2a0b4cb7f899e04a604bf36e5a7a53a699e28a9b252af0568d5284298251736e"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FlowChainAssembly",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "51edebc5db89ae6b96d1192cc6d0ef1fa773d467cadf42b0fa11be3ce63c0000"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FlowChainNbhd",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "759961b5dabaf6655c33da84bbcfbc12fa8ca9cc8a2b6bd0db0cb6eb3d899d68"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ExpDifferential",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "95d7f7b42a5266bc0d0fa4e6318178d816aadb417d1a6f69eb11bed559948c39"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ConjugateDifferential",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "ba8ecc074d79ae4c17ec8228b5ffebf335bdfb5da6a47755d80b691d1c77ee8b"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ExpLocalDiffeo",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "568d20ff7a98d1e86ba3b294263880b15734934f70bbdd5eb7eae8e6e2186334"
+    },
+    {
+      "module": "MorganTianLib.Ch01.GeodesicRegularity",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "66cfb2866692250606968ade07eb53766b4ee66cc9f217f23e872f34fa0a0ae0"
+    },
+    {
+      "module": "MorganTianLib.Ch01.BrokenVariationGlue",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "3d7289c17df5d464e318bb9bd682156a683de85c578bf55863da4f82df21cb87"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ParallelIsometry",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "258bac7d46f9b3abd51b6c91c4d2862c6bee1c53779645d85761be8ddc3b5653"
+    },
+    {
+      "module": "MorganTianLib.Ch01.GeodesicSpeed",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "6c6a328150b2b611898d8933e5c9fc8977522f1b993cb7b90c61eca166218e3e"
+    },
+    {
+      "module": "MorganTianLib.Ch01.JunctionGeodesic",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "0a6014d95e3c35ff3a0da39e516b97e624dcc8166d547d03ba20bebf7a4225e0"
+    },
+    {
+      "module": "MorganTianLib.Ch01.SecondVariationPrep",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "149e6a8685d8e1e00a9e8d511d070faadb47b4fe2154d36c981ad94f1ffe4c60"
+    },
+    {
+      "module": "MorganTianLib.Ch02.MinimizingSegment",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "6ec5076555c2167d669f86a15c93fe37d7e3fda729ffb88fc18af93e9f92ea06"
+    },
+    {
+      "module": "MorganTianLib.Ch02.EndsExist",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "9e27bb45b57a62970b237e73f28fa74afab88b4a7311fa11af737f157a3350de"
+    },
+    {
+      "module": "MorganTianLib.Ch02.EndsEndpointContinuity",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "1050c2ae7e9215797ee644a4b7d10c189aa9dcbc0046b15f2a25700aa025aac6"
+    },
+    {
+      "module": "MorganTianLib.Ch02.EndsConvStep",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "b20e4a11915e7ab62c2b6b5f291551545573259ffd38c0b422a2e73059706775"
+    },
+    {
+      "module": "MorganTianLib.Ch02.GeodesicContinuousDependence",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "416a3b54b80a2208aed92430cc871f9278538e7e883265f0ba066916ea1b6203"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ExpContinuity",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "750657dad07ded1834f0872ab662e053e84013ff756d45d1a0e74626c27d8ad0"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ExpBallDiffeo",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "887f5f468962a0960fbc09082b74a65072fddf22284ef79e2260862bf0eb0aa4"
+    },
+    {
+      "module": "MorganTianLib.Ch01.CutLocus",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "a6d8cc68e73ab80c3558e4e8eafc2b57631abadde3dfe9125bb176034b554b12"
+    },
+    {
+      "module": "MorganTianLib.Ch01.CutTimeMeasurable",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "c316fa933807e1eac47c70d1904a6eb88af415d193f7155ad98dd14c2b969c03"
+    },
+    {
+      "module": "MorganTianLib.Ch02.GradientFlow",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "d135cfd224a13884e9cada97453fe38888ead943065a6a1306bc712075679261"
+    },
+    {
+      "module": "MorganTianLib.Ch02.BochnerLipschitz",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "1cbe5dfa5037ecc84dbbbece10815b354fb2a73f6025a8301c9d5de312a7c8bc"
+    },
+    {
+      "module": "MorganTianLib.Ch02.SliceChartAdapted",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "0ed4b4e82a7523c29f4e55c836b4d6a8f5a94fc292aeb81f63f382e8db6aac7f"
+    },
+    {
+      "module": "MorganTianLib.Ch02.LevelSetChartedSpace",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "5d9032f8176572a315d16dcca8e329e99824def31ed6ef514cd9836e62ba2ba1"
+    },
+    {
+      "module": "MorganTianLib.Ch02.LevelSetInducedMetric",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "28739f4ea8f4f7c5c70c81f5bee6ce7419ad648f0c7de73efc761738d33fe6e5"
+    },
+    {
+      "module": "MorganTianLib.Ch02.EpsilonNeck",
+      "exit_code": 0,
+      "cached": true,
+      "sha256": "5bb76a5f354fefa1181995a37e59140589cf4f0bcd2e540f685e382644b96a60"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FrameJacobi",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "9ca39e36b9b7fa207cdd226f81a2f1e6d6acc3d39da0bef7974df46a2df1ca9a"
+    },
+    {
+      "module": "MorganTianLib.Ch01.VolumeElement",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "bb5da1b35abe97f1722857e11e197a1e0f05c6536d05a2820a86d5389a45e63f"
+    },
+    {
+      "module": "MorganTianLib.Ch01.SharpTrace",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "379137a662c4b64b941c6e057ddc25e79b7ee95c2537e7b1d308dc486bc0cb2c"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FrameCurvatureBridge",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "8bff33a481be19978f93def647cb00437d58cac0db606bc2bc57d98eca6700a4"
+    },
+    {
+      "module": "MorganTianLib.Ch01.VolumeAsymptotics",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "507717660d23d91e831b830b03c192086f0c5e2a3ae64c1fb88ffda458860ff2"
+    },
+    {
+      "module": "MorganTianLib.Ch01.VolumeComparison",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "f62edf31b3b8bfae020dcb2a6afdfdb4493e363c330509b141be27073132f361"
+    },
+    {
+      "module": "MorganTianLib.Ch03.RicciFlow.EvolvingEpsilonNeck",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "b26ae7bfab3c97773f787124f86f5b17fc56c091efafb66b613d9434eb2be908"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FrameJacobiSystem",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "5180d666ab66d5a5002030d562ecbb8277e9de5a0095315ea7f6cc436bec5ff9"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FrameCurvContinuity",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "b6cc692834ff869dc9c829baf82bcb861c7b99115d1df4da50ee5ef1011ed4b2"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FrameRadialBridge",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "2b960251b0151b312c1bec8addac687431f6123c581db88a73fb81c8066cadb5"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ConjugateUnit",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "cf685ad3728f5cac76ea830bbff493a9f2acfff2f56521d4ec6e9b2156b820aa"
+    },
+    {
+      "module": "MorganTianLib.Ch01.RicciFrameTrace",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "0d48b934539512d83884bd3e2fc4f2401ac9d0f8d0d5f2f73356ea5089b00398"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FrameCurvSmooth",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "5fe1e150daa5a95b2ac522477805164fa93aaec46a9b25aab3c733202efb416a"
+    },
+    {
+      "module": "MorganTianLib.Ch01.IndexFormConjugate",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "69f6a8c576abbdd9288abda6d40df6e2d19a2d5001e477c34e0941476dba18db"
+    },
+    {
+      "module": "MorganTianLib.Ch01.RadialJacobiVelocity",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "7d0d1a211b0caa41eb1086a2f4b730acd1702e9935aa40b897b1fdeca6f8464f"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FrameIndexBridge",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "a220e38704daead93f05e96ba81d875cda39815e50d4d228290417f596535cd6"
+    },
+    {
+      "module": "MorganTianLib.Ch01.SectionalComparison",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "6aa0f03e4683ea66428d57b7910bae95d1cee9e8f35164205f8587f2e30abeea"
+    },
+    {
+      "module": "MorganTianLib.Ch01.RicciComparison",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "cc3bb887bf253bd383d7d73222006784c81bffbc0c0ba11e906e17fc13b5a19c"
+    },
+    {
+      "module": "MorganTianLib.Ch01.IndexFormNegativeSmooth",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "4d3d187b3af231f33e3fb91592b41dcdf6366c021668c0eeb2881355310a535f"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ChartIndexSeam",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "9d687ace2c6b81ce831c653eace3c6b838ccca16d4d9d670e836ec022994a7a1"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ComparisonGeometric",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "fba445d0bcca328be34db99e4cbeaaae8218f20972138ec692db1a8a6daccc3b"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FrameIndexSeam",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "67688472ab027207a15ca0fbee42a63514eb1974d5e7dee5671fef99badb0850"
+    },
+    {
+      "module": "MorganTianLib.Ch01.FrameLiftCovDeriv",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "e2b06dba001652969c9930cca3d1d2b1aec8518ab299c82632ec92759394f179"
+    },
+    {
+      "module": "MorganTianLib.Ch01.PolarMetricComparison",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "1a39467a82b4b9c8d5d4b763bcd421883f1af9dca3b7c3dce3d482e31d2478b0"
+    },
+    {
+      "module": "MorganTianLib.Ch01.BrokenVariationData",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "a4168533b0942ce1c7e093caabef937f1d14339a2fde1c44f93b9cfe0e66a2ed"
+    },
+    {
+      "module": "MorganTianLib.Ch01.PolarVolumeComparison",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "171e5daa97d82d863c1a36658cc3831e964811edaf399f5402a1dfec79daaa7e"
+    },
+    {
+      "module": "MorganTianLib.Ch01.MinimalGeodesicNoConjugate",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "48b07ecc8717e2f987448bc9c39347845127ee88eaad10edfce3190ceec9b6d7"
+    },
+    {
+      "module": "MorganTianLib.Ch01.NoConjugateOfMinimizing",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "cc221299e60d61e24b5f76c1126478c225749b4b27c2a2bce49a5e6c5690f65e"
+    },
+    {
+      "module": "MorganTianLib.Ch01.CutLocusFacades",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "9fde01a41b4781fc2c70f97fd026cee2163fb8887d2fd3f91184319afa36c8a5"
+    },
+    {
+      "module": "MorganTianLib.Ch01.ComparisonMinimizing",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "a76ddd863538247b65d6a4899e5747af65b876572dae75f143f33a706ed2c79b"
+    },
+    {
+      "module": "MorganTianLib.Ch02.LengthComparison",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "b1b0a364c1dea61a74fc7f8a7a7ee49ba019f39f89ee17150b877837dec7d52c"
+    },
+    {
+      "module": "MorganTianLib.Ch03.RicciFlow.DistanceVariation",
+      "exit_code": 0,
+      "cached": false,
+      "sha256": "caa50033bbe93c66b31a3ff7899b75fa00792205e6cdf7129ac84701f97e0960"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-19T11:21:50.911876+00:00",
+  "main_package_build": "PASS",
+  "sanity_suites": 25,
+  "existing_axiom_targets": 364,
+  "new_independent_targets": 23,
+  "controller_unit_tests": 37,
+  "concrete_tests": [
+    "rank-one zero-area pair",
+    "empty extended infimum is infinity",
+    "unattained positive-ray infimum",
+    "closed-time-slab minmax",
+    "approximate-competitor Dini without minimizer",
+    "nonempty unit-fiber covering",
+    "actual standard sphere covering",
+    "canonical Riemannian extended-distance equality"
+  ],
+  "source_hashes_stable": true,
+  "fixed_mathlib_commit": "520045ab14e26149ee970e2e617ca04b09bde5d6",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "fresh_external_dependency_rebuild": false,
+  "dependency_validation_base": "5b77ac17b6eff241fecfd7e5c88468421e64c06b",
+  "legacy_wide_validation": "Stopped after an output-only Lean report file selected every reference package; retained partial logs, relocated test without changing bytes, and reran unchanged dependency gate against checked batch baseline.",
+  "reference_module_closure": 355,
+  "reference_diagnostics": "One fixed path-integral declaration retains an unused automatically included section variable warning. Theorem statement unchanged; no linter is disabled."
+}
