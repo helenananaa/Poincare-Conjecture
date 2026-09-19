@@ -1,0 +1,36 @@
+[
+  {
+    "id": "standard-collar",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- A genuine smooth strip collar exists in the usual product Euclidean space.\nThis is an explicit non-vacuous input for the geometric construction. -/\ntheorem exists_standard_smooth_strip_collar\n    (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] :\n    ∃ Φ : PartialDiffeomorph ((𝓘(ℝ, V)).prod (𝓘(ℝ, ℝ)))\n        (𝓘(ℝ, V × ℝ)) (V × ℝ) (V × ℝ) ∞,\n      Φ.source = (univ : Set V) ×ˢ Ioo (-1 : ℝ) 1 ∧\n      (∀ z, Φ z = z) ∧ Φ.target = (univ : Set V) ×ˢ Ioo (-1 : ℝ) 1 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.exists_standard_smooth_strip_collar",
+    "target_path": "tests/SmoothCollar/StandardCollar.lean",
+    "hint": "Build a PartialDiffeomorph using the identity PartialEquiv restricted to the open strip. Forward smoothness uses contMDiff_fst.prodMk_space contMDiff_snd (product model to vector model). Inverse smoothness uses the ordinary smooth linear projections on V × Real then ContMDiff.prodMk (vector model to product model). The forward total map must literally be identity, not just some unspecified equivalence.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "standard-component",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- The nontrivial complementary component and its frontier in the Euclidean test case. -/\ntheorem standard_upper_component_geometry\n    (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] :\n    connectedComponentIn ({z : V × ℝ | z.2 ≤ 0}ᶜ) (0, 1) = {z | 0 < z.2} ∧\n    frontier (connectedComponentIn ({z : V × ℝ | z.2 ≤ 0}ᶜ) (0, 1)) =\n      {z | z.2 = 0} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.standard_upper_component_geometry",
+    "target_path": "tests/SmoothCollar/StandardComponent.lean",
+    "hint": "The complement is univ × Ioi 0, a preconnected set containing (0,1). Use IsPreconnected.connectedComponentIn to identify the actual component. Compute frontier by closure_prod_eq/interior_prod_eq and real interval closure_Ioi/interior_Ioi. This is a genuine region, not an empty or conditional example.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "standard-closure-sanity",
+    "model": "grok",
+    "depends_on": [
+      "standard-collar",
+      "standard-component",
+      "smooth-complement-closure"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothCollar.Core\nimport tests.SmoothCollar.StandardCollar\nimport tests.SmoothCollar.StandardComponent\nimport PoincareConjecture.Topology.FiberSaturation.SmoothCollar.ComplementClosure\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothCollar\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Apply the full construction to a nonempty Euclidean complementary closure,\nincluding its exact boundary, without supplying a pre-existing closure atlas. -/\ntheorem standard_complement_smooth_structure\n    (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] :\n    let D := connectedComponentIn ({z : V × ℝ | z.2 ≤ 0}ᶜ) (0, 1)\n    D.Nonempty ∧\n    ∃ cs : ChartedSpace (HalfSpace V) (closure D),\n      letI : ChartedSpace (HalfSpace V) (closure D) := cs\n      IsManifold (halfSpaceModel V) ∞ (closure D) ∧\n      IsSmoothEmbedding (halfSpaceModel V) (𝓘(ℝ, V × ℝ)) ∞\n        (Subtype.val : closure D → V × ℝ) ∧\n      (Subtype.val : closure D → V × ℝ) '' (halfSpaceModel V).boundary (closure D) =\n        {z | z.2 = 0} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothCollar\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothCollar.standard_complement_smooth_structure",
+    "target_path": "tests/SmoothCollar/ClosureSanity.lean",
+    "hint": "Use the integrated standard strip collar and component geometry. For any boundary point y, y.2=0; use the identity strip collar and x=y.1. Its one-sided condition for C={snd≤0} is literal. Closedness of C follows from continuity of snd. Invoke exists_smoothClosure_of_smoothCollar_cover with cross-section X=V. Get nonempty D from (0,1). Preserve the actual closure subtype and use the derived frontier equality, not a newly chosen homeomorphic region.",
+    "timeout_seconds": 900
+  }
+]
