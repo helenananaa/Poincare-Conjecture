@@ -8,7 +8,7 @@ set_option synthInstance.maxHeartbeats 400000
 noncomputable section
 namespace PoincareConjecture.ParallelMath.Transfer
 open Set MeasureTheory Riemannian Manifold
-open scoped Topology Manifold ContDiff ENNReal
+open scoped Topology Manifold ContDiff ENNReal Bundle
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]
   {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}

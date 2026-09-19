@@ -1,0 +1,59 @@
+[
+  {
+    "id": "length-readback-v2",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal Bundle\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Read the genuine Riemannian path length as the explicit chosen metric-speed integral. -/\ntheorem metricPathLength_eq_integral (g : RiemannianMetric I M) (γ : ℝ → M) (a b : ℝ) :\n    metricPathLength g γ a b =\n      ∫⁻ t in Icc a b, ENNReal.ofReal (Real.sqrt\n        (g.metricInner (γ t) (mfderiv 𝓘(ℝ,ℝ) I γ t 1) (mfderiv 𝓘(ℝ,ℝ) I γ t 1))) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.metricPathLength_eq_integral",
+    "target_path": "ReferenceBridges/GlobalTransfer/LengthReadback.lean",
+    "hint": "Definition-version correction: the Core now explicitly opens Bundle, ensuring the path integrand uses the supplied g metric rather than the background E norm. Previous task was stopped due to the coordinator definition bug, not mathematical inability. Work against the corrected frozen source and compile. Unfold metricPathLength with its explicit g bundle, use pathELength_eq_lintegral_mfderiv_Icc and the genuine Riemannian.enorm_tangent_eq_sqrt_metricInner from DoCarmoLib.Riemannian.Geodesic.HopfRinow.MetricBridge. Preserve mfderiv and the original model I. Avoid claiming the background E norm equals the metric norm.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "distance",
+    "math_role": "map"
+  },
+  {
+    "id": "distance-readback-v2",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal Bundle\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** The actual Riemannian distance is the infimum over real C1 joining curves; disconnected endpoints remain at infinity. -/\ntheorem metricEDist_eq_joining_inf (g : RiemannianMetric I M) (x y : M) :\n    metricEDist g x y = ⨅ γ : JoiningCurve I x y, metricPathLength g γ.1 0 1 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.metricEDist_eq_joining_inf",
+    "target_path": "ReferenceBridges/GlobalTransfer/DistanceReadback.lean",
+    "hint": "Definition-version correction: the Core now explicitly opens Bundle, ensuring the path integrand uses the supplied g metric rather than the background E norm. Previous task was stopped due to the coordinator definition bug, not mathematical inability. Work against the corrected frozen source and compile. Install the g RiemannianBundle. Use Manifold.riemannianEDist_le_pathELength in one direction; in the other direction use exists_lt_of_riemannianEDist_lt for every strictly larger ENNReal bound. Do not assume joining curves exist or distances finite. All curves have the explicitly supplied C1 condition and exact endpoints.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 0,
+    "math_lane": "distance",
+    "math_role": "map"
+  },
+  {
+    "id": "epsilon-length-v2",
+    "model": "grok",
+    "depends_on": [
+      "length-readback-v2"
+    ],
+    "source": "import ReferenceBridges.GlobalTransfer.LengthReadback\nimport ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal Bundle\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Actual epsilon-close metrics compare the genuine path lengths using square-root constants. -/\ntheorem epsilonClose_path_length {ε : ℝ} (g0 g : RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose ε g0 g) (γ : ℝ → M) (a b : ℝ) :\n    ENNReal.ofReal (Real.sqrt (1-ε)) * metricPathLength g0 γ a b ≤ metricPathLength g γ a b ∧\n    metricPathLength g γ a b ≤ ENNReal.ofReal (Real.sqrt (1+ε)) * metricPathLength g0 γ a b :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_path_length",
+    "target_path": "ReferenceBridges/GlobalTransfer/EpsilonLength.lean",
+    "hint": "Definition-version correction: the Core now explicitly opens Bundle, ensuring the path integrand uses the supplied g metric rather than the background E norm. Previous task was stopped due to the coordinator definition bug, not mathematical inability. Work against the corrected frozen source and compile. Read both lengths using LengthReadback. Apply the already checked Quantitative.Reference.epsilonClose_speed_comparison pointwise to the actual velocity; ofReal multiplication and finite-constant lintegral scaling finish. Do not assume unit speed or finite path length.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "distance",
+    "math_role": "reduce"
+  },
+  {
+    "id": "epsilon-distance-v2",
+    "model": "grok",
+    "depends_on": [
+      "distance-readback-v2",
+      "epsilon-length-v2"
+    ],
+    "source": "import ReferenceBridges.GlobalTransfer.DistanceReadback\nimport ReferenceBridges.GlobalTransfer.EpsilonLength\nimport ReferenceBridges.GlobalTransfer.Core\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Transfer\nopen Set Function Filter MeasureTheory Riemannian Manifold\nopen scoped Topology BigOperators Manifold ContDiff ENNReal Bundle\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Actual epsilon-close Riemannian metrics compare their original extended distances, not an assumed external distance. -/\ntheorem epsilonClose_riemannianEDist {ε : ℝ} (g0 g : RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose ε g0 g) (x y : M) :\n    ENNReal.ofReal (Real.sqrt (1-ε))*metricEDist g0 x y ≤ metricEDist g x y ∧\n    metricEDist g x y ≤ ENNReal.ofReal (Real.sqrt (1+ε))*metricEDist g0 x y :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Transfer\n",
+    "target_name": "PoincareConjecture.ParallelMath.Transfer.epsilonClose_riemannianEDist",
+    "target_path": "ReferenceBridges/GlobalTransfer/EpsilonDistance.lean",
+    "hint": "Definition-version correction: the Core now explicitly opens Bundle, ensuring the path integrand uses the supplied g metric rather than the background E norm. Previous task was stopped due to the coordinator definition bug, not mathematical inability. Work against the corrected frozen source and compile. Rewrite both original distances with metricEDist_eq_joining_inf; the admissible curve subtype is identical for the two metrics because topology and smooth structure were not changed. Apply epsilonClose_path_length and constant-times-iInf identities, proving the positive finite constants from 0<epsilon<1/2. Include empty path sets/infinite distance.\nReference source location: ../formalized-sources and ../shared within YOUR OWN worktree. Mathlib/ is linked read-only. Do not scan other attempts.",
+    "timeout_seconds": 780,
+    "priority": 5,
+    "math_lane": "distance",
+    "math_role": "reduce"
+  }
+]
