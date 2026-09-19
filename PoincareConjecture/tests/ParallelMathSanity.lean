@@ -14,4 +14,4 @@ example (v : Fin 3 → ℝ) (hv : v ≠ 0) :
   simp
 /-- Zero-edge metric chains are included, rather than silently excluded. -/
 example {X : Type*} [PseudoMetricSpace X] (x : X) : dist x x ≤ (0 : ℝ) := by
-  simpa using finite_chain_dist_le 0 (fun _ => x)
+  exact finite_chain_dist_le 0 (fun _ => x)
