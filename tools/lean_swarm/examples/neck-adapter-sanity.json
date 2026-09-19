@@ -1,0 +1,27 @@
+[
+  {
+    "id": "offcenter-reverse-sanity",
+    "model": "grok",
+    "depends_on": [
+      "oriented-collar",
+      "restrict-partial"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.OrientedCollar\nimport PoincareConjecture.Topology.FiberSaturation.SmoothNeck.RestrictPartial\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n/-- Regression: an off-center cut with reversed orientation still yields the\ncorrect collar, rather than silently fixing the zero section or the positive axis. -/\ntheorem offcenter_reverse_neck_sanity (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] :\n    ∃ Φ : PartialDiffeomorph ((𝓘(ℝ,V)).prod (𝓘(ℝ,ℝ))) (𝓘(ℝ,V × ℝ)) (V × ℝ) (V × ℝ) ∞,\n      Φ.source = (univ : Set V) ×ˢ Ioo (-1 : ℝ) 1 ∧\n      (∀ z ∈ Φ.source, 1 ≤ (Φ z).2 ↔ z.2 ≤ 0) ∧\n      (∀ x : V, Φ (x,0) = (x,1)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.offcenter_reverse_neck_sanity",
+    "target_path": "tests/NeckAdapter/OffCenterReverse.lean",
+    "hint": "Construct the finite identity partial chart on V × (-2,3) via exists_partialDiffeomorph_restriction of Diffeomorph.refl. Apply the actual oriented collar theorem with c=1 and s=-1 and continuing region C={z | 1 ≤ z.2}. Prove the pointwise local-cut relation by ring/linarith, and keep the center equation. This is an integration regression, not an independently new mathematical theorem.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "native-sphere-reverse-sanity",
+    "model": "grok",
+    "depends_on": [
+      "native-collar"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.NativeCollar\nimport Mathlib.Tactic\n\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.SmoothNeck\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n/-- A nonempty genuine standard spherical native-neck test, including native\nR3 model transport, a noncentral cut, and reversed orientation. -/\ntheorem native_sphere_reverse_neck_sanity :\n    ∃ Φ : PartialDiffeomorph ((𝓡 2).prod (𝓘(ℝ,ℝ))) NativeCylinderModel\n        (Sphere2 × ℝ) NativeCylinder ∞,\n      Φ.source = (univ : Set Sphere2) ×ˢ Ioo (-1 : ℝ) 1 ∧\n      (∀ z ∈ Φ.source, 1 ≤ (Φ z).2 0 ↔ z.2 ≤ 0) ∧\n      (∀ x : Sphere2, Φ (x,0) = (x,nativeAxis 1)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.SmoothNeck\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.SmoothNeck.native_sphere_reverse_neck_sanity",
+    "target_path": "tests/NeckAdapter/NativeSphereReverse.lean",
+    "hint": "Use epsilon=1/2, Q=nativeNeckDomain epsilon as an open subset of NativeCylinder, and φ=Diffeomorph.refl NativeCylinderModel Q infinity. Apply exists_smoothCollar_of_native_neck_cut with C={z | 1 ≤ z.2 0}, c=1, s=-1. Simplify the concrete scalarToNative center equation; do not replace the native sphere/model with a Euclidean proxy.",
+    "timeout_seconds": 900
+  }
+]
