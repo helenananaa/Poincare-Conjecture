@@ -1,3 +1,4 @@
+import PoincareConjecture.Topology.FiberSaturation.CollarClosureHalfSpace
 import PoincareConjecture.Topology.FiberSaturation.ComplementaryBoundarySelection
 import PoincareConjecture.Basic
 import PoincareConjecture.Topology.FiberSaturation.SmoothPeriodicInverse

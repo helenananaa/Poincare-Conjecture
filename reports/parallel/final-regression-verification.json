@@ -1,0 +1,1923 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "mathlib_commit": "520045ab14e26149ee970e2e617ca04b09bde5d6",
+  "source_hashes_stable": true,
+  "sanity_suites": 19,
+  "transitive_axioms": {
+    "PoincareConjecture.Topology.FiberSaturation.fiberSaturated_of_frontier": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.FiberSaturated.eq_univ_prod_image": [
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.eq_univ_prod_image_of_frontier": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.exists_open_base": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.frontier_fiberSaturated_univ_prod": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.open_connected_eq_Ioo": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.exists_interval_of_compact_closure": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.exists_open_ordConnected_base": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere2_connectedSpace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_neck_fiber_saturation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_neck_two_frontier_spheres": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_neck_open_interval": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.fiber_saturation_from_spherical_frontier": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.exists_closed_cylinder": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.neck_coordinates_cylinder": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.preimage_fiberSaturated_of_ambient_frontier": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.ambient_fiber_trichotomy": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.connectedComponentIn_univ_prod": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.component_eq_univ_prod_image": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.frontier_component_fiberSaturated": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.component_open_interval": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.embedding_image_connectedComponentIn": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.continuous_collarInteriorMap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.isEmbedding_collarInteriorMap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.collarInterior_frontierSaturated": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.collar_component_interval": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.embedded_collar_component_interval": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_closed_collar_saturation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.frontier_componentIn_subset": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.collar_component_frontier_subset_ambient": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.relativeClosedCylinderHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.relativeClosedCylinderUnitHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_product_closure_homeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.neck_closure_homeomorph_unitCylinder": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.componentIn_disjoint_closed_union": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.componentIn_finite_disjoint_closed": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.componentIn_two_fibers": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_product_two_frontier_components": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.relative_fiber_boundary_pairing_product": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.deck": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.deck_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.deck_add": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.orbitSetoid": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.Space": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_eq_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_deck": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.continuous_proj": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.preimage_proj_image": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.isOpenMap_proj": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.integer_shift_zero": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_injOn_closedStrip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.period_endpoint_identification": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_injOn_closedStrip_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_isOpenEmbedding_openStrip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_isEmbedding_closedStrip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.closedStripHomeomorphImage": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.blueprint_endpoint_convention": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.image_period_closedStrip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.closure_image_period_openStrip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.frontier_closure_image_period_empty": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.width_le_period_of_disjoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.width_lt_period_of_disjoint_frontier_closure": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.closedStrip_embeds_of_disjoint_frontier_closure": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.deck_image_preimage": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.openStrip_ne_deck_image": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.lifted_strip_component_disjoint": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.lifted_strip_component_width_lt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_surjective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.base_shift_mem_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.isOpen_real_component": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.lifted_component_isOpen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.periodic_component_bounded": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.lifted_component_finite_strip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_image_deck": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.component_images_eq_of_inter": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.image_lifted_component_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.image_period_halfOpenStrip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.image_closedStrip_eq_compl_gap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.isClosed_image_closedStrip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.closure_image_openStrip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.closedCylinderUnitHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.region_short_strip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.region_closure_homeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.frontier_closure_eq_of_regularOpen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.sphere_bundle_quotient_regular_region": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.regularOpen_of_frontier_closure_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.HasAmbientModelCharts": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.intrinsicInterior_iff_ambientInterior": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.intrinsicBoundary_iff_ambientFrontier": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.intrinsicInterior_image_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.intrinsicBoundary_image_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.regularOpen_of_intrinsicBoundary_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.intrinsicBoundary_eq_frontier_iff_regularOpen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_quotient_region_of_boundaryCharts": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.closedHalfSpace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.closedHalfSpace_chartedSpace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.closedHalfSpace_hasAmbientModelCharts": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.closedHalfSpace_boundary_image": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.embedding_local_set_model": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.exists_codimensionZero_ambient_chart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.interior_transfer_maximalAtlas": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.intrinsicInterior_iff_maximalChart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.intrinsicBoundary_iff_maximalChart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.smoothEmbedding_interior_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.smoothEmbedding_boundary_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.smoothEmbedding_interior_image": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.smoothEmbedding_boundary_image": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.proper_smoothEmbedding_boundary_image": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.closedDomain_boundary_image": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.regularOpen_of_smoothClosure_boundary": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.smoothClosure_boundary_iff_regularOpen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_region_of_smoothClosure": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.model_inclusion_smoothEmbedding": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.circle_eq_iff_integer_shift": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentation_deck_invariant": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentation_eq_iff_orbit": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentationLift": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentationLift_proj": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.continuous_presentationLift": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.isOpenMap_presentationLift": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.bijective_presentationLift": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentationHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentationHomeomorph_proj": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentationHomeomorph_unique": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentation_preimage_inverse_image": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.circleProjection": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.circleProjection_proj": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.continuous_circleProjection": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_fiber_injective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_isLocalHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.proj_isOpenQuotientMap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.image_height_fiber": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.canonical_presentationHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentation_image_cylinder": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentation_closedStrip_embedding": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentation_openStrip_embedding": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentation_isLocalHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.presentation_isOpenQuotientMap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_presentation_coordinates": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_region_of_presented_smoothClosure": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.diffeomorphOfEmbeddingComparison": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.diffeomorphOfEmbeddingComparison_apply": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.diffeomorphOfEqualEmbeddingRange": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.realTranslation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.realReflection": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.realDiffeomorph_mem_maximalAtlas": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.Icc_subtype_smoothEmbedding": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.iccDiffeomorphUnit": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.cylinder_inclusion_smoothEmbedding": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.cylinderDiffeomorphUnit": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.cylinderDiffeomorphUnit_apply": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.comparison_inverse_contMDiff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.diffeomorphOfLocalDiffeomorphComparison": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.diffeomorphOfLocalDiffeomorphComparison_apply": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.presented_region_closedStrip": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_region_diffeomorph_of_smoothPresentation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.product_region_diffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.Lifted": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutTrivialization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutTrivialization_covers": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutMap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutMap_proj": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.continuous_cutMap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutFiberChart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutFiberChart_apply": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutFiberChart_symm": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutMap_fiber_injective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.fiberTransport_mk": [
+      "Quot.sound"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutMap_eq_fiberChart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutMap_range_fiber": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.surjective_cutMap": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.monodromy": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutMap_endpoints": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.monodromy_unique": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.circle_Icc_eq_or_endpoints": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.Seam": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.cutMap_eq_iff_seam": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.ClosedMappingTorus": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.closedDescent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.closedDescent_mk": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.continuous_closedDescent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.bijective_closedDescent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.closedBundleHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.closedBundleHomeomorph_mk": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.abstract_bundle_closed_mappingTorus": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.abstract_sphere_bundle_closed_mappingTorus": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.space_t2Space": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.space_compactSpace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.fundamentalProjection": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.continuous_fundamentalProjection": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.fundamentalProjection_fiber_injective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.fundamentalProjection_endpoints": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.surjective_fundamentalProjection": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.fundamentalProjection_eq_iff_seam": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.closedToReal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.closedToReal_mk": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.continuous_closedToReal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.bijective_closedToReal": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.closedRealHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.closedRealHomeomorph_mk": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.closedRealHomeomorph_unique": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.realBundleHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.realBundleHomeomorph_fundamental": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.realBundleHomeomorph_base": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.realPresentation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.continuous_realPresentation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.surjective_realPresentation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.realPresentation_base": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.realPresentation_fiber_injective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.realPresentation_glue": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.realPresentation_cut": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.realPresentation_isLocalHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.abstract_bundle_real_presentation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.abstract_sphere_bundle_real_presentation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.abstract_sphere_bundle_regular_region": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.abstract_sphere_bundle_smoothClosure_region": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.MappingTorus.region_frontier_circle_pair": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.abstract_sphere_bundle_frontier_pair": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.abstract_sphere_bundle_fiber_connected": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.abstract_sphere_bundle_boundary_components": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.seamClamp": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.contDiff_seamClamp": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.seamClamp_eq_self": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.seamClamp_eq_center": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.seamClamp_mem": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.seamClamp_eqOn": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.IsSmoothTrivialization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.contMDiffOn_coordChange": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.transitionDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.isSmooth_restrOpen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.adjust": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.adjust_apply": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.isSmooth_adjust": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.matchNear": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.matchNear_smooth": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.matchNear_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.contMDiffOn_ite_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.inverse_eqOn_collar": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.smooth_piecewiseLeOfEq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.exists_smooth_splice_of_collar": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.exists_smooth_splice": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.exists_smooth_trivialization_Icc": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.fiberBundle_exists_smooth_trivialization_Icc": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.coordChangeDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.matchNear_right_tail": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.exists_smooth_splice_with_tail": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.deck_inverse_base": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.deckTranslate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.deckTranslate_baseSet": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.deckTranslate_apply": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.deckTranslate_smooth": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.deckTranslate_deck_apply": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodic_chart_of_collars": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.exists_periodic_chart_from_interval": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.exists_smooth_periodic_trivialization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.smooth_chart_inverse_localDiffeomorphAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodic_inverse_seam": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.exists_smooth_endmatched_period_chart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodIndex": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodRemainder": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodRemainder_mem": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodIndex_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodIndex_add_periods": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodRemainder_add_periods": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodIndex_zeroCell": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.contMDiff_homeomorph_zpow": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.integerDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.height_integer_iterate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicExtend": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicCell": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicExtend_zeroCell": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicExtend_translate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicExtend_on_collar": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicExtend_eq_cell": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.localDiffeomorphAt_of_eventuallyEq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicCell_localDiffeomorphAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicExtend_isLocalDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicExtend_height": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicExtend_injective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicExtend_surjective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.periodicExtend_bijective": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.exists_equivariant_real_diffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverLift.chart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverLift.chart_apply": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverLift.chartedSpace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverLift.project_chart_symm": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverLift.transition_source_subset": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverLift.transition_eq": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverLift.isManifold": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverLift.isLocalDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.contMDiff_of_localDiffeomorph_comp": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.deckDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.continuous_forget": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.continuous_height": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.sheet": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.forget_isLocalHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.CircleSpace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.circleDeck": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.circleDeck_forget": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.circleDeck_height": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.circleChartedSpace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.circle_isManifold": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.circle_forget_isLocalDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.circleDeckDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.bundleToSpace_bijective": [
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.bundleHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.forget_bundleHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.height_bundleHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.bundle_lift_isLocalHomeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.bundleChartedSpace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.bundle_isManifold": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.bundle_lift_isLocalDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.bundleComparisonDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.nativeCircleDeck": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.nativeCircleDeck_lift": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.nativeCircleDeck_height": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.contMDiffAt_of_localDiffeomorph_comp": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.contMDiffOn_of_localDiffeomorph_comp": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.IsSmoothBundleChart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.contMDiff_projection_of_local_charts": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.isSmoothBundleChart_real_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.isSmoothBundleChart_restrOpen": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.contMDiff_pullback_height": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.isSmooth_pullback_chart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.pullback_local_smooth_charts": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleSmooth.logChart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleSmooth.logChart_symm": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleSmooth.representative": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleSmooth.representative_coe": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleSmooth.chartedSpace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleSmooth.log_comp_coe_contDiffAt": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleSmooth.isManifold": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.CircleSmooth.coe_isLocalDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.SmoothBundle.abstract_bundle_smooth_real_presentation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.abstract_smooth_sphere_bundle_region": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.abstract_smooth_sphere_bundle_boundary_pairing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.relativeClosedCylinderDiffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.relative_product_region_diffeomorph": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.relative_sphere_region_boundary_pairing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.fiberSaturated_univ_prod": [],
+    "PoincareConjecture.Topology.FiberSaturation.CircleBundle.fiberTransport": [],
+    "PoincareConjecture.Topology.FiberSaturation.ProjectionSaturated": [],
+    "PoincareConjecture.Topology.FiberSaturation.projectionSaturated_pullback": [],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.Space": [],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.forget": [],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.height": [],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.forget_surjective": [],
+    "PoincareConjecture.Topology.FiberSaturation.CoverPullback.bundleToSpace": [],
+    "PoincareConjecture.Topology.FiberSaturation.exterior_piece_subset_component": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.complementary_component_frontier_subset": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.proper_complementary_component_frontier_nonempty": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.NeckParameter": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.neckCenter": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.positiveCollar": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.isPreconnected_positiveCollar": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.center_mem_closure_positiveCollar": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_frontier_saturated": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.collarSection": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.complementary_frontier_selection": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.collared_complement_frontier_components": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.Topology.FiberSaturation.sphere_collared_complement_frontier_components": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "source_sha256": {
+    "PoincareConjecture/Basic.lean": "44bdbaf8c1d3051c3e610bff68a22091c7c0e1683c02414d7a0eb01b9b44fabe",
+    "PoincareConjecture/Topology/FiberSaturation/AbstractBoundaryPairing.lean": "fae718f997a84ac6ab7437a19263514aa563ca77686429ce9e589ccc07cc28c5",
+    "PoincareConjecture/Topology/FiberSaturation/AbstractBundleMappingTorus.lean": "4e144c2e2021c3fd65c3de146329ddf1ceec9c35484ae456da75f7ea07439568",
+    "PoincareConjecture/Topology/FiberSaturation/AbstractBundleRegion.lean": "88f64c4c4d3712dec51dcfea18ae0887e20a685728f249a6cca9d254f0883c67",
+    "PoincareConjecture/Topology/FiberSaturation/AbstractRealPresentation.lean": "33d62c36346effe4e9e5525034a568bdb19ee9b35ebb6e4c655a73abd452a4d9",
+    "PoincareConjecture/Topology/FiberSaturation/AbstractSmoothBundleRegion.lean": "c6ee9f96a639576e226ffb964e69f0f87e875741a4c605f5f9f9425068093149",
+    "PoincareConjecture/Topology/FiberSaturation/AbstractSmoothPresentation.lean": "45144da47f3b0a7e4e9703e5df98ea81837bb1a2a78c900c83456b7c73423f3f",
+    "PoincareConjecture/Topology/FiberSaturation/Ambient.lean": "abe7945b0b96b14603943e2dddb4efc29ccd8f061c15c052b639553b726a4be9",
+    "PoincareConjecture/Topology/FiberSaturation/Basic.lean": "719d75996e083fc83e9506b53a1db1c7d6a3d45845546ee954e1368af10bb434",
+    "PoincareConjecture/Topology/FiberSaturation/Blueprint.lean": "5b0b115da98fc15c6628bb741cab9d41050f3af696abc47af39a56955aa171bf",
+    "PoincareConjecture/Topology/FiberSaturation/Boundary.lean": "ba992b12811eadc31c026f47c4b69542134f80d0db00479fdb1a989f564de355",
+    "PoincareConjecture/Topology/FiberSaturation/BoundaryModels.lean": "4f7ec5ba24f11f57d704b647ad3b411be4057a195560f2a6950115414dda1297",
+    "PoincareConjecture/Topology/FiberSaturation/BoundaryRegionAdapter.lean": "5683ee0a276e6724f3a3bc47ee3353823eae02d6d77d61f57b208d760465e132",
+    "PoincareConjecture/Topology/FiberSaturation/BoundaryRegularity.lean": "6a28e37f0a61e5162aee83ebe6867f670308f3fd666eebcef842821b2a2f488d",
+    "PoincareConjecture/Topology/FiberSaturation/BundleCut.lean": "23f0e917afb71b0f2a9fa5e5163be8d48221abf4c471e997a88a65c05e93ea4d",
+    "PoincareConjecture/Topology/FiberSaturation/BundleCutRelation.lean": "3bba2ee5bacc60d2d4a8912275c68287b7dfd86676abea14d1510506eeb25947",
+    "PoincareConjecture/Topology/FiberSaturation/BundleMonodromy.lean": "c03217d6ac71870fd1c34efc40caef8b541ae184f8022590cd9ef0d06ff9a879",
+    "PoincareConjecture/Topology/FiberSaturation/BundlePullbackComparison.lean": "ee5b22db0ec60974635e46f5e7c7ab24864ea2b245fb8b2468826f053dac7a8b",
+    "PoincareConjecture/Topology/FiberSaturation/BundlePullbackSmooth.lean": "03155e6567c4be146f3b37e7f1607d7ba0ac99744858ce8e2edbc646f9b2582f",
+    "PoincareConjecture/Topology/FiberSaturation/CanonicalCircleProjection.lean": "2df5cb27c778ece4120ab6f4c6f7f682662aab56f5c3f3b0f15e11cf58f846f5",
+    "PoincareConjecture/Topology/FiberSaturation/CirclePresentation.lean": "009412d05afd29967cabf9f129313364c65211c2403cdf0f1b6f56d92e06b1a2",
+    "PoincareConjecture/Topology/FiberSaturation/CirclePullbackDeck.lean": "682cec0a50349e9244374eb91bb8b6659d6ffed4996ea48acf1f9e6eea79ab4b",
+    "PoincareConjecture/Topology/FiberSaturation/ClosedCollar.lean": "5fb91410b0a45946e06018ce300a0dc222b9d2e81c399522c3491d1725c6c60f",
+    "PoincareConjecture/Topology/FiberSaturation/ClosedRealComparison.lean": "7df679763cfbab26c51c0f934a858aee75c684d6efcfe1c494b411ae129070bd",
+    "PoincareConjecture/Topology/FiberSaturation/ClosedRealRelation.lean": "82ae4ae104a62e9674f9766c429a2a919d6395d0fc241026b64637c03a7a67e0",
+    "PoincareConjecture/Topology/FiberSaturation/CodimensionZeroCharts.lean": "0612e5060a356eda50d0e4da06da32ef465e5d88b76c951060800aba31bacad2",
+    "PoincareConjecture/Topology/FiberSaturation/CollarClosureHalfSpace.lean": "3df2cdf1c9a38390e6e860c430b3930818ee0e45965dcb143770c1e00a1e5793",
+    "PoincareConjecture/Topology/FiberSaturation/CollarNegativeSide.lean": "8fadbf51c20dca5c72e28a30547975a2f6b39aedd7e2e991c8ee48a5a042011f",
+    "PoincareConjecture/Topology/FiberSaturation/CollarPositiveSide.lean": "9fdda257f5301a4dcea84f6b0677ad6efde4cb253f688777b7008c19bf023c88",
+    "PoincareConjecture/Topology/FiberSaturation/ComplementaryBoundarySelection.lean": "9566087da553f1c8fede03db0641d3aaecc4520da1b2c86adcaeae498992ef09",
+    "PoincareConjecture/Topology/FiberSaturation/ComplementaryComponent.lean": "b0a11fe8fc55de685e736b8f0c78540f126a5a686448b05841511e53354a6ed7",
+    "PoincareConjecture/Topology/FiberSaturation/Components.lean": "8645c59dbb7d3a5d09f46200a13b80e84979a4773eb6e554d20f37402c44b978",
+    "PoincareConjecture/Topology/FiberSaturation/CoverLiftAtlas.lean": "98b81bbd03c92ff146abf2b58666c2d3713474feb29c70e1a957224dd95ba975",
+    "PoincareConjecture/Topology/FiberSaturation/CoverLiftLocalDiffeomorph.lean": "a3c1f0c908823e80071818b512f0b52c0e44bf7c9522c399b63f73c78b54227f",
+    "PoincareConjecture/Topology/FiberSaturation/CoverLiftSmooth.lean": "6072fffeced1b1925fb28be0a3c8d158ce37a58a4745aa1be9f06f6539b82d1f",
+    "PoincareConjecture/Topology/FiberSaturation/CoverPullbackTopology.lean": "aecebe8043a59a260f9536554804ea10902dff38ef85ed9dfebc9db73374bf15",
+    "PoincareConjecture/Topology/FiberSaturation/CylinderHomeomorph.lean": "2cde4cffaa828716b5c9beaf8348dd87fd301ff02b7bf29ac080df7fd4c0da27",
+    "PoincareConjecture/Topology/FiberSaturation/Embedding.lean": "6c013ad8002b9c9952ad2ab577f3cfd30892b89ead6be331bcac4b6450ffd778",
+    "PoincareConjecture/Topology/FiberSaturation/EmbeddingDiffeomorph.lean": "6046c6d912b3b49f1fb313097b77bdb52ca6d83462435cb66a58c88766869ca5",
+    "PoincareConjecture/Topology/FiberSaturation/EmbeddingLocalModel.lean": "8ce3b630d5d6ff4c4b4930b790c252d6b8852a99037e4ead3cce1c14c8f8c857",
+    "PoincareConjecture/Topology/FiberSaturation/FrontierComponents.lean": "f66c553c300aa8d0f03063977784cd2699b81ecdd10e0d3a29dfe2b700fd5edd",
+    "PoincareConjecture/Topology/FiberSaturation/Interval.lean": "fd9a3e089a77ee24849d6dc6031728e798e46279c1c7d2331d8bf3b1b6bd3d60",
+    "PoincareConjecture/Topology/FiberSaturation/LocalDiffeomorphComparison.lean": "85fa882e8a0b22adceb623f06ea52a88ba7cf60f6ed716c84fb99e664497d23f",
+    "PoincareConjecture/Topology/FiberSaturation/MappingTorus.lean": "219fdec8b7115c2ec28e35e3ef183e05f93da1e7bf152838e11a37890c2bf0e8",
+    "PoincareConjecture/Topology/FiberSaturation/MaximalAtlasBoundary.lean": "b6591f9f8558027a28930759ebfbbf7cf3e7ea601d5dd6ecd603ddcfe428d844",
+    "PoincareConjecture/Topology/FiberSaturation/NativeCirclePullback.lean": "a325a4b8e20e267ce040f76055f8247e4306e244396acd25e00ce2e9dbddd3a6",
+    "PoincareConjecture/Topology/FiberSaturation/NeckCoordinates.lean": "b7d551af3b391bba2dcfe860121e286f0ec0285b59cdaa921f73c8ef45e8310a",
+    "PoincareConjecture/Topology/FiberSaturation/OneSidedCollar.lean": "29d6fe46e5969dc8b425e930e32c5632577f1739a3f35f0ced44e961eb9b1080",
+    "PoincareConjecture/Topology/FiberSaturation/PeriodIndex.lean": "b11cbe7f714db0c5792deff398e12d3a4b3ee3d19a5c25861f11f014ed7b5c1a",
+    "PoincareConjecture/Topology/FiberSaturation/PeriodicExtension.lean": "82b23f0635d791ce42ca5ebbb27865a63db8d2f082aee501b0cf7a93463fa514",
+    "PoincareConjecture/Topology/FiberSaturation/PeriodicExtensionBijective.lean": "166a7feeaba1481633434841e4a009ee6398330f36aa438e62b8aac719240a39",
+    "PoincareConjecture/Topology/FiberSaturation/PresentationDescent.lean": "28acfb9059eb8e04b4fb363915ca0cc6d571a50a441f6b905001d85fe8283ca3",
+    "PoincareConjecture/Topology/FiberSaturation/PresentationOpenness.lean": "fa109a4e699507459ec5778cdbb5e57df97a43d0fc4f9ec0df36c42c90931ede",
+    "PoincareConjecture/Topology/FiberSaturation/PresentedSmoothRegion.lean": "4e71cea7014be8de4720dea8dfb0362a622eed1bef2da97d3fe47572bddec063",
+    "PoincareConjecture/Topology/FiberSaturation/ProductPairing.lean": "c82fc9e632d5efe649e5a4145a575ed5504675c92bc7369c2c05eedc3e345ad3",
+    "PoincareConjecture/Topology/FiberSaturation/RelativeNeckPairing.lean": "2594cd6befadf07635197710e02d3558a7eb69970bcdb9d48c5210a9e900a59f",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothBundleAtlas.lean": "8ce1c9803723d46c00cfd1ed4a91878f3bc7f14f41da798dd7f88c12ac39d1cf",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothBundleChart.lean": "7b91f628ea9feee3810cb2a7117ee4d0015966ea0852064ecdc3e93b7a32d035",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothChartAdjustment.lean": "6f044cc00f701dfb7a569b40820e1ce7e9afbfa736aa85940df91672508ffdc3",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothCircleCover.lean": "106546a1b0d65675d35bfe665ab942ccca241aa8879bef4d2b11c6a6ef69208b",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothCylinder.lean": "e63bf38dd32fb849fb111af32d1c0e69310c943d7de28b71ffbdb9a75585ed11",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothDeckChart.lean": "6b1570689f58bfbac3c36193fb61b89ba00a8ee140afd123cf87d10ad6c91eb6",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothDomainRegularity.lean": "1048c0df4ce8cadef49415d62fa2887f949bdf0c26e1e1f76b7d1a50600b41ff",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothEmbeddingBoundary.lean": "e1dff9f077d51fb3c5740aa25a93b465b86a5439e791966ed9737ef7b395006f",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothEmbeddingModels.lean": "e677c0bdaed111ab8e3025c1c2df19aa53e49b644a626c99f7a0556a079bb800",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothIntegerPowers.lean": "d6f147e26647a04c95350316a3dce953a91c31b51ddd07057df03fc66b8190ae",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothInterval.lean": "97a761e49a87394f17848012e0ee1752dba42a528dc56b98d952ffd80b6b5df8",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothIntervalTrivialization.lean": "24c2953f0d1ee8a6a27ce245cab2671ac2cae29c0a634f32de4e315e2787c920",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothLiftOn.lean": "540c5cd6a00323d9322be63629707a9f616c5d4065fa130badf36c54e3771c26",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothLocalLift.lean": "2e9f9f6de824398f3f90800ecb7f76353020694a573f3cf0a41959b62e8ebd9e",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothLocalPasting.lean": "b7f38a207efaa9d8a9a839c279513e5f1f7956608f45f4153b845f55481a7f24",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothPeriodicChart.lean": "84f875a6672d0fc6207386caba498e5d5da972aa781d243f5cd86da060d6f9f1",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothPeriodicExtension.lean": "65b455d857d8a5859520ae32af1b4c2464c23ddd128aef330230f14bdd20cba9",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothPeriodicInverse.lean": "5e7f924a9ac72a719b1bd10a3ce47358b9c2646d07333ef408afde9ca27b4d2e",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothPresentedCylinder.lean": "1f156f7157899959e30081af7e7c1e40831f41a6cd35177a0a892ade4d542e46",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothProductRegion.lean": "d20c618477dac0d3a1bf441f9d247b3812900ae668fad21af6d261479174794d",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothPullbackAtlas.lean": "3c932c769d9a397d9ff34448f0d5b41b1572c1aa2c24c99a90a9e56af2299323",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothRealTrivialization.lean": "906a74b7a9b246c28164d72e56193cafb85e46bf668339beb9372ad623c7ec4c",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothRelativeProduct.lean": "134ceadc83c31790e3a197b3c8dd0daf348640fe592bf529b78285a57278b1fb",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothSeamClamp.lean": "3df3896389be3db5050016d390ad3f24a396612756172bebf154dd6a45c6f219",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothSpliceTail.lean": "22f4e11f84cc711488031ddb4b3918fc6ac363f7d4e4c7e66f856529aa722eea",
+    "PoincareConjecture/Topology/FiberSaturation/SmoothTrivializationSplice.lean": "66b6e4fe17dc48baafe18334093075acf59074888b9135ca790b772c74949f62",
+    "PoincareConjecture/Topology/FiberSaturation/Sphere.lean": "78b986d367a1bab9e7ea2d09ce983af81bc469bc7a9e68996bba7a24c0100bc5",
+    "PoincareConjecture/Topology/FiberSaturation/TorusComponentImage.lean": "68b071498b6f8a920e67a4f538064dfbfee7a6c8e37f416264ad6622756294bc",
+    "PoincareConjecture/Topology/FiberSaturation/TorusComponents.lean": "5e1a10835f877a53143767186b7a645b02b533b02155e791fa9f84e825e8e6f2",
+    "PoincareConjecture/Topology/FiberSaturation/TorusFrontierFibers.lean": "1bbeb7c9c340227401850e3e99dcfea05f318983e433d3ea28427e9c86041227",
+    "PoincareConjecture/Topology/FiberSaturation/TorusHausdorff.lean": "7ff8050f8d507f2de48815cd5b953ba358067a31d80e18017e4d87ffd621b789",
+    "PoincareConjecture/Topology/FiberSaturation/TorusImageClosure.lean": "e15701dfe8e69f7ff704001317ec7d9c39f17cf0e96a8781509d1ae6c4fbb9f2",
+    "PoincareConjecture/Topology/FiberSaturation/TorusLiftedRegion.lean": "e69d038c31ab6760a3397697ae852bc55b47314c8e227756ac40261adf08e0e7",
+    "PoincareConjecture/Topology/FiberSaturation/TorusPeriod.lean": "b7426f5cf737426886e26ebf4b62fc88b7e2bdb9be424f9e157569e9a505d885",
+    "PoincareConjecture/Topology/FiberSaturation/TorusRegionClassification.lean": "06b361d15083d2b9a5e0cf626f01cb096411b6df5aa95ec1e15745fc5e8d0c93",
+    "PoincareConjecture/Topology/FiberSaturation/TorusShortStrip.lean": "a28ca9e1b5fdb101b4ed5e10465aad3f4e57fe2f544ff254475013e042689eac",
+    "tests/AbstractBoundaryPairingSanity.lean": "f2cf74bad7c80ce584d60498e78265ae58539300bf03488a936cd6c0762f48a2",
+    "tests/AbstractBundleCutSanity.lean": "38c52f56d28fae5055021fe4ba2cff56a3ddaa1c137a9ea4009824c1c7f47343",
+    "tests/BoundaryRegularitySanity.lean": "dcfea5b93f9c5f5ee2abb55cfdba1c6ac3fdc7fc03b5a62074d3db81311008cc",
+    "tests/ClosedCollarAudit.lean": "a5ef2e1b26518b02b8ba86628a6818acab6b15b7942900be9f1c8aa4b8a32f9f",
+    "tests/ClosedCollarSanity.lean": "554d21a5bfc15a038f1bb8f967851e66d4d137db9173a576fb99b3cb0233d88c",
+    "tests/ClosedRealBridgeSanity.lean": "3c5f842f5b27ddb5f883cf5d721bf9fe7dc8cbf2ee0e73d22762cd27729c8215",
+    "tests/ComplementaryFrontierAudit.lean": "df8db3d14e82bb4573ffc524d163679fb631b70c7ea4c231a4cd68bc958d4a18",
+    "tests/ComplementaryFrontierSanity.lean": "6cb3627b9c8ffff5e1e367cc16efad829426ba054e450be1510c930d17add1d6",
+    "tests/CoverPullbackSanity.lean": "5bb4de09021e849c2fc1063f9ee48b654252324ac474dfc501f470848f31298e",
+    "tests/FiberSaturationAudit.lean": "4c3523908150d834ce25075af7a2f70a10e280142a5e5405112fa7d277faea09",
+    "tests/FiberSaturationSanity.lean": "ee93e8ecd66c0a3fc8a7364dd1a2bca32c1c34ab38493e6b6484bbacc63bebff",
+    "tests/FullAbstractBundleAudit.lean": "1a0030a966fd6daf423600d49101e0b41ef3e2b6680a774784d5f7945f24c62d",
+    "tests/FullAbstractPairingAudit.lean": "ca4eb30b92c57e4477d2e670de0bdc2b7ed62a35d5ac8f5103ce5f0fb78c1297",
+    "tests/FullBoundaryRegularityAudit.lean": "1d76a749db8f9e949e24af1d199c318bcec708a31d80c2d3109bdf45c56f17f1",
+    "tests/FullClosedRealAudit.lean": "55b9554ec17a8b9d21a113cddf4fe8797fca464ee5e69d31e3ec1314cde51cc3",
+    "tests/FullCoverPullbackAudit.lean": "429d8d6dec1729e1bf70b0bc274772b8a1e4ff9689a2877ad68151f40c8f6127",
+    "tests/FullFiberCollarAudit.lean": "4f13dbff33d4ddee75eeb61138fa9caa31d9afb0cf23dcd62f2725cd412e6cfe",
+    "tests/FullIntegerExtensionAudit.lean": "72a9e7397be86c8b12a0b93811d692ccf31b3e584b46dc8e15f75506f4f82262",
+    "tests/FullPeriodicEndAudit.lean": "9099de890c7a371af4af9e5147ce8cbb8c4307d81d7792f8825c1f1ebb9bf0f7",
+    "tests/FullPresentationAudit.lean": "98df93556574364f58d86537b9ae31b9f52b70b70c5d413898be8dc0926ff038",
+    "tests/FullProductPairingAudit.lean": "0e175e0801dd1123a64e7fd8f30c1fe45a20ce16104c568ea991e21a9bf80751",
+    "tests/FullRelativeProductAudit.lean": "7da4771c21b6d908ec303dbeaa340912153370bd126aed13d5821f5ddbe56615",
+    "tests/FullSmoothAtlasPullbackAudit.lean": "d96406dcb1799bbde443d9880e4942af2eec2e568de5d3f8ab0a7d4a9f0f6ea3",
+    "tests/FullSmoothCylinderAudit.lean": "cb2de69f9ae3549daf27f3e6abf76acdc6869c8eb15d452afce5ae37d45187d9",
+    "tests/FullSmoothEmbeddingAudit.lean": "86cb326ebdc2269ead355249bb3d3833e392423692e4a96679bc012fe04568df",
+    "tests/FullSmoothSpliceAudit.lean": "8c538ad3d84aec3b55327bee635e2515aeb1d67b7484693243ec3a2e58ef6229",
+    "tests/FullTorusAudit.lean": "834ae821929408f92190aa362e7dde1b5b4c782dd3022682cf3ef19073e6450f",
+    "tests/FullTorusRegionAudit.lean": "f407cd3f2691b3c8586d156893776d5102457f42f98f7e5f5dcbc9974d2971a7",
+    "tests/IntegerExtensionSanity.lean": "72b7c5ddbfdb028929eab333db65c145491cf0600c352894a06291cda17c571d",
+    "tests/PeriodicEndMatchingSanity.lean": "e4f8523baf9d4df19b769bb9b7cc0df5949e5ae40289238a0f0fbaa2e826d7c6",
+    "tests/PresentationSanity.lean": "739c6d24d3c925e812667044ec72215a303425493df1b400a9c4069af740b361",
+    "tests/ProductPairingSanity.lean": "f3bc515e16e55781c4cd347f5db43a0d9b5cbc825caa9fa284f782cd5c6636e9",
+    "tests/RelativeProductSanity.lean": "7ac3302c8e63c809441d8433b7ce249ea5843f17adba8509401334a3ff1d1c53",
+    "tests/SmoothAtlasPullbackSanity.lean": "2c87b9237e670c642f8fa3a27aa57830b29195065265ad3d77699246a1b89c08",
+    "tests/SmoothCylinderSanity.lean": "230ed29d16551ab89b22a2aa6963dda2ed4c1cd2f47aae4172246aaea77b8d3f",
+    "tests/SmoothEmbeddingSanity.lean": "72f4e615030b97a3742ffb42673c0f721a094a730499fb03e5728455e8663b88",
+    "tests/SmoothSpliceSanity.lean": "25a3fdb93a0656075bcfc873e526f7a6a5d8d7ff5188be236734df6f6e1160f1",
+    "tests/TorusRegionSanity.lean": "4f337eb3646fd71e9873243e890abafb5ba3c2344d9cd8b6c73373645e6900d9",
+    "tests/TorusSanity.lean": "d59ac3521b7cf63ca27955820d715b2cc736a5976811a57c072e5e738e0bd289",
+    "PoincareConjecture.lean": "f26a634375cc0851041ad8c2f002d08873f985cbeaae9970176453f2ad20c4bd"
+  },
+  "scope": "Complementary-frontier selection from finite disjoint one-sided collars; no collar-existence, smooth-closure or complete Poincare claim."
+}

@@ -1,0 +1,199 @@
+{
+  "date": "2026-09-19",
+  "generated_utc": "2026-09-19T05:40:09.951023+00:00",
+  "repository": "helenananaa/Poincare-Conjecture",
+  "upstream": "frenzymath/Poincare-Conjecture",
+  "upstream_prs_created_by_setup": 0,
+  "baseline_commit": "5e9b6c9eedc1ce152b2f44e6ab31d31396788434",
+  "baseline_checks": {
+    "status": "PASS",
+    "sanity_suites": 19,
+    "axiom_targets": 364,
+    "fresh_primary_build": true,
+    "pins": {
+      "lean": "4.32.1",
+      "mathlib": "520045ab14e26149ee970e2e617ca04b09bde5d6"
+    }
+  },
+  "preservation": {
+    "worktrees_backed_up": 9,
+    "checksum_verification": "PASS",
+    "full_history_bundle_verified": true,
+    "original_history_rewritten": false,
+    "dirty_worktrees_preserved": true
+  },
+  "controller": {
+    "unit_tests": 21,
+    "unit_test_result": "PASS",
+    "managed_global_limits": {
+      "luna": 4,
+      "grok": 4
+    },
+    "luna_configured_limit_max": 8,
+    "global_scope": "all managed projects and dispatch processes for this OS user",
+    "unmanaged_sessions_counted": false,
+    "idle_dispatcher_after_run": true
+  },
+  "fault_checks": {
+    "status": "PASS",
+    "timeout_state": "TIMEOUT",
+    "frozen_before_capture": true,
+    "no_writes_after_capture": true,
+    "detached_process_group_empty": true,
+    "slot_reusable_only_after_stop": true,
+    "real_model_calls": 0,
+    "attempt_seconds": 5.152
+  },
+  "recovery_checks": {
+    "freeze_snapshot_no_late_writes": true,
+    "detached_descendant_stopped": true,
+    "dead_owner_recovery_stops_execution_before_retry": true,
+    "candidate_snapshot_sha256": "cb13b3ff04729444f5c088bac849f79b59eaf118959a1b0550812cb111e13904",
+    "active_real_models_used": false
+  },
+  "tasks": [
+    {
+      "project": "poincare-acceptance-20260919",
+      "task": "consumer",
+      "model": "luna",
+      "status": "INTEGRATED",
+      "integrated_commit": "1e762fe116a76f2b4faf637edff2c391eb4674e3",
+      "base_commit": "bb83eba939ad9dc86d59b2dee35b18b03108ec37",
+      "target_name": "SwarmAcceptance.combined_regression",
+      "target_path": "tests/Swarm/Consumer.lean",
+      "model_elapsed_seconds": 54.127,
+      "sha256": "d77db55d8e243bd8323fb21ae7d833fb77b9767e470b92cc7ed2fb4e079a09ab",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "dependencies": [
+        "transport",
+        "period"
+      ],
+      "reverified_without_model": false,
+      "containment_stopped": true,
+      "service_state": "inactive"
+    },
+    {
+      "project": "poincare-acceptance-20260919",
+      "task": "period",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "integrated_commit": "a2bde743477093ee79551e01b3aa84940883c42f",
+      "base_commit": "0e49d2c33219c7a397bf8804d07206575ea2a4c9",
+      "target_name": "SwarmAcceptance.periodic_remainder_identity",
+      "target_path": "tests/Swarm/Period.lean",
+      "model_elapsed_seconds": 69.355,
+      "sha256": "29d54e694c7ccf2bc756942f7e05393a0c99d0188bc669f5df29d8c4bfa37018",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "dependencies": [],
+      "reverified_without_model": false,
+      "containment_stopped": true,
+      "service_state": "inactive"
+    },
+    {
+      "project": "poincare-acceptance-20260919",
+      "task": "transport",
+      "model": "luna",
+      "status": "INTEGRATED",
+      "integrated_commit": "bb83eba939ad9dc86d59b2dee35b18b03108ec37",
+      "base_commit": "0e49d2c33219c7a397bf8804d07206575ea2a4c9",
+      "target_name": "SwarmAcceptance.transport_closure",
+      "target_path": "tests/Swarm/Transport.lean",
+      "model_elapsed_seconds": 78.312,
+      "sha256": "e056a3d85c4355d62581e448f798be4fa5162a9da7b27e4b06fd68ae9418f1b6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "dependencies": [],
+      "reverified_without_model": false,
+      "containment_stopped": true,
+      "service_state": "inactive"
+    },
+    {
+      "project": "poincare-collar-closure-20260919",
+      "task": "collar-closure",
+      "model": "luna",
+      "status": "INTEGRATED",
+      "integrated_commit": "2bf0f2fe9b79ac6fdffe2d0e525d40f4c79b35c5",
+      "base_commit": "73eba3770e096183697003daf0f825d5ff0542b6",
+      "target_name": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_mem_closure_component_iff_nonneg",
+      "target_path": "PoincareConjecture/Topology/FiberSaturation/CollarClosureHalfSpace.lean",
+      "model_elapsed_seconds": 92.069,
+      "sha256": "3df2cdf1c9a38390e6e860c430b3930818ee0e45965dcb143770c1e00a1e5793",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "dependencies": [
+        "collar-positive",
+        "collar-negative"
+      ],
+      "reverified_without_model": false,
+      "containment_stopped": true,
+      "service_state": "inactive"
+    },
+    {
+      "project": "poincare-collar-closure-20260919",
+      "task": "collar-negative",
+      "model": "grok",
+      "status": "INTEGRATED",
+      "integrated_commit": "35be5d52cef63f950be42765f81a5899e73be114",
+      "base_commit": "8a01378ccce8b06977285bd4d9c438fb0a65e198",
+      "target_name": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_negative_not_mem_closure",
+      "target_path": "PoincareConjecture/Topology/FiberSaturation/CollarNegativeSide.lean",
+      "model_elapsed_seconds": 169.053,
+      "sha256": "8fadbf51c20dca5c72e28a30547975a2f6b39aedd7e2e991c8ee48a5a042011f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "dependencies": [],
+      "reverified_without_model": true,
+      "containment_stopped": true,
+      "service_state": "inactive"
+    },
+    {
+      "project": "poincare-collar-closure-20260919",
+      "task": "collar-positive",
+      "model": "luna",
+      "status": "INTEGRATED",
+      "integrated_commit": "73eba3770e096183697003daf0f825d5ff0542b6",
+      "base_commit": "8a01378ccce8b06977285bd4d9c438fb0a65e198",
+      "target_name": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_mem_component_iff_pos",
+      "target_path": "PoincareConjecture/Topology/FiberSaturation/CollarPositiveSide.lean",
+      "model_elapsed_seconds": 68.906,
+      "sha256": "9fdda257f5301a4dcea84f6b0677ad6efde4cb253f688777b7008c19bf023c88",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "dependencies": [],
+      "reverified_without_model": true,
+      "containment_stopped": true,
+      "service_state": "inactive"
+    }
+  ],
+  "observed_repair": {
+    "kind": "Lean partial namespace cache shadowing",
+    "affected_initial_verifications": [
+      "collar-positive",
+      "collar-negative"
+    ],
+    "solution": "file-linked complete namespace view with private output files; rechecked unchanged frozen proofs",
+    "original_failure_record_retained": true,
+    "additional_model_calls_for_reverification": 0
+  },
+  "scope": "Partial local collar topology plus fixed-goal multi-agent workflow; not a complete Poincare formalization or independent expert review."
+}

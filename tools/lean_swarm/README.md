@@ -54,4 +54,12 @@ python3 tools/lean_swarm/cli.py resume-model grok
 python3 -m unittest discover -s tools/lean_swarm -p 'test_*.py' -v
 ```
 
-单元测试不需要模型账户、网络、Lean 或 sudo；实际模型验收和 cgroup 故障测试另外记录在 `docs/parallel/SETUP_REPORT.md`。原始会话日志留在本机，不上传。
+单元测试不需要模型账户、网络、Lean 或 sudo；实际模型验收和 cgroup 故障测试另外记录在 `reports/parallel/SETUP_REPORT.md`。原始会话日志留在本机，不上传。
+
+## 固定交卷的基础设施重验
+
+若任务因为验证环境错误成为 FAILED，可在修复验证器后运行 `cli.py reverify PROJECT TASK`。此操作校验原冻结交卷哈希、重编译并记录重验事件，不调用模型，不覆盖原失败证据。TIMEOUT 任务不能通过这个入口晋升成功。
+
+完整命名空间缓存视图采用文件级链接，输出目录私有；写新的 `.olean` 前断开相应文件链接，不修改被固定的依赖缓存。这避免新模块局部目录遮住原有同名命名空间。
+
+本仓库已验证的固定目标可用 `verify_cards.py --config CONFIG --cards CARDS...` 在不调用模型的情况下重新检查。`fault_checks.py` 和 `containment_checks.py` 是真实 systemd/cgroup 故障测试，接受 `--config CONFIG --output NEW_DIRECTORY`，只启动合成进程，不消耗模型额度。

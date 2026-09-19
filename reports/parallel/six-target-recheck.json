@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "tasks": [
+    {
+      "id": "transport",
+      "target": "SwarmAcceptance.transport_closure",
+      "path": "tests/Swarm/Transport.lean",
+      "status": "PASS",
+      "sha256": "e056a3d85c4355d62581e448f798be4fa5162a9da7b27e4b06fd68ae9418f1b6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "period",
+      "target": "SwarmAcceptance.periodic_remainder_identity",
+      "path": "tests/Swarm/Period.lean",
+      "status": "PASS",
+      "sha256": "29d54e694c7ccf2bc756942f7e05393a0c99d0188bc669f5df29d8c4bfa37018",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "consumer",
+      "target": "SwarmAcceptance.combined_regression",
+      "path": "tests/Swarm/Consumer.lean",
+      "status": "PASS",
+      "sha256": "d77db55d8e243bd8323fb21ae7d833fb77b9767e470b92cc7ed2fb4e079a09ab",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "collar-positive",
+      "target": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_mem_component_iff_pos",
+      "path": "PoincareConjecture/Topology/FiberSaturation/CollarPositiveSide.lean",
+      "status": "PASS",
+      "sha256": "9fdda257f5301a4dcea84f6b0677ad6efde4cb253f688777b7008c19bf023c88",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "collar-negative",
+      "target": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_negative_not_mem_closure",
+      "path": "PoincareConjecture/Topology/FiberSaturation/CollarNegativeSide.lean",
+      "status": "PASS",
+      "sha256": "8fadbf51c20dca5c72e28a30547975a2f6b39aedd7e2e991c8ee48a5a042011f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "collar-closure",
+      "target": "PoincareConjecture.Topology.FiberSaturation.oneSidedCollar_mem_closure_component_iff_nonneg",
+      "path": "PoincareConjecture/Topology/FiberSaturation/CollarClosureHalfSpace.lean",
+      "status": "PASS",
+      "sha256": "3df2cdf1c9a38390e6e860c430b3930818ee0e45965dcb143770c1e00a1e5793",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "model_calls": 0
+}

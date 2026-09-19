@@ -26,3 +26,7 @@ Before reorganization, all nine worktrees, including tracked edits, untracked so
 ## Attribution
 
 The local contributions are maintained by GitHub user `helenananaa`. They were developed with AI assistance; task design, orchestration and review used ChatGPT, and the parallel worker tests use Codex `gpt-5.6-luna` and Grok `grok-4.6`. Lean checking does not replace expert review of definitions, statement fidelity or mathematical novelty. Do not attribute inherited upstream work to this fork's maintainer.
+
+## Parallel workflow acceptance
+
+The setup and reproducible test evidence are recorded in [the delivery report](reports/parallel/SETUP_REPORT.md). In addition to the original baseline, three new local collar-closure lemmas and three engineering acceptance targets have been checked and integrated. The controller passes 21 unit tests and explicit process-containment/recovery fault checks.
