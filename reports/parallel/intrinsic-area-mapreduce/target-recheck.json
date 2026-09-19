@@ -1,0 +1,705 @@
+{
+  "status": "PASS",
+  "targets": [
+    {
+      "id": "extended-infimum",
+      "line": "intrinsic-distance",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.ennreal_infimum_twoSided",
+      "path": "PoincareConjecture/ParallelMath/Transport/ExtendedInfimum.lean",
+      "sha256": "961c1848fade6b51bbb12c8e0f71149a2170e746e922356d2065aab0453cdefa",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "f6253154-e874-49ee-954a-2d66f04d6d00",
+      "elapsed_seconds": 62.939,
+      "commit": "1d1cd1d9183ab83b409ea68a22c3e433828bf464",
+      "timing": {
+        "finished_unix": 1789814251.6059964,
+        "prepare_finished_unix": 1789814177.0911133,
+        "prepare_started_unix": 1789814176.2199962,
+        "service_started_unix": 1789814178.0283,
+        "service_stopped_unix": 1789814246.59206,
+        "verification_finished_unix": 1789814251.605996,
+        "verification_started_unix": 1789814246.59504
+      },
+      "warnings": []
+    },
+    {
+      "id": "extended-balls",
+      "line": "intrinsic-distance",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.extended_distance_ball_sandwich",
+      "path": "PoincareConjecture/ParallelMath/Transport/ExtendedBalls.lean",
+      "sha256": "fb7d375ceb4d093abcac5dbd8025c52a9110ea7d951efb0a5bb22fcaf0f21d17",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "6205abca-21f6-4745-82a3-858fbb4b19ce",
+      "elapsed_seconds": 87.664,
+      "commit": "c5aff006db5b831b46025540d15c72df3adbcb22",
+      "timing": {
+        "finished_unix": 1789814282.6599884,
+        "prepare_finished_unix": 1789814181.0487223,
+        "prepare_started_unix": 1789814180.7484834,
+        "service_started_unix": 1789814181.07095,
+        "service_stopped_unix": 1789814277.3374412,
+        "verification_finished_unix": 1789814282.6599874,
+        "verification_started_unix": 1789814277.3393898
+      },
+      "warnings": []
+    },
+    {
+      "id": "epsilon-path-integrals",
+      "line": "intrinsic-distance",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_path_integral_twoSided",
+      "path": "ReferenceBridges/Transport/EpsilonPathIntegrals.lean",
+      "sha256": "5217c06aca9d77d7a77900ce3b08133749bbdc2738c21746ad9077932be11416",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "ec2016d6-ddf4-44d3-bfb8-96024845f844",
+      "elapsed_seconds": 187.703,
+      "commit": "f373592ef705ffbe3f055795b5f9ff0d6de3c0a6",
+      "timing": {
+        "finished_unix": 1789814392.5691943,
+        "prepare_finished_unix": 1789814178.2094653,
+        "prepare_started_unix": 1789814176.7982259,
+        "service_started_unix": 1789814181.0639386,
+        "service_stopped_unix": 1789814385.9509547,
+        "verification_finished_unix": 1789814392.5691931,
+        "verification_started_unix": 1789814385.9604669
+      },
+      "warnings": [
+        "/home/helenanana/projects/poincare-parallel/PoincareConjecture/ReferenceBridges/Transport/EpsilonPathIntegrals.lean:19:0: warning: automatically included section variable(s) unused in theorem `PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_path_integral_twoSided`:"
+      ]
+    },
+    {
+      "id": "epsilon-intrinsic-distance",
+      "line": "intrinsic-distance",
+      "role": "reduce",
+      "depends_on": [
+        "extended-infimum",
+        "epsilon-path-integrals"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_intrinsic_edist_twoSided",
+      "path": "ReferenceBridges/Transport/EpsilonIntrinsicDistance.lean",
+      "sha256": "894f0d2dc25de22df499627babd07a86c2bdb46e913b7b0914e4e3ab01ebbe2c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "72c79e58-db77-4960-9770-51e154750ed0",
+      "elapsed_seconds": 273.003,
+      "commit": "f052a7f146ed49acd6c353732389bb42be31961e",
+      "timing": {
+        "finished_unix": 1789814929.4607644,
+        "prepare_finished_unix": 1789814603.99023,
+        "prepare_started_unix": 1789814587.8472016,
+        "service_started_unix": 1789814604.044111,
+        "service_stopped_unix": 1789814900.4881024,
+        "verification_finished_unix": 1789814929.4607632,
+        "verification_started_unix": 1789814900.4983876
+      },
+      "warnings": []
+    },
+    {
+      "id": "epsilon-admissible-paths",
+      "line": "intrinsic-distance",
+      "role": "reduce",
+      "depends_on": [
+        "extended-infimum",
+        "epsilon-path-integrals"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_admissible_path_infimum",
+      "path": "ReferenceBridges/Transport/EpsilonAdmissiblePaths.lean",
+      "sha256": "4cad32def68b1c351aa9e4f38135ec7164d2414855ca16ac6d2819bc92b94de1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "b51321ef-d788-48f1-a729-9fbe14c94d13",
+      "elapsed_seconds": 109.798,
+      "commit": "6d18dca6836bac8ca3e40acb515c8bc8ec834e4c",
+      "timing": {
+        "finished_unix": 1789814742.6011925,
+        "prepare_finished_unix": 1789814603.753112,
+        "prepare_started_unix": 1789814587.8524091,
+        "service_started_unix": 1789814603.8253095,
+        "service_stopped_unix": 1789814722.3998394,
+        "verification_finished_unix": 1789814742.6011913,
+        "verification_started_unix": 1789814722.4029176
+      },
+      "warnings": []
+    },
+    {
+      "id": "epsilon-ball-reduce",
+      "line": "intrinsic-distance",
+      "role": "reduce",
+      "depends_on": [
+        "epsilon-intrinsic-distance",
+        "extended-balls"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_intrinsic_ball_sandwich",
+      "path": "ReferenceBridges/Transport/EpsilonBalls.lean",
+      "sha256": "77622bb5c0a98dce02af1c5d366d096dd0a2cf9a68b132f48229d0e3373375c8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "171501cd-4020-4b08-a1c5-34ba3df7a5ba",
+      "elapsed_seconds": 65.246,
+      "commit": "854ec47edfa091f67dbaf7046644652201574f9e",
+      "timing": {
+        "finished_unix": 1789815104.6511273,
+        "prepare_finished_unix": 1789814997.934384,
+        "prepare_started_unix": 1789814968.0329723,
+        "service_started_unix": 1789814997.985286,
+        "service_stopped_unix": 1789815069.3721945,
+        "verification_finished_unix": 1789815104.6511266,
+        "verification_started_unix": 1789815069.3734105
+      },
+      "warnings": []
+    },
+    {
+      "id": "psd-mixed",
+      "line": "degenerate-area",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.psd2_mixed_determinant_nonneg",
+      "path": "PoincareConjecture/ParallelMath/Transport/PSDMixed.lean",
+      "sha256": "b026845b9ccea68d779ae28997976ba8395b88d303ef64d0eba24a8f96dc193c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "aa021a61-3052-4535-9a7b-ec5cbb956636",
+      "elapsed_seconds": 147.641,
+      "commit": "a1905ad7b04179acaea62c6c54256d7888e6b0de",
+      "timing": {
+        "finished_unix": 1789814345.9572742,
+        "prepare_finished_unix": 1789814176.5905862,
+        "prepare_started_unix": 1789814175.8057358,
+        "service_started_unix": 1789814177.2838042,
+        "service_stopped_unix": 1789814336.7840343,
+        "verification_finished_unix": 1789814345.9572732,
+        "verification_started_unix": 1789814336.7888806
+      },
+      "warnings": []
+    },
+    {
+      "id": "psd-det-monotone",
+      "line": "degenerate-area",
+      "role": "reduce",
+      "depends_on": [
+        "psd-mixed"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.psd2_determinant_monotone",
+      "path": "PoincareConjecture/ParallelMath/Transport/PSDDetMonotone.lean",
+      "sha256": "2b7e464fbe7f48de92b977265e514e481fb09986283132630b2657ca21d00ce2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "e0687c3e-5710-46b4-bc90-551739cc1269",
+      "elapsed_seconds": 111.525,
+      "commit": "94b4798a85690322f6f9afb027c03f6ccd2fb8e5",
+      "timing": {
+        "finished_unix": 1789814505.216422,
+        "prepare_finished_unix": 1789814370.2944093,
+        "prepare_started_unix": 1789814363.539827,
+        "service_started_unix": 1789814370.3464282,
+        "service_stopped_unix": 1789814493.2787385,
+        "verification_finished_unix": 1789814505.2164211,
+        "verification_started_unix": 1789814493.2804563
+      },
+      "warnings": []
+    },
+    {
+      "id": "relative-gram-area",
+      "line": "degenerate-area",
+      "role": "reduce",
+      "depends_on": [
+        "psd-det-monotone"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.relative_gram_area_distortion",
+      "path": "PoincareConjecture/ParallelMath/Transport/RelativeGramArea.lean",
+      "sha256": "d42d1025ca38b0ea0a082bcfc82275f6ae2ff25e98b798d40c6dc38d430d30cd",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "f938f6d1-701a-4e6b-9bc9-cb40003bfa6b",
+      "elapsed_seconds": 168.938,
+      "commit": "a81b7e7e228cec5754e758e36745affe79fac40f",
+      "timing": {
+        "finished_unix": 1789814829.3701155,
+        "prepare_finished_unix": 1789814622.1547585,
+        "prepare_started_unix": 1789814609.5669084,
+        "service_started_unix": 1789814622.2207584,
+        "service_stopped_unix": 1789814808.469981,
+        "verification_finished_unix": 1789814829.3701148,
+        "verification_started_unix": 1789814808.4732797
+      },
+      "warnings": []
+    },
+    {
+      "id": "dominated-integrability",
+      "line": "degenerate-area",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.integrable_twoSided_from_reference",
+      "path": "PoincareConjecture/ParallelMath/Transport/DominatedIntegrability.lean",
+      "sha256": "8aa3a3c38c2155c7e1835ed64bd1eaee82cc3e27fe8999bbfbbd13ffd4dbc488",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "13718a70-c531-4731-8a7c-f8416fc07a25",
+      "elapsed_seconds": 137.337,
+      "commit": "e6a0850de25f3ffd751572ac997e92d1ff836a1a",
+      "timing": {
+        "finished_unix": 1789814338.1479619,
+        "prepare_finished_unix": 1789814183.3904536,
+        "prepare_started_unix": 1789814180.7099586,
+        "service_started_unix": 1789814183.446085,
+        "service_stopped_unix": 1789814332.6436434,
+        "verification_finished_unix": 1789814338.1479611,
+        "verification_started_unix": 1789814332.6466482
+      },
+      "warnings": []
+    },
+    {
+      "id": "epsilon-arbitrary-pair",
+      "line": "degenerate-area",
+      "role": "reduce",
+      "depends_on": [
+        "relative-gram-area"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_arbitrary_pair_area",
+      "path": "ReferenceBridges/Transport/EpsilonArbitraryPair.lean",
+      "sha256": "6fb42bab7d0493b1a83c68e42a8cdb1930e28a2836eb9ae45892dc64f9bf594b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "bfd6ff5a-812a-407c-b827-1cfae3bf084e",
+      "elapsed_seconds": 155.147,
+      "commit": "dc56eda74301ba7c7d00456d1a35f6d683c75650",
+      "timing": {
+        "finished_unix": 1789815099.7861416,
+        "prepare_finished_unix": 1789814900.5353444,
+        "prepare_started_unix": 1789814873.1438103,
+        "service_started_unix": 1789814900.587497,
+        "service_stopped_unix": 1789815070.3923144,
+        "verification_finished_unix": 1789815099.7861407,
+        "verification_started_unix": 1789815070.395366
+      },
+      "warnings": []
+    },
+    {
+      "id": "epsilon-integrated-area",
+      "line": "degenerate-area",
+      "role": "reduce",
+      "depends_on": [
+        "epsilon-arbitrary-pair",
+        "dominated-integrability"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_integrated_pair_area",
+      "path": "ReferenceBridges/Transport/EpsilonIntegratedArea.lean",
+      "sha256": "89fd32ff6ad38e87135bfab3bfcef2028133fddfc94aac1bf4bea79428097fae",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "a50b1c54-c8ba-4372-aee9-1fef64ca5a98",
+      "elapsed_seconds": 94.095,
+      "commit": "aa5ba264c7212ba6c25adc09c12a8115082dccde",
+      "timing": {
+        "finished_unix": 1789815309.7041192,
+        "prepare_finished_unix": 1789815167.5999963,
+        "prepare_started_unix": 1789815132.1127214,
+        "service_started_unix": 1789815167.6571517,
+        "service_stopped_unix": 1789815268.2277427,
+        "verification_finished_unix": 1789815309.704118,
+        "verification_started_unix": 1789815268.2307074
+      },
+      "warnings": []
+    },
+    {
+      "id": "cost-open-derivative",
+      "line": "local-time-width",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.cost_growth_from_interior_derivatives",
+      "path": "PoincareConjecture/ParallelMath/Transport/CostOpenDerivative.lean",
+      "sha256": "b3a89d5aff538140f4aaae5cf4c6fd85e006d90d2278d7a26d0d5718107f7017",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "5976e750-a9c9-4da3-a32a-6611716c70e3",
+      "elapsed_seconds": 206.164,
+      "commit": "a1421c69a11158fe98714918e32b14342ef00be8",
+      "timing": {
+        "finished_unix": 1789814410.4956183,
+        "prepare_finished_unix": 1789814180.5433505,
+        "prepare_started_unix": 1789814178.7580593,
+        "service_started_unix": 1789814181.0367086,
+        "service_stopped_unix": 1789814404.3868587,
+        "verification_finished_unix": 1789814410.4956176,
+        "verification_started_unix": 1789814404.392973
+      },
+      "warnings": []
+    },
+    {
+      "id": "width-local-continuity",
+      "line": "local-time-width",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.leastCost_continuousOn_of_exp_distortion",
+      "path": "PoincareConjecture/ParallelMath/Transport/WidthLocalContinuity.lean",
+      "sha256": "54227a44df62561ce48f04fef76d2c22476c3f63da005632e76bd751a4a139f4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "5655549d-e5c7-4606-8df7-1e31ad1fb5cb",
+      "elapsed_seconds": 176.637,
+      "commit": "a7984abb27327f127805a4818cc1816fb6a42cf3",
+      "timing": {
+        "finished_unix": 1789814381.4057045,
+        "prepare_finished_unix": 1789814181.636936,
+        "prepare_started_unix": 1789814180.797629,
+        "service_started_unix": 1789814181.6901078,
+        "service_stopped_unix": 1789814372.6899095,
+        "verification_finished_unix": 1789814381.4057038,
+        "verification_started_unix": 1789814372.6942346
+      },
+      "warnings": []
+    },
+    {
+      "id": "peak-local-control",
+      "line": "local-time-width",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.peakCost_exp_control_on",
+      "path": "PoincareConjecture/ParallelMath/Transport/PeakLocalControl.lean",
+      "sha256": "fa727ad0e375ebde93e1081b1ac3f5c40ab49e5698bd3ba963206be612146dbd",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "9431d9ea-ceb8-40f9-a5ca-f3cd07f2245b",
+      "elapsed_seconds": 103.715,
+      "commit": "c5e3bf28696a24e6b2bce5f820d005175c12cdd5",
+      "timing": {
+        "finished_unix": 1789814298.919108,
+        "prepare_finished_unix": 1789814181.3343112,
+        "prepare_started_unix": 1789814180.7553008,
+        "service_started_unix": 1789814181.4171379,
+        "service_stopped_unix": 1789814293.7393453,
+        "verification_finished_unix": 1789814298.919107,
+        "verification_started_unix": 1789814293.7432828
+      },
+      "warnings": []
+    },
+    {
+      "id": "dini-inf-minimizer",
+      "line": "local-time-width",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.Reference.leastCost_forwardDiff_of_minimizer",
+      "path": "ReferenceBridges/Transport/DiniInfMinimizer.lean",
+      "sha256": "b31a478d49a02bf55c65b6446d7bba02d1037b15fb1b58c435091a2f2dbe4836",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "9657af66-94db-4b45-9182-0556074160a8",
+      "elapsed_seconds": 206.74,
+      "commit": "c197e3de5824e3b29ede14e8358d54e1e48f6178",
+      "timing": {
+        "finished_unix": 1789814411.3571403,
+        "prepare_finished_unix": 1789814181.9537752,
+        "prepare_started_unix": 1789814180.8092089,
+        "service_started_unix": 1789814182.0120625,
+        "service_stopped_unix": 1789814405.938616,
+        "verification_finished_unix": 1789814411.3571393,
+        "verification_started_unix": 1789814405.9435072
+      },
+      "warnings": []
+    },
+    {
+      "id": "dini-inf-approximate",
+      "line": "local-time-width",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.Reference.leastCost_forwardDiff_of_approximate_competitors",
+      "path": "ReferenceBridges/Transport/DiniInfApproximate.lean",
+      "sha256": "7388988b54465ada022c330b61d45e8932149a62777ed17e5ae46bf402e1df5e",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "86cc445a-6f79-4d48-a2b3-3bae367a1d20",
+      "elapsed_seconds": 192.518,
+      "commit": "7bd3d72a8127cb9b4d4f0cd1524e2de4a8429ded",
+      "timing": {
+        "finished_unix": 1789814397.997362,
+        "prepare_finished_unix": 1789814182.3013988,
+        "prepare_started_unix": 1789814180.8035443,
+        "service_started_unix": 1789814182.386564,
+        "service_stopped_unix": 1789814392.0885289,
+        "verification_finished_unix": 1789814397.9973612,
+        "verification_started_unix": 1789814392.093072
+      },
+      "warnings": []
+    },
+    {
+      "id": "minmax-local-reduce",
+      "line": "local-time-width",
+      "role": "reduce",
+      "depends_on": [
+        "cost-open-derivative",
+        "width-local-continuity",
+        "peak-local-control"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.leastPeak_continuousOn_from_derivative_bounds",
+      "path": "PoincareConjecture/ParallelMath/Transport/MinmaxLocal.lean",
+      "sha256": "05f80630e1329cdee9c778950aff68ade0779da24970fa7ffb7176a743c05076",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "7bb75293-7da7-4d2b-9235-74cae226fef4",
+      "elapsed_seconds": 229.954,
+      "commit": "6d06b5919562e519c48415db4de862b7b6d87d1d",
+      "timing": {
+        "finished_unix": 1789814930.8642282,
+        "prepare_finished_unix": 1789814644.336818,
+        "prepare_started_unix": 1789814621.5220263,
+        "service_started_unix": 1789814644.3980052,
+        "service_stopped_unix": 1789814894.814375,
+        "verification_finished_unix": 1789814930.8642273,
+        "verification_started_unix": 1789814894.819336
+      },
+      "warnings": []
+    },
+    {
+      "id": "torus-covering",
+      "line": "torus-covering",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.mappingTorus_projection_isCoveringMap",
+      "path": "PoincareConjecture/ParallelMath/Transport/TorusCovering.lean",
+      "sha256": "2a4ec942112124237591e64fdd993349a48bd2342133f229626183146a031e2b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "0a8f7b71-f3c9-439d-8549-0be825240d21",
+      "elapsed_seconds": 391.592,
+      "commit": "e7dfa4fc849e7fae3d681647c2983b12e4ff7bb1",
+      "timing": {
+        "finished_unix": 1789814614.5172954,
+        "prepare_finished_unix": 1789814182.6174889,
+        "prepare_started_unix": 1789814180.7683184,
+        "service_started_unix": 1789814182.6831436,
+        "service_stopped_unix": 1789814608.4851139,
+        "verification_finished_unix": 1789814614.5172944,
+        "verification_started_unix": 1789814608.4974282
+      },
+      "warnings": []
+    },
+    {
+      "id": "torus-fiber-integers",
+      "line": "torus-covering",
+      "role": "map",
+      "depends_on": [],
+      "target": "PoincareConjecture.ParallelMath.Transport.mappingTorus_fiber_equiv_integers",
+      "path": "PoincareConjecture/ParallelMath/Transport/TorusFiberIntegers.lean",
+      "sha256": "04b2e131727a42ab6f757b9ee65d9758e4cdfc9af220cad401248a42937be1eb",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "83d4520b-d717-4363-a2b0-35ed9ec56023",
+      "elapsed_seconds": 141.784,
+      "commit": "a45b537bcc557a0fbcd24efcd5a30b265340c684",
+      "timing": {
+        "finished_unix": 1789814345.090324,
+        "prepare_finished_unix": 1789814182.989385,
+        "prepare_started_unix": 1789814180.7878065,
+        "service_started_unix": 1789814183.0578873,
+        "service_stopped_unix": 1789814336.699843,
+        "verification_finished_unix": 1789814345.090323,
+        "verification_started_unix": 1789814336.7029746
+      },
+      "warnings": []
+    },
+    {
+      "id": "torus-universal-reduce",
+      "line": "torus-covering",
+      "role": "reduce",
+      "depends_on": [
+        "torus-covering",
+        "torus-fiber-integers"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.mappingTorus_universal_cover_data",
+      "path": "PoincareConjecture/ParallelMath/Transport/TorusUniversal.lean",
+      "sha256": "c7ebbfaa3aa43dbdddcb6e14e4eb53725f6c4e015578a697f74a422f018f9268",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "60b48034-8247-42c7-85c0-58d8b002906a",
+      "elapsed_seconds": 114.947,
+      "commit": "3995c3c6d5e6fedaf4782fb1685355a37f454c3b",
+      "timing": {
+        "finished_unix": 1789814794.782455,
+        "prepare_finished_unix": 1789814649.3323023,
+        "prepare_started_unix": 1789814637.2463984,
+        "service_started_unix": 1789814649.3977518,
+        "service_stopped_unix": 1789814775.8206387,
+        "verification_finished_unix": 1789814794.7824543,
+        "verification_started_unix": 1789814775.8281755
+      },
+      "warnings": []
+    },
+    {
+      "id": "epsilon-least-area-reduce",
+      "line": "degenerate-area",
+      "role": "reduce",
+      "depends_on": [
+        "epsilon-integrated-area"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.Reference.epsilonClose_least_parametrized_area",
+      "path": "ReferenceBridges/Transport/EpsilonLeastArea.lean",
+      "sha256": "e4e0ce0ec8a52f3296f05ff4948ed20ab997948bc0684505242885901b712d5a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "fcc7aaf1-4da3-4822-9766-04f45641c894",
+      "elapsed_seconds": 183.339,
+      "commit": "bbf8d2764e6d7442b843660f8cba1d419a6950b4",
+      "timing": {
+        "finished_unix": 1789815637.488041,
+        "prepare_finished_unix": 1789815391.173266,
+        "prepare_started_unix": 1789815350.7236166,
+        "service_started_unix": 1789815391.2224865,
+        "service_stopped_unix": 1789815589.0781367,
+        "verification_finished_unix": 1789815637.48804,
+        "verification_started_unix": 1789815589.0818973
+      },
+      "warnings": []
+    },
+    {
+      "id": "variational-extinction-reduce",
+      "line": "local-time-width",
+      "role": "reduce",
+      "depends_on": [
+        "width-local-continuity",
+        "dini-inf-approximate"
+      ],
+      "target": "PoincareConjecture.ParallelMath.Transport.Reference.finite_horizon_from_approximate_width_competitors",
+      "path": "ReferenceBridges/Transport/VariationalExtinction.lean",
+      "sha256": "ae1d088168e64acd949daa7ebf86763466d709fb4e9702986c3672acf0ddbee4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "status": "PASS",
+      "model": "grok",
+      "attempt": "5367046d-e50e-4d88-98e4-74836123a86d",
+      "elapsed_seconds": 151.169,
+      "commit": "c0c87dd2471d350350d1f6c02888868726885e14",
+      "timing": {
+        "finished_unix": 1789814824.1843343,
+        "prepare_finished_unix": 1789814638.3000503,
+        "prepare_started_unix": 1789814621.527258,
+        "service_started_unix": 1789814638.350523,
+        "service_stopped_unix": 1789814800.9936547,
+        "verification_finished_unix": 1789814824.1843338,
+        "verification_started_unix": 1789814800.9972894
+      },
+      "warnings": []
+    }
+  ],
+  "model_calls_in_recheck": 0
+}
