@@ -1,0 +1,245 @@
+[
+  {
+    "id": "epsilon-c0",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport MorganTianLib.Ch02.EpsilonClose\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter Riemannian\nopen scoped BigOperators Topology Manifold ContDiff\nopen MorganTianLib\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** The original C^[1/epsilon] closeness bounds its zeroth derivative term. -/\ntheorem epsilonClose_zero_norm_bound {epsilon : ℝ} (g0 g : Riemannian.RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose epsilon g0 g) :\n    ∀ p : M, 0 ≤ MorganTianLib.metricCovariantDerivativeNormSq g0 g 0 p ∧\n      MorganTianLib.metricCovariantDerivativeNormSq g0 g 0 p < epsilon^2 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_zero_norm_bound",
+    "target_path": "ReferenceBridges/Quantitative/EpsilonC0.lean",
+    "hint": "Unfold the actual MorganTianLib.EpsilonClose and epsilonClosenessDensity definitions. Every higher derivative norm is a finite sum of squares. Do not replace the definition or discard its strict uniform witness. The original source is ../formalized-sources/MorganTian/MorganTianLib/Ch02/EpsilonClose.lean.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_lane": "actual-epsilon-metric",
+    "math_role": "map"
+  },
+  {
+    "id": "epsilon-matrix",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport MorganTianLib.Ch02.EpsilonClose\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter Riemannian\nopen scoped BigOperators Topology Manifold ContDiff\nopen MorganTianLib\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** The actual zeroth tensor norm is exactly the frame-matrix Frobenius error. -/\ntheorem zero_metric_norm_eq_matrix_error (g0 g : Riemannian.RiemannianMetric I M) (p : M) :\n    MorganTianLib.metricCovariantDerivativeNormSq g0 g 0 p =\n      ∑ i : Fin (Module.finrank ℝ E), ∑ j : Fin (Module.finrank ℝ E),\n        (g.metricInner p (orthoFrameField g0 p i p) (orthoFrameField g0 p j p) - if i=j then 1 else 0)^2 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.zero_metric_norm_eq_matrix_error",
+    "target_path": "ReferenceBridges/Quantitative/EpsilonMatrix.lean",
+    "hint": "Unfold the n=0 tensor expression; use orthoFrameField_orthonormal at mem_orthoFrameSet_self and reindex Fin 2 -> Fin d as an ordered pair. This equality must refer to the original norm, not an assumed Frobenius bound. Namespace MorganTianLib for frame lemmas; all source fields remain frozen.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_lane": "actual-epsilon-metric",
+    "math_role": "map"
+  },
+  {
+    "id": "frame-parseval",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport MorganTianLib.Ch02.EpsilonClose\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter Riemannian\nopen scoped BigOperators Topology Manifold ContDiff\nopen MorganTianLib\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Parseval identity in the actual metric-orthonormal frame. -/\ntheorem metric_frame_parseval (g0 : Riemannian.RiemannianMetric I M) (p : M)\n    (v : TangentSpace I p) :\n    (∑ i : Fin (Module.finrank ℝ E), (g0.metricInner p v (orthoFrameField g0 p i p))^2) =\n      g0.metricInner p v v :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.metric_frame_parseval",
+    "target_path": "ReferenceBridges/Quantitative/FrameParseval.lean",
+    "hint": "Use MorganTianLib.orthoFrameBasis or orthoFrameField_expansion with mem_orthoFrameSet_self. Install the local RiemannianBundle from g0 if using inner-product Parseval; do not identify g0 with the unrelated background Euclidean inner product. All metric and tangent-space definitions are actual source definitions.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_lane": "actual-epsilon-metric",
+    "math_role": "map"
+  },
+  {
+    "id": "frame-expansion",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport MorganTianLib.Ch02.EpsilonClose\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter Riemannian\nopen scoped BigOperators Topology Manifold ContDiff\nopen MorganTianLib\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Express an arbitrary second metric bilinear form using the first metric frame. -/\ntheorem metric_bilinear_frame_expansion (g0 g : Riemannian.RiemannianMetric I M) (p : M)\n    (v w : TangentSpace I p) :\n    g.metricInner p v w =\n      ∑ i : Fin (Module.finrank ℝ E), ∑ j : Fin (Module.finrank ℝ E),\n        g.metricInner p (orthoFrameField g0 p i p) (orthoFrameField g0 p j p) *\n          g0.metricInner p v (orthoFrameField g0 p i p) * g0.metricInner p w (orthoFrameField g0 p j p) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.metric_bilinear_frame_expansion",
+    "target_path": "ReferenceBridges/Quantitative/FrameExpansion.lean",
+    "hint": "Expand v and w with MorganTianLib.orthoFrameField_expansion at the center. Use actual metricInner bilinearity and finite sum linearity, with local have lemmas if needed. Do not replace the tangent space or assume either metric is the identity.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_lane": "actual-epsilon-metric",
+    "math_role": "map"
+  },
+  {
+    "id": "epsilon-reflexive",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport MorganTianLib.Ch02.EpsilonClose\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter Riemannian\nopen scoped BigOperators Topology Manifold ContDiff\nopen MorganTianLib\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** The original metric closeness predicate is nonvacuous on any actual metric. -/\ntheorem epsilonClose_self (g0 : Riemannian.RiemannianMetric I M) (epsilon : ℝ)\n    (he0 : 0 < epsilon) (he1 : epsilon < 1/2) :\n    MorganTianLib.EpsilonClose epsilon g0 g0 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_self",
+    "target_path": "ReferenceBridges/Quantitative/EpsilonReflexive.lean",
+    "hint": "First prove all iteratedCovariantMetricDifference g0 g0 n vanish by induction, including the directional derivative of the zero function and correction terms. Then all norm-square contractions and the closeness density vanish. Choose the strict uniform witness 0. This is a concrete nonvacuity theorem, not an input assumption.",
+    "timeout_seconds": 900,
+    "priority": 20,
+    "math_lane": "actual-epsilon-metric",
+    "math_role": "nonvacuity"
+  },
+  {
+    "id": "bilinear-frobenius",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff\n\n/-- **Math.** Cauchy-Schwarz bounds the full mixed contraction, not just the diagonal quadratic form. -/\ntheorem bilinear_frobenius_sq_bound {ι κ : Type*} [Fintype ι] [Fintype κ]\n    (A : ι → κ → ℝ) (v : ι → ℝ) (w : κ → ℝ) :\n    (∑ i, ∑ j, A i j * v i * w j)^2 ≤\n      (∑ i, ∑ j, (A i j)^2) * (∑ i, (v i)^2) * (∑ j, (w j)^2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.bilinear_frobenius_sq_bound",
+    "target_path": "PoincareConjecture/ParallelMath/Quantitative/BilinearFrobenius.lean",
+    "hint": "Use finite Cauchy-Schwarz on index pairs and factor the product sum of squared rank-one coefficients. Handle empty index types. The previous quadraticForm_sq_le is diagonal-only; do not assume A symmetric or square.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_lane": "actual-epsilon-metric",
+    "math_role": "map"
+  },
+  {
+    "id": "sqrt-metric",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff\n\n/-- **Math.** Two-sided quadratic comparison gives the correct square-root speed bounds. -/\ntheorem sqrt_comparison_of_quadratic_bounds (a b epsilon : ℝ)\n    (ha : 0 ≤ a) (hb : 0 ≤ b) (he0 : 0 ≤ epsilon) (he1 : epsilon < 1)\n    (hlo : (1-epsilon)*a ≤ b) (hhi : b ≤ (1+epsilon)*a) :\n    Real.sqrt (1-epsilon)*Real.sqrt a ≤ Real.sqrt b ∧\n    Real.sqrt b ≤ Real.sqrt (1+epsilon)*Real.sqrt a :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.sqrt_comparison_of_quadratic_bounds",
+    "target_path": "PoincareConjecture/ParallelMath/Quantitative/SqrtMetric.lean",
+    "hint": "Apply sqrt monotonicity and its product identity on nonnegative factors. Preserve square roots; replacing by 1±epsilon would be false in general. Do not change any hypotheses just to silence lint.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_lane": "actual-epsilon-metric",
+    "math_role": "map"
+  },
+  {
+    "id": "short-path",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport Shared.MetricGeometry.LengthSpace\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff\n\n/-- **Math.** A genuine intrinsic metric supplies finite paths arbitrarily close to its distance. -/\ntheorem exists_short_path_of_lengthSpace {X : Type*} [PseudoMetricSpace X]\n    [Shared.LengthSpace X] (x y : X) (epsilon : ℝ) (he : 0 < epsilon) :\n    ∃ γ : Path x y, Shared.pathLength γ ≠ ⊤ ∧\n      (Shared.pathLength γ).toReal < dist x y + epsilon :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.exists_short_path_of_lengthSpace",
+    "target_path": "ReferenceBridges/Quantitative/ShortPath.lean",
+    "hint": "Use exactly Shared.LengthSpace.edist_eq_iInf_pathLength and the finite bound ENNReal.ofReal(dist+epsilon); an infimum need not be attained. Extract a path strictly below that bound and convert toReal only after finiteness. Preserve pseudo-metric and original topology.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_lane": "length-space-gluing",
+    "math_role": "map"
+  },
+  {
+    "id": "path-subdivision",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff\n\n/-- **Math.** An open cover gives a finite path subdivision with each whole subpath in one piece. -/\ntheorem path_subdivision_of_open_cover {ι X : Type*} [TopologicalSpace X]\n    (U : ι → Set X) (hU : ∀ i, IsOpen (U i)) (hcover : ∀ x, ∃ i, x ∈ U i)\n    {x y : X} (γ : Path x y) :\n    ∃ n : ℕ, ∃ t : Fin (n+1) → unitInterval, ∃ piece : Fin n → ι,\n      t 0 = 0 ∧ t (Fin.last n) = 1 ∧ Monotone t ∧\n      ∀ i, MapsTo γ (Icc (t i.castSucc) (t i.succ)) (U (piece i)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.path_subdivision_of_open_cover",
+    "target_path": "PoincareConjecture/ParallelMath/Quantitative/PathSubdivision.lean",
+    "hint": "Pull back the open cover along gamma and use exists_monotone_Icc_subset_open_cover_unitInterval from Mathlib/Topology/UnitInterval.lean. Restrict the eventually-1 natural-number sequence to Fin(n+1), and choose a piece for each closed subinterval. Full subpath containment, not only endpoints, is required.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_lane": "length-space-gluing",
+    "math_role": "map"
+  },
+  {
+    "id": "variation-partition",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff\n\n/-- **Math.** Finite monotone partition sums are bounded by the actual finite total variation. -/\ntheorem dist_partition_sum_le_variation {X : Type*} [PseudoMetricSpace X]\n    (f : unitInterval → X) (hfinite : eVariationOn f univ ≠ ⊤)\n    (n : ℕ) (t : Fin (n+1) → unitInterval) (ht : Monotone t) :\n    (∑ i : Fin n, dist (f (t i.castSucc)) (f (t i.succ))) ≤\n      (eVariationOn f univ).toReal :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.dist_partition_sum_le_variation",
+    "target_path": "PoincareConjecture/ParallelMath/Quantitative/VariationPartition.lean",
+    "hint": "Use eVariationOn.sum_le on a natural-number extension t(min k n), then convert the finite ENNReal sum to real. Or use sum_le_of_monotoneOn_Iic. Treat n=0. Source eVariationOn.sum_le uses reversed endpoints, harmless by distance symmetry.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_lane": "length-space-gluing",
+    "math_role": "map"
+  },
+  {
+    "id": "coefficient-domination",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport MorganTianLib.Ch02.ForwardDifference\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff\n\n/-- **Math.** A lower bound on the curvature coefficient weakens the actual forward difference inequality. -/\ntheorem forwardDiff_of_coefficient_lower_bound (u q : ℝ → ℝ) (alpha c k t : ℝ)\n    (hu : 0 ≤ u t) (hq : -(alpha/(t+c)) ≤ q t)\n    (hd : MorganTianLib.ForwardDiffQuotientLE u t (-k-q t*u t)) :\n    MorganTianLib.ForwardDiffQuotientLE u t (-k+alpha/(t+c)*u t) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.forwardDiff_of_coefficient_lower_bound",
+    "target_path": "ReferenceBridges/Quantitative/CoefficientDomination.lean",
+    "hint": "Use the original ForwardDiffQuotientLE.mono with an algebraic inequality from hu and hq. q is not assumed differentiable or equal to the barrier coefficient; this is the point of the lemma. It will feed the finite-jump extinction reducer.",
+    "timeout_seconds": 900,
+    "priority": 10,
+    "math_lane": "curvature-coefficient-extinction",
+    "math_role": "map"
+  },
+  {
+    "id": "epsilon-metric-reduce",
+    "model": "grok",
+    "depends_on": [
+      "epsilon-c0",
+      "epsilon-matrix",
+      "frame-parseval",
+      "frame-expansion"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport ReferenceBridges.Quantitative.EpsilonC0\nimport ReferenceBridges.Quantitative.EpsilonMatrix\nimport ReferenceBridges.Quantitative.FrameParseval\nimport ReferenceBridges.Quantitative.FrameExpansion\nimport PoincareConjecture.ParallelMath.Tensor.MetricComparison\nimport MorganTianLib.Ch02.EpsilonClose\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter Riemannian\nopen scoped BigOperators Topology Manifold ContDiff\nopen MorganTianLib\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** The original epsilon-closeness condition yields actual pointwise quadratic metric comparison. -/\ntheorem epsilonClose_metric_comparison {epsilon : ℝ} (g0 g : Riemannian.RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose epsilon g0 g) :\n    ∀ p : M, ∀ v : TangentSpace I p,\n      (1-epsilon)*g0.metricInner p v v ≤ g.metricInner p v v ∧\n      g.metricInner p v v ≤ (1+epsilon)*g0.metricInner p v v :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_metric_comparison",
+    "target_path": "ReferenceBridges/Quantitative/EpsilonMetricComparison.lean",
+    "hint": "Use the integrated original C0 extraction and exact matrix norm identity, then metric_comparison_of_frobenius_error on the frame matrix and the g0 coefficients of v. Replace the finite coefficient sum by integrated Parseval and the quadratic contraction by integrated frame expansion. This discharges the previous missing connection to actual EpsilonClose, not just another matrix lemma.",
+    "timeout_seconds": 900,
+    "priority": 20,
+    "math_lane": "actual-epsilon-metric",
+    "math_role": "reduce"
+  },
+  {
+    "id": "epsilon-mixed-reduce",
+    "model": "grok",
+    "depends_on": [
+      "epsilon-c0",
+      "epsilon-matrix",
+      "frame-parseval",
+      "frame-expansion",
+      "bilinear-frobenius"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport ReferenceBridges.Quantitative.EpsilonC0\nimport ReferenceBridges.Quantitative.EpsilonMatrix\nimport ReferenceBridges.Quantitative.FrameParseval\nimport ReferenceBridges.Quantitative.FrameExpansion\nimport PoincareConjecture.ParallelMath.Quantitative.BilinearFrobenius\nimport MorganTianLib.Ch02.EpsilonClose\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter Riemannian\nopen scoped BigOperators Topology Manifold ContDiff\nopen MorganTianLib\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Original epsilon-closeness controls mixed metric errors on actual tangent vectors. -/\ntheorem epsilonClose_mixed_error_sq {epsilon : ℝ} (g0 g : Riemannian.RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose epsilon g0 g) :\n    ∀ p : M, ∀ v w : TangentSpace I p,\n      (g.metricInner p v w - g0.metricInner p v w)^2 ≤\n        epsilon^2 * g0.metricInner p v v * g0.metricInner p w w :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_mixed_error_sq",
+    "target_path": "ReferenceBridges/Quantitative/EpsilonMixedComparison.lean",
+    "hint": "Expand both bilinear forms in the g0 frame. g0 frame coefficients are the identity, so their difference has exactly the integrated C0 Frobenius error. Apply bilinear_frobenius_sq_bound and use integrated Parseval for both vectors. Nonnegativity is needed to multiply inequalities. No arbitrary coordinate norm may replace g0.",
+    "timeout_seconds": 900,
+    "priority": 20,
+    "math_lane": "actual-epsilon-metric",
+    "math_role": "reduce"
+  },
+  {
+    "id": "epsilon-speed-reduce",
+    "model": "grok",
+    "depends_on": [
+      "epsilon-metric-reduce",
+      "sqrt-metric"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport ReferenceBridges.Quantitative.EpsilonMetricComparison\nimport PoincareConjecture.ParallelMath.Quantitative.SqrtMetric\nimport MorganTianLib.Ch02.EpsilonClose\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter Riemannian\nopen scoped BigOperators Topology Manifold ContDiff\nopen MorganTianLib\nvariable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]\n  [CompleteSpace E] [FiniteDimensional ℝ E] [NeZero (Module.finrank ℝ E)]\n  {H : Type*} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}\n  {M : Type*} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]\n  [SigmaCompactSpace M] [T2Space M]\n\n/-- **Math.** Actual epsilon-close metrics compare tangent speeds with square-root constants. -/\ntheorem epsilonClose_speed_comparison {epsilon : ℝ} (g0 g : Riemannian.RiemannianMetric I M)\n    (h : MorganTianLib.EpsilonClose epsilon g0 g) :\n    ∀ p : M, ∀ v : TangentSpace I p,\n      Real.sqrt (1-epsilon)*Real.sqrt (g0.metricInner p v v) ≤ Real.sqrt (g.metricInner p v v) ∧\n      Real.sqrt (g.metricInner p v v) ≤ Real.sqrt (1+epsilon)*Real.sqrt (g0.metricInner p v v) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_speed_comparison",
+    "target_path": "ReferenceBridges/Quantitative/EpsilonSpeedComparison.lean",
+    "hint": "Combine the integrated true metric comparison with sqrt_comparison_of_quadratic_bounds. Use the actual metricInner_self_nonneg and epsilon bounds from EpsilonClose. This is a tangent-speed theorem, not yet an integrated distance or volume theorem.",
+    "timeout_seconds": 900,
+    "priority": 20,
+    "math_lane": "actual-epsilon-metric",
+    "math_role": "reduce"
+  },
+  {
+    "id": "piece-chains-reduce",
+    "model": "grok",
+    "depends_on": [
+      "short-path",
+      "path-subdivision",
+      "variation-partition"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport ReferenceBridges.Quantitative.ShortPath\nimport PoincareConjecture.ParallelMath.Quantitative.PathSubdivision\nimport PoincareConjecture.ParallelMath.Quantitative.VariationPartition\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff\n\n/-- **Math.** In the original length metric, open-cover piece chains approximate distance. -/\ntheorem lengthSpace_open_cover_piece_chains {ι X : Type*} [PseudoMetricSpace X]\n    [Shared.LengthSpace X] (U : ι → Set X) (hU : ∀ i, IsOpen (U i))\n    (hcover : ∀ x, ∃ i, x ∈ U i) (x y : X) (epsilon : ℝ) (he : 0 < epsilon) :\n    ∃ n : ℕ, ∃ z : Fin (n+1) → X, ∃ piece : Fin n → ι,\n      z 0 = x ∧ z (Fin.last n) = y ∧\n      (∀ i, z i.castSucc ∈ U (piece i) ∧ z i.succ ∈ U (piece i)) ∧\n      (∑ i : Fin n, dist (z i.castSucc) (z i.succ)) ≤ dist x y + epsilon :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.lengthSpace_open_cover_piece_chains",
+    "target_path": "ReferenceBridges/Quantitative/OpenCoverChains.lean",
+    "hint": "Choose the integrated short path, apply the integrated full-subpath subdivision, set z i=gamma(t i), and bound the partition distance sum using the integrated variation inequality. Do not assume a piece-chain approximation condition; that is what this theorem produces.",
+    "timeout_seconds": 900,
+    "priority": 20,
+    "math_lane": "length-space-gluing",
+    "math_role": "reduce"
+  },
+  {
+    "id": "lipschitz-open-cover-reduce",
+    "model": "grok",
+    "depends_on": [
+      "piece-chains-reduce"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport ReferenceBridges.Quantitative.OpenCoverChains\nimport PoincareConjecture.ParallelMath.SurgeryMetric.LengthGluing\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff\n\n/-- **Math.** Uniformly Lipschitz compatible maps on an open cover glue globally on a true length space. -/\ntheorem lipschitz_gluing_on_lengthSpace_open_cover {ι X Y : Type*}\n    [PseudoMetricSpace X] [PseudoMetricSpace Y] [Shared.LengthSpace X]\n    (U : ι → Set X) (hU : ∀ i, IsOpen (U i)) (hcover : ∀ x, ∃ i, x ∈ U i)\n    (f : ι → X → Y) (L : NNReal)\n    (hcompat : ∀ i j x, x ∈ U i → x ∈ U j → f i x = f j x)\n    (hlocal : ∀ i, LipschitzOnWith L (f i) (U i)) :\n    ∃ F : X → Y, (∀ i x, x ∈ U i → F x = f i x) ∧ LipschitzWith L F :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.lipschitz_gluing_on_lengthSpace_open_cover",
+    "target_path": "ReferenceBridges/Quantitative/OpenCoverLipschitz.lean",
+    "hint": "Apply the previously integrated lipschitz_gluing_of_approximate_piece_chains with cost i x y=dist x y. Its missing geometric chain hypothesis is supplied by the new integrated lengthSpace_open_cover_piece_chains, not added to this statement. Derive local dist bounds from LipschitzOnWith. Closed surgical pieces are not claimed to be an open cover.",
+    "timeout_seconds": 900,
+    "priority": 20,
+    "math_lane": "length-space-gluing",
+    "math_role": "reduce"
+  },
+  {
+    "id": "curvature-extinction-reduce",
+    "model": "grok",
+    "depends_on": [
+      "coefficient-domination"
+    ],
+    "source": "import Mathlib\nimport PoincareConjecture.ParallelMath.Core\nimport ReferenceBridges.Quantitative.CoefficientDomination\nimport ReferenceBridges.ParallelMath.FiniteExtinctionObstruction\nset_option autoImplicit false\nset_option backward.isDefEq.respectTransparency false\nset_option synthInstance.maxHeartbeats 400000\nnoncomputable section\nnamespace PoincareConjecture.ParallelMath.Quantitative.Reference\nopen Set Function Filter\nopen scoped BigOperators Topology Manifold ContDiff\n\n/-- **Math.** A lower coefficient bound suffices for the finite-jump scalar extinction obstruction. -/\ntheorem finite_horizon_under_coefficient_bound (alpha c a k : ℝ)\n    (hc : 0 < c) (hk : 0 < k) (ha0 : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ T : ℝ, 0 < T ∧\n      ∀ (n : ℕ) (time : ℕ → ℝ) (u : ℕ → ℝ → ℝ) (q : ℝ → ℝ),\n        0 < n → StrictMono time → time 0 = 0 → T ≤ time n →\n        (∀ i < n, ContinuousOn (u i) (Icc (time i) (time (i+1)))) →\n        (∀ i < n, ∀ t ∈ Ico (time i) (time (i+1)),\n          MorganTianLib.ForwardDiffQuotientLE (u i) t (-k-q t*u i t)) →\n        (∀ t ∈ Icc 0 (time n), -(alpha/(t+c)) ≤ q t) →\n        (∀ i < n, ∀ t ∈ Icc (time i) (time (i+1)), 0 ≤ u i t) →\n        u 0 0 ≤ a →\n        (∀ i, i+1 < n → u (i+1) (time (i+1)) ≤ u i (time (i+1))) → False :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ParallelMath.Quantitative.Reference\n",
+    "target_name": "PoincareConjecture.ParallelMath.Quantitative.Reference.finite_horizon_under_coefficient_bound",
+    "target_path": "ReferenceBridges/Quantitative/CurvatureExtinction.lean",
+    "hint": "Use the prior finite_horizon_for_nonnegative_width and replace each Dini inequality by the integrated coefficient domination lemma. Check time interval inclusion using strict monotonicity and time0=0. No regularity of q beyond the explicit lower bound is assumed. This is still a scalar obstruction, not proof of geometric width evolution or surgery finiteness.",
+    "timeout_seconds": 900,
+    "priority": 20,
+    "math_lane": "curvature-coefficient-extinction",
+    "math_role": "reduce"
+  }
+]
