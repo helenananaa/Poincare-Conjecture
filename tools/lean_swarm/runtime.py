@@ -65,6 +65,35 @@ def validate_task(task: dict) -> None:
         raise ValueError('timeout_seconds must be an integer in [5,3600]')
 
 
+def lean_code_without_comments(text: str) -> str:
+    """Mask Lean line/nested block comments; keep all code and string literals.
+
+    This is only the conservative policy scan. Frozen-statement reconstruction,
+    independent Lean compilation and transitive-axiom checking remain mandatory.
+    """
+    out=[];i=0;depth=0;quoted=False;escaped=False
+    while i<len(text):
+        ch=text[i];two=text[i:i+2]
+        if depth:
+            if two=='/-':depth+=1;out.extend('  ');i+=2;continue
+            if two=='-/':depth-=1;out.extend('  ');i+=2;continue
+            out.append('\n' if ch=='\n' else ' ');i+=1;continue
+        if quoted:
+            out.append(ch)
+            if escaped:escaped=False
+            elif ch=='\\':escaped=True
+            elif ch=='"':quoted=False
+            i+=1;continue
+        if ch=='"':quoted=True;out.append(ch);i+=1;continue
+        if two=='/-':depth=1;out.extend('  ');i+=2;continue
+        if two=='--':
+            while i<len(text) and text[i]!='\n':out.append(' ');i+=1
+            continue
+        out.append(ch);i+=1
+    if depth:raise ValueError('unterminated Lean block comment')
+    return ''.join(out)
+
+
 def reconstruct(template: str, candidate: str) -> str:
     """Only the proof body is accepted; all other bytes come from the template."""
     if candidate.count(BEGIN) != 1 or candidate.count(END) != 1:
@@ -77,7 +106,7 @@ def reconstruct(template: str, candidate: str) -> str:
             raise ValueError('frozen statement, definition, imports, or suffix changed')
     banned = (r'\b(sorry|admit|axiom|native_decide|unsafe|run_tac|run_elab|elab|'
               r'eval_expr|set_option|namespace|macro|syntax|attribute)\b|(^|\n)\s*#')
-    if re.search(banned, proof):
+    if re.search(banned, lean_code_without_comments(proof)):
         raise ValueError('placeholder or unsupported environment-changing construct')
     return expected_prefix + BEGIN + proof + END + expected_suffix
 
