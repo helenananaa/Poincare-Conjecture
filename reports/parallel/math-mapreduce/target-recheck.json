@@ -1,0 +1,245 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "tasks": [
+    {
+      "id": "ode-explicit-derivative-repair",
+      "target": "PoincareConjecture.ParallelMath.comparisonSolution_hasDerivAt",
+      "path": "PoincareConjecture/ParallelMath/Extinction/ExplicitDerivative.lean",
+      "status": "PASS",
+      "sha256": "628c1d69d5a96679100f298f934aff17eea61e749dcc6cf0d919e71bcacc4e40",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "ode-initial-sensitivity",
+      "target": "PoincareConjecture.ParallelMath.comparisonSolution_initial_and_sensitivity",
+      "path": "PoincareConjecture/ParallelMath/Extinction/InitialSensitivity.lean",
+      "status": "PASS",
+      "sha256": "e0e095296039d6793e91d65484b22110c077f9ab90d36a55172f801a2d96d4b3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "ode-integrating-identity",
+      "target": "PoincareConjecture.ParallelMath.integratingFactor_identity",
+      "path": "PoincareConjecture/ParallelMath/Extinction/IntegratingIdentity.lean",
+      "status": "PASS",
+      "sha256": "b35feb25ea2807b7322b27ff0e64175b007039d5fa65b1002431fc31af059e5c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "ode-interface-v2",
+      "target": "PoincareConjecture.ParallelMath.scalarComparison_solution_interface",
+      "path": "PoincareConjecture/ParallelMath/Extinction/ComparisonInterface.lean",
+      "status": "PASS",
+      "sha256": "af730633d6c7c90b04acc95217d617846589321bec0cb5f0397016441b2d3e01",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "power-barrier-derivative",
+      "target": "PoincareConjecture.ParallelMath.powerBarrier_hasDerivAt",
+      "path": "PoincareConjecture/ParallelMath/Extinction/PowerDerivative.lean",
+      "status": "PASS",
+      "sha256": "fb129abc5103451b4b7d1f0a37d6bf1d8d1330bcc43116705d03fcf1c10ac5f2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "power-barrier-negative-repair",
+      "target": "PoincareConjecture.ParallelMath.powerBarrier_eventually_negative",
+      "path": "PoincareConjecture/ParallelMath/Extinction/PowerNegative.lean",
+      "status": "PASS",
+      "sha256": "a9f4917588e9e60a7cebdae472417d493ba3918975cb745b6de8a120e4456187",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "tensor-contraction",
+      "target": "PoincareConjecture.ParallelMath.quadraticForm_sq_le",
+      "path": "PoincareConjecture/ParallelMath/Tensor/QuadraticBound.lean",
+      "status": "PASS",
+      "sha256": "5fbb24597d4f7eba17ecf4606dee5e79f918958cfc3072063092414fd19143dc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "metric-quadratic-comparison",
+      "target": "PoincareConjecture.ParallelMath.metric_comparison_of_frobenius_error",
+      "path": "PoincareConjecture/ParallelMath/Tensor/MetricComparison.lean",
+      "status": "PASS",
+      "sha256": "7c25d3eef908c458a656a7d90b21a1b1d43764b22b1050bf10a0826d2bc143ed",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "metric-positive-definite",
+      "target": "PoincareConjecture.ParallelMath.positive_quadraticForm_of_small_frobenius_error",
+      "path": "PoincareConjecture/ParallelMath/Tensor/PositiveDefinite.lean",
+      "status": "PASS",
+      "sha256": "a14276b043eebdcf34bf6988fdfea8796113f898fce39c65833b2ca63445cff4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "metric-chain-triangle",
+      "target": "PoincareConjecture.ParallelMath.finite_chain_dist_le",
+      "path": "PoincareConjecture/ParallelMath/SurgeryMetric/ChainTriangle.lean",
+      "status": "PASS",
+      "sha256": "bee479d5427bdfb643db1b2654191782ea05b49495fd1c28bfb7736fc88776c6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "metric-glued-map",
+      "target": "PoincareConjecture.ParallelMath.exists_map_of_compatible_cover",
+      "path": "PoincareConjecture/ParallelMath/SurgeryMetric/GluedMap.lean",
+      "status": "PASS",
+      "sha256": "cdf956167f0a4ef01de99513ed0fed72bb567238ea2e36e660df47ee9a4b420a",
+      "axioms": [
+        "Classical.choice"
+      ]
+    },
+    {
+      "id": "metric-epsilon-removal",
+      "target": "PoincareConjecture.ParallelMath.le_mul_of_forall_length_error",
+      "path": "PoincareConjecture/ParallelMath/SurgeryMetric/EpsilonRemoval.lean",
+      "status": "PASS",
+      "sha256": "fbd7d658c5256f1e9fd5a9c62bbd2080ac23950adda28719d8573d7947958fb8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "metric-length-gluing-v2",
+      "target": "PoincareConjecture.ParallelMath.lipschitz_gluing_of_approximate_piece_chains",
+      "path": "PoincareConjecture/ParallelMath/SurgeryMetric/LengthGluing.lean",
+      "status": "PASS",
+      "sha256": "995734f0ade06d18518c8121c69148191524b4a052026c7ae02ef68ec1d2fe65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "dini-finite-jumps",
+      "target": "PoincareConjecture.ParallelMath.Reference.finite_forward_comparison",
+      "path": "ReferenceBridges/ParallelMath/FiniteDini.lean",
+      "status": "PASS",
+      "sha256": "0349184325a1c7f7de13bb603203d43fb057382fbdf1af9ce094197b72fcda29",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-family-reindex",
+      "target": "PoincareConjecture.ParallelMath.Reference.epsilonCloseFamily_reindex",
+      "path": "ReferenceBridges/ParallelMath/EpsilonFamilyReindex.lean",
+      "status": "PASS",
+      "sha256": "aeaa0c968572db79ade61ee3393aba4f4b62ea08eafd1f64ac3b1ec96a0933c6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "evolving-depth-restriction",
+      "target": "PoincareConjecture.ParallelMath.Reference.evolvingNeck_restrict_depth",
+      "path": "ReferenceBridges/ParallelMath/EvolvingDepth.lean",
+      "status": "PASS",
+      "sha256": "39d2eb53850872c751bcc621d886c375d2e297bc74e6586a711f89ba0cba7ea4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "strong-neck-reduce",
+      "target": "PoincareConjecture.ParallelMath.Reference.strongNeck_of_depth_ge_one",
+      "path": "ReferenceBridges/ParallelMath/StrongNeck.lean",
+      "status": "PASS",
+      "sha256": "ed2422a9174a2ee45ae71106e66fefc7c0935d89c00cff5c9bff4fb6ee8f61bd",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "sphere-circle-group",
+      "target": "PoincareConjecture.ParallelMath.Reference.sphere2_circle_fundamentalGroup",
+      "path": "ReferenceBridges/ParallelMath/SphereCircleGroup.lean",
+      "status": "PASS",
+      "sha256": "c762b012d06549dd8e07000916e02267cfe01430443f2b961eb80a272e86490a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "sphere-circle-obstruction",
+      "target": "PoincareConjecture.ParallelMath.Reference.no_homeomorph_to_sphere2_circle",
+      "path": "ReferenceBridges/ParallelMath/SphereCircleObstruction.lean",
+      "status": "PASS",
+      "sha256": "10cefc8774a786c57296fe7badb1f4a0a85f6bd0173cc574aad7cddc5933b0b7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "scalar-extinction-reduce",
+      "target": "PoincareConjecture.ParallelMath.Reference.finite_horizon_for_nonnegative_width",
+      "path": "ReferenceBridges/ParallelMath/FiniteExtinctionObstruction.lean",
+      "status": "PASS",
+      "sha256": "e2caf6ff8f66bb28557d03037e34e58cf38a21c726abdd5387daaf1aa1851863",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "model_calls": 0
+}

@@ -1,0 +1,561 @@
+{
+  "generated_utc": "2026-09-19T09:23:46.962851+00:00",
+  "logical_targets": 20,
+  "initial_independent_targets": 12,
+  "mathematical_mainlines": 5,
+  "source_scouts_counted_as_proofs": 0,
+  "actual_model_calls": 22,
+  "actual_peak_service_concurrency": 10,
+  "models_used": [
+    "grok"
+  ],
+  "other_conversations_excluded": true,
+  "model_failure_or_timeout_attempts": [
+    {
+      "id": "a9337c3b-fe0d-4f03-9692-c231f8a3cdb5",
+      "task": "ode-explicit-derivative",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "status": "TIMEOUT",
+      "timing": {
+        "finished_unix": 1789808991.9382613,
+        "prepare_finished_unix": 1789808217.0243714,
+        "prepare_started_unix": 1789808212.9175112,
+        "service_started_unix": 1789808217.1211941,
+        "service_stopped_unix": 1789808991.9175947
+      },
+      "model_was_started": true,
+      "client_seconds": 720.247,
+      "pre_execution_note": null,
+      "failure_stage": null
+    },
+    {
+      "id": "ca08d055-46b9-45a2-a2f3-d40186e1ffeb",
+      "task": "power-barrier-negative",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "status": "FAILED",
+      "timing": {
+        "finished_unix": 1789808621.5587082,
+        "prepare_finished_unix": 1789808215.409016,
+        "prepare_started_unix": 1789808213.0306602,
+        "service_started_unix": 1789808215.505558,
+        "service_stopped_unix": 1789808616.823804,
+        "verification_started_unix": 1789808616.82974
+      },
+      "model_was_started": true,
+      "client_seconds": 371.672,
+      "pre_execution_note": null,
+      "failure_stage": null
+    }
+  ],
+  "pre_execution_revisions": [
+    {
+      "id": "dd514710-2279-4649-9f2d-842facae7cc2",
+      "task": "metric-length-gluing",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "status": "FAILED",
+      "timing": {},
+      "model_was_started": false,
+      "client_seconds": null,
+      "pre_execution_note": "NNReal scoped notation was missing; unqualified Real>=0 parsed as a type inequality. New version uses explicit NNReal with the same intended mathematical statement.",
+      "failure_stage": "pre_execution_statement_typecheck"
+    },
+    {
+      "id": "0a9b44cd-2f01-416e-82f9-e9e94169421c",
+      "task": "ode-interface",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "status": "FAILED",
+      "timing": {},
+      "model_was_started": false,
+      "client_seconds": null,
+      "pre_execution_note": "Dependency attempt timed out; unchanged mathematical consumer is re-registered against an explicit repair task.",
+      "failure_stage": "superseded_before_execution"
+    }
+  ],
+  "targets": [
+    {
+      "id": "ode-explicit-derivative-repair",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "extinction-ode",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.comparisonSolution_hasDerivAt",
+      "path": "PoincareConjecture/ParallelMath/Extinction/ExplicitDerivative.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "6b1ae7bb775faddc667fd9f1b2a0d065cb56bc93",
+      "base_commit": "0899ce3b9114a17968246f5a80ce3ad8a8025f6b",
+      "dependencies": [],
+      "source_sha256": "628c1d69d5a96679100f298f934aff17eea61e749dcc6cf0d919e71bcacc4e40",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 147.698
+    },
+    {
+      "id": "ode-initial-sensitivity",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "extinction-ode",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.comparisonSolution_initial_and_sensitivity",
+      "path": "PoincareConjecture/ParallelMath/Extinction/InitialSensitivity.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "bf367ebf39c58579f7876d35fc20ee520f162949",
+      "base_commit": "8f4c906831a9e385efb737a3fa116ad7a3e97fa7",
+      "dependencies": [],
+      "source_sha256": "e0e095296039d6793e91d65484b22110c077f9ab90d36a55172f801a2d96d4b3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 115.814
+    },
+    {
+      "id": "ode-integrating-identity",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "extinction-ode",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.integratingFactor_identity",
+      "path": "PoincareConjecture/ParallelMath/Extinction/IntegratingIdentity.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "c7048aba2714f6d4bf1dba271928dd4bdbcaf045",
+      "base_commit": "8f4c906831a9e385efb737a3fa116ad7a3e97fa7",
+      "dependencies": [],
+      "source_sha256": "b35feb25ea2807b7322b27ff0e64175b007039d5fa65b1002431fc31af059e5c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 359.385
+    },
+    {
+      "id": "ode-interface-v2",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "extinction-ode",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.scalarComparison_solution_interface",
+      "path": "PoincareConjecture/ParallelMath/Extinction/ComparisonInterface.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "bdc7d6a2fb65624e46c8e5fefbcb36d19c6c3ef0",
+      "base_commit": "6b1ae7bb775faddc667fd9f1b2a0d065cb56bc93",
+      "dependencies": [
+        {
+          "project": "poincare-mathematical-mapreduce-20260919",
+          "id": "ode-explicit-derivative-repair",
+          "commit": "6b1ae7bb775faddc667fd9f1b2a0d065cb56bc93"
+        },
+        {
+          "project": "poincare-mathematical-mapreduce-20260919",
+          "id": "ode-initial-sensitivity",
+          "commit": "bf367ebf39c58579f7876d35fc20ee520f162949"
+        },
+        {
+          "project": "poincare-mathematical-mapreduce-20260919",
+          "id": "ode-integrating-identity",
+          "commit": "c7048aba2714f6d4bf1dba271928dd4bdbcaf045"
+        }
+      ],
+      "source_sha256": "af730633d6c7c90b04acc95217d617846589321bec0cb5f0397016441b2d3e01",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 159.542
+    },
+    {
+      "id": "power-barrier-derivative",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "extinction-barrier",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.powerBarrier_hasDerivAt",
+      "path": "PoincareConjecture/ParallelMath/Extinction/PowerDerivative.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "d39c45e25dc3c41cd26c11c649371905400004b3",
+      "base_commit": "8f4c906831a9e385efb737a3fa116ad7a3e97fa7",
+      "dependencies": [],
+      "source_sha256": "fb129abc5103451b4b7d1f0a37d6bf1d8d1330bcc43116705d03fcf1c10ac5f2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 640.547
+    },
+    {
+      "id": "power-barrier-negative-repair",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "extinction-barrier",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.powerBarrier_eventually_negative",
+      "path": "PoincareConjecture/ParallelMath/Extinction/PowerNegative.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "2c82806e2c3ba14d3074aa8c7d8d5eda77d2d20b",
+      "base_commit": "f85e491dbe2485b0e03bf821edaf4e50690a7c78",
+      "dependencies": [],
+      "source_sha256": "a9f4917588e9e60a7cebdae472417d493ba3918975cb745b6de8a120e4456187",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 57.824
+    },
+    {
+      "id": "tensor-contraction",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "metric-tensor",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.quadraticForm_sq_le",
+      "path": "PoincareConjecture/ParallelMath/Tensor/QuadraticBound.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "25e1e1d815c5e54dd0b64d567f31cc110695863e",
+      "base_commit": "8f4c906831a9e385efb737a3fa116ad7a3e97fa7",
+      "dependencies": [],
+      "source_sha256": "5fbb24597d4f7eba17ecf4606dee5e79f918958cfc3072063092414fd19143dc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 487.542
+    },
+    {
+      "id": "metric-quadratic-comparison",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "metric-tensor",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.metric_comparison_of_frobenius_error",
+      "path": "PoincareConjecture/ParallelMath/Tensor/MetricComparison.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "0c8224453d2c4f3196df3ca71b3c81dae6a9fe6b",
+      "base_commit": "25e1e1d815c5e54dd0b64d567f31cc110695863e",
+      "dependencies": [
+        {
+          "project": "poincare-mathematical-mapreduce-20260919",
+          "id": "tensor-contraction",
+          "commit": "25e1e1d815c5e54dd0b64d567f31cc110695863e"
+        }
+      ],
+      "source_sha256": "7c25d3eef908c458a656a7d90b21a1b1d43764b22b1050bf10a0826d2bc143ed",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 309.137
+    },
+    {
+      "id": "metric-positive-definite",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "metric-tensor",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.positive_quadraticForm_of_small_frobenius_error",
+      "path": "PoincareConjecture/ParallelMath/Tensor/PositiveDefinite.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "d619bcd8458251eebe754dc1cd541aa6ba188e71",
+      "base_commit": "0c8224453d2c4f3196df3ca71b3c81dae6a9fe6b",
+      "dependencies": [
+        {
+          "project": "poincare-mathematical-mapreduce-20260919",
+          "id": "metric-quadratic-comparison",
+          "commit": "0c8224453d2c4f3196df3ca71b3c81dae6a9fe6b"
+        }
+      ],
+      "source_sha256": "a14276b043eebdcf34bf6988fdfea8796113f898fce39c65833b2ca63445cff4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 147.892
+    },
+    {
+      "id": "metric-chain-triangle",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "surgery-metric",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.finite_chain_dist_le",
+      "path": "PoincareConjecture/ParallelMath/SurgeryMetric/ChainTriangle.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "c91f36283613f41c7c3924fd4741ae8d9e1c6c80",
+      "base_commit": "8f4c906831a9e385efb737a3fa116ad7a3e97fa7",
+      "dependencies": [],
+      "source_sha256": "bee479d5427bdfb643db1b2654191782ea05b49495fd1c28bfb7736fc88776c6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 537.248
+    },
+    {
+      "id": "metric-glued-map",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "surgery-metric",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.exists_map_of_compatible_cover",
+      "path": "PoincareConjecture/ParallelMath/SurgeryMetric/GluedMap.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "de742ef2e931f7f90a1b8dc09be1277d953b8e25",
+      "base_commit": "8f4c906831a9e385efb737a3fa116ad7a3e97fa7",
+      "dependencies": [],
+      "source_sha256": "cdf956167f0a4ef01de99513ed0fed72bb567238ea2e36e660df47ee9a4b420a",
+      "axioms": [
+        "Classical.choice"
+      ],
+      "client_seconds": 75.04
+    },
+    {
+      "id": "metric-epsilon-removal",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "surgery-metric",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.le_mul_of_forall_length_error",
+      "path": "PoincareConjecture/ParallelMath/SurgeryMetric/EpsilonRemoval.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "21a4db87851961cc65694ad9529fad1517a85887",
+      "base_commit": "8f4c906831a9e385efb737a3fa116ad7a3e97fa7",
+      "dependencies": [],
+      "source_sha256": "fbd7d658c5256f1e9fd5a9c62bbd2080ac23950adda28719d8573d7947958fb8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 398.676
+    },
+    {
+      "id": "metric-length-gluing-v2",
+      "project": "poincare-mathematical-mapreduce-20260919",
+      "lane": "surgery-metric",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.lipschitz_gluing_of_approximate_piece_chains",
+      "path": "PoincareConjecture/ParallelMath/SurgeryMetric/LengthGluing.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "b7e51aa1f44043637081c56c077d1d46744390e1",
+      "base_commit": "c91f36283613f41c7c3924fd4741ae8d9e1c6c80",
+      "dependencies": [
+        {
+          "project": "poincare-mathematical-mapreduce-20260919",
+          "id": "metric-chain-triangle",
+          "commit": "c91f36283613f41c7c3924fd4741ae8d9e1c6c80"
+        },
+        {
+          "project": "poincare-mathematical-mapreduce-20260919",
+          "id": "metric-glued-map",
+          "commit": "de742ef2e931f7f90a1b8dc09be1277d953b8e25"
+        },
+        {
+          "project": "poincare-mathematical-mapreduce-20260919",
+          "id": "metric-epsilon-removal",
+          "commit": "21a4db87851961cc65694ad9529fad1517a85887"
+        }
+      ],
+      "source_sha256": "995734f0ade06d18518c8121c69148191524b4a052026c7ae02ef68ec1d2fe65",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 88.251
+    },
+    {
+      "id": "dini-finite-jumps",
+      "project": "poincare-reference-mapreduce-20260919",
+      "lane": "extinction-jumps",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Reference.finite_forward_comparison",
+      "path": "ReferenceBridges/ParallelMath/FiniteDini.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "2db71065bc532fd82780110901e98ba1073e69e6",
+      "base_commit": "f85e491dbe2485b0e03bf821edaf4e50690a7c78",
+      "dependencies": [],
+      "source_sha256": "0349184325a1c7f7de13bb603203d43fb057382fbdf1af9ce094197b72fcda29",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 237.847
+    },
+    {
+      "id": "epsilon-family-reindex",
+      "project": "poincare-reference-mapreduce-20260919",
+      "lane": "evolving-neck",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Reference.epsilonCloseFamily_reindex",
+      "path": "ReferenceBridges/ParallelMath/EpsilonFamilyReindex.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "432cc67e758220646593d018ded949b98080f07e",
+      "base_commit": "f85e491dbe2485b0e03bf821edaf4e50690a7c78",
+      "dependencies": [],
+      "source_sha256": "aeaa0c968572db79ade61ee3393aba4f4b62ea08eafd1f64ac3b1ec96a0933c6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 129.333
+    },
+    {
+      "id": "evolving-depth-restriction",
+      "project": "poincare-reference-mapreduce-20260919",
+      "lane": "evolving-neck",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Reference.evolvingNeck_restrict_depth",
+      "path": "ReferenceBridges/ParallelMath/EvolvingDepth.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "d9af121883ddee6f7bce00d9967987deb6ce8d03",
+      "base_commit": "821140c8e506dd6e89a864bb943f91eef35f3147",
+      "dependencies": [
+        {
+          "project": "poincare-reference-mapreduce-20260919",
+          "id": "epsilon-family-reindex",
+          "commit": "432cc67e758220646593d018ded949b98080f07e"
+        }
+      ],
+      "source_sha256": "39d2eb53850872c751bcc621d886c375d2e297bc74e6586a711f89ba0cba7ea4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 419.297
+    },
+    {
+      "id": "strong-neck-reduce",
+      "project": "poincare-reference-mapreduce-20260919",
+      "lane": "evolving-neck",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Reference.strongNeck_of_depth_ge_one",
+      "path": "ReferenceBridges/ParallelMath/StrongNeck.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "20c8a1f2205112ae5668703d5012e1d03f2bbd10",
+      "base_commit": "d9af121883ddee6f7bce00d9967987deb6ce8d03",
+      "dependencies": [
+        {
+          "project": "poincare-reference-mapreduce-20260919",
+          "id": "evolving-depth-restriction",
+          "commit": "d9af121883ddee6f7bce00d9967987deb6ce8d03"
+        }
+      ],
+      "source_sha256": "ed2422a9174a2ee45ae71106e66fefc7c0935d89c00cff5c9bff4fb6ee8f61bd",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 60.017
+    },
+    {
+      "id": "sphere-circle-group",
+      "project": "poincare-reference-mapreduce-20260919",
+      "lane": "topology-product",
+      "role": "map",
+      "target": "PoincareConjecture.ParallelMath.Reference.sphere2_circle_fundamentalGroup",
+      "path": "ReferenceBridges/ParallelMath/SphereCircleGroup.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "b452593938f950639ae6bfb43edd93272883108a",
+      "base_commit": "f85e491dbe2485b0e03bf821edaf4e50690a7c78",
+      "dependencies": [],
+      "source_sha256": "c762b012d06549dd8e07000916e02267cfe01430443f2b961eb80a272e86490a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 208.806
+    },
+    {
+      "id": "sphere-circle-obstruction",
+      "project": "poincare-reference-mapreduce-20260919",
+      "lane": "topology-product",
+      "role": "reduce",
+      "target": "PoincareConjecture.ParallelMath.Reference.no_homeomorph_to_sphere2_circle",
+      "path": "ReferenceBridges/ParallelMath/SphereCircleObstruction.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "5fcfdbf18007eeba79f7d9c6700a02810932bb31",
+      "base_commit": "b452593938f950639ae6bfb43edd93272883108a",
+      "dependencies": [
+        {
+          "project": "poincare-reference-mapreduce-20260919",
+          "id": "sphere-circle-group",
+          "commit": "b452593938f950639ae6bfb43edd93272883108a"
+        }
+      ],
+      "source_sha256": "10cefc8774a786c57296fe7badb1f4a0a85f6bd0173cc574aad7cddc5933b0b7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 161.356
+    },
+    {
+      "id": "scalar-extinction-reduce",
+      "project": "poincare-reference-mapreduce-20260919",
+      "lane": "extinction-ode",
+      "role": "cross-branch-reduce",
+      "target": "PoincareConjecture.ParallelMath.Reference.finite_horizon_for_nonnegative_width",
+      "path": "ReferenceBridges/ParallelMath/FiniteExtinctionObstruction.lean",
+      "status": "INTEGRATED_AND_INDEPENDENTLY_RECHECKED",
+      "model": "grok",
+      "commit": "1b94d790a95648e0e717e8803ebd44984b5c5d29",
+      "base_commit": "b7e51aa1f44043637081c56c077d1d46744390e1",
+      "dependencies": [
+        {
+          "project": "poincare-reference-mapreduce-20260919",
+          "id": "dini-finite-jumps",
+          "commit": "2db71065bc532fd82780110901e98ba1073e69e6"
+        },
+        {
+          "project": "poincare-mathematical-mapreduce-20260919",
+          "id": "power-barrier-derivative",
+          "commit": "d39c45e25dc3c41cd26c11c649371905400004b3",
+          "path": "PoincareConjecture/ParallelMath/Extinction/PowerDerivative.lean"
+        },
+        {
+          "project": "poincare-mathematical-mapreduce-20260919",
+          "id": "power-barrier-negative-repair",
+          "commit": "2c82806e2c3ba14d3074aa8c7d8d5eda77d2d20b",
+          "path": "PoincareConjecture/ParallelMath/Extinction/PowerNegative.lean"
+        }
+      ],
+      "source_sha256": "e2caf6ff8f66bb28557d03037e34e58cf38a21c726abdd5387daaf1aa1851863",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 275.821
+    }
+  ],
+  "scope_notes": [
+    "Different formalization lanes really run independently of the collar branch.",
+    "A service interval includes tool use and provider waiting, not exclusively neural inference.",
+    "The reference adapters are explicitly rechecked optional modules; they are not silently added to the primary Lake dependency graph.",
+    "Geometric width evolution, intrinsic length-chain construction, actual epsilon-close norm identification and twisted sphere bundle classification remain separate.",
+    "No complete Poincare proof or new main-blueprint completion flag is asserted."
+  ]
+}

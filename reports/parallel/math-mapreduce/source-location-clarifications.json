@@ -1,0 +1,26 @@
+[
+  {
+    "task": "sphere-circle-group",
+    "attempt": "6e1945b7-95e2-459b-9c3b-41674c25a78d",
+    "unix": 1789808677.776614,
+    "kind": "reference source aliases in same frozen checkout; no proof or theorem changed"
+  },
+  {
+    "task": "dini-finite-jumps",
+    "attempt": "f6eed3ba-8ce1-446b-88b2-a3f5cdff08ae",
+    "unix": 1789808677.7771792,
+    "kind": "reference source aliases in same frozen checkout; no proof or theorem changed"
+  },
+  {
+    "task": "evolving-depth-restriction",
+    "attempt": "37801172-0937-4c1d-8895-51925e20e492",
+    "unix": 1789809116.3407,
+    "kind": "source location assistance only, no proof edit"
+  },
+  {
+    "task": "sphere-circle-obstruction",
+    "attempt": "1d418ea3-0c87-4dc8-9b49-95ab8b32e582",
+    "unix": 1789809116.3414643,
+    "kind": "source location assistance only, no proof edit"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "main_package_build": "PASS",
+  "nonvacuous_sanity": "PASS",
+  "independent_target_count": 20,
+  "controller_tests": "PASS",
+  "source_caches": "fixed version reused",
+  "reference_adapters": "independent explicit recheck; not part of default Lake glob"
+}

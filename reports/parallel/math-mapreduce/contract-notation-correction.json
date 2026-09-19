@@ -1,0 +1,7 @@
+{
+  "old_id": "metric-length-gluing",
+  "new_id": "metric-length-gluing-v2",
+  "old_source_sha256": "488fb46e2199f12fbab100e3d1c5ec08113cc5b6187ee99b73cde477becb71b5",
+  "original_preserved": true,
+  "model_calls": 0
+}
