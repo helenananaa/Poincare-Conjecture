@@ -12,6 +12,8 @@ import PoincareConjecture.Topology.FiberSaturation.SmoothProductRegion
 import PoincareConjecture.Topology.FiberSaturation.AbstractBundleMappingTorus
 import PoincareConjecture.Topology.FiberSaturation.AbstractBoundaryPairing
 import PoincareConjecture.Topology.FiberSaturation.NativeCirclePullback
+import PoincareConjecture.Topology.FiberSaturation.AbstractSmoothBundleRegion
+import PoincareConjecture.Topology.FiberSaturation.RelativeNeckPairing
 
 import PoincareConjecture.Topology.FiberSaturation.SmoothIntervalTrivialization
 

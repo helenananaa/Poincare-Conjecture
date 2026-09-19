@@ -220,3 +220,19 @@ diffeomorphism. Smooth compatibility of its local fiber trivializations remains
 a separate input to be established; it is not inferred from continuity.
 See `blueprint/review/smooth-cover-pullback-lean-review.md` and run
 `python3 tests/check_cover_pullback.py --fresh` for the 328-declaration audit.
+
+## Direct smooth abstract sphere-bundle region classification
+
+The smooth-atlas pullback stage closes the compatibility gap described above.
+It constructs the standard smooth additive-circle cover, proves both directions
+of the native pulled-back bundle charts smooth, then constructs the all-real
+smooth periodic presentation from the original local bundle atlas alone.
+`abstract_smooth_sphere_bundle_boundary_pairing` concludes a standard closed-cylinder
+diffeomorphism and two genuine original-fiber boundary components under its
+explicit embedded-closure and intrinsic-boundary hypotheses. Earlier development
+notes describe intermediate limitations, not additional present assumptions.
+
+No full Poincare theorem, prescribed boundary parametrization extension or
+third-party acceptance is claimed. No new blueprint completion marker is set.
+See `blueprint/review/smooth-atlas-pullback-lean-review.md`; run
+`python3 tests/check_smooth_atlas_pullback.py --fresh` for the cumulative audit.
