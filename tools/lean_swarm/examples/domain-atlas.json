@@ -1,0 +1,127 @@
+[
+  {
+    "id": "restrict-construction",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- Construct the intrinsic chart from a genuine ambient local model.\nThe set K retains its original subspace topology. -/\ntheorem exists_modelDomainChart (I : ModelWithCorners ℝ E H) (K : Set N)\n    (e : OpenPartialHomeomorph N E) (he : e.IsImage K (range I))\n    (p : K) (hp : p.1 ∈ e.source) :\n    ∃ c : ModelDomainChart I K, c.ambient = e :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.exists_modelDomainChart",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/Restriction.lean",
+    "hint": "Construct actual maps (not a new topology). Source in K is preimage of e.source and target in H is preimage of e.target under I. On the source use I.symm ∘ e ∘ Subtype.val; outside the source use I.symm(e p.1). For the inverse use e.symm ∘ I on the target, and p outside. IsImage proves membership of inverse in K. Partial inverses use e and I identities; continuityOn follows locally from the exact formulas on open source/target. Alternatively build the homeomorphism between open subspaces first and extend with existing APIs. The source-set, target-set and two formula fields are all required. Do not assume the desired intrinsic chart exists. This constructor is the actual existence bottleneck; helpers inside the proof are encouraged.",
+    "timeout_seconds": 1500
+  },
+  {
+    "id": "transition-domain",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- Intrinsic overlap points lie in the genuine ambient transition domain. -/\ntheorem transitionDomain_subset_ambient (a b : ModelDomainChart I K) :\n    transitionDomain a b ⊆ (a.ambient.symm.trans b.ambient).source :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.transitionDomain_subset_ambient",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/TransitionDomain.lean",
+    "hint": "Expand transitionDomain and the two trans sources. Use a.target_eq, a.inverse_eq and b.source_eq. Membership in range I lets I(I.symm z)=z. No smoothness assumptions are needed. This feeds the restriction of the ambient derivative estimates to the actual intrinsic overlap.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "transition-formula",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- The extended intrinsic transition is exactly the ambient one on its domain. -/\ntheorem transition_model_eq_ambient (a b : ModelDomainChart I K) :\n    EqOn (I ∘ (a.intrinsic.symm.trans b.intrinsic) ∘ I.symm)\n      (b.ambient ∘ a.ambient.symm) (transitionDomain a b) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.transition_model_eq_ambient",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/TransitionFormula.lean",
+    "hint": "On the intrinsic overlap, use b.forward_eq and a.inverse_eq. The overlap condition provides both source memberships and range I justifies I.right_inv. This identity prevents changing the map while proving smoothness. All topology and definitions in Core are frozen.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "ambient-smooth",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- Smooth ambient maximal-atlas charts have the required ordinary transition. -/\ntheorem ambient_chart_transition_contDiffOn [ChartedSpace E N]\n    [IsManifold (𝓘(ℝ, E)) ∞ N] (e e' : OpenPartialHomeomorph N E)\n    (he : e ∈ IsManifold.maximalAtlas (𝓘(ℝ, E)) ∞ N)\n    (he' : e' ∈ IsManifold.maximalAtlas (𝓘(ℝ, E)) ∞ N) :\n    ContDiffOn ℝ ∞ (e' ∘ e.symm) (e.symm.trans e').source :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.ambient_chart_transition_contDiffOn",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/AmbientSmooth.lean",
+    "hint": "Use IsManifold.compatible_of_mem_maximalAtlas and the contDiffGroupoid/pregroupoid definition, or contDiffOn_extendCoordChange for the self model. Reduce the trivial model maps to identities. Do not add global smoothness of either entire partial-chart function: only its local source is relevant.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "ambient-bridge",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- The constructed chart family satisfies the existing ambient-model API. -/\ntheorem domainCharted_hasAmbientModelCharts (c : K → ModelDomainChart I K)\n    (hc : ∀ p, p ∈ (c p).intrinsic.source) :\n    letI : ChartedSpace H K := domainChartedSpace c hc\n    HasAmbientModelCharts I K :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.domainCharted_hasAmbientModelCharts",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/AmbientBridge.lean",
+    "hint": "Use the specific ambient chart (c p).ambient. Membership comes from c.source_eq and hc. The image condition is c.model_image. The extChartAt equation is c.forward_eq after unfolding the constructed charted space and extended chart. This is not a hypothesis saying the boundary already equals the frontier; it supplies the actual local model required by the existing bridge.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "collar-closure-frontier",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport PoincareConjecture.Topology.FiberSaturation.CollarClosureHalfSpace\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- A central collar point is a genuine frontier point of the complementary closure. -/\ntheorem oneSidedCollar_center_mem_frontier_closure\n    {X Y : Type*} [TopologicalSpace X] [TopologicalSpace Y] [PreconnectedSpace X]\n    {C : Set Y} {f : X × NeckParameter → Y} (hf : Topology.IsOpenEmbedding f)\n    (hside : ∀ z, f z ∈ C ↔ (z.2 : ℝ) ≤ 0) {p : Y} {x : X}\n    (hx : f (x, neckCenter) ∈ frontier (connectedComponentIn Cᶜ p)) (y : X) :\n    f (y, neckCenter) ∈ frontier (closure (connectedComponentIn Cᶜ p)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.oneSidedCollar_center_mem_frontier_closure",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/CollarClosureFrontier.lean",
+    "hint": "The center is in closure D by the checked saturation result. Approach it by negative-parameter points; the checked oneSidedCollar_negative_not_mem_closure puts those outside closure D. Show 0 lies in closure of the negative interval in NeckParameter (the existing positive-side proof is a template, or reflect the parameter), and map this closure by continuous t ↦ f(y,t). Combine closure D with closure of its complement. This proves an actual regular-domain fact without assuming a smooth closure.",
+    "timeout_seconds": 1200
+  },
+  {
+    "id": "transition-smooth",
+    "model": "grok",
+    "depends_on": [
+      "transition-domain",
+      "transition-formula"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.TransitionDomain\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.TransitionFormula\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- Smooth ambient transitions restrict to the original corner model. -/\ntheorem restricted_transition_contDiffOn (a b : ModelDomainChart I K)\n    (hs : ContDiffOn ℝ ∞ (b.ambient ∘ a.ambient.symm)\n      (a.ambient.symm.trans b.ambient).source) :\n    ContDiffOn ℝ ∞ (I ∘ (a.intrinsic.symm.trans b.intrinsic) ∘ I.symm)\n      (transitionDomain a b) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.restricted_transition_contDiffOn",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/TransitionSmooth.lean",
+    "hint": "Use the integrated transition-domain lemma to restrict hs, then the integrated exact formula to transfer it by ContDiffOn.congr. Pay attention to the direction of EqOn. Both dependencies must genuinely enter the proof.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "manifold-family",
+    "model": "grok",
+    "depends_on": [
+      "ambient-smooth",
+      "transition-smooth"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.AmbientSmooth\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.TransitionSmooth\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- A covering family of genuine restricted ambient smooth charts defines a manifold. -/\ntheorem domainCharted_isManifold [ChartedSpace E N]\n    [IsManifold (𝓘(ℝ, E)) ∞ N] (c : K → ModelDomainChart I K)\n    (hc : ∀ p, p ∈ (c p).intrinsic.source)\n    (hca : ∀ p, (c p).ambient ∈ IsManifold.maximalAtlas (𝓘(ℝ, E)) ∞ N) :\n    letI : ChartedSpace H K := domainChartedSpace c hc\n    IsManifold I ∞ K :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.domainCharted_isManifold",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/ManifoldFamily.lean",
+    "hint": "Instantiate the constructed charted space, use isManifold_of_contDiffOn, and unpack range witnesses for its atlas. Apply the integrated restricted transition result to the integrated ambient maximal-atlas smoothness theorem. Do not add intrinsic transition smoothness as a premise: that is what this task derives.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "regular-open",
+    "model": "grok",
+    "depends_on": [
+      "collar-closure-frontier"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.CollarClosureFrontier\nimport PoincareConjecture.Topology.FiberSaturation.Sphere\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- Covering the frontier by genuine one-sided sphere collars derives regular openness. -/\ntheorem complementary_regularOpen_of_sphereCollars\n    {Y : Type*} [TopologicalSpace Y] [LocallyConnectedSpace Y]\n    {C : Set Y} (hC : IsClosed C) {p : Y} (hp : p ∉ C)\n    (hcover : ∀ y ∈ frontier (connectedComponentIn Cᶜ p),\n      ∃ f : Sphere2 × NeckParameter → Y,\n        Topology.IsOpenEmbedding f ∧\n        (∀ z, f z ∈ C ↔ (z.2 : ℝ) ≤ 0) ∧\n        ∃ x : Sphere2, f (x, neckCenter) = y) :\n    connectedComponentIn Cᶜ p = interior (closure (connectedComponentIn Cᶜ p)) ∧\n    frontier (closure (connectedComponentIn Cᶜ p)) =\n      frontier (connectedComponentIn Cᶜ p) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.complementary_regularOpen_of_sphereCollars",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/CollaredRegularOpen.lean",
+    "hint": "The complement of closed C is open, so each connected component is open under local connectedness. The easy frontier-of-closure inclusion is general. For the reverse, choose the collar at a frontier point, turn its given equality into the contact condition, and apply the integrated center-frontier-closure lemma. Feed the resulting equality into existing regularOpen_of_frontier_closure_eq. Do not assume global connectedness or that exactly two spheres occur.",
+    "timeout_seconds": 900
+  },
+  {
+    "id": "inclusion-embedding",
+    "model": "grok",
+    "depends_on": [
+      "manifold-family"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.ManifoldFamily\nimport PoincareConjecture.Topology.FiberSaturation.SmoothEmbeddingModels\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- The inclusion of a constructed smooth domain is genuinely a smooth embedding. -/\ntheorem domainCharted_inclusion_smoothEmbedding [ChartedSpace E N]\n    [IsManifold (𝓘(ℝ, E)) ∞ N] (c : K → ModelDomainChart I K)\n    (hc : ∀ p, p ∈ (c p).intrinsic.source)\n    (hca : ∀ p, (c p).ambient ∈ IsManifold.maximalAtlas (𝓘(ℝ, E)) ∞ N) :\n    letI : ChartedSpace H K := domainChartedSpace c hc\n    IsSmoothEmbedding I (𝓘(ℝ, E)) ∞ (Subtype.val : K → N) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.domainCharted_inclusion_smoothEmbedding",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/InclusionEmbedding.lean",
+    "hint": "First install domainCharted_isManifold from the integrated dependency. For immersion use complement PUnit and IsImmersionAtOfComplement.mk_of_charts with ContinuousLinearEquiv.prodUnique ℝ E PUnit, the actual intrinsic chart (c p).intrinsic and ambient chart (c p).ambient. This is the same coordinate argument as the existing model_inclusion_smoothEmbedding, but use the exact forward/inverse and source/target fields. Subtype.val is a topological embedding by its original subspace topology. Crucially derive immersion from local model maps; do not assume a derivative or immersion as input. Inspect SmoothEmbeddingModels and Mathlib immersion constructor signatures.",
+    "timeout_seconds": 1500
+  },
+  {
+    "id": "closed-domain",
+    "model": "grok",
+    "depends_on": [
+      "restrict-construction",
+      "manifold-family",
+      "inclusion-embedding",
+      "ambient-bridge"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Core\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.Restriction\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.ManifoldFamily\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.InclusionEmbedding\nimport PoincareConjecture.Topology.FiberSaturation.DomainAtlas.AmbientBridge\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\nvariable {E H N : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n  [TopologicalSpace H] [TopologicalSpace N]\n  {I : ModelWithCorners ℝ E H} {K : Set N}\n\n/-- From ambient smooth local set models, construct the full smooth closed-domain\nstructure and identify its intrinsic boundary with its actual ambient frontier. -/\ntheorem exists_smoothClosedDomain_structure [ChartedSpace E N]\n    [IsManifold (𝓘(ℝ, E)) ∞ N] (hK : IsClosed K)\n    (hlocal : ∀ p : K, ∃ e : OpenPartialHomeomorph N E,\n      p.1 ∈ e.source ∧\n      e ∈ IsManifold.maximalAtlas (𝓘(ℝ, E)) ∞ N ∧\n      e.IsImage K (range I)) :\n    ∃ cs : ChartedSpace H K,\n      letI : ChartedSpace H K := cs\n      IsManifold I ∞ K ∧\n      IsSmoothEmbedding I (𝓘(ℝ, E)) ∞ (Subtype.val : K → N) ∧\n      HasAmbientModelCharts I K ∧\n      (Subtype.val : K → N) '' I.boundary K = frontier K :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.exists_smoothClosedDomain_structure",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/ClosedDomain.lean",
+    "hint": "Choose each ambient chart from hlocal. For each p, the integrated existence theorem gives a ModelDomainChart whose ambient chart is the chosen one. Obtain covering from its source_eq and hlocal membership. Apply the integrated manifold-family and inclusion-embedding results and the ambient-model bridge. Then existing intrinsicBoundary_image_eq with hK identifies the actual boundary. Empty K must work without adding Nonempty K globally. This theorem constructs charted and smooth structure from real ambient local model data, not from a supplied IsManifold on K. Do not claim it already produces those ambient models for every surgery region.",
+    "timeout_seconds": 1500
+  }
+]
