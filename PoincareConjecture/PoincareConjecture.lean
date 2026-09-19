@@ -1,3 +1,4 @@
+import PoincareConjecture.ParallelMath.Transfer
 import PoincareConjecture.ParallelMath.Transport
 import PoincareConjecture.ParallelMath.Variational
 import PoincareConjecture.ParallelMath.Quantitative

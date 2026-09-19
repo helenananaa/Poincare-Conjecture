@@ -1,0 +1,15 @@
+import PoincareConjecture.ParallelMath.Transfer.GramShear
+import PoincareConjecture.ParallelMath.Transfer.GramDegenerate
+import PoincareConjecture.ParallelMath.Transfer.GramFrame
+import PoincareConjecture.ParallelMath.Transfer.GramComparison
+import PoincareConjecture.ParallelMath.Transfer.LocalTimeInfimum
+import PoincareConjecture.ParallelMath.Transfer.LocalTimeMinmax
+import PoincareConjecture.ParallelMath.Transfer.NonNullInvariant
+import PoincareConjecture.ParallelMath.Transfer.HomotopyLeftInverse
+import PoincareConjecture.ParallelMath.Transfer.HomotopyWidthTransport
+import PoincareConjecture.ParallelMath.Transfer.HomotopicTransport
+import PoincareConjecture.ParallelMath.Transfer.IntegralDomination
+import PoincareConjecture.ParallelMath.Transfer.MinmaxLipschitz
+import PoincareConjecture.ParallelMath.Transfer.C1NonNullWidth
+
+/-! Area, finite-time variational and homotopy transfer components. Metric-specific reference bridges are checked separately. -/
