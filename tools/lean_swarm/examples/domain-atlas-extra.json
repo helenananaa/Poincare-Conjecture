@@ -1,0 +1,36 @@
+[
+  {
+    "id": "collar-product-coordinates",
+    "model": "grok",
+    "depends_on": [],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.CollarClosureChart\nimport Mathlib.Topology.OpenPartialHomeomorph.Constructions\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Compose a genuine collar with local cross-section coordinates.\nThis gives actual ambient product coordinates, not only a chart of the closure. -/\ntheorem oneSidedCollar_exists_ambient_product_chart\n    {X Y V : Type*} [TopologicalSpace X] [TopologicalSpace Y] [TopologicalSpace V]\n    [PreconnectedSpace X] {C : Set Y} {f : X × NeckParameter → Y}\n    (hf : Topology.IsOpenEmbedding f)\n    (hside : ∀ z, f z ∈ C ↔ (z.2 : ℝ) ≤ 0) {p : Y} {x : X}\n    (hx : f (x, neckCenter) ∈ frontier (connectedComponentIn Cᶜ p))\n    (a : OpenPartialHomeomorph X V) :\n    ∃ e : OpenPartialHomeomorph Y (V × ℝ),\n      (∀ z : X × NeckParameter, z.1 ∈ a.source →\n        f z ∈ e.source ∧ e (f z) = (a z.1, (z.2 : ℝ))) ∧\n      e.source ⊆ range f ∧\n      e.IsImage (connectedComponentIn Cᶜ p) {v | 0 < v.2} ∧\n      e.IsImage (closure (connectedComponentIn Cᶜ p)) {v | 0 ≤ v.2} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.oneSidedCollar_exists_ambient_product_chart",
+    "target_path": "PoincareConjecture/Topology/FiberSaturation/DomainAtlas/CollarProductCoordinates.lean",
+    "hint": "Let b be the open partial homeomorphism coming from the open embedding Subtype.val : NeckParameter -> Real. Let F be the open partial homeomorphism from hf, with source univ. Set e = F.symm.trans (a.prod b). Point x from hx supplies Nonempty X. Prove the forward formula and source subset. Every y in e.source is f z for the inverse collar coordinate z, so the existing component iff positive and closure iff nonnegative lemmas give the exact IsImage claims. Preserve actual induced topologies and the given a; do not assume an ambient chart of the closure. This is the bridge from the previous half-collar chart to actual ambient product coordinates. It is intentionally topological, no false smoothness claim.",
+    "timeout_seconds": 1500
+  },
+  {
+    "id": "model-range-sanity",
+    "model": "grok",
+    "depends_on": [
+      "closed-domain"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.ClosedDomain\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Nonvacuity regression: a genuine model range satisfies the construction theorem. -/\ntheorem model_range_structure_sanity {E H : Type*}\n    [NormedAddCommGroup E] [NormedSpace ℝ E] [TopologicalSpace H]\n    (I : ModelWithCorners ℝ E H) :\n    ∃ cs : ChartedSpace H (range I),\n      letI : ChartedSpace H (range I) := cs\n      IsManifold I ∞ (range I) ∧\n      IsSmoothEmbedding I (𝓘(ℝ, E)) ∞ (Subtype.val : range I → E) ∧\n      (Subtype.val : range I → E) '' I.boundary (range I) = frontier (range I) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.model_range_structure_sanity",
+    "target_path": "tests/DomainAtlas/ModelRange.lean",
+    "hint": "Instantiate the newly proved exists_smoothClosedDomain_structure on K=range I inside E. The model range is closed. Ambient identity charts are maximal-atlas members in the self model and exactly preserve range I. Then project the requested conclusions. Do not prove it by assuming the result or adding IsManifold on the subtype. This is a regression instance, not a new main-route milestone.",
+    "timeout_seconds": 1200
+  },
+  {
+    "id": "empty-domain-sanity",
+    "model": "grok",
+    "depends_on": [
+      "closed-domain"
+    ],
+    "source": "import PoincareConjecture.Topology.FiberSaturation.DomainAtlas.ClosedDomain\nimport Mathlib.Tactic\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.Topology.FiberSaturation.DomainAtlas\nopen Set Function Manifold\nopen scoped Manifold ContDiff Topology\n\n/-- Empty domains do not require an accidental global Nonempty subtype assumption. -/\ntheorem empty_domain_structure_sanity {E H N : Type*}\n    [NormedAddCommGroup E] [NormedSpace ℝ E] [TopologicalSpace H]\n    [TopologicalSpace N] [ChartedSpace E N] [IsManifold (𝓘(ℝ, E)) ∞ N]\n    (I : ModelWithCorners ℝ E H) :\n    ∃ cs : ChartedSpace H (∅ : Set N),\n      letI : ChartedSpace H (∅ : Set N) := cs\n      IsManifold I ∞ (∅ : Set N) ∧\n      IsSmoothEmbedding I (𝓘(ℝ, E)) ∞ (Subtype.val : (∅ : Set N) → N) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.Topology.FiberSaturation.DomainAtlas\n",
+    "target_name": "PoincareConjecture.Topology.FiberSaturation.DomainAtlas.empty_domain_structure_sanity",
+    "target_path": "tests/DomainAtlas/EmptyDomain.lean",
+    "hint": "Apply the newly integrated closed-domain structure theorem with empty K. The local chart requirement has an impossible p. Return the first two conclusions. This checks that the construction, despite local default-point choices, works for an empty global subset. Do not install a different topology.",
+    "timeout_seconds": 1200
+  }
+]
