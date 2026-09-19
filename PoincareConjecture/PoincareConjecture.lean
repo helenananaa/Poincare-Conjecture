@@ -1,3 +1,4 @@
+import PoincareConjecture.ParallelMath.Quantitative
 import PoincareConjecture.ParallelMath
 import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.FiniteCutClosure
 import PoincareConjecture.Topology.FiberSaturation.SmoothNeck.NativeCutClosure

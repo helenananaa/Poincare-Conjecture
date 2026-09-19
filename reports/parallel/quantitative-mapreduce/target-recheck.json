@@ -1,0 +1,235 @@
+{
+  "status": "PASS",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "tasks": [
+    {
+      "id": "epsilon-c0",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_zero_norm_bound",
+      "path": "ReferenceBridges/Quantitative/EpsilonC0.lean",
+      "status": "PASS",
+      "sha256": "ef77cdd9585e4f08c43084db69d635d19b9b0e818a362cb5ec8cc4f9eaedc082",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-matrix",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.zero_metric_norm_eq_matrix_error",
+      "path": "ReferenceBridges/Quantitative/EpsilonMatrix.lean",
+      "status": "PASS",
+      "sha256": "543f73198f627c4c7beb13cf3c1ec44035443b5f695fecc1e66be8a750f761fe",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "frame-parseval",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.metric_frame_parseval",
+      "path": "ReferenceBridges/Quantitative/FrameParseval.lean",
+      "status": "PASS",
+      "sha256": "b3fe66c4a8bf19ebe872195295be299287bb6e6ca217b4f42e152cdf9efb6d13",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "frame-expansion",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.metric_bilinear_frame_expansion",
+      "path": "ReferenceBridges/Quantitative/FrameExpansion.lean",
+      "status": "PASS",
+      "sha256": "335e5438f5b2770973f1dbf00c81393e0ba9c641eaa9551dd84f6499aa61721a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-reflexive",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_self",
+      "path": "ReferenceBridges/Quantitative/EpsilonReflexive.lean",
+      "status": "PASS",
+      "sha256": "73302c93bd74e700033c8803b5467d4ccada47df7ef85a7cf0128cd91b5a0ed8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "bilinear-frobenius",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.bilinear_frobenius_sq_bound",
+      "path": "PoincareConjecture/ParallelMath/Quantitative/BilinearFrobenius.lean",
+      "status": "PASS",
+      "sha256": "38250555deb7be01c2cbc963f7e4e2f1be141ea9da629b58a0233f1a295bfe44",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "sqrt-metric",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.sqrt_comparison_of_quadratic_bounds",
+      "path": "PoincareConjecture/ParallelMath/Quantitative/SqrtMetric.lean",
+      "status": "PASS",
+      "sha256": "e5b50c1648d47ac68b4d7bd3d15a3dc51c78bcb3c9ef043cc7019756fa03a1c0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "short-path",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.exists_short_path_of_lengthSpace",
+      "path": "ReferenceBridges/Quantitative/ShortPath.lean",
+      "status": "PASS",
+      "sha256": "523ff9b7f97c71a6d04b8e0dd70e4f9e2e118b2811bbf01130ad7511786f473f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "path-subdivision",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.path_subdivision_of_open_cover",
+      "path": "PoincareConjecture/ParallelMath/Quantitative/PathSubdivision.lean",
+      "status": "PASS",
+      "sha256": "531627acbaff302a641c79fcfaa47292d470c030f9514d528b26ec32dd8079a1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "variation-partition",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.dist_partition_sum_le_variation",
+      "path": "PoincareConjecture/ParallelMath/Quantitative/VariationPartition.lean",
+      "status": "PASS",
+      "sha256": "8431e36979b3bdad8761d455b8097c62600fca9a422b0bea04bb980e91f66b58",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "coefficient-domination",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.forwardDiff_of_coefficient_lower_bound",
+      "path": "ReferenceBridges/Quantitative/CoefficientDomination.lean",
+      "status": "PASS",
+      "sha256": "c9088ed26dd4f364c1532ba28b34ce3a462f8d29fca773e35e36295f9b08d636",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-metric-reduce",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_metric_comparison",
+      "path": "ReferenceBridges/Quantitative/EpsilonMetricComparison.lean",
+      "status": "PASS",
+      "sha256": "1234189679de73ff94a25cf096ef83f5f2133b42aa4657d19dc74e8b67161dde",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-mixed-reduce",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_mixed_error_sq",
+      "path": "ReferenceBridges/Quantitative/EpsilonMixedComparison.lean",
+      "status": "PASS",
+      "sha256": "c2e1dac38f340d5638580f5d51a44ad3b5bf566d29e33e9190d515429d51f859",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "epsilon-speed-reduce",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_speed_comparison",
+      "path": "ReferenceBridges/Quantitative/EpsilonSpeedComparison.lean",
+      "status": "PASS",
+      "sha256": "aa89d4bca1d07db25a21f594160afcdede020e5bbc98912f2e06a43d2c940c27",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "piece-chains-reduce",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.lengthSpace_open_cover_piece_chains",
+      "path": "ReferenceBridges/Quantitative/OpenCoverChains.lean",
+      "status": "PASS",
+      "sha256": "f6eb9c949059b1acb30b91b63d555fac2751d494075272eb0fa6bef01237e446",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "lipschitz-open-cover-reduce",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.lipschitz_gluing_on_lengthSpace_open_cover",
+      "path": "ReferenceBridges/Quantitative/OpenCoverLipschitz.lean",
+      "status": "PASS",
+      "sha256": "926e626409d1d018c93d32319ffa822179ff13efe47cc6b449e586c5e05c2acc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "curvature-extinction-reduce",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.finite_horizon_under_coefficient_bound",
+      "path": "ReferenceBridges/Quantitative/CurvatureExtinction.lean",
+      "status": "PASS",
+      "sha256": "a15be21005a504bd96db79e25586bb2f53462e51f4b557bca39a0cbb0020b438",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "real-line-lengthspace",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.real_line_lengthSpace",
+      "path": "ReferenceBridges/Quantitative/RealLineLengthSpace.lean",
+      "status": "PASS",
+      "sha256": "ffaa1e7d9e9e8383b71e9db61367c407f676a1f36a6a259a1ab7738ec45d4aec",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    {
+      "id": "real-local-global",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.real_uniform_local_lipschitz_is_global",
+      "path": "ReferenceBridges/Quantitative/RealLocalGlobal.lean",
+      "status": "PASS",
+      "sha256": "10f3159336267eec5c3bd5a6153c250bd1e58d83f3d170d357b5cbf582922d8d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    }
+  ],
+  "model_calls": 0
+}

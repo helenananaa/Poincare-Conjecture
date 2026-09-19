@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-19T10:13:50.328775+00:00",
+  "lean": "Lean (version 4.32.1, x86_64-unknown-linux-gnu, commit f054605aea4b840552cca2e725580bffd1e1b704, Release)",
+  "mathlib_commit": "520045ab14e26149ee970e2e617ca04b09bde5d6",
+  "sanity_suites": 24,
+  "source_hashes_stable": true,
+  "prior_axiom_targets": 364,
+  "new_target_count": 19,
+  "controller_tests": "PASS"
+}

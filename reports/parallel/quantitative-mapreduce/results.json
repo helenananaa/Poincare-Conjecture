@@ -1,0 +1,581 @@
+{
+  "generated_utc": "2026-09-19T10:11:37.576924+00:00",
+  "project": "poincare-quantitative-mapreduce-20260919",
+  "logical_targets": 19,
+  "independent_root_targets": 12,
+  "mathematical_lanes": 3,
+  "actual_model_calls": 19,
+  "actual_service_interval_peak": 11,
+  "models": [
+    "grok"
+  ],
+  "no_luna_calls": true,
+  "source_scouts_counted_as_proofs": 0,
+  "previous_targets_rechecked_but_not_counted_new": 20,
+  "frozen_submission_reviews": [
+    "short-path",
+    "real-line-lengthspace"
+  ],
+  "targets": [
+    {
+      "id": "epsilon-c0",
+      "lane": "actual-epsilon-metric",
+      "role": "map",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_zero_norm_bound",
+      "path": "ReferenceBridges/Quantitative/EpsilonC0.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "73d3f752f7991c712810868a7d5b8f3550361a34",
+      "sha256": "ef77cdd9585e4f08c43084db69d635d19b9b0e818a362cb5ec8cc4f9eaedc082",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 100.984,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810482.7553036,
+        "prepare_finished_unix": 1789810366.4492486,
+        "prepare_started_unix": 1789810362.953326,
+        "service_started_unix": 1789810366.5390992,
+        "service_stopped_unix": 1789810475.0484679,
+        "verification_finished_unix": 1789810482.7553024,
+        "verification_started_unix": 1789810475.050896
+      }
+    },
+    {
+      "id": "epsilon-matrix",
+      "lane": "actual-epsilon-metric",
+      "role": "map",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.zero_metric_norm_eq_matrix_error",
+      "path": "ReferenceBridges/Quantitative/EpsilonMatrix.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "5efcf53fb2ee71b34aab9bd8419925a3436f67ce",
+      "sha256": "543f73198f627c4c7beb13cf3c1ec44035443b5f695fecc1e66be8a750f761fe",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 232.844,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810621.818877,
+        "prepare_finished_unix": 1789810363.2215455,
+        "prepare_started_unix": 1789810362.9571621,
+        "service_started_unix": 1789810363.2810926,
+        "service_stopped_unix": 1789810614.854356,
+        "verification_finished_unix": 1789810621.8188756,
+        "verification_started_unix": 1789810614.8700182
+      }
+    },
+    {
+      "id": "frame-parseval",
+      "lane": "actual-epsilon-metric",
+      "role": "map",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.metric_frame_parseval",
+      "path": "ReferenceBridges/Quantitative/FrameParseval.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "00f9be4eda4e42fe9bbb957e59fafa6680fb0d89",
+      "sha256": "b3fe66c4a8bf19ebe872195295be299287bb6e6ca217b4f42e152cdf9efb6d13",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 328.528,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810726.1422517,
+        "prepare_finished_unix": 1789810363.4687226,
+        "prepare_started_unix": 1789810362.9685302,
+        "service_started_unix": 1789810363.5345721,
+        "service_stopped_unix": 1789810718.1084394,
+        "verification_finished_unix": 1789810726.1422508,
+        "verification_started_unix": 1789810718.1221244
+      }
+    },
+    {
+      "id": "frame-expansion",
+      "lane": "actual-epsilon-metric",
+      "role": "map",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.metric_bilinear_frame_expansion",
+      "path": "ReferenceBridges/Quantitative/FrameExpansion.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "9f042191b6f14acdf1b781e67e46fb8a30bd6807",
+      "sha256": "335e5438f5b2770973f1dbf00c81393e0ba9c641eaa9551dd84f6499aa61721a",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 246.002,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810638.3605378,
+        "prepare_finished_unix": 1789810364.3925579,
+        "prepare_started_unix": 1789810362.9610424,
+        "service_started_unix": 1789810364.4650738,
+        "service_stopped_unix": 1789810629.1949458,
+        "verification_finished_unix": 1789810638.360537,
+        "verification_started_unix": 1789810629.2079983
+      }
+    },
+    {
+      "id": "epsilon-reflexive",
+      "lane": "actual-epsilon-metric",
+      "role": "nonvacuity",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_self",
+      "path": "ReferenceBridges/Quantitative/EpsilonReflexive.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "2dfab483ee18dc203d05a5614cc81f5c825ac99c",
+      "sha256": "73302c93bd74e700033c8803b5467d4ccada47df7ef85a7cf0128cd91b5a0ed8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 240.723,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810633.8129845,
+        "prepare_finished_unix": 1789810366.0777645,
+        "prepare_started_unix": 1789810362.947099,
+        "service_started_unix": 1789810366.16324,
+        "service_stopped_unix": 1789810625.6136148,
+        "verification_finished_unix": 1789810633.8129835,
+        "verification_started_unix": 1789810625.621686
+      }
+    },
+    {
+      "id": "bilinear-frobenius",
+      "lane": "actual-epsilon-metric",
+      "role": "map",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.bilinear_frobenius_sq_bound",
+      "path": "PoincareConjecture/ParallelMath/Quantitative/BilinearFrobenius.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "dbb1386600c9181c3cb642a286ac84a584728e50",
+      "sha256": "38250555deb7be01c2cbc963f7e4e2f1be141ea9da629b58a0233f1a295bfe44",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 189.882,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810579.3425426,
+        "prepare_finished_unix": 1789810364.7001495,
+        "prepare_started_unix": 1789810363.0038154,
+        "service_started_unix": 1789810364.7704246,
+        "service_stopped_unix": 1789810567.743602,
+        "verification_finished_unix": 1789810579.3425412,
+        "verification_started_unix": 1789810567.7480783
+      }
+    },
+    {
+      "id": "sqrt-metric",
+      "lane": "actual-epsilon-metric",
+      "role": "map",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.sqrt_comparison_of_quadratic_bounds",
+      "path": "PoincareConjecture/ParallelMath/Quantitative/SqrtMetric.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "c849e82886f8b9e51955f7f2bf73f03c18cbe56b",
+      "sha256": "e5b50c1648d47ac68b4d7bd3d15a3dc51c78bcb3c9ef043cc7019756fa03a1c0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 165.688,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810551.725743,
+        "prepare_finished_unix": 1789810365.7270002,
+        "prepare_started_unix": 1789810363.052983,
+        "service_started_unix": 1789810365.8337116,
+        "service_stopped_unix": 1789810544.606362,
+        "verification_finished_unix": 1789810551.7257416,
+        "verification_started_unix": 1789810544.60959
+      }
+    },
+    {
+      "id": "short-path",
+      "lane": "length-space-gluing",
+      "role": "map",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.exists_short_path_of_lengthSpace",
+      "path": "ReferenceBridges/Quantitative/ShortPath.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "e1512564312ef53f9fa2adee1abc15dda7ad88d1",
+      "sha256": "523ff9b7f97c71a6d04b8e0dd70e4f9e2e118b2811bbf01130ad7511786f473f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 182.864,
+      "frozen_submission_reverified_without_model_call": true,
+      "timing": {
+        "finished_unix": 1789810560.114323,
+        "prepare_finished_unix": 1789810364.0817354,
+        "prepare_started_unix": 1789810362.9914312,
+        "service_started_unix": 1789810364.147588,
+        "service_stopped_unix": 1789810560.098319,
+        "verification_started_unix": 1789810560.1133988
+      }
+    },
+    {
+      "id": "path-subdivision",
+      "lane": "length-space-gluing",
+      "role": "map",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.path_subdivision_of_open_cover",
+      "path": "PoincareConjecture/ParallelMath/Quantitative/PathSubdivision.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "f228583cebb6c2d41cef4cdbbe0e8772075a7f8d",
+      "sha256": "531627acbaff302a641c79fcfaa47292d470c030f9514d528b26ec32dd8079a1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 168.715,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810553.2048218,
+        "prepare_finished_unix": 1789810363.7788804,
+        "prepare_started_unix": 1789810362.9841492,
+        "service_started_unix": 1789810363.8393672,
+        "service_stopped_unix": 1789810545.637417,
+        "verification_finished_unix": 1789810553.2048202,
+        "verification_started_unix": 1789810545.6446705
+      }
+    },
+    {
+      "id": "variation-partition",
+      "lane": "length-space-gluing",
+      "role": "map",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.dist_partition_sum_le_variation",
+      "path": "PoincareConjecture/ParallelMath/Quantitative/VariationPartition.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "0382152af41d8908bb0aae55ad739366b6879ae1",
+      "sha256": "8431e36979b3bdad8761d455b8097c62600fca9a422b0bea04bb980e91f66b58",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 272.919,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810667.174637,
+        "prepare_finished_unix": 1789810365.0501673,
+        "prepare_started_unix": 1789810362.9976017,
+        "service_started_unix": 1789810365.1142876,
+        "service_stopped_unix": 1789810659.224912,
+        "verification_finished_unix": 1789810667.1746361,
+        "verification_started_unix": 1789810659.2390344
+      }
+    },
+    {
+      "id": "coefficient-domination",
+      "lane": "curvature-coefficient-extinction",
+      "role": "map",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.forwardDiff_of_coefficient_lower_bound",
+      "path": "ReferenceBridges/Quantitative/CoefficientDomination.lean",
+      "dependencies": [],
+      "base_commit": "9b22c646ad82f5b8b40017fff5929dbde6a09cc2",
+      "integrated_commit": "50e90854f3b9e9f401b039a228dfe987f3cc1baf",
+      "sha256": "c9088ed26dd4f364c1532ba28b34ce3a462f8d29fca773e35e36295f9b08d636",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 136.298,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810518.745446,
+        "prepare_finished_unix": 1789810365.3811255,
+        "prepare_started_unix": 1789810363.0443897,
+        "service_started_unix": 1789810365.4528825,
+        "service_stopped_unix": 1789810512.0322342,
+        "verification_finished_unix": 1789810518.745445,
+        "verification_started_unix": 1789810512.0369103
+      }
+    },
+    {
+      "id": "epsilon-metric-reduce",
+      "lane": "actual-epsilon-metric",
+      "role": "reduce",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_metric_comparison",
+      "path": "ReferenceBridges/Quantitative/EpsilonMetricComparison.lean",
+      "dependencies": [
+        "epsilon-c0",
+        "epsilon-matrix",
+        "frame-parseval",
+        "frame-expansion"
+      ],
+      "base_commit": "00f9be4eda4e42fe9bbb957e59fafa6680fb0d89",
+      "integrated_commit": "c0141b82d4dfd843c736d28193e962ba6b1c3a0e",
+      "sha256": "1234189679de73ff94a25cf096ef83f5f2133b42aa4657d19dc74e8b67161dde",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 208.097,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789811050.2039587,
+        "prepare_finished_unix": 1789810775.2975357,
+        "prepare_started_unix": 1789810737.9458275,
+        "service_started_unix": 1789810775.3595638,
+        "service_stopped_unix": 1789811000.8308127,
+        "verification_finished_unix": 1789811050.2039583,
+        "verification_started_unix": 1789811000.8362846
+      }
+    },
+    {
+      "id": "epsilon-mixed-reduce",
+      "lane": "actual-epsilon-metric",
+      "role": "reduce",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_mixed_error_sq",
+      "path": "ReferenceBridges/Quantitative/EpsilonMixedComparison.lean",
+      "dependencies": [
+        "epsilon-c0",
+        "epsilon-matrix",
+        "frame-parseval",
+        "frame-expansion",
+        "bilinear-frobenius"
+      ],
+      "base_commit": "00f9be4eda4e42fe9bbb957e59fafa6680fb0d89",
+      "integrated_commit": "8798ba0d18c35effcfdcc2e3680d083f47c46740",
+      "sha256": "c2e1dac38f340d5638580f5d51a44ad3b5bf566d29e33e9190d515429d51f859",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 253.712,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789811121.6847758,
+        "prepare_finished_unix": 1789810785.1683574,
+        "prepare_started_unix": 1789810737.9598486,
+        "service_started_unix": 1789810785.2309825,
+        "service_stopped_unix": 1789811056.1685052,
+        "verification_finished_unix": 1789811121.684775,
+        "verification_started_unix": 1789811056.1745641
+      }
+    },
+    {
+      "id": "epsilon-speed-reduce",
+      "lane": "actual-epsilon-metric",
+      "role": "reduce",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_speed_comparison",
+      "path": "ReferenceBridges/Quantitative/EpsilonSpeedComparison.lean",
+      "dependencies": [
+        "epsilon-metric-reduce",
+        "sqrt-metric"
+      ],
+      "base_commit": "c0141b82d4dfd843c736d28193e962ba6b1c3a0e",
+      "integrated_commit": "7037f19bfeb23ffcb4ce0c9314683283b60100d3",
+      "sha256": "aa89d4bca1d07db25a21f594160afcdede020e5bbc98912f2e06a43d2c940c27",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 121.817,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789811402.4495091,
+        "prepare_finished_unix": 1789811192.4607875,
+        "prepare_started_unix": 1789811127.3083296,
+        "service_started_unix": 1789811192.5288877,
+        "service_stopped_unix": 1789811324.5770192,
+        "verification_finished_unix": 1789811402.449508,
+        "verification_started_unix": 1789811324.5845685
+      }
+    },
+    {
+      "id": "piece-chains-reduce",
+      "lane": "length-space-gluing",
+      "role": "reduce",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.lengthSpace_open_cover_piece_chains",
+      "path": "ReferenceBridges/Quantitative/OpenCoverChains.lean",
+      "dependencies": [
+        "short-path",
+        "path-subdivision",
+        "variation-partition"
+      ],
+      "base_commit": "e1512564312ef53f9fa2adee1abc15dda7ad88d1",
+      "integrated_commit": "bd214aed0d8dac4be5ee2402569dac9cff746c95",
+      "sha256": "f6eb9c949059b1acb30b91b63d555fac2751d494075272eb0fa6bef01237e446",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 239.275,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789811022.3134704,
+        "prepare_finished_unix": 1789810724.6086884,
+        "prepare_started_unix": 1789810698.4864984,
+        "service_started_unix": 1789810724.651302,
+        "service_stopped_unix": 1789810981.5057669,
+        "verification_finished_unix": 1789811022.3134694,
+        "verification_started_unix": 1789810981.5123777
+      }
+    },
+    {
+      "id": "lipschitz-open-cover-reduce",
+      "lane": "length-space-gluing",
+      "role": "reduce",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.lipschitz_gluing_on_lengthSpace_open_cover",
+      "path": "ReferenceBridges/Quantitative/OpenCoverLipschitz.lean",
+      "dependencies": [
+        "piece-chains-reduce"
+      ],
+      "base_commit": "d1f536d4e0de34e4fd2e41c8181949da5bd0b0d3",
+      "integrated_commit": "63bed5c529fde62bda08aa302f45a9eebaa44f48",
+      "sha256": "926e626409d1d018c93d32319ffa822179ff13efe47cc6b449e586c5e05c2acc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 71.479,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789811237.1786828,
+        "prepare_finished_unix": 1789811111.2508993,
+        "prepare_started_unix": 1789811068.7301707,
+        "service_started_unix": 1789811111.3069484,
+        "service_stopped_unix": 1789811188.1491547,
+        "verification_finished_unix": 1789811237.178681,
+        "verification_started_unix": 1789811188.1532912
+      }
+    },
+    {
+      "id": "curvature-extinction-reduce",
+      "lane": "curvature-coefficient-extinction",
+      "role": "reduce",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.finite_horizon_under_coefficient_bound",
+      "path": "ReferenceBridges/Quantitative/CurvatureExtinction.lean",
+      "dependencies": [
+        "coefficient-domination"
+      ],
+      "base_commit": "50e90854f3b9e9f401b039a228dfe987f3cc1baf",
+      "integrated_commit": "cdf8d14ae242d63f14da8595b10be20d7b0910cf",
+      "sha256": "a15be21005a504bd96db79e25586bb2f53462e51f4b557bca39a0cbb0020b438",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 119.705,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789810688.4779744,
+        "prepare_finished_unix": 1789810539.5721238,
+        "prepare_started_unix": 1789810529.0975015,
+        "service_started_unix": 1789810539.6179554,
+        "service_stopped_unix": 1789810667.4515707,
+        "verification_finished_unix": 1789810688.4779735,
+        "verification_started_unix": 1789810667.4552796
+      }
+    },
+    {
+      "id": "real-line-lengthspace",
+      "lane": "length-space-gluing",
+      "role": "nonvacuity",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.real_line_lengthSpace",
+      "path": "ReferenceBridges/Quantitative/RealLineLengthSpace.lean",
+      "dependencies": [],
+      "base_commit": "f75a3b13836397f0eac4090b3170a4869ebf418e",
+      "integrated_commit": "5f2f5f94fe079cead46816fd79405f2da892e079",
+      "sha256": "ffaa1e7d9e9e8383b71e9db61367c407f676a1f36a6a259a1ab7738ec45d4aec",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 558.75,
+      "frozen_submission_reverified_without_model_call": true,
+      "timing": {
+        "finished_unix": 1789811170.0509355,
+        "prepare_finished_unix": 1789810567.1801105,
+        "prepare_started_unix": 1789810566.885336,
+        "service_started_unix": 1789810567.2276225,
+        "service_stopped_unix": 1789811170.023582
+      }
+    },
+    {
+      "id": "real-local-global",
+      "lane": "length-space-gluing",
+      "role": "reduce",
+      "model": "grok",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.real_uniform_local_lipschitz_is_global",
+      "path": "ReferenceBridges/Quantitative/RealLocalGlobal.lean",
+      "dependencies": [
+        "real-line-lengthspace",
+        "lipschitz-open-cover-reduce"
+      ],
+      "base_commit": "5f2f5f94fe079cead46816fd79405f2da892e079",
+      "integrated_commit": "811261e01fc80d6e51ac08639a72d3f1f3822a9e",
+      "sha256": "10f3159336267eec5c3bd5a6153c250bd1e58d83f3d170d357b5cbf582922d8d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "client_seconds": 80.19,
+      "frozen_submission_reverified_without_model_call": false,
+      "timing": {
+        "finished_unix": 1789811575.5913801,
+        "prepare_finished_unix": 1789811418.0656,
+        "prepare_started_unix": 1789811346.2317898,
+        "service_started_unix": 1789811418.1350083,
+        "service_stopped_unix": 1789811506.0651624,
+        "verification_finished_unix": 1789811575.591378,
+        "verification_started_unix": 1789811506.0681832
+      }
+    }
+  ],
+  "limits": [
+    "EpsilonClose results concern pointwise tangent bilinear forms and speeds, not integrated distance/volume comparison.",
+    "The gluing theorem requires a true length space and an open cover with a uniform local Lipschitz constant; arbitrary closed surgical pieces are not asserted to have those properties.",
+    "The extinction result is a scalar finite-jump obstruction; geometry must supply width evolution, lower curvature estimates and local surgery finiteness.",
+    "Service concurrency includes tools/provider waiting and is not GPU inference concurrency."
+  ]
+}
