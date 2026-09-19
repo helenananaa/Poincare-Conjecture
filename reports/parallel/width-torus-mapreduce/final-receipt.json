@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "distinct_new_targets": 20,
+  "main_batch_targets": 19,
+  "cross_project_reducers": 1,
+  "initial_independent_targets": 10,
+  "actual_model_service_calls": 20,
+  "peak_service_intervals": 10,
+  "models": [
+    "grok"
+  ],
+  "projects": [
+    "poincare-width-torus-mapreduce-20260919",
+    "poincare-crossbatch-epsilon-area-20260919"
+  ],
+  "all_canonical_targets_integrated": true,
+  "all_own_model_services_stopped": true,
+  "external_producer_tasks_not_double_counted": [
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "commit": "73d3f752f7991c712810868a7d5b8f3550361a34",
+      "project": "poincare-quantitative-mapreduce-20260919",
+      "sha256": "ef77cdd9585e4f08c43084db69d635d19b9b0e818a362cb5ec8cc4f9eaedc082",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_zero_norm_bound",
+      "task": "epsilon-c0"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "commit": "5efcf53fb2ee71b34aab9bd8419925a3436f67ce",
+      "project": "poincare-quantitative-mapreduce-20260919",
+      "sha256": "543f73198f627c4c7beb13cf3c1ec44035443b5f695fecc1e66be8a750f761fe",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.zero_metric_norm_eq_matrix_error",
+      "task": "epsilon-matrix"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "commit": "00f9be4eda4e42fe9bbb957e59fafa6680fb0d89",
+      "project": "poincare-quantitative-mapreduce-20260919",
+      "sha256": "b3fe66c4a8bf19ebe872195295be299287bb6e6ca217b4f42e152cdf9efb6d13",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.metric_frame_parseval",
+      "task": "frame-parseval"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "commit": "9f042191b6f14acdf1b781e67e46fb8a30bd6807",
+      "project": "poincare-quantitative-mapreduce-20260919",
+      "sha256": "335e5438f5b2770973f1dbf00c81393e0ba9c641eaa9551dd84f6499aa61721a",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.metric_bilinear_frame_expansion",
+      "task": "frame-expansion"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "commit": "c0141b82d4dfd843c736d28193e962ba6b1c3a0e",
+      "project": "poincare-quantitative-mapreduce-20260919",
+      "sha256": "1234189679de73ff94a25cf096ef83f5f2133b42aa4657d19dc74e8b67161dde",
+      "target": "PoincareConjecture.ParallelMath.Quantitative.Reference.epsilonClose_metric_comparison",
+      "task": "epsilon-metric-reduce"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "commit": "98abe15bddb45edffe78d37d89a11cd0873964ba",
+      "project": "poincare-width-torus-mapreduce-20260919",
+      "sha256": "b17ce46f2b34e36d4ae217fbd8d16422b5928c1a9694be7a2834db75f03a1614",
+      "target": "PoincareConjecture.ParallelMath.Variational.quadratic_nonneg_det",
+      "task": "quadratic-discriminant"
+    },
+    {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "commit": "9998a75dd4924162520aafa1c2336453fa70f110",
+      "project": "poincare-width-torus-mapreduce-20260919",
+      "sha256": "e1b3e3a32b533f78b72a8272c0466d1e118c88820ed744d9d158a011959cad15",
+      "target": "PoincareConjecture.ParallelMath.Variational.plane_area_distortion",
+      "task": "plane-area-distortion"
+    }
+  ],
+  "external_caches": "fixed pinned reference/source caches reused",
+  "scope": "This receipt counts only these two batches; other simultaneous project batches are excluded.",
+  "coordinator_lint_maintenance": [
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelMath/Variational/AdmissibleTransfer.lean",
+      "target": "PoincareConjecture.ParallelMath.Variational.leastCost_transfer",
+      "before_sha256": "f4b49ea360bc1c4c8695220cadf8cacb65410c1bd5d8598a3d308138a31a36fe",
+      "after_sha256": "c7dd384ab4e6cb9d2fc14ec9f41101a22daa61f06d7db826aaa49bfe612bf9b8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "statement_unchanged": true,
+      "note": "Coordinator preserves the exact theorem interface and constructive proof branch; adds an explicit impossible-input branch using the existing hypothesis. This is a lint-maintenance change, not a new mathematical target or model attempt."
+    }
+  ]
+}

@@ -56,3 +56,15 @@
 参考拓扑文件位于 ReferenceBridges/WidthTorus，避免默认主包无意引入整套 Hatcher 依赖；使用固定本机 reference 配置可通过 tools/lean_swarm/verify_cards.py 和本批 JSON 卡片复核。不公开认证文件、本机配置或原始 agent 会话。
 
 只向个人 fork 发布，不向上游提交 PR。本批自身模型任务结束，不设置持续后台派单。
+
+## 第 20 项：真实 EpsilonClose 到切平面面积的跨批次 Reduce
+
+在前述 19 个目标之外，又完成一项跨批次汇总 `epsilonClose_plane_area`。它不再把二次型界作为输入：使用另一批已集成、独立复核的原始 `MorganTianLib.EpsilonClose` 度量比较，再调用本批二维行列式结果，推出任意 g0-正交归一切平面上的实际面积 Jacobian 位于 `[1-epsilon,1+epsilon]`。
+
+外部输入的源码、提交祖先关系、传递公理和哈希都另行核验；外部批次的旧目标不计入这次 20 个新目标。现在总计 19 项主批任务和 1 项跨项目汇总，全部使用 Grok。详见 `epsilon-area-crossbatch.json` 和 `final-receipt.json`。
+
+这完成了从真实度量接近性到点态二维面积因子的连接；具体浸入曲面的 Jacobian 识别、全局积分条件、手术映射对非平凡同伦类的保持，以及实际几何宽度的存在性仍须分别建立。没有把这些条件省略。
+
+## 同一交卷的维护记录
+
+另一批全包严格检查指出 AdmissibleTransfer 的既有非负性假设未被显式使用。协调器保持原始定理接口与主要证明分支，补上违背该输入的不可能情形，并独立复核。原始 Grok 交卷与维护后哈希见 final-receipt.json 的 coordinator_lint_maintenance；该维护不计为新数学任务或模型调用。
