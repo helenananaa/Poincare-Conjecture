@@ -155,17 +155,124 @@ class StoreTests(unittest.TestCase):
         self.store.mark_integrated("p", "a", "base")
         self.assertEqual(self.store.claim("p", "owner")["task_id"], "b")
 
-    def test_grok_default_and_luna_guard(self) -> None:
+    def test_luna_default_and_unbounded_limit_guard(self) -> None:
         task = _task("implicit")
         del task["model"]
         self.store.add_tasks("p", [task])
-        self.assertEqual(self.store.list_tasks("p")[0]["model"], "grok")
-        for invalid in (0, 9, True, -1):
+        self.assertEqual(self.store.list_tasks("p")[0]["model"], "luna")
+        self.store.set_limits(luna=0, grok=0)
+        self.store.set_limits(luna=9, grok=2**63 - 1)
+        for invalid in (True, -1, 2**63):
             with self.assertRaises(ValueError):
                 self.store.set_limits(luna=invalid, grok=0)
         with self.assertRaises(ValueError):
             self.store.set_limits(luna=4, grok=-1)
-        self.store.set_limits(luna=8, grok=0)
+
+    def test_unlimited_luna_supports_more_than_twenty_claims(self) -> None:
+        self.store.set_limits(luna=0, grok=0)
+        self.store.add_tasks("p", [_task(f"u{i:02}") for i in range(25)])
+        claims = [self.store.claim("p", "owner") for _ in range(25)]
+        self.assertTrue(all(claims))
+        self.assertEqual(len({claim["attempt_id"] for claim in claims}), 25)
+
+    def test_finite_luna_limit_above_eight_is_honored(self) -> None:
+        self.store.set_limits(luna=12, grok=0)
+        self.store.add_tasks("p", [_task(f"f{i:02}") for i in range(15)])
+        claims = [self.store.claim("p", "owner") for _ in range(15)]
+        self.assertEqual(sum(claim is not None for claim in claims), 12)
+
+    def test_live_upgrade_to_unlimited_keeps_running_attempts(self) -> None:
+        self.store.set_limits(luna=1, grok=0)
+        self.store.add_tasks("p", [_task(f"upgrade{i}") for i in range(4)])
+        first = self.store.claim("p", "owner")
+        self.assertIsNotNone(first)
+        self.assertIsNone(self.store.claim("p", "owner-2"))
+        self.store.set_limits(luna=0, grok=0)
+        self.assertEqual(sum(self.store.claim("p", "owner") is not None for _ in range(3)), 3)
+
+    def test_lowering_limit_below_active_work_is_rejected(self) -> None:
+        self.store.set_limits(luna=3, grok=0)
+        self.store.add_tasks("p", [_task(f"active{i}") for i in range(3)])
+        self.assertTrue(all(self.store.claim("p", "owner") for _ in range(3)))
+        with self.assertRaises(ValueError):
+            self.store.set_limits(luna=2, grok=0)
+
+    def test_reopen_preserves_frozen_explicit_grok_payload(self) -> None:
+        task = _task("historical", model="grok")
+        task["reasoning_effort"] = "legacy-value"
+        self.store.add_tasks("p", [task])
+        reopened = Store(self.db)
+        self.assertEqual(reopened.list_tasks("p")[0]["payload"], task)
+        self.assertEqual(reopened.list_tasks("p")[0]["model"], "grok")
+
+    def test_cross_project_target_conflict_uses_repo_and_package(self) -> None:
+        # Use a fresh database so both projects have the same resolved output identity.
+        other_db = self.db.with_name("conflicts.sqlite3")
+        store = Store(other_db)
+        config = {"repo": self.tempdir.name, "package_dir": "Package"}
+        store.init_project("p", config)
+        store.init_project("q", config)
+        ptask = _task("p-write")
+        qtask = _task("q-write")
+        ptask["target_path"] = "Main/Output"
+        qtask["target_path"] = "Main/Output/Child.lean"
+        store.add_tasks("p", [ptask])
+        store.add_tasks("q", [qtask])
+        first = store.claim("p", "owner")
+        self.assertEqual(first["task_id"], "p-write")
+        self.assertIsNone(store.claim("q", "owner"))
+        store.finish(first["attempt_id"], "VERIFIED", {})
+        self.assertEqual(store.claim("q", "owner")["task_id"], "q-write")
+
+    def test_gate_blocks_claim_and_releases_idempotently(self) -> None:
+        task = _task("gated")
+        task["integrated_gates"] = ["research-1"]
+        self.store.add_tasks("p", [task])
+        self.assertIsNone(self.store.claim("p", "owner"))
+        evidence = {
+            "commit": "abc",
+            "manifest_sha256": "a" * 64,
+            "audited_targets": ["gated"],
+            "reviewer": "reviewer",
+        }
+        self.store.record_acceptance_gate("research-1", evidence)
+        self.store.record_acceptance_gate("research-1", dict(evidence))
+        self.assertEqual(self.store.get_acceptance_gate("research-1")["evidence"], evidence)
+        self.assertEqual(self.store.claim("p", "owner")["task_id"], "gated")
+        with self.assertRaises(ValueError):
+            self.store.record_acceptance_gate("research-1", dict(evidence, commit="different"))
+
+    def test_longest_critical_path_precedes_shorter_unweighted_work(self) -> None:
+        short = _task("short")
+        short["estimated_seconds"] = 10
+        long = _task("long")
+        long["estimated_seconds"] = 1
+        child = _task("long-child", depends_on=["long"])
+        child["estimated_seconds"] = 20
+        self.store.add_tasks("p", [short, long, child])
+        self.assertEqual(self.store.claim("p", "owner")["task_id"], "long")
+
+    def test_research_jobs_count_for_finite_limits_but_not_unlimited(self) -> None:
+        with self.store._connection() as connection:
+            connection.execute("CREATE TABLE research_jobs (model TEXT, status TEXT)")
+            connection.execute("INSERT INTO research_jobs(model, status) VALUES ('luna', 'RUNNING')")
+            connection.execute("INSERT INTO research_jobs(model, status) VALUES ('luna', 'PREPARING')")
+        self.store.add_tasks("p", [_task("research-counted")])
+        self.store.set_limits(luna=2, grok=0)
+        self.assertIsNone(self.store.claim("p", "owner"))
+        self.store.set_limits(luna=0, grok=0)
+        self.assertEqual(self.store.claim("p", "owner")["task_id"], "research-counted")
+
+    def test_scheduler_events_persist_and_filter(self) -> None:
+        self.store.add_tasks("p", [_task("evented")])
+        claim = self.store.claim("p", "owner")
+        self.store.finish(claim["attempt_id"], "VERIFIED", {})
+        self.store.mark_integrated("p", "evented", "commit")
+        events = self.store.list_events()
+        self.assertEqual([event["kind"] for event in events[:3]], ["enqueue", "claim", "finish"])
+        self.assertEqual(self.store.list_events(after=events[1]["seq"])[0]["kind"], "finish")
+        reopened = Store(self.db)
+        self.assertEqual(len(reopened.list_events()), len(events))
 
     def test_invalid_transitions(self) -> None:
         self.store.add_tasks("p", [_task("a")])

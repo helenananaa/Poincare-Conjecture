@@ -30,3 +30,11 @@
 - Do not spend another agent on a mere rewrite of an already supplied frontier equality or an already proved bundle theorem.
 - New mainline bridges stay in isolated workspaces until compilation, statement review and transitive-axiom checks pass.
 - Task reports and newly created imports are not proof-completion evidence. Record conditional, unconditional, refuted and pending statements separately.
+
+## Unified scheduler — latest architecture request
+
+- Luna model concurrency and default dispatcher budget are unlimited (0). No fixed 8/32 cap.
+- New fixed proof tasks use tools/lean_swarm/cli.py, explicit high/xhigh/max and the shared dependency registry. Do not restart old handoff jobs to bypass the queue.
+- Running research workers are adopted without interruption; returned source snapshots require independent target-axiom verification and explicit semantic review.
+- Compiler/verifier resource limits remain independent of model concurrency. Never grant a worker write access to the full trusted scheduler state directory.
+- Auto-integration is allowed only for accepted fixed statements; research acceptance gates require a reviewed manifest matching an actual integration commit. No automatic upstream push.

@@ -43,6 +43,49 @@ class PipelineTests(TestCase):
     s.finish(claim['attempt_id'],'VERIFIED',{})
    c.execute=execute;rows=c.run(12,False)
    self.assertEqual(peak,12);self.assertTrue(all(r['status']=='VERIFIED' for r in rows))
+
+ def test_zero_budget_has_no_artificial_thirty_two_worker_cap(self):
+  with TemporaryDirectory() as tmp:
+   s=Store(Path(tmp)/'s.db');s.init_project('p',{'repo':tmp,'integration_branch':'integration','min_available_memory_mb':0})
+   s.set_limits(4,0);s.add_tasks('p',[task(f't{i:02}') for i in range(40)])
+   c=Controller(s,Path(tmp)/'state','p');barrier=threading.Barrier(40);lock=threading.Lock();active=peak=0
+   c._resource_status=lambda count:(True,None)
+   def execute(claim):
+    nonlocal active,peak
+    with lock:active+=1;peak=max(active,peak)
+    barrier.wait(5)
+    with lock:active-=1
+    s.finish(claim['attempt_id'],'VERIFIED',{})
+   c.execute=execute;rows=c.run(jobs=0)
+   self.assertGreater(peak,32);self.assertTrue(all(r['status']=='VERIFIED' for r in rows))
+
+ def test_positive_budget_remains_a_hard_worker_cap(self):
+  with TemporaryDirectory() as tmp:
+   s=Store(Path(tmp)/'s.db');s.init_project('p',{'repo':tmp,'integration_branch':'integration','min_available_memory_mb':0})
+   s.set_limits(4,0);s.add_tasks('p',[task(f't{i:02}') for i in range(9)])
+   c=Controller(s,Path(tmp)/'state','p');lock=threading.Lock();active=peak=0
+   def execute(claim):
+    nonlocal active,peak
+    with lock:active+=1;peak=max(peak,active)
+    time.sleep(.03)
+    with lock:active-=1
+    s.finish(claim['attempt_id'],'VERIFIED',{})
+   c.execute=execute;rows=c.run(jobs=3)
+   self.assertLessEqual(peak,3);self.assertTrue(all(r['status']=='VERIFIED' for r in rows))
+
+ def test_poll_hook_failure_stops_claims_without_killing_own_work(self):
+  with TemporaryDirectory() as tmp:
+   s=Store(Path(tmp)/'s.db');s.init_project('p',{'repo':tmp,'integration_branch':'integration'})
+   s.set_limits(4,0);s.add_tasks('p',[task('a'),task('b')])
+   c=Controller(s,Path(tmp)/'state','p');calls=[]
+   def execute(claim):
+    calls.append(claim['task_id']);s.finish(claim['attempt_id'],'VERIFIED',{})
+   c.execute=execute
+   def hook():
+    raise RuntimeError('research queue unavailable')
+   with self.assertRaises(RuntimeError):c.run(jobs=0,poll_hook=hook)
+   self.assertEqual(calls,[])
+   self.assertEqual({row['status'] for row in s.list_tasks('p')},{'QUEUED'})
  def test_failed_integration_does_not_unlock_child(self):
   with TemporaryDirectory() as tmp:
    s=Store(Path(tmp)/'s.db');s.init_project('p',{'repo':tmp,'integration_branch':'integration'});s.set_limits(4,0)

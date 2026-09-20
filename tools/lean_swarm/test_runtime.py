@@ -1,6 +1,7 @@
 """Pure tests: no model, account, network, Lean or sudo required."""
 import unittest
-from runtime import BEGIN,END,reconstruct,validate_task,parse_axioms,UNIT_RE
+from runtime import (BEGIN,END,reconstruct,validate_task,parse_axioms,UNIT_RE,
+                     resolve_effort,validate_lean_options)
 TEMPLATE=('import Mathlib\nnamespace Demo\ntheorem target (n : Nat) : n = n :=\n'+BEGIN+'\nby\n  sorry\n'+END+'\nend Demo\n')
 def task():return {'id':'test','model':'luna','depends_on':[],'source':TEMPLATE,'target_name':'Demo.target','target_path':'tests/Swarm/Target.lean'}
 class FrozenProofTests(unittest.TestCase):
@@ -33,6 +34,48 @@ class FrozenProofTests(unittest.TestCase):
     def test_no_unrelated_unit_can_be_targeted(self):
         self.assertTrue(UNIT_RE.fullmatch('lean-swarm-'+'a'*32+'.service'))
         self.assertFalse(UNIT_RE.fullmatch('grok.service'));self.assertFalse(UNIT_RE.fullmatch('lean-swarm-*'))
+
+    def test_luna_effort_contract_and_pinned_options(self):
+        base = task()
+        for difficulty, expected in [('integration', 'high'), ('proof', 'xhigh'),
+                                     ('foundation', 'max')]:
+            value = dict(base, difficulty=difficulty)
+            self.assertEqual(resolve_effort(value, {}), expected)
+        self.assertEqual(resolve_effort(dict(base, reasoning_effort='max'), {}), 'max')
+        self.assertEqual(resolve_effort(base, {'luna_reasoning_effort': 'high'}), 'high')
+        for effort in ['low', 'medium', True, 1]:
+            with self.subTest(effort=effort), self.assertRaises(ValueError):
+                resolve_effort(dict(base, reasoning_effort=effort), {})
+        for options in [['-DskipKernelTC=true'], ['-DtrustLevel=0'], ['--unsafe'], ['-o', 'x']]:
+            with self.subTest(options=options), self.assertRaises(ValueError):
+                validate_lean_options(options)
+        self.assertEqual(validate_lean_options(None), ['-j2', '-DmaxHeartbeats=800000'])
+
+    def test_job_entry_propagates_each_luna_effort_and_rejects_invalid_specs(self):
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import Mock, patch
+        import json, os
+        from runtime import job_entry
+        with TemporaryDirectory() as directory:
+            root = Path(directory); prompt = root/'prompt'; prompt.write_text('proof')
+            for effort in ('high', 'xhigh', 'max'):
+                logdir = root/effort; logdir.mkdir()
+                spec = {'model': 'luna', 'luna_model': 'gpt-5.6-luna',
+                        'luna_reasoning_effort': effort, 'codex': '/bin/false',
+                        'cwd': str(root), 'logdir': str(logdir),
+                        'prompt_file': str(prompt), 'home': str(root),
+                        'path': os.environ.get('PATH', ''), 'lean_path': '',
+                        'attempt_id': 'a'*32}
+                spec_path = root/(effort+'.json'); spec_path.write_text(json.dumps(spec))
+                with patch('runtime.subprocess.run', return_value=Mock(returncode=0)) as run:
+                    self.assertEqual(job_entry(spec_path), 0)
+                    command = run.call_args.args[0]
+                    self.assertIn('model_reasoning_effort="'+effort+'"', command)
+            bad = json.loads((root/'high.json').read_text()); bad['luna_reasoning_effort'] = 'low'
+            bad_path = root/'bad.json'; bad_path.write_text(json.dumps(bad))
+            with self.assertRaises(ValueError):
+                job_entry(bad_path)
 
 class LaunchFailureTests(unittest.TestCase):
     def test_partial_launch_failure_stops_unit_before_releasing_claim(self):

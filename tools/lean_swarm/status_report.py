@@ -3,7 +3,7 @@
 from pathlib import Path
 import argparse,collections,json,sqlite3,time
 
-def summarize(tasks,attempts,now=None):
+def summarize(tasks,attempts,now=None,gates=()):
     now=time.time() if now is None else now
     by_id={(t['project_id'],t['task_id']):t for t in tasks}
     projects={}
@@ -11,8 +11,10 @@ def summarize(tasks,attempts,now=None):
         p=projects.setdefault(t['project_id'],{'states':{},'ready':[],'blocked':[]})
         p['states'][t['status']]=p['states'].get(t['status'],0)+1
         if t['status']=='QUEUED':
-            deps=json.loads(t['payload_json']).get('depends_on',[])
+            payload=json.loads(t['payload_json'])
+            deps=payload.get('depends_on',[])
             missing=[d for d in deps if by_id.get((t['project_id'],d),{}).get('status')!='INTEGRATED']
+            missing += ['gate:'+g for g in payload.get('integrated_gates',[]) if g not in gates]
             p['blocked' if missing else 'ready'].append({'id':t['task_id'],'waiting_for':missing})
     active=[];intervals=[]
     for a in attempts:
@@ -45,6 +47,18 @@ def main():
         attempts=[dict(r) for r in c.execute('select * from attempts where project_id=?',(a.project,))]
     else:
         tasks=[dict(r) for r in c.execute('select * from tasks')];attempts=[dict(r) for r in c.execute('select * from attempts')]
-    result=summarize(tasks,attempts);result['managed_model_caps']={r['model']:'unlimited' if r['max_active']==0 else r['max_active'] for r in c.execute('select * from limits')};c.close()
+    tables={r['name'] for r in c.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    gates={r['gate_id'] for r in c.execute('SELECT gate_id FROM acceptance_gates')} if 'acceptance_gates' in tables else set()
+    research=[]
+    if 'research_jobs' in tables:
+        sql='SELECT job_id,project_id,task_id,model,effort,status FROM research_jobs'
+        research=[dict(r) for r in c.execute(sql+' WHERE project_id=?',(a.project,))] if a.project else [dict(r) for r in c.execute(sql)]
+    result=summarize(tasks,attempts,gates=gates)
+    result['research_jobs']=research
+    result['research_states']=dict(collections.Counter(r['status'] for r in research))
+    result['accepted_research_gate_count']=len(gates)
+    result['paused_models']={r['model']:r['reason'] for r in c.execute('SELECT * FROM paused_models')}
+    result['notes']='Queue slots and process stages are not measurements of model inference. Fixed-proof and research records are separate in the same registry. Research REVIEW_REQUIRED is not proved or integrated. Unregistered external sessions are not counted.'
+    result['managed_model_caps']={r['model']:'unlimited' if r['max_active']==0 else r['max_active'] for r in c.execute('select * from limits')};c.close()
     print(json.dumps(result,ensure_ascii=False,indent=2))
 if __name__=='__main__':main()
