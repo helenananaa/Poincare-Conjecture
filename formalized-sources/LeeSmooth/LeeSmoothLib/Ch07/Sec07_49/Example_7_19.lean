@@ -948,11 +948,26 @@ spelling world. -/
 private theorem torusCoordinateExpOnTorusModel_isImmersion_top :
     IsImmersion T2Model T2Model (⊤ : WithTop ℕ∞)
       (fun z : Fin 2 → EuclideanSpace ℝ (Fin 1) ↦ torusCoordinateExp (torusModelLinearEquiv.symm z)) := by
-  -- TODO: the pointwise bridge above is proved, but applying it here still needs one explicit
-  -- transport from the product charted-space instance on `Fin 2 → EuclideanSpace ℝ (Fin 1)` to the
-  -- self-chart spelling used by `localDiffeomorphAt_selfModel_isImmersionAtOfComplementPUnitTop`.
-  -- The remaining blocker is to package `isLocalDiffeomorph_comp ...` in that normalized instance.
-  sorry
+  let torusChartedSpace :
+      ChartedSpace (ModelPi fun _ : Fin 2 ↦ EuclideanSpace ℝ (Fin 1)) (𝕋^{2}) :=
+    inferInstance
+  let torusIsManifoldTop :
+      IsManifold T2Model (⊤ : WithTop ℕ∞) (𝕋^{2}) := inferInstance
+  have hLocal :
+      IsLocalDiffeomorph T2Model T2Model (⊤ : WithTop ℕ∞)
+        (torusCoordinateExp ∘ torusModelLinearEquiv.symm) := by
+    exact isLocalDiffeomorph_comp torusCoordinateExp_isLocalDiffeomorph_top
+      torusModelDiffeomorphTop.symm.isLocalDiffeomorph
+  rw [chartedSpaceSelf_fin_fun_eq_pi_r1] at hLocal ⊢
+  let _ : ChartedSpace (Fin 2 → EuclideanSpace ℝ (Fin 1))
+      (Fin 2 → EuclideanSpace ℝ (Fin 1)) :=
+    chartedSpaceSelf (Fin 2 → EuclideanSpace ℝ (Fin 1))
+  let _ : ChartedSpace (Fin 2 → EuclideanSpace ℝ (Fin 1)) (𝕋^{2}) :=
+    torusChartedSpace
+  let _ : IsManifold T2Model (⊤ : WithTop ℕ∞) (𝕋^{2}) := torusIsManifoldTop
+  refine ⟨PUnit.{1}, inferInstance, inferInstance, ?_⟩
+  intro x
+  exact localDiffeomorphAt_selfModel_isImmersionAtOfComplementPUnitTop (hLocal x)
 
 /-- Helper for Example 7.19: the linear source reparameterization itself is an analytic immersion
 from the raw torus coordinate model into the `T2Model` fiber. -/
@@ -1030,20 +1045,25 @@ every point because the smooth Lie-group homomorphism is already an `∞`-immers
 theorem torusSlopeCurve_addChar_mfderiv_injective
     (α : ℝ) (hα : Irrational α) (x : Multiplicative ℝ) :
     Function.Injective (mfderiv 𝓘(ℝ) T2Model (torusSlopeCurve_addChar α) x) := by
-  letI : LieGroup T2Model ∞ (𝕋^{2}) := torusLieGroupSmooth
-  let F : ContMDiffMonoidMorphism 𝓘(ℝ) T2Model ∞ (Multiplicative ℝ) (𝕋^{2}) :=
-    { toMonoidHom := (torusSlopeCurve_addChar α).toMonoidHom
-      contMDiff_toFun := by
-        -- The bundled additive character already carries the required smoothness.
-        simpa using! torusSlopeCurve_addChar_contMDiff α }
-  have hF_injective : Function.Injective F := by
-    -- Irrationality of the slope gives injectivity of the underlying homomorphism.
-    simpa using! torusSlopeCurve_addChar_injective α hα
-  have hImm : IsImmersion 𝓘(ℝ) T2Model ∞ F := by
-    -- Proposition 7.17 packages injective smooth Lie-group homomorphisms as immersions.
-    exact injectiveLieGroupHomIsImmersion F hF_injective
-  -- Extract the pointwise manifold-derivative injectivity from the existing `∞`-immersion route.
-  simpa [F] using
+  have hImm : IsImmersion (modelWithCornersSelf ℝ ℝ) T2Model ∞
+      (torusSlopeCurve_addChar α) := by
+    -- Lower the explicit analytic immersion proved above to the chapter's smooth regularity.
+    let hTop := torusSlopeCurve_addChar_isImmersion_top α
+    let hComp := hTop.complement
+    let hCompImm := hTop.isImmersionOfComplement_complement
+    refine ⟨hComp, inferInstance, inferInstance, ?_⟩
+    intro y
+    let hy := hCompImm y
+    refine Manifold.IsImmersionAtOfComplement.mk_of_charts
+      hy.equiv hy.domChart hy.codChart hy.mem_domChart_source hy.mem_codChart_source
+      ?_ ?_ hy.source_subset_preimage_source hy.writtenInCharts
+    · exact (IsManifold.maximalAtlas_subset_of_le (by simp))
+        hy.domChart_mem_maximalAtlas
+    · exact (IsManifold.maximalAtlas_subset_of_le (by simp))
+        hy.codChart_mem_maximalAtlas
+  -- Extract pointwise derivative injectivity directly; irrationality is only needed for the
+  -- global injectivity statement, not for this local rank computation.
+  simpa using
     ((Manifold.is_immersion_iff_forall_injective_mfderiv
       (torusSlopeCurve_addChar_contMDiff α)).1 hImm x)
 

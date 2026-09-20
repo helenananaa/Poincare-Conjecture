@@ -8,6 +8,9 @@ import LeeSmoothLib.Ch06.Sec06_44.Theorem_6_30
 
 open scoped ContDiff Manifold
 open Manifold Set
+open TopologicalSpace
+
+set_option linter.unusedSectionVars false
 
 /-- Helper for Problem 6-10: if `A.range ⊔ S = ⊤`, then the quotient map modulo `S` composed with
 `A` is surjective, so rank-nullity computes the dimension of `S.comap A`. -/
@@ -181,6 +184,187 @@ lemma mdifferentiableAt_toSubtype_of_isEmbeddedSubmanifold
     e.extend_target_subset_range hx'_target
   exact hcomp.congr_of_eventuallyEq_of_mem heq hx'_range
 
+omit [IsEmbeddedSubmanifold I J S] [IsEmbeddedSubmanifold I J' S]
+  [FiniteDimensional ℝ E''] in
+/-- Helper for Problem 6-10: a smooth ambient map whose image lies in a C∞ embedded subset is
+manifold-differentiable at each point as a map into that subtype. The target need only be a
+C∞ embedding, not an analytic `IsEmbeddedSubmanifold`. -/
+private lemma mdifferentiableAt_toSubtype_of_isSmoothEmbedding
+    {E_src : Type*} [NormedAddCommGroup E_src] [NormedSpace ℝ E_src]
+    {H_src : Type*} [TopologicalSpace H_src]
+    {N : Type*} [TopologicalSpace N] [ChartedSpace H_src N]
+    {K : ModelWithCorners ℝ E_src H_src} [IsManifold K ∞ N]
+    {F : N → M}
+    (hS : IsSmoothEmbedding J I ∞ (Subtype.val : S → M))
+    (hF : ContMDiff K I ∞ F) (hFS : ∀ x, F x ∈ S) (x : N) :
+    MDifferentiableAt K J (Set.codRestrict F S hFS) x := by
+  let fS : N → S := Set.codRestrict F S hFS
+  let y : S := fS x
+  let hImm : IsImmersionAt J I ∞ (Subtype.val : S → M) y :=
+    hS.isImmersion.isImmersionAt y
+  let e : OpenPartialHomeomorph N H_src := chartAt H_src x
+  let x' : E_src := e.extend K x
+  have hdom :
+      hImm.domChart ∈ IsManifold.maximalAtlas J 1 S :=
+    IsManifold.maximalAtlas_subset_of_le
+      (I := J) (M := S) (m := 1) (n := ∞) (by simp) hImm.domChart_mem_maximalAtlas
+  have hcod :
+      hImm.codChart ∈ IsManifold.maximalAtlas I 1 M :=
+    IsManifold.maximalAtlas_subset_of_le
+      (I := I) (M := M) (m := 1) (n := ∞) (by simp) hImm.codChart_mem_maximalAtlas
+  have hcont : ContinuousAt fS x := (hF.continuous.continuousAt.codRestrict hFS)
+  have hx : x ∈ e.source := mem_chart_source H_src x
+  have hy : fS x ∈ hImm.domChart.source := hImm.mem_domChart_source
+  have hy' : F x ∈ hImm.codChart.source := hImm.mem_codChart_source
+  rw [← mdifferentiableWithinAt_univ,
+    mdifferentiableWithinAt_iff_of_mem_maximalAtlas
+      (s := Set.univ) (e := e) (e' := hImm.domChart)
+      (IsManifold.chart_mem_maximalAtlas x) hdom hx hy,
+    continuousWithinAt_univ, Set.preimage_univ, Set.univ_inter]
+  refine ⟨hcont, ?_⟩
+  have hFwithin : MDifferentiableWithinAt K I F Set.univ x := by
+    exact (hF.mdifferentiableAt (by simp : (∞ : ℕ∞ω) ≠ 0)).mdifferentiableWithinAt
+  have hambient :
+      DifferentiableWithinAt ℝ ((hImm.codChart.extend I) ∘ F ∘ (e.extend K).symm)
+        (Set.range K) x' := by
+    rw [mdifferentiableWithinAt_iff_of_mem_maximalAtlas
+      (s := Set.univ) (e := e) (e' := hImm.codChart)
+      (IsManifold.chart_mem_maximalAtlas x) hcod hx hy',
+      continuousWithinAt_univ, Set.preimage_univ, Set.univ_inter] at hFwithin
+    simpa [x'] using hFwithin.2
+  have hproj :
+      Differentiable ℝ (fun v ↦ (hImm.equiv.symm v).1) := by
+    simpa using!
+      (contDiff_fst.comp hImm.equiv.symm.contDiff).differentiable
+        (by simp : (⊤ : ℕ∞ω) ≠ 0)
+  have hprojWithin :
+      DifferentiableWithinAt ℝ (fun v ↦ (hImm.equiv.symm v).1) Set.univ
+        (((hImm.codChart.extend I) ∘ F ∘ (e.extend K).symm) x') :=
+    (hproj _).differentiableWithinAt
+  have hcomp :
+      DifferentiableWithinAt ℝ
+        ((fun v ↦ (hImm.equiv.symm v).1) ∘ ((hImm.codChart.extend I) ∘ F ∘ (e.extend K).symm))
+        (Set.range K) x' := by
+    exact hprojWithin.comp x' hambient (by intro z hz; simp)
+  have hsource_mem : fS ⁻¹' hImm.domChart.source ∈ nhds x := by
+    have : hImm.domChart.source ∈ nhds (fS x) :=
+      hImm.domChart.open_source.mem_nhds hy
+    exact hcont.preimage_mem_nhds this
+  have hset_mem :
+      (e.extend K).symm ⁻¹' (fS ⁻¹' hImm.domChart.source) ∈ nhdsWithin x' (Set.range K) := by
+    simpa [e, x', nhdsWithin_univ] using
+      e.extend_preimage_mem_nhdsWithin (I := K) (s := Set.univ) (t := fS ⁻¹' hImm.domChart.source)
+        hx (by simpa [nhdsWithin_univ] using hsource_mem)
+  have heq :
+      ((hImm.domChart.extend J) ∘ fS ∘ (e.extend K).symm)
+        =ᶠ[nhdsWithin x' (Set.range K)]
+          ((fun v ↦ (hImm.equiv.symm v).1) ∘
+            ((hImm.codChart.extend I) ∘ F ∘ (e.extend K).symm)) := by
+    refine Filter.eventuallyEq_of_mem hset_mem ?_
+    intro z hz
+    have hz_source : fS ((e.extend K).symm z) ∈ hImm.domChart.source := by
+      simpa using hz
+    have hz_extend_source : fS ((e.extend K).symm z) ∈ (hImm.domChart.extend J).source := by
+      simpa [OpenPartialHomeomorph.extend_source] using hz_source
+    have hz_target :
+        hImm.domChart.extend J (fS ((e.extend K).symm z)) ∈ (hImm.domChart.extend J).target :=
+      (hImm.domChart.extend J).map_source hz_extend_source
+    have hwritten :=
+      (congrArg (fun v => Prod.fst (hImm.equiv.symm v)) (hImm.writtenInCharts hz_target)).symm
+    have hwritten' :
+        hImm.domChart.extend J (fS ((e.extend K).symm z)) =
+          (hImm.equiv.symm
+            ((hImm.codChart.extend I)
+              (↑(hImm.domChart.symm (hImm.domChart (fS ((e.extend K).symm z)))) : M))).1 := by
+      simpa [Function.comp, OpenPartialHomeomorph.extend_coe, hImm.domChart.left_inv hz_source] using
+        hwritten
+    have hwritten'' :
+        hImm.domChart.extend J (fS ((e.extend K).symm z)) =
+          (hImm.equiv.symm ((hImm.codChart.extend I) (F ((e.extend K).symm z)))).1 := by
+      calc
+        hImm.domChart.extend J (fS ((e.extend K).symm z))
+            = (hImm.equiv.symm
+                ((hImm.codChart.extend I)
+                  (↑(hImm.domChart.symm (hImm.domChart (fS ((e.extend K).symm z)))) : M))).1 := by
+                    exact hwritten'
+        _ = (hImm.equiv.symm ((hImm.codChart.extend I) (F ((e.extend K).symm z)))).1 := by
+              rw [hImm.domChart.left_inv hz_source]
+              rfl
+    simpa [Function.comp, fS, OpenPartialHomeomorph.extend_coe] using hwritten''
+  have hx'_target : x' ∈ (e.extend K).target := (e.extend K).map_source <| by
+    simpa [OpenPartialHomeomorph.extend_source] using hx
+  have hx'_range : x' ∈ Set.range K :=
+    e.extend_target_subset_range hx'_target
+  exact hcomp.congr_of_eventuallyEq_of_mem heq hx'_range
+
+omit [IsEmbeddedSubmanifold I J S] [IsEmbeddedSubmanifold I J' S] in
+/-- Helper for Problem 6-10: two C∞ embeddings of the same carrier determine the same ambient
+tangent submodule at each point. This does not use the target preimage/intersection identity. -/
+private lemma sameCarrierTangentSpace_eq_of_isSmoothEmbeddings
+    (hJ : IsSmoothEmbedding J I ∞ (Subtype.val : S → M))
+    (hJ' : IsSmoothEmbedding J' I ∞ (Subtype.val : S → M))
+    (p : S) :
+    (T[J; p] : Submodule ℝ (TangentSpace I (p : M))) = T[J'; p] := by
+  let g : S → S := Set.codRestrict (Subtype.val : S → M) S (fun x => x.2)
+  have hsubJ : MDifferentiableAt J I (Subtype.val : S → M) p :=
+    hJ.contMDiff.mdifferentiableAt (by simp)
+  have hsubJ' : MDifferentiableAt J' I (Subtype.val : S → M) p :=
+    hJ'.contMDiff.mdifferentiableAt (by simp)
+  have hdiffJJ' : MDifferentiableAt J J' g p := by
+    simpa [g] using
+      mdifferentiableAt_toSubtype_of_isSmoothEmbedding (J := J') (K := J)
+        hJ' hJ.contMDiff (fun x => x.2) p
+  have hdiffJ'J : MDifferentiableAt J' J g p := by
+    simpa [g] using
+      mdifferentiableAt_toSubtype_of_isSmoothEmbedding (J := J) (K := J')
+        hJ hJ'.contMDiff (fun x => x.2) p
+  have hle : (T[J; p] : Submodule ℝ (TangentSpace I (p : M))) ≤ T[J'; p] := by
+    rw [show T[J; p] = (mfderiv J I (Subtype.val : S → M) p).range by rfl,
+      show T[J'; p] = (mfderiv J' I (Subtype.val : S → M) p).range by rfl]
+    have hcomp :
+        mfderiv J I (Subtype.val : S → M) p =
+          (mfderiv J' I (Subtype.val : S → M) p).comp (mfderiv J J' g p) := by
+      simpa [g, Function.comp] using!
+        (mfderiv_comp (x := p) (g := (Subtype.val : S → M)) (f := g) hsubJ' hdiffJJ')
+    rw [hcomp]
+    exact LinearMap.range_comp_le_range _ _
+  have hge : T[J'; p] ≤ (T[J; p] : Submodule ℝ (TangentSpace I (p : M))) := by
+    rw [show T[J'; p] = (mfderiv J' I (Subtype.val : S → M) p).range by rfl,
+      show T[J; p] = (mfderiv J I (Subtype.val : S → M) p).range by rfl]
+    have hcomp :
+        mfderiv J' I (Subtype.val : S → M) p =
+          (mfderiv J I (Subtype.val : S → M) p).comp (mfderiv J' J g p) := by
+      simpa [g, Function.comp] using!
+        (mfderiv_comp (x := p) (g := (Subtype.val : S → M)) (f := g) hsubJ hdiffJ'J)
+    rw [hcomp]
+    exact LinearMap.range_comp_le_range _ _
+  exact le_antisymm hle hge
+
+omit [IsEmbeddedSubmanifold I J S] [IsEmbeddedSubmanifold I J' S] in
+/-- Helper for Problem 6-10: the tangent submodule of a C∞ embedding has the model dimension. -/
+private lemma finrank_tangentSpace_of_isSmoothEmbedding
+    (hS : IsSmoothEmbedding J I ∞ (Subtype.val : S → M)) (p : S) :
+    Module.finrank ℝ (T[J; p] : Submodule ℝ (TangentSpace I (p : M))) =
+      Module.finrank ℝ E' := by
+  let _ : FiniteDimensional ℝ (TangentSpace I (p : M)) := by
+    simpa using! (inferInstance : FiniteDimensional ℝ E)
+  let _ : FiniteDimensional ℝ (TangentSpace J p) := by
+    simpa using! (inferInstance : FiniteDimensional ℝ E')
+  have hinj :
+      Function.Injective (mfderiv J I (Subtype.val : S → M) p) :=
+    hS.isImmersion.mfderiv_injective p
+  change Module.finrank ℝ ((mfderiv J I (Subtype.val : S → M) p).toLinearMap.range) =
+    Module.finrank ℝ E'
+  have hnullity := LinearMap.finrank_range_add_finrank_ker
+    (mfderiv J I (Subtype.val : S → M) p).toLinearMap
+  have hker :
+      (mfderiv J I (Subtype.val : S → M) p).toLinearMap.ker = ⊥ :=
+    LinearMap.ker_eq_bot.2 hinj
+  rw [hker, finrank_bot, add_zero] at hnullity
+  exact hnullity.trans (by
+    change Module.finrank ℝ (TangentSpace J p) = Module.finrank ℝ E'
+    rfl)
+
 /-- Helper for Problem 6-10: two embedded submanifold structures on the same subtype determine the
 same ambient tangent submodule at each point. -/
 lemma sameCarrierTangentSpace_eq_of_embeddedStructures (p : S) :
@@ -248,10 +432,7 @@ lemma tangentQuotientFinrank_eq_codimension (p : S) :
       hEmbedded.isSmoothEmbedding_subtype_val
   have hinj :
       Function.Injective (mfderiv J I (Subtype.val : S → M) p) :=
-    (Manifold.is_immersion_iff_forall_injective_mfderiv
-      (subtypeVal_contMDiff_of_isEmbeddedSubmanifold
-        (I := I) (JS := J) (S := S))).1
-      hSubtypeEmbeddingInf.isImmersion p
+    hSubtypeEmbeddingInf.isImmersion.mfderiv_injective p
   have hrange :
       Module.finrank ℝ (T[J; p] : Submodule ℝ (TangentSpace I (p : M))) =
         Module.finrank ℝ (TangentSpace J p) := by
@@ -381,11 +562,14 @@ lemma preimageTangentSpace_le_comap
     exact hleft.trans (hmid.trans hright)
   simpa [LinearMap.comp_apply] using! (congrArg (fun L ↦ L u) hcomp).symm
 
--- The next helper transports codimension from Theorem 6.30's witness structure to the chosen
--- preimage structure.
+-- The next helper transports codimension from Theorem 6.30's C∞ witness to the chosen
+-- analytic preimage structure. The C∞ witness is not an `IsEmbeddedSubmanifold` (analytic).
 /-- Helper for Problem 6-10: the codimension of any chosen embedded structure on the transverse
-preimage agrees with the codimension supplied by Theorem 6.30. -/
+preimage agrees with the codimension of the target. The nonempty point supplies the rank bound
+for Theorem 6.30; the source must be boundaryless, Hausdorff, and second-countable so that the
+C∞ Euclidean preimage embedding exists. -/
 lemma preimageCodimension_eq_codimension_of_transverse
+    [K.Boundaryless] [T2Space N] [SecondCountableTopology N]
     {f : N → M} {JW : ModelWithCorners ℝ E'' H''}
     [ChartedSpace H'' (f ⁻¹' X)] [IsManifold JW ∞ (f ⁻¹' X)]
     [IsEmbeddedSubmanifold K JW (f ⁻¹' X)]
@@ -393,56 +577,50 @@ lemma preimageCodimension_eq_codimension_of_transverse
     (p : f ⁻¹' X) :
     (inferInstance : IsEmbeddedSubmanifold K JW (f ⁻¹' X)).codimension =
       (inferInstance : IsEmbeddedSubmanifold I JX X).codimension := by
-  -- Unpack Theorem 6.30's witness structure on the same carrier.
+  have hTne : (f ⁻¹' X).Nonempty := ⟨p, p.2⟩
+  have hcod :
+      (inferInstance : IsEmbeddedSubmanifold I JX X).codimension ≤
+        Module.finrank ℝ F :=
+    transverse_codimension_le_source_finrank
+      (IM := I) (IN := K) (JS := JX) (S := X) (F := f) htrans hTne
   have hwitness :=
     transverse_preimage_has_embedded_submanifold_structure
-      (IM := I) (IN := K) (JS := JX) (S := X) (F := f) htrans
+      (IM := I) (IN := K) (JS := JX) (S := X) (F := f) htrans hcod
   dsimp only at hwitness
-  rcases hwitness with ⟨cs, hs, hW, hcodW⟩
-  letI : ChartedSpace
-      (EuclideanSpace ℝ
-        (Fin
-          (Module.finrank ℝ F -
-            (inferInstance : IsEmbeddedSubmanifold I JX X).codimension)))
-      (f ⁻¹' X) := cs
-  letI : IsManifold
-      (modelWithCornersSelf ℝ
-        (EuclideanSpace ℝ
-          (Fin
-            (Module.finrank ℝ F -
-              (inferInstance : IsEmbeddedSubmanifold I JX X).codimension))))
-      ∞ (f ⁻¹' X) := hs
-  letI : IsEmbeddedSubmanifold
-      K
-      (modelWithCornersSelf ℝ
-        (EuclideanSpace ℝ
-          (Fin
-            (Module.finrank ℝ F -
-              (inferInstance : IsEmbeddedSubmanifold I JX X).codimension))))
-      (f ⁻¹' X) := hW
-  -- Transport codimension across the two embedded structures on the same subtype carrier.
-  calc
-    (inferInstance : IsEmbeddedSubmanifold K JW (f ⁻¹' X)).codimension
-      = (inferInstance : IsEmbeddedSubmanifold
-          K
-          (modelWithCornersSelf ℝ
-            (EuclideanSpace ℝ
-              (Fin
-                (Module.finrank ℝ F -
-                  (inferInstance : IsEmbeddedSubmanifold I JX X).codimension))))
-          (f ⁻¹' X)).codimension := by
-            exact sameCarrierCodimension_eq_of_embeddedStructures
-              (I := K)
-              (J := JW)
-              (J' := modelWithCornersSelf ℝ
-                (EuclideanSpace ℝ
-                  (Fin
-                    (Module.finrank ℝ F -
-                      (inferInstance : IsEmbeddedSubmanifold I JX X).codimension))))
-              (S := f ⁻¹' X) p
-    _ = (inferInstance : IsEmbeddedSubmanifold I JX X).codimension := hcodW
+  rcases hwitness with ⟨cs, hs, hW⟩
+  let k : ℕ :=
+    Module.finrank ℝ F -
+      (inferInstance : IsEmbeddedSubmanifold I JX X).codimension
+  let L := modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin k))
+  letI : ChartedSpace (EuclideanSpace ℝ (Fin k)) (f ⁻¹' X) := cs
+  letI : IsManifold L ∞ (f ⁻¹' X) := hs
+  let hChosen : IsSmoothEmbedding JW K ∞ (Subtype.val : (f ⁻¹' X) → N) :=
+    isSmoothEmbedding_of_le (by simp)
+      (show IsSmoothEmbedding JW K (⊤ : WithTop ℕ∞) (Subtype.val : (f ⁻¹' X) → N) from
+        IsEmbeddedSubmanifold.isSmoothEmbedding_subtype_val)
+  have hTan :
+      (T[JW; p] : Submodule ℝ (TangentSpace K (p : N))) = T[L; p] :=
+    sameCarrierTangentSpace_eq_of_isSmoothEmbeddings
+      (I := K) (J := JW) (J' := L) (S := f ⁻¹' X) hChosen hW p
+  have hdimChosen :
+      Module.finrank ℝ (T[JW; p] : Submodule ℝ (TangentSpace K (p : N))) =
+        Module.finrank ℝ E'' :=
+    finrank_tangentSpace_of_isSmoothEmbedding
+      (I := K) (J := JW) (S := f ⁻¹' X) hChosen p
+  have hdimW :
+      Module.finrank ℝ (T[L; p] : Submodule ℝ (TangentSpace K (p : N))) = k := by
+    have h :=
+      finrank_tangentSpace_of_isSmoothEmbedding
+        (I := K) (J := L) (S := f ⁻¹' X) hW p
+    simpa [L, k, finrank_euclideanSpace] using h
+  have hdimEq : Module.finrank ℝ E'' = k :=
+    hdimChosen.symm.trans (hTan ▸ hdimW)
+  rw [IsEmbeddedSubmanifold.codimension_eq_finrank_sub
+      (I := K) (J := JW) (S := f ⁻¹' X) (hS := inferInstance), hdimEq]
+  exact Nat.sub_sub_self hcod
 
 theorem tangentSpace_preimage_eq_comap_of_transverse_aux
+    [K.Boundaryless] [T2Space N] [SecondCountableTopology N]
     {f : N → M} {JW : ModelWithCorners ℝ E'' H''}
     [ChartedSpace H'' (f ⁻¹' X)] [IsManifold JW ∞ (f ⁻¹' X)]
     [IsEmbeddedSubmanifold K JW (f ⁻¹' X)]
@@ -525,6 +703,7 @@ theorem tangentSpace_preimage_eq_comap_of_transverse_aux
 /-- Helper for Problem 6-10: once the ambient manifold structures on `M` and `N` are available as
 ordinary terms, the public preimage tangent-space statement is just the proved auxiliary theorem. -/
 lemma preimageTangentSpaceEqComap_fromAmbientManifolds
+    [K.Boundaryless] [T2Space N] [SecondCountableTopology N]
     {f : N → M} {JW : ModelWithCorners ℝ E'' H''}
     [ChartedSpace H'' (f ⁻¹' X)] [IsManifold JW ∞ (f ⁻¹' X)]
     [IsEmbeddedSubmanifold K JW (f ⁻¹' X)]
@@ -545,6 +724,7 @@ omit [IsManifold I ∞ M] [IsManifold K ∞ N] in
 /-- Helper for Problem 6-10: the public preimage tangent-space theorem can be reused under
 `omit` once the ambient manifold structures are treated as ordinary implicit arguments. -/
 lemma preimageTangentSpaceEqComap_omitAux
+    [K.Boundaryless] [T2Space N] [SecondCountableTopology N]
     {hIM : IsManifold I ∞ M} {hKN : IsManifold K ∞ N}
     {f : N → M} {JW : ModelWithCorners ℝ E'' H''}
     [ChartedSpace H'' (f ⁻¹' X)] [IsManifold JW ∞ (f ⁻¹' X)]
@@ -565,6 +745,7 @@ lemma preimageTangentSpaceEqComap_omitAux
 `F ⁻¹' X` is the inverse image of the tangent space of `X` under `dFₚ`, written in Lean as a
 `Submodule.comap`. -/
 theorem tangentSpace_preimage_eq_comap_of_transverse
+    [K.Boundaryless] [T2Space N] [SecondCountableTopology N]
     {f : N → M} {JW : ModelWithCorners ℝ E'' H''}
     [ChartedSpace H'' (f ⁻¹' X)] [IsManifold JW ∞ (f ⁻¹' X)]
     [IsEmbeddedSubmanifold K JW (f ⁻¹' X)]
@@ -717,8 +898,11 @@ lemma finrank_quotient_inf_eq_add_finrank_quotient_of_sup_eq_top
   exact Nat.add_right_cancel <| hleft.trans hright.symm
 
 /-- Helper for Problem 6-10: the codimension of any chosen embedded structure on the transverse
-intersection agrees with the codimension supplied by Theorem 6.30. -/
+intersection is the sum of the two factor codimensions. The nonempty point supplies the rank
+bound for Theorem 6.30; the ambient manifold and the first factor model must be boundaryless,
+Hausdorff, and second-countable so that the C∞ Euclidean intersection embedding exists. -/
 lemma intersectionCodimension_eq_add_of_transverse
+    [I.Boundaryless] [JX.Boundaryless] [T2Space M] [SecondCountableTopology M]
     {JXX' : ModelWithCorners ℝ E''' H'''}
     [ChartedSpace H''' (X ∩ X' : Set M)] [IsManifold JXX' ∞ (X ∩ X' : Set M)]
     [IsEmbeddedSubmanifold I JXX' (X ∩ X' : Set M)]
@@ -727,62 +911,64 @@ lemma intersectionCodimension_eq_add_of_transverse
     (inferInstance : IsEmbeddedSubmanifold I JXX' (X ∩ X' : Set M)).codimension =
       (inferInstance : IsEmbeddedSubmanifold I JX X).codimension +
         (inferInstance : IsEmbeddedSubmanifold I JX' X').codimension := by
-  -- Unpack Theorem 6.30's witness structure on the same carrier.
+  have hTne : ((Subtype.val : X → M) ⁻¹' X').Nonempty :=
+    ⟨⟨p, p.2.1⟩, p.2.2⟩
+  have hftrans : IsTransverseToSubmanifold I JX JX' X' (Subtype.val : X → M) :=
+    (submanifoldsIntersectTransversely_iff_left_inclusion_transverse).1 htrans
+  have hcod' :
+      (inferInstance : IsEmbeddedSubmanifold I JX' X').codimension ≤
+        Module.finrank ℝ E' :=
+    transverse_codimension_le_source_finrank
+      (IM := I) (IN := JX) (JS := JX') (S := X') (F := (Subtype.val : X → M))
+      hftrans hTne
+  have hcod :
+      (inferInstance : IsEmbeddedSubmanifold I JX X).codimension +
+          (inferInstance : IsEmbeddedSubmanifold I JX' X').codimension ≤
+        Module.finrank ℝ E := by
+    simp only [IsEmbeddedSubmanifold.codimension_eq_finrank_sub] at hcod' ⊢
+    omega
   have hwitness :=
     transverse_intersection_has_embedded_submanifold_structure
-      (IM := I) (JS := JX) (S := X) (JS' := JX') (S' := X') htrans
+      (IM := I) (JS := JX) (S := X) (JS' := JX') (S' := X') htrans hcod
   dsimp only at hwitness
-  rcases hwitness with ⟨cs, hs, hW, hcodW⟩
-  letI : ChartedSpace
-      (EuclideanSpace ℝ
-        (Fin
-          (Module.finrank ℝ E -
-            ((inferInstance : IsEmbeddedSubmanifold I JX X).codimension +
-              (inferInstance : IsEmbeddedSubmanifold I JX' X').codimension))))
-      (X ∩ X' : Set M) := cs
-  letI : IsManifold
-      (modelWithCornersSelf ℝ
-        (EuclideanSpace ℝ
-          (Fin
-            (Module.finrank ℝ E -
-              ((inferInstance : IsEmbeddedSubmanifold I JX X).codimension +
-                (inferInstance : IsEmbeddedSubmanifold I JX' X').codimension)))))
-      ∞ (X ∩ X' : Set M) := hs
-  letI : IsEmbeddedSubmanifold
-      I
-      (modelWithCornersSelf ℝ
-        (EuclideanSpace ℝ
-          (Fin
-            (Module.finrank ℝ E -
-              ((inferInstance : IsEmbeddedSubmanifold I JX X).codimension +
-                (inferInstance : IsEmbeddedSubmanifold I JX' X').codimension)))))
-      (X ∩ X' : Set M) := hW
-  -- Transport codimension across the two embedded structures on the same intersection carrier.
-  calc
-    (inferInstance : IsEmbeddedSubmanifold I JXX' (X ∩ X' : Set M)).codimension
-      = (inferInstance : IsEmbeddedSubmanifold
-          I
-          (modelWithCornersSelf ℝ
-            (EuclideanSpace ℝ
-              (Fin
-                (Module.finrank ℝ E -
-                  ((inferInstance : IsEmbeddedSubmanifold I JX X).codimension +
-                    (inferInstance : IsEmbeddedSubmanifold I JX' X').codimension)))))
-          (X ∩ X' : Set M)).codimension := by
-            exact sameCarrierCodimension_eq_of_embeddedStructures
-              (I := I)
-              (J := JXX')
-              (J' := modelWithCornersSelf ℝ
-                (EuclideanSpace ℝ
-                  (Fin
-                    (Module.finrank ℝ E -
-                      ((inferInstance : IsEmbeddedSubmanifold I JX X).codimension +
-                        (inferInstance : IsEmbeddedSubmanifold I JX' X').codimension)))))
-              (S := (X ∩ X' : Set M)) p
-    _ = (inferInstance : IsEmbeddedSubmanifold I JX X).codimension +
-          (inferInstance : IsEmbeddedSubmanifold I JX' X').codimension := hcodW
+  rcases hwitness with ⟨cs, hs, hW⟩
+  let k : ℕ :=
+    Module.finrank ℝ E -
+      ((inferInstance : IsEmbeddedSubmanifold I JX X).codimension +
+        (inferInstance : IsEmbeddedSubmanifold I JX' X').codimension)
+  let L := modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin k))
+  letI : ChartedSpace (EuclideanSpace ℝ (Fin k)) (X ∩ X' : Set M) := cs
+  letI : IsManifold L ∞ (X ∩ X' : Set M) := hs
+  let hChosen :
+      IsSmoothEmbedding JXX' I ∞ (Subtype.val : (X ∩ X' : Set M) → M) :=
+    isSmoothEmbedding_of_le (by simp)
+      (show IsSmoothEmbedding JXX' I (⊤ : WithTop ℕ∞)
+          (Subtype.val : (X ∩ X' : Set M) → M) from
+        IsEmbeddedSubmanifold.isSmoothEmbedding_subtype_val)
+  have hTan :
+      (T[JXX'; p] : Submodule ℝ (TangentSpace I (p : M))) = T[L; p] :=
+    sameCarrierTangentSpace_eq_of_isSmoothEmbeddings
+      (I := I) (J := JXX') (J' := L) (S := (X ∩ X' : Set M)) hChosen hW p
+  have hdimChosen :
+      Module.finrank ℝ (T[JXX'; p] : Submodule ℝ (TangentSpace I (p : M))) =
+        Module.finrank ℝ E''' :=
+    finrank_tangentSpace_of_isSmoothEmbedding
+      (I := I) (J := JXX') (S := (X ∩ X' : Set M)) hChosen p
+  have hdimW :
+      Module.finrank ℝ (T[L; p] : Submodule ℝ (TangentSpace I (p : M))) = k := by
+    have h :=
+      finrank_tangentSpace_of_isSmoothEmbedding
+        (I := I) (J := L) (S := (X ∩ X' : Set M)) hW p
+    simpa [L, k, finrank_euclideanSpace] using h
+  have hdimEq : Module.finrank ℝ E''' = k :=
+    hdimChosen.symm.trans (hTan ▸ hdimW)
+  rw [IsEmbeddedSubmanifold.codimension_eq_finrank_sub
+      (I := I) (J := JXX') (S := (X ∩ X' : Set M)) (hS := inferInstance),
+    hdimEq]
+  exact Nat.sub_sub_self hcod
 
 theorem tangentSpace_inter_eq_inf_of_transverse_aux
+    [I.Boundaryless] [JX.Boundaryless] [T2Space M] [SecondCountableTopology M]
     {JXX' : ModelWithCorners ℝ E''' H'''}
     [ChartedSpace H''' (X ∩ X' : Set M)] [IsManifold JXX' ∞ (X ∩ X' : Set M)]
     [IsEmbeddedSubmanifold I JXX' (X ∩ X' : Set M)]
@@ -882,6 +1068,7 @@ theorem tangentSpace_inter_eq_inf_of_transverse_aux
 ordinary term, the public intersection tangent-space statement is just the proved auxiliary
 theorem. -/
 lemma intersectionTangentSpaceEqInf_fromAmbientManifold
+    [I.Boundaryless] [JX.Boundaryless] [T2Space M] [SecondCountableTopology M]
     {JXX' : ModelWithCorners ℝ E''' H'''}
     [ChartedSpace H''' (X ∩ X' : Set M)] [IsManifold JXX' ∞ (X ∩ X' : Set M)]
     [IsEmbeddedSubmanifold I JXX' (X ∩ X' : Set M)]
@@ -902,6 +1089,7 @@ omit [IsManifold I ∞ M] in
 /-- Helper for Problem 6-10: the public intersection tangent-space theorem can be reused under
 `omit` once the ambient manifold structure is treated as an ordinary implicit argument. -/
 lemma intersectionTangentSpaceEqInf_omitAux
+    [I.Boundaryless] [JX.Boundaryless] [T2Space M] [SecondCountableTopology M]
     {hIM : IsManifold I ∞ M}
     {JXX' : ModelWithCorners ℝ E''' H'''}
     [ChartedSpace H''' (X ∩ X' : Set M)] [IsManifold JXX' ∞ (X ∩ X' : Set M)]
@@ -921,6 +1109,7 @@ lemma intersectionTangentSpaceEqInf_omitAux
 transversely, and `X ∩ X'` carries a chosen embedded submanifold structure, then the tangent space
 of `X ∩ X'` is the intersection of the tangent spaces of `X` and `X'`. -/
 theorem tangentSpace_inter_eq_inf_of_transverse
+    [I.Boundaryless] [JX.Boundaryless] [T2Space M] [SecondCountableTopology M]
     {JXX' : ModelWithCorners ℝ E''' H'''}
     [ChartedSpace H''' (X ∩ X' : Set M)] [IsManifold JXX' ∞ (X ∩ X' : Set M)]
     [IsEmbeddedSubmanifold I JXX' (X ∩ X' : Set M)]

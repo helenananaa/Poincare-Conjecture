@@ -32,7 +32,8 @@ def IsRegularValue (I : ModelWithCorners ℝ E H) (J : ModelWithCorners ℝ E' H
 /-- A regular value is characterized by surjectivity of the manifold derivative on the level set. -/
 theorem isRegularValue_iff (F : M → N) (c : N) :
     IsRegularValue I J F c ↔
-      ∀ x : M, F x = c → Function.Surjective (mfderiv I J F x) := sorry
+      ∀ x : M, F x = c → Function.Surjective (mfderiv I J F x) := by
+  rfl
 
 end Manifold
 
@@ -62,10 +63,20 @@ value `b`. -/
 -- Proof sketch: unfold `IsRegularSublevelSet` and expose the witnessing regular value.
 theorem isRegularSublevelSet_iff (f : M → ℝ) (D : Set M) :
     IsRegularSublevelSet I f D ↔
-      ∃ b : ℝ, Manifold.IsRegularValue I 𝓘(ℝ, ℝ) f b ∧ D = f ⁻¹' Set.Iic b := sorry
+      ∃ b : ℝ, Manifold.IsRegularValue I 𝓘(ℝ, ℝ) f b ∧ D = f ⁻¹' Set.Iic b := by
+  constructor
+  · intro h
+    exact h.exists_regular_value
+  · intro h
+    exact ⟨h⟩
 
 /-- A defining function is a smooth function whose given domain is one of its regular sublevel
 sets. -/
 -- Proof sketch: unfold `IsDefiningFunction` and read off its two defining clauses.
 theorem isDefiningFunction_iff (D : Set M) (f : M → ℝ) :
-    IsDefiningFunction I D f ↔ ContMDiff I 𝓘(ℝ, ℝ) ∞ f ∧ IsRegularSublevelSet I f D := sorry
+    IsDefiningFunction I D f ↔ ContMDiff I 𝓘(ℝ, ℝ) ∞ f ∧ IsRegularSublevelSet I f D := by
+  constructor
+  · intro h
+    exact ⟨h.contMDiff, h.isRegularSublevelSet⟩
+  · rintro ⟨hf, hD⟩
+    exact ⟨hf, hD⟩

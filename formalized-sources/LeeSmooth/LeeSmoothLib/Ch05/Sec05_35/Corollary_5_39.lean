@@ -197,12 +197,15 @@ vector `v ∈ T_(p : M) M` is tangent to `S` exactly when the derivative of `Φ`
 `v` vanishes. -/
 theorem tangent_iff_mfderiv_eq_zero_of_isDefiningFunction {k : ℕ} {Φ : M → Fin k → ℝ}
     (hS : IsSmoothEmbedding J I ∞ ((↑) : S → M))
-    (hΦ : Set.IsDefiningFunction I S Φ) {p : S} (v : TangentSpace I (p : M)) :
+    (hΦ : Set.IsDefiningFunction I S Φ)
+    (hcodim : Module.finrank ℝ E' + k = Module.finrank ℝ E)
+    {p : S} (v : TangentSpace I (p : M)) :
     v ∈ T[J; p] ↔
       mfderiv I 𝓘(ℝ, Fin k → ℝ) Φ (p : M) v = 0 := by
   rcases exists_local_defining_mapOn_nhds_of_isDefiningFunction hΦ p with ⟨U, hpU, hU⟩
   -- Proposition 5.38 converts the local defining-map data into the tangent-space/kernel identity.
-  rw [tangentSpace_eq_ker_mfderiv_of_isLocalDefiningMapOn hS hU p hpU]
+  rw [tangentSpace_eq_ker_mfderiv_of_isLocalDefiningMapOn hS hU
+    (by simpa using hcodim) p hpU]
   -- Kernel membership is exactly the vanishing of the derivative applied to `v`.
   exact LinearMap.mem_ker
 

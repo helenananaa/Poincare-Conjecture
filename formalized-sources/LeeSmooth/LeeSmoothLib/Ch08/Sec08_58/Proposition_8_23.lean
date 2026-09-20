@@ -498,7 +498,7 @@ private theorem embeddedNeighborhoodAtOfImmersedSubmanifold
         (n := (⊤ : ℕ∞ω)) (by simp) hS
     refine Manifold.IsSmoothEmbedding.mk ?_ hUemb
     simpa [Function.comp] using!
-      Manifold.IsImmersion.ex416_comp hSInf (Manifold.IsImmersion.of_opens U)
+      Manifold.SweepRestriction.isImmersion_comp_subtype hSInf U
 
 /-- Helper for Proposition 8.23: on an embedded patch, the pointwise chosen intrinsic tangent
 vector still maps to the ambient vector `Y q`. -/

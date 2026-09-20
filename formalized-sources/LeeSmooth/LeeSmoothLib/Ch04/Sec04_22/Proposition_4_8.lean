@@ -52,7 +52,7 @@ namespace IsLocalDiffeomorph
 
 /-- Helper for Proposition 4.8: a smooth local diffeomorphism of finite-dimensional smooth
 manifolds is a smooth immersion. -/
-theorem isImmersion {F : M → N} (hF : IsLocalDiffeomorph I J ∞ F) :
+theorem isImmersion [I.Boundaryless] [J.Boundaryless] {F : M → N} (hF : IsLocalDiffeomorph I J ∞ F) :
     IsImmersion I J ∞ F := by
   -- The local diffeomorphism supplies a tangent-space equivalence at every point.
   have hcontMDiff : ContMDiff I J ∞ F := by

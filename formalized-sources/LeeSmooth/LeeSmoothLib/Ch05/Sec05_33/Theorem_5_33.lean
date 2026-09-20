@@ -328,12 +328,14 @@ instance instIsEmbeddedSubmanifoldOfIsWeaklyEmbeddedSubmanifold
       (@weaklyEmbedded_subtypeVal_isEmbedding_of_localAmbientRefinements
         𝕜 _ E _ _ H _ M _ _ I _ E' _ _ H' _ J S _ _ _) hRefine
 
-/-- Theorem 5.33. If `M` is a smooth manifold and `S ⊆ M` is a weakly embedded submanifold, then
-`S` has only one topology and smooth structure with respect to which it is an immersed
-submanifold. -/
-theorem weakly_embedded_submanifold_structure_unique
+/-- Compatibility form of Theorem 5.33: after a weakly embedded structure has been upgraded to an
+embedded one, an immersed realization already known to have the induced topology is uniquely
+diffeomorphic to it.  The explicit `hTind` makes clear that this intermediate statement does not
+yet prove textbook uniqueness. -/
+theorem weakly_embedded_submanifold_structure_unique_of_inducing
     [IsWeaklyEmbeddedSubmanifold I J S]
-    (T : Manifold.ImmersedSubmanifold I M) (hT : T.carrier = S) :
+    (T : Manifold.ImmersedSubmanifold I M) (hT : T.carrier = S)
+    (hTind : Topology.IsInducing T.inclusion) :
     ∃ Φ : T ≃ₘ⟮modelWithCornersSelf 𝕜 T.ModelSpace, J⟯ S,
       ∀ x : T, (Φ x : M) = T.inclusion x := by
   -- Once the weakly embedded structure has been upgraded to an embedded one, Theorem 5.31 applies
@@ -341,6 +343,36 @@ theorem weakly_embedded_submanifold_structure_unique
   letI : IsEmbeddedSubmanifold I J S :=
     instIsEmbeddedSubmanifoldOfIsWeaklyEmbeddedSubmanifold
   simpa using
-    immersed_submanifold_structure_unique_of_same_carrier T hT
+    immersed_submanifold_structure_unique_of_same_carrier_of_inducing T hT hTind
 
 end WeaklyEmbeddedSubmanifoldUniqueness
+
+noncomputable section
+
+section OrdinaryRealWeaklyEmbeddedSubmanifoldUniqueness
+
+variable {E : Type uE} [NormedAddCommGroup E] [NormedSpace ℝ E]
+  [FiniteDimensional ℝ E]
+variable {H : Type uH} [TopologicalSpace H]
+variable {M : Type uM} [TopologicalSpace M] [T2Space M] [SecondCountableTopology M]
+  [ChartedSpace H M]
+variable {I : ModelWithCorners ℝ E H} [IsManifold I (⊤ : WithTop ℕ∞) M]
+variable {E' : Type uE'} [NormedAddCommGroup E'] [NormedSpace ℝ E']
+variable {H' : Type uH'} [TopologicalSpace H']
+variable {J : ModelWithCorners ℝ E' H'} {S : Set M}
+variable [ChartedSpace H' S] [IsManifold J (⊤ : WithTop ℕ∞) S]
+
+/-- Theorem 5.33 for ordinary finite-dimensional real manifolds: a weakly embedded submanifold
+has a unique smooth-manifold structure among Hausdorff, second-countable immersed realizations of
+the same carrier.  Unlike the compatibility theorem above, no inducing hypothesis is assumed. -/
+theorem weakly_embedded_submanifold_structure_unique
+    [IsWeaklyEmbeddedSubmanifold I J S]
+    (T : Manifold.ImmersedSubmanifold I M) [T2Space T] [SecondCountableTopology T]
+    (hT : T.carrier = S) :
+    ∃ Φ : T ≃ₘ⟮modelWithCornersSelf ℝ T.ModelSpace, J⟯ S,
+      ∀ x : T, (Φ x : M) = T.inclusion x := by
+  letI : IsEmbeddedSubmanifold I J S :=
+    instIsEmbeddedSubmanifoldOfIsWeaklyEmbeddedSubmanifold
+  exact immersed_submanifold_structure_unique_of_same_carrier T hT
+
+end OrdinaryRealWeaklyEmbeddedSubmanifoldUniqueness

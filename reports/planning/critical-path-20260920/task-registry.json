@@ -1,0 +1,71 @@
+{
+  "plan_directory": "/home/helenanana/projects/poincare-ops-20260919/critical-path-20260920-191900",
+  "registries": [
+    "/home/helenanana/projects/poincare-ops-20260919/luna-handoff-20260920-180603/tasks.json",
+    "/home/helenanana/projects/poincare-ops-20260919/critical-path-20260920-191900/tasks.json"
+  ],
+  "focus_owners": [
+    {
+      "name": "l13-PoincareCriticalPath",
+      "cwd": "/home/helenanana/projects/poincare-ops-20260919/luna-handoff-20260920-180603/workers/l13-PoincareCriticalPath",
+      "model": "gpt-5.6-luna",
+      "effort": "high",
+      "running": false,
+      "returned": true,
+      "result": 0,
+      "role": "audit",
+      "blueprint_target": "thm:poincare-conjecture"
+    },
+    {
+      "name": "l14-SardStandardModels",
+      "cwd": "/home/helenanana/projects/poincare-ops-20260919/luna-handoff-20260920-180603/workers/l14-SardStandardModels",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh",
+      "running": true,
+      "returned": false,
+      "result": null,
+      "role": "foundation",
+      "blueprint_target": "Sard step used in reduced-geometry cut-locus nullity"
+    },
+    {
+      "name": "l15-NativeNeckAmbientAdapter",
+      "cwd": "/home/helenanana/projects/poincare-ops-20260919/luna-handoff-20260920-180603/workers/l15-NativeNeckAmbientAdapter",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh",
+      "running": true,
+      "returned": false,
+      "result": null,
+      "role": "topology",
+      "blueprint_target": "lem:frontier-disappearing-component-classification"
+    },
+    {
+      "name": "p03-DiniJumpComparison",
+      "cwd": "/home/helenanana/projects/poincare-ops-20260919/critical-path-20260920-191900/workers/p03-DiniJumpComparison",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh",
+      "running": true,
+      "returned": false,
+      "result": null,
+      "role": "extinction",
+      "blueprint_target": "lem:forward-dini-comparison-with-downward-jumps"
+    },
+    {
+      "name": "p04-SphericalSpaceFormEndgame",
+      "cwd": "/home/helenanana/projects/poincare-ops-20260919/critical-path-20260920-191900/workers/p04-SphericalSpaceFormEndgame",
+      "model": "gpt-5.6-luna",
+      "effort": "xhigh",
+      "running": false,
+      "returned": true,
+      "result": 0,
+      "role": "endgame",
+      "blueprint_target": "lem:simply-connected-spherical-space-form"
+    }
+  ],
+  "deduplication": "p01 and p02 stopped; l13 and l15 retained",
+  "model": "gpt-5.6-luna",
+  "allowed_efforts": [
+    "high",
+    "xhigh",
+    "max"
+  ]
+}

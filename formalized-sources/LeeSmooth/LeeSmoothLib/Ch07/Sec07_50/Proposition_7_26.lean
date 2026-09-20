@@ -11,6 +11,7 @@ import LeeSmoothLib.Ch07.Sec07_49.Proposition_7_16
 import LeeSmoothLib.Ch07.Sec07_49.Proposition_7_11
 import LeeSmoothLib.Ch07.Sec07_50.Definition_7_50_extra_4
 import LeeSmoothLib.Ch07.Sec07_50.Theorem_7_25
+import LeeSmoothLib.Ch07.Sec07_50.StabilizerSmoothLevelBundle
 -- Declarations for this item will be appended below by the statement pipeline.
 
 open Manifold
@@ -658,204 +659,14 @@ theorem stabilizer_isProperlyEmbedded
 
 end
 
-/-- The constant-rank level-set theorem equips the stabilizer subset with the embedded-submanifold
-structure needed by Proposition 7.11. -/
-lemma stabilizer_has_embeddedSubmanifold_data {r : ℕ} (p : M)
-    [FiniteDimensional 𝕜 EG] [FiniteDimensional 𝕜 EM]
-    (hOrbitRank : Manifold.HasConstantRank I J (orbit_map G p) r) :
-    let k : ℕ := Module.finrank 𝕜 EG - r
-    let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
-    ∃ cs : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) ((MulAction.stabilizer G p : Set G)),
-      ∃ hs : IsManifold K ∞ ((MulAction.stabilizer G p : Set G)),
-        let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k))
-            ((MulAction.stabilizer G p : Set G)) := cs
-        let _ : IsManifold K ∞ ((MulAction.stabilizer G p : Set G)) := hs
-        ∃ hEmb : IsEmbeddedSubmanifold I K ((MulAction.stabilizer G p : Set G)),
-          hEmb.codimension = r := by
-  -- Rewrite the orbit-map fiber over `p` as the stabilizer subset before applying Theorem 5.12.
-  rw [← preimage_singleton_orbit_map_eq_stabilizer p]
-  exact
-    constant_rank_level_set_has_embedded_submanifold_structure (orbitMap_smooth p) hOrbitRank p
+-- The legacy lemma `stabilizer_has_embeddedSubmanifold_data` concluded
+-- `IsEmbeddedSubmanifold` (analytic `⊤`/`ω` inclusion) from a `C^∞` orbit map.  That
+-- implication is false; the honest `C^∞` bundle lives in `StabilizerSmoothFiber` and is
+-- consumed by the real-model stabilizer owner below.  Proper embedding of the stabilizer
+-- subset is already recorded by `stabilizer_isProperlyEmbedded`.
 
-section
-
-include I J
-
-local notation "SmoothLieSubgroupI" =>
-  @ContMDiffMonoidMorphism.SmoothLieSubgroup 𝕜 inferInstance EG inferInstance inferInstance
-    HG inferInstance I G inferInstance inferInstance inferInstance
-
-/-- The current section already contains the constant-rank witness for the orbit map, so the
-stabilizer's embedded-submanifold package can be produced without passing that witness through
-later theorem boundaries. -/
-lemma stabilizerEmbeddedData_fromCurrentSection (p : M)
-    [FiniteDimensional 𝕜 EG] [FiniteDimensional 𝕜 EM] :
-    ∃ r : ℕ,
-      let k : ℕ := Module.finrank 𝕜 EG - r
-      let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
-      ∃ cs : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) ((MulAction.stabilizer G p : Set G)),
-        ∃ hs : IsManifold K ∞ ((MulAction.stabilizer G p : Set G)),
-          let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k))
-              ((MulAction.stabilizer G p : Set G)) := cs
-          let _ : IsManifold K ∞ ((MulAction.stabilizer G p : Set G)) := hs
-          ∃ hEmb : IsEmbeddedSubmanifold I K ((MulAction.stabilizer G p : Set G)),
-            hEmb.codimension = r := by
-  have hOrbitRank : ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r :=
-    (orbitMap_hasConstantRank : ∀ p : M, ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r)
-      p
-  rcases hOrbitRank with ⟨r, hRank⟩
-  -- Feed the current section's constant-rank witness into the stabilizer level-set package.
-  refine ⟨r, ?_⟩
-  simpa using
-    stabilizer_has_embeddedSubmanifold_data p hRank
-
-/-- The current section already supplies the stabilizer as a smooth embedded submanifold of `G`,
-which is the input needed for the smooth `C^∞` Lie-subgroup owner. -/
-lemma stabilizerIsEmbeddedSubmanifold_fromCurrentSection (p : M)
-    [FiniteDimensional 𝕜 EG] [FiniteDimensional 𝕜 EM] :
-    ∃ r : ℕ,
-      let k : ℕ := Module.finrank 𝕜 EG - r
-      let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
-      ∃ cs : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) ((MulAction.stabilizer G p : Set G)),
-        let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k))
-            ((MulAction.stabilizer G p : Set G)) := cs
-        ∃ _ : @IsEmbeddedSubmanifold 𝕜 inferInstance
-            EG inferInstance inferInstance
-            HG inferInstance
-            G inferInstance inferInstance
-            I
-            (EuclideanSpace 𝕜 (Fin k)) inferInstance inferInstance
-            (EuclideanSpace 𝕜 (Fin k)) inferInstance
-            K
-            ((MulAction.stabilizer G p : Set G)) cs,
-          IsManifold K ∞ ((MulAction.stabilizer G p : Set G)) := by
-  have hOrbitRank : ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r :=
-    (orbitMap_hasConstantRank : ∀ p : M, ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r)
-      p
-  rcases hOrbitRank with ⟨r, hRank⟩
-  rcases stabilizer_has_embeddedSubmanifold_data p hRank with
-    ⟨cs, hs, hEmb, hCodim⟩
-  -- Reorder the packaged data so the embedded-submanifold owner is exposed first.
-  refine ⟨r, cs, ?_⟩
-  let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin (Module.finrank 𝕜 EG - r)))
-      ((MulAction.stabilizer G p : Set G)) := cs
-  exact ⟨hEmb, hs⟩
-
-/-- Helper owner for Proposition 7.26: the literal stabilizer at `p` packaged as a smooth
-`C^∞` Lie subgroup of `G`. -/
-noncomputable def stabilizerSmoothLieSubgroup (p : M)
-    [FiniteDimensional 𝕜 EG] [FiniteDimensional 𝕜 EM] :
-    @ContMDiffMonoidMorphism.SmoothLieSubgroup 𝕜 inferInstance EG inferInstance inferInstance
-      HG inferInstance I G inferInstance inferInstance inferInstance := by
-  classical
-  let S : Subgroup G := MulAction.stabilizer G p
-  let hRankData :
-      ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r :=
-    (orbitMap_hasConstantRank : ∀ p : M, ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r)
-      p
-  let r : ℕ := Classical.choose hRankData
-  have hRank : Manifold.HasConstantRank I J (orbit_map G p) r :=
-    Classical.choose_spec hRankData
-  let k : ℕ := Module.finrank 𝕜 EG - r
-  let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
-  have hData :
-      ∃ cs : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (S : Set G),
-        ∃ hs : IsManifold K ∞ (S : Set G),
-          ∃ hEmb : IsEmbeddedSubmanifold I K (S : Set G),
-            hEmb.codimension = r := by
-    simpa [S, k, K] using
-      stabilizer_has_embeddedSubmanifold_data p hRank
-  let cs := Classical.choose hData
-  let hs := Classical.choose (Classical.choose_spec hData)
-  let hEmbData := Classical.choose_spec (Classical.choose_spec hData)
-  let hEmb := Classical.choose hEmbData
-  let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (S : Set G) := cs
-  let _ : IsManifold K ∞ (S : Set G) := hs
-  let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) S := cs
-  let _ : IsManifold K ∞ S := hs
-  have hEmbInfty :
-      IsSmoothEmbedding K I ∞ (Subtype.val : S → G) := by
-    exact isSmoothEmbedding_of_le (by simp) hEmb.isSmoothEmbedding_subtype_val
-  have hsub : ContMDiff K I ∞ (Subtype.val : S → G) :=
-    hEmbInfty.isImmersion.contMDiff
-  have hmulAmbient :
-      ContMDiff (K.prod K) I ∞
-        (fun q : S × S ↦ (q.1 : G) * (q.2 : G)) := by
-    have hfst :
-        ContMDiff (K.prod K) I ∞
-          (fun q : S × S ↦ (q.1 : G)) := by
-      simpa using!
-        hsub.comp
-          (contMDiff_fst :
-            ContMDiff (K.prod K) K ∞
-              (fun q : S × S ↦ q.1))
-    have hsnd :
-        ContMDiff (K.prod K) I ∞
-          (fun q : S × S ↦ (q.2 : G)) := by
-      simpa using!
-        hsub.comp
-          (contMDiff_snd :
-            ContMDiff (K.prod K) K ∞
-              (fun q : S × S ↦ q.2))
-    simpa using! hfst.mul hsnd
-  have hmulSubtype :
-      ContMDiff (K.prod K) K ∞
-        (fun q : S × S ↦ q.1 * q.2) := by
-    simpa [subgroupMul_codRestrict_eq S] using
-      Manifold.IsSmoothEmbedding.contMDiff_toSubtype_infty hEmbInfty hmulAmbient
-        (fun q : S × S ↦ S.mul_mem q.1.property q.2.property)
-  have hinvAmbient :
-      ContMDiff K I ∞ (fun x : S ↦ ((x : G)⁻¹)) := by
-    simpa using hsub.inv
-  have hinvSubtype :
-      ContMDiff K K ∞ (fun x : S ↦ x⁻¹) := by
-    simpa [subgroupInv_codRestrict_eq S] using
-      Manifold.IsSmoothEmbedding.contMDiff_toSubtype_infty hEmbInfty hinvAmbient
-        (fun x : S ↦ S.inv_mem x.property)
-  let _ : LieGroup K ∞ S :=
-    { contMDiff_mul := hmulSubtype
-      contMDiff_inv := hinvSubtype }
-  refine
-    { carrier := S
-      ModelSpace := EuclideanSpace 𝕜 (Fin k)
-      instNormedAddCommGroupModelSpace := inferInstance
-      instNormedSpaceModelSpace := inferInstance
-      instTopologicalSpaceCarrier := inferInstance
-      instChartedSpaceCarrier := inferInstance
-      instLieGroupCarrier := inferInstance
-      subtype_val_isSmoothEmbedding := hEmbInfty }
-
-/-- The source-facing stabilizer owner returned by `stabilizerSmoothLieSubgroup` has the literal
-stabilizer carrier. -/
-@[simp] theorem stabilizerSmoothLieSubgroup_carrier (p : M)
-    [FiniteDimensional 𝕜 EG] [FiniteDimensional 𝕜 EM] :
-    (@stabilizerSmoothLieSubgroup 𝕜 _ EG _ _ HG _ G _ _ _ I _ EM _ _ HM _ M _ _ J _ _ _ p _ _
-      : SmoothLieSubgroupI).carrier =
-      MulAction.stabilizer G p := rfl
-
-/-- The carrier set of `stabilizerSmoothLieSubgroup p` is the literal stabilizer subset of `G`. -/
-@[simp] theorem stabilizerSmoothLieSubgroup_coe (p : M)
-    [FiniteDimensional 𝕜 EG] [FiniteDimensional 𝕜 EM] :
-    (((@stabilizerSmoothLieSubgroup 𝕜 _ EG _ _ HG _ G _ _ _ I _ EM _ _ HM _ M _ _ J _ _ _ p
-        _ _ : SmoothLieSubgroupI).carrier : Set G)) =
-      (MulAction.stabilizer G p : Set G) := by
-  exact
-    congrArg (fun S : Subgroup G ↦ (S : Set G))
-      (stabilizerSmoothLieSubgroup_carrier p)
-
-/-- Companion theorem for Proposition 7.26: the carrier of `stabilizerSmoothLieSubgroup p` is
-properly embedded in `G`. -/
-theorem stabilizerSmoothLieSubgroup_isProperlyEmbedded (p : M)
-    [FiniteDimensional 𝕜 EG] [FiniteDimensional 𝕜 EM] [T1Space M] :
-    Set.IsProperlyEmbedded
-      ((((@stabilizerSmoothLieSubgroup 𝕜 _ EG _ _ HG _ G _ _ _ I _ EM _ _ HM _ M _ _ J _ _ _
-          p _ _ : SmoothLieSubgroupI).carrier : Set G))) := by
-  have hOrbitRank : ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r :=
-    (orbitMap_hasConstantRank : ∀ p : M, ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r)
-      p
-  simpa using stabilizerIsProperlyEmbedded_of_orbitMapHasConstantRank p hOrbitRank
-
-end
+-- Real-model `C^∞` stabilizer owner: see `section RealStabilizerOwner` below. The
+-- original analytic `IsEmbeddedSubmanifold` packaging is not reconstructed.
 
 omit [TopologicalSpace G] [TopologicalSpace M] in
 /-- Helper for Proposition 7.26: if the isotropy group at `p` is trivial, then the orbit map
@@ -881,142 +692,261 @@ theorem orbitMap_injective_of_stabilizer_eq_bot (p : M)
 
 end OrbitMapProperties
 
-section OrbitMapImmersionProperties
+section RealStabilizerOwner
 
-variable {EG : Type uEG} [NormedAddCommGroup EG] [NormedSpace ℝ EG]
+variable {EG : Type uEG} [NormedAddCommGroup EG] [NormedSpace ℝ EG] [FiniteDimensional ℝ EG]
 variable {HG : Type uHG} [TopologicalSpace HG]
 variable {G : Type uG} [Group G] [TopologicalSpace G] [ChartedSpace HG G]
-variable {I : ModelWithCorners ℝ EG HG} [LieGroup I ∞ G]
-variable {EM : Type uEM} [NormedAddCommGroup EM] [NormedSpace ℝ EM]
+variable {I : ModelWithCorners ℝ EG HG} [I.Boundaryless]
+  [IsManifold I ∞ G] [LieGroup I ∞ G]
+variable {EM : Type uEM} [NormedAddCommGroup EM] [NormedSpace ℝ EM] [FiniteDimensional ℝ EM]
 variable {HM : Type uHM} [TopologicalSpace HM]
 variable {M : Type uM} [TopologicalSpace M] [ChartedSpace HM M]
-variable {J : ModelWithCorners ℝ EM HM} [IsManifold J ∞ M]
+variable {J : ModelWithCorners ℝ EM HM} [J.Boundaryless] [IsManifold J ∞ M]
 variable [MulAction G M] [ContMDiffSMul I J ∞ G M]
+variable [T2Space G] [SecondCountableTopology G]
 
-/-- Trivial isotropy forces the orbit map to have full manifold rank at every point. -/
-lemma stabilizerModelDim_eq_zero_of_eq_bot {r : ℕ} (p : M)
-    [FiniteDimensional ℝ EG] [FiniteDimensional ℝ EM]
-    (hRank : Manifold.HasConstantRank I J (orbit_map G p) r)
-    (hp : MulAction.stabilizer G p = ⊥) :
-    Module.finrank ℝ EG - r = 0 := by
+include J
+
+/-- Corrected C∞ form of the legacy stabilizer data helper. The analytic owner
+is not asserted; the actual embedded inclusion and codimension are preserved. -/
+theorem stabilizer_has_embeddedSubmanifold_data {r : ℕ} (p : M)
+    (hOrbitRank : HasConstantRank I J (orbit_map G p) r) :
+    let k := Module.finrank ℝ EG - r
+    let S := (MulAction.stabilizer G p : Set G)
+    ∃ cs : ChartedSpace (EuclideanSpace ℝ (Fin k)) S,
+      ∃ hs : IsManifold (𝓡 k) ∞ S,
+        letI := cs
+        letI := hs
+        IsSmoothEmbedding (𝓡 k) I ∞ (Subtype.val : S → G) ∧
+          Module.finrank ℝ EG - k = r := by
+  have hrm := StabilizerSmoothFiber.orbitMap_rank_le_source p hOrbitRank
+  obtain ⟨cs, hs, hemb⟩ :=
+    StabilizerSmoothFiber.stabilizer_has_smooth_embedded_structure p hOrbitRank
+  exact ⟨cs, hs, hemb, Nat.sub_sub_self hrm⟩
+
+/-- Stabilizer data with the orbit rank chosen from the smooth action. -/
+theorem stabilizerEmbeddedData_fromCurrentSection (p : M) :
+    ∃ r : ℕ,
+      ∃ cs : ChartedSpace (EuclideanSpace ℝ (Fin (Module.finrank ℝ EG - r)))
+          (MulAction.stabilizer G p : Set G),
+        ∃ hs : IsManifold (𝓡 (Module.finrank ℝ EG - r)) ∞ (MulAction.stabilizer G p : Set G),
+          letI := cs
+          letI := hs
+          IsSmoothEmbedding (𝓡 (Module.finrank ℝ EG - r)) I ∞
+            (Subtype.val : ↥(MulAction.stabilizer G p : Set G) → G) ∧
+            Module.finrank ℝ EG - (Module.finrank ℝ EG - r) = r := by
+  obtain ⟨r, hr, _, _⟩ := StabilizerSmoothFiber.orbitMap_rank_with_bounds (I := I) (J := J) (G := G) (M := M) p
+  exact ⟨r, stabilizer_has_embeddedSubmanifold_data p hr⟩
+
+local notation "SmoothLieSubgroupI" =>
+  @ContMDiffMonoidMorphism.SmoothLieSubgroup ℝ inferInstance EG inferInstance inferInstance
+    HG inferInstance I G inferInstance inferInstance inferInstance
+
+/-- Honest `C^∞` stabilizer bundle: the orbit-map fiber is a smoothly embedded submanifold
+of `G` in the original ambient atlas.  The original invalid conclusion was
+`IsEmbeddedSubmanifold` at analytic regularity. -/
+lemma stabilizer_has_smooth_embedded_structure {r : ℕ} (p : M)
+    (hOrbitRank : HasConstantRank I J (orbit_map G p) r) :
+    ∃ cs : ChartedSpace (EuclideanSpace ℝ (Fin (Module.finrank ℝ EG - r)))
+        ((MulAction.stabilizer G p : Set G)),
+      ∃ _ : IsManifold (𝓡 (Module.finrank ℝ EG - r)) ∞
+          ((MulAction.stabilizer G p : Set G)),
+        let S := (MulAction.stabilizer G p : Set G)
+        let _ : ChartedSpace (EuclideanSpace ℝ (Fin (Module.finrank ℝ EG - r))) S := cs
+        IsSmoothEmbedding (𝓡 (Module.finrank ℝ EG - r)) I ∞ (Subtype.val : S → G) :=
+  StabilizerSmoothFiber.stabilizer_has_smooth_embedded_structure p hOrbitRank
+
+/-- Helper owner for Proposition 7.26: the literal stabilizer at `p` packaged as a smooth
+`C^∞` Lie subgroup of `G`, using the verified constant-rank fiber rather than the false
+analytic `IsEmbeddedSubmanifold` owner. -/
+noncomputable def stabilizerSmoothLieSubgroup (p : M) :
+    @ContMDiffMonoidMorphism.SmoothLieSubgroup ℝ inferInstance EG inferInstance inferInstance
+      HG inferInstance I G inferInstance inferInstance inferInstance := by
+  classical
+  let S : Subgroup G := MulAction.stabilizer G p
+  let hRankData :=
+    StabilizerSmoothFiber.orbitMap_rank_with_bounds (I := I) (J := J) (G := G) (M := M) p
+  let r : ℕ := Classical.choose hRankData
+  have hRank : HasConstantRank I J (orbit_map G p) r :=
+    (Classical.choose_spec hRankData).1
   let k : ℕ := Module.finrank ℝ EG - r
-  let K := modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin k))
-  have hLevel :
-      ∃ cs : ChartedSpace (EuclideanSpace ℝ (Fin k)) ((MulAction.stabilizer G p : Set G)),
-        ∃ hs : IsManifold K ∞ ((MulAction.stabilizer G p : Set G)),
-          let _ : ChartedSpace (EuclideanSpace ℝ (Fin k))
-              ((MulAction.stabilizer G p : Set G)) := cs
-          let _ : IsManifold K ∞ ((MulAction.stabilizer G p : Set G)) := hs
-          ∃ hEmb : IsEmbeddedSubmanifold I K ((MulAction.stabilizer G p : Set G)),
-            hEmb.codimension = r := by
-    -- Keep only the intrinsic manifold model for the stabilizer fiber.
-    simpa [k, K] using
-      stabilizer_has_embeddedSubmanifold_data p hRank
-  rcases hLevel with ⟨cs, hs, hEmb, hCodim⟩
-  let _ : ChartedSpace (EuclideanSpace ℝ (Fin k)) ((MulAction.stabilizer G p : Set G)) := cs
-  let _ : IsManifold K ∞ ((MulAction.stabilizer G p : Set G)) := hs
-  let S : Type uG := ↥((MulAction.stabilizer G p : Set G))
-  let _ : TopologicalSpace S := inferInstance
-  let _ : ChartedSpace (EuclideanSpace ℝ (Fin k)) S := inferInstance
-  let _ : Nonempty S := by
-    refine ⟨⟨1, ?_⟩⟩
-    simp
-  let _ : Subsingleton S := by
-    refine ⟨fun x y ↦ ?_⟩
-    apply Subtype.ext
-    have hx : (x : G) = 1 := by
-      have hxBot : (x : G) ∈ (⊥ : Subgroup G) := by
-        simpa [hp] using x.property
-      simpa using hxBot
-    have hy : (y : G) = 1 := by
-      have hyBot : (y : G) ∈ (⊥ : Subgroup G) := by
-        simpa [hp] using y.property
-      simpa using hyBot
-    simp [hx, hy]
-  -- A nonempty subsingleton manifold modeled on `EuclideanSpace ℝ (Fin k)` must have `k = 0`.
-  have hk0 : k = 0 := @subsingletonChartedSpace_fin_eq_zero ℝ _ k S _ _ _ _
-  simpa [k] using hk0
+  let K : ModelWithCorners ℝ (EuclideanSpace ℝ (Fin k)) (EuclideanSpace ℝ (Fin k)) := 𝓡 k
+  have hData :=
+    StabilizerSmoothFiber.stabilizer_has_smooth_embedded_structure (I := I) (J := J)
+      (G := G) (M := M) p hRank
+  let cs := Classical.choose hData
+  let hs := Classical.choose (Classical.choose_spec hData)
+  let hEmbInfty := Classical.choose_spec (Classical.choose_spec hData)
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin k)) (S : Set G) := cs
+  let _ : IsManifold K ∞ (S : Set G) := hs
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin k)) S := cs
+  let _ : IsManifold K ∞ S := hs
+  have hsub : ContMDiff K I ∞ (Subtype.val : S → G) :=
+    hEmbInfty.isImmersion.contMDiff
+  have hmulAmbient :
+      ContMDiff (K.prod K) I ∞
+        (fun q : S × S ↦ (q.1 : G) * (q.2 : G)) := by
+    have hfst :
+        ContMDiff (K.prod K) I ∞
+          (fun q : S × S ↦ (q.1 : G)) := by
+      simpa using!
+        hsub.comp
+          (contMDiff_fst :
+            ContMDiff (K.prod K) K ∞
+              (fun q : S × S ↦ q.1))
+    have hsnd :
+        ContMDiff (K.prod K) I ∞
+          (fun q : S × S ↦ (q.2 : G)) := by
+      simpa using!
+        hsub.comp
+          (contMDiff_snd :
+            ContMDiff (K.prod K) K ∞
+              (fun q : S × S ↦ q.2))
+    simpa using! hfst.mul hsnd
+  have hmulSubtype :
+      ContMDiff (K.prod K) K ∞
+        (fun q : S × S ↦ q.1 * q.2) := by
+    simpa [S, k, K, subgroupMul_codRestrict_eq S] using!
+      Manifold.IsSmoothEmbedding.contMDiff_toSubtype_infty hEmbInfty hmulAmbient
+        (fun q : S × S ↦ S.mul_mem q.1.property q.2.property)
+  have hinvAmbient :
+      ContMDiff K I ∞ (fun x : S ↦ ((x : G)⁻¹)) := by
+    simpa using hsub.inv
+  have hinvSubtype :
+      ContMDiff K K ∞ (fun x : S ↦ x⁻¹) := by
+    simpa [S, k, K, subgroupInv_codRestrict_eq S] using!
+      Manifold.IsSmoothEmbedding.contMDiff_toSubtype_infty hEmbInfty hinvAmbient
+        (fun x : S ↦ S.inv_mem x.property)
+  let _ : LieGroup K ∞ S :=
+    { contMDiff_mul := hmulSubtype
+      contMDiff_inv := hinvSubtype }
+  refine
+    { carrier := S
+      ModelSpace := EuclideanSpace ℝ (Fin k)
+      instNormedAddCommGroupModelSpace := inferInstance
+      instNormedSpaceModelSpace := inferInstance
+      instTopologicalSpaceCarrier := inferInstance
+      instChartedSpaceCarrier := inferInstance
+      instLieGroupCarrier := inferInstance
+      subtype_val_isSmoothEmbedding := hEmbInfty }
+
+/-- The source-facing stabilizer owner returned by `stabilizerSmoothLieSubgroup` has the literal
+stabilizer carrier. -/
+@[simp] theorem stabilizerSmoothLieSubgroup_carrier (p : M) :
+    (stabilizerSmoothLieSubgroup (J := J) (M := M) p : SmoothLieSubgroupI).carrier =
+      MulAction.stabilizer G p :=
+  rfl
+
+/-- The carrier set of `stabilizerSmoothLieSubgroup p` is the literal stabilizer subset of `G`. -/
+@[simp] theorem stabilizerSmoothLieSubgroup_coe (p : M) :
+    (((stabilizerSmoothLieSubgroup (J := J) (M := M) p : SmoothLieSubgroupI).carrier : Set G)) =
+      (MulAction.stabilizer G p : Set G) :=
+  congrArg (fun S : Subgroup G ↦ (S : Set G))
+    (stabilizerSmoothLieSubgroup_carrier (J := J) (M := M) p)
+
+/-- Companion theorem for Proposition 7.26: the carrier of `stabilizerSmoothLieSubgroup p` is
+properly embedded in `G`. -/
+theorem stabilizerSmoothLieSubgroup_isProperlyEmbedded [T1Space M] (p : M) :
+    Set.IsProperlyEmbedded
+      (((stabilizerSmoothLieSubgroup (J := J) (M := M) p : SmoothLieSubgroupI).carrier : Set G)) := by
+  rw [stabilizerSmoothLieSubgroup_coe (J := J) (M := M) p]
+  rw [← preimage_singleton_orbit_map_eq_stabilizer p]
+  exact (isClosed_singleton.preimage (orbitMap_contMDiff (I := I) (J := J) p).continuous).isProperlyEmbedded
+
+end RealStabilizerOwner
+
+section OrbitMapImmersionProperties
+
+variable {m n : ℕ}
+variable {G : Type uG} [Group G] [TopologicalSpace G]
+  [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+  [IsManifold (𝓡 m) ∞ G] [LieGroup (𝓡 m) ∞ G]
+variable {M : Type uM} [TopologicalSpace M]
+  [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+  [IsManifold (𝓡 n) ∞ M]
+variable [MulAction G M] [ContMDiffSMul (𝓡 m) (𝓡 n) ∞ G M]
+
+/-- Trivial isotropy forces the orbit map to have full source rank: Theorem 4.14 identifies
+an injective constant-rank map as an immersion, so the constant rank equals `m`. -/
+lemma stabilizerModelDim_eq_zero_of_eq_bot {r : ℕ} (p : M)
+    [T2Space G] [SecondCountableTopology G] [T2Space M] [SecondCountableTopology M]
+    (hRank : HasConstantRank (𝓡 m) (𝓡 n) (orbit_map G p) r)
+    (hp : MulAction.stabilizer G p = ⊥) :
+    m - r = 0 := by
+  have hImm :
+      IsImmersion (𝓡 m) (𝓡 n) ∞ (orbit_map G p) :=
+    StabilizerSmoothFiber.orbitMap_isImmersion_of_stabilizer_eq_bot (I := 𝓡 m) (J := 𝓡 n)
+      (G := G) (M := M) p hp
+  have hCont : ContMDiff (𝓡 m) (𝓡 n) ∞ (orbit_map G p) := orbitMap_contMDiff p
+  have hInjDeriv :
+      Function.Injective (mfderiv (𝓡 m) (𝓡 n) (orbit_map G p) (1 : G)) :=
+    (Manifold.is_immersion_iff_forall_injective_mfderiv hCont).1 hImm (1 : G)
+  let _ : FiniteDimensional ℝ (TangentSpace (𝓡 m) (1 : G)) := by
+    change FiniteDimensional ℝ (EuclideanSpace ℝ (Fin m))
+    infer_instance
+  have hKerBot :
+      (mfderiv (𝓡 m) (𝓡 n) (orbit_map G p) (1 : G)).toLinearMap.ker = ⊥ :=
+    LinearMap.ker_eq_bot.2 hInjDeriv
+  have hKer0 :
+      Module.finrank ℝ
+          ((mfderiv (𝓡 m) (𝓡 n) (orbit_map G p) (1 : G)).toLinearMap.ker) = 0 :=
+    Submodule.finrank_eq_zero.2 hKerBot
+  have hNullity :=
+    LinearMap.finrank_range_add_finrank_ker
+      (mfderiv (𝓡 m) (𝓡 n) (orbit_map G p) (1 : G)).toLinearMap
+  have hRankOne :
+      Module.finrank ℝ
+          ((mfderiv (𝓡 m) (𝓡 n) (orbit_map G p) (1 : G)).toLinearMap.range) = r := by
+    have hRankAt :
+        rankAt (𝓡 m) (𝓡 n) (orbit_map G p) (1 : G) =
+          Module.finrank ℝ
+            ((mfderiv (𝓡 m) (𝓡 n) (orbit_map G p) (1 : G)).range) :=
+      rankAt_eq_finrank_range_mfderiv (orbit_map G p) (1 : G)
+    simpa [hRank.2 (1 : G)] using hRankAt.symm
+  have hdim : Module.finrank ℝ (TangentSpace (𝓡 m) (1 : G)) = m :=
+    finrank_euclideanSpace_fin
+  have : r + 0 = m := by
+    calc
+      r + 0 = Module.finrank ℝ
+            ((mfderiv (𝓡 m) (𝓡 n) (orbit_map G p) (1 : G)).toLinearMap.range) +
+          Module.finrank ℝ
+            ((mfderiv (𝓡 m) (𝓡 n) (orbit_map G p) (1 : G)).toLinearMap.ker) := by
+        simp [hRankOne, hKer0]
+      _ = m := hNullity.trans hdim
+  omega
 
 /-- Trivial isotropy forces the orbit map to have full manifold rank at every point. -/
 lemma orbitMapRank_eq_sourceFinrank_of_stabilizer_eq_bot (p : M)
-    [FiniteDimensional ℝ EG] [FiniteDimensional ℝ EM]
+    [T2Space G] [SecondCountableTopology G] [T2Space M] [SecondCountableTopology M]
     (hp : MulAction.stabilizer G p = ⊥) :
-    ∀ g : G, rankAt I J (orbit_map G p) g = Module.finrank ℝ EG := by
-  have hOrbitRank : ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r :=
-    orbitMap_hasConstantRank p
-  rcases hOrbitRank with
-    ⟨r, hRank⟩
-  have hZero : Module.finrank ℝ EG - r = 0 :=
+    ∀ g : G, rankAt (𝓡 m) (𝓡 n) (orbit_map G p) g = m := by
+  obtain ⟨r, hRank, hrm, _⟩ :=
+    StabilizerSmoothFiber.orbitMap_rank_with_bounds (I := 𝓡 m) (J := 𝓡 n) (G := G) (M := M) p
+  have hZero : m - r = 0 :=
     stabilizerModelDim_eq_zero_of_eq_bot p hRank hp
-  have hr_le : r ≤ Module.finrank ℝ EG := by
-    let _ : FiniteDimensional ℝ (TangentSpace I (1 : G)) := by
-      simpa using! (inferInstance : FiniteDimensional ℝ EG)
-    have hRankOne :
-        Module.finrank ℝ ((mfderiv I J (orbit_map G p) (1 : G)).toLinearMap.range) = r := by
-      have hRankAtOne :
-          rankAt I J (orbit_map G p) (1 : G) =
-            Module.finrank ℝ ((mfderiv I J (orbit_map G p) (1 : G)).range) :=
-        rankAt_eq_finrank_range_mfderiv (orbit_map G p) (1 : G)
-      simpa [hRank.2 (1 : G)] using
-        hRankAtOne.symm
-    have hRangeLe :
-        Module.finrank ℝ ((mfderiv I J (orbit_map G p) (1 : G)).toLinearMap.range) ≤
-          Module.finrank ℝ EG := by
-      simpa using!
-        (LinearMap.finrank_range_le
-          ((mfderiv I J (orbit_map G p) (1 : G)).toLinearMap))
-    omega
-  have hr_eq : r = Module.finrank ℝ EG := by
-    omega
+  have hrm' : r ≤ m := by simpa using hrm
+  have hr_eq : r = m := by omega
   intro g
-  -- Constant rank identifies every pointwise rank with the source dimension.
   simpa [hr_eq] using hRank.2 g
 
-/-- Trivial isotropy makes every manifold derivative of the orbit map injective, so the immersion
-criterion can close pointwise. -/
-lemma orbitMapMfderiv_injective_of_stabilizer_eq_bot (p : M)
-    [FiniteDimensional ℝ EG] [FiniteDimensional ℝ EM]
+/-- Helper for Proposition 7.26: if the isotropy group at `p` is trivial, then the orbit map
+`g ↦ g • p` is a smooth immersion. This is the source-facing real-manifold immersion statement
+from Lee's proposition, proved by Theorem 4.14 rather than the false analytic fiber owner. -/
+theorem orbitMap_isImmersion_of_stabilizer_eq_bot (p : M)
+    [T2Space G] [SecondCountableTopology G] [T2Space M] [SecondCountableTopology M]
     (hp : MulAction.stabilizer G p = ⊥) :
-    ∀ g : G, Function.Injective (mfderiv I J (orbit_map G p) g) := by
-  intro g
-  let _ : FiniteDimensional ℝ (TangentSpace I g) := by
-    simpa using! (inferInstance : FiniteDimensional ℝ EG)
-  have hRankg :
-      rankAt I J (orbit_map G p) g = Module.finrank ℝ EG :=
-    orbitMapRank_eq_sourceFinrank_of_stabilizer_eq_bot p hp g
-  have hRangeFinrank :
-      Module.finrank ℝ ((mfderiv I J (orbit_map G p) g).toLinearMap.range) =
-        Module.finrank ℝ EG := by
-    -- Rewrite `rankAt` as the range dimension of the manifold derivative.
-    have hRankAtg :
-        rankAt I J (orbit_map G p) g =
-          Module.finrank ℝ ((mfderiv I J (orbit_map G p) g).range) :=
-      rankAt_eq_finrank_range_mfderiv (orbit_map G p) g
-    simpa using
-      hRankAtg.symm.trans hRankg
-  have hNullity :=
-    LinearMap.finrank_range_add_finrank_ker (mfderiv I J (orbit_map G p) g).toLinearMap
-  change Module.finrank ℝ ((mfderiv I J (orbit_map G p) g).toLinearMap.range) +
-      Module.finrank ℝ ((mfderiv I J (orbit_map G p) g).toLinearMap.ker) =
-        Module.finrank ℝ EG at hNullity
-  have hKerFinrank :
-      Module.finrank ℝ ((mfderiv I J (orbit_map G p) g).toLinearMap.ker) = 0 := by
-    -- Rank-nullity leaves no room for a nontrivial kernel once the range has full source dimension.
-    rw [hRangeFinrank] at hNullity
-    omega
-  let _ : FiniteDimensional ℝ ((mfderiv I J (orbit_map G p) g).toLinearMap.ker) := by
-    infer_instance
-  have hKerBot : ((mfderiv I J (orbit_map G p) g).toLinearMap.ker) = ⊥ :=
-    Submodule.finrank_eq_zero.1 hKerFinrank
-  -- A linear map with trivial kernel is injective.
-  exact (LinearMap.ker_eq_bot).1 hKerBot
+    IsImmersion (𝓡 m) (𝓡 n) ∞ (orbit_map G p) :=
+  StabilizerSmoothFiber.orbitMap_isImmersion_of_stabilizer_eq_bot (I := 𝓡 m) (J := 𝓡 n)
+    (G := G) (M := M) p hp
 
-omit [Group G] [LieGroup I ∞ G] [IsManifold J ∞ M] [MulAction G M] [ContMDiffSMul I J ∞ G M] in
+omit [Group G] [LieGroup (𝓡 m) ∞ G] [IsManifold (𝓡 n) ∞ M]
+  [MulAction G M] [ContMDiffSMul (𝓡 m) (𝓡 n) ∞ G M] in
 /-- Once an immersion is known at a higher regularity level, the same chart normal forms still
 witness immersion after lowering the differentiability index. -/
-lemma isImmersion_of_le {n m : WithTop ℕ∞} {f : G → M} (hmn : m ≤ n)
-    (hf : IsImmersion I J n f) :
-    IsImmersion I J m f := by
+lemma isImmersion_of_le {n' m' : WithTop ℕ∞} {f : G → M} (hmn : m' ≤ n')
+    (hf : IsImmersion (𝓡 m) (𝓡 n) n' f) :
+    IsImmersion (𝓡 m) (𝓡 n) m' f := by
   -- Lower the maximal-atlas regularity while keeping the same local immersion normal forms.
   rcases hf with ⟨F, _, _, hfF⟩
   refine ⟨F, inferInstance, inferInstance, ?_⟩
@@ -1030,102 +960,38 @@ lemma isImmersion_of_le {n m : WithTop ℕ∞} {f : G → M} (hmn : m ≤ n)
   · -- The local written-in-charts normal form is unchanged.
     exact hxImm.writtenInCharts
 
-/-- Helper for Proposition 7.26: if the isotropy group at `p` is trivial, then the orbit map
-`g ↦ g • p` is a smooth immersion. This is the source-facing real-manifold immersion statement
-from Lee's proposition. -/
-theorem orbitMap_isImmersion_of_stabilizer_eq_bot (p : M)
-    [FiniteDimensional ℝ EG] [FiniteDimensional ℝ EM]
-    [T2Space G] [SecondCountableTopology G] [T2Space M] [SecondCountableTopology M]
-    (hp : MulAction.stabilizer G p = ⊥) :
-    IsImmersion I J ∞ (orbit_map G p) := by
-  have hCont : ContMDiff I J ∞ (orbit_map G p) := orbitMap_smooth p
-  -- The smooth immersion criterion reduces the goal to injectivity of each manifold derivative.
-  refine (Manifold.is_immersion_iff_forall_injective_mfderiv hCont).2 ?_
-  intro g
-  exact orbitMapMfderiv_injective_of_stabilizer_eq_bot p hp g
-
 end OrbitMapImmersionProperties
 
 section OrbitImmersedSubmanifold
 
-variable {EG : Type uEG} [NormedAddCommGroup EG] [NormedSpace ℝ EG]
-variable {HG : Type uHG} [TopologicalSpace HG]
-variable {G : Type uG} [Group G] [TopologicalSpace G] [ChartedSpace HG G]
-variable {I : ModelWithCorners ℝ EG HG} [LieGroup I ∞ G]
-variable {EM : Type uEM} [NormedAddCommGroup EM] [NormedSpace ℝ EM]
-variable {HM : Type uHM} [TopologicalSpace HM]
-variable {M : Type uM} [TopologicalSpace M] [ChartedSpace HM M]
-variable {J : ModelWithCorners ℝ EM HM} [IsManifold J ∞ M]
-variable [MulAction G M] [ContMDiffSMul I J ∞ G M]
+variable {m n : ℕ}
+variable {G : Type uG} [Group G] [TopologicalSpace G]
+  [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+  [IsManifold (𝓡 m) ∞ G] [LieGroup (𝓡 m) ∞ G]
+variable {M : Type uM} [TopologicalSpace M]
+  [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+  [IsManifold (𝓡 n) ∞ M]
+variable [MulAction G M] [ContMDiffSMul (𝓡 m) (𝓡 n) ∞ G M]
 
-include I
-
-/-- Helper for Proposition 7.26: after recharting `G` by its self model, the orbit map is still
-an immersion. -/
+/-- In Euclidean coordinates the orbit map of a free action is already an immersion of the
+self-modeled source, so the extra `extChartAt` recharting detour is unnecessary. -/
 lemma orbitMap_selfModeled_isImmersion_of_stabilizer_eq_bot (p : M)
-    [FiniteDimensional ℝ EG] [FiniteDimensional ℝ EM]
     [T2Space G] [SecondCountableTopology G] [T2Space M] [SecondCountableTopology M]
     (hp : MulAction.stabilizer G p = ⊥) :
-    let _ : BoundarylessManifold I G :=
-      (@boundarylessManifold_of_lieGroup ℝ _ EG _ _ HG _ G _ _ _ I _ :
-        BoundarylessManifold I G)
-    let _ : ChartedSpace EG G :=
-      (@selfModeledCarrierChartedSpace ℝ _ EG _ _ HG _ G _ _ _ I _ _ :
-        ChartedSpace EG G)
-    let _ : IsManifold (modelWithCornersSelf ℝ EG) ∞ G :=
-      (@selfModeledCarrierIsManifold ℝ _ EG _ _ HG _ G _ _ _ I _ _ :
-        IsManifold (modelWithCornersSelf ℝ EG) ∞ G)
-    let _ : LieGroup (modelWithCornersSelf ℝ EG) ∞ G :=
-      (@selfModeledCarrierLieGroup ℝ _ EG _ _ HG _ G _ _ _ I _ _ :
-        LieGroup (modelWithCornersSelf ℝ EG) ∞ G)
-    IsImmersion (modelWithCornersSelf ℝ EG) J ∞ (orbit_map G p) := by
-  let _ : BoundarylessManifold I G :=
-    (@boundarylessManifold_of_lieGroup ℝ _ EG _ _ HG _ G _ _ _ I _ :
-      BoundarylessManifold I G)
-  let _ : ChartedSpace EG G :=
-    (@selfModeledCarrierChartedSpace ℝ _ EG _ _ HG _ G _ _ _ I _ _ :
-      ChartedSpace EG G)
-  let _ : IsManifold (modelWithCornersSelf ℝ EG) ∞ G :=
-    (@selfModeledCarrierIsManifold ℝ _ EG _ _ HG _ G _ _ _ I _ _ :
-      IsManifold (modelWithCornersSelf ℝ EG) ∞ G)
-  let _ : LieGroup (modelWithCornersSelf ℝ EG) ∞ G :=
-    (@selfModeledCarrierLieGroup ℝ _ EG _ _ HG _ G _ _ _ I _ _ :
-      LieGroup (modelWithCornersSelf ℝ EG) ∞ G)
-  have hIdImm : IsImmersion (modelWithCornersSelf ℝ EG) I ∞ (fun x : G ↦ x) :=
-    (@selfModeledIdentityIsImmersion ℝ _ EG _ _ HG _ G _ _ _ I _ _ _ :
-      IsImmersion (modelWithCornersSelf ℝ EG) I ∞ (fun x : G ↦ x))
-  have hOrbitImm : IsImmersion I J ∞ (orbit_map G p) :=
-    orbitMap_isImmersion_of_stabilizer_eq_bot p hp
-  -- Compose the transported identity immersion with the original orbit-map immersion.
-  simpa [Function.comp] using! Manifold.IsImmersion.ex416_comp hOrbitImm hIdImm
+    IsImmersion (modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin m))) (𝓡 n) ∞
+      (orbit_map G p) := by
+  simpa using
+    orbitMap_isImmersion_of_stabilizer_eq_bot (m := m) (n := n) (G := G) (M := M) p hp
 
 /-- Companion owner for Proposition 7.26: if the isotropy group at `p` is trivial, then the orbit
-map, recharted on `G` by its self model, determines a smooth immersed submanifold of `M`. -/
+map determines a smooth immersed submanifold of `M`. -/
 noncomputable def orbitSmoothImmersedSubmanifoldWitness (p : M)
-    [FiniteDimensional ℝ EG] [FiniteDimensional ℝ EM]
     [T2Space G] [SecondCountableTopology G] [T2Space M] [SecondCountableTopology M]
     (hp : MulAction.stabilizer G p = ⊥) :
-    SmoothImmersedSubmanifold J M := by
-  let _ : BoundarylessManifold I G :=
-    (@boundarylessManifold_of_lieGroup ℝ _ EG _ _ HG _ G _ _ _ I _ :
-      BoundarylessManifold I G)
-  let _ : ChartedSpace EG G :=
-    (@selfModeledCarrierChartedSpace ℝ _ EG _ _ HG _ G _ _ _ I _ _ :
-      ChartedSpace EG G)
-  let _ : IsManifold (modelWithCornersSelf ℝ EG) ∞ G :=
-    (@selfModeledCarrierIsManifold ℝ _ EG _ _ HG _ G _ _ _ I _ _ :
-      IsManifold (modelWithCornersSelf ℝ EG) ∞ G)
-  let _ : LieGroup (modelWithCornersSelf ℝ EG) ∞ G :=
-    (@selfModeledCarrierLieGroup ℝ _ EG _ _ HG _ G _ _ _ I _ _ :
-      LieGroup (modelWithCornersSelf ℝ EG) ∞ G)
-  let pack :
-      IsImmersion (modelWithCornersSelf ℝ EG) J ∞ (orbit_map G p) →
-      Function.Injective (orbit_map G p) →
-      SmoothImmersedSubmanifold J M :=
-    fun hImm hInj ↦ Manifold.IsImmersion.toSmoothImmersedSubmanifold hImm hInj
-  exact
-    pack (orbitMap_selfModeled_isImmersion_of_stabilizer_eq_bot p hp)
-      (orbitMap_injective_of_stabilizer_eq_bot p hp)
+    SmoothImmersedSubmanifold (𝓡 n) M :=
+  Manifold.IsImmersion.toSmoothImmersedSubmanifold
+    (orbitMap_isImmersion_of_stabilizer_eq_bot (m := m) (n := n) (G := G) (M := M) p hp)
+    (orbitMap_injective_of_stabilizer_eq_bot p hp)
 
 end OrbitImmersedSubmanifold
 
@@ -1141,28 +1007,10 @@ variable {M : Type uM} [TopologicalSpace M] [ChartedSpace HM M]
 variable {J : ModelWithCorners ℝ EM HM} [IsManifold J ∞ M]
 variable [MulAction G M] [ContMDiffSMul I J ∞ G M]
 
-local notation "SmoothLieSubgroupI" =>
-  @ContMDiffMonoidMorphism.SmoothLieSubgroup ℝ inferInstance EG inferInstance inferInstance
-    HG inferInstance I G inferInstance inferInstance inferInstance
-
-local notation "SmoothImmersedSubmanifoldJ" =>
-  @SmoothImmersedSubmanifold ℝ inferInstance EM inferInstance inferInstance HM inferInstance J M
-    inferInstance inferInstance
-
-local notation "stabilizerSmoothLieSubgroup" =>
-  @stabilizerSmoothLieSubgroup ℝ inferInstance EG inferInstance inferInstance HG inferInstance G
-    inferInstance inferInstance inferInstance I inferInstance EM inferInstance inferInstance HM
-    inferInstance M inferInstance inferInstance J inferInstance inferInstance inferInstance
-
-local notation "orbitSmoothImmersedSubmanifoldWitness" =>
-  @orbitSmoothImmersedSubmanifoldWitness EG inferInstance inferInstance HG inferInstance G
-    inferInstance inferInstance inferInstance I inferInstance EM inferInstance inferInstance HM
-    inferInstance M inferInstance inferInstance J inferInstance inferInstance inferInstance
-
 /-- Proposition 7.26 (Properties of the Orbit Map). Suppose `θ` is a smooth left action of a Lie
 group `G` on a smooth manifold `M`. For each `p : M`, the orbit map `orbit_map G p` is smooth and
-has constant rank. The stabilizer and trivial-isotropy consequences are recorded by the named
-companion theorems `stabilizerSmoothLieSubgroup_carrier`,
+has constant rank. The stabilizer and trivial-isotropy consequences, in Euclidean coordinates,
+are recorded by `stabilizerSmoothLieSubgroup_carrier`,
 `stabilizerSmoothLieSubgroup_isProperlyEmbedded`,
 `orbitMap_injective_of_stabilizer_eq_bot`, `orbitMap_isImmersion_of_stabilizer_eq_bot`, and
 `orbitSmoothImmersedSubmanifoldWitness_carrier`. -/
@@ -1172,30 +1020,39 @@ theorem orbitMap_properties (p : M)
     ContMDiff I J ∞ (orbit_map G p) ∧
       ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r :=
     by
-  -- The public proposition only repackages the orbit map's established smoothness and rank data.
   refine ⟨orbitMap_smooth p, ?_⟩
   exact orbitMap_hasConstantRank p
+
+end Proposition726Surface
+
+section EuclideanOrbitWitness
+
+variable {m n : ℕ}
+variable {G : Type uG} [Group G] [TopologicalSpace G]
+  [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+  [IsManifold (𝓡 m) ∞ G] [LieGroup (𝓡 m) ∞ G]
+variable {M : Type uM} [TopologicalSpace M]
+  [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+  [IsManifold (𝓡 n) ∞ M]
+variable [MulAction G M] [ContMDiffSMul (𝓡 m) (𝓡 n) ∞ G M]
 
 /-- Helper for Proposition 7.26: the immersed-submanifold witness built from the orbit map has
 carrier `Set.range (orbit_map G p)`. -/
 lemma orbitSmoothImmersedSubmanifoldWitnessCarrier_eq_range (p : M)
-    [FiniteDimensional ℝ EG] [FiniteDimensional ℝ EM]
     [T2Space G] [SecondCountableTopology G] [T2Space M] [SecondCountableTopology M]
     (hp : MulAction.stabilizer G p = ⊥) :
-    (orbitSmoothImmersedSubmanifoldWitness p hp).carrier = Set.range (orbit_map G p) := by
-  -- Route correction: unfold the packaged witness once and read off that its inclusion is
-  -- definitionally the orbit map.
+    (orbitSmoothImmersedSubmanifoldWitness (m := m) (n := n) (G := G) (M := M) p hp).carrier =
+      Set.range (orbit_map G p) :=
   rfl
 
 /-- Companion theorem for Proposition 7.26: if the isotropy group at `p` is trivial, the carrier
 of the canonical smooth immersed-submanifold witness is the literal orbit `MulAction.orbit G p`. -/
 theorem orbitSmoothImmersedSubmanifoldWitness_carrier (p : M)
-    [FiniteDimensional ℝ EG] [FiniteDimensional ℝ EM]
     [T2Space G] [SecondCountableTopology G] [T2Space M] [SecondCountableTopology M]
     (hp : MulAction.stabilizer G p = ⊥) :
-    (orbitSmoothImmersedSubmanifoldWitness p hp).carrier = MulAction.orbit G p := by
-  -- Normalize the witness carrier to the orbit-map range, then rewrite that range as the orbit.
+    (orbitSmoothImmersedSubmanifoldWitness (m := m) (n := n) (G := G) (M := M) p hp).carrier =
+      MulAction.orbit G p := by
   rw [orbitSmoothImmersedSubmanifoldWitnessCarrier_eq_range (p := p) hp]
   simpa using (range_orbit_map (G := G) p)
 
-end Proposition726Surface
+end EuclideanOrbitWitness

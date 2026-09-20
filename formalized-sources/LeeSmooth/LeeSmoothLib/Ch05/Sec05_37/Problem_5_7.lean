@@ -1,9 +1,13 @@
 import LeeSmoothLib.Ch01.Sec01.Definition_1_extra_1
 import LeeSmoothLib.Ch05.Sec05_28.Definition_5_28_extra_1
+import LeeSmoothLib.Ch04.Sec04_22.Theorem_4_5
 import LeeSmoothLib.Ch04.Sec04_25.Proposition_4_28
+import LeeSmoothLib.Ch05.Sec05_29.Definition_5_29_extra_1
+import LeeSmoothLib.Ch05.Sec05_29.Theorem_5_8.LocalSliceImmersion
 import LeeSmoothLib.Ch05.Sec05_36.Proposition_5_49
 import Mathlib.Analysis.Calculus.FDeriv.WithLp
 import Mathlib.Analysis.Calculus.FDeriv.Pow
+import Mathlib.Analysis.Calculus.FDeriv.Prod
 
 -- Declarations for this item will be appended below by the statement pipeline.
 
@@ -314,7 +318,32 @@ onto `ℝ`. -/
 theorem problem_5_7_regularDomain_scalar_isSmoothSubmersion :
     IsSmoothSubmersion (𝓡 2) 𝓘(ℝ, ℝ)
       (fun p : problem_5_7_regularDomain ↦ problem_5_7_F p.1) := by
-  sorry
+  refine ⟨?_, ?_⟩
+  · have hFtop : ContMDiff (𝓡 2) 𝓘(ℝ, ℝ) (⊤ : WithTop ℕ∞) problem_5_7_F := by
+      rw [contMDiff_iff_contDiff]
+      simpa using problem_5_7_F_contDiff
+    have hF : ContMDiff (𝓡 2) 𝓘(ℝ, ℝ) (((⊤ : ℕ∞) : WithTop ℕ∞)) problem_5_7_F :=
+      hFtop.of_le (by simp)
+    have hcs : problem_5_7_regularDomain.instChartedSpace =
+        (TopologicalSpace.Opens.topologicalManifold (n := 2) (M := R2)
+          problem_5_7_regularDomain).toChartedSpace := by
+      rfl
+    rw [← hcs]
+    simpa only [Function.comp_def] using
+      hF.comp (contMDiff_subtype_val :
+        ContMDiff (𝓡 2) (𝓡 2) (((⊤ : ℕ∞) : WithTop ℕ∞))
+          (Subtype.val : problem_5_7_regularDomain → R2))
+  · intro p
+    rw [problem_5_7_regularDomain_mfderiv_eq_comp_subtype_val]
+    have hgrad :
+        ¬ (3 * (p : R2) 0 ^ (2 : ℕ) + (p : R2) 1 = 0 ∧
+          (p : R2) 0 + 3 * (p : R2) 1 ^ (2 : ℕ) = 0) := by
+      intro hcritical
+      rcases (problem_5_7_critical_point_iff (p : R2)).1 hcritical with hzero | hsing
+      · exact p.2.1 hzero
+      · exact p.2.2 hsing
+    exact ((problem_5_7_mfderiv_surjective_iff (p : R2)).2 hgrad).comp
+      (mfderiv_open_subset_inclusion_isInvertible problem_5_7_regularDomain p).surjective
 
 /-- Helper for Problem 5-7: the `ℝ¹`-valued restriction of `F` to the regular domain is a smooth
 submersion. -/
@@ -521,7 +550,134 @@ theorem problem_5_7_zero_branch_witnesses_in_ball (ε : ℝ) (hε : 0 < ε) :
     (∃ p ∈ Metric.ball (0 : R2) ε, problem_5_7_F p = 0 ∧ 0 < p 0 ∧ p 1 < 0) ∧
       (∃ p ∈ Metric.ball (0 : R2) ε, problem_5_7_F p = 0 ∧ p 0 < 0 ∧ 0 < p 1) ∧
       (∃ p ∈ Metric.ball (0 : R2) ε, problem_5_7_F p = 0 ∧ p 0 < 0 ∧ p 1 < 0) := by
-  sorry
+  let t : ℝ := min (ε / 10) (1 / 10)
+  have ht : 0 < t := by
+    simp only [t, lt_min_iff]
+    constructor <;> positivity
+  have htε : t ≤ ε / 10 := min_le_left _ _
+  have ht1 : t ≤ 1 / 10 := min_le_right _ _
+  have ht_lt_one : t < 1 := by linarith
+  have ht3_lt_one : t ^ (3 : ℕ) < 1 :=
+    pow_lt_one₀ ht.le ht_lt_one (by norm_num)
+  have ht_sq_eps : t ^ (2 : ℕ) ≤ (ε / 10) ^ (2 : ℕ) := by
+    nlinarith [mul_nonneg (sub_nonneg.mpr htε)
+      (add_nonneg ht.le (div_nonneg hε.le (by norm_num : (0 : ℝ) ≤ 10)))]
+  have ht_sq_le_one : t ^ (2 : ℕ) ≤ 1 := by
+    nlinarith [ht3_lt_one, sq_nonneg t]
+  have ht_cube_small : t ^ (3 : ℕ) < (3 / 8 : ℝ) := by
+    have h₁ : 0 ≤ t * (1 / 10 - t) :=
+      mul_nonneg ht.le (sub_nonneg.mpr ht1)
+    have h₂ : 0 ≤ t ^ (2 : ℕ) * (1 / 10 - t) :=
+      mul_nonneg (sq_nonneg t) (sub_nonneg.mpr ht1)
+    nlinarith [sq_nonneg t]
+
+  let f₁ : ℝ → ℝ := fun y ↦ problem_5_7_F (WithLp.toLp 2 ![t, y])
+  have hf₁ : Continuous f₁ := by
+    dsimp [f₁, problem_5_7_F]
+    fun_prop
+  have hf₁_left : f₁ (-t) = -(t ^ (2 : ℕ)) := by
+    simpa [f₁] using (problem_5_7_zero_slice_positive_x_signs t).2
+  have hf₁_right : f₁ 0 = t ^ (3 : ℕ) := by
+    simpa [f₁] using (problem_5_7_zero_slice_positive_x_signs t).1
+  have hz₁ : (0 : ℝ) ∈ Set.Icc (f₁ (-t)) (f₁ 0) := by
+    rw [hf₁_left, hf₁_right]
+    constructor
+    · exact neg_nonpos.mpr (sq_nonneg t)
+    · exact (pow_pos ht 3).le
+  obtain ⟨y₁, hy₁, hy₁zero⟩ :=
+    intermediate_value_Icc (show -t ≤ (0 : ℝ) by linarith) hf₁.continuousOn hz₁
+  let p₁ : R2 := WithLp.toLp 2 ![t, y₁]
+  have hy₁neg : y₁ < 0 := by
+    rcases hy₁ with ⟨_, hy₁le⟩
+    exact lt_of_le_of_ne hy₁le fun hy₁eq ↦ by
+      have : f₁ 0 = 0 := by simpa [hy₁eq] using hy₁zero
+      rw [hf₁_right] at this
+      exact (pow_ne_zero 3 ht.ne') this
+  have hy₁sq : y₁ ^ (2 : ℕ) ≤ t ^ (2 : ℕ) := by
+    have hneg_nonneg : 0 ≤ -y₁ := by linarith
+    have hneg_le : -y₁ ≤ t := by linarith [hy₁.1]
+    simpa using pow_le_pow_left₀ hneg_nonneg hneg_le 2
+  have hp₁normsq : ‖p₁‖ ^ (2 : ℕ) = t ^ (2 : ℕ) + y₁ ^ (2 : ℕ) := by
+    simp [p₁, EuclideanSpace.real_norm_sq_eq]
+  have hp₁norm : ‖p₁‖ < ε := by
+    nlinarith only [hp₁normsq, hy₁sq, ht_sq_eps, norm_nonneg p₁, hε]
+  have hp₁ball : p₁ ∈ Metric.ball (0 : R2) ε := by
+    simpa [Metric.mem_ball, dist_eq_norm] using hp₁norm
+  have hp₁zero : problem_5_7_F p₁ = 0 := by
+    simpa [p₁, f₁] using hy₁zero
+
+  let f₂ : ℝ → ℝ := fun y ↦ problem_5_7_F (WithLp.toLp 2 ![-t ^ (2 : ℕ), y])
+  have hf₂ : Continuous f₂ := by
+    dsimp [f₂, problem_5_7_F]
+    fun_prop
+  have hf₂_left : f₂ t = -(t ^ (6 : ℕ)) := by
+    simpa [f₂] using (problem_5_7_zero_slice_negative_x_positive_y_signs t).1
+  have hf₂_right : f₂ (2 * t) = 6 * t ^ (3 : ℕ) - t ^ (6 : ℕ) := by
+    simpa [f₂] using (problem_5_7_zero_slice_negative_x_positive_y_signs t).2
+  have hf₂_right_pos : 0 < f₂ (2 * t) := by
+    rw [hf₂_right]
+    have hfactor : 0 < t ^ (3 : ℕ) * (6 - t ^ (3 : ℕ)) :=
+      mul_pos (pow_pos ht 3) (by linarith [ht3_lt_one])
+    nlinarith
+  have hz₂ : (0 : ℝ) ∈ Set.Icc (f₂ t) (f₂ (2 * t)) := by
+    rw [hf₂_left]
+    exact ⟨neg_nonpos.mpr (pow_nonneg ht.le 6), hf₂_right_pos.le⟩
+  obtain ⟨y₂, hy₂, hy₂zero⟩ :=
+    intermediate_value_Icc (show t ≤ 2 * t by linarith) hf₂.continuousOn hz₂
+  let p₂ : R2 := WithLp.toLp 2 ![-t ^ (2 : ℕ), y₂]
+  have hy₂pos : 0 < y₂ := lt_of_lt_of_le ht hy₂.1
+  have hy₂sq : y₂ ^ (2 : ℕ) ≤ (2 * t) ^ (2 : ℕ) := by
+    exact pow_le_pow_left₀ hy₂pos.le hy₂.2 2
+  have ht_four_le_sq : t ^ (4 : ℕ) ≤ t ^ (2 : ℕ) := by
+    nlinarith only [mul_nonneg (sq_nonneg t) (sub_nonneg.mpr ht_sq_le_one)]
+  have hp₂normsq : ‖p₂‖ ^ (2 : ℕ) = t ^ (4 : ℕ) + y₂ ^ (2 : ℕ) := by
+    simp [p₂, EuclideanSpace.real_norm_sq_eq]
+    ring
+  have hp₂norm : ‖p₂‖ < ε := by
+    nlinarith only [hp₂normsq, hy₂sq, ht_four_le_sq, ht_sq_eps, norm_nonneg p₂, hε]
+  have hp₂ball : p₂ ∈ Metric.ball (0 : R2) ε := by
+    simpa [Metric.mem_ball, dist_eq_norm] using hp₂norm
+  have hp₂zero : problem_5_7_F p₂ = 0 := by
+    simpa [p₂, f₂] using hy₂zero
+
+  let f₃ : ℝ → ℝ := fun y ↦ problem_5_7_F (WithLp.toLp 2 ![-t ^ (2 : ℕ), y])
+  have hf₃ : Continuous f₃ := by
+    dsimp [f₃, problem_5_7_F]
+    fun_prop
+  have hf₃_left : f₃ (-t) = -(t ^ (6 : ℕ)) := by
+    simpa [f₃] using (problem_5_7_zero_slice_negative_x_negative_y_signs t).1
+  have hf₃_right : f₃ (-(t / 2)) = (3 / 8 : ℝ) * t ^ (3 : ℕ) - t ^ (6 : ℕ) := by
+    simpa [f₃] using (problem_5_7_zero_slice_negative_x_negative_y_signs t).2
+  have hf₃_right_pos : 0 < f₃ (-(t / 2)) := by
+    rw [hf₃_right]
+    have hfactor : 0 < t ^ (3 : ℕ) * ((3 / 8 : ℝ) - t ^ (3 : ℕ)) :=
+      mul_pos (pow_pos ht 3) (sub_pos.mpr ht_cube_small)
+    nlinarith
+  have hz₃ : (0 : ℝ) ∈ Set.Icc (f₃ (-t)) (f₃ (-(t / 2))) := by
+    rw [hf₃_left]
+    exact ⟨neg_nonpos.mpr (pow_nonneg ht.le 6), hf₃_right_pos.le⟩
+  obtain ⟨y₃, hy₃, hy₃zero⟩ :=
+    intermediate_value_Icc (show -t ≤ -(t / 2) by linarith) hf₃.continuousOn hz₃
+  let p₃ : R2 := WithLp.toLp 2 ![-t ^ (2 : ℕ), y₃]
+  have hy₃neg : y₃ < 0 := lt_of_le_of_lt hy₃.2 (by linarith)
+  have hy₃sq : y₃ ^ (2 : ℕ) ≤ t ^ (2 : ℕ) := by
+    have hneg_nonneg : 0 ≤ -y₃ := by linarith
+    have hneg_le : -y₃ ≤ t := by linarith [hy₃.1]
+    simpa using pow_le_pow_left₀ hneg_nonneg hneg_le 2
+  have hp₃normsq : ‖p₃‖ ^ (2 : ℕ) = t ^ (4 : ℕ) + y₃ ^ (2 : ℕ) := by
+    simp [p₃, EuclideanSpace.real_norm_sq_eq]
+    ring
+  have hp₃norm : ‖p₃‖ < ε := by
+    nlinarith only [hp₃normsq, hy₃sq, ht_four_le_sq, ht_sq_eps, norm_nonneg p₃, hε]
+  have hp₃ball : p₃ ∈ Metric.ball (0 : R2) ε := by
+    simpa [Metric.mem_ball, dist_eq_norm] using hp₃norm
+  have hp₃zero : problem_5_7_F p₃ = 0 := by
+    simpa [p₃, f₃] using hy₃zero
+
+  refine ⟨⟨p₁, hp₁ball, hp₁zero, ?_, hy₁neg⟩,
+    ⟨⟨p₂, hp₂ball, hp₂zero, ?_, hy₂pos⟩,
+      ⟨p₃, hp₃ball, hp₃zero, ?_, hy₃neg⟩⟩⟩
+  all_goals simp [p₁, p₂, p₃, ht]
 
 /-- Helper for Problem 5-7: every ambient neighborhood of the origin meets all three local
 branches of the zero fiber. -/
@@ -548,7 +704,17 @@ theorem problem_5_7_preconnected_zero_fiber_no_mixed_x_sign
     {A : Set (problem_5_7_F ⁻¹' ({(0 : ℝ)} : Set ℝ))} (hA : IsPreconnected A)
     (hA_nonzero : ∀ q ∈ A, (q : R2) ≠ 0) :
     ¬ ((∃ q ∈ A, 0 < (q : R2) 0) ∧ ∃ q ∈ A, (q : R2) 0 < 0) := by
-  sorry
+  rintro ⟨⟨qpos, hqposA, hqpos⟩, ⟨qneg, hqnegA, hqneg⟩⟩
+  obtain ⟨q, hqA, hqx⟩ := hA.intermediate_value₂ hqnegA hqposA
+    (f := fun q ↦ (q : R2) 0) (g := fun _ ↦ (0 : ℝ)) (by fun_prop) (by fun_prop)
+    hqneg.le hqpos.le
+  have hqF : problem_5_7_F (q : R2) = 0 := by
+    have hqfiber := q.property
+    change problem_5_7_F (q : R2) ∈ ({(0 : ℝ)} : Set ℝ) at hqfiber
+    exact Set.mem_singleton_iff.mp hqfiber
+  have hqzero : (q : R2) = 0 :=
+    problem_5_7_zero_fiber_eq_origin_of_x_zero hqF hqx
+  exact hA_nonzero q hqA hqzero
 
 /-- Helper for Problem 5-7: a preconnected subset of the punctured zero fiber cannot contain both
 positive and negative `y`-coordinates. -/
@@ -556,7 +722,305 @@ theorem problem_5_7_preconnected_zero_fiber_no_mixed_y_sign
     {A : Set (problem_5_7_F ⁻¹' ({(0 : ℝ)} : Set ℝ))} (hA : IsPreconnected A)
     (hA_nonzero : ∀ q ∈ A, (q : R2) ≠ 0) :
     ¬ ((∃ q ∈ A, 0 < (q : R2) 1) ∧ ∃ q ∈ A, (q : R2) 1 < 0) := by
-  sorry
+  rintro ⟨⟨qpos, hqposA, hqpos⟩, ⟨qneg, hqnegA, hqneg⟩⟩
+  obtain ⟨q, hqA, hqy⟩ := hA.intermediate_value₂ hqnegA hqposA
+    (f := fun q ↦ (q : R2) 1) (g := fun _ ↦ (0 : ℝ)) (by fun_prop) (by fun_prop)
+    hqneg.le hqpos.le
+  have hqF : problem_5_7_F (q : R2) = 0 := by
+    have hqfiber := q.property
+    change problem_5_7_F (q : R2) ∈ ({(0 : ℝ)} : Set ℝ) at hqfiber
+    exact Set.mem_singleton_iff.mp hqfiber
+  have hqzero : (q : R2) = 0 :=
+    problem_5_7_zero_fiber_eq_origin_of_y_zero hqF hqy
+  exact hA_nonzero q hqA hqzero
+
+namespace Problem57RegularSlice
+
+open Set ChartedSpace
+
+/-- Canonical identification `ℝ² ≃ ℝ × ℝ`. -/
+noncomputable def r2PairEquiv : R2 ≃L[ℝ] (ℝ × ℝ) :=
+  (EuclideanSpace.equiv (Fin 2) ℝ).trans (ContinuousLinearEquiv.finTwoArrow ℝ ℝ)
+
+theorem r2PairEquiv_apply (p : R2) : r2PairEquiv p = (p 0, p 1) := by
+  dsimp [r2PairEquiv]
+  simp [ContinuousLinearEquiv.finTwoArrow_apply]
+
+theorem r2PairEquiv_symm_apply (z : ℝ × ℝ) :
+    r2PairEquiv.symm z 0 = z.1 ∧ r2PairEquiv.symm z 1 = z.2 := by
+  have hz : ((r2PairEquiv.symm z) 0, (r2PairEquiv.symm z) 1) = z := by
+    rw [← r2PairEquiv_apply]
+    exact r2PairEquiv.apply_symm_apply z
+  exact ⟨congrArg Prod.fst hz, congrArg Prod.snd hz⟩
+
+/-- Upper-triangular shear `(a, b) ↦ (a, k a + m b)`, invertible when `m ≠ 0`. -/
+noncomputable def shear (k m : ℝ) (hm : m ≠ 0) : (ℝ × ℝ) ≃L[ℝ] (ℝ × ℝ) :=
+  ContinuousLinearEquiv.equivOfInverse
+    ((ContinuousLinearMap.fst ℝ ℝ ℝ).prod
+      (k • ContinuousLinearMap.fst ℝ ℝ ℝ + m • ContinuousLinearMap.snd ℝ ℝ ℝ))
+    ((ContinuousLinearMap.fst ℝ ℝ ℝ).prod
+      (m⁻¹ • (ContinuousLinearMap.snd ℝ ℝ ℝ -
+        k • ContinuousLinearMap.fst ℝ ℝ ℝ)))
+    (by
+      intro z
+      ext
+      · simp
+      · simp
+        field_simp [hm])
+    (by
+      intro z
+      ext
+      · simp
+      · simp
+        field_simp [hm]
+        ring)
+
+/-- Keep the first coordinate free and record `F` as the last coordinate. -/
+def sliceMapKeepX : R2 → R2 :=
+  fun p ↦ r2PairEquiv.symm (p 0, problem_5_7_F p)
+
+/-- Keep the second coordinate free and record `F` as the last coordinate. -/
+def sliceMapKeepY : R2 → R2 :=
+  fun p ↦ r2PairEquiv.symm (p 1, problem_5_7_F p)
+
+theorem sliceMapKeepX_coords (p : R2) :
+    sliceMapKeepX p 0 = p 0 ∧ sliceMapKeepX p 1 = problem_5_7_F p := by
+  simpa [sliceMapKeepX] using r2PairEquiv_symm_apply (p 0, problem_5_7_F p)
+
+theorem sliceMapKeepY_coords (p : R2) :
+    sliceMapKeepY p 0 = p 1 ∧ sliceMapKeepY p 1 = problem_5_7_F p := by
+  simpa [sliceMapKeepY] using r2PairEquiv_symm_apply (p 1, problem_5_7_F p)
+
+theorem sliceMapKeepX_contDiff : ContDiff ℝ (⊤ : WithTop ℕ∞) sliceMapKeepX := by
+  have h0 : ContDiff ℝ (⊤ : WithTop ℕ∞) (fun q : R2 ↦ q 0) := by fun_prop
+  exact r2PairEquiv.symm.contDiff.comp (h0.prodMk problem_5_7_F_contDiff)
+
+theorem sliceMapKeepY_contDiff : ContDiff ℝ (⊤ : WithTop ℕ∞) sliceMapKeepY := by
+  have h1 : ContDiff ℝ (⊤ : WithTop ℕ∞) (fun q : R2 ↦ q 1) := by fun_prop
+  exact r2PairEquiv.symm.contDiff.comp (h1.prodMk problem_5_7_F_contDiff)
+
+theorem hasFDerivAt_pair_keepX (p : R2) :
+    HasFDerivAt (fun q : R2 ↦ ((q 0, problem_5_7_F q) : ℝ × ℝ))
+      ((PiLp.proj 2 (fun _ : Fin 2 ↦ ℝ) 0).prod (fderiv ℝ problem_5_7_F p)) p := by
+  have h0 :
+      HasFDerivAt (fun q : R2 ↦ q 0)
+        (PiLp.proj 2 (fun _ : Fin 2 ↦ ℝ) 0) p :=
+    PiLp.hasFDerivAt_apply (𝕜 := ℝ) (p := 2) (E := fun _ : Fin 2 ↦ ℝ) p 0
+  have hF :
+      HasFDerivAt problem_5_7_F (fderiv ℝ problem_5_7_F p) p :=
+    (problem_5_7_F_contDiff.differentiable (by simp)).differentiableAt.hasFDerivAt
+  exact h0.prodMk hF
+
+theorem hasFDerivAt_pair_keepY (p : R2) :
+    HasFDerivAt (fun q : R2 ↦ ((q 1, problem_5_7_F q) : ℝ × ℝ))
+      ((PiLp.proj 2 (fun _ : Fin 2 ↦ ℝ) 1).prod (fderiv ℝ problem_5_7_F p)) p := by
+  have h1 :
+      HasFDerivAt (fun q : R2 ↦ q 1)
+        (PiLp.proj 2 (fun _ : Fin 2 ↦ ℝ) 1) p :=
+    PiLp.hasFDerivAt_apply (𝕜 := ℝ) (p := 2) (E := fun _ : Fin 2 ↦ ℝ) p 1
+  have hF :
+      HasFDerivAt problem_5_7_F (fderiv ℝ problem_5_7_F p) p :=
+    (problem_5_7_F_contDiff.differentiable (by simp)).differentiableAt.hasFDerivAt
+  exact h1.prodMk hF
+
+/-- The derivative of `sliceMapKeepX` is the shear of the identity in pair coordinates. -/
+noncomputable def sliceDerivKeepX (p : R2)
+    (hFy : p 0 + 3 * p 1 ^ (2 : ℕ) ≠ 0) : R2 ≃L[ℝ] R2 :=
+  (r2PairEquiv.trans (shear (3 * p 0 ^ (2 : ℕ) + p 1)
+      (p 0 + 3 * p 1 ^ (2 : ℕ)) hFy)).trans r2PairEquiv.symm
+
+/-- The derivative of `sliceMapKeepY` swaps coordinates, then shears. -/
+noncomputable def sliceDerivKeepY (p : R2)
+    (hFx : 3 * p 0 ^ (2 : ℕ) + p 1 ≠ 0) : R2 ≃L[ℝ] R2 :=
+  (r2PairEquiv.trans
+      ((ContinuousLinearEquiv.prodComm ℝ ℝ ℝ).trans
+        (shear (p 0 + 3 * p 1 ^ (2 : ℕ)) (3 * p 0 ^ (2 : ℕ) + p 1) hFx))).trans
+    r2PairEquiv.symm
+
+theorem hasFDerivAt_sliceMapKeepX (p : R2)
+    (hFy : p 0 + 3 * p 1 ^ (2 : ℕ) ≠ 0) :
+    HasFDerivAt sliceMapKeepX (sliceDerivKeepX p hFy : R2 →L[ℝ] R2) p := by
+  have hpair := hasFDerivAt_pair_keepX p
+  have hCLM :
+      ((PiLp.proj 2 (fun _ : Fin 2 ↦ ℝ) 0).prod (fderiv ℝ problem_5_7_F p) :
+          R2 →L[ℝ] (ℝ × ℝ)) =
+        (r2PairEquiv.trans
+          (shear (3 * p 0 ^ (2 : ℕ) + p 1)
+            (p 0 + 3 * p 1 ^ (2 : ℕ)) hFy) : R2 →L[ℝ] (ℝ × ℝ)) := by
+    apply ContinuousLinearMap.ext
+    intro v
+    have hfst :
+        (((PiLp.proj 2 (fun _ : Fin 2 ↦ ℝ) 0).prod (fderiv ℝ problem_5_7_F p)) v).1 =
+          (r2PairEquiv.trans
+            (shear (3 * p 0 ^ (2 : ℕ) + p 1)
+              (p 0 + 3 * p 1 ^ (2 : ℕ)) hFy) v).1 := by
+      simp [r2PairEquiv_apply, shear, PiLp.proj_apply]
+    have hsnd :
+        (((PiLp.proj 2 (fun _ : Fin 2 ↦ ℝ) 0).prod (fderiv ℝ problem_5_7_F p)) v).2 =
+          (r2PairEquiv.trans
+            (shear (3 * p 0 ^ (2 : ℕ) + p 1)
+              (p 0 + 3 * p 1 ^ (2 : ℕ)) hFy) v).2 := by
+      simp [r2PairEquiv_apply, shear, PiLp.proj_apply, problem_5_7_fderiv_apply]
+    exact Prod.ext hfst hsnd
+  have hpair' :
+      HasFDerivAt (fun q : R2 ↦ ((q 0, problem_5_7_F q) : ℝ × ℝ))
+        (↑(r2PairEquiv.trans
+            (shear (3 * p 0 ^ (2 : ℕ) + p 1)
+              (p 0 + 3 * p 1 ^ (2 : ℕ)) hFy)) : R2 →L[ℝ] (ℝ × ℝ)) p := by
+    rwa [← hCLM]
+  unfold sliceMapKeepX sliceDerivKeepX
+  exact r2PairEquiv.symm.toContinuousLinearMap.hasFDerivAt.comp p hpair'
+
+theorem hasFDerivAt_sliceMapKeepY (p : R2)
+    (hFx : 3 * p 0 ^ (2 : ℕ) + p 1 ≠ 0) :
+    HasFDerivAt sliceMapKeepY (sliceDerivKeepY p hFx : R2 →L[ℝ] R2) p := by
+  have hpair := hasFDerivAt_pair_keepY p
+  have hCLM :
+      ((PiLp.proj 2 (fun _ : Fin 2 ↦ ℝ) 1).prod (fderiv ℝ problem_5_7_F p) :
+          R2 →L[ℝ] (ℝ × ℝ)) =
+        (r2PairEquiv.trans
+          ((ContinuousLinearEquiv.prodComm ℝ ℝ ℝ).trans
+            (shear (p 0 + 3 * p 1 ^ (2 : ℕ))
+              (3 * p 0 ^ (2 : ℕ) + p 1) hFx)) : R2 →L[ℝ] (ℝ × ℝ)) := by
+    apply ContinuousLinearMap.ext
+    intro v
+    have hfst :
+        (((PiLp.proj 2 (fun _ : Fin 2 ↦ ℝ) 1).prod (fderiv ℝ problem_5_7_F p)) v).1 =
+          (r2PairEquiv.trans
+            ((ContinuousLinearEquiv.prodComm ℝ ℝ ℝ).trans
+              (shear (p 0 + 3 * p 1 ^ (2 : ℕ))
+                (3 * p 0 ^ (2 : ℕ) + p 1) hFx)) v).1 := by
+      simp [r2PairEquiv_apply, shear, ContinuousLinearEquiv.prodComm_apply, PiLp.proj_apply]
+    have hsnd :
+        (((PiLp.proj 2 (fun _ : Fin 2 ↦ ℝ) 1).prod (fderiv ℝ problem_5_7_F p)) v).2 =
+          (r2PairEquiv.trans
+            ((ContinuousLinearEquiv.prodComm ℝ ℝ ℝ).trans
+              (shear (p 0 + 3 * p 1 ^ (2 : ℕ))
+                (3 * p 0 ^ (2 : ℕ) + p 1) hFx)) v).2 := by
+      simp [r2PairEquiv_apply, shear, ContinuousLinearEquiv.prodComm_apply, PiLp.proj_apply,
+        problem_5_7_fderiv_apply]
+      ring
+    exact Prod.ext hfst hsnd
+  have hpair' :
+      HasFDerivAt (fun q : R2 ↦ ((q 1, problem_5_7_F q) : ℝ × ℝ))
+        (↑(r2PairEquiv.trans
+            ((ContinuousLinearEquiv.prodComm ℝ ℝ ℝ).trans
+              (shear (p 0 + 3 * p 1 ^ (2 : ℕ))
+                (3 * p 0 ^ (2 : ℕ) + p 1) hFx))) : R2 →L[ℝ] (ℝ × ℝ)) p := by
+    rwa [← hCLM]
+  unfold sliceMapKeepY sliceDerivKeepY
+  exact r2PairEquiv.symm.toContinuousLinearMap.hasFDerivAt.comp p hpair'
+
+/-- Membership in the model Euclidean 1-slice of `ℝ²` is “last coordinate equals `c`”. -/
+theorem mem_euclideanSlice_r2 (U : Set R2) (c : ℝ) (x : R2) :
+    x ∈ euclideanSlice (n := 2) U 1 (by omega) (fun _ : Fin 1 ↦ c) ↔
+      x ∈ U ∧ x 1 = c := by
+  constructor
+  · intro hx
+    change x ∈ U ∧ ∀ i : Fin 1,
+        x (Fin.cast (Nat.add_sub_of_le (by omega : 1 ≤ 2)) (i.natAdd 1)) = c at hx
+    refine ⟨hx.1, ?_⟩
+    simpa using hx.2 (0 : Fin 1)
+  · intro hx
+    change x ∈ U ∧ ∀ i : Fin 1,
+        x (Fin.cast (Nat.add_sub_of_le (by omega : 1 ≤ 2)) (i.natAdd 1)) = c
+    refine ⟨hx.1, ?_⟩
+    intro i
+    fin_cases i
+    simpa using hx.2
+
+/-- Package an analytic local diffeomorphism produced by the inverse function theorem as a
+slice chart whose last coordinate is the given analytic function `g`. -/
+theorem analytic_ift_to_sliceChart
+    (g : R2 → R2) (p : R2) (c : ℝ)
+    (hg : ContDiff ℝ (⊤ : WithTop ℕ∞) g)
+    (e : R2 ≃L[ℝ] R2)
+    (hderiv : HasFDerivAt g (e : R2 →L[ℝ] R2) p)
+    (hlast : ∀ q, g q 1 = problem_5_7_F q) :
+    ∃ Φ : OpenPartialHomeomorph R2 R2,
+      p ∈ Φ.source ∧ Φ.IsSliceChart (problem_5_7_F ⁻¹' {c}) 1 := by
+  have hInv : (fderiv ℝ g p).IsInvertible := by
+    rw [hderiv.fderiv]
+    exact ContinuousLinearMap.isInvertible_equiv
+  obtain ⟨Ψ, hpΨ, _, _, hEq⟩ :=
+    model_partialDiffeomorph_of_inverse_function_theorem
+      (𝕜 := ℝ) (E := R2) (F := R2)
+      (g := g) (a := p) (Ω := (Set.univ : Set R2)) (T := (Set.univ : Set R2))
+      (f' := e) Filter.univ_mem hg.contDiffOn (fun _ _ ↦ Set.mem_univ _)
+      hg.contDiffAt hderiv (by simp) hInv
+  let Φ : OpenPartialHomeomorph R2 R2 := Ψ.toOpenPartialHomeomorph
+  have hmax : Φ ∈ IsManifold.maximalAtlas (𝓡 2) (⊤ : WithTop ℕ∞) R2 :=
+    Φ.mem_maximalAtlas_of_contMDiffOn Ψ.contMDiffOn_toFun Ψ.contMDiffOn_invFun
+  have hslice : (Φ '' ((problem_5_7_F ⁻¹' {c}) ∩ Φ.source)).IsEuclideanSlice Φ.target 1 := by
+    refine ⟨by omega, fun _ : Fin 1 ↦ c, ?_⟩
+    ext z
+    constructor
+    · rintro ⟨q, ⟨hqF, hqSrc⟩, rfl⟩
+      have hz : Φ q = g q := (hEq hqSrc).symm
+      have hz1 : (Φ q) 1 = c := by
+        have hqval : problem_5_7_F q = c := by
+          simpa [Set.mem_preimage] using hqF
+        simpa [hz, hlast, hqval]
+      have hzT : Φ q ∈ Φ.target := Φ.map_source hqSrc
+      exact (mem_euclideanSlice_r2 Φ.target c (Φ q)).2 ⟨hzT, hz1⟩
+    · intro hz
+      have hz' := (mem_euclideanSlice_r2 Φ.target c z).1 hz
+      have hqSrc : Φ.symm z ∈ Φ.source := Φ.map_target hz'.1
+      refine ⟨Φ.symm z, ⟨?_, hqSrc⟩, Φ.right_inv hz'.1⟩
+      have hgz : g (Φ.symm z) = z := by
+        have := hEq hqSrc
+        simpa [Φ.right_inv hz'.1] using this.trans (Φ.right_inv hz'.1)
+      have hFval : problem_5_7_F (Φ.symm z) = c := by
+        have := congrArg (fun v : R2 ↦ v 1) hgz
+        simpa [hlast, hz'.2] using this
+      simpa [Set.mem_preimage] using hFval
+  exact ⟨Φ, hpΨ, ⟨hmax, hslice⟩⟩
+
+theorem exists_sliceChart_keepX {c : ℝ} {p : R2}
+    (hFy : p 0 + 3 * p 1 ^ (2 : ℕ) ≠ 0) :
+    ∃ Φ : OpenPartialHomeomorph R2 R2,
+      p ∈ Φ.source ∧ Φ.IsSliceChart (problem_5_7_F ⁻¹' {c}) 1 :=
+  analytic_ift_to_sliceChart sliceMapKeepX p c sliceMapKeepX_contDiff
+    (sliceDerivKeepX p hFy) (hasFDerivAt_sliceMapKeepX p hFy)
+    (fun q ↦ (sliceMapKeepX_coords q).2)
+
+theorem exists_sliceChart_keepY {c : ℝ} {p : R2}
+    (hFx : 3 * p 0 ^ (2 : ℕ) + p 1 ≠ 0) :
+    ∃ Φ : OpenPartialHomeomorph R2 R2,
+      p ∈ Φ.source ∧ Φ.IsSliceChart (problem_5_7_F ⁻¹' {c}) 1 :=
+  analytic_ift_to_sliceChart sliceMapKeepY p c sliceMapKeepY_contDiff
+    (sliceDerivKeepY p hFx) (hasFDerivAt_sliceMapKeepY p hFx)
+    (fun q ↦ (sliceMapKeepY_coords q).2)
+
+/-- On a nonexceptional fiber the gradient of `F` is nonzero, so one of the two partials survives. -/
+theorem gradient_ne_zero_of_regular {c : ℝ} {p : R2}
+    (hp : problem_5_7_F p = c) (hc : c ≠ 0 ∧ c ≠ (1 / 27 : ℝ)) :
+    ¬ (3 * p 0 ^ (2 : ℕ) + p 1 = 0 ∧ p 0 + 3 * p 1 ^ (2 : ℕ) = 0) :=
+  (problem_5_7_mfderiv_surjective_iff p).1
+    (((problem_5_7_isRegularValue_iff c).2 hc) p hp)
+
+theorem exists_sliceChart_of_regular_fiber {c : ℝ} {p : R2}
+    (hp : problem_5_7_F p = c) (hc : c ≠ 0 ∧ c ≠ (1 / 27 : ℝ)) :
+    ∃ Φ : OpenPartialHomeomorph R2 R2,
+      p ∈ Φ.source ∧ Φ.IsSliceChart (problem_5_7_F ⁻¹' {c}) 1 := by
+  have hgrad := gradient_ne_zero_of_regular hp hc
+  by_cases hFy : p 0 + 3 * p 1 ^ (2 : ℕ) = 0
+  · have hFx : 3 * p 0 ^ (2 : ℕ) + p 1 ≠ 0 := by
+      intro hFx
+      exact hgrad ⟨hFx, hFy⟩
+    exact exists_sliceChart_keepY hFx
+  · exact exists_sliceChart_keepX hFy
+
+/-- A nonexceptional fiber of the cubic satisfies the analytic local 1-slice condition. -/
+theorem regular_fiber_satisfies_local_slice_condition {c : ℝ}
+    (hc : c ≠ 0 ∧ c ≠ (1 / 27 : ℝ)) :
+    Set.SatisfiesLocalSliceCondition 2 (problem_5_7_F ⁻¹' {c}) 1 where
+  exists_sliceChart p hp := by
+    have hpF : problem_5_7_F p = c := by
+      simpa [Set.mem_preimage] using hp
+    exact exists_sliceChart_of_regular_fiber hpF hc
+
+end Problem57RegularSlice
 
 /-- Helper for Problem 5-7: every nonexceptional fiber satisfies the local-submersion criterion,
 so it carries an embedded-submanifold structure modelled on `ℝ¹`. -/
@@ -566,8 +1030,10 @@ theorem problem_5_7_regular_level_embedded_submanifold_r1 {c : ℝ}
       let _ : TopologicalManifold 1 (problem_5_7_F ⁻¹' {c}) := tm
       ∃ hs : IsManifold (𝓡 1) (⊤ : WithTop ℕ∞) (problem_5_7_F ⁻¹' {c}),
         let _ : IsManifold (𝓡 1) (⊤ : WithTop ℕ∞) (problem_5_7_F ⁻¹' {c}) := hs
-        IsEmbeddedSubmanifold (𝓡 2) (𝓡 1) (problem_5_7_F ⁻¹' {c}) := by
-  sorry
+        IsEmbeddedSubmanifold (𝓡 2) (𝓡 1) (problem_5_7_F ⁻¹' {c}) :=
+  local_slice_condition_has_embedded_submanifold_structure
+    (problem_5_7_F ⁻¹' {c})
+    (Problem57RegularSlice.regular_fiber_satisfies_local_slice_condition hc)
 
 /-- Helper for Problem 5-7: the singular point is isolated in the `c = 1 / 27` fiber. -/
 theorem problem_5_7_level_one_over_twenty_seventh_isolated :

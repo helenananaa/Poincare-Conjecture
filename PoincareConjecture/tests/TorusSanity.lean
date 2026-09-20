@@ -4,14 +4,8 @@ open Set PoincareConjecture.Topology.FiberSaturation
 open PoincareConjecture.Topology.FiberSaturation.MappingTorus
 noncomputable section
 
-/-- A genuinely nonidentity twist on the actual sphere. -/
-def antipodalTwist : Sphere2 ≃ₜ Sphere2 where
-  toFun x := ⟨-x.1, by simp⟩
-  invFun x := ⟨-x.1, by simp⟩
-  left_inv x := by apply Subtype.ext; exact neg_neg x.1
-  right_inv x := by apply Subtype.ext; exact neg_neg x.1
-  continuous_toFun := by fun_prop
-  continuous_invFun := by fun_prop
+/-- Library antipodal homeomorphism, not an ad-hoc test construction. -/
+abbrev antipodalTwist : Sphere2 ≃ₜ Sphere2 := sphere2Antipodal
 
 example (x : Sphere2) : proj antipodalTwist 4 (antipodalTwist x, 4) =
     proj antipodalTwist 4 (x,0) := by

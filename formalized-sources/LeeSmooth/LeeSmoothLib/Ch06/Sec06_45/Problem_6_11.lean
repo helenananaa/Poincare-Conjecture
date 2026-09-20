@@ -88,8 +88,10 @@ omit [TopologicalSpace M] in
 is the comap of the tangent space of `X` under `dG`. -/
 lemma preimageTangentSpaceEqComap_atCompositePoint
     {F : M → N} {G : N → P} {JGX : ModelWithCorners ℝ EGX HGX}
+    [T2Space N] [SecondCountableTopology N]
     [ChartedSpace HGX (G ⁻¹' X)] [IsManifold JGX ∞ (G ⁻¹' X)]
     [IsEmbeddedSubmanifold J JGX (G ⁻¹' X)]
+    [J.Boundaryless]
     (hGtrans : IsTransverseToSubmanifold K J JX X G)
     (p : (G ∘ F) ⁻¹' X) :
     let q : G ⁻¹' X := ⟨F p, p.2⟩
@@ -107,8 +109,10 @@ omit [FiniteDimensional ℝ EM] [IsManifold I ∞ M] in
 matches the pointwise transversality equation for `G ∘ F` against `X`. -/
 lemma compositeTransversePointwise_iff_preimageTransversePointwise
     {F : M → N} {G : N → P} {JGX : ModelWithCorners ℝ EGX HGX}
+    [T2Space N] [SecondCountableTopology N]
     [ChartedSpace HGX (G ⁻¹' X)] [IsManifold JGX ∞ (G ⁻¹' X)]
     [IsEmbeddedSubmanifold J JGX (G ⁻¹' X)]
+    [J.Boundaryless]
     (hF : ContMDiff I J ∞ F)
     (hGtrans : IsTransverseToSubmanifold K J JX X G)
     (p : (G ∘ F) ⁻¹' X) :
@@ -147,9 +151,11 @@ submanifold `X ⊆ P`, and `G ⁻¹' X` carries a chosen embedded submanifold st
 transverse to `G ⁻¹' X` if and only if `G ∘ F` is transverse to `X`. -/
 theorem transverse_preimage_iff_comp_transverse
     {F : M → N} {G : N → P} {JGX : ModelWithCorners ℝ EGX HGX}
+    [T2Space N] [SecondCountableTopology N]
     [ChartedSpace HGX (G ⁻¹' X)] [IsManifold JGX ∞ (G ⁻¹' X)]
     (hF : ContMDiff I J ∞ F)
     [IsEmbeddedSubmanifold J JGX (G ⁻¹' X)]
+    [J.Boundaryless]
     (hGtrans : IsTransverseToSubmanifold K J JX X G) :
     IsTransverseToSubmanifold J I JGX (G ⁻¹' X) F ↔
       IsTransverseToSubmanifold K I JX X (G ∘ F) := by

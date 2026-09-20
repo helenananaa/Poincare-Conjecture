@@ -4,7 +4,7 @@ import LeeSmoothLib.Ch07.Sec07_46.Proposition_7_1
 import LeeSmoothLib.Ch07.Sec07_47.Theorem_7_5
 import LeeSmoothLib.Ch04.Sec04_21.Definition_4_21_extra_1
 import LeeSmoothLib.Ch04.Sec04_22.Proposition_4_8
-import LeeSmoothLib.Ch05.Sec05_30.Theorem_5_12
+import LeeSmoothLib.Verified.LevelSets.InjectiveRank
 import LeeSmoothLib.Ch05.Sec05_31.Proposition_5_18
 import LeeSmoothLib.Ch07.Sec07_49.Definition_7_49_extra_1
 import LeeSmoothLib.Ch07.Sec07_49.Proposition_7_11
@@ -689,69 +689,37 @@ lemma injective_mfderiv_of_rankAt_eq_sourceFinrank
 /-- Helper for Proposition 7.17: injectivity makes the identity-point derivative of a
 constant-rank Lie-group homomorphism injective by collapsing the identity fiber to a singleton. -/
 lemma rankAtOne_eq_sourceFinrank_of_injectiveLieGroupHom
-    [FiniteDimensional 𝕜 EG]
-    (F : ContMDiffMonoidMorphism I J ∞ G H) (hFinj : Function.Injective F)
-    (hRankF : HasConstantRank I J F (rankAt I J F (1 : G))) :
-    rankAt I J F (1 : G) = Module.finrank 𝕜 EG := by
-  let k : ℕ := Module.finrank 𝕜 EG - rankAt I J F (1 : G)
-  let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
-  have hLevel :
-      ∃ cs : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (F ⁻¹' ({(1 : H)} : Set H)),
-        ∃ hs : IsManifold K ∞ (F ⁻¹' ({(1 : H)} : Set H)),
-          let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (F ⁻¹' ({(1 : H)} : Set H)) := cs
-          let _ : IsManifold K ∞ (F ⁻¹' ({(1 : H)} : Set H)) := hs
-          ∃ hEmb : IsEmbeddedSubmanifold I K (F ⁻¹' ({(1 : H)} : Set H)),
-            hEmb.codimension = rankAt I J F (1 : G) := by
-    -- Route correction: use the constant-rank level-set theorem directly on the identity fiber,
-    -- rather than recharting the whole source manifold into a self-model first.
-    simpa [k, K] using!
-      (constant_rank_level_set_has_embedded_submanifold_structure
-        F.contMDiff_toFun hRankF (1 : H))
-  rcases hLevel with ⟨cs, hs, hEmb, hCodim⟩
-  let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (F ⁻¹' ({(1 : H)} : Set H)) := cs
-  let _ : IsManifold K ∞ (F ⁻¹' ({(1 : H)} : Set H)) := hs
-  have hPreimageOne :
-      F ⁻¹' ({(1 : H)} : Set H) = ({(1 : G)} : Set G) :=
-    preimageOne_eq_singleton_of_injective F hFinj
-  let _ : Nonempty (F ⁻¹' ({(1 : H)} : Set H)) := ⟨⟨1, by simp⟩⟩
-  let _ : Subsingleton (F ⁻¹' ({(1 : H)} : Set H)) := by
-    refine ⟨fun x y ↦ ?_⟩
-    apply Subtype.ext
-    have hx : (x : G) = 1 := by
-      simpa [hPreimageOne, Set.mem_singleton_iff] using x.2
-    have hy : (y : G) = 1 := by
-      simpa [hPreimageOne, Set.mem_singleton_iff] using y.2
-    simpa [hx, hy]
-  let S : Type uG := ↥(F ⁻¹' ({(1 : H)} : Set H))
-  let _ : TopologicalSpace S := inferInstance
-  let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) S := inferInstance
-  let _ : Nonempty S := inferInstance
-  let _ : Subsingleton S := inferInstance
-  have hk0 : k = 0 := @subsingletonChartedSpace_fin_eq_zero 𝕜 _ k S _ _ _ _
-  have hRankOne :
-      rankAt I J F (1 : G) = Module.finrank 𝕜 EG := by
-    -- The singleton identity fiber has zero intrinsic dimension, so its codimension is the full
-    -- source dimension.
-    calc
-      rankAt I J F (1 : G) = hEmb.codimension := by simpa using hCodim.symm
-      _ = Module.finrank 𝕜 EG - Module.finrank 𝕜 (EuclideanSpace 𝕜 (Fin k)) := by
-            simp [IsEmbeddedSubmanifold.codimension]
-      _ = Module.finrank 𝕜 EG := by
-            have hdim0 : Module.finrank 𝕜 (EuclideanSpace 𝕜 (Fin 0)) = 0 := by
-              exact Module.finrank_zero_iff.2 (by infer_instance)
-            rw [hk0, hdim0]
-            simp
-  exact hRankOne
+    {EG0 : Type uEG} [NormedAddCommGroup EG0] [NormedSpace ℝ EG0] [FiniteDimensional ℝ EG0]
+    {HG0 : Type uHG} [TopologicalSpace HG0]
+    {EH0 : Type uEH} [NormedAddCommGroup EH0] [NormedSpace ℝ EH0] [FiniteDimensional ℝ EH0]
+    {HH0 : Type uHH} [TopologicalSpace HH0]
+    {I0 : ModelWithCorners ℝ EG0 HG0} {J0 : ModelWithCorners ℝ EH0 HH0}
+    [I0.Boundaryless] [J0.Boundaryless]
+    {G0 : Type uG} [Group G0] [TopologicalSpace G0] [ChartedSpace HG0 G0]
+    {H0 : Type uH} [Group H0] [TopologicalSpace H0] [ChartedSpace HH0 H0]
+    [LieGroup I0 ∞ G0] [LieGroup J0 ∞ H0]
+    (F : ContMDiffMonoidMorphism I0 J0 ∞ G0 H0) (hFinj : Function.Injective F)
+    (hRankF : HasConstantRank I0 J0 F (rankAt I0 J0 F (1 : G0))) :
+    rankAt I0 J0 F (1 : G0) = Module.finrank ℝ EG0 :=
+  LeeVerifiedLevelSets.InjectiveRank.rank_eq_source_finrank_of_injective
+    F.contMDiff_toFun hRankF hFinj (1 : G0)
 
-/-- Helper for Proposition 7.17: injectivity makes the identity-point derivative of a
-constant-rank Lie-group homomorphism injective by collapsing the identity fiber to a singleton. -/
+/-- The local real rank theorem proves derivative injectivity at the identity;
+no analytic level-set structure, global Hausdorffness, or countability is assumed. -/
 lemma mfderivAtOne_injective_of_injectiveLieGroupHom
-    [FiniteDimensional 𝕜 EG]
-    (F : ContMDiffMonoidMorphism I J ∞ G H) (hFinj : Function.Injective F)
-    (hRankF : HasConstantRank I J F (rankAt I J F (1 : G))) :
-    Function.Injective (mfderiv I J F (1 : G)) := by
-  -- Reuse the rank computation at the identity and then apply the generic full-rank criterion.
-  exact injective_mfderiv_of_rankAt_eq_sourceFinrank F
+    {EG0 : Type uEG} [NormedAddCommGroup EG0] [NormedSpace ℝ EG0] [FiniteDimensional ℝ EG0]
+    {HG0 : Type uHG} [TopologicalSpace HG0]
+    {EH0 : Type uEH} [NormedAddCommGroup EH0] [NormedSpace ℝ EH0] [FiniteDimensional ℝ EH0]
+    {HH0 : Type uHH} [TopologicalSpace HH0]
+    {I0 : ModelWithCorners ℝ EG0 HG0} {J0 : ModelWithCorners ℝ EH0 HH0}
+    [I0.Boundaryless] [J0.Boundaryless]
+    {G0 : Type uG} [Group G0] [TopologicalSpace G0] [ChartedSpace HG0 G0]
+    {H0 : Type uH} [Group H0] [TopologicalSpace H0] [ChartedSpace HH0 H0]
+    [LieGroup I0 ∞ G0] [LieGroup J0 ∞ H0]
+    (F : ContMDiffMonoidMorphism I0 J0 ∞ G0 H0) (hFinj : Function.Injective F)
+    (hRankF : HasConstantRank I0 J0 F (rankAt I0 J0 F (1 : G0))) :
+    Function.Injective (mfderiv I0 J0 F (1 : G0)) :=
+  injective_mfderiv_of_rankAt_eq_sourceFinrank F
     (rankAtOne_eq_sourceFinrank_of_injectiveLieGroupHom F hFinj hRankF)
 
 /-- Helper for Proposition 7.17: an immersion at regularity `n` is also an immersion at every
@@ -866,6 +834,12 @@ lemma mfderivInjectiveAt_of_injectiveAtOneLieGroupHom
   -- Full source rank forces injectivity of the manifold derivative at `g`.
   exact injective_mfderiv_of_rankAt_eq_sourceFinrank F hRankg
 
+/- The derivative criterion used below is for boundaryless MODELS. A Lie group is an
+interior-point manifold, but this does not force an arbitrary model-with-corners to be
+boundaryless. In particular the zero-tail immersion normal form for a zero-dimensional
+source forces the target chart to take value zero; zero need not be an interior point of an
+arbitrary half-space model. The ordinary-model hypotheses are explicit below. -/
+
 /-- Helper for Proposition 7.17: for real Lie groups, constant rank plus injectivity upgrades a
 Lie-group homomorphism to an immersion by the pointwise manifold-derivative criterion from
 Definition 4.21-extra-1. -/
@@ -875,6 +849,7 @@ theorem injectiveLieGroupHomIsImmersion_of_hasConstantRank
     {EH0 : Type uEH} [NormedAddCommGroup EH0] [NormedSpace ℝ EH0] [FiniteDimensional ℝ EH0]
     {HH0 : Type uHH} [TopologicalSpace HH0]
     {I0 : ModelWithCorners ℝ EG0 HG0} {J0 : ModelWithCorners ℝ EH0 HH0}
+    [I0.Boundaryless] [J0.Boundaryless]
     {G0 : Type uG} [Group G0] [TopologicalSpace G0] [ChartedSpace HG0 G0]
     {H0 : Type uH} [Group H0] [TopologicalSpace H0] [ChartedSpace HH0 H0]
     [LieGroup I0 ∞ G0] [LieGroup J0 ∞ H0]
@@ -895,6 +870,7 @@ theorem injectiveLieGroupHomIsImmersion
     {EH0 : Type uEH} [NormedAddCommGroup EH0] [NormedSpace ℝ EH0] [FiniteDimensional ℝ EH0]
     {HH0 : Type uHH} [TopologicalSpace HH0]
     {I0 : ModelWithCorners ℝ EG0 HG0} {J0 : ModelWithCorners ℝ EH0 HH0}
+    [I0.Boundaryless] [J0.Boundaryless]
     {G0 : Type uG} [Group G0] [TopologicalSpace G0] [ChartedSpace HG0 G0]
     {H0 : Type uH} [Group H0] [TopologicalSpace H0] [ChartedSpace HH0 H0]
     [LieGroup I0 ∞ G0] [LieGroup J0 ∞ H0]
@@ -1410,6 +1386,7 @@ structure SmoothImageFactorization
 Lie-group homomorphism carries the required smooth Lie-group structure, its inclusion into `H` is
 a smooth immersion, and the canonical Lie-group isomorphism from `G` realizes the given map. -/
 theorem rangeLieSubgroupStructureOfInjectiveImmersion
+    [I.Boundaryless] [J.Boundaryless]
     [FiniteDimensional 𝕜 EG]
     (F : ContMDiffMonoidMorphism I J ∞ G H) (hFinj : Function.Injective F)
     (hImmF : IsImmersion I J ∞ F) :
@@ -1519,6 +1496,7 @@ theorem injective_lie_group_hom_range_has_lie_subgroup_structure
     {EH0 : Type uEH} [NormedAddCommGroup EH0] [NormedSpace ℝ EH0] [FiniteDimensional ℝ EH0]
     {HH0 : Type uHH} [TopologicalSpace HH0]
     {I0 : ModelWithCorners ℝ EG0 HG0} {J0 : ModelWithCorners ℝ EH0 HH0}
+    [I0.Boundaryless] [J0.Boundaryless]
     {G0 : Type uG} [Group G0] [TopologicalSpace G0] [ChartedSpace HG0 G0]
     {H0 : Type uH} [Group H0] [TopologicalSpace H0] [ChartedSpace HH0 H0]
     [LieGroup I0 ∞ G0] [LieGroup J0 ∞ H0]

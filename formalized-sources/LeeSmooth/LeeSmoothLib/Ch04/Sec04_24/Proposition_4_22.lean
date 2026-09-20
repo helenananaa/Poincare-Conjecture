@@ -1,6 +1,8 @@
 import Mathlib.Geometry.Manifold.SmoothEmbedding
 import Mathlib.Geometry.Manifold.IsManifold.InteriorBoundary
 import Mathlib.Topology.Maps.Proper.Basic
+import Mathlib.Topology.Separation.Hausdorff
+import LeeSmoothLib.Ch04.Sec04_22.Proposition_4_8
 
 -- Declarations for this item will be appended below by the statement pipeline.
 
@@ -30,7 +32,10 @@ theorem smooth_embedding_of_injective_isImmersion_isOpenMap
     (h_inj : Function.Injective F)
     (hF : Manifold.IsImmersion I J ∞ F)
     (h_open : IsOpenMap F) :
-    Manifold.IsSmoothEmbedding I J ∞ F := sorry
+    Manifold.IsSmoothEmbedding I J ∞ F :=
+  Manifold.IsSmoothEmbedding.mk hF
+    (Topology.IsOpenEmbedding.of_continuous_injective_isOpenMap
+      hF.contMDiff.continuous h_inj h_open).isEmbedding
 
 /-- Proposition 4.22 (2): an injective smooth immersion that is a closed map is a smooth
 embedding. -/
@@ -38,14 +43,18 @@ theorem smooth_embedding_of_injective_isImmersion_isClosedMap
     (h_inj : Function.Injective F)
     (hF : Manifold.IsImmersion I J ∞ F)
     (h_closed : IsClosedMap F) :
-    Manifold.IsSmoothEmbedding I J ∞ F := sorry
+    Manifold.IsSmoothEmbedding I J ∞ F :=
+  Manifold.IsSmoothEmbedding.mk hF
+    (Topology.IsClosedEmbedding.of_continuous_injective_isClosedMap
+      hF.contMDiff.continuous h_inj h_closed).isEmbedding
 
 /-- Proposition 4.22 (3): an injective smooth immersion that is proper is a smooth embedding. -/
 theorem smooth_embedding_of_injective_isImmersion_isProperMap
     (h_inj : Function.Injective F)
     (hF : Manifold.IsImmersion I J ∞ F)
     (h_proper : IsProperMap F) :
-    Manifold.IsSmoothEmbedding I J ∞ F := sorry
+    Manifold.IsSmoothEmbedding I J ∞ F :=
+  smooth_embedding_of_injective_isImmersion_isClosedMap h_inj hF h_proper.isClosedMap
 
 /-- Proposition 4.22 (4): if the source manifold is compact, then an injective smooth immersion is
 a smooth embedding. -/
@@ -53,7 +62,9 @@ theorem smooth_embedding_of_compact_source_injective_isImmersion
     [CompactSpace M] [T2Space N]
     (h_inj : Function.Injective F)
     (hF : Manifold.IsImmersion I J ∞ F) :
-    Manifold.IsSmoothEmbedding I J ∞ F := sorry
+    Manifold.IsSmoothEmbedding I J ∞ F :=
+  Manifold.IsSmoothEmbedding.mk hF
+    (hF.contMDiff.continuous.isClosedEmbedding h_inj).isEmbedding
 
 end GeneralCases
 
@@ -77,6 +88,8 @@ theorem smooth_embedding_of_injective_isImmersion_boundaryless_of_eq_finrank
     (h_dim : Module.finrank ℝ E = Module.finrank ℝ E')
     (h_inj : Function.Injective F)
     (hF : Manifold.IsImmersion I J ∞ F) :
-    Manifold.IsSmoothEmbedding I J ∞ F := sorry
+    Manifold.IsSmoothEmbedding I J ∞ F :=
+  smooth_embedding_of_injective_isImmersion_isOpenMap h_inj hF
+    (hF.isLocalDiffeomorph_of_eq_finrank h_dim).isOpenMap
 
 end EqualDimensionCase

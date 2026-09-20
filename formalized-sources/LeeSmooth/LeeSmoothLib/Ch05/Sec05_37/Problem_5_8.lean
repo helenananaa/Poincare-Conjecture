@@ -23,7 +23,7 @@ universe uE uM
 -- repository and mathlib inspection verified the standard sphere manifold instance from
 -- `Mathlib.Geometry.Manifold.Instances.Sphere`, with ambient dimension written as `Fin (n + 1)`.
 
-variable {E : Type uE} [NormedAddCommGroup E] [NormedSpace ℝ E] [InnerProductSpace ℝ E]
+variable {E : Type uE} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   [FiniteDimensional ℝ E]
 variable {M : Type uM} [TopologicalSpace M] [ChartedSpace E M]
 variable [IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M]
@@ -173,6 +173,72 @@ lemma basis_model_isManifold
       basis_model_transition_mem_contDiffGroupoid b hcompat_old
   let _ : HasGroupoid M (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 dimM)) := hGroupoid
   exact IsManifold.mk' (𝓡 dimM) (⊤ : WithTop ℕ∞) M
+
+/-- Helper for Problem 5-8: the preferred transported chart is the original preferred chart
+followed by the global basis coordinate map. -/
+lemma basis_model_chartAt_eq
+    (b : Module.Basis (Fin dimM) ℝ E) (x : M) :
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin dimM)) M :=
+      basis_model_chartedSpace b
+    let eModel : OpenPartialHomeomorph E (EuclideanSpace ℝ (Fin dimM)) :=
+      (basis_model_diffeomorph b).symm.toHomeomorph.toOpenPartialHomeomorph
+    chartAt (EuclideanSpace ℝ (Fin dimM)) x = (chartAt E x).trans eModel := by
+  rfl
+
+/-- Helper for Problem 5-8: the identity from the transported Euclidean model back to the original
+`E`-model is smooth. -/
+lemma basis_model_identity_contMDiff_to_original
+    (b : Module.Basis (Fin dimM) ℝ E) :
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin dimM)) M :=
+      basis_model_chartedSpace b
+    let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) M :=
+      basis_model_isManifold b
+    ContMDiff (𝓡 dimM) (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞)
+      (id : M → M) := by
+  let V := EuclideanSpace ℝ (Fin dimM)
+  let _ : ChartedSpace V M := basis_model_chartedSpace b
+  let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) M := basis_model_isManifold b
+  rw [contMDiff_iff_target]
+  refine ⟨continuous_id, ?_⟩
+  intro y
+  have hnew :
+      ContMDiffOn (𝓡 dimM) (𝓡 dimM) (⊤ : WithTop ℕ∞)
+        (extChartAt (𝓡 dimM) y) (chartAt V y).source :=
+    contMDiffOn_extChartAt
+  have hcomp :=
+    (basis_model_continuousLinearEquiv b).toContinuousLinearMap.contDiff.contMDiff.comp_contMDiffOn
+      hnew
+  refine hcomp.congr ?_
+  intro x hx
+  simp [Function.comp, basis_model_chartAt_eq (M := M) b y,
+    basis_model_diffeomorph, basis_model_continuousLinearEquiv]
+
+/-- Helper for Problem 5-8: the identity from the original `E`-model into the transported
+Euclidean basis model is smooth. -/
+lemma basis_model_identity_contMDiff_from_original
+    (b : Module.Basis (Fin dimM) ℝ E) :
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin dimM)) M :=
+      basis_model_chartedSpace b
+    let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) M :=
+      basis_model_isManifold b
+    ContMDiff (modelWithCornersSelf ℝ E) (𝓡 dimM) (⊤ : WithTop ℕ∞)
+      (id : M → M) := by
+  let V := EuclideanSpace ℝ (Fin dimM)
+  let _ : ChartedSpace V M := basis_model_chartedSpace b
+  let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) M := basis_model_isManifold b
+  rw [contMDiff_iff_target]
+  refine ⟨continuous_id, ?_⟩
+  intro y
+  have hold :
+      ContMDiffOn (modelWithCornersSelf ℝ E) (modelWithCornersSelf ℝ E)
+        (⊤ : WithTop ℕ∞) (extChartAt (modelWithCornersSelf ℝ E) y)
+        (chartAt E y).source :=
+    contMDiffOn_extChartAt
+  have hcomp :=
+    (basis_model_continuousLinearEquiv b).symm.toContinuousLinearMap.contDiff.contMDiff.comp_contMDiffOn
+      hold
+  simpa [Function.comp, basis_model_chartAt_eq (M := M) b y,
+    basis_model_diffeomorph, basis_model_continuousLinearEquiv] using hcomp
 
 /-- Helper for Problem 5-8: an ambient smooth chart for the original `E`-model remains a maximal
 atlas chart after composing with the fixed basis identification to `ℝ^dimM`. -/
@@ -1411,6 +1477,94 @@ lemma unit_exterior_signed_shell_chart_mem_contDiffGroupoid
           simpa [unit_exterior_signed_shell_flip_symm_preserves_retained_coordinates (k := k) z]
             using hz_tail)
 
+/-- Helper for Problem 5-8: on a signed shell patch, the distinguished shell coordinate is
+nonnegative exactly on the exterior of the open unit ball. -/
+lemma unit_exterior_signed_shell_chart_apply_zero_nonneg_iff
+    (k : ℕ) (i : Fin (k + 2)) (s : Bool)
+    {x : EuclideanSpace ℝ (Fin (k + 2))}
+    (hx : x ∈ unit_exterior_signed_shell_source_set k i s) :
+    0 ≤ (unit_exterior_signed_shell_chart k i s x) 0 ↔
+      x ∉ Metric.ball (0 : EuclideanSpace ℝ (Fin (k + 2))) 1 := by
+  let u := (split_at_coordinate i x).1
+  let t := (split_at_coordinate i x).2
+  let a := closed_unit_ball_boundary_sign s * x i
+  have hu : ‖u‖ < 1 := by
+    simpa [unit_exterior_signed_shell_source_set, u] using hx.1
+  have ha : 0 < a := by
+    simpa [unit_exterior_signed_shell_source_set, a] using hx.2
+  have ht : t = x i := by
+    simp [t, split_at_coordinate_snd_apply]
+  have ha_sq : a ^ 2 = t ^ 2 := by
+    rw [ht]
+    cases s <;> simp [a, closed_unit_ball_boundary_sign]
+  have hnorm_sq : ‖x‖ ^ 2 = ‖u‖ ^ 2 + t ^ 2 := by
+    simpa [u, t] using
+      split_at_coordinate_symm_norm_sq i (split_at_coordinate i x)
+  have hrad : 0 ≤ 1 - ‖u‖ ^ 2 := by
+    nlinarith [norm_nonneg u]
+  have hsqrt_sq : (Real.sqrt (1 - ‖u‖ ^ 2)) ^ 2 = 1 - ‖u‖ ^ 2 :=
+    Real.sq_sqrt hrad
+  have hcoord :
+      (unit_exterior_signed_shell_chart k i s x) 0 =
+        a - Real.sqrt (1 - ‖u‖ ^ 2) := by
+    simpa [a, u] using unit_exterior_signed_shell_chart_apply_zero k i s x
+  constructor
+  · intro hnonneg hxball
+    have hnorm_lt : ‖x‖ < 1 := by
+      simpa [Metric.mem_ball, dist_eq_norm] using hxball
+    have hroot_le : Real.sqrt (1 - ‖u‖ ^ 2) ≤ a := by
+      linarith [hnonneg, hcoord]
+    have hroot_nonneg : 0 ≤ Real.sqrt (1 - ‖u‖ ^ 2) := Real.sqrt_nonneg _
+    have hsq : 1 ≤ ‖x‖ ^ 2 := by
+      nlinarith [sq_nonneg (a - Real.sqrt (1 - ‖u‖ ^ 2)), ha_sq, hnorm_sq,
+        hsqrt_sq]
+    nlinarith [norm_nonneg x]
+  · intro hout
+    have hnorm_ge : 1 ≤ ‖x‖ := by
+      by_contra hlt
+      have hnorm_lt : ‖x‖ < 1 := lt_of_not_ge hlt
+      exact hout (by simpa [Metric.mem_ball, dist_eq_norm] using hnorm_lt)
+    have hroot_le : Real.sqrt (1 - ‖u‖ ^ 2) ≤ a := by
+      have hroot_nonneg : 0 ≤ Real.sqrt (1 - ‖u‖ ^ 2) := Real.sqrt_nonneg _
+      nlinarith [ha_sq, hnorm_sq, hsqrt_sq, norm_nonneg x]
+    rw [hcoord]
+    linarith
+
+/-- Helper for Problem 5-8: a unit-sphere point in a signed shell source has zero distinguished
+shell coordinate. -/
+lemma unit_exterior_signed_shell_chart_apply_zero_of_mem_sphere
+    (k : ℕ) (i : Fin (k + 2)) (s : Bool)
+    {x : EuclideanSpace ℝ (Fin (k + 2))}
+    (hx : x ∈ unit_exterior_signed_shell_source_set k i s)
+    (hsphere : x ∈ Metric.sphere (0 : EuclideanSpace ℝ (Fin (k + 2))) 1) :
+    (unit_exterior_signed_shell_chart k i s x) 0 = 0 := by
+  let u := (split_at_coordinate i x).1
+  let t := (split_at_coordinate i x).2
+  let a := closed_unit_ball_boundary_sign s * x i
+  have ha : 0 < a := by
+    simpa [unit_exterior_signed_shell_source_set, a] using hx.2
+  have ht : t = x i := by
+    simp [t, split_at_coordinate_snd_apply]
+  have ha_sq : a ^ 2 = t ^ 2 := by
+    rw [ht]
+    cases s <;> simp [a, closed_unit_ball_boundary_sign]
+  have hnorm : ‖x‖ = 1 := by
+    simpa [Metric.mem_sphere, dist_eq_norm] using hsphere
+  have hnorm_sq : ‖x‖ ^ 2 = ‖u‖ ^ 2 + t ^ 2 := by
+    simpa [u, t] using
+      split_at_coordinate_symm_norm_sq i (split_at_coordinate i x)
+  have hu : ‖u‖ < 1 := by
+    simpa [unit_exterior_signed_shell_source_set, u] using hx.1
+  have hrad : 0 ≤ 1 - ‖u‖ ^ 2 := by
+    nlinarith [norm_nonneg u]
+  have hsqrt_sq : (Real.sqrt (1 - ‖u‖ ^ 2)) ^ 2 = 1 - ‖u‖ ^ 2 :=
+    Real.sq_sqrt hrad
+  have ha_eq : a = Real.sqrt (1 - ‖u‖ ^ 2) := by
+    nlinarith [Real.sqrt_nonneg (1 - ‖u‖ ^ 2)]
+  rw [unit_exterior_signed_shell_chart_apply_zero, show
+    closed_unit_ball_boundary_sign s * x i = a by rfl, show
+    (split_at_coordinate i x).1 = u by rfl, ha_eq, sub_self]
+
 /-- Helper for Problem 5-8: after sign-normalizing and centering a one-dimensional exterior ray at
 the sphere point, the local image is exactly the standard nonnegative half-line in the restricted
 chart target. -/
@@ -1574,18 +1728,157 @@ lemma unit_exterior_signed_shell_boundary_slice_chart_at_sphere_point_succSucc
       y ∈ e.source ∧
         e.IsBoundarySliceChart
           (U \ Metric.ball (0 : EuclideanSpace ℝ (Fin (k + 2))) 1) (k + 2) := by
-  -- Route correction: isolate the genuine higher-dimensional shell construction as its own
-  -- theorem, so the ambient-dimension split below is ordinary recursion on `n`.
-  -- TODO: follow Lee's shell-chart route on the sign-positive patch:
-  -- pick `(i, s)` with `0 < closed_unit_ball_boundary_sign s * y i`, restrict
-  -- `unit_exterior_signed_shell_chart k i s` to
-  -- `U ∩ unit_exterior_signed_shell_source_set k i s`, center at `y`, prove the centered local
-  -- image `{z ∈ e.target | 0 ≤ z 0}`, and then compose with the fixed coordinate swap chart to
-  -- match the project's `Fin.last` half-slice convention.
-  let _ := hU_open
-  let _ := hy_shell
-  let _ := hy_sphere
-  sorry
+  obtain ⟨i, s, hy_sign⟩ := unit_sphere_point_exists_positive_signed_coordinate hy_sphere
+  let e0 := unit_exterior_signed_shell_chart k i s
+  have hy_norm : ‖y‖ = 1 := by
+    simpa [Metric.mem_sphere, dist_eq_norm] using hy_sphere
+  have hy_tail : ‖(split_at_coordinate i y).1‖ < 1 := by
+    have hsplit :
+        ‖y‖ ^ 2 = ‖(split_at_coordinate i y).1‖ ^ 2 + (split_at_coordinate i y).2 ^ 2 := by
+      simpa using split_at_coordinate_symm_norm_sq i (split_at_coordinate i y)
+    have hcoord_ne : (split_at_coordinate i y).2 ≠ 0 := by
+      cases s <;>
+        simpa [split_at_coordinate_snd_apply, closed_unit_ball_boundary_sign] using hy_sign.ne'
+    have hcoord_sq_pos : 0 < (split_at_coordinate i y).2 ^ 2 := sq_pos_iff.mpr hcoord_ne
+    nlinarith [norm_nonneg ((split_at_coordinate i y).1)]
+  have hy_e0source : y ∈ e0.source := by
+    simpa [e0, unit_exterior_signed_shell_chart_source,
+      unit_exterior_signed_shell_source_set] using ⟨hy_tail, hy_sign⟩
+  have hy_e0zero : e0 y 0 = 0 := by
+    exact unit_exterior_signed_shell_chart_apply_zero_of_mem_sphere k i s
+      (by simpa [e0, unit_exterior_signed_shell_chart_source] using hy_e0source) hy_sphere
+  let e1 := e0.restr U
+  have hy_e1source : y ∈ e1.source := by
+    change y ∈ (e0.restr U).source
+    rw [e0.restr_source' U hU_open]
+    exact ⟨hy_e0source, hy_shell.1⟩
+  let p : e1.source := ⟨y, hy_e1source⟩
+  let ec := e1.centerAt p
+  have hcenter_image :
+      ec '' ((U \ Metric.ball (0 : EuclideanSpace ℝ (Fin (k + 2))) 1) ∩ ec.source) =
+        {z ∈ ec.target | 0 ≤ z 0} := by
+    ext z
+    constructor
+    · rintro ⟨x, hx, rfl⟩
+      refine ⟨ec.map_source hx.2, ?_⟩
+      have hx_e1source : x ∈ e1.source := by
+        simpa [ec, OpenPartialHomeomorph.centerAt_source] using hx.2
+      have hx_e0source : x ∈ e0.source := by
+        change x ∈ (e0.restr U).source at hx_e1source
+        rw [e0.restr_source' U hU_open] at hx_e1source
+        exact hx_e1source.1
+      have hx_nonneg : 0 ≤ e0 x 0 :=
+        (unit_exterior_signed_shell_chart_apply_zero_nonneg_iff k i s
+          (by simpa [e0, unit_exterior_signed_shell_chart_source] using hx_e0source)).2 hx.1.2
+      have hcoord : ec x 0 = e0 x 0 := by
+        simp [ec, e1, p, centerAt_apply_eq_sub_basepoint, hy_e0zero]
+      simpa [hcoord] using hx_nonneg
+    · intro hz
+      refine ⟨ec.symm z, ?_, ec.right_inv hz.1⟩
+      have hx_ecsource : ec.symm z ∈ ec.source := ec.map_target hz.1
+      have hx_e1source : ec.symm z ∈ e1.source := by
+        simpa [ec, OpenPartialHomeomorph.centerAt_source] using hx_ecsource
+      have hx_e0source : ec.symm z ∈ e0.source := by
+        change ec.symm z ∈ (e0.restr U).source at hx_e1source
+        rw [e0.restr_source' U hU_open] at hx_e1source
+        exact hx_e1source.1
+      have hxU : ec.symm z ∈ U := by
+        change ec.symm z ∈ (e0.restr U).source at hx_e1source
+        rw [e0.restr_source' U hU_open] at hx_e1source
+        exact hx_e1source.2
+      have hx_nonneg : 0 ≤ e0 (ec.symm z) 0 := by
+        have hcoord : ec (ec.symm z) 0 = e0 (ec.symm z) 0 := by
+          simp [ec, e1, p, centerAt_apply_eq_sub_basepoint, hy_e0zero]
+        rw [← hcoord, ec.right_inv hz.1]
+        exact hz.2
+      have hx_not_ball :
+          ec.symm z ∉ Metric.ball (0 : EuclideanSpace ℝ (Fin (k + 2))) 1 :=
+        (unit_exterior_signed_shell_chart_apply_zero_nonneg_iff k i s
+          (by simpa [e0, unit_exterior_signed_shell_chart_source] using hx_e0source)).1 hx_nonneg
+      exact ⟨⟨hxU, hx_not_ball⟩, hx_ecsource⟩
+  let qL : EuclideanSpace ℝ (Fin (k + 2)) ≃L[ℝ] EuclideanSpace ℝ (Fin (k + 2)) :=
+    (LinearIsometryEquiv.piLpCongrLeft 2 ℝ ℝ
+      (Equiv.swap 0 (Fin.last (k + 1)))).toContinuousLinearEquiv
+  let q : OpenPartialHomeomorph (EuclideanSpace ℝ (Fin (k + 2)))
+      (EuclideanSpace ℝ (Fin (k + 2))) :=
+    qL.toHomeomorph.toOpenPartialHomeomorph
+  let e := ec.trans q
+  have he_source : e.source = ec.source := by
+    ext x
+    simp [e, q]
+  have himage :
+      e '' ((U \ Metric.ball (0 : EuclideanSpace ℝ (Fin (k + 2))) 1) ∩ e.source) =
+        {z ∈ e.target | 0 ≤ z (Fin.last (k + 1))} := by
+    ext z
+    constructor
+    · rintro ⟨x, hx, rfl⟩
+      have hx_ec : x ∈ ec.source := he_source ▸ hx.2
+      have hw : ec x ∈ {w ∈ ec.target | 0 ≤ w 0} := by
+        rw [← hcenter_image]
+        exact ⟨x, ⟨hx.1, hx_ec⟩, rfl⟩
+      refine ⟨e.map_source hx.2, ?_⟩
+      have hlast : qL (ec x) (Fin.last (k + 1)) = ec x 0 := by
+        simpa [qL] using swap_zero_last_linear_isometry_apply_last k (ec x)
+      simpa [e, q, OpenPartialHomeomorph.trans_apply, hlast] using hw.2
+    · intro hz
+      let x := e.symm z
+      have hx_source : x ∈ e.source := e.map_target hz.1
+      have hx_ecsource : x ∈ ec.source := he_source ▸ hx_source
+      have hex : e x = z := e.right_inv hz.1
+      have hx_nonneg : 0 ≤ ec x 0 := by
+        have hlast : qL (ec x) (Fin.last (k + 1)) = ec x 0 := by
+          simpa [qL] using swap_zero_last_linear_isometry_apply_last k (ec x)
+        have hzlast : 0 ≤ e x (Fin.last (k + 1)) := by
+          simpa [hex] using hz.2
+        simpa [e, q, OpenPartialHomeomorph.trans_apply, hlast] using hzlast
+      have hw : ec x ∈ {w ∈ ec.target | 0 ≤ w 0} :=
+        ⟨ec.map_source hx_ecsource, hx_nonneg⟩
+      rw [← hcenter_image] at hw
+      rcases hw with ⟨x', hx', hxx'⟩
+      have hxeq : x' = x := ec.injOn hx'.2 hx_ecsource hxx'
+      subst x'
+      exact ⟨x, ⟨hx'.1, hx_source⟩, e.right_inv hz.1⟩
+  refine ⟨e, ?_, ?_⟩
+  · rw [he_source]
+    simpa [ec, OpenPartialHomeomorph.centerAt_source] using hy_e1source
+  · refine ⟨?_, ?_⟩
+    · have hrefl :
+          OpenPartialHomeomorph.refl (EuclideanSpace ℝ (Fin (k + 2))) ∈
+            IsManifold.maximalAtlas (𝓡 (k + 2)) (⊤ : WithTop ℕ∞)
+              (EuclideanSpace ℝ (Fin (k + 2))) := by
+          simpa using!
+            (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 (k + 2))).id_mem_maximalAtlas
+      have he0max : e0 ∈
+          IsManifold.maximalAtlas (𝓡 (k + 2)) (⊤ : WithTop ℕ∞)
+            (EuclideanSpace ℝ (Fin (k + 2))) := by
+        simpa [e0] using
+          (trans_mem_maximalAtlas_of_mem_groupoid
+            (m := k + 2) (X := EuclideanSpace ℝ (Fin (k + 2)))
+            (e := OpenPartialHomeomorph.refl (EuclideanSpace ℝ (Fin (k + 2))))
+            hrefl (chi := unit_exterior_signed_shell_chart k i s)
+            (unit_exterior_signed_shell_chart_mem_contDiffGroupoid k i s))
+      have he1max : e1 ∈
+          IsManifold.maximalAtlas (𝓡 (k + 2)) (⊤ : WithTop ℕ∞)
+            (EuclideanSpace ℝ (Fin (k + 2))) := by
+        simpa [e1] using!
+          (restr_mem_maximalAtlas
+            (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 (k + 2))) he0max hU_open)
+      have hecmax : ec ∈
+          IsManifold.maximalAtlas (𝓡 (k + 2)) (⊤ : WithTop ℕ∞)
+            (EuclideanSpace ℝ (Fin (k + 2))) := by
+        simpa [ec] using centerAt_mem_maximalAtlas e1 he1max p
+      have hq : q ∈ contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 (k + 2)) := by
+        simpa [q] using (euclidean_linear_equiv_mem_contDiffGroupoid (L := qL))
+      simpa [e] using trans_mem_maximalAtlas_of_mem_groupoid hecmax hq
+    · rw [Set.IsHalfSliceInChart, Set.IsEuclideanHalfSlice]
+      rcases full_dimensional_halfslice_eq_last_coordinate_nonneg
+          (m := k + 1) e.target with ⟨c, hc⟩
+      refine ⟨by omega, le_rfl, c, ?_⟩
+      calc
+        e '' ((U \ Metric.ball (0 : EuclideanSpace ℝ (Fin (k + 2))) 1) ∩ e.source) =
+            {z ∈ e.target | 0 ≤ z (Fin.last (k + 1))} := himage
+        _ = Set.euclideanHalfSlice e.target (k + 2) (by omega) le_rfl c := by
+          simpa [Nat.add_assoc] using hc.symm
 
 /-- Helper for Problem 5-8: prove the Euclidean exterior-ball boundary chart theorem by splitting
 the ambient dimension into the impossible `0` case, the one-dimensional ray case, and the
@@ -1635,6 +1928,165 @@ lemma unit_exterior_ball_has_boundary_slice_chart_at_sphere_point
     (unit_exterior_ball_has_boundary_slice_chart_at_sphere_point_explicit_dim
       (n := dimM) hU_open hy_shell hy_sphere)
 
+/-- Dimension-explicit composition helper used by the radius-rescaling argument. -/
+private lemma trans_chart_image_eq_inter_source_explicit
+    {n : ℕ} {X : Type*} [TopologicalSpace X]
+    {S : Set X} {T : Set (EuclideanSpace ℝ (Fin n))}
+    {chart : OpenPartialHomeomorph X (EuclideanSpace ℝ (Fin n))}
+    {e : OpenPartialHomeomorph (EuclideanSpace ℝ (Fin n))
+      (EuclideanSpace ℝ (Fin n))}
+    (himage : chart '' (S ∩ chart.source) = T) :
+    chart '' (S ∩ (chart.trans e).source) = T ∩ e.source := by
+  ext y
+  constructor
+  · rintro ⟨x, hx, rfl⟩
+    have hx_source : x ∈ chart.source := by
+      simpa [OpenPartialHomeomorph.trans_source] using hx.2.1
+    have hyT : chart x ∈ T := by
+      rw [← himage]
+      exact ⟨x, ⟨hx.1, hx_source⟩, rfl⟩
+    have hy_source : chart x ∈ e.source := by
+      simpa [OpenPartialHomeomorph.trans_source] using hx.2.2
+    exact ⟨hyT, hy_source⟩
+  · intro hy
+    rw [← himage] at hy
+    rcases hy.1 with ⟨x, hx, rfl⟩
+    refine ⟨x, ⟨hx.1, ?_⟩, rfl⟩
+    simpa [OpenPartialHomeomorph.trans_source, hx.2] using hy.2
+
+/-- Dimension-explicit version of shrinking the ambient set of a Euclidean half-slice. -/
+private lemma euclideanHalfSlice_inter_eq_of_subset_explicit
+    {n k : ℕ} {hk : 0 < k} {hkn : k ≤ n}
+    {U V : Set (EuclideanSpace ℝ (Fin n))}
+    {c : Fin (n - k) → ℝ}
+    (hsub : Set.euclideanHalfSlice U k hk hkn c ⊆ V) :
+    Set.euclideanHalfSlice U k hk hkn c =
+      Set.euclideanHalfSlice (U ∩ V) k hk hkn c := by
+  ext x
+  constructor
+  · intro hx
+    rcases hx with ⟨⟨hxU, hxTail⟩, hxNonneg⟩
+    exact ⟨⟨⟨hxU, hsub ⟨⟨hxU, hxTail⟩, hxNonneg⟩⟩, hxTail⟩, hxNonneg⟩
+  · rintro ⟨⟨⟨hxU, hxV⟩, hxTail⟩, hxNonneg⟩
+    exact ⟨⟨hxU, hxTail⟩, hxNonneg⟩
+
+/-- Dimension-explicit boundary-slice transport used by the radius-rescaling argument. -/
+private lemma trans_isBoundarySliceChart_of_local_image_explicit
+    {n : ℕ} {X : Type*} [TopologicalSpace X]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) X]
+    [IsManifold (𝓡 n) (⊤ : WithTop ℕ∞) X]
+    {S : Set X} {T : Set (EuclideanSpace ℝ (Fin n))}
+    {chart : OpenPartialHomeomorph X (EuclideanSpace ℝ (Fin n))}
+    {e : OpenPartialHomeomorph (EuclideanSpace ℝ (Fin n))
+      (EuclideanSpace ℝ (Fin n))}
+    (htrans : chart.trans e ∈
+      IsManifold.maximalAtlas (𝓡 n) (⊤ : WithTop ℕ∞) X)
+    (hlocal : chart '' (S ∩ (chart.trans e).source) = T ∩ e.source)
+    (hsub : T ⊆ chart.target)
+    (he : e.IsBoundarySliceChart T n) :
+    (chart.trans e).IsBoundarySliceChart S n := by
+  rcases he.2 with ⟨hk, hkn, c, hc⟩
+  refine ⟨htrans, ?_⟩
+  rw [Set.IsHalfSliceInChart, Set.IsEuclideanHalfSlice]
+  refine ⟨hk, hkn, c, ?_⟩
+  have hHalfSlice_subset :
+      Set.euclideanHalfSlice e.target n hk hkn c ⊆ e.symm ⁻¹' chart.target := by
+    intro z hz
+    rw [← hc] at hz
+    rcases hz with ⟨y, hy, rfl⟩
+    simpa [hy.2] using hsub hy.1
+  calc
+    (chart.trans e) '' (S ∩ (chart.trans e).source) =
+        e '' (chart '' (S ∩ (chart.trans e).source)) := by
+          ext z
+          constructor
+          · rintro ⟨x, hx, rfl⟩
+            exact ⟨chart x, ⟨x, hx, rfl⟩, by simp [OpenPartialHomeomorph.trans_apply]⟩
+          · rintro ⟨y, ⟨x, hx, rfl⟩, hz⟩
+            exact ⟨x, hx, by simpa [OpenPartialHomeomorph.trans_apply] using hz⟩
+    _ = e '' (T ∩ e.source) := by rw [hlocal]
+    _ = Set.euclideanHalfSlice e.target n hk hkn c := hc
+    _ = Set.euclideanHalfSlice (e.target ∩ e.symm ⁻¹' chart.target) n hk hkn c :=
+      euclideanHalfSlice_inter_eq_of_subset_explicit hHalfSlice_subset
+    _ = Set.euclideanHalfSlice (chart.trans e).target n hk hkn c := by
+      rw [OpenPartialHomeomorph.trans_target]
+
+/-- Helper for Problem 5-8: the arbitrary-radius exterior shell chart is just the unit-radius
+shell chart transported by the global scaling `x ↦ (1 / r) • x`. -/
+private lemma euclidean_exterior_ball_has_boundary_slice_chart_explicit
+    {n : ℕ} {r : ℝ} (hr : 0 < r) {U : Set (EuclideanSpace ℝ (Fin n))}
+    (hU_open : IsOpen U) {y : EuclideanSpace ℝ (Fin n)}
+    (hy_shell : y ∈ U \ Metric.ball (0 : EuclideanSpace ℝ (Fin n)) r)
+    (hy_sphere : y ∈ Metric.sphere (0 : EuclideanSpace ℝ (Fin n)) r) :
+    ∃ e : OpenPartialHomeomorph (EuclideanSpace ℝ (Fin n)) (EuclideanSpace ℝ (Fin n)),
+      y ∈ e.source ∧
+        e.IsBoundarySliceChart (U \ Metric.ball (0 : EuclideanSpace ℝ (Fin n)) r) n := by
+  let V := EuclideanSpace ℝ (Fin n)
+  have hr_inv_ne : r⁻¹ ≠ 0 := inv_ne_zero hr.ne'
+  let scale : V ≃L[ℝ] V :=
+    ContinuousLinearEquiv.smulLeft (R₁ := ℝ) (M₁ := V) (Units.mk0 r⁻¹ hr_inv_ne)
+  let d : OpenPartialHomeomorph V V := scale.toHomeomorph.toOpenPartialHomeomorph
+  let U1 : Set V := scale '' U
+  have hscale_apply (x : V) : scale x = r⁻¹ • x := by
+    simp [scale, Units.smul_def]
+  have hball (x : V) :
+      scale x ∈ Metric.ball (0 : V) 1 ↔ x ∈ Metric.ball (0 : V) r := by
+    rw [Metric.mem_ball, Metric.mem_ball]
+    simp only [dist_zero_right]
+    rw [hscale_apply, norm_smul, Real.norm_eq_abs, abs_of_pos (inv_pos.mpr hr)]
+    exact inv_mul_lt_one₀ hr
+  have hsphere_norm : ‖y‖ = r := by
+    simpa [Metric.mem_sphere, dist_eq_norm] using hy_sphere
+  have hy1_sphere : scale y ∈ Metric.sphere (0 : V) 1 := by
+    rw [Metric.mem_sphere, dist_zero_right, hscale_apply, norm_smul, Real.norm_eq_abs,
+      abs_of_pos (inv_pos.mpr hr), hsphere_norm]
+    exact inv_mul_cancel₀ hr.ne'
+  have hy1_shell : scale y ∈ U1 \ Metric.ball (0 : V) 1 := by
+    refine ⟨⟨y, hy_shell.1, rfl⟩, ?_⟩
+    rw [hball]
+    exact hy_shell.2
+  have hU1_open : IsOpen U1 := scale.toHomeomorph.isOpenMap U hU_open
+  rcases unit_exterior_ball_has_boundary_slice_chart_at_sphere_point_explicit_dim
+      (n := n) hU1_open hy1_shell hy1_sphere with ⟨e1, hy1_source, he1⟩
+  have himage_base :
+      d '' ((U \ Metric.ball (0 : V) r) ∩ d.source) =
+        U1 \ Metric.ball (0 : V) 1 := by
+    ext z
+    constructor
+    · rintro ⟨x, hx, rfl⟩
+      refine ⟨⟨x, hx.1.1, by simp [d]⟩, ?_⟩
+      simpa [d] using (show scale x ∉ Metric.ball (0 : V) 1 from
+        (not_congr (hball x)).2 hx.1.2)
+    · rintro ⟨⟨x, hxU, rfl⟩, hxball⟩
+      refine ⟨x, ⟨⟨hxU, ?_⟩, by simp [d]⟩, by simp [d]⟩
+      exact (not_congr (hball x)).1 (by simpa using hxball)
+  have hlocal :
+      d '' ((U \ Metric.ball (0 : V) r) ∩ (d.trans e1).source) =
+        (U1 \ Metric.ball (0 : V) 1) ∩ e1.source :=
+    trans_chart_image_eq_inter_source_explicit himage_base
+  have hrefl : OpenPartialHomeomorph.refl V ∈
+      IsManifold.maximalAtlas (𝓡 n) (⊤ : WithTop ℕ∞) V := by
+    simpa using!
+      (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)).id_mem_maximalAtlas
+  have hd_group : d ∈ contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n) := by
+    simpa [d] using (euclidean_linear_equiv_mem_contDiffGroupoid (L := scale))
+  have he1_group : e1 ∈ contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n) := by
+    have hcompat :=
+      IsManifold.compatible_of_mem_maximalAtlas hrefl he1.mem_maximalAtlas
+    rw [OpenPartialHomeomorph.refl_symm, OpenPartialHomeomorph.refl_trans] at hcompat
+    exact hcompat
+  have htrans_group : d.trans e1 ∈
+      contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n) :=
+    (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)).trans hd_group he1_group
+  have htrans : d.trans e1 ∈ IsManifold.maximalAtlas (𝓡 n)
+      (⊤ : WithTop ℕ∞) V := by
+    simpa using
+      (trans_mem_maximalAtlas_of_mem_groupoid (e := OpenPartialHomeomorph.refl V)
+        hrefl htrans_group)
+  refine ⟨d.trans e1, ?_, ?_⟩
+  · simpa [OpenPartialHomeomorph.trans_source, d] using hy1_source
+  · exact trans_isBoundarySliceChart_of_local_image_explicit htrans hlocal (by simp [d]) he1
+
 /-- Helper for Problem 5-8: the arbitrary-radius exterior shell chart is just the unit-radius
 shell chart transported by the global scaling `x ↦ (1 / r) • x`. -/
 lemma euclidean_exterior_ball_has_boundary_slice_chart_at_sphere_point
@@ -1644,8 +2096,134 @@ lemma euclidean_exterior_ball_has_boundary_slice_chart_at_sphere_point
     (hy_sphere : y ∈ Metric.sphere (0 : EuclideanSpace ℝ (Fin dimM)) r) :
     ∃ e : OpenPartialHomeomorph (EuclideanSpace ℝ (Fin dimM)) (EuclideanSpace ℝ (Fin dimM)),
       y ∈ e.source ∧ e.IsBoundarySliceChart (U \ Metric.ball (0 : EuclideanSpace ℝ (Fin dimM)) r)
-        dimM := sorry
+        dimM := by
+  simpa using euclidean_exterior_ball_has_boundary_slice_chart_explicit
+    (n := dimM) hr hU_open hy_shell hy_sphere
 
+set_option maxHeartbeats 400000 in
+/-- The orthonormal-coordinate chart is a maximal-atlas chart for the basis-transported
+Euclidean structure.  Keeping this atlas calculation separate prevents the geometric transport
+argument below from exhausting a single declaration's heartbeat budget. -/
+private lemma basis_model_orthonormal_chart_data
+    (b : Module.Basis (Fin dimM) ℝ E) :
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin dimM)) E :=
+      basis_model_chartedSpace b
+    let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) E :=
+      basis_model_isManifold b
+    let ortho : E ≃L[ℝ] EuclideanSpace ℝ (Fin dimM) :=
+      (stdOrthonormalBasis ℝ E).repr.toContinuousLinearEquiv
+    ∃ eOrtho : OpenPartialHomeomorph E (EuclideanSpace ℝ (Fin dimM)),
+      eOrtho ∈ IsManifold.maximalAtlas (𝓡 dimM) (⊤ : WithTop ℕ∞) E ∧
+        eOrtho.source = Set.univ ∧ ∀ x : E, eOrtho x = ortho x := by
+  let V := EuclideanSpace ℝ (Fin dimM)
+  let _ : ChartedSpace V E := basis_model_chartedSpace b
+  dsimp only
+  let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) E := basis_model_isManifold b
+  let _ : TopologicalManifold dimM E := topologicalManifoldOfChartedSpace dimM E
+  let ortho : E ≃L[ℝ] V := (stdOrthonormalBasis ℝ E).repr.toContinuousLinearEquiv
+  let eBasis : OpenPartialHomeomorph E V :=
+    (basis_model_diffeomorph b).symm.toHomeomorph.toOpenPartialHomeomorph
+  let changeModel : V ≃L[ℝ] V := (basis_model_continuousLinearEquiv b).trans ortho
+  let changeChart : OpenPartialHomeomorph V V :=
+    changeModel.toHomeomorph.toOpenPartialHomeomorph
+  let eOrtho : OpenPartialHomeomorph E V := eBasis.trans changeChart
+  have heOrtho_apply (x : E) : eOrtho x = ortho x := by
+    simp [eOrtho, eBasis, changeChart, changeModel, ortho, basis_model_diffeomorph,
+      ContinuousLinearEquiv.apply_symm_apply]
+    exact (basis_model_continuousLinearEquiv b).apply_symm_apply x
+  have heOrtho_source : eOrtho.source = Set.univ := by
+    ext x
+    simp [eOrtho, eBasis, changeChart]
+  have hId : OpenPartialHomeomorph.refl E ∈
+      IsManifold.maximalAtlas (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) E := by
+    simpa using!
+      (contDiffGroupoid (⊤ : WithTop ℕ∞)
+        (modelWithCornersSelf ℝ E)).id_mem_maximalAtlas
+  have heBasisMax : eBasis ∈
+      IsManifold.maximalAtlas (𝓡 dimM) (⊤ : WithTop ℕ∞) E := by
+    simpa [eBasis] using
+      (basis_model_chart_mem_maximalAtlas (M := E) b
+        (chart := OpenPartialHomeomorph.refl E) hId)
+  have hchange : changeChart ∈
+      contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 dimM) := by
+    simpa [changeChart] using
+      (euclidean_linear_equiv_mem_contDiffGroupoid (L := changeModel))
+  have heOrthoMax : eOrtho ∈
+      IsManifold.maximalAtlas (𝓡 dimM) (⊤ : WithTop ℕ∞) E := by
+    simpa [eOrtho] using
+      (trans_mem_maximalAtlas_of_mem_groupoid (e := eBasis) heBasisMax (chi := changeChart)
+        hchange)
+  exact ⟨eOrtho, heOrthoMax, heOrtho_source, heOrtho_apply⟩
+
+/-- Postcomposition by a smooth Euclidean chart change preserves the maximal atlas.  This variant
+only assumes the charted-space structure actually used by the proof. -/
+private lemma problem58_trans_mem_maximalAtlas_of_mem_groupoid
+    {n : ℕ} {X : Type*} [TopologicalSpace X]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) X]
+    [IsManifold (𝓡 n) (⊤ : WithTop ℕ∞) X]
+    {e : OpenPartialHomeomorph X (EuclideanSpace ℝ (Fin n))}
+    (he : e ∈ IsManifold.maximalAtlas (𝓡 n) (⊤ : WithTop ℕ∞) X)
+    {chi : OpenPartialHomeomorph (EuclideanSpace ℝ (Fin n))
+      (EuclideanSpace ℝ (Fin n))}
+    (hchi : chi ∈ contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)) :
+    e.trans chi ∈ IsManifold.maximalAtlas (𝓡 n) (⊤ : WithTop ℕ∞) X := by
+  rw [IsManifold.mem_maximalAtlas_iff]
+  intro e' he'
+  have he'max : e' ∈ IsManifold.maximalAtlas (𝓡 n) (⊤ : WithTop ℕ∞) X :=
+    IsManifold.subset_maximalAtlas he'
+  have hleft : e.symm.trans e' ∈ contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n) :=
+    IsManifold.compatible_of_mem_maximalAtlas he he'max
+  have hright : e'.symm.trans e ∈ contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n) :=
+    IsManifold.compatible_of_mem_maximalAtlas he'max he
+  constructor
+  · rw [OpenPartialHomeomorph.trans_symm_eq_symm_trans_symm,
+      OpenPartialHomeomorph.trans_assoc]
+    exact (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)).trans
+      ((contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)).symm hchi) hleft
+  · have hright' : (e'.symm.trans e).trans chi ∈
+        contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n) :=
+      (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)).trans hright hchi
+    simpa [OpenPartialHomeomorph.trans_assoc] using hright'
+
+/-- Pull a Euclidean boundary-slice chart back through a global chart in the maximal atlas. -/
+private lemma pullback_boundary_slice_through_global_chart
+    {n : ℕ} {X : Type*} [TopologicalSpace X]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) X]
+    [IsManifold (𝓡 n) (⊤ : WithTop ℕ∞) X]
+    {S : Set X} {T : Set (EuclideanSpace ℝ (Fin n))} {x : X}
+    {chart : OpenPartialHomeomorph X (EuclideanSpace ℝ (Fin n))}
+    {e : OpenPartialHomeomorph (EuclideanSpace ℝ (Fin n))
+      (EuclideanSpace ℝ (Fin n))}
+    (hchart : chart ∈ IsManifold.maximalAtlas (𝓡 n) (⊤ : WithTop ℕ∞) X)
+    (hsource : chart.source = Set.univ)
+    (hx : chart x ∈ e.source)
+    (himage : chart '' (S ∩ chart.source) = T)
+    (he : e.IsBoundarySliceChart T n) :
+    ∃ e' : OpenPartialHomeomorph X (EuclideanSpace ℝ (Fin n)),
+      x ∈ e'.source ∧ e'.IsBoundarySliceChart S n := by
+  have hlocal :
+      chart '' (S ∩ (chart.trans e).source) = T ∩ e.source :=
+    trans_chart_image_eq_inter_source_explicit himage
+  have hrefl : OpenPartialHomeomorph.refl (EuclideanSpace ℝ (Fin n)) ∈
+      IsManifold.maximalAtlas (𝓡 n) (⊤ : WithTop ℕ∞)
+        (EuclideanSpace ℝ (Fin n)) := by
+    simpa using!
+      (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)).id_mem_maximalAtlas
+  have he_group : e ∈ contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n) := by
+    simpa using IsManifold.compatible_of_mem_maximalAtlas hrefl he.mem_maximalAtlas
+  have htrans : chart.trans e ∈
+      IsManifold.maximalAtlas (𝓡 n) (⊤ : WithTop ℕ∞) X :=
+    problem58_trans_mem_maximalAtlas_of_mem_groupoid (e := chart) hchart he_group
+  have hsub : T ⊆ chart.target := by
+    intro z hz
+    rw [← himage] at hz
+    rcases hz with ⟨w, hw, rfl⟩
+    exact chart.map_source hw.2
+  refine ⟨chart.trans e, ?_, ?_⟩
+  · simpa [OpenPartialHomeomorph.trans_source, hsource] using hx
+  · exact trans_isBoundarySliceChart_of_local_image_explicit htrans hlocal hsub he
+
+set_option maxHeartbeats 800000 in
 /-- Helper for Problem 5-8: in the transported Euclidean ambient structure, each frontier point of
 `closure B \ B` should admit a boundary slice chart for the complement. -/
 lemma ball_exterior_boundary_slice_chart_in_basis_model
@@ -1658,7 +2236,50 @@ lemma ball_exterior_boundary_slice_chart_in_basis_model
     let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) E :=
       basis_model_isManifold b
     ∃ e : OpenPartialHomeomorph E (EuclideanSpace ℝ (Fin dimM)),
-      y ∈ e.source ∧ e.IsBoundarySliceChart (U \ Metric.ball (0 : E) r) dimM := sorry
+      y ∈ e.source ∧ e.IsBoundarySliceChart (U \ Metric.ball (0 : E) r) dimM := by
+  let V := EuclideanSpace ℝ (Fin dimM)
+  let _ : ChartedSpace V E := basis_model_chartedSpace b
+  dsimp only
+  let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) E := basis_model_isManifold b
+  let _ : TopologicalManifold dimM E := topologicalManifoldOfChartedSpace dimM E
+  let ortho : E ≃L[ℝ] V := (stdOrthonormalBasis ℝ E).repr.toContinuousLinearEquiv
+  rcases basis_model_orthonormal_chart_data (E := E) b with
+    ⟨eOrtho, heOrthoMax, heOrtho_source, heOrtho_apply⟩
+  let U1 : Set V := ortho '' U
+  have hortho_norm (x : E) : ‖ortho x‖ = ‖x‖ := by
+    change ‖(stdOrthonormalBasis ℝ E).repr x‖ = ‖x‖
+    exact (stdOrthonormalBasis ℝ E).repr.norm_map x
+  have hball (x : E) :
+      ortho x ∈ Metric.ball (0 : V) r ↔ x ∈ Metric.ball (0 : E) r := by
+    simp only [Metric.mem_ball, dist_zero_right]
+    rw [hortho_norm]
+  have hsphere (x : E) :
+      ortho x ∈ Metric.sphere (0 : V) r ↔ x ∈ Metric.sphere (0 : E) r := by
+    simp only [Metric.mem_sphere, dist_zero_right]
+    rw [hortho_norm]
+  have hU1_open : IsOpen U1 := ortho.toHomeomorph.isOpenMap U hU_open
+  have hy1_shell : ortho y ∈ U1 \ Metric.ball (0 : V) r := by
+    exact ⟨⟨y, hy_shell.1, rfl⟩, (not_congr (hball y)).2 hy_shell.2⟩
+  have hy1_sphere : ortho y ∈ Metric.sphere (0 : V) r := (hsphere y).2 hy_sphere
+  rcases euclidean_exterior_ball_has_boundary_slice_chart_at_sphere_point
+      hr hU1_open hy1_shell hy1_sphere with ⟨e1, hy1_source, he1⟩
+  have himage_base :
+      eOrtho '' ((U \ Metric.ball (0 : E) r) ∩ eOrtho.source) =
+        U1 \ Metric.ball (0 : V) r := by
+    ext z
+    constructor
+    · rintro ⟨x, hx, rfl⟩
+      rw [heOrtho_apply]
+      exact ⟨⟨x, hx.1.1, rfl⟩, (not_congr (hball x)).2 hx.1.2⟩
+    · rintro ⟨⟨x, hxU, rfl⟩, hxball⟩
+      refine ⟨x, ⟨⟨hxU, (not_congr (hball x)).1 hxball⟩, ?_⟩, ?_⟩
+      · simp [heOrtho_source]
+      · exact heOrtho_apply x
+  have hy_e : eOrtho y ∈ e1.source := by
+    rw [heOrtho_apply]
+    exact hy1_source
+  exact pullback_boundary_slice_through_global_chart heOrthoMax heOrtho_source
+    hy_e himage_base he1
 
 /-- Helper for Problem 5-8: in the transported Euclidean ambient structure, each frontier point of
 `closure B \ B` should admit a boundary slice chart for the complement. -/
@@ -1672,7 +2293,88 @@ lemma regular_coordinate_ball_frontier_has_boundary_sliceChart_for_compl_of_pos 
       basis_model_isManifold b
     ∀ x ∈ closure B \ B,
       ∃ e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin dimM)),
-        x ∈ e.source ∧ e.IsBoundarySliceChart (Set.compl B) dimM := sorry
+        x ∈ e.source ∧ e.IsBoundarySliceChart (Set.compl B) dimM := by
+  let V := EuclideanSpace ℝ (Fin dimM)
+  let _ : ChartedSpace V M := basis_model_chartedSpace b
+  let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) M := basis_model_isManifold b
+  dsimp only
+  intro x hx
+  rcases hB with
+    ⟨chart, hchart, hclosure, r, r', hr, hrr', himage, hclosure_image, htarget⟩
+  have hsubset : B ⊆ chart.source := fun z hz ↦ hclosure (subset_closure hz)
+  have himage_diff : chart '' (chart.source \ B) = chart '' chart.source \ chart '' B :=
+    chart.injOn.image_diff_subset hsubset
+  have hcomplImage :
+      chart '' ((Set.compl B) ∩ chart.source) = chart.target \ Metric.ball (0 : E) r := by
+    calc
+      chart '' ((Set.compl B) ∩ chart.source) = chart '' (chart.source \ B) := by
+        ext z
+        constructor
+        · rintro ⟨w, hw, rfl⟩
+          exact ⟨w, ⟨hw.2, hw.1⟩, rfl⟩
+        · rintro ⟨w, hw, rfl⟩
+          exact ⟨w, ⟨hw.2, hw.1⟩, rfl⟩
+      _ = chart '' chart.source \ chart '' B := himage_diff
+      _ = chart.target \ Metric.ball (0 : E) r := by
+        rw [chart.image_source_eq_target, himage]
+  have hy_shell : chart x ∈ chart.target \ Metric.ball (0 : E) r :=
+    regular_coordinate_ball_witness_frontier_point_mem_ball_exterior
+      hclosure hcomplImage hx
+  have hy_sphere : chart x ∈ Metric.sphere (0 : E) r :=
+    regular_coordinate_ball_witness_frontier_point_mem_sphere
+      hclosure himage hclosure_image hx
+  rcases ball_exterior_boundary_slice_chart_in_basis_model b hr chart.open_target
+      hy_shell hy_sphere with ⟨e1, hy_source, he1⟩
+  have hlocal :
+      chart '' (Set.compl B ∩ (chart.trans e1).source) =
+        (chart.target \ Metric.ball (0 : E) r) ∩ e1.source :=
+    trans_chart_image_eq_inter_source_of_image_eq hcomplImage
+  let eModel : OpenPartialHomeomorph E V :=
+    (basis_model_diffeomorph b).symm.toHomeomorph.toOpenPartialHomeomorph
+  let _ : ChartedSpace V E := basis_model_chartedSpace b
+  let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) E := basis_model_isManifold b
+  let _ : TopologicalManifold dimM E := topologicalManifoldOfChartedSpace dimM E
+  have hId : OpenPartialHomeomorph.refl E ∈
+      IsManifold.maximalAtlas (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) E := by
+    simpa using!
+      (contDiffGroupoid (⊤ : WithTop ℕ∞)
+        (modelWithCornersSelf ℝ E)).id_mem_maximalAtlas
+  have heModelMax : eModel ∈
+      IsManifold.maximalAtlas (𝓡 dimM) (⊤ : WithTop ℕ∞) E := by
+    simpa [eModel] using
+      (basis_model_chart_mem_maximalAtlas (M := E) b
+        (chart := OpenPartialHomeomorph.refl E) hId)
+  have hchartModelMax : chart.trans eModel ∈
+      IsManifold.maximalAtlas (𝓡 dimM) (⊤ : WithTop ℕ∞) M := by
+    simpa [eModel] using basis_model_chart_mem_maximalAtlas b hchart
+  have hchange : eModel.symm.trans e1 ∈
+      contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 dimM) :=
+    IsManifold.compatible_of_mem_maximalAtlas heModelMax he1.mem_maximalAtlas
+  have htransRaw : (chart.trans eModel).trans (eModel.symm.trans e1) ∈
+      IsManifold.maximalAtlas (𝓡 dimM) (⊤ : WithTop ℕ∞) M :=
+    problem58_trans_mem_maximalAtlas_of_mem_groupoid
+      (e := chart.trans eModel) hchartModelMax hchange
+  have hcancel : eModel.trans eModel.symm = OpenPartialHomeomorph.refl E := by
+    simpa [eModel] using
+      (Homeomorph.trans_toOpenPartialHomeomorph
+        (basis_model_diffeomorph b).symm.toHomeomorph
+        (basis_model_diffeomorph b).toHomeomorph).symm
+  have htransEq :
+      (chart.trans eModel).trans (eModel.symm.trans e1) = chart.trans e1 := by
+    calc
+      (chart.trans eModel).trans (eModel.symm.trans e1) =
+          chart.trans (eModel.trans (eModel.symm.trans e1)) :=
+        OpenPartialHomeomorph.trans_assoc (e := chart) (e' := eModel)
+          (eModel.symm.trans e1)
+      _ = chart.trans ((eModel.trans eModel.symm).trans e1) := by
+        rw [OpenPartialHomeomorph.trans_assoc (e := eModel) (e' := eModel.symm) e1]
+      _ = chart.trans e1 := by rw [hcancel, OpenPartialHomeomorph.refl_trans]
+  have htrans : chart.trans e1 ∈
+      IsManifold.maximalAtlas (𝓡 dimM) (⊤ : WithTop ℕ∞) M := by
+    rwa [htransEq] at htransRaw
+  refine ⟨chart.trans e1, ?_, ?_⟩
+  · simpa [OpenPartialHomeomorph.trans_source, hclosure hx.1] using hy_source
+  · exact trans_isBoundarySliceChart_of_local_image htrans hlocal diff_subset he1
 
 /-- Helper for Problem 5-8: in the transported Euclidean ambient structure, each frontier point of
 `closure B \ B` should admit a boundary slice chart for the complement. -/
@@ -1685,14 +2387,256 @@ lemma regular_coordinate_ball_frontier_has_boundary_sliceChart_for_compl {B : Se
       basis_model_isManifold b
     ∀ x ∈ closure B \ B,
       ∃ e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin dimM)),
-        x ∈ e.source ∧ e.IsBoundarySliceChart (Set.compl B) dimM := sorry
+        x ∈ e.source ∧ e.IsBoundarySliceChart (Set.compl B) dimM := by
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin dimM)) M := basis_model_chartedSpace b
+  let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) M := basis_model_isManifold b
+  dsimp only
+  by_cases hdim : 0 < dimM
+  · exact regular_coordinate_ball_frontier_has_boundary_sliceChart_for_compl_of_pos
+      hB b hdim
+  · have hdim0 : dimM = 0 := Nat.eq_zero_of_not_pos hdim
+    intro x hx
+    have hempty : closure B \ B = ∅ :=
+      regular_coordinate_ball_frontier_eq_empty_of_dim_zero hB hdim0
+    rw [hempty] at hx
+    exact False.elim hx
 
 /-- Helper for Problem 5-8: in positive ambient dimension, the geometric frontier `closure B \ B`
 is homeomorphic to the standard unit sphere after first identifying it with the witness-radius
 sphere and then transporting that sphere to Euclidean coordinates and rescaling to radius `1`. -/
 lemma regular_coordinate_ball_frontier_homeomorph_to_boundarySphere {B : Set M}
     (hB : IsRegularCoordinateBall E B) (hdim : 0 < dimM) :
-    Nonempty (↥(closure B \ B) ≃ₜ boundarySphere) := sorry
+    Nonempty (↥(closure B \ B) ≃ₜ boundarySphere) := by
+  rcases hB with
+    ⟨chart, hchart, hclosure, r, r', hr, hrr', himage, hclosure_image, htarget⟩
+  have hInj : Set.InjOn chart (closure B) := chart.injOn.mono hclosure
+  have hfrontier_image :
+      chart '' (closure B \ B) = Metric.sphere (0 : E) r := by
+    calc
+      chart '' (closure B \ B) = chart '' closure B \ chart '' B :=
+        hInj.image_diff_subset subset_closure
+      _ = Metric.closedBall (0 : E) r \ Metric.ball (0 : E) r := by
+        rw [hclosure_image, himage]
+      _ = Metric.sphere (0 : E) r := Metric.closedBall_diff_ball
+  let hChart : ↥(closure B \ B) ≃ₜ Metric.sphere (0 : E) r :=
+    chart.homeomorphOfImageSubsetSource (diff_subset.trans hclosure) hfrontier_image
+  let V := EuclideanSpace ℝ (Fin dimM)
+  let ortho : E ≃ₗᵢ[ℝ] V := (stdOrthonormalBasis ℝ E).repr
+  let hOrtho : Metric.sphere (0 : E) r ≃ₜ Metric.sphere (0 : V) r :=
+    ortho.toHomeomorph.subtype (by
+      intro x
+      simp only [Metric.mem_sphere, dist_zero_right]
+      change ‖x‖ = r ↔ ‖ortho x‖ = r
+      rw [ortho.norm_map])
+  let scale : V ≃ₜ V := Homeomorph.smulOfNeZero r⁻¹ (inv_ne_zero hr.ne')
+  let hScale : Metric.sphere (0 : V) r ≃ₜ Metric.sphere (0 : V) 1 :=
+    scale.subtype (by
+      intro x
+      have hscale_norm : ‖scale x‖ = r⁻¹ * ‖x‖ := by
+        simp [scale, norm_smul, Real.norm_eq_abs, abs_inv, abs_of_pos hr]
+      simp only [Metric.mem_sphere, dist_zero_right]
+      rw [hscale_norm]
+      constructor
+      · intro hx
+        rw [hx, inv_mul_cancel₀ hr.ne']
+      · intro hx
+        calc
+          ‖x‖ = r * (r⁻¹ * ‖x‖) := by field_simp
+          _ = r * 1 := congrArg (r * ·) hx
+          _ = r := by ring)
+  have hdim_succ : (dimM - 1) + 1 = dimM := by omega
+  let reindex : V ≃ₗᵢ[ℝ] EuclideanSpace ℝ (Fin ((dimM - 1) + 1)) :=
+    LinearIsometryEquiv.piLpCongrLeft 2 ℝ ℝ (finCongr hdim_succ.symm)
+  let hReindex : Metric.sphere (0 : V) 1 ≃ₜ boundarySphere :=
+    reindex.toHomeomorph.subtype (by
+      intro x
+      simp only [Metric.mem_sphere, dist_zero_right]
+      change ‖x‖ = 1 ↔ ‖reindex x‖ = 1
+      rw [reindex.norm_map])
+  refine ⟨?_⟩
+  exact hChart.trans (hOrtho.trans (hScale.trans hReindex))
+
+/-- Helper for Problem 5-8: transport a Euclidean charted-space structure across a
+homeomorphism. -/
+private noncomputable abbrev problem58TransportedChartedSpace
+    {n : ℕ} {R N : Type*} [TopologicalSpace R] [TopologicalSpace N]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) R] (e : R ≃ₜ N) :
+    ChartedSpace (EuclideanSpace ℝ (Fin n)) N := by
+  let eN : OpenPartialHomeomorph N R := e.symm.toOpenPartialHomeomorph
+  let _ : ChartedSpace R N := eN.singletonChartedSpace (by
+    ext x
+    simp [eN])
+  exact ChartedSpace.comp (EuclideanSpace ℝ (Fin n)) R N
+
+/-- The preferred chart in the transported structure is the transporting homeomorphism followed
+by the preferred chart at the corresponding source point. -/
+private lemma problem58TransportedChartedSpace_chartAt
+    {n : ℕ} {R N : Type*} [TopologicalSpace R] [TopologicalSpace N]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) R]
+    (e : R ≃ₜ N) (y : N) :
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin n)) N :=
+      problem58TransportedChartedSpace e
+    chartAt (EuclideanSpace ℝ (Fin n)) y =
+      e.symm.toOpenPartialHomeomorph.trans
+        (chartAt (EuclideanSpace ℝ (Fin n)) (e.symm y)) := by
+  rfl
+
+/-- Helper for Problem 5-8: the smooth manifold structure transports across the preceding
+homeomorphism construction. -/
+private lemma problem58TransportedIsManifold
+    {n : ℕ} {R N : Type*} [TopologicalSpace R] [TopologicalSpace N]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) R]
+    [IsManifold (𝓡 n) (⊤ : WithTop ℕ∞) R]
+    (e : R ≃ₜ N) :
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin n)) N :=
+      problem58TransportedChartedSpace e
+    IsManifold (𝓡 n) (⊤ : WithTop ℕ∞) N := by
+  let eN : OpenPartialHomeomorph N R := e.symm.toOpenPartialHomeomorph
+  have heN_source : eN.source = Set.univ := by
+    ext x
+    simp [eN]
+  let _ : ChartedSpace R N := eN.singletonChartedSpace heN_source
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin n)) N :=
+    problem58TransportedChartedSpace e
+  have hGroupoid : HasGroupoid N (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)) := by
+    refine ⟨?_⟩
+    rintro _ _ ⟨f, hf, c, hc, rfl⟩ ⟨f', hf', c', hc', rfl⟩
+    have hfEq : f = eN := by
+      simpa [eN] using eN.singletonChartedSpace_mem_atlas_eq heN_source f hf
+    have hf'Eq : f' = eN := by
+      simpa [eN] using eN.singletonChartedSpace_mem_atlas_eq heN_source f' hf'
+    subst f
+    subst f'
+    have hmid : eN.symm.trans eN = OpenPartialHomeomorph.refl R := by
+      simpa [eN] using (Homeomorph.trans_toOpenPartialHomeomorph e e.symm).symm
+    have hcompat :
+        ((c.symm.trans eN.symm).trans eN).trans c' ∈
+          contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n) := by
+      have hinner : (c.symm.trans eN.symm).trans eN =
+          c.symm.trans (eN.symm.trans eN) :=
+        OpenPartialHomeomorph.trans_assoc (e := c.symm) (e' := eN.symm) eN
+      rw [hinner, hmid, OpenPartialHomeomorph.trans_refl]
+      exact HasGroupoid.compatible hc hc'
+    simpa [eN, OpenPartialHomeomorph.trans_symm_eq_symm_trans_symm,
+      OpenPartialHomeomorph.trans_assoc] using hcompat
+  let _ : HasGroupoid N (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)) := hGroupoid
+  exact IsManifold.mk' (𝓡 n) (⊤ : WithTop ℕ∞) N
+
+/-- Helper for Problem 5-8: with the transported structure, the transporting homeomorphism is a
+diffeomorphism. -/
+private noncomputable def problem58TransportedDiffeomorph
+    {n : ℕ} {R N : Type*} [TopologicalSpace R] [TopologicalSpace N]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) R]
+    [IsManifold (𝓡 n) (⊤ : WithTop ℕ∞) R]
+    (e : R ≃ₜ N) :
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin n)) N :=
+      problem58TransportedChartedSpace e
+    let _ : IsManifold (𝓡 n) (⊤ : WithTop ℕ∞) N :=
+      problem58TransportedIsManifold e
+    R ≃ₘ^(⊤ : WithTop ℕ∞)⟮𝓡 n, 𝓡 n⟯ N := by
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin n)) N :=
+    problem58TransportedChartedSpace e
+  let _ : IsManifold (𝓡 n) (⊤ : WithTop ℕ∞) N :=
+    problem58TransportedIsManifold e
+  refine
+    { toEquiv := e.toEquiv
+      contMDiff_toFun := ?_
+      contMDiff_invFun := ?_ }
+  · rw [contMDiff_iff_target]
+    refine ⟨e.continuous, ?_⟩
+    intro y
+    convert (contMDiffOn_extChartAt (I := 𝓡 n) (n := (⊤ : WithTop ℕ∞))
+      (x := e.symm y)) using 1
+    · funext x
+      simp [problem58TransportedChartedSpace_chartAt, Function.comp]
+    · ext x
+      simp [problem58TransportedChartedSpace_chartAt, Function.comp]
+  · rw [contMDiff_iff_target]
+    refine ⟨e.symm.continuous, ?_⟩
+    intro y
+    convert (contMDiffOn_extChartAt (I := 𝓡 n) (n := (⊤ : WithTop ℕ∞))
+      (x := e y)) using 1
+    · funext x
+      simp [problem58TransportedChartedSpace_chartAt, Function.comp]
+    · ext x
+      simp [problem58TransportedChartedSpace_chartAt, Function.comp]
+
+/-- Lowering the differentiability index preserves the local normal forms defining an
+immersion. -/
+private lemma problem58IsImmersionOfLE
+    {𝕜 : Type*} [NontriviallyNormedField 𝕜]
+    {E₁ : Type*} [NormedAddCommGroup E₁] [NormedSpace 𝕜 E₁]
+    {H₁ : Type*} [TopologicalSpace H₁]
+    {X : Type*} [TopologicalSpace X] [ChartedSpace H₁ X]
+    {I₁ : ModelWithCorners 𝕜 E₁ H₁} [IsManifold I₁ (⊤ : WithTop ℕ∞) X]
+    {E₂ : Type*} [NormedAddCommGroup E₂] [NormedSpace 𝕜 E₂]
+    {H₂ : Type*} [TopologicalSpace H₂]
+    {Y : Type*} [TopologicalSpace Y] [ChartedSpace H₂ Y]
+    {I₂ : ModelWithCorners 𝕜 E₂ H₂} [IsManifold I₂ (⊤ : WithTop ℕ∞) Y]
+    {m n : WithTop ℕ∞} {f : X → Y} (hmn : m ≤ n)
+    (hf : Manifold.IsImmersion I₁ I₂ n f) :
+    Manifold.IsImmersion I₁ I₂ m f := by
+  let F := hf.complement
+  let hF := hf.isImmersionOfComplement_complement
+  refine ⟨F, inferInstance, inferInstance, ?_⟩
+  intro x
+  let hx := hF x
+  refine Manifold.IsImmersionAtOfComplement.mk_of_charts
+    hx.equiv hx.domChart hx.codChart hx.mem_domChart_source hx.mem_codChart_source ?_ ?_
+      hx.source_subset_preimage_source hx.writtenInCharts
+  · exact (IsManifold.maximalAtlas_subset_of_le hmn) hx.domChart_mem_maximalAtlas
+  · exact (IsManifold.maximalAtlas_subset_of_le hmn) hx.codChart_mem_maximalAtlas
+
+/-- The identity from the basis-transported Euclidean model to the original model is an
+immersion. -/
+private lemma basis_model_identity_isImmersion_to_original
+    (b : Module.Basis (Fin dimM) ℝ E) :
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin dimM)) M :=
+      basis_model_chartedSpace b
+    let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) M :=
+      basis_model_isManifold b
+    Manifold.IsImmersion (𝓡 dimM) (modelWithCornersSelf ℝ E)
+      (⊤ : WithTop ℕ∞) (id : M → M) := by
+  let V := EuclideanSpace ℝ (Fin dimM)
+  let _ : ChartedSpace V M := basis_model_chartedSpace b
+  let _ : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) M := basis_model_isManifold b
+  let eModel : OpenPartialHomeomorph E V :=
+    (basis_model_diffeomorph b).symm.toHomeomorph.toOpenPartialHomeomorph
+  refine ⟨PUnit.{uE + 1}, inferInstance, inferInstance, ?_⟩
+  intro x
+  let codChart : OpenPartialHomeomorph M E := chartAt E x
+  let domChart : OpenPartialHomeomorph M V := codChart.trans eModel
+  let equiv : (V × PUnit.{uE + 1}) ≃L[ℝ] E :=
+    (ContinuousLinearEquiv.prodUnique ℝ V PUnit.{uE + 1}).trans
+      (basis_model_continuousLinearEquiv b)
+  have hcodChart : codChart ∈
+      IsManifold.maximalAtlas (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M := by
+    exact IsManifold.chart_mem_maximalAtlas x
+  have hdomChart : domChart ∈
+      IsManifold.maximalAtlas (𝓡 dimM) (⊤ : WithTop ℕ∞) M := by
+    simpa [domChart, codChart, eModel] using
+      basis_model_chart_mem_maximalAtlas b hcodChart
+  refine Manifold.IsImmersionAtOfComplement.mk_of_continuousAt continuousAt_id equiv
+    domChart codChart ?_ ?_ hdomChart hcodChart ?_
+  · simpa [domChart, codChart, eModel, OpenPartialHomeomorph.trans_source] using
+      (mem_chart_source E x)
+  · exact mem_chart_source E x
+  intro u hu
+  have hu_target : (basis_model_continuousLinearEquiv b) u ∈ codChart.target := by
+    simpa [domChart, codChart, eModel, OpenPartialHomeomorph.extend_target,
+      OpenPartialHomeomorph.trans_target, basis_model_diffeomorph,
+      basis_model_continuousLinearEquiv] using hu
+  have hequiv_apply :
+      equiv (u, (0 : PUnit.{uE + 1})) = (basis_model_continuousLinearEquiv b) u := by
+    simp only [equiv, ContinuousLinearEquiv.trans_apply,
+      ContinuousLinearEquiv.prodUnique_apply]
+    rfl
+  simp only [Function.comp_apply, id_eq]
+  rw [hequiv_apply]
+  simpa [Function.comp, domChart, codChart, eModel,
+    OpenPartialHomeomorph.extend_coe, OpenPartialHomeomorph.extend_coe_symm,
+    basis_model_diffeomorph, basis_model_continuousLinearEquiv] using
+      codChart.right_inv hu_target
 
 -- Proof sketch: choose a chart witnessing that `B` is a regular coordinate ball. In this chart,
 -- the complement of the round open ball is diffeomorphic to a Euclidean half-space, so the
@@ -1701,10 +2645,53 @@ lemma regular_coordinate_ball_frontier_homeomorph_to_boundarySphere {B : Set M}
 /-- Problem 5-8 (1), existence half: the complement of a regular coordinate ball carries a smooth
 manifold-with-boundary structure making it a regular domain in the ambient manifold. -/
 theorem regularCoordinateBall_compl_exists_smoothManifoldWithBoundary
+    [T2Space M] [SecondCountableTopology M]
     {B : Set M} (hB : IsRegularCoordinateBall E B) :
     ∃ instSmooth : SmoothManifoldWithBoundary dimM (Set.compl B),
       letI : SmoothManifoldWithBoundary dimM (Set.compl B) := instSmooth
-      Set.IsRegularDomain (modelWithCornersSelf ℝ E) (Set.compl B) := sorry
+      Set.IsRegularDomain (modelWithCornersSelf ℝ E) (Set.compl B) := by
+  let b : Module.Basis (Fin dimM) ℝ E := Module.finBasis ℝ E
+  let instCharted : ChartedSpace (EuclideanSpace ℝ (Fin dimM)) M :=
+    basis_model_chartedSpace b
+  letI : ChartedSpace (EuclideanSpace ℝ (Fin dimM)) M := instCharted
+  let instManifold : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) M :=
+    basis_model_isManifold b
+  letI : IsManifold (𝓡 dimM) (⊤ : WithTop ℕ∞) M := instManifold
+  letI : TopologicalManifold dimM M :=
+    topologicalManifoldOfChartedSpace dimM M
+  have hfrontier :=
+    regular_coordinate_ball_frontier_has_boundary_sliceChart_for_compl hB b
+  have hlocal :
+      Set.SatisfiesLocalSliceConditionWithBoundary dimM (Set.compl B) dimM :=
+    regular_coordinate_ball_compl_satisfiesLocalSliceConditionWithBoundary hB hfrontier
+  rcases (local_slice_criterion_for_embedded_submanifold_with_boundary
+      dimM (Set.compl B)).mp hlocal with ⟨instSmooth, hEmbBasis⟩
+  refine ⟨instSmooth, ?_⟩
+  letI : SmoothManifoldWithBoundary dimM (Set.compl B) := instSmooth
+  have hModelImmersionTop :
+      Manifold.IsImmersion (𝓡 dimM) (modelWithCornersSelf ℝ E)
+        (⊤ : WithTop ℕ∞) (id : M → M) :=
+    basis_model_identity_isImmersion_to_original (M := M) b
+  have hModelImmersion :
+      Manifold.IsImmersion (𝓡 dimM) (modelWithCornersSelf ℝ E)
+        (∞ : WithTop ℕ∞) (id : M → M) :=
+    problem58IsImmersionOfLE (by simp) hModelImmersionTop
+  have hEmbBasisImmersion :
+      Manifold.IsImmersion (leeBoundaryModelWithCorners dimM) (𝓡 dimM)
+        (∞ : WithTop ℕ∞) ((↑) : Set.compl B → M) :=
+    problem58IsImmersionOfLE (by simp) hEmbBasis.isImmersion
+  have hEmbOriginal :
+      Manifold.IsSmoothEmbedding
+        (leeBoundaryModelWithCorners dimM)
+        (modelWithCornersSelf ℝ E)
+        (∞ : WithTop ℕ∞)
+        ((↑) : Set.compl B → M) := by
+    refine ⟨?_, hEmbBasis.isEmbedding⟩
+    simpa [Function.comp] using
+      Manifold.IsImmersion.ex416_comp hModelImmersion hEmbBasisImmersion
+  exact
+    { isSmoothEmbedding_subtype_val := hEmbOriginal
+      isProperlyEmbedded := (regular_coordinate_ball_compl_isClosed hB).isProperlyEmbedded }
 
 -- Proof sketch: first use the existence half to choose a smooth manifold-with-boundary structure
 -- on `Bᶜ` making it a regular domain. For that chosen complement structure, its boundary subtype
@@ -1716,6 +2703,7 @@ theorem regularCoordinateBall_compl_exists_smoothManifoldWithBoundary
 manifold-with-boundary structure making it a regular domain, and for that induced complement
 structure its boundary is diffeomorphic to the standard sphere `S^(n - 1)`. -/
 theorem regularCoordinateBall_compl_boundary_diffeomorph_sphere
+    [T2Space M] [SecondCountableTopology M]
     {B : Set M} (hB : IsRegularCoordinateBall E B)
     (hdim : 0 < dimM) :
     ∃ instSmooth : SmoothManifoldWithBoundary dimM (Set.compl B),
@@ -1729,4 +2717,52 @@ theorem regularCoordinateBall_compl_boundary_diffeomorph_sphere
             ↥((leeBoundaryModelWithCorners dimM).boundary (Set.compl B)),
             Nonempty
               (↥((leeBoundaryModelWithCorners dimM).boundary (Set.compl B)) ≃ₘ⟮𝓡 (dimM - 1),
-                𝓡 (dimM - 1)⟯ boundarySphere) := sorry
+                𝓡 (dimM - 1)⟯ boundarySphere) := by
+  rcases regularCoordinateBall_compl_exists_smoothManifoldWithBoundary hB with
+    ⟨instSmooth, hRegular⟩
+  refine ⟨instSmooth, ?_⟩
+  letI : SmoothManifoldWithBoundary dimM (Set.compl B) := instSmooth
+  refine ⟨hRegular, ?_⟩
+  have hBoundaryImage :
+      Subtype.val ''
+          (leeBoundaryModelWithCorners dimM).boundary (Set.compl B) =
+        frontier (Set.compl B) := by
+    exact regular_domain_manifoldBoundary_image_eq_frontier
+      (I := modelWithCornersSelf ℝ E)
+  let hBoundaryFrontier :
+      ↥((leeBoundaryModelWithCorners dimM).boundary (Set.compl B)) ≃ₜ
+        ↥(frontier (Set.compl B)) :=
+    (Topology.IsEmbedding.subtypeVal.homeomorphImage
+      ((leeBoundaryModelWithCorners dimM).boundary (Set.compl B))).trans
+      (Homeomorph.setCongr hBoundaryImage)
+  let hBoundaryGeometric :
+      ↥((leeBoundaryModelWithCorners dimM).boundary (Set.compl B)) ≃ₜ
+        ↥(closure B \ B) :=
+    hBoundaryFrontier.trans
+      (Homeomorph.setCongr
+        (regular_coordinate_ball_compl_frontier_eq_closure_diff hB))
+  rcases regular_coordinate_ball_frontier_homeomorph_to_boundarySphere hB hdim with
+    ⟨hGeometricSphere⟩
+  let hBoundarySphere :
+      ↥((leeBoundaryModelWithCorners dimM).boundary (Set.compl B)) ≃ₜ boundarySphere :=
+    hBoundaryGeometric.trans hGeometricSphere
+  let instCharted : ChartedSpace (EuclideanSpace ℝ (Fin (dimM - 1)))
+      ↥((leeBoundaryModelWithCorners dimM).boundary (Set.compl B)) :=
+    problem58TransportedChartedSpace hBoundarySphere.symm
+  refine ⟨instCharted, ?_⟩
+  letI : ChartedSpace (EuclideanSpace ℝ (Fin (dimM - 1)))
+      ↥((leeBoundaryModelWithCorners dimM).boundary (Set.compl B)) := instCharted
+  let instManifold : IsManifold (𝓡 (dimM - 1)) (⊤ : WithTop ℕ∞)
+      ↥((leeBoundaryModelWithCorners dimM).boundary (Set.compl B)) :=
+    problem58TransportedIsManifold hBoundarySphere.symm
+  refine ⟨instManifold, ?_⟩
+  letI : IsManifold (𝓡 (dimM - 1)) (⊤ : WithTop ℕ∞)
+      ↥((leeBoundaryModelWithCorners dimM).boundary (Set.compl B)) := instManifold
+  let topDiffeomorph :
+      ↥((leeBoundaryModelWithCorners dimM).boundary (Set.compl B))
+        ≃ₘ^(⊤ : WithTop ℕ∞)⟮𝓡 (dimM - 1), 𝓡 (dimM - 1)⟯ boundarySphere :=
+    (problem58TransportedDiffeomorph (n := dimM - 1) hBoundarySphere.symm).symm
+  refine ⟨{
+    toEquiv := topDiffeomorph.toEquiv
+    contMDiff_toFun := topDiffeomorph.contMDiff.of_le (by simp)
+    contMDiff_invFun := topDiffeomorph.symm.contMDiff.of_le (by simp) }⟩

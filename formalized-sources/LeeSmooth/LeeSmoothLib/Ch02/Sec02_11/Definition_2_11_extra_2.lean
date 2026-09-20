@@ -53,6 +53,31 @@ theorem isSmoothOn_iff_exists_contMDiffMap_local_extension {A : Set M} {f : A �
           (p : M) ∈ U ∧
             ∃ Fext : C^∞⟮I, U; I', N⟯,
               ∀ q : A, (hq : (q : M) ∈ U) → Fext ⟨q, hq⟩ = f q := by
-  sorry
+  constructor
+  · intro h p
+    obtain ⟨U, hU, hp, Fext, hFext, hEq⟩ := h p
+    let U' : Opens M := ⟨U, hU⟩
+    have hFext' : ContMDiff I I' ∞ (fun x : U' ↦ Fext x) := by
+      intro x
+      apply (contMDiffAt_subtype_iff (U := U') (f := Fext) (x := x)).2
+      exact (hFext x x.property).contMDiffAt (hU.mem_nhds x.property)
+    let Fext' : C^∞⟮I, U'; I', N⟯ := ⟨fun x ↦ Fext x, hFext'⟩
+    refine ⟨U', hp, Fext', ?_⟩
+    intro q hq
+    exact hEq q hq
+  · intro h p
+    obtain ⟨U, hp, Fext, hEq⟩ := h p
+    classical
+    let Fext' : M → N :=
+      fun x ↦ if hx : x ∈ (U : Set M) then Fext ⟨x, hx⟩ else f p
+    refine ⟨(U : Set M), U.isOpen, hp, Fext', ?_, ?_⟩
+    · intro x hx
+      apply ContMDiffAt.contMDiffWithinAt
+      apply (contMDiffAt_subtype_iff (U := U) (f := Fext') (x := ⟨x, hx⟩)).1
+      simpa [Fext'] using Fext.contMDiff ⟨x, hx⟩
+    · intro q hq
+      change (if hx : (q : M) ∈ (U : Set M) then Fext ⟨q, hx⟩ else f p) = f q
+      rw [dif_pos hq]
+      exact hEq q hq
 
 end Function

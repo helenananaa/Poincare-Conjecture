@@ -441,7 +441,13 @@ noncomputable def real_subgroup_defining_representation (n : ℕ)
 /-- The defining representation of a Lie subgroup of `GL(n, ℝ)` is faithful. -/
 theorem real_subgroup_defining_representation_faithful
     (n : ℕ) (G : RealLieSubgroupGL n) :
-    Function.Injective (fun g : G.carrier ↦ real_subgroup_defining_representation n G g) := sorry
+    Function.Injective (fun g : G.carrier ↦ real_subgroup_defining_representation n G g) := by
+  intro g h hgh
+  apply Subtype.ext
+  apply (Matrix.GeneralLinearGroup.toLin :
+    GL (Fin n) ℝ ≃* LinearMap.GeneralLinearGroup ℝ (Fin n → ℝ)).injective
+  apply Units.ext
+  exact hgh
 
 /-- A Lie subgroup of `GL(n, ℝ)` has an injective defining representation. -/
 theorem real_subgroup_defining_hom_injective (n : ℕ)
@@ -534,7 +540,18 @@ noncomputable def circle_defining_representation :
 
 /-- The circle defining representation is faithful. -/
 theorem circle_defining_representation_faithful :
-    Function.Injective (fun z : Circle ↦ circle_defining_representation z) := sorry
+    Function.Injective (fun z : Circle ↦ circle_defining_representation z) := by
+  intro z w hzw
+  have hMatrix : circle_defining_matrix_hom z = circle_defining_matrix_hom w := by
+    apply (Matrix.GeneralLinearGroup.toLin :
+      GL (Fin 1) ℂ ≃* LinearMap.GeneralLinearGroup ℂ (Fin 1 → ℂ)).injective
+    apply Units.ext
+    exact hzw
+  have hEntry := congrArg
+    (fun g : GL (Fin 1) ℂ ↦ ((g : Matrix (Fin 1) (Fin 1) ℂ) 0 0))
+    hMatrix
+  exact Subtype.ext (by
+    simpa [circle_defining_matrix_hom, Circle.toUnits_apply, Matrix.scalar_apply] using hEntry)
 
 /-- The circle inclusion into `GL(1, ℂ)` is smooth in ambient matrix coordinates. -/
 theorem circle_defining_matrix_hom_contMDiff :
@@ -2066,6 +2083,7 @@ theorem tau_d_n_representation_apply
     (n : ℕ) (d : ℕ+) (A : GL (Fin n) ℝ) (v : polynomialRepresentationSpace n d) :
     ((tau_d_n_representation n d A :
       polynomialRepresentationSpace n d →L[ℝ] polynomialRepresentationSpace n d) v) =
-      tau_d_n_coordinateLinearEquiv n d A v := sorry
+      tau_d_n_coordinateLinearEquiv n d A v := by
+  rfl
 
 end PolynomialExample

@@ -1,5 +1,6 @@
 import Mathlib.Geometry.Manifold.IsManifold.InteriorBoundary
 import Mathlib.Tactic.Recall
+import LeeSmoothLib.External.InvarianceOfDomain.Unconditional
 import LeeSmoothLib.Ch01.Sec01.Definition_1_extra_1
 import LeeSmoothLib.Ch01.Sec01_05.Definition_1_5_extra_1
 -- Declarations for this item will be appended below by the statement pipeline.
@@ -200,6 +201,32 @@ private theorem realToR1Equiv_apply_zero (t : ℝ) :
   -- The preferred `ℝ ≃ ℝ¹` identification is the inverse of the standard collapse to one scalar.
   simp [realToR1Equiv]
 
+/-- Helper for Proposition 1.38: the one-dimensional Euclidean half-space is the nonnegative
+real half-line. -/
+private noncomputable def halfSpaceOneHomeomorphIci :
+    EuclideanHalfSpace 1 ≃ₜ Set.Ici (0 : ℝ) :=
+  { toEquiv :=
+      { toFun := fun z ↦ ⟨z.1 0, z.2⟩
+        invFun := fun t ↦
+          ⟨realToR1Equiv t.1, by simpa [realToR1Equiv_apply_zero] using t.2⟩
+        left_inv := by
+          intro z
+          apply Subtype.ext
+          ext i
+          fin_cases i
+          simp [realToR1Equiv_apply_zero]
+        right_inv := by
+          intro t
+          apply Subtype.ext
+          simp [realToR1Equiv_apply_zero] }
+    continuous_toFun := by
+      exact Continuous.subtype_mk
+        ((PiLp.continuous_apply 2 _ 0).comp continuous_subtype_val) (fun z ↦ z.2)
+    continuous_invFun := by
+      exact Continuous.subtype_mk
+        (realToR1Equiv.continuous.comp continuous_subtype_val) (fun t ↦ by
+          simpa [realToR1Equiv_apply_zero] using t.2) }
+
 /-- Helper for Proposition 1.38: removing the midpoint from an open interval in `ℝ` destroys
 preconnectedness. -/
 private theorem puncturedOpenInterval_not_preconnected
@@ -235,11 +262,107 @@ private theorem halfSpaceBoundaryPointNotHomeomorphicToOpenEuclidean_dimZero
     ¬ ∃ S : Set W,
       IsOpen S ∧ (⟨z, hzW⟩ : W) ∈ S ∧
         ∃ V : Set (EuclideanSpace ℝ (Fin 1)), IsOpen V ∧ Nonempty (↑S ≃ₜ ↑V) := by
-  -- TODO: convert the target patch to an open subset of `ℝ`, restrict to a small interval around
-  -- the image of `z`, and then transport punctured preconnectedness back through the source
-  -- coordinate map `fun x : EuclideanHalfSpace 1 ↦ x.1 0`. The remaining blocker is the nested
-  -- subtype bookkeeping needed to identify the punctured source image with `A ∩ Ioi 0`.
-  sorry
+  rintro ⟨S, hSOpen, hzS, V, hVOpen, ⟨h⟩⟩
+  let zW : W := ⟨z, hzW⟩
+  let zS : S := ⟨zW, hzS⟩
+  let yV : V := h zS
+  let p : ℝ := realToR1Equiv.symm yV.1
+  let P : Set ℝ := realToR1Equiv ⁻¹' V
+  have hPOpen : IsOpen P := hVOpen.preimage realToR1Equiv.continuous
+  have hpP : p ∈ P := by
+    simp [P, p, yV]
+  rcases Metric.isOpen_iff.mp hPOpen p hpP with ⟨r, hr, hball⟩
+  let a : ℝ := p - r
+  let b : ℝ := p + r
+  have hap : a < p := by dsimp [a]; linarith
+  have hpb : p < b := by dsimp [b]; linarith
+  let coordV : V → ℝ := fun v ↦ realToR1Equiv.symm v.1
+  let T : Set V := coordV ⁻¹' Set.Ioo a b
+  let A : Set S := h ⁻¹' T
+  have hcoordV : Topology.IsEmbedding coordV := by
+    have h₁ : Topology.IsEmbedding ((↑) : V → EuclideanSpace ℝ (Fin 1)) :=
+      Topology.IsEmbedding.subtypeVal
+    have h₂ : Topology.IsEmbedding (realToR1Equiv.symm : EuclideanSpace ℝ (Fin 1) → ℝ) :=
+      realToR1Equiv.symm.toHomeomorph.isEmbedding
+    simpa [coordV, Function.comp_def] using h₂.comp h₁
+  have hcoordV_image_T : coordV '' T = Set.Ioo a b := by
+    ext t
+    constructor
+    · rintro ⟨v, hv, rfl⟩
+      simpa [T] using hv
+    · intro ht
+      have htP : t ∈ P := by
+        apply hball
+        simpa [Real.ball_eq_Ioo, a, b] using ht
+      let v : V := ⟨realToR1Equiv t, htP⟩
+      refine ⟨v, ?_, ?_⟩
+      · simpa [T, coordV, v]
+      · simp [coordV, v]
+  have hTPre : IsPreconnected T := by
+    apply hcoordV.isInducing.isPreconnected_image.mp
+    rw [hcoordV_image_T]
+    exact isPreconnected_Ioo
+  have hAPre : IsPreconnected A := by
+    exact h.isPreconnected_preimage.mpr hTPre
+  have hpIoo : p ∈ Set.Ioo a b := ⟨hap, hpb⟩
+  have hyT : yV ∈ T := by
+    simpa [T, coordV, p] using hpIoo
+  have hzA : zS ∈ A := by
+    change h zS ∈ T
+    exact hyT
+  let coordS : S → ℝ := fun s ↦ (halfSpaceOneHomeomorphIci s.1.1).1
+  have hcoordS : Topology.IsEmbedding coordS := by
+    have h₁ : Topology.IsEmbedding ((↑) : S → W) := Topology.IsEmbedding.subtypeVal
+    have h₂ : Topology.IsEmbedding ((↑) : W → EuclideanHalfSpace 1) :=
+      Topology.IsEmbedding.subtypeVal
+    have h₃ : Topology.IsEmbedding (halfSpaceOneHomeomorphIci :
+        EuclideanHalfSpace 1 → Set.Ici (0 : ℝ)) := halfSpaceOneHomeomorphIci.isEmbedding
+    have h₄ : Topology.IsEmbedding ((↑) : Set.Ici (0 : ℝ) → ℝ) :=
+      Topology.IsEmbedding.subtypeVal
+    simpa [coordS, Function.comp_def] using h₄.comp (h₃.comp (h₂.comp h₁))
+  have hcoordS_z : coordS zS = 0 := by
+    change z.1 0 = 0
+    exact hzZero
+  let C : Set ℝ := coordS '' A
+  have hCPre : IsPreconnected C := by
+    exact hcoordS.isInducing.isPreconnected_image.mpr hAPre
+  have hCNonneg : C ⊆ Set.Ici (0 : ℝ) := by
+    rintro t ⟨s, hs, rfl⟩
+    exact (halfSpaceOneHomeomorphIci s.1.1).2
+  have hCPunctPre : IsPreconnected (C \ ({0} : Set ℝ)) := by
+    rw [isPreconnected_iff_ordConnected]
+    refine ⟨?_⟩
+    intro x hx y hy t ht
+    have htC : t ∈ C := hCPre.ordConnected.out hx.1 hy.1 ht
+    refine ⟨htC, ?_⟩
+    have hxNe : x ≠ 0 := by simpa using hx.2
+    have hxPos : 0 < x := lt_of_le_of_ne (hCNonneg hx.1) (Ne.symm hxNe)
+    have htPos : 0 < t := hxPos.trans_le ht.1
+    simpa using htPos.ne'
+  have hcoordS_image_punct :
+      coordS '' (A \ ({zS} : Set S)) = C \ ({0} : Set ℝ) := by
+    rw [Set.image_sdiff hcoordS.injective, show coordS '' A = C from rfl,
+      Set.image_singleton, hcoordS_z]
+  have hAPunctPre : IsPreconnected (A \ ({zS} : Set S)) := by
+    apply hcoordS.isInducing.isPreconnected_image.mp
+    rw [hcoordS_image_punct]
+    exact hCPunctPre
+  have hImageA : h '' A = T := by
+    exact Set.image_preimage_eq T h.surjective
+  have h_image_punct : h '' (A \ ({zS} : Set S)) = T \ ({yV} : Set V) := by
+    rw [Set.image_sdiff h.injective, hImageA, Set.image_singleton]
+  have hTargetPunctPre : IsPreconnected (T \ ({yV} : Set V)) := by
+    rw [← h_image_punct]
+    exact hAPunctPre.image h h.continuous.continuousOn
+  have hcoordV_y : coordV yV = p := rfl
+  have hcoordV_image_punct :
+      coordV '' (T \ ({yV} : Set V)) =
+        Set.Ioo a b \ ({p} : Set ℝ) := by
+    rw [Set.image_sdiff hcoordV.injective, hcoordV_image_T, Set.image_singleton, hcoordV_y]
+  have hIntervalPunctPre : IsPreconnected (Set.Ioo a b \ ({p} : Set ℝ)) := by
+    rw [← hcoordV_image_punct]
+    exact hTargetPunctPre.image coordV hcoordV.continuous.continuousOn
+  exact (puncturedOpenInterval_not_preconnected hap hpb) hIntervalPunctPre
 
 /-- Helper for Proposition 1.38: after the codomain-chart reduction, the remaining obstruction is
 purely local and Euclidean-targeted. -/
@@ -255,13 +378,55 @@ private theorem halfSpaceBoundaryPointNotHomeomorphicToOpenEuclidean
     subst h0
     simpa using halfSpaceBoundaryPointNotHomeomorphicToOpenEuclidean_dimZero
       (W := W) (z := z) hWOpen hzW hzZero
-  · have hn : 1 ≤ n := Nat.succ_le_of_lt (Nat.pos_iff_ne_zero.mpr h0)
-    -- TODO: for `n ≥ 1`, shrink to a canonical half-ball neighborhood, puncture at the marked
-    -- point, transport across the restricted homeomorphism, and contradict Euclidean punctured
-    -- noncontractibility via the planned support theorem.
-    -- The chart reduction is complete; the remaining blocker is the positive-dimensional local
-    -- Euclidean obstruction.
-    sorry
+  · classical
+    rintro ⟨S, _hSOpen, hzS, V, hVOpen, ⟨h⟩⟩
+    let g : EuclideanSpace ℝ (Fin (n + 1)) → EuclideanSpace ℝ (Fin (n + 1)) :=
+      fun x ↦ if hx : x ∈ V then (h.symm ⟨x, hx⟩).1.1.1 else 0
+    have hg_restrict :
+        V.restrict g = fun x : V ↦ (h.symm x).1.1.1 := by
+      funext x
+      simp [g, x.2]
+    have hg_cont : ContinuousOn g V := by
+      rw [continuousOn_iff_continuous_restrict, hg_restrict]
+      fun_prop
+    have hg_inj : Set.InjOn g V := by
+      intro x hx y hy hxy
+      simp only [g, dif_pos hx, dif_pos hy] at hxy
+      have hs : h.symm (⟨x, hx⟩ : V) = h.symm ⟨y, hy⟩ := by
+        apply Subtype.ext
+        apply Subtype.ext
+        apply Subtype.ext
+        exact hxy
+      exact congrArg Subtype.val (h.symm.injective hs)
+    have hg_open : IsOpen (g '' V) :=
+      LeeSmooth.External.InvarianceOfDomain.Unconditional.invariance_of_domain_open_map
+        g V hVOpen hg_cont hg_inj
+    let zS : S := ⟨⟨z, hzW⟩, hzS⟩
+    let yV : V := h zS
+    have hzImage : z.1 ∈ g '' V := by
+      refine ⟨yV.1, yV.2, ?_⟩
+      change (if hy : yV.1 ∈ V then (h.symm ⟨yV.1, hy⟩).1.1.1 else 0) = z.1
+      rw [dif_pos yV.2]
+      change (h.symm yV).1.1.1 = z.1
+      rw [h.symm_apply_apply]
+    have himage_nonneg :
+        ∀ x ∈ g '' V, 0 ≤ x 0 := by
+      rintro x ⟨y, hy, rfl⟩
+      simp only [g, dif_pos hy]
+      exact (h.symm ⟨y, hy⟩).1.1.2
+    rcases Metric.isOpen_iff.mp hg_open z.1 hzImage with ⟨r, hr, hball⟩
+    let w : EuclideanSpace ℝ (Fin (n + 1)) :=
+      z.1 - EuclideanSpace.single 0 (r / 2)
+    have hwBall : w ∈ Metric.ball z.1 r := by
+      rw [Metric.mem_ball, dist_eq_norm]
+      simp only [w, sub_sub_cancel_left, norm_neg, EuclideanSpace.norm_single,
+        Real.norm_eq_abs, abs_of_pos (half_pos hr)]
+      exact half_lt_self hr
+    have hwNonneg : 0 ≤ w 0 := himage_nonneg w (hball hwBall)
+    have hwCoord : w 0 = -(r / 2) := by
+      simp [w, hzZero, EuclideanSpace.single]
+    rw [hwCoord] at hwNonneg
+    linarith
 
 /-- Helper for Proposition 1.38: a boundary-centered open half-space patch cannot be homeomorphic
 to an open subset of a boundaryless Euclidean manifold. -/

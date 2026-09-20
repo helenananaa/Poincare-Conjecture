@@ -31,7 +31,7 @@ def IsRegularPoint (I : ModelWithCorners ℝ E H) (J : ModelWithCorners ℝ E' H
 
 /-- `IsRegularPoint` means surjectivity of the manifold derivative at the given point. -/
 theorem isRegularPoint_iff_surjective_mfderiv (Φ : M → N) (p : M) :
-    IsRegularPoint I J Φ p ↔ Function.Surjective (mfderiv I J Φ p) := sorry
+    IsRegularPoint I J Φ p ↔ Function.Surjective (mfderiv I J Φ p) := by rfl
 
 /-- Definition 5.30-extra-2 (2): a point `p` is a critical point of `Φ : M → N` when `p` is not a
 regular point of `Φ`. -/
@@ -41,18 +41,22 @@ def IsCriticalPoint (I : ModelWithCorners ℝ E H) (J : ModelWithCorners ℝ E' 
 
 /-- A point is critical exactly when it is not regular. -/
 theorem isCriticalPoint_iff_not_isRegularPoint (Φ : M → N) (p : M) :
-    IsCriticalPoint I J Φ p ↔ ¬ IsRegularPoint I J Φ p := sorry
+    IsCriticalPoint I J Φ p ↔ ¬ IsRegularPoint I J Φ p := by rfl
 
 /-- Definition 5.30-extra-2 (3): a value `c` is regular exactly when every point of the level set
 `Φ⁻¹({c})` is a regular point of `Φ`. This uses the canonical local definition
 `Manifold.IsRegularValue`. -/
 theorem isRegularValue_iff_forall_isRegularPoint (Φ : M → N) (c : N) :
-    IsRegularValue I J Φ c ↔ ∀ p : M, Φ p = c → IsRegularPoint I J Φ p := sorry
+    IsRegularValue I J Φ c ↔ ∀ p : M, Φ p = c → IsRegularPoint I J Φ p := by rfl
 
 /-- A value with empty fiber is a regular value. -/
 theorem isRegularValue_of_preimage_eq_empty {Φ : M → N} {c : N}
     (h : Φ ⁻¹' ({c} : Set N) = ∅) :
-    IsRegularValue I J Φ c := sorry
+    IsRegularValue I J Φ c := by
+  intro p hp
+  have hm : p ∈ Φ ⁻¹' ({c} : Set N) := hp
+  rw [h] at hm
+  exact hm.elim
 
 /-- Definition 5.30-extra-2 (4): a value `c` is a critical value of `Φ : M → N` when `c` is not a
 regular value of `Φ`. -/
@@ -62,7 +66,10 @@ def IsCriticalValue (I : ModelWithCorners ℝ E H) (J : ModelWithCorners ℝ E' 
 
 /-- A value is critical exactly when some point of its level set is a critical point. -/
 theorem isCriticalValue_iff_exists_critical_point (Φ : M → N) (c : N) :
-    IsCriticalValue I J Φ c ↔ ∃ p : M, Φ p = c ∧ IsCriticalPoint I J Φ p := sorry
+    IsCriticalValue I J Φ c ↔ ∃ p : M, Φ p = c ∧ IsCriticalPoint I J Φ p := by
+  classical
+  simp only [IsCriticalValue, IsRegularValue, IsCriticalPoint, IsRegularPoint,
+    not_forall, _root_.not_imp, exists_prop]
 
 /-- Definition 5.30-extra-2 (5): the level set `Φ⁻¹({c})` is a regular level set when `c` is a
 regular value of `Φ`. -/
@@ -73,7 +80,7 @@ def IsRegularLevelSet (I : ModelWithCorners ℝ E H) (J : ModelWithCorners ℝ E
 /-- A level set is regular exactly when every point of that level set is a regular point. -/
 theorem isRegularLevelSet_iff_forall_mem_preimage_isRegularPoint (Φ : M → N) (c : N) :
     IsRegularLevelSet I J Φ c ↔
-      ∀ p : M, p ∈ Φ ⁻¹' ({c} : Set N) → IsRegularPoint I J Φ p := sorry
+      ∀ p : M, p ∈ Φ ⁻¹' ({c} : Set N) → IsRegularPoint I J Φ p := by rfl
 
 section FiniteDimensional
 
@@ -84,16 +91,32 @@ variable [IsManifold I ∞ M] [IsManifold J ∞ N]
 point is critical. -/
 theorem isCriticalPoint_of_model_finrank_lt {Φ : M → N}
     (hdim : Module.finrank ℝ E < Module.finrank ℝ E') (p : M) :
-    IsCriticalPoint I J Φ p := sorry
+    IsCriticalPoint I J Φ p := by
+  intro hreg
+  letI : FiniteDimensional ℝ (TangentSpace I p) := inferInstanceAs (FiniteDimensional ℝ E)
+  letI : FiniteDimensional ℝ (TangentSpace J (Φ p)) := inferInstanceAs (FiniteDimensional ℝ E')
+  have hle := LinearMap.finrank_le_finrank_of_surjective hreg
+  exact (not_le_of_gt hdim) hle
 
 /-- A smooth map is a smooth submersion exactly when every point of the source is a regular
 point. -/
 theorem isSmoothSubmersion_iff_forall_isRegularPoint {Φ : M → N} (hΦ : ContMDiff I J ∞ Φ) :
-    IsSmoothSubmersion I J Φ ↔ ∀ p : M, IsRegularPoint I J Φ p := sorry
+    IsSmoothSubmersion I J Φ ↔ ∀ p : M, IsRegularPoint I J Φ p := by
+  exact ⟨fun h ↦ h.surjective_mfderiv, fun h ↦ ⟨hΦ, h⟩⟩
 
 /-- The regular points of a smooth map form an open subset of the source manifold. -/
 theorem isOpen_setOf_isRegularPoint {Φ : M → N} (hΦ : ContMDiff I J ∞ Φ) :
-    IsOpen {p : M | IsRegularPoint I J Φ p} := sorry
+    IsOpen {p : M | IsRegularPoint I J Φ p} := by
+  rw [isOpen_iff_mem_nhds]
+  intro p hp
+  obtain ⟨U, hpU, hU⟩ :=
+    exists_open_restriction_isSmoothSubmersion_of_surjective_mfderiv hΦ hp
+  refine Filter.mem_of_superset (U.isOpen.mem_nhds hpU) ?_
+  intro q hq
+  have hs := hU.surjective_mfderiv ⟨q, hq⟩
+  rw [mfderiv_comp _ (hΦ.mdifferentiable (by simp) q)
+    ((contMDiff_subtype_val (I := I) (U := U) (n := ∞)).mdifferentiable (by simp) ⟨q, hq⟩)] at hs
+  exact Function.Surjective.of_comp hs
 
 end FiniteDimensional
 

@@ -1,3 +1,4 @@
+import LeeSmoothLib.Ch04.Sec04_26.Definition_4_26_extra_1
 import Mathlib.Geometry.Manifold.LocalDiffeomorph
 import Mathlib.Topology.Covering.Basic
 import Mathlib.Topology.Maps.Proper.Basic
@@ -20,16 +21,7 @@ variable {E : Type uE} [TopologicalSpace E] [ChartedSpace HE E] [T2Space E]
 variable {M : Type uM} [TopologicalSpace M] [ChartedSpace HM M]
 variable [Nonempty E] [PreconnectedSpace M]
 
-namespace Manifold
-
-/-- Definition 4.26-extra-1: a smooth covering map is a surjective topological covering map that
-is also a smooth local diffeomorphism. This local reintroduction keeps the proposition file
-self-contained while the canonical owner file is unavailable. -/
-def IsSmoothCoveringMap
-    (I : ModelWithCorners K VE HE) (I' : ModelWithCorners K VM HM) (π : E → M) : Prop :=
-  IsCoveringMap π ∧ Function.Surjective π ∧ IsLocalDiffeomorph I I' ∞ π
-
-end Manifold
+-- Reuse the canonical covering-map predicate and its projections; do not redeclare them.
 
 omit [T2Space E] [Nonempty E] [PreconnectedSpace M] in
 /-- Helper for Proposition 4.46: a local diffeomorphism provides an open partial homeomorphism

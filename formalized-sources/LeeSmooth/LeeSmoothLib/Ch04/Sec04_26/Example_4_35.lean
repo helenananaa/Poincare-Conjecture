@@ -1,3 +1,4 @@
+import LeeSmoothLib.Ch04.Sec04_26.Definition_4_26_extra_1
 import Mathlib.Topology.Homeomorph.Lemmas
 import Mathlib.Topology.Covering.Basic
 import LeeSmoothLib.Ch01.Sec01.Example_1_5
@@ -5,48 +6,7 @@ import LeeSmoothLib.Ch01.Sec01_07.Problem_1_8
 import LeeSmoothLib.Ch04.Sec04_22.Proposition_4_6
 -- Declarations for this item will be appended below by the statement pipeline.
 
-namespace Manifold
-
-open scoped ContDiff
-
-universe u𝕜 uE uE' uH uH' uM uM'
-
-variable {𝕜 : Type u𝕜} [NontriviallyNormedField 𝕜]
-variable {E : Type uE} [NormedAddCommGroup E] [NormedSpace 𝕜 E]
-variable {E' : Type uE'} [NormedAddCommGroup E'] [NormedSpace 𝕜 E']
-variable {H : Type uH} [TopologicalSpace H]
-variable {H' : Type uH'} [TopologicalSpace H']
-variable {M : Type uM} [TopologicalSpace M] [ChartedSpace H M]
-variable {M' : Type uM'} [TopologicalSpace M'] [ChartedSpace H' M']
-
-/-- Helper for Example 4.35: a smooth covering map is a covering map that is surjective and a
-smooth local diffeomorphism. -/
-def IsSmoothCoveringMap
-    (I : ModelWithCorners 𝕜 E H) (I' : ModelWithCorners 𝕜 E' H') (π : M → M') : Prop :=
-  IsCoveringMap π ∧ Function.Surjective π ∧ IsLocalDiffeomorph I I' (∞ : ℕ∞ω) π
-
-namespace IsSmoothCoveringMap
-
-/-- Helper for Example 4.35: a smooth covering map is surjective. -/
-theorem surjective
-    {I : ModelWithCorners 𝕜 E H} {I' : ModelWithCorners 𝕜 E' H'} {π : M → M'}
-    (hπ : IsSmoothCoveringMap I I' π) : Function.Surjective π :=
-  hπ.2.1
-
-/-- Helper for Example 4.35: a smooth covering map is a covering map. -/
-theorem isCoveringMap
-    {I : ModelWithCorners 𝕜 E H} {I' : ModelWithCorners 𝕜 E' H'} {π : M → M'}
-    (hπ : IsSmoothCoveringMap I I' π) : IsCoveringMap π :=
-  hπ.1
-
-/-- Helper for Example 4.35: a smooth covering map is a smooth local diffeomorphism. -/
-theorem isLocalDiffeomorph
-    {I : ModelWithCorners 𝕜 E H} {I' : ModelWithCorners 𝕜 E' H'} {π : M → M'}
-    (hπ : IsSmoothCoveringMap I I' π) : IsLocalDiffeomorph I I' (∞ : ℕ∞ω) π :=
-  hπ.2.2
-
-end IsSmoothCoveringMap
-end Manifold
+-- Reuse the canonical covering-map predicate and its projections; do not redeclare them.
 
 noncomputable section
 

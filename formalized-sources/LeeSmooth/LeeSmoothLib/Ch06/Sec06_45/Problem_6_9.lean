@@ -3,11 +3,11 @@ import LeeSmoothLib.Ch01.Sec01.Definition_1_extra_1
 import LeeSmoothLib.Ch04.Sec04_22.Proposition_4_8
 import LeeSmoothLib.Ch05.Sec05_29.Example_5_9
 import LeeSmoothLib.Ch05.Sec05_30.Definition_5_30_extra_2
-import LeeSmoothLib.Ch05.Sec05_30.Corollary_5_14
 import LeeSmoothLib.Ch05.Sec05_35.Proposition_5_38
 import LeeSmoothLib.Ch05.Sec05_37.Problem_5_7
 import LeeSmoothLib.Ch06.Sec06_44.Definition_6_44_extra_1
 import LeeSmoothLib.Ch06.Sec06_44.Theorem_6_30
+import LeeSmoothLib.Verified.LevelSets.AnalyticRegularValue
 -- Declarations for this item will be appended below by the statement pipeline.
 
 open scoped ContDiff Manifold
@@ -275,7 +275,7 @@ theorem positiveSphere_isManifold (r : ℝ) (hr : 0 < r) :
   have hTop : IsManifold (𝓡 2) (⊤ : WithTop ℕ∞) (sphereR r) := by
     simpa [positiveSphere_chartedSpace] using
       transportedHomeomorphIsManifoldTop (n := 2) (positiveSphere_homeomorph r hr)
-  let _ : IsManifold (𝓡 2) (⊤ : WithTop ℕ∞) (sphereR r) := hTop
+  letI : IsManifold (𝓡 2) (⊤ : WithTop ℕ∞) (sphereR r) := hTop
   exact IsManifold.of_le (I := 𝓡 2) (M := sphereR r) (m := ∞) (n := (⊤ : WithTop ℕ∞))
     (by simp)
 
@@ -312,8 +312,8 @@ theorem positiveSphere_isEmbeddedSubmanifold (r : ℝ) (hr : 0 < r) :
     let _ : ChartedSpace R2 (sphereR r) := positiveSphere_chartedSpace r hr
     let _ : IsManifold (𝓡 2) ∞ (sphereR r) := positiveSphere_isManifold r hr
     IsEmbeddedSubmanifold (𝓡 3) (𝓡 2) (sphereR r) := by
-  let _ : ChartedSpace R2 (sphereR r) := positiveSphere_chartedSpace r hr
-  let _ : IsManifold (𝓡 2) ∞ (sphereR r) := positiveSphere_isManifold r hr
+  letI : ChartedSpace R2 (sphereR r) := positiveSphere_chartedSpace r hr
+  letI : IsManifold (𝓡 2) ∞ (sphereR r) := positiveSphere_isManifold r hr
   have hTop : IsManifold (𝓡 2) (⊤ : WithTop ℕ∞) (sphereR r) := by
     -- The transported charted-space spelling already carries the top-order sphere manifold owner.
     simpa [positiveSphere_chartedSpace] using
@@ -333,7 +333,11 @@ theorem positiveSphere_isEmbeddedSubmanifold (r : ℝ) (hr : 0 < r) :
           intro x
           exact positiveSphere_homeomorph_apply_val r hr x))
   exact
-    { toBoundarylessManifold := inferInstance
+    { toBoundarylessManifold := by
+        constructor
+        intro x
+        change extChartAt (𝓡 2) x x ∈ interior (Set.range (𝓡 2))
+        simp
       isSmoothEmbedding_subtype_val := hSubtype }
 
 /-- Helper for Problem 6-9: the canonical linear identification `ℝ ≃ ℝ¹`. -/
@@ -604,6 +608,23 @@ theorem problem_6_9_radius_sq_contMDiff :
   change ContDiff ℝ ∞ (fun p : R2 ↦ Real.exp (2 * p 1) + Real.exp (-2 * p 1))
   fun_prop
 
+/-- Helper for Problem 6-9: the explicit formula `e^(2y) + e^(-2y)` is analytic, not merely
+`C∞`.  This is read off the formula; it is not a smoothness-class promotion. -/
+theorem problem_6_9_radius_sq_contMDiffTop :
+    ContMDiff (𝓡 2) 𝓘(ℝ, ℝ) (⊤ : WithTop ℕ∞) problem_6_9_radius_sq := by
+  rw [contMDiff_iff_contDiff]
+  change ContDiff ℝ (⊤ : WithTop ℕ∞)
+    (fun p : R2 ↦ Real.exp (2 * p 1) + Real.exp (-2 * p 1))
+  fun_prop
+
+/-- Helper for Problem 6-9: the second-coordinate projection is linear, hence analytic. -/
+theorem problem_6_9_secondCoordinate_contMDiffTop :
+    ContMDiff (𝓡 2) 𝓘(ℝ, ℝ) (⊤ : WithTop ℕ∞) (fun p : R2 ↦ p 1) := by
+  rw [contMDiff_iff_contDiff]
+  simpa using
+    (contDiff_piLp_apply (p := 2) (i := (1 : Fin 2)) :
+      ContDiff ℝ (⊤ : WithTop ℕ∞) (fun p : R2 ↦ p 1))
+
 /-- Helper for Problem 6-9: the regular-level-set codimension here is `1`. -/
 theorem problem_6_9_levelset_model_eq_one :
     Module.finrank ℝ R2 - Module.finrank ℝ ℝ = 1 := by
@@ -704,7 +725,7 @@ theorem problem_6_9_regularValue_of_transverse
     simpa [x] using
       tangentSpace_eq_ker_mfderiv_of_isLocalDefiningMapOn
         hSphereSubtype
-        (ambientRadiusSq_isLocalDefiningMapOnSphere r hr) x hxNe
+        (ambientRadiusSq_isLocalDefiningMapOnSphere r hr) (by simp) x hxNe
   let A := mfderiv (𝓡 2) (𝓡 3) problem_6_9_map p
   let B := mfderiv (𝓡 3) 𝓘(ℝ, ℝ) ambientRadiusSq (problem_6_9_map p)
   have hTop :
@@ -776,7 +797,7 @@ theorem problem_6_9_transverse_of_regularValue
     simpa [x] using
       tangentSpace_eq_ker_mfderiv_of_isLocalDefiningMapOn
         hSphereSubtype
-        (ambientRadiusSq_isLocalDefiningMapOnSphere r hr) x hxNe
+        (ambientRadiusSq_isLocalDefiningMapOnSphere r hr) (by simp) x hxNe
   have hRadiusSurj :
       Function.Surjective (mfderiv (𝓡 2) 𝓘(ℝ, ℝ) problem_6_9_radius_sq q) :=
     hReg q hqLevel
@@ -967,6 +988,57 @@ theorem r1TransitionMemContDiffGroupoidReal
       OpenPartialHomeomorph.trans_symm_eq_symm_trans_symm, OpenPartialHomeomorph.trans_assoc] using!
       hfinal
 
+/-- Helper for Problem 6-9: the canonical linear identification `ℝ ≃ ℝ¹` is analytic. -/
+theorem problem_6_9_realToR1Equiv_contMDiffTop :
+    ContMDiff 𝓘(ℝ, ℝ) (𝓡 1) (⊤ : WithTop ℕ∞)
+      (fun t : ℝ ↦ realToR1Equiv t) :=
+  realToR1Equiv.toContinuousLinearMap.contMDiff
+
+/-- Helper for Problem 6-9: postcomposing an analytic scalar map by `ℝ ≃ ℝ¹` remains analytic
+as a map into the Euclidean model `𝓡 1`. -/
+theorem problem_6_9_comp_realToR1_contMDiffTop {Φ : R2 → ℝ}
+    (hΦ : ContMDiff (𝓡 2) 𝓘(ℝ, ℝ) (⊤ : WithTop ℕ∞) Φ) :
+    ContMDiff (𝓡 2) (𝓡 1) (⊤ : WithTop ℕ∞)
+      (fun p : R2 ↦ realToR1Equiv (Φ p)) :=
+  problem_6_9_realToR1Equiv_contMDiffTop.comp hΦ
+
+/-- Helper for Problem 6-9: the linear identification `ℝ ≃ ℝ¹` does not change level sets. -/
+theorem problem_6_9_comp_realToR1_preimage {Φ : R2 → ℝ} {c : ℝ} :
+    (fun p : R2 ↦ realToR1Equiv (Φ p)) ⁻¹' ({realToR1Equiv c} : Set _) =
+      Φ ⁻¹' ({c} : Set ℝ) := by
+  ext p
+  exact realToR1Equiv.injective.eq_iff
+
+/-- Helper for Problem 6-9: regularity of a scalar value is preserved by the linear
+identification `ℝ ≃ ℝ¹`, because that identification is a linear equivalence. -/
+theorem problem_6_9_comp_realToR1_isRegularValue {Φ : R2 → ℝ} {c : ℝ}
+    (hΦ : ContMDiff (𝓡 2) 𝓘(ℝ, ℝ) (⊤ : WithTop ℕ∞) Φ)
+    (hreg : IsRegularValue (𝓡 2) 𝓘(ℝ, ℝ) Φ c) :
+    IsRegularValue (𝓡 2) (𝓡 1)
+      (fun p : R2 ↦ realToR1Equiv (Φ p)) (realToR1Equiv c) := by
+  intro p hp
+  have hΦc : Φ p = c := realToR1Equiv.injective hp
+  have hinner : MDifferentiableAt (𝓡 2) 𝓘(ℝ, ℝ) Φ p :=
+    hΦ.contMDiffAt.mdifferentiableAt (by simp)
+  have houter :
+      MDifferentiableAt 𝓘(ℝ, ℝ) (𝓡 1)
+        (fun t : ℝ ↦ realToR1Equiv t) (Φ p) :=
+    problem_6_9_realToR1Equiv_contMDiffTop.contMDiffAt.mdifferentiableAt (by simp)
+  have hchain :=
+    mfderiv_comp (I' := 𝓘(ℝ, ℝ)) (I'' := 𝓡 1) (I := 𝓡 2)
+      p houter hinner
+  change Function.Surjective
+    (mfderiv (𝓡 2) (𝓡 1) ((fun t : ℝ ↦ realToR1Equiv t) ∘ Φ) p)
+  rw [hchain]
+  have hlin :
+      mfderiv 𝓘(ℝ, ℝ) (𝓡 1) (fun t : ℝ ↦ realToR1Equiv t) (Φ p) =
+        realToR1Equiv.toContinuousLinearMap := by
+    rw [mfderiv_eq_fderiv]
+    simpa using
+      (realToR1Equiv.toContinuousLinearMap.hasFDerivAt (x := Φ p)).fderiv
+  rw [hlin]
+  exact realToR1Equiv.surjective.comp (hreg p hΦc)
+
 /-- Helper for Problem 6-9: the codimension computation in the regular-level-set theorem yields a
 concrete charted-space witness modeled on `ℝ¹`. -/
 theorem problem_6_9_codimOneChartedSpaceNonempty {S : Set R2}
@@ -1053,40 +1125,25 @@ theorem problem_6_9_transportInput_of_codimOne {S : Set R2}
   exact normalizeCodimOneInput hn hS'
 
 /-- Helper for Problem 6-9: an embedded one-dimensional regular level set modeled on `ℝ¹` can be
-transported to the standard curve model `𝓘(ℝ)`. -/
+transported to the standard curve model `𝓘(ℝ)` along the finite-dimensional linear
+identification `realToR1Equiv`.  The input manifold structure is the analytic (`⊤`) owner
+produced by the Euclidean analytic regular-level theorem; the exported curve owner is still
+recorded at `∞` by lowering. -/
 theorem transportEmbeddedSubmanifoldR1ToReal {S : Set R2}
     (hS :
-      ∃ cs : ChartedSpace
-          (EuclideanSpace ℝ (Fin (Module.finrank ℝ R2 - Module.finrank ℝ ℝ))) S,
-        ∃ hs :
-            IsManifold
-              (𝓡 (Module.finrank ℝ R2 - Module.finrank ℝ ℝ))
-              ∞
-              S,
-          let _ : ChartedSpace
-              (EuclideanSpace ℝ (Fin (Module.finrank ℝ R2 - Module.finrank ℝ ℝ))) S := cs
-          let _ :
-              IsManifold
-                (𝓡 (Module.finrank ℝ R2 - Module.finrank ℝ ℝ))
-                ∞
-                S := hs
-          IsEmbeddedSubmanifold
-            (𝓡 2)
-            (𝓡 (Module.finrank ℝ R2 - Module.finrank ℝ ℝ))
-            S) :
+      ∃ cs : ChartedSpace (EuclideanSpace ℝ (Fin 1)) S,
+        ∃ hs : IsManifold (𝓡 1) (⊤ : WithTop ℕ∞) S,
+          let _ : ChartedSpace (EuclideanSpace ℝ (Fin 1)) S := cs
+          let _ : IsManifold (𝓡 1) (⊤ : WithTop ℕ∞) S := hs
+          IsEmbeddedSubmanifold (𝓡 2) (𝓡 1) S) :
     ∃ (_ : ChartedSpace ℝ S) (_ : IsManifold 𝓘(ℝ) ∞ S),
       IsEmbeddedSubmanifold (𝓡 2) 𝓘(ℝ) S := by
-  -- First normalize the codimension-one witness to the chapter's `𝓡 1` owner.
-  have hR1 :
-      ∃ cs1 : ChartedSpace (EuclideanSpace ℝ (Fin 1)) S,
-        ∃ hs1 : IsManifold (𝓡 1) ∞ S,
-          let _ : ChartedSpace (EuclideanSpace ℝ (Fin 1)) S := cs1
-          let _ : IsManifold (𝓡 1) ∞ S := hs1
-          IsEmbeddedSubmanifold (𝓡 2) (𝓡 1) S :=
-    problem_6_9_transportInput_of_codimOne hS
-  rcases hR1 with ⟨cs, hs, hEmb⟩
-  let _ : ChartedSpace (EuclideanSpace ℝ (Fin 1)) S := cs
-  let _ : IsManifold (𝓡 1) ∞ S := hs
+  rcases hS with ⟨cs, hs, hEmb⟩
+  letI : ChartedSpace (EuclideanSpace ℝ (Fin 1)) S := cs
+  letI : IsManifold (𝓡 1) (⊤ : WithTop ℕ∞) S := hs
+  have hsInf : IsManifold (𝓡 1) ∞ S :=
+    IsManifold.of_le (I := 𝓡 1) (M := S) (m := ∞) (n := (⊤ : WithTop ℕ∞)) (by simp)
+  letI : IsManifold (𝓡 1) ∞ S := hsInf
   let eModel :
       OpenPartialHomeomorph (EuclideanSpace ℝ (Fin 1)) ℝ :=
     realToR1Equiv.toHomeomorph.symm.toOpenPartialHomeomorph
@@ -1188,46 +1245,51 @@ theorem transportEmbeddedSubmanifoldR1ToReal {S : Set R2}
     ⟨hSubtypeImmersion, Topology.IsEmbedding.subtypeVal⟩
   refine ⟨instCharted, instManifold, ?_⟩
   exact
-    { toBoundarylessManifold := inferInstance
+    { toBoundarylessManifold := by
+        constructor
+        intro x
+        change extChartAt 𝓘(ℝ, ℝ) x x ∈ interior (Set.range 𝓘(ℝ, ℝ))
+        simp
       isSmoothEmbedding_subtype_val := by
         simpa using hSubtype }
 
-/-- Helper for Problem 6-9: a scalar regular level set in `ℝ²` is an embedded curve after the
-canonical `ℝ¹`-to-`ℝ` transport. -/
+/-- Helper for Problem 6-9: an analytic scalar regular level set in `ℝ²` is an embedded curve
+after the canonical `ℝ¹`-to-`ℝ` transport.  Analyticity of `Φ` is an input, read off an
+explicit formula at the call site; this does not promote a merely `C∞` map. -/
 theorem problem_6_9_scalarRegularLevel_isEmbeddedCurve
     {Φ : R2 → ℝ} {c : ℝ}
-    (hΦ : ContMDiff (𝓡 2) 𝓘(ℝ, ℝ) ∞ Φ)
+    (hΦ : ContMDiff (𝓡 2) 𝓘(ℝ, ℝ) (⊤ : WithTop ℕ∞) Φ)
     (hreg : IsRegularValue (𝓡 2) 𝓘(ℝ, ℝ) Φ c) :
     ∃ (_ : ChartedSpace ℝ (Φ ⁻¹' ({c} : Set ℝ)))
       (_ : IsManifold 𝓘(ℝ) ∞ (Φ ⁻¹' ({c} : Set ℝ))),
       IsEmbeddedSubmanifold (𝓡 2) 𝓘(ℝ)
         (Φ ⁻¹' ({c} : Set ℝ)) := by
-  -- First package the regular level set as an embedded codimension-one `ℝ¹`-submanifold.
+  let ΦE : R2 → EuclideanSpace ℝ (Fin 1) := fun p ↦ realToR1Equiv (Φ p)
+  let cE : EuclideanSpace ℝ (Fin 1) := realToR1Equiv c
+  have hFiber :
+      ΦE ⁻¹' ({cE} : Set (EuclideanSpace ℝ (Fin 1))) =
+        Φ ⁻¹' ({c} : Set ℝ) :=
+    problem_6_9_comp_realToR1_preimage (Φ := Φ) (c := c)
+  have hΦE : ContMDiff (𝓡 2) (𝓡 1) (⊤ : WithTop ℕ∞) ΦE :=
+    problem_6_9_comp_realToR1_contMDiffTop hΦ
+  have hregE : IsRegularValue (𝓡 2) (𝓡 1) ΦE cE :=
+    problem_6_9_comp_realToR1_isRegularValue hΦ hreg
+  have hnm : (1 : ℕ) ≤ 2 := by omega
+  -- Euclidean analytic regular-level theorem on the `𝓡 1`-valued map.  The source `ℝ²` is
+  -- already a Euclidean model; the scalar target is transported by `realToR1Equiv`.
+  have hLevel :=
+    LeeVerifiedAnalyticLevelSets.analytic_regular_level_set_has_embedded_submanifold_structure
+      (m := 2) (n := 1) (M := R2) (N := EuclideanSpace ℝ (Fin 1))
+      (Φ := ΦE) (c := cE) hΦE hregE hnm
   have hR1 :
-      ∃ cs : ChartedSpace
-          (EuclideanSpace ℝ (Fin (Module.finrank ℝ R2 - Module.finrank ℝ ℝ)))
-          (Φ ⁻¹' ({c} : Set ℝ)),
-        ∃ hs :
-            IsManifold
-              (𝓡 (Module.finrank ℝ R2 - Module.finrank ℝ ℝ))
-              ∞
-              (Φ ⁻¹' ({c} : Set ℝ)),
-          let _ : ChartedSpace
-              (EuclideanSpace ℝ (Fin (Module.finrank ℝ R2 - Module.finrank ℝ ℝ)))
-              (Φ ⁻¹' ({c} : Set ℝ)) := cs
-          let _ :
-              IsManifold
-                (𝓡 (Module.finrank ℝ R2 - Module.finrank ℝ ℝ))
-                ∞
-                (Φ ⁻¹' ({c} : Set ℝ)) := hs
-          IsEmbeddedSubmanifold
-            (𝓡 2)
-            (𝓡 (Module.finrank ℝ R2 - Module.finrank ℝ ℝ))
-            (Φ ⁻¹' ({c} : Set ℝ)) := by
-    simpa using
-      (regular_level_set_has_embedded_submanifold_structure
-        (I := 𝓡 2) (J := 𝓘(ℝ, ℝ)) (Φ := Φ) (c := c) hΦ hreg)
-  -- Then transport the codimension-one model to the standard real-line model used in the chapter.
+      ∃ cs : ChartedSpace (EuclideanSpace ℝ (Fin 1)) (Φ ⁻¹' ({c} : Set ℝ)),
+        ∃ hs : IsManifold (𝓡 1) (⊤ : WithTop ℕ∞) (Φ ⁻¹' ({c} : Set ℝ)),
+          let _ : ChartedSpace (EuclideanSpace ℝ (Fin 1)) (Φ ⁻¹' ({c} : Set ℝ)) := cs
+          let _ : IsManifold (𝓡 1) (⊤ : WithTop ℕ∞) (Φ ⁻¹' ({c} : Set ℝ)) := hs
+          IsEmbeddedSubmanifold (𝓡 2) (𝓡 1) (Φ ⁻¹' ({c} : Set ℝ)) := by
+    rw [← hFiber]
+    rcases hLevel with ⟨cs, hs, hS, _hcodim⟩
+    exact ⟨cs, hs, hS⟩
   exact transportEmbeddedSubmanifoldR1ToReal hR1
 
 /-- Helper for Problem 6-9: at the exceptional radius `√2`, the fiber `F ⁻¹(S_{√2}(0))` is the
@@ -1298,27 +1360,22 @@ theorem problem_6_9_preimage_is_embedded_submanifold (r : ℝ) :
     by_cases hsqrt : r = Real.sqrt 2
     · -- Rewrite the exceptional fiber to the zero set of the second coordinate.
       rw [hsqrt, problem_6_9_preimage_eq_secondCoordinate_zeroFiber_of_sqrtTwo]
-      have hproj :
-          ContMDiff (𝓡 2) 𝓘(ℝ, ℝ) ∞ (fun p : R2 ↦ p 1) := by
-        rw [contMDiff_iff_contDiff]
-        simpa using
-          ((contDiff_piLp_apply (p := 2) (i := (1 : Fin 2))) :
-            ContDiff ℝ ∞ (fun p : R2 ↦ p 1))
       have hreg :
           IsRegularValue (𝓡 2) 𝓘(ℝ, ℝ) (fun p : R2 ↦ p 1) 0 := by
         rw [Manifold.isRegularValue_iff_forall_isRegularPoint]
         intro p hp
         rw [Manifold.isRegularPoint_iff_surjective_mfderiv]
         exact problem_6_9_secondCoordinate_mfderiv_surjective p
-      -- The exceptional radius is still a scalar regular level set, now packaged once and for all.
-      exact problem_6_9_scalarRegularLevel_isEmbeddedCurve hproj hreg
+      -- The exceptional radius is the zero fiber of a linear (hence analytic) projection.
+      exact problem_6_9_scalarRegularLevel_isEmbeddedCurve
+        problem_6_9_secondCoordinate_contMDiffTop hreg
     · -- Away from the exceptional radius, the scalar regular-level-set theorem applies.
       rw [problem_6_9_preimage_eq_radius_sq_level_set r hrpos.le]
       have hreg :
           IsRegularValue (𝓡 2) 𝓘(ℝ, ℝ) problem_6_9_radius_sq (r ^ (2 : ℕ)) := by
         exact (problem_6_9_radius_sq_isRegularValue_iff r hrpos).2 hsqrt
-      -- Away from `√2`, the same scalar regular-level-set package closes the argument.
+      -- Away from `√2`, the same analytic scalar regular-level-set package closes the argument.
       exact problem_6_9_scalarRegularLevel_isEmbeddedCurve
-        problem_6_9_radius_sq_contMDiff hreg
+        problem_6_9_radius_sq_contMDiffTop hreg
 
 end

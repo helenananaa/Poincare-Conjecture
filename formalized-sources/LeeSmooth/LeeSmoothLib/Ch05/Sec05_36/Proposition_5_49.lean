@@ -1,3 +1,4 @@
+import LeeSmoothLib.Ch04.Sec04_21.ImmersionRestriction
 import LeeSmoothLib.Ch05.Sec05_28.Proposition_5_2
 import LeeSmoothLib.Ch05.Sec05_28.Definition_5_28_extra_2
 import LeeSmoothLib.Ch05.Sec05_36.Definition_5_36_extra_1
@@ -222,7 +223,7 @@ lemma subtype_val_isSmoothEmbedding_of_open_embedding {S : Set M}
   refine Manifold.IsSmoothEmbedding.mk ?_ hUemb
   -- Compose the canonical open immersion of `U` into `S` with the ambient immersed inclusion.
   simpa [Function.comp] using!
-    Manifold.IsImmersion.ex416_comp hS (Manifold.IsImmersion.of_opens U)
+    Manifold.SweepRestriction.isImmersion_comp_subtype hS U
 
 /-- Helper for Proposition 5.49: a partial equivalence with continuous forward and inverse maps
 induces a homeomorphism between its source and target subtypes. -/

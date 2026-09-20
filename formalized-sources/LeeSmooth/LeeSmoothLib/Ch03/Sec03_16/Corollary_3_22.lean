@@ -57,18 +57,28 @@ variable {H : Type uH} [TopologicalSpace H]
 variable {H' : Type uH'} [TopologicalSpace H']
 variable {I : ModelWithCorners 𝕜 E H}
 variable {I' : ModelWithCorners 𝕜 E' H'}
-variable {M : Type uM} [TopologicalSpace M] [ChartedSpace H M] [IsManifold I ∞ M]
-variable {N : Type uN} [TopologicalSpace N] [ChartedSpace H' N] [IsManifold I' ∞ N]
+variable {M : Type uM} [TopologicalSpace M] [ChartedSpace H M]
+variable {N : Type uN} [TopologicalSpace N] [ChartedSpace H' N]
 
 /-- The tangent map of the inverse diffeomorphism is a left inverse to the tangent map. -/
 theorem tangentMap_symm_leftInverse
     (Φ : M ≃ₘ⟮I, I'⟯ N) :
-    Function.LeftInverse (tangentMap I' I Φ.symm) (tangentMap I I' Φ) := sorry
+    Function.LeftInverse (tangentMap I' I Φ.symm) (tangentMap I I' Φ) := by
+  -- Chain rule plus `d(id) = id` recovers the identity on `TM`.
+  rw [Function.leftInverse_iff_comp,
+    ← tangentMap_comp (Φ.symm.mdifferentiable (by simp)) (Φ.mdifferentiable (by simp))]
+  rw [show Φ.symm ∘ Φ = (id : M → M) from funext Φ.left_inv, tangentMap_id]
 
 /-- The tangent map of the inverse diffeomorphism is a right inverse to the tangent map. -/
 theorem tangentMap_symm_rightInverse
     (Φ : M ≃ₘ⟮I, I'⟯ N) :
-    Function.RightInverse (tangentMap I' I Φ.symm) (tangentMap I I' Φ) := sorry
+    Function.RightInverse (tangentMap I' I Φ.symm) (tangentMap I I' Φ) := by
+  -- The same argument with the roles of `Φ` and `Φ.symm` reversed.
+  rw [Function.rightInverse_iff_comp,
+    ← tangentMap_comp (Φ.mdifferentiable (by simp)) (Φ.symm.mdifferentiable (by simp))]
+  rw [show Φ ∘ Φ.symm = (id : N → N) from funext Φ.right_inv, tangentMap_id]
+
+variable [IsManifold I ∞ M] [IsManifold I' ∞ N]
 
 /-- Corollary 3.22 (3): if `Φ` is a diffeomorphism, then its global differential is a
 diffeomorphism of tangent bundles, and its inverse is the global differential of `Φ.symm`. -/
@@ -86,6 +96,7 @@ def tangentMap_diffeomorph
 /-- The diffeomorphism `tangentMap_diffeomorph Φ` acts by the tangent map of `Φ`. -/
 theorem tangentMap_diffeomorph_apply
     (Φ : M ≃ₘ⟮I, I'⟯ N) (v : TangentBundle I M) :
-    tangentMap_diffeomorph Φ v = tangentMap I I' Φ v := sorry
+    tangentMap_diffeomorph Φ v = tangentMap I I' Φ v :=
+  rfl
 
 end Diffeomorphisms

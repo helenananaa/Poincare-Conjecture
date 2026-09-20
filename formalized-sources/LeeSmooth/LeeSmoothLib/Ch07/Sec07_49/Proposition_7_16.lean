@@ -245,24 +245,6 @@ end Manifold.IsSmoothEmbedding
 
 namespace ContMDiffMonoidMorphism
 
-/-- Helper for Proposition 7.16: the constant-rank level-set theorem equips `F.ker` with the
-embedded-submanifold structure of the identity fiber. -/
-theorem kerEmbeddedData
-    (F : ContMDiffMonoidMorphism I J ∞ G H) :
-    let k : ℕ := Module.finrank 𝕜 EG - rankAt I J F (1 : G)
-    let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
-    ∃ cs : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (F.toMonoidHom.ker : Set G),
-      ∃ hs : IsManifold K ∞ (F.toMonoidHom.ker : Set G),
-        let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (F.toMonoidHom.ker : Set G) := cs
-        let _ : IsManifold K ∞ (F.toMonoidHom.ker : Set G) := hs
-        ∃ hEmb : IsEmbeddedSubmanifold I K (F.toMonoidHom.ker : Set G),
-          hEmb.codimension = rankAt I J F (1 : G) := by
-  -- The kernel is definitionally the fiber over the identity, so the level-set theorem applies
-  -- without changing the underlying manifold data.
-  simpa using!
-    (constant_rank_level_set_has_embedded_submanifold_structure
-      F.contMDiff_toFun F.hasConstantRank (1 : H))
-
 /-- Helper owner for Proposition 7.16: a smooth `C^∞` Lie subgroup structure on the literal
 kernel carrier `F.toMonoidHom.ker`. -/
 structure SmoothKernelLieSubgroupStructure
@@ -352,7 +334,7 @@ structure KernelEmbeddedSubmanifold
     let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
     let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (F.toMonoidHom.ker : Set G) := cs
     let _ : IsManifold K ∞ (F.toMonoidHom.ker : Set G) := hs
-    IsEmbeddedSubmanifold I K (F.toMonoidHom.ker : Set G)
+    IsSmoothEmbedding K I ∞ (Subtype.val : ↥(F.toMonoidHom.ker : Set G) → G)
   /-- The model dimension matches the constant-rank formula. -/
   k_eq : k = Module.finrank 𝕜 EG - rankAt I J F (1 : G)
   /-- The codimension of the embedded kernel equals the rank of `F` at the identity. -/
@@ -360,7 +342,7 @@ structure KernelEmbeddedSubmanifold
     let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
     let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (F.toMonoidHom.ker : Set G) := cs
     let _ : IsManifold K ∞ (F.toMonoidHom.ker : Set G) := hs
-    hEmb.codimension = rankAt I J F (1 : G)
+    (Module.finrank 𝕜 EG - k) = rankAt I J F (1 : G)
 
 namespace KernelEmbeddedSubmanifold
 
@@ -371,7 +353,7 @@ abbrev CodimensionEqRank (F : ContMDiffMonoidMorphism I J ∞ G H)
   let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin W.k))
   let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin W.k)) (F.toMonoidHom.ker : Set G) := W.cs
   let _ : IsManifold K ∞ (F.toMonoidHom.ker : Set G) := W.hs
-  W.hEmb.codimension = rankAt I J F (1 : G)
+  (Module.finrank 𝕜 EG - W.k) = rankAt I J F (1 : G)
 
 end KernelEmbeddedSubmanifold
 
@@ -411,35 +393,72 @@ instance {F : ContMDiffMonoidMorphism I J ∞ G H} (K : KernelLieSubgroup F) :
 
 end KernelLieSubgroup
 
+
+end ContMDiffMonoidMorphism
+end LieGroupKernel
+
+section RealLieGroupKernel
+
+variable {EG : Type uEG} [NormedAddCommGroup EG] [NormedSpace ℝ EG] [FiniteDimensional ℝ EG]
+variable {HG : Type uHG} [TopologicalSpace HG]
+variable {EH : Type uEH} [NormedAddCommGroup EH] [NormedSpace ℝ EH] [FiniteDimensional ℝ EH]
+variable {HH : Type uHH} [TopologicalSpace HH]
+variable {I : ModelWithCorners ℝ EG HG} {J : ModelWithCorners ℝ EH HH}
+variable [I.Boundaryless] [J.Boundaryless]
+variable {G : Type uG} [Group G] [TopologicalSpace G] [ChartedSpace HG G]
+variable [T2Space G] [SecondCountableTopology G]
+variable {H : Type uH} [Group H] [TopologicalSpace H] [ChartedSpace HH H]
+variable [LieGroup I ∞ G] [LieGroup J ∞ H]
+
+namespace ContMDiffMonoidMorphism
+
+/-- The genuine C∞ kernel level-set structure for ordinary real Lie groups. -/
+theorem kerEmbeddedData (F : ContMDiffMonoidMorphism I J ∞ G H) :
+    let k : ℕ := Module.finrank ℝ EG - rankAt I J F (1 : G)
+    let K := modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin k))
+    ∃ cs : ChartedSpace (EuclideanSpace ℝ (Fin k)) (F.toMonoidHom.ker : Set G),
+      ∃ hs : IsManifold K ∞ (F.toMonoidHom.ker : Set G),
+        letI := cs
+        letI := hs
+        ∃ hEmb : IsSmoothEmbedding K I ∞ (Subtype.val : ↥(F.toMonoidHom.ker : Set G) → G),
+          Module.finrank ℝ EG - k = rankAt I J F (1 : G) := by
+  have hr : rankAt I J F (1 : G) ≤ Module.finrank ℝ EG := by
+    let A : EG →L[ℝ] EH := mfderiv I J F (1 : G)
+    exact LinearMap.finrank_range_le A.toLinearMap
+  obtain ⟨cs, hs, hemb, hc⟩ :=
+    constant_rank_level_set_has_embedded_submanifold_structure
+      F.contMDiff_toFun F.hasConstantRank (1 : H) hr
+  exact ⟨cs, hs, hemb, hc⟩
+
 /-- Helper owner for Proposition 7.16: the canonical smooth Lie-group structure on the literal
 kernel carrier `F.toMonoidHom.ker`. -/
 noncomputable def kerLieSubgroupStructure
     (F : ContMDiffMonoidMorphism I J ∞ G H) :
     SmoothKernelLieSubgroupStructure F := by
   classical
-  let k : ℕ := Module.finrank 𝕜 EG - rankAt I J F (1 : G)
-  let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
+  let k : ℕ := Module.finrank ℝ EG - rankAt I J F (1 : G)
+  let K := modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin k))
   have hData :
-      ∃ cs : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (F.toMonoidHom.ker : Set G),
+      ∃ cs : ChartedSpace (EuclideanSpace ℝ (Fin k)) (F.toMonoidHom.ker : Set G),
         ∃ hs : IsManifold K ∞ (F.toMonoidHom.ker : Set G),
-          ∃ hEmb : IsEmbeddedSubmanifold I K (F.toMonoidHom.ker : Set G),
-            hEmb.codimension = rankAt I J F (1 : G) := by
+          ∃ hEmb : IsSmoothEmbedding K I ∞ (Subtype.val : ↥(F.toMonoidHom.ker : Set G) → G),
+            (Module.finrank ℝ EG - k) = rankAt I J F (1 : G) := by
     simpa [k, K] using kerEmbeddedData F
   let kerF := F.toMonoidHom.ker
   let cs := Classical.choose hData
   let hs := Classical.choose (Classical.choose_spec hData)
   let hEmbData := Classical.choose_spec (Classical.choose_spec hData)
   let hEmb := Classical.choose hEmbData
-  let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (F.toMonoidHom.ker : Set G) := cs
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin k)) (F.toMonoidHom.ker : Set G) := cs
   let _ : IsManifold K ∞ (F.toMonoidHom.ker : Set G) := hs
   -- Route correction: Proposition 7.11 already upgrades an embedded subgroup to a smooth
   -- Lie-group structure, so the kernel package only needs to be unpacked once here.
   -- Install the induced manifold structure from the constant-rank level-set package.
-  let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) F.toMonoidHom.ker := cs
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin k)) F.toMonoidHom.ker := cs
   let _ : IsManifold K ∞ F.toMonoidHom.ker := hs
   have hEmbInfty :
       IsSmoothEmbedding K I ∞ (Subtype.val : F.toMonoidHom.ker → G) := by
-    exact isSmoothEmbedding_of_le (by simp) hEmb.isSmoothEmbedding_subtype_val
+    exact hEmb
   have hsub :
       ContMDiff K I ∞ (Subtype.val : F.toMonoidHom.ker → G) :=
     hEmbInfty.isImmersion.contMDiff
@@ -495,7 +514,7 @@ noncomputable def kerLieSubgroupStructure
     { contMDiff_mul := hmulSubtype
       contMDiff_inv := hinvSubtype }
   refine
-    { ModelSpace := EuclideanSpace 𝕜 (Fin k)
+    { ModelSpace := EuclideanSpace ℝ (Fin k)
       instNormedAddCommGroupModelSpace := inferInstance
       instNormedSpaceModelSpace := inferInstance
       instFiniteDimensionalModelSpace := inferInstance
@@ -511,13 +530,13 @@ noncomputable def kerEmbeddedSubmanifold
     (F : ContMDiffMonoidMorphism I J ∞ G H) :
     KernelEmbeddedSubmanifold F := by
   classical
-  let k : ℕ := Module.finrank 𝕜 EG - rankAt I J F (1 : G)
-  let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
+  let k : ℕ := Module.finrank ℝ EG - rankAt I J F (1 : G)
+  let K := modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin k))
   have hData :
-      ∃ cs : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) (F.toMonoidHom.ker : Set G),
+      ∃ cs : ChartedSpace (EuclideanSpace ℝ (Fin k)) (F.toMonoidHom.ker : Set G),
         ∃ hs : IsManifold K ∞ (F.toMonoidHom.ker : Set G),
-          ∃ hEmb : IsEmbeddedSubmanifold I K (F.toMonoidHom.ker : Set G),
-            hEmb.codimension = rankAt I J F (1 : G) := by
+          ∃ hEmb : IsSmoothEmbedding K I ∞ (Subtype.val : ↥(F.toMonoidHom.ker : Set G) → G),
+            (Module.finrank ℝ EG - k) = rankAt I J F (1 : G) := by
     simpa [k, K] using kerEmbeddedData F
   let cs := Classical.choose hData
   let hs := Classical.choose (Classical.choose_spec hData)
@@ -574,7 +593,7 @@ as a smooth embedding into `G`. -/
 theorem kerSmoothLieSubgroup_spec
     [T1Space H] (F : ContMDiffMonoidMorphism I J ∞ G H) :
     IsSmoothEmbedding
-      (modelWithCornersSelf 𝕜 (kerSmoothLieSubgroup F).ModelSpace) I ∞
+      (modelWithCornersSelf ℝ (kerSmoothLieSubgroup F).ModelSpace) I ∞
       (Subtype.val : (kerSmoothLieSubgroup F).carrier → G) := by
   simpa [kerSmoothLieSubgroup] using
     (kerLieSubgroupStructure F).subtype_val_isSmoothEmbeddingKer
@@ -592,10 +611,10 @@ theorem kerSmoothLieSubgroup_codimension_eq_rank
     [T1Space H] (F : ContMDiffMonoidMorphism I J ∞ G H) :
     let S := kerSmoothLieSubgroup F
     let W := S.embeddedSubmanifold
-    let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin W.k))
-    let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin W.k)) (F.toMonoidHom.ker : Set G) := W.cs
+    let K := modelWithCornersSelf ℝ (EuclideanSpace ℝ (Fin W.k))
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin W.k)) (F.toMonoidHom.ker : Set G) := W.cs
     let _ : IsManifold K ∞ (F.toMonoidHom.ker : Set G) := W.hs
-    W.hEmb.codimension = rankAt I J F (1 : G) := by
+    (Module.finrank ℝ EG - W.k) = rankAt I J F (1 : G) := by
   simpa using (kerSmoothLieSubgroup F).embeddedSubmanifold.codimension_eq_rank
 
 /-- Auxiliary theorem for Proposition 7.16: the kernel structure produced by
@@ -605,22 +624,22 @@ theorem kerLieSubgroupStructure_spec
     let S := kerLieSubgroupStructure F
     let _ : TopologicalSpace F.toMonoidHom.ker := S.instTopologicalSpaceKer
     let _ : ChartedSpace S.ModelSpace F.toMonoidHom.ker := S.instChartedSpaceKer
-    let _ : IsManifold (modelWithCornersSelf 𝕜 S.ModelSpace) ∞ F.toMonoidHom.ker :=
+    let _ : IsManifold (modelWithCornersSelf ℝ S.ModelSpace) ∞ F.toMonoidHom.ker :=
       S.instIsManifoldKer
     IsSmoothEmbedding
-      (modelWithCornersSelf 𝕜 S.ModelSpace) I ∞
+      (modelWithCornersSelf ℝ S.ModelSpace) I ∞
       (Subtype.val : F.toMonoidHom.ker → G) := by
   -- Reuse the smooth-embedding field already stored in the packaged kernel structure.
   let S := kerLieSubgroupStructure F
   let _ : TopologicalSpace F.toMonoidHom.ker := S.instTopologicalSpaceKer
   let _ : ChartedSpace S.ModelSpace F.toMonoidHom.ker := S.instChartedSpaceKer
-  let _ : IsManifold (modelWithCornersSelf 𝕜 S.ModelSpace) ∞ F.toMonoidHom.ker :=
+  let _ : IsManifold (modelWithCornersSelf ℝ S.ModelSpace) ∞ F.toMonoidHom.ker :=
     S.instIsManifoldKer
   simpa [S] using S.subtype_val_isSmoothEmbeddingKer
 
 end ContMDiffMonoidMorphism
 
-end LieGroupKernel
+end RealLieGroupKernel
 
 section SmoothKernelProperEmbedding
 

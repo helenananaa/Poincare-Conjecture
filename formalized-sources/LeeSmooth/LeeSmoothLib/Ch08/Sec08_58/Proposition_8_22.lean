@@ -25,11 +25,12 @@ namespace VectorField
 -- matched against the local `tangentVector_mem_submanifold_iff_forall_smooth_eq_zero` criterion
 -- from Proposition 5.37 and the Chapter 8 `IsTangentToSubmanifold` API.
 
-/-- Proposition 8.22: let `M` be a smooth manifold, let `S ⊆ M` be an embedded submanifold with
+/-- Proposition 8.22: let `M` be a finite-dimensional Hausdorff smooth manifold, let `S ⊆ M` be an embedded submanifold with
 or without boundary, and let `X` be a smooth vector field on `M`. Then `X` is tangent to `S` if
 and only if, for every smooth function `f` on `M` whose restriction to `S` vanishes, the
 directional derivative `Xf` also vanishes on `S`. -/
 theorem isTangentToSubmanifold_iff_forall_smooth_apply_eq_zero
+    [FiniteDimensional ℝ E] [FiniteDimensional ℝ E'] [T2Space M]
     (hS : IsSmoothEmbedding J I ∞ (Subtype.val : S → M))
     (X : ∀ p : M, TangentSpace I p) :
     IsTangentToSubmanifold S J X ↔

@@ -16,6 +16,15 @@ open scoped ContDiff Manifold
 -- Semantic search note: `lean_leansearch` did not return a usable parametric-transversality
 -- theorem, so this file follows the local Chapter 6 owners `IsSmoothFamily`,
 -- `IsTransverseToSubmanifold`, and `has_measure_zero_in_manifold`.
+--
+-- Theorem 6.30 now returns a C∞ bundle (`ChartedSpace` + `IsManifold ∞` + `IsSmoothEmbedding ∞`)
+-- rather than analytic `IsEmbeddedSubmanifold`.  The parametric-transversality argument below
+-- uses that C∞ embedding of the transverse preimage, together with the local defining map of
+-- `X` only through the frozen Theorem 6.30 API.  No analytic-family hypothesis is added.
+
+noncomputable section
+
+set_option linter.unusedSectionVars false
 
 section ParametricTransversality
 
@@ -72,7 +81,8 @@ private theorem parametricPreimageProjectionMfderiv_eq_fst_comp
     {F : S → N → M}
     [ChartedSpace HW ((Function.uncurry F) ⁻¹' X)]
     [IsManifold JW ∞ ((Function.uncurry F) ⁻¹' X)]
-    [IsEmbeddedSubmanifold (IS.prod IN) JW ((Function.uncurry F) ⁻¹' X)]
+    (hW : IsSmoothEmbedding JW (IS.prod IN) ∞
+      (Subtype.val : (Function.uncurry F) ⁻¹' X → S × N))
     (w : (Function.uncurry F) ⁻¹' X) :
     mfderiv JW IS (fun u : (Function.uncurry F) ⁻¹' X ↦ u.1.1) w =
       (ContinuousLinearMap.fst ℝ (TangentSpace IS w.1.1) (TangentSpace IN w.1.2)).comp
@@ -92,18 +102,19 @@ private theorem parametricPreimageProjectionMfderiv_eq_fst_comp
       (g := Prod.fst)
       (f := (Subtype.val : (Function.uncurry F) ⁻¹' X → S × N))
       (contMDiff_fst.mdifferentiableAt (by simp : (∞ : ℕ∞ω) ≠ 0))
-      ((subtypeVal_contMDiff_of_isEmbeddedSubmanifold
-        (I := IS.prod IN) (JS := JW) (S := (Function.uncurry F) ⁻¹' X)).mdifferentiableAt
-        (by simp : (∞ : ℕ∞ω) ≠ 0)))
+      (hW.contMDiff.mdifferentiableAt (by simp : (∞ : ℕ∞ω) ≠ 0)))
 
 /-- Helper for Theorem 6.35: every tangent vector to `(Function.uncurry F) ⁻¹' X` maps under the
-ambient derivative of `Function.uncurry F` into the tangent space of `X`. -/
+ambient derivative of `Function.uncurry F` into the tangent space of `X`.  The preimage is used
+only through a C∞ embedding of its inclusion, not through analytic `IsEmbeddedSubmanifold`
+membership. -/
 private theorem preimageSubtypeValRange_le_targetComap_at_parametricPoint
     {F : S → N → M}
     (hF : ContMDiff (IS.prod IN) IM ∞ (Function.uncurry F))
     [ChartedSpace HW ((Function.uncurry F) ⁻¹' X)]
     [IsManifold JW ∞ ((Function.uncurry F) ⁻¹' X)]
-    [IsEmbeddedSubmanifold (IS.prod IN) JW ((Function.uncurry F) ⁻¹' X)]
+    (hW : IsSmoothEmbedding JW (IS.prod IN) ∞
+      (Subtype.val : (Function.uncurry F) ⁻¹' X → S × N))
     (w : (Function.uncurry F) ⁻¹' X) :
     let x : X := ⟨Function.uncurry F w, w.2⟩
     (mfderiv JW (IS.prod IN)
@@ -115,19 +126,14 @@ private theorem preimageSubtypeValRange_le_targetComap_at_parametricPoint
   have hsubPre :
       MDifferentiableAt JW (IS.prod IN)
         (Subtype.val : (Function.uncurry F) ⁻¹' X → S × N) w :=
-    (subtypeVal_contMDiff_of_isEmbeddedSubmanifold
-      (I := IS.prod IN) (JS := JW) (S := (Function.uncurry F) ⁻¹' X)).mdifferentiableAt
-      (by simp)
+    hW.contMDiff.mdifferentiableAt (by simp)
   have hsubX :
       MDifferentiableAt JX IM (Subtype.val : X → M) ⟨Function.uncurry F w, w.2⟩ :=
     (subtypeVal_contMDiff_of_isEmbeddedSubmanifold
       (I := IM) (JS := JX) (S := X)).mdifferentiableAt
       (by simp)
   have hFpre : ContMDiff JW IM ∞ (fun y : (Function.uncurry F) ⁻¹' X ↦ Function.uncurry F y) := by
-    simpa [Function.comp] using!
-      hF.comp
-        (subtypeVal_contMDiff_of_isEmbeddedSubmanifold
-          (I := IS.prod IN) (JS := JW) (S := (Function.uncurry F) ⁻¹' X))
+    simpa [Function.comp] using! hF.comp hW.contMDiff
   have hgdiff : MDifferentiableAt JW JX g w := by
     let y : X := g w
     let hImm : IsImmersionAt JX IM ⊤ (Subtype.val : X → M) y :=
@@ -345,7 +351,8 @@ theorem isTransverseToSubmanifold_of_isRegularValue_parametricPreimageProjection
     (htrans : IsTransverseToSubmanifold IM (IS.prod IN) JX X (Function.uncurry F))
     [ChartedSpace HW ((Function.uncurry F) ⁻¹' X)]
     [IsManifold JW ∞ ((Function.uncurry F) ⁻¹' X)]
-    [IsEmbeddedSubmanifold (IS.prod IN) JW ((Function.uncurry F) ⁻¹' X)]
+    (hW : IsSmoothEmbedding JW (IS.prod IN) ∞
+      (Subtype.val : (Function.uncurry F) ⁻¹' X → S × N))
     {s : S}
     (hs : IsRegularValue JW IS (fun w : (Function.uncurry F) ⁻¹' X ↦ w.1.1) s) :
     IsTransverseToSubmanifold IM IN JX X (F s) := by
@@ -365,7 +372,7 @@ theorem isTransverseToSubmanifold_of_isRegularValue_parametricPreimageProjection
             (mfderiv (IS.prod IN) IM (Function.uncurry F) w).toLinearMap := by
     simpa [w, x] using
       preimageSubtypeValRange_le_targetComap_at_parametricPoint
-        (F := F) (JW := JW) htrans.contMDiff w
+        (F := F) (JW := JW) htrans.contMDiff hW w
   have hsurjProjection :
       Function.Surjective
         (mfderiv JW IS (fun u : (Function.uncurry F) ⁻¹' X ↦ u.1.1) w) :=
@@ -375,7 +382,7 @@ theorem isTransverseToSubmanifold_of_isRegularValue_parametricPreimageProjection
         ((ContinuousLinearMap.fst ℝ (TangentSpace IS s) (TangentSpace IN (p : N))).comp
           (mfderiv JW (IS.prod IN)
             (Subtype.val : (Function.uncurry F) ⁻¹' X → S × N) w)) := by
-    rw [← parametricPreimageProjectionMfderiv_eq_fst_comp (F := F) (JW := JW) (w := w)]
+    rw [← parametricPreimageProjectionMfderiv_eq_fst_comp (F := F) (JW := JW) hW w]
     exact hsurjProjection
   have hslice :
       ((mfderiv (IS.prod IN) IM (Function.uncurry F) w).comp
@@ -392,18 +399,16 @@ theorem isTransverseToSubmanifold_of_isRegularValue_parametricPreimageProjection
     hslice
 
 /-- Helper for Theorem 6.35: the restricted parameter projection on the transverse preimage is a
-smooth map because it is the ambient first projection composed with the subtype inclusion. -/
+smooth map because it is the ambient first projection composed with the C∞ subtype inclusion. -/
 private theorem parametricPreimageProjection_contMDiff
     {F : S → N → M}
     [ChartedSpace HW ((Function.uncurry F) ⁻¹' X)]
     [IsManifold JW ∞ ((Function.uncurry F) ⁻¹' X)]
-    [IsEmbeddedSubmanifold (IS.prod IN) JW ((Function.uncurry F) ⁻¹' X)] :
+    (hW : IsSmoothEmbedding JW (IS.prod IN) ∞
+      (Subtype.val : (Function.uncurry F) ⁻¹' X → S × N)) :
     ContMDiff JW IS ∞ (fun w : (Function.uncurry F) ⁻¹' X ↦ w.1.1) := by
   -- The restricted projection is `Prod.fst` after the smooth subtype inclusion.
-  simpa [Function.comp] using!
-    contMDiff_fst.comp
-      (subtypeVal_contMDiff_of_isEmbeddedSubmanifold
-        (I := IS.prod IN) (JS := JW) (S := (Function.uncurry F) ⁻¹' X))
+  simpa [Function.comp] using! contMDiff_fst.comp hW.contMDiff
 
 /-- Helper for Theorem 6.35: a parameter with nontransverse slice is a critical value of the
 restricted projection from the transverse preimage `(Function.uncurry F) ⁻¹' X` to `S`. -/
@@ -412,7 +417,8 @@ private theorem notTransverseSlice_subset_criticalValues_parametricProjection
     (htrans : IsTransverseToSubmanifold IM (IS.prod IN) JX X (Function.uncurry F))
     [ChartedSpace HW ((Function.uncurry F) ⁻¹' X)]
     [IsManifold JW ∞ ((Function.uncurry F) ⁻¹' X)]
-    [IsEmbeddedSubmanifold (IS.prod IN) JW ((Function.uncurry F) ⁻¹' X)] :
+    (hW : IsSmoothEmbedding JW (IS.prod IN) ∞
+      (Subtype.val : (Function.uncurry F) ⁻¹' X → S × N)) :
     {s : S | ¬ IsTransverseToSubmanifold IM IN JX X (F s)} ⊆
       {s : S | IsCriticalValue JW IS (fun w : (Function.uncurry F) ⁻¹' X ↦ w.1.1) s} := by
   intro s hsnot
@@ -421,62 +427,83 @@ private theorem notTransverseSlice_subset_criticalValues_parametricProjection
     (fun hsreg ↦
       hsnot <|
         isTransverseToSubmanifold_of_isRegularValue_parametricPreimageProjection
-          (F := F) (JW := JW) htrans hsreg)
+          (F := F) (JW := JW) htrans hW hsreg)
 
 variable [T2Space N] [SecondCountableTopology N]
 variable [T2Space S] [SecondCountableTopology S]
+-- Explicit extra hypotheses required to invoke the C∞ Euclidean-model transport in Theorem 6.30
+-- on the product source `S × N`.  These are not silent weakenings of the almost-everywhere
+-- conclusion: Lee's parametric transversality theorem is stated for manifolds without boundary,
+-- and the product of boundaryless models is the source of the transverse preimage.
+variable [IS.Boundaryless] [IN.Boundaryless]
 
 /-- Theorem 6.35 (Parametric Transversality Theorem): if `F : S → N → M` is a smooth family and
 its uncurried map `S × N → M` is transverse to the embedded submanifold `X ⊆ M`, then the set of
 parameters `s : S` for which the slice `F s : N → M` fails to be transverse to `X` has measure
-zero in `S`. Equivalently, the transverse slices occur for almost every parameter. -/
+zero in `S`. Equivalently, the transverse slices occur for almost every parameter.
+
+The transverse preimage is equipped with the corrected C∞ bundle of Theorem 6.30, not an analytic
+`IsEmbeddedSubmanifold` structure.  The empty-preimage case is split off before any codimension
+comparison at a preimage point, so that `codimension ≤ source dimension` is never deduced from a
+nonexistent point of `W`. -/
 theorem parametric_transversality_setOf_not_transverse_has_measure_zero_in_manifold
     {F : S → N → M} (hF : IsSmoothFamily IM IS IN F)
     (htrans : IsTransverseToSubmanifold IM (IS.prod IN) JX X (Function.uncurry F)) :
     has_measure_zero_in_manifold IS {s : S | ¬ IsTransverseToSubmanifold IM IN JX X (F s)} :=
 by
   classical
-  by_cases hXempty : X = ∅
+  let W : Set (S × N) := (Function.uncurry F) ⁻¹' X
+  by_cases hWempty : W = (∅ : Set (S × N))
   · have hAllTransverse : ∀ s : S, IsTransverseToSubmanifold IM IN JX X (F s) := by
       intro s
       refine ⟨hF.contMDiff_slice s, ?_⟩
       intro p
-      exact False.elim (by simpa [hXempty] using p.2)
+      have hpW : ((s, (p : N)) : S × N) ∈ W := p.property
+      rw [hWempty] at hpW
+      exact hpW.elim
     have hbadEmpty :
         {s : S | ¬ IsTransverseToSubmanifold IM IN JX X (F s)} = ∅ := by
       ext s
       simp [hAllTransverse s]
     intro μ hμ e he
     simp [hbadEmpty]
-  · let hX : IsEmbeddedSubmanifold IM JX X := inferInstance
-    obtain ⟨x, hx⟩ : Set.Nonempty X := Set.nonempty_iff_ne_empty.mpr hXempty
-    let xX : X := ⟨x, hx⟩
-    let _ : FiniteDimensional ℝ EX :=
+  · have hWne : W.Nonempty := Set.nonempty_iff_ne_empty.mpr hWempty
+    have hTne : ((Function.uncurry F) ⁻¹' X).Nonempty := hWne
+    obtain ⟨⟨s0, p0⟩, hp0⟩ := hWne
+    let hX : IsEmbeddedSubmanifold IM JX X := inferInstance
+    let xX : X := ⟨F s0 p0, hp0⟩
+    letI : FiniteDimensional ℝ EX :=
       finiteDimensionalModelSpace_of_embeddedSubmanifold_point
         (IM := IM) (JX := JX) (X := X) (hX := hX) (x := xX)
-    let W : Set (S × N) := (Function.uncurry F) ⁻¹' X
+    have hcod : hX.codimension ≤ Module.finrank ℝ (ES × EN) :=
+      transverse_codimension_le_source_finrank
+        (IN := IS.prod IN) (IM := IM) (JS := JX) (S := X)
+        (F := Function.uncurry F) htrans hTne
     let EW :=
       EuclideanSpace ℝ (Fin (Module.finrank ℝ (ES × EN) - hX.codimension))
     let LW : ModelWithCorners ℝ EW EW := modelWithCornersSelf ℝ EW
-    obtain ⟨csW, hEmbW, hsW, _⟩ := by
-      simpa [W, EW, LW] using
-        transverse_preimage_has_embedded_submanifold_structure
-          (IN := IS.prod IN) (IM := IM) (JS := JX) (S := X)
-          (F := Function.uncurry F) htrans
-    let _ : ChartedSpace EW W := csW
-    let _ : IsManifold LW ∞ W := hsW
-    let _ : IsEmbeddedSubmanifold (IS.prod IN) LW W := hEmbW
-    let _ : T2Space W := inferInstance
-    let _ : SecondCountableTopology W := inferInstance
+    obtain ⟨csW, hsW, hEmbW⟩ :=
+      transverse_preimage_has_embedded_submanifold_structure
+        (IN := IS.prod IN) (IM := IM) (JS := JX) (S := X)
+        (F := Function.uncurry F) htrans hcod
+    letI : ChartedSpace EW W := by
+      simpa [W, EW] using csW
+    letI : IsManifold LW ∞ W := by
+      simpa [W, EW, LW] using hsW
+    have hEmbW' :
+        IsSmoothEmbedding LW (IS.prod IN) ∞ (Subtype.val : W → S × N) := by
+      simpa [W, EW, LW] using hEmbW
+    letI : T2Space W := inferInstance
+    letI : SecondCountableTopology W := inferInstance
+    letI : MeasurableSpace EW := borel EW
+    letI : BorelSpace EW := ⟨rfl⟩
     have hsubset :
         {s : S | ¬ IsTransverseToSubmanifold IM IN JX X (F s)} ⊆
-          {s : S | IsCriticalValue LW IS (fun w : W ↦ w.1.1) s} := by
-      simpa [W] using
-        notTransverseSlice_subset_criticalValues_parametricProjection
-          (F := F) (IN := IN) (JW := LW) htrans
-    have hprojContMDiff : ContMDiff LW IS ∞ (fun w : W ↦ w.1.1) := by
-      simpa [W] using
-        parametricPreimageProjection_contMDiff (F := F) (IN := IN) (JW := LW)
+          {s : S | IsCriticalValue LW IS (fun w : W ↦ w.1.1) s} :=
+      notTransverseSlice_subset_criticalValues_parametricProjection
+        (F := F) (IN := IN) (JW := LW) htrans hEmbW'
+    have hprojContMDiff : ContMDiff LW IS ∞ (fun w : W ↦ w.1.1) :=
+      parametricPreimageProjection_contMDiff (F := F) (IN := IN) (JW := LW) hEmbW'
     have hcritical :
         has_measure_zero_in_manifold IS
           {s : S | IsCriticalValue LW IS (fun w : W ↦ w.1.1) s} :=
@@ -488,3 +515,19 @@ by
     exact ⟨s, ⟨hsubset hs.1, hs.2⟩, rfl⟩
 
 end ParametricTransversality
+
+#print axioms parametric_transversality_setOf_not_transverse_has_measure_zero_in_manifold
+#print axioms isTransverseToSubmanifold_of_isRegularValue_parametricPreimageProjection
+#print axioms critical_values_has_measure_zero_in_manifold_of_contMDiff
+#print axioms euclideanCriticalImage_measureZero_of_modelRangeMarkedSubset_strictCore
+#print axioms transverse_preimage_has_embedded_submanifold_structure
+#print axioms transverse_codimension_le_source_finrank
+#print axioms sliceMfderiv_eq_uncurryMfderiv_compInr
+#print axioms finiteDimensionalModelSpace_of_embeddedSubmanifold_point
+#print axioms supRange_slice_of_transverse_and_surjective_parametricLift
+#print axioms parametricPreimageProjectionMfderiv_eq_fst_comp
+#print axioms preimageSubtypeValRange_le_targetComap_at_parametricPoint
+#print axioms parametricPreimageProjection_contMDiff
+#print axioms notTransverseSlice_subset_criticalValues_parametricProjection
+
+end

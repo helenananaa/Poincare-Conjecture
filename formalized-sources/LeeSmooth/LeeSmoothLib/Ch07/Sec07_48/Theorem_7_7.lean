@@ -10,7 +10,7 @@ import LeeSmoothLib.Ch07.Sec07_47.Definition_7_47_extra_1
 open scoped Manifold ContDiff
 open Path.Homotopic
 
-universe u𝕜 uE uH uG uGtilde
+universe u𝕜 uE uH uG
 
 -- Semantic recall confirmed the canonical owners `LieGroup`,
 -- `Manifold.IsUniversalSmoothCoveringMap`, and `ContMDiffMonoidMorphism` used below.
@@ -161,9 +161,9 @@ theorem existsLiftedInversionAtIdentity {Gtilde : Type*} [TopologicalSpace Gtild
 omit [ConnectedSpace G] in
 /-- Helper for Theorem 7.7: once a universal smooth covering map `π0 : Gtilde → G` is given,
 the Lie-group structure on `G` lifts to `Gtilde`, and `π0` becomes a smooth group homomorphism. -/
-theorem existsLieGroupStructureOfUniversalSmoothCovering {Gtilde : Type uGtilde}
+theorem existsLieGroupStructureOfUniversalSmoothCovering {Gtilde : Type uG}
     [TopologicalSpace Gtilde] [ChartedSpace H Gtilde]
-    [IsManifold I (⊤ : WithTop ℕ∞) Gtilde] [IsRCLikeNormedField 𝕜]
+    [IsManifold I ∞ Gtilde] [IsRCLikeNormedField 𝕜]
     [LocallyPathConnectedSpace Gtilde]
     [LocallyPathConnectedSpace (Gtilde × Gtilde)] {π0 : Gtilde → G}
     (hπ0 : Manifold.IsUniversalSmoothCoveringMap I I π0) :
@@ -172,7 +172,6 @@ theorem existsLieGroupStructureOfUniversalSmoothCovering {Gtilde : Type uGtilde}
       Manifold.IsUniversalSmoothCoveringMap I I π := by
   obtain ⟨etilde, h_etilde⟩ := hπ0.isSmoothCoveringMap.surjective 1
   let _ : SimplyConnectedSpace Gtilde := hπ0.simplyConnectedSpace
-  let _ : IsManifold I ∞ Gtilde := IsManifold.of_le le_top
   let _ : IsTopologicalGroup G := topologicalGroup_of_lieGroup I ∞
   -- First lift multiplication and inversion with the chosen normalization over `1`.
   obtain ⟨μ, hμ_base, hμ_comp⟩ :=
@@ -328,21 +327,21 @@ theorem exists_universal_covering_group
     {HReal : Type uH} [TopologicalSpace HReal]
     {IReal : ModelWithCorners ℝ EReal HReal}
     {GReal : Type uG} [Group GReal] [TopologicalSpace GReal] [ChartedSpace HReal GReal]
-    [IsManifold IReal (⊤ : WithTop ℕ∞) GReal] [LieGroup IReal ∞ GReal] [ConnectedSpace GReal] :
-    ∃ (Gtilde : Type uGtilde) (_ : Group Gtilde) (_ : TopologicalSpace Gtilde)
-      (_ : ChartedSpace HReal Gtilde) (_ : IsManifold IReal (⊤ : WithTop ℕ∞) Gtilde)
+    [IsManifold IReal ∞ GReal] [LieGroup IReal ∞ GReal] [ConnectedSpace GReal] :
+    ∃ (Gtilde : Type uG) (_ : Group Gtilde) (_ : TopologicalSpace Gtilde)
+      (_ : ChartedSpace HReal Gtilde) (_ : IsManifold IReal ∞ Gtilde)
       (_ : LieGroup IReal ∞ Gtilde)
       (π : ContMDiffMonoidMorphism IReal IReal ∞ Gtilde GReal),
       Manifold.IsUniversalSmoothCoveringMap IReal IReal π := by
   -- Route correction: the public theorem is a wrapper around the universal covering manifold
   -- theorem and the already constructed lifted Lie-group structure.
   rcases
-      (exists_universal_smooth_covering_manifold.{0, uE, uH, uG, uGtilde, uE, uH, uG}
+      (exists_universal_smooth_covering_manifold.{0, uE, uH, uG, uE, uH, uG}
         (I := IReal) (M := GReal)) with
     ⟨Gtilde, instTop, instCharted, instManifold, π0, hπ0, _⟩
   let _ : TopologicalSpace Gtilde := instTop
   let _ : ChartedSpace HReal Gtilde := instCharted
-  let _ : IsManifold IReal (⊤ : WithTop ℕ∞) Gtilde := instManifold
+  let _ : IsManifold IReal ∞ Gtilde := instManifold
   -- The lifting theorem needs local path connectedness on the cover and its product.
   let _ : LocallyPathConnectedSpace Gtilde := chartedSpaceLocPathConnectedSpace (J := IReal)
   let _ : LocallyPathConnectedSpace (Gtilde × Gtilde) :=

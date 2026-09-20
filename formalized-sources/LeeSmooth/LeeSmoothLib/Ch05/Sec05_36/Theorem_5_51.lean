@@ -1217,6 +1217,115 @@ private noncomputable abbrev local_slice_condition_with_boundary_chartedSpace
     -- The chosen chart at `x` is, by construction, one of the distinguished subtype charts.
     exact ⟨x, rfl⟩
 
+/-- Helper for Theorem 5.51: the source of either induced subtype chart is contained in the
+source of the ambient slice chart from which it was constructed. -/
+private theorem local_slice_condition_with_boundary_chartAt_source_subset_ambient_source
+    (S : Set M) (hS : Set.SatisfiesLocalSliceConditionWithBoundary n S k)
+    (x : S) {y : S}
+    (hy : y ∈ (local_slice_condition_with_boundary_chartAt S hS x).source) :
+    y.1 ∈ (local_slice_condition_with_boundary_ambient_chart S hS x).source := by
+  classical
+  let e := local_slice_condition_with_boundary_ambient_chart S hS x
+  let hx := local_slice_condition_with_boundary_ambient_chart_mem_source S hS x
+  rcases local_slice_condition_with_boundary_ambient_chart_isSlice_or_isBoundarySlice
+      S hS x with hSlice | hBoundary
+  · rw [local_slice_condition_with_boundary_chartAt_eq_of_isSliceChart S hS x hSlice] at hy
+    unfold interior_slice_chart_induces_pointed_subtype_chart at hy
+    rw [OpenPartialHomeomorph.trans_source] at hy
+    simpa [e, subtype_source_patch] using hy.1
+  · by_cases hSlice : e.IsSliceChart S k
+    · have hSlice' :
+          (local_slice_condition_with_boundary_ambient_chart S hS x).IsSliceChart S k := by
+        simpa [e] using hSlice
+      rw [local_slice_condition_with_boundary_chartAt_eq_of_isSliceChart S hS x hSlice'] at hy
+      unfold interior_slice_chart_induces_pointed_subtype_chart at hy
+      rw [OpenPartialHomeomorph.trans_source] at hy
+      simpa [e, subtype_source_patch] using hy.1
+    · have hNotSlice :
+          ¬ (local_slice_condition_with_boundary_ambient_chart S hS x).IsSliceChart S k := by
+        simpa [e] using hSlice
+      rw [local_slice_condition_with_boundary_chartAt_eq_of_isBoundarySliceChart
+        S hS x hNotSlice hBoundary] at hy
+      unfold boundary_slice_chart_induces_pointed_subtype_chart at hy
+      rw [OpenPartialHomeomorph.trans_source] at hy
+      simpa [e, subtype_source_patch] using hy.1
+
+/-- Helper for Theorem 5.51: the affine coordinate change used by an interior slice chart. -/
+private noncomputable def theorem551_interior_forward
+    {S : Set M} (hk : k ≤ n)
+    (e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n))) (x : S) :
+    EuclideanSpace ℝ (Fin k) → EuclideanSpace ℝ (Fin k) := by
+  cases k with
+  | zero => exact id
+  | succ m =>
+      exact fun z ↦ z + boundary_model_shift_vector m
+        (boundary_model_shift_amount
+          (euclidean_slice_projection hk (e x.1)))
+
+/-- Helper for Theorem 5.51: the inverse affine coordinate change used by an interior slice
+chart. -/
+private noncomputable def theorem551_interior_backward
+    {S : Set M} (hk : k ≤ n)
+    (e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n))) (x : S) :
+    EuclideanSpace ℝ (Fin k) → EuclideanSpace ℝ (Fin k) := by
+  cases k with
+  | zero => exact id
+  | succ m =>
+      exact fun z ↦ z - boundary_model_shift_vector m
+        (boundary_model_shift_amount
+          (euclidean_slice_projection hk (e x.1)))
+
+private theorem theorem551_interior_forward_contDiff
+    {S : Set M} (hk : k ≤ n)
+    (e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n))) (x : S) :
+    ContDiff ℝ (⊤ : WithTop ℕ∞) (theorem551_interior_forward hk e x) := by
+  cases k with
+  | zero => simpa [theorem551_interior_forward] using
+      (contDiff_id : ContDiff ℝ (⊤ : WithTop ℕ∞) (id : EuclideanSpace ℝ (Fin 0) → _))
+  | succ m =>
+      simpa [theorem551_interior_forward] using
+        (contDiff_id.add (contDiff_const : ContDiff ℝ (⊤ : WithTop ℕ∞)
+          (fun _ : EuclideanSpace ℝ (Fin (m + 1)) ↦
+            boundary_model_shift_vector m
+              (boundary_model_shift_amount
+                (euclidean_slice_projection hk (e x.1))))))
+
+private theorem theorem551_interior_backward_contDiff
+    {S : Set M} (hk : k ≤ n)
+    (e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n))) (x : S) :
+    ContDiff ℝ (⊤ : WithTop ℕ∞) (theorem551_interior_backward hk e x) := by
+  cases k with
+  | zero => simpa [theorem551_interior_backward] using
+      (contDiff_id : ContDiff ℝ (⊤ : WithTop ℕ∞) (id : EuclideanSpace ℝ (Fin 0) → _))
+  | succ m =>
+      simpa [theorem551_interior_backward] using
+        (contDiff_id.sub (contDiff_const : ContDiff ℝ (⊤ : WithTop ℕ∞)
+          (fun _ : EuclideanSpace ℝ (Fin (m + 1)) ↦
+            boundary_model_shift_vector m
+              (boundary_model_shift_amount
+                (euclidean_slice_projection hk (e x.1))))))
+
+private theorem theorem551_interior_forward_backward
+    {S : Set M} (hk : k ≤ n)
+    (e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n))) (x : S)
+    (z : EuclideanSpace ℝ (Fin k)) :
+    theorem551_interior_forward hk e x
+        (theorem551_interior_backward hk e x z) = z := by
+  cases k with
+  | zero => rfl
+  | succ m => simp [theorem551_interior_forward, theorem551_interior_backward]
+
+private theorem theorem551_interior_backward_forward
+    {S : Set M} (hk : k ≤ n)
+    (e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n))) (x : S)
+    (z : EuclideanSpace ℝ (Fin k)) :
+    theorem551_interior_backward hk e x
+        (theorem551_interior_forward hk e x z) = z := by
+  cases k with
+  | zero => rfl
+  | succ m => simp [theorem551_interior_forward, theorem551_interior_backward]
+
+
 /-- Helper for Theorem 5.51: any nonempty subset satisfying the local slice-with-boundary
 condition has dimension at most that of the ambient manifold. -/
 private theorem satisfies_local_slice_condition_with_boundary_dimension_le
@@ -1232,6 +1341,350 @@ private theorem satisfies_local_slice_condition_with_boundary_dimension_le
   · -- Boundary half-slice witnesses record both `0 < k` and the same ambient inequality.
     rcases hBoundary.2 with ⟨_, hk, _, _⟩
     exact hk
+
+/-- Helper for Theorem 5.51: a nonempty `k`-manifold with boundary smoothly embedded in an
+`n`-manifold has `k ≤ n`. -/
+private theorem smooth_embedding_boundary_dimension_le
+    (S : Set M) [SmoothManifoldWithBoundary k S]
+    (hS :
+      Manifold.IsSmoothEmbedding
+        (leeBoundaryModelWithCorners k)
+        (𝓡 n)
+        (⊤ : WithTop ℕ∞)
+        ((↑) : S → M))
+    (x : S) :
+    k ≤ n := by
+  let hAt := hS.isImmersion.isImmersionAt x
+  haveI : FiniteDimensional ℝ (EuclideanSpace ℝ (Fin k) × hAt.complement) :=
+    FiniteDimensional.of_injective hAt.equiv.toLinearMap hAt.equiv.injective
+  haveI : FiniteDimensional ℝ hAt.complement :=
+    FiniteDimensional.of_injective
+      (LinearMap.inr ℝ (EuclideanSpace ℝ (Fin k)) hAt.complement)
+      LinearMap.inr_injective
+  have hfin :
+      Module.finrank ℝ (EuclideanSpace ℝ (Fin k) × hAt.complement) = n := by
+    calc
+      Module.finrank ℝ (EuclideanSpace ℝ (Fin k) × hAt.complement) =
+          Module.finrank ℝ (EuclideanSpace ℝ (Fin n)) :=
+        hAt.equiv.toLinearEquiv.finrank_eq
+      _ = n := by
+        simpa using finrank_euclideanSpace_fin (α := ℝ) (ι := Fin n)
+  calc
+    k ≤ k + Module.finrank ℝ hAt.complement := Nat.le_add_right k _
+    _ = Module.finrank ℝ (EuclideanSpace ℝ (Fin k) × hAt.complement) := by
+      simpa using
+        (Module.finrank_prod ℝ (EuclideanSpace ℝ (Fin k)) hAt.complement).symm
+    _ = n := hfin
+
+/-- Helper for Theorem 5.51: a linear Euclidean automorphism is an analytic chart change. -/
+private theorem theorem551_euclidean_linear_equiv_mem_contDiffGroupoid
+    {m : ℕ}
+    {L : EuclideanSpace ℝ (Fin m) ≃L[ℝ] EuclideanSpace ℝ (Fin m)} :
+    L.toHomeomorph.toOpenPartialHomeomorph ∈
+      contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 m) := by
+  rw [contDiffGroupoid, mem_groupoid_of_pregroupoid, contDiffPregroupoid]
+  constructor
+  · simpa [modelWithCornersSelf_coe] using L.contDiff.contDiffOn
+  · simpa [modelWithCornersSelf_coe] using L.symm.contDiff.contDiffOn
+
+/-- Helper for Theorem 5.51: exchange the half-space boundary coordinate with Lee's last free
+coordinate. -/
+private noncomputable def theorem551_boundary_coordinate_swap
+    {k : ℕ} (hk : 0 < k) :
+    EuclideanSpace ℝ (Fin k) ≃L[ℝ] EuclideanSpace ℝ (Fin k) :=
+  (LinearIsometryEquiv.piLpCongrLeft 2 ℝ ℝ
+    (Equiv.swap ⟨0, hk⟩ ⟨k - 1, Nat.pred_lt (Nat.ne_of_gt hk)⟩)).toContinuousLinearEquiv
+
+/-- The inverse coordinate exchange recovers the old boundary coordinate from Lee's last free
+coordinate. -/
+private theorem theorem551_boundary_coordinate_swap_symm_zero
+    {k : ℕ} (hk : 0 < k) (z : EuclideanSpace ℝ (Fin k)) :
+    (theorem551_boundary_coordinate_swap hk).symm z ⟨0, hk⟩ =
+      z ⟨k - 1, Nat.pred_lt (Nat.ne_of_gt hk)⟩ := by
+  simp [theorem551_boundary_coordinate_swap]
+
+/-- The forward coordinate exchange puts the old boundary coordinate in Lee's last free slot. -/
+private theorem theorem551_boundary_coordinate_swap_last
+    {k : ℕ} (hk : 0 < k) (z : EuclideanSpace ℝ (Fin k)) :
+    theorem551_boundary_coordinate_swap hk z
+        ⟨k - 1, Nat.pred_lt (Nat.ne_of_gt hk)⟩ = z ⟨0, hk⟩ := by
+  simp [theorem551_boundary_coordinate_swap]
+
+/-- Helper for Theorem 5.51: the half-slice projection chart has the expected underlying
+coordinate formula. -/
+private theorem theorem551_half_slice_projection_apply
+    {k n : ℕ} [NeZero k]
+    (U : Set (EuclideanSpace ℝ (Fin n))) (hU : IsOpen U)
+    (hk : 0 < k) (hkn : k ≤ n) (c : Fin (n - k) → ℝ)
+    (x₀ x : Set.euclideanHalfSlice U k hk hkn c) :
+    (leeBoundaryModelWithCorners k)
+        (euclidean_half_slice_projection_partial_homeomorph U hU hk hkn c x₀ x) =
+      theorem551_boundary_coordinate_swap hk (euclidean_slice_projection hkn x.1) := by
+  cases k with
+  | zero => exact (Nat.not_lt_zero 0 hk).elim
+  | succ m =>
+      letI : NeZero (m + 1) := ⟨Nat.succ_ne_zero m⟩
+      rfl
+
+/-- Helper for Theorem 5.51: the positive-dimensional interior adapter is translation by its
+chosen boundary-coordinate shift in extended coordinates. -/
+private theorem theorem551_euclidean_boundary_adapter_apply
+    {m : ℕ} (z₀ : EuclideanSpace ℝ (Fin (m + 1)))
+    (z : boundary_model_source_opens z₀) :
+    (leeBoundaryModelWithCorners (m + 1))
+        (euclidean_space_to_boundary_model_chart_at z₀ z.1) =
+      z.1 + boundary_model_shift_vector m (boundary_model_shift_amount z₀) := by
+  letI : NeZero (m + 1) := ⟨Nat.succ_ne_zero m⟩
+  let sourceOpen := boundary_model_source_opens z₀
+  let hz₀ : z₀ ∈ sourceOpen := boundary_model_source_set_mem z₀
+  let targetOpen := boundary_model_target_opens m
+  let targetNonempty : Nonempty targetOpen := by
+    exact ⟨boundary_model_translate_forward z₀ ⟨z₀, hz₀⟩⟩
+  have hzRestore :
+      ((sourceOpen.openPartialHomeomorphSubtypeCoe ⟨⟨z₀, hz₀⟩⟩).symm z.1 :
+          sourceOpen) = z := by
+    exact opens_subtype_inclusion_symm_eq_mk sourceOpen ⟨⟨z₀, hz₀⟩⟩ z.2
+  change
+    ((targetOpen.openPartialHomeomorphSubtypeCoe targetNonempty)
+      ((boundary_model_translation_homeomorph z₀)
+        ((sourceOpen.openPartialHomeomorphSubtypeCoe ⟨⟨z₀, hz₀⟩⟩).symm z.1))).1 = _
+  rw [hzRestore]
+  rfl
+
+/-- Helper for Theorem 5.51: the inverse positive-dimensional interior adapter subtracts the same
+shift on its chart target. -/
+private theorem theorem551_euclidean_boundary_adapter_symm
+    {m : ℕ} (z₀ : EuclideanSpace ℝ (Fin (m + 1)))
+    {w : ℍ^{(m + 1)}}
+    (hw : w ∈ (euclidean_space_to_boundary_model_chart_at z₀).target) :
+    (euclidean_space_to_boundary_model_chart_at z₀).symm w =
+      w.1 - boundary_model_shift_vector m (boundary_model_shift_amount z₀) := by
+  let z := (euclidean_space_to_boundary_model_chart_at z₀).symm w
+  have hzSource : z ∈ (euclidean_space_to_boundary_model_chart_at z₀).source :=
+    (euclidean_space_to_boundary_model_chart_at z₀).symm.map_source hw
+  have hzOpen : z ∈ boundary_model_source_opens z₀ := by
+    simpa [euclidean_space_to_boundary_model_chart_at,
+      OpenPartialHomeomorph.trans_source] using hzSource
+  have hforward := theorem551_euclidean_boundary_adapter_apply z₀ ⟨z, hzOpen⟩
+  have hright := (euclidean_space_to_boundary_model_chart_at z₀).right_inv hw
+  change z = w.1 - boundary_model_shift_vector m (boundary_model_shift_amount z₀)
+  have hval :
+      z + boundary_model_shift_vector m (boundary_model_shift_amount z₀) = w.1 := by
+    rw [hright] at hforward
+    change w.1 =
+      z + boundary_model_shift_vector m (boundary_model_shift_amount z₀) at hforward
+    exact hforward.symm
+  exact eq_sub_of_add_eq hval
+
+/-- Helper for Theorem 5.51: an interior induced chart is the ambient slice projection followed
+by its affine boundary-model adapter. -/
+private theorem theorem551_interior_pointed_chart_apply
+    (S : Set M) (e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n)))
+    (he : e.IsSliceChart S k) (x : S) (hx : x.1 ∈ e.source)
+    (hk : k ≤ n) {y : S}
+    (hy : y ∈ (interior_slice_chart_induces_pointed_subtype_chart S e he x hx).source) :
+    (leeBoundaryModelWithCorners k)
+        (interior_slice_chart_induces_pointed_subtype_chart S e he x hx y) =
+      theorem551_interior_forward hk e x (euclidean_slice_projection hk (e y.1)) := by
+  classical
+  let hk' : k ≤ n := Classical.choose he.2
+  have hhk : hk' = hk := Subsingleton.elim _ _
+  subst hk'
+  have hc : ∃ c : Fin (n - k) → ℝ,
+      e '' (S ∩ e.source) = Set.euclideanSlice e.target k hk c := by
+    simpa [hk] using (Classical.choose_spec he.2)
+  let c : Fin (n - k) → ℝ := Classical.choose hc
+  let hSlice : e '' (S ∩ e.source) = Set.euclideanSlice e.target k hk c :=
+    Classical.choose_spec hc
+  let xPatch : subtype_source_patch S e := ⟨x, hx⟩
+  let xSlice : Set.euclideanSlice e.target k hk c :=
+    subtype_patch_target_homeomorph S e hSlice xPatch
+  let P : TopologicalSpace.Opens S := subtype_source_patch S e
+  let iP : OpenPartialHomeomorph P S := P.openPartialHomeomorphSubtypeCoe ⟨xPatch⟩
+  change y ∈ ((iP.symm).trans
+    (interior_slice_chart_induces_patch_chart S e he x hx)).source at hy
+  rw [OpenPartialHomeomorph.trans_source] at hy
+  have hyTarget : y ∈ iP.target := by
+    simpa [iP, P, subtype_source_patch] using hy.1
+  have hyE : y.1 ∈ e.source := by
+    simpa [iP, P, subtype_source_patch] using hy.1
+  have hsymm :
+      (iP.symm y : P) = ⟨y, by simpa [P, subtype_source_patch] using hyE⟩ := by
+    apply Subtype.ext
+    simpa using! iP.right_inv hyTarget
+  change
+    (leeBoundaryModelWithCorners k)
+      (((iP.symm).trans
+        (interior_slice_chart_induces_patch_chart S e he x hx)) y) = _
+  rw [OpenPartialHomeomorph.trans_apply, hsymm]
+  change
+    (leeBoundaryModelWithCorners k)
+      ((((OpenPartialHomeomorph.trans'
+          ((subtype_patch_target_homeomorph S e hSlice).toOpenPartialHomeomorph)
+          (euclidean_slice_projection_partial_homeomorph e.target e.open_target hk c xSlice)
+          rfl).trans
+        (euclidean_space_to_boundary_model_chart_at
+          (euclidean_slice_projection hk xSlice.1)))
+        (⟨y, by simpa [P, subtype_source_patch] using hyE⟩ : P))) = _
+  rw [OpenPartialHomeomorph.trans_apply, OpenPartialHomeomorph.trans'_apply]
+  change
+    (leeBoundaryModelWithCorners k)
+        (euclidean_space_to_boundary_model_chart_at
+          (euclidean_slice_projection hk (e x.1))
+          (euclidean_slice_projection hk (e y.1))) = _
+  have hzSource :
+      euclidean_slice_projection hk (e y.1) ∈
+        (euclidean_space_to_boundary_model_chart_at
+          (euclidean_slice_projection hk (e x.1))).source := by
+    have hChart :
+        interior_slice_chart_induces_patch_chart S e he x hx =
+          (OpenPartialHomeomorph.trans'
+            ((subtype_patch_target_homeomorph S e hSlice).toOpenPartialHomeomorph)
+            (euclidean_slice_projection_partial_homeomorph
+              e.target e.open_target hk c xSlice) rfl).trans
+          (euclidean_space_to_boundary_model_chart_at
+            (euclidean_slice_projection hk xSlice.1)) := by
+      unfold interior_slice_chart_induces_patch_chart
+      simp [hk, c, hSlice, xPatch, xSlice]
+    have hxSliceVal : xSlice.1 = e x.1 := by rfl
+    have hySliceVal :
+        (subtype_patch_target_homeomorph S e hSlice (iP.symm y)).1 = e y.1 := by
+      rw [hsymm]
+      rfl
+    have hyFirstVal :
+        (OpenPartialHomeomorph.trans'
+          ((subtype_patch_target_homeomorph S e hSlice).toOpenPartialHomeomorph)
+          (euclidean_slice_projection_partial_homeomorph
+            e.target e.open_target hk c xSlice) rfl) (iP.symm y) =
+          euclidean_slice_projection hk (e y.1) := by
+      rw [OpenPartialHomeomorph.trans'_apply,
+        euclidean_slice_projection_partial_homeomorph_apply]
+      change euclidean_slice_projection hk
+        ((subtype_patch_target_homeomorph S e hSlice (iP.symm y)).1) = _
+      rw [hySliceVal]
+    have hyPatch := hy.2
+    change (iP.symm y : P) ∈
+      (interior_slice_chart_induces_patch_chart S e he x hx).source at hyPatch
+    rw [hChart, OpenPartialHomeomorph.trans_source] at hyPatch
+    have hyAdapter := hyPatch.2
+    change
+      (OpenPartialHomeomorph.trans'
+        ((subtype_patch_target_homeomorph S e hSlice).toOpenPartialHomeomorph)
+        (euclidean_slice_projection_partial_homeomorph
+          e.target e.open_target hk c xSlice) rfl) (iP.symm y) ∈
+        (euclidean_space_to_boundary_model_chart_at
+          (euclidean_slice_projection hk xSlice.1)).source at hyAdapter
+    rw [hyFirstVal] at hyAdapter
+    simpa [hxSliceVal] using hyAdapter
+  cases k with
+  | zero =>
+      rfl
+  | succ m =>
+      letI : NeZero (m + 1) := ⟨Nat.succ_ne_zero m⟩
+      have hzOpen :
+          euclidean_slice_projection hk (e y.1) ∈
+            boundary_model_source_opens (euclidean_slice_projection hk (e x.1)) := by
+        simpa [euclidean_space_to_boundary_model_chart_at,
+          OpenPartialHomeomorph.trans_source] using hzSource
+      simpa [theorem551_interior_forward] using
+        theorem551_euclidean_boundary_adapter_apply
+          (euclidean_slice_projection hk (e x.1))
+          ⟨euclidean_slice_projection hk (e y.1), hzOpen⟩
+
+/-- Helper for Theorem 5.51: the coordinate changes for a boundary half-slice are the swap of
+the distinguished half-space coordinate and its inverse. -/
+private noncomputable def theorem551_boundary_forward
+    (hk : 0 < k) : EuclideanSpace ℝ (Fin k) → EuclideanSpace ℝ (Fin k) :=
+  theorem551_boundary_coordinate_swap hk
+
+private noncomputable def theorem551_boundary_backward
+    (hk : 0 < k) : EuclideanSpace ℝ (Fin k) → EuclideanSpace ℝ (Fin k) :=
+  (theorem551_boundary_coordinate_swap hk).symm
+
+private theorem theorem551_boundary_forward_contDiff (hk : 0 < k) :
+    ContDiff ℝ (⊤ : WithTop ℕ∞) (theorem551_boundary_forward hk) := by
+  simpa [theorem551_boundary_forward] using
+    (theorem551_boundary_coordinate_swap hk).contDiff
+
+private theorem theorem551_boundary_backward_contDiff (hk : 0 < k) :
+    ContDiff ℝ (⊤ : WithTop ℕ∞) (theorem551_boundary_backward hk) := by
+  simpa [theorem551_boundary_backward] using
+    (theorem551_boundary_coordinate_swap hk).symm.contDiff
+
+private theorem theorem551_boundary_forward_backward (hk : 0 < k)
+    (z : EuclideanSpace ℝ (Fin k)) :
+    theorem551_boundary_forward hk (theorem551_boundary_backward hk z) = z := by
+  exact (theorem551_boundary_coordinate_swap hk).apply_symm_apply z
+
+private theorem theorem551_boundary_backward_forward (hk : 0 < k)
+    (z : EuclideanSpace ℝ (Fin k)) :
+    theorem551_boundary_backward hk (theorem551_boundary_forward hk z) = z := by
+  exact (theorem551_boundary_coordinate_swap hk).symm_apply_apply z
+
+/-- Helper for Theorem 5.51: a boundary induced chart is the ambient slice projection followed
+by the coordinate swap matching Lee's half-space convention. -/
+private theorem theorem551_boundary_pointed_chart_apply
+    (S : Set M) (e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n)))
+    (he : e.IsBoundarySliceChart S k) (x : S) (hx : x.1 ∈ e.source)
+    (hk : 0 < k) (hkn : k ≤ n) {y : S}
+    (hy : y ∈ (boundary_slice_chart_induces_pointed_subtype_chart S e he x hx).source) :
+    (leeBoundaryModelWithCorners k)
+        (boundary_slice_chart_induces_pointed_subtype_chart S e he x hx y) =
+      theorem551_boundary_forward hk (euclidean_slice_projection hkn (e y.1)) := by
+  classical
+  let hk' : 0 < k := Classical.choose he.2
+  have hhk : hk' = hk := Subsingleton.elim _ _
+  subst hk'
+  letI : NeZero k := ⟨Nat.ne_of_gt hk⟩
+  have hhkn : ∃ hkn' : k ≤ n, ∃ c : Fin (n - k) → ℝ,
+      e '' (S ∩ e.source) = Set.euclideanHalfSlice e.target k hk hkn' c := by
+    simpa [Set.IsHalfSliceInChart, Set.IsEuclideanHalfSlice, hk] using
+      (Classical.choose_spec he.2)
+  let hkn' : k ≤ n := Classical.choose hhkn
+  have hhknEq : hkn' = hkn := Subsingleton.elim _ _
+  subst hkn'
+  have hc : ∃ c : Fin (n - k) → ℝ,
+      e '' (S ∩ e.source) = Set.euclideanHalfSlice e.target k hk hkn c := by
+    simpa [hkn] using (Classical.choose_spec hhkn)
+  let c : Fin (n - k) → ℝ := Classical.choose hc
+  let hHalfSlice : e '' (S ∩ e.source) =
+      Set.euclideanHalfSlice e.target k hk hkn c := Classical.choose_spec hc
+  let xPatch : subtype_source_patch S e := ⟨x, hx⟩
+  let xHalfSlice : Set.euclideanHalfSlice e.target k hk hkn c :=
+    subtype_patch_target_homeomorph S e hHalfSlice xPatch
+  let P : TopologicalSpace.Opens S := subtype_source_patch S e
+  let iP : OpenPartialHomeomorph P S := P.openPartialHomeomorphSubtypeCoe ⟨xPatch⟩
+  change y ∈ ((iP.symm).trans
+    (boundary_slice_chart_induces_patch_chart S e he x hx)).source at hy
+  rw [OpenPartialHomeomorph.trans_source] at hy
+  have hyTarget : y ∈ iP.target := by
+    simpa [iP, P, subtype_source_patch] using hy.1
+  have hyE : y.1 ∈ e.source := by
+    simpa [iP, P, subtype_source_patch] using hy.1
+  have hsymm :
+      (iP.symm y : P) = ⟨y, by simpa [P, subtype_source_patch] using hyE⟩ := by
+    apply Subtype.ext
+    simpa using! iP.right_inv hyTarget
+  change
+    (leeBoundaryModelWithCorners k)
+      (((iP.symm).trans (boundary_slice_chart_induces_patch_chart S e he x hx)) y) = _
+  rw [OpenPartialHomeomorph.trans_apply, hsymm]
+  change
+    (leeBoundaryModelWithCorners k)
+      (((subtype_patch_target_homeomorph S e hHalfSlice).toOpenPartialHomeomorph.trans
+        (euclidean_half_slice_projection_partial_homeomorph
+          e.target e.open_target hk hkn c xHalfSlice))
+        (⟨y, by simpa [P, subtype_source_patch] using hyE⟩ : P)) = _
+  rw [OpenPartialHomeomorph.trans_apply]
+  change
+    (leeBoundaryModelWithCorners k)
+      (euclidean_half_slice_projection_partial_homeomorph
+        e.target e.open_target hk hkn c xHalfSlice
+        ⟨e y.1, by
+          rw [← hHalfSlice]
+          exact ⟨y.1, ⟨y.2, hyE⟩, rfl⟩⟩) = _
+  exact theorem551_half_slice_projection_apply e.target e.open_target hk hkn c
+    xHalfSlice _
 
 /-- Helper for Theorem 5.51: the zero-dimensional boundary model has no boundary points. -/
 private theorem zero_dimensional_boundary_model_not_isBoundaryPoint
@@ -1270,6 +1723,36 @@ private theorem open_subtype_patch_inclusion_isEmbedding
   -- ambient subtype inclusion `S ↪ M`.
   exact hEmb.comp Topology.IsEmbedding.subtypeVal
 
+/-- Helper for Theorem 5.51: an analytic maximal-atlas chart restricts to an analytic chart on
+an open subtype. -/
+private theorem theorem551_subtypeRestr_mem_maximalAtlas
+    {κ : Type*} [NontriviallyNormedField κ]
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace κ E]
+    {H X : Type*} [TopologicalSpace H] [TopologicalSpace X]
+    {I : ModelWithCorners κ E H} [ChartedSpace H X]
+    [IsManifold I (⊤ : WithTop ℕ∞) X]
+    {e : OpenPartialHomeomorph X H}
+    (he : e ∈ IsManifold.maximalAtlas I (⊤ : WithTop ℕ∞) X)
+    {s : TopologicalSpace.Opens X} (hs : Nonempty s) :
+    e.subtypeRestr hs ∈ IsManifold.maximalAtlas I (⊤ : WithTop ℕ∞) s := by
+  rw [IsManifold.mem_maximalAtlas_iff]
+  intro e' he'
+  obtain ⟨x, hx⟩ := TopologicalSpace.Opens.chart_eq hs he'
+  rw [hx]
+  constructor
+  · exact (contDiffGroupoid (⊤ : WithTop ℕ∞) I).mem_of_eqOnSource
+      (closedUnderRestriction'
+        ((contDiffGroupoid (⊤ : WithTop ℕ∞) I).compatible_of_mem_maximalAtlas he
+          (IsManifold.subset_maximalAtlas (chart_mem_atlas H (x : X))))
+        (e.isOpen_inter_preimage_symm s.2))
+      (e.subtypeRestr_symm_trans_subtypeRestr hs _)
+  · exact (contDiffGroupoid (⊤ : WithTop ℕ∞) I).mem_of_eqOnSource
+      (closedUnderRestriction'
+        ((contDiffGroupoid (⊤ : WithTop ℕ∞) I).compatible_of_mem_maximalAtlas
+          (IsManifold.subset_maximalAtlas (chart_mem_atlas H (x : X))) he)
+        ((chartAt H (x : X)).isOpen_inter_preimage_symm s.2))
+      ((chartAt H (x : X)).subtypeRestr_symm_trans_subtypeRestr hs e)
+
 /-- Helper for Theorem 5.51: restricting a smooth subtype inclusion to an open subtype patch
 preserves smooth embedding into the ambient manifold. -/
 private theorem open_subtype_patch_inclusion_isSmoothEmbedding
@@ -1286,13 +1769,45 @@ private theorem open_subtype_patch_inclusion_isSmoothEmbedding
       (𝓡 n)
       (⊤ : WithTop ℕ∞)
       ((↑) : U → M) := by
-  -- The restricted inclusion factors through the open inclusion `U ↪ S`, followed by the ambient
-  -- subtype inclusion `S ↪ M`, so we compose the existing immersion data and keep the induced
-  -- topological embedding.
   refine Manifold.IsSmoothEmbedding.mk ?_ <|
     open_subtype_patch_inclusion_isEmbedding hEmb.2
-  simpa [Function.comp] using!
-    Manifold.IsImmersion.ex416_comp hEmb.1 (Manifold.IsImmersion.of_opens U)
+  refine ⟨hEmb.1.complement, inferInstance, inferInstance, ?_⟩
+  intro q
+  let hf := hEmb.1.isImmersionOfComplement_complement q.1
+  let hU : Nonempty U := ⟨q⟩
+  refine Manifold.IsImmersionAtOfComplement.mk_of_charts hf.equiv
+    (hf.domChart.subtypeRestr hU) hf.codChart ?_ ?_ ?_ ?_ ?_ ?_
+  · simpa [OpenPartialHomeomorph.subtypeRestr_source] using hf.mem_domChart_source
+  · exact hf.mem_codChart_source
+  · exact theorem551_subtypeRestr_mem_maximalAtlas hf.domChart_mem_maximalAtlas hU
+  · exact hf.codChart_mem_maximalAtlas
+  · intro z hz
+    exact hf.source_subset_preimage_source <| by
+      simpa [OpenPartialHomeomorph.subtypeRestr_source] using hz
+  · intro y hy
+    rw [OpenPartialHomeomorph.extend_target] at hy
+    have hyU :
+        (leeBoundaryModelWithCorners k).symm y ∈ (hf.domChart.subtypeRestr hU).target := hy.1
+    have hyRange : y ∈ Set.range (leeBoundaryModelWithCorners k) := hy.2
+    have hyDomTarget : (leeBoundaryModelWithCorners k).symm y ∈ hf.domChart.target :=
+      hf.domChart.subtypeRestr_target_subset hU hyU
+    have hyTarget : y ∈ (hf.domChart.extend (leeBoundaryModelWithCorners k)).target := by
+      rw [OpenPartialHomeomorph.extend_target]
+      exact ⟨hyDomTarget, hyRange⟩
+    have hySource :
+        (hf.domChart.extend (leeBoundaryModelWithCorners k)).symm y ∈ hf.domChart.source := by
+      simpa [OpenPartialHomeomorph.extend_source] using
+        (hf.domChart.extend (leeBoundaryModelWithCorners k)).map_target hyTarget
+    have hraw := hf.writtenInCharts hyTarget
+    have hval :
+        ((hf.domChart.subtypeRestr hU).symm
+            ((leeBoundaryModelWithCorners k).symm y) : S) =
+          hf.domChart.symm ((leeBoundaryModelWithCorners k).symm y) :=
+      hf.domChart.subtypeRestr_symm_apply (U := U) hU hyU
+    dsimp [Function.comp, OpenPartialHomeomorph.extend_coe,
+      OpenPartialHomeomorph.extend_coe_symm] at hraw ⊢
+    rw [hval]
+    exact hraw
 
 /-- Helper for Theorem 5.51: lowering the differentiability index preserves immersions by keeping
 the same local chart normal forms. -/
@@ -1690,7 +2205,7 @@ private theorem transported_patch_subtype_val_isImmersion
   -- TODO: transport the `IsImmersionAtOfComplement` witness for `g` across the patch
   -- homeomorphism `e`, reusing the same singleton-chart transport pattern as
   -- `transported_source_map_isImmersion`.
-  sorry
+  omitted
 
 /-- Helper for Theorem 5.51: once a point-centered ambient patch is identified with an open
 Euclidean neighborhood, that patch carries the Euclidean `k`-manifold owner. -/
@@ -2207,7 +2722,7 @@ private theorem interior_positive_target_chart_inverse_subtype_val_isImmersion
   -- using `hFactor`. The new pointwise formula `hVal` has already normalized the only remaining
   -- nontrivial transport: the codomain carrier from the positive Euclidean patch into
   -- `chartAt.target`.
-  sorry
+  omitted
 
 /-- Helper for Theorem 5.51: after Euclideanizing the interior chart at `x`, the inverse chart
 viewed as a map into the ambient manifold is still an immersion. -/
@@ -2277,7 +2792,7 @@ private theorem smooth_embedding_subtype_val_has_local_slice_at_of_isInteriorPoi
   -- Euclideanized interior chart at `x`, restrict the resulting codomain chart to the ambient
   -- patch cut out by `interior_chart_patch_homeomorph`, and close the image computation with
   -- `restricted_local_normal_form_image_eq_zero_slice_of_projection_mem_target`.
-  sorry
+  omitted
 
 theorem smooth_embedding_subtype_val_has_local_slice_at_of_isInteriorPoint
     (k : ℕ) (S : Set M) [SmoothManifoldWithBoundary k S]
@@ -2420,7 +2935,7 @@ theorem smooth_embedding_subtype_val_has_local_slice_at_of_isInteriorPoint
     -- `restricted_local_normal_form_image_eq_zero_slice_of_projection_mem_target` together with
     -- the normalized-target lemmas `interior_chart_target_*` to build the final ambient
     -- `IsSliceChart` witness.
-    sorry
+    omitted
 
 /-- Helper for Theorem 5.51: a boundary point of the source boundary model admits an ambient
 half-slice chart for the subtype inclusion. -/
@@ -2450,7 +2965,7 @@ theorem smooth_embedding_subtype_val_has_local_half_slice_at_of_isBoundaryPoint
   -- `restricted_local_normal_form_image_eq_zero_slice_of_projection_mem_target`; the boundary
   -- branch still needs the half-slice analogue that additionally records the distinguished
   -- nonnegative coordinate.
-  sorry
+  omitted
 
 /-- Helper for Theorem 5.51: a point of a smoothly embedded subtype admits an ambient chart whose
 local image is either a Euclidean slice or a Euclidean half-slice. -/
@@ -2564,14 +3079,211 @@ theorem smooth_embedding_subtype_val_has_local_slice_at_of_isInteriorPoint
   · -- TODO: in positive dimension, transport the interior chart to an open Euclidean patch,
     -- apply the ordinary local immersion normal form there, and then restrict the ambient
     -- codomain chart so that the image is the literal zero-tail slice.
-    rcases Nat.exists_eq_succ_of_ne_zero hk0 with ⟨m, rfl⟩
-    -- TODO: after rewriting `k = m + 1`, Euclideanize the interior chart on `S`, transport the
-    -- subtype immersion to the corresponding Euclidean patch, and apply
-    -- `smooth_immersion_local_inclusion_form` on that literal ambient patch.
-    -- TODO: restrict the resulting codomain chart to the ambient patch and close the image
-    -- computation with
-    -- `restricted_local_normal_form_image_eq_zero_slice_of_projection_mem_target`.
-    sorry
+    classical
+    have hk : k ≤ n := smooth_embedding_boundary_dimension_le S hS x
+    let hAt := hS.isImmersion.isImmersionAt x
+    haveI : FiniteDimensional ℝ (EuclideanSpace ℝ (Fin k) × hAt.complement) :=
+      FiniteDimensional.of_injective hAt.equiv.toLinearMap hAt.equiv.injective
+    haveI : FiniteDimensional ℝ hAt.complement :=
+      FiniteDimensional.of_injective
+        (LinearMap.inr ℝ (EuclideanSpace ℝ (Fin k)) hAt.complement)
+        LinearMap.inr_injective
+    have hfinComp : Module.finrank ℝ hAt.complement = n - k := by
+      have hprod :
+          Module.finrank ℝ (EuclideanSpace ℝ (Fin k) × hAt.complement) = n := by
+        calc
+          Module.finrank ℝ (EuclideanSpace ℝ (Fin k) × hAt.complement) =
+              Module.finrank ℝ (EuclideanSpace ℝ (Fin n)) :=
+            hAt.equiv.toLinearEquiv.finrank_eq
+          _ = n := by
+            simpa using finrank_euclideanSpace_fin (α := ℝ) (ι := Fin n)
+      have hsum : k + Module.finrank ℝ hAt.complement = n := by
+        calc
+          k + Module.finrank ℝ hAt.complement =
+              Module.finrank ℝ (EuclideanSpace ℝ (Fin k) × hAt.complement) := by
+            simpa using
+              (Module.finrank_prod ℝ (EuclideanSpace ℝ (Fin k)) hAt.complement).symm
+          _ = n := hprod
+      omega
+    have hfinCompEq :
+        Module.finrank ℝ hAt.complement =
+          Module.finrank ℝ (EuclideanSpace ℝ (Fin (n - k))) := by
+      simpa [hfinComp] using
+        (finrank_euclideanSpace_fin (α := ℝ) (ι := Fin (n - k))).symm
+    let compEquiv : hAt.complement ≃L[ℝ] EuclideanSpace ℝ (Fin (n - k)) :=
+      ContinuousLinearEquiv.ofFinrankEq hfinCompEq
+    let straightening :
+        EuclideanSpace ℝ (Fin n) ≃L[ℝ] EuclideanSpace ℝ (Fin n) :=
+      hAt.equiv.symm.trans
+        (((ContinuousLinearEquiv.refl ℝ (EuclideanSpace ℝ (Fin k))).prodCongr compEquiv).trans
+          (euclidean_slice_product_equiv hk))
+    let domChart := hAt.domChart
+    let rawCodChart := hAt.codChart
+    let codChart :=
+      rawCodChart.trans straightening.toHomeomorph.toOpenPartialHomeomorph
+    have hcodMax :
+        codChart ∈ IsManifold.maximalAtlas (𝓡 n) (⊤ : WithTop ℕ∞) M := by
+      exact trans_mem_maximalAtlas_of_mem_groupoid hAt.codChart_mem_maximalAtlas
+        (theorem551_euclidean_linear_equiv_mem_contDiffGroupoid (L := straightening))
+    have hcoord :
+        Set.EqOn
+          (((codChart.extend (𝓡 n)) ∘ Subtype.val ∘
+            (domChart.extend (leeBoundaryModelWithCorners k)).symm))
+          (fun z ↦ euclidean_slice_inclusion hk
+            (fun _ : Fin (n - k) ↦ (0 : ℝ)) z)
+          (domChart.extend (leeBoundaryModelWithCorners k)).target := by
+      intro z hz
+      have hraw := hAt.writtenInCharts hz
+      calc
+        ((codChart.extend (𝓡 n)) ∘ Subtype.val ∘
+              (domChart.extend (leeBoundaryModelWithCorners k)).symm) z =
+            straightening
+              (((rawCodChart.extend (𝓡 n)) ∘ Subtype.val ∘
+                (domChart.extend (leeBoundaryModelWithCorners k)).symm) z) := by
+              simp [codChart, rawCodChart, Function.comp, modelWithCornersSelf_coe]
+        _ = straightening (hAt.equiv (z, (0 : hAt.complement))) := by
+              simpa [Function.comp] using congrArg straightening hraw
+        _ = euclidean_slice_product_equiv hk
+              (z, (0 : EuclideanSpace ℝ (Fin (n - k)))) := by
+              simp [straightening, compEquiv]
+        _ = euclidean_slice_inclusion hk
+              (fun _ : Fin (n - k) ↦ (0 : ℝ)) z :=
+              euclidean_slice_product_equiv_apply_zero hk z
+    let T : Set (EuclideanSpace ℝ (Fin k)) :=
+      interior (domChart.extend (leeBoundaryModelWithCorners k)).target
+    have hxT : (domChart.extend (leeBoundaryModelWithCorners k)) x ∈ T := by
+      exact
+        ((leeBoundaryModelWithCorners k).isInteriorPoint_iff_of_mem_maximalAtlas
+          (n := (⊤ : WithTop ℕ∞)) (hn := by simp)
+          hAt.domChart_mem_maximalAtlas hAt.mem_domChart_source).1 hxInt
+    let U : Set S :=
+      domChart.source ∩ (domChart.extend (leeBoundaryModelWithCorners k)) ⁻¹' T
+    have hUOpen : IsOpen U := by
+      exact domChart.isOpen_extend_preimage isOpen_interior
+    rcases subtype_open_eq_preimage_ambient_open hUOpen with ⟨W, hWOpen, hWEq⟩
+    let Q : Set (EuclideanSpace ℝ (Fin n)) :=
+      euclidean_slice_projection hk ⁻¹' T
+    have hQOpen : IsOpen Q := by
+      exact isOpen_interior.preimage (euclidean_slice_projection_continuous hk)
+    let V : Set M := codChart.symm '' (Q ∩ codChart.target)
+    have hVOpen : IsOpen V := by
+      exact codChart.isOpen_image_symm_of_subset_target
+        (hQOpen.inter codChart.open_target) inter_subset_right
+    let e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n)) :=
+      codChart.restr (W ∩ V)
+    have hESource : e.source = codChart.source ∩ (W ∩ V) := by
+      simpa [e] using codChart.restr_source' (W ∩ V) (hWOpen.inter hVOpen)
+    have hxU : x ∈ U := ⟨hAt.mem_domChart_source, hxT⟩
+    have hxW : x.1 ∈ W := by simpa [hWEq] using hxU
+    have hxCod : x.1 ∈ codChart.source := by
+      simpa [codChart, rawCodChart, OpenPartialHomeomorph.trans_source] using
+        hAt.mem_codChart_source
+    have hxCoord :
+        codChart x.1 = euclidean_slice_inclusion hk
+          (fun _ : Fin (n - k) ↦ (0 : ℝ))
+          ((domChart.extend (leeBoundaryModelWithCorners k)) x) := by
+      have hxExt :
+          (domChart.extend (leeBoundaryModelWithCorners k)) x ∈
+            (domChart.extend (leeBoundaryModelWithCorners k)).target :=
+          (domChart.extend (leeBoundaryModelWithCorners k)).map_source <| by
+          simpa [domChart, OpenPartialHomeomorph.extend_source] using hAt.mem_domChart_source
+      have hxLeft : domChart.symm (domChart x) = x :=
+        domChart.left_inv hAt.mem_domChart_source
+      simpa [Function.comp, hxLeft, OpenPartialHomeomorph.extend_coe,
+        OpenPartialHomeomorph.extend_coe_symm, modelWithCornersSelf_coe] using hcoord hxExt
+    have hxV : x.1 ∈ V := by
+      refine ⟨codChart x.1, ⟨?_, codChart.map_source hxCod⟩, codChart.left_inv hxCod⟩
+      change euclidean_slice_projection hk (codChart x.1) ∈ T
+      rw [hxCoord, euclidean_slice_projection_inclusion]
+      exact hxT
+    have hxSource : x.1 ∈ e.source := by
+      rw [hESource]
+      exact ⟨hxCod, hxW, hxV⟩
+    refine ⟨e, hxSource, ?_⟩
+    refine ⟨?_, ?_⟩
+    · exact restr_mem_maximalAtlas
+        (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)) hcodMax (hWOpen.inter hVOpen)
+    · refine ⟨hk, (fun _ : Fin (n - k) ↦ (0 : ℝ)), ?_⟩
+      apply Set.Subset.antisymm
+      · rintro z ⟨y, ⟨hyS, hyE⟩, rfl⟩
+        have hyData : y ∈ codChart.source ∩ (W ∩ V) := by
+          rwa [← hESource]
+        let yS : S := ⟨y, hyS⟩
+        have hyU : yS ∈ U := by simpa [hWEq, yS] using hyData.2.1
+        have hyDom : yS ∈ domChart.source := hyU.1
+        have hyExtTarget :
+            (domChart.extend (leeBoundaryModelWithCorners k)) yS ∈
+              (domChart.extend (leeBoundaryModelWithCorners k)).target :=
+          (domChart.extend (leeBoundaryModelWithCorners k)).map_source <| by
+            simpa [OpenPartialHomeomorph.extend_source] using hyDom
+        have hyCoord :
+            codChart y = euclidean_slice_inclusion hk
+              (fun _ : Fin (n - k) ↦ (0 : ℝ))
+              ((domChart.extend (leeBoundaryModelWithCorners k)) yS) := by
+          have hyLeft : domChart.symm (domChart yS) = yS :=
+            domChart.left_inv hyDom
+          simpa [Function.comp, yS, hyLeft, OpenPartialHomeomorph.extend_coe,
+            OpenPartialHomeomorph.extend_coe_symm, modelWithCornersSelf_coe] using
+              hcoord hyExtTarget
+        refine ⟨e.map_source hyE, ?_⟩
+        intro i
+        change
+          (e y) (euclidean_slice_tail_coordinate hk i) = 0
+        simpa [e, hyCoord] using
+          euclidean_slice_inclusion_tail hk
+            (fun _ : Fin (n - k) ↦ (0 : ℝ))
+            ((domChart.extend (leeBoundaryModelWithCorners k)) yS) i
+      · intro z hz
+        have hzETarget : z ∈ e.target := hz.1
+        have hzCodTarget : z ∈ codChart.target := by
+          simpa [e, PartialEquiv.restr_target] using hzETarget.1
+        have hzPatch : codChart.symm z ∈ W ∩ V := by
+          have := hzETarget.2
+          simpa [e, PartialEquiv.restr_target,
+            (hWOpen.inter hVOpen).interior_eq] using this
+        have hzQ : z ∈ Q := by
+          rcases hzPatch.2 with ⟨w, hw, hwEq⟩
+          have hwEq' : w = z := by
+            calc
+              w = codChart (codChart.symm w) := (codChart.right_inv hw.2).symm
+              _ = codChart (codChart.symm z) := by rw [hwEq]
+              _ = z := codChart.right_inv hzCodTarget
+          simpa [hwEq'] using hw.1
+        let u := euclidean_slice_projection hk z
+        have huT : u ∈ T := by simpa [Q, u] using hzQ
+        have huTarget : u ∈ (domChart.extend (leeBoundaryModelWithCorners k)).target :=
+          interior_subset huT
+        let yS : S := (domChart.extend (leeBoundaryModelWithCorners k)).symm u
+        have hyDom : yS ∈ domChart.source := by
+          simpa [yS, OpenPartialHomeomorph.extend_source] using
+            (domChart.extend (leeBoundaryModelWithCorners k)).symm.map_source huTarget
+        have hyCoord : codChart yS.1 = z := by
+          calc
+            codChart yS.1 = euclidean_slice_inclusion hk
+                (fun _ : Fin (n - k) ↦ (0 : ℝ)) u := by
+              have := hcoord huTarget
+              simpa [Function.comp, yS, OpenPartialHomeomorph.extend_coe,
+                OpenPartialHomeomorph.extend_coe_symm, modelWithCornersSelf_coe] using this
+            _ = z := euclidean_slice_inclusion_projection hk
+              (fun _ : Fin (n - k) ↦ (0 : ℝ)) hz
+        have hyEq : yS.1 = codChart.symm z := by
+          have hyCod : yS.1 ∈ codChart.source := by
+            simpa [codChart, rawCodChart, OpenPartialHomeomorph.trans_source] using
+              hAt.source_subset_preimage_source hyDom
+          calc
+            yS.1 = codChart.symm (codChart yS.1) :=
+              (codChart.left_inv hyCod).symm
+            _ = codChart.symm z := by rw [hyCoord]
+        have hyW : yS.1 ∈ W := by simpa [hyEq] using hzPatch.1
+        have hyV : yS.1 ∈ V := by simpa [hyEq] using hzPatch.2
+        have hyE : yS.1 ∈ e.source := by
+          rw [hESource]
+          have hyCod : yS.1 ∈ codChart.source := by
+            simpa [codChart, rawCodChart, OpenPartialHomeomorph.trans_source] using
+              hAt.source_subset_preimage_source hyDom
+          exact ⟨hyCod, hyW, hyV⟩
+        refine ⟨yS.1, ⟨yS.2, hyE⟩, ?_⟩
+        simpa [e] using hyCoord
 
 /-- Helper for Theorem 5.51: a boundary point of the source boundary model admits an ambient
 half-slice chart for the subtype inclusion. -/
@@ -2598,10 +3310,245 @@ theorem smooth_embedding_subtype_val_has_local_half_slice_at_of_isBoundaryPoint
     -- form on a half-space source patch and use the same restricted-chart bookkeeping lemmas to
     -- show the restricted codomain chart has Euclidean half-slice image.
     rcases Nat.exists_eq_succ_of_ne_zero hk0 with ⟨m, rfl⟩
-    -- TODO: the missing bridge is the boundary analogue of
-    -- `restricted_local_normal_form_image_eq_zero_slice_of_projection_mem_target`, upgraded to
-    -- record the distinguished nonnegative coordinate of Lee's half-slice condition.
-    sorry
+    classical
+    let hkpos : 0 < m + 1 := Nat.succ_pos m
+    have hkn : m + 1 ≤ n := smooth_embedding_boundary_dimension_le S hS x
+    let hAt := hS.isImmersion.isImmersionAt x
+    haveI : FiniteDimensional ℝ
+        (EuclideanSpace ℝ (Fin (m + 1)) × hAt.complement) :=
+      FiniteDimensional.of_injective hAt.equiv.toLinearMap hAt.equiv.injective
+    haveI : FiniteDimensional ℝ hAt.complement :=
+      FiniteDimensional.of_injective
+        (LinearMap.inr ℝ (EuclideanSpace ℝ (Fin (m + 1))) hAt.complement)
+        LinearMap.inr_injective
+    have hfinComp : Module.finrank ℝ hAt.complement = n - (m + 1) := by
+      have hprod :
+          Module.finrank ℝ
+              (EuclideanSpace ℝ (Fin (m + 1)) × hAt.complement) = n := by
+        calc
+          Module.finrank ℝ
+              (EuclideanSpace ℝ (Fin (m + 1)) × hAt.complement) =
+              Module.finrank ℝ (EuclideanSpace ℝ (Fin n)) :=
+            hAt.equiv.toLinearEquiv.finrank_eq
+          _ = n := by
+            simpa using finrank_euclideanSpace_fin (α := ℝ) (ι := Fin n)
+      have hsum : m + 1 + Module.finrank ℝ hAt.complement = n := by
+        calc
+          m + 1 + Module.finrank ℝ hAt.complement =
+              Module.finrank ℝ
+                (EuclideanSpace ℝ (Fin (m + 1)) × hAt.complement) := by
+            simpa using
+              (Module.finrank_prod ℝ
+                (EuclideanSpace ℝ (Fin (m + 1))) hAt.complement).symm
+          _ = n := hprod
+      omega
+    have hfinCompEq :
+        Module.finrank ℝ hAt.complement =
+          Module.finrank ℝ (EuclideanSpace ℝ (Fin (n - (m + 1)))) := by
+      simpa [hfinComp] using
+        (finrank_euclideanSpace_fin (α := ℝ) (ι := Fin (n - (m + 1)))).symm
+    let compEquiv : hAt.complement ≃L[ℝ]
+        EuclideanSpace ℝ (Fin (n - (m + 1))) :=
+      ContinuousLinearEquiv.ofFinrankEq hfinCompEq
+    let q : EuclideanSpace ℝ (Fin (m + 1)) ≃L[ℝ]
+        EuclideanSpace ℝ (Fin (m + 1)) :=
+      theorem551_boundary_coordinate_swap hkpos
+    let straightening :
+        EuclideanSpace ℝ (Fin n) ≃L[ℝ] EuclideanSpace ℝ (Fin n) :=
+      hAt.equiv.symm.trans
+        (((q.prodCongr compEquiv)).trans (euclidean_slice_product_equiv hkn))
+    let domChart := hAt.domChart
+    let rawCodChart := hAt.codChart
+    let codChart :=
+      rawCodChart.trans straightening.toHomeomorph.toOpenPartialHomeomorph
+    have hcodMax :
+        codChart ∈ IsManifold.maximalAtlas (𝓡 n) (⊤ : WithTop ℕ∞) M := by
+      exact trans_mem_maximalAtlas_of_mem_groupoid hAt.codChart_mem_maximalAtlas
+        (theorem551_euclidean_linear_equiv_mem_contDiffGroupoid (L := straightening))
+    have hcoord :
+        Set.EqOn
+          (((codChart.extend (𝓡 n)) ∘ Subtype.val ∘
+            (domChart.extend (leeBoundaryModelWithCorners (m + 1))).symm))
+          (fun z ↦ euclidean_slice_inclusion hkn
+            (fun _ : Fin (n - (m + 1)) ↦ (0 : ℝ)) (q z))
+          (domChart.extend (leeBoundaryModelWithCorners (m + 1))).target := by
+      intro z hz
+      have hraw := hAt.writtenInCharts hz
+      calc
+        ((codChart.extend (𝓡 n)) ∘ Subtype.val ∘
+              (domChart.extend (leeBoundaryModelWithCorners (m + 1))).symm) z =
+            straightening
+              (((rawCodChart.extend (𝓡 n)) ∘ Subtype.val ∘
+                (domChart.extend (leeBoundaryModelWithCorners (m + 1))).symm) z) := by
+              simp [codChart, rawCodChart, Function.comp]
+        _ = straightening (hAt.equiv (z, (0 : hAt.complement))) := by
+              simpa [Function.comp] using congrArg straightening hraw
+        _ = euclidean_slice_product_equiv hkn
+              (q z, (0 : EuclideanSpace ℝ (Fin (n - (m + 1))))) := by
+              simp [straightening, compEquiv]
+        _ = euclidean_slice_inclusion hkn
+              (fun _ : Fin (n - (m + 1)) ↦ (0 : ℝ)) (q z) :=
+              euclidean_slice_product_equiv_apply_zero hkn (q z)
+    let T : Set (EuclideanSpace ℝ (Fin (m + 1))) :=
+      (leeBoundaryModelWithCorners (m + 1)).symm ⁻¹' domChart.target
+    have hTOpen : IsOpen T := by
+      exact domChart.open_target.preimage
+        (leeBoundaryModelWithCorners (m + 1)).continuous_symm
+    let U : Set S := domChart.source
+    have hUOpen : IsOpen U := domChart.open_source
+    rcases subtype_open_eq_preimage_ambient_open hUOpen with ⟨W, hWOpen, hWEq⟩
+    let Q : Set (EuclideanSpace ℝ (Fin n)) :=
+      {z | q.symm (euclidean_slice_projection hkn z) ∈ T}
+    have hQOpen : IsOpen Q := by
+      exact hTOpen.preimage
+        (q.symm.continuous.comp (euclidean_slice_projection_continuous hkn))
+    let V : Set M := codChart.symm '' (Q ∩ codChart.target)
+    have hVOpen : IsOpen V := by
+      exact codChart.isOpen_image_symm_of_subset_target
+        (hQOpen.inter codChart.open_target) inter_subset_right
+    let e : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n)) :=
+      codChart.restr (W ∩ V)
+    have hESource : e.source = codChart.source ∩ (W ∩ V) := by
+      simpa [e] using codChart.restr_source' (W ∩ V) (hWOpen.inter hVOpen)
+    have hxU : x ∈ U := hAt.mem_domChart_source
+    have hxW : x.1 ∈ W := by simpa [hWEq] using hxU
+    have hxCod : x.1 ∈ codChart.source := by
+      simpa [codChart, rawCodChart, OpenPartialHomeomorph.trans_source] using
+        hAt.mem_codChart_source
+    have hxExt :
+        (domChart.extend (leeBoundaryModelWithCorners (m + 1))) x ∈
+          (domChart.extend (leeBoundaryModelWithCorners (m + 1))).target :=
+      (domChart.extend (leeBoundaryModelWithCorners (m + 1))).map_source <| by
+        simpa [OpenPartialHomeomorph.extend_source] using hAt.mem_domChart_source
+    have hxCoord :
+        codChart x.1 = euclidean_slice_inclusion hkn
+          (fun _ : Fin (n - (m + 1)) ↦ (0 : ℝ))
+          (q ((domChart.extend (leeBoundaryModelWithCorners (m + 1))) x)) := by
+      have hxLeft : domChart.symm (domChart x) = x :=
+        domChart.left_inv hAt.mem_domChart_source
+      simpa [Function.comp, hxLeft, OpenPartialHomeomorph.extend_coe,
+        OpenPartialHomeomorph.extend_coe_symm, modelWithCornersSelf_coe] using hcoord hxExt
+    have hxV : x.1 ∈ V := by
+      refine ⟨codChart x.1, ⟨?_, codChart.map_source hxCod⟩, codChart.left_inv hxCod⟩
+      change q.symm (euclidean_slice_projection hkn (codChart x.1)) ∈ T
+      rw [hxCoord, euclidean_slice_projection_inclusion]
+      simpa [T] using
+        (show domChart x ∈ domChart.target from domChart.map_source hAt.mem_domChart_source)
+    have hxSource : x.1 ∈ e.source := by
+      rw [hESource]
+      exact ⟨hxCod, hxW, hxV⟩
+    refine ⟨e, hxSource, ?_⟩
+    refine ⟨?_, ?_⟩
+    · exact restr_mem_maximalAtlas
+        (contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n)) hcodMax (hWOpen.inter hVOpen)
+    · refine ⟨hkpos, hkn, (fun _ : Fin (n - (m + 1)) ↦ (0 : ℝ)), ?_⟩
+      apply Set.Subset.antisymm
+      · rintro z ⟨y, ⟨hyS, hyE⟩, rfl⟩
+        have hyData : y ∈ codChart.source ∩ (W ∩ V) := by rwa [← hESource]
+        let yS : S := ⟨y, hyS⟩
+        have hyU : yS ∈ U := by simpa [hWEq, yS] using hyData.2.1
+        have hyExtTarget :
+            (domChart.extend (leeBoundaryModelWithCorners (m + 1))) yS ∈
+              (domChart.extend (leeBoundaryModelWithCorners (m + 1))).target :=
+          (domChart.extend (leeBoundaryModelWithCorners (m + 1))).map_source <| by
+            simpa [U, OpenPartialHomeomorph.extend_source] using hyU
+        have hyCoord :
+            codChart y = euclidean_slice_inclusion hkn
+              (fun _ : Fin (n - (m + 1)) ↦ (0 : ℝ))
+              (q ((domChart.extend (leeBoundaryModelWithCorners (m + 1))) yS)) := by
+          have hyLeft : domChart.symm (domChart yS) = yS := domChart.left_inv hyU
+          simpa [Function.comp, yS, hyLeft, OpenPartialHomeomorph.extend_coe,
+            OpenPartialHomeomorph.extend_coe_symm, modelWithCornersSelf_coe] using
+              hcoord hyExtTarget
+        refine ⟨⟨e.map_source hyE, ?_⟩, ?_⟩
+        · intro i
+          change (e y) (euclidean_slice_tail_coordinate hkn i) = 0
+          simpa [e, hyCoord] using
+            euclidean_slice_inclusion_tail hkn
+              (fun _ : Fin (n - (m + 1)) ↦ (0 : ℝ))
+              (q ((domChart.extend (leeBoundaryModelWithCorners (m + 1))) yS)) i
+        · change 0 ≤ (e y)
+              ⟨m, lt_of_lt_of_le (Nat.pred_lt (Nat.succ_ne_zero m)) hkn⟩
+          rw [show e y = codChart y by rfl, hyCoord]
+          rw [show
+            ⟨m, lt_of_lt_of_le (Nat.pred_lt (Nat.succ_ne_zero m)) hkn⟩ =
+              Fin.castLE hkn ⟨m, Nat.pred_lt (Nat.succ_ne_zero m)⟩ by rfl]
+          rw [euclidean_slice_inclusion_first]
+          have hswap :
+              q ((domChart.extend (leeBoundaryModelWithCorners (m + 1))) yS)
+                  ⟨m, Nat.lt_add_one m⟩ =
+                ((domChart.extend (leeBoundaryModelWithCorners (m + 1))) yS)
+                  ⟨0, Nat.succ_pos m⟩ := by
+            simpa [q] using theorem551_boundary_coordinate_swap_last hkpos
+              ((domChart.extend (leeBoundaryModelWithCorners (m + 1))) yS)
+          rw [hswap]
+          exact (domChart yS).2
+      · intro z hz
+        have hzETarget : z ∈ e.target := hz.1.1
+        have hzCodTarget : z ∈ codChart.target := by
+          simpa [e, PartialEquiv.restr_target] using hzETarget.1
+        have hzPatch : codChart.symm z ∈ W ∩ V := by
+          have := hzETarget.2
+          simpa [e, PartialEquiv.restr_target,
+            (hWOpen.inter hVOpen).interior_eq] using this
+        have hzQ : z ∈ Q := by
+          rcases hzPatch.2 with ⟨w, hw, hwEq⟩
+          have hwEq' : w = z := by
+            calc
+              w = codChart (codChart.symm w) := (codChart.right_inv hw.2).symm
+              _ = codChart (codChart.symm z) := by rw [hwEq]
+              _ = z := codChart.right_inv hzCodTarget
+          simpa [hwEq'] using hw.1
+        let u := q.symm (euclidean_slice_projection hkn z)
+        have huT : u ∈ T := by simpa [Q, u] using hzQ
+        have huNonneg : 0 ≤ u ⟨0, Nat.succ_pos m⟩ := by
+          calc
+            0 ≤ (euclidean_slice_projection hkn z)
+                ⟨m, Nat.pred_lt (Nat.succ_ne_zero m)⟩ := by
+              change 0 ≤ z
+                ⟨m, lt_of_lt_of_le (Nat.pred_lt (Nat.succ_ne_zero m)) hkn⟩
+              exact hz.2
+            _ = u ⟨0, Nat.succ_pos m⟩ := by
+              symm
+              exact theorem551_boundary_coordinate_swap_symm_zero hkpos _
+        have huRange : u ∈ Set.range (leeBoundaryModelWithCorners (m + 1)) := by
+          rw [leeBoundaryModelWithCorners, range_modelWithCornersEuclideanHalfSpace]
+          exact huNonneg
+        have huTarget :
+            u ∈ (domChart.extend (leeBoundaryModelWithCorners (m + 1))).target := by
+          rw [OpenPartialHomeomorph.extend_target]
+          exact ⟨huT, huRange⟩
+        let yS : S :=
+          (domChart.extend (leeBoundaryModelWithCorners (m + 1))).symm u
+        have hyDom : yS ∈ domChart.source := by
+          simpa [yS, OpenPartialHomeomorph.extend_source] using
+            (domChart.extend (leeBoundaryModelWithCorners (m + 1))).symm.map_source huTarget
+        have hyCoord : codChart yS.1 = z := by
+          calc
+            codChart yS.1 = euclidean_slice_inclusion hkn
+                (fun _ : Fin (n - (m + 1)) ↦ (0 : ℝ)) (q u) := by
+              have := hcoord huTarget
+              simpa [Function.comp, yS, OpenPartialHomeomorph.extend_coe,
+                OpenPartialHomeomorph.extend_coe_symm, modelWithCornersSelf_coe] using this
+            _ = euclidean_slice_inclusion hkn
+                (fun _ : Fin (n - (m + 1)) ↦ (0 : ℝ))
+                (euclidean_slice_projection hkn z) := by simp [u]
+            _ = z := euclidean_slice_inclusion_projection hkn
+              (fun _ : Fin (n - (m + 1)) ↦ (0 : ℝ)) hz.1
+        have hyCod : yS.1 ∈ codChart.source := by
+          simpa [codChart, rawCodChart, OpenPartialHomeomorph.trans_source] using
+            hAt.source_subset_preimage_source hyDom
+        have hyEq : yS.1 = codChart.symm z := by
+          calc
+            yS.1 = codChart.symm (codChart yS.1) := (codChart.left_inv hyCod).symm
+            _ = codChart.symm z := by rw [hyCoord]
+        have hyW : yS.1 ∈ W := by simpa [hyEq] using hzPatch.1
+        have hyV : yS.1 ∈ V := by simpa [hyEq] using hzPatch.2
+        have hyE : yS.1 ∈ e.source := by
+          rw [hESource]
+          exact ⟨hyCod, hyW, hyV⟩
+        refine ⟨yS.1, ⟨yS.2, hyE⟩, ?_⟩
+        simpa [e] using hyCoord
 
 /-- Helper for Theorem 5.51: a point of a smoothly embedded subtype admits an ambient chart whose
 local image is either a Euclidean slice or a Euclidean half-slice. -/
@@ -2633,6 +3580,399 @@ theorem smooth_embedding_subtype_val_has_local_slice_or_half_slice_at
       ⟨e, hxsource, heHalfSlice⟩
     exact ⟨e, hxsource, Or.inr heHalfSlice⟩
 
+/-- The uniform local coordinate data behind both the interior-slice and boundary-half-slice
+branches of the induced atlas. -/
+private structure Theorem551LocalChartData
+    (S : Set M) (hS : Set.SatisfiesLocalSliceConditionWithBoundary n S k) (x : S) where
+  hk : k ≤ n
+  c : Fin (n - k) → ℝ
+  forward : EuclideanSpace ℝ (Fin k) → EuclideanSpace ℝ (Fin k)
+  backward : EuclideanSpace ℝ (Fin k) → EuclideanSpace ℝ (Fin k)
+  forward_contDiff : ContDiff ℝ (⊤ : WithTop ℕ∞) forward
+  backward_contDiff : ContDiff ℝ (⊤ : WithTop ℕ∞) backward
+  forward_backward : ∀ z, forward (backward z) = z
+  backward_forward : ∀ z, backward (forward z) = z
+  chart_apply : ∀ {y : S},
+    y ∈ (local_slice_condition_with_boundary_chartAt S hS x).source →
+      (leeBoundaryModelWithCorners k)
+          (local_slice_condition_with_boundary_chartAt S hS x y) =
+        forward (euclidean_slice_projection hk
+          (local_slice_condition_with_boundary_ambient_chart S hS x y.1))
+  ambient_eq_inclusion : ∀ {y : S},
+    y.1 ∈ (local_slice_condition_with_boundary_ambient_chart S hS x).source →
+      local_slice_condition_with_boundary_ambient_chart S hS x y.1 =
+        euclidean_slice_inclusion hk c
+          (euclidean_slice_projection hk
+            (local_slice_condition_with_boundary_ambient_chart S hS x y.1))
+
+/-- Helper for Theorem 5.51: construct the uniform local data by splitting only once on the
+chosen ambient witness. -/
+private noncomputable def theorem551_localChartData
+    (S : Set M) (hS : Set.SatisfiesLocalSliceConditionWithBoundary n S k) (x : S) :
+    Theorem551LocalChartData S hS x := by
+  classical
+  let e := local_slice_condition_with_boundary_ambient_chart S hS x
+  let hx := local_slice_condition_with_boundary_ambient_chart_mem_source S hS x
+  have hCases : e.IsSliceChart S k ∨ e.IsBoundarySliceChart S k := by
+    simpa [e] using
+      local_slice_condition_with_boundary_ambient_chart_isSlice_or_isBoundarySlice S hS x
+  by_cases hSlice : e.IsSliceChart S k
+  · let hk : k ≤ n := Classical.choose hSlice.2
+    have hc : ∃ c : Fin (n - k) → ℝ,
+        e '' (S ∩ e.source) = Set.euclideanSlice e.target k hk c := by
+      simpa [hk] using (Classical.choose_spec hSlice.2)
+    let c : Fin (n - k) → ℝ := Classical.choose hc
+    let hImage : e '' (S ∩ e.source) = Set.euclideanSlice e.target k hk c :=
+      Classical.choose_spec hc
+    refine
+      { hk := hk
+        c := c
+        forward := theorem551_interior_forward hk e x
+        backward := theorem551_interior_backward hk e x
+        forward_contDiff := theorem551_interior_forward_contDiff hk e x
+        backward_contDiff := theorem551_interior_backward_contDiff hk e x
+        forward_backward := theorem551_interior_forward_backward hk e x
+        backward_forward := theorem551_interior_backward_forward hk e x
+        chart_apply := ?_
+        ambient_eq_inclusion := ?_ }
+    · intro y hy
+      have hSlice' :
+          (local_slice_condition_with_boundary_ambient_chart S hS x).IsSliceChart S k := by
+        simpa [e] using hSlice
+      rw [local_slice_condition_with_boundary_chartAt_eq_of_isSliceChart S hS x hSlice'] at hy ⊢
+      simpa [e, hx] using
+        theorem551_interior_pointed_chart_apply S e hSlice x hx hk hy
+    · intro y hy
+      have hz : e y.1 ∈ Set.euclideanSlice e.target k hk c := by
+        rw [← hImage]
+        exact ⟨y.1, ⟨y.2, by simpa [e] using hy⟩, rfl⟩
+      simpa [e] using (euclidean_slice_inclusion_projection hk c hz).symm
+  · have hBoundary : e.IsBoundarySliceChart S k := by
+      rcases hCases with hSlice' | hBoundary
+      · exact (hSlice hSlice').elim
+      · exact hBoundary
+    let hkpos : 0 < k := Classical.choose hBoundary.2
+    have hhkn : ∃ hkn : k ≤ n, ∃ c : Fin (n - k) → ℝ,
+        e '' (S ∩ e.source) = Set.euclideanHalfSlice e.target k hkpos hkn c := by
+      simpa [Set.IsHalfSliceInChart, Set.IsEuclideanHalfSlice, hkpos] using
+        (Classical.choose_spec hBoundary.2)
+    let hkn : k ≤ n := Classical.choose hhkn
+    have hc : ∃ c : Fin (n - k) → ℝ,
+        e '' (S ∩ e.source) = Set.euclideanHalfSlice e.target k hkpos hkn c := by
+      simpa [hkn] using (Classical.choose_spec hhkn)
+    let c : Fin (n - k) → ℝ := Classical.choose hc
+    let hImage : e '' (S ∩ e.source) =
+        Set.euclideanHalfSlice e.target k hkpos hkn c := Classical.choose_spec hc
+    refine
+      { hk := hkn
+        c := c
+        forward := theorem551_boundary_forward hkpos
+        backward := theorem551_boundary_backward hkpos
+        forward_contDiff := theorem551_boundary_forward_contDiff hkpos
+        backward_contDiff := theorem551_boundary_backward_contDiff hkpos
+        forward_backward := theorem551_boundary_forward_backward hkpos
+        backward_forward := theorem551_boundary_backward_forward hkpos
+        chart_apply := ?_
+        ambient_eq_inclusion := ?_ }
+    · intro y hy
+      have hNotSlice :
+          ¬ (local_slice_condition_with_boundary_ambient_chart S hS x).IsSliceChart S k := by
+        simpa [e] using hSlice
+      have hBoundary' :
+          (local_slice_condition_with_boundary_ambient_chart S hS x).IsBoundarySliceChart S k := by
+        simpa [e] using hBoundary
+      rw [local_slice_condition_with_boundary_chartAt_eq_of_isBoundarySliceChart
+        S hS x hNotSlice hBoundary'] at hy ⊢
+      simpa [e, hx] using
+        theorem551_boundary_pointed_chart_apply S e hBoundary x hx hkpos hkn hy
+    · intro y hy
+      have hz : e y.1 ∈ Set.euclideanHalfSlice e.target k hkpos hkn c := by
+        rw [← hImage]
+        exact ⟨y.1, ⟨y.2, by simpa [e] using hy⟩, rfl⟩
+      simpa [e] using (euclidean_slice_inclusion_projection hkn c hz.1).symm
+
+/-- Helper for Theorem 5.51: the inverse induced chart is obtained by undoing its affine
+coordinate change, reinserting the fixed tail, and applying the inverse ambient chart. -/
+private theorem theorem551_chartAt_symm_image_data
+    (S : Set M) (hS : Set.SatisfiesLocalSliceConditionWithBoundary n S k)
+    (x : S) (D : Theorem551LocalChartData S hS x)
+    {z : ℍ^{k}}
+    (hz : z ∈ (local_slice_condition_with_boundary_chartAt S hS x).target) :
+    ((local_slice_condition_with_boundary_chartAt S hS x).symm z).1 =
+        (local_slice_condition_with_boundary_ambient_chart S hS x).symm
+          (euclidean_slice_inclusion D.hk D.c
+            (D.backward ((leeBoundaryModelWithCorners k) z))) ∧
+      euclidean_slice_inclusion D.hk D.c
+          (D.backward ((leeBoundaryModelWithCorners k) z)) ∈
+        (local_slice_condition_with_boundary_ambient_chart S hS x).target := by
+  let chart := local_slice_condition_with_boundary_chartAt S hS x
+  let e := local_slice_condition_with_boundary_ambient_chart S hS x
+  let y : S := chart.symm z
+  have hySource : y ∈ chart.source := chart.symm.map_source hz
+  have hyAmbient : y.1 ∈ e.source := by
+    exact local_slice_condition_with_boundary_chartAt_source_subset_ambient_source
+      S hS x hySource
+  have hright : chart y = z := chart.right_inv hz
+  have happly := D.chart_apply hySource
+  have hmodel :
+      (leeBoundaryModelWithCorners k) z =
+        D.forward (euclidean_slice_projection D.hk (e y.1)) := by
+    simpa [chart, e, y, hright] using happly
+  have hproj :
+      euclidean_slice_projection D.hk (e y.1) =
+        D.backward ((leeBoundaryModelWithCorners k) z) := by
+    calc
+      euclidean_slice_projection D.hk (e y.1) =
+          D.backward (D.forward (euclidean_slice_projection D.hk (e y.1))) :=
+        (D.backward_forward _).symm
+      _ = D.backward ((leeBoundaryModelWithCorners k) z) := by rw [hmodel]
+  have hcoord :
+      e y.1 = euclidean_slice_inclusion D.hk D.c
+        (D.backward ((leeBoundaryModelWithCorners k) z)) := by
+    rw [D.ambient_eq_inclusion hyAmbient, hproj]
+  have htarget :
+      euclidean_slice_inclusion D.hk D.c
+          (D.backward ((leeBoundaryModelWithCorners k) z)) ∈ e.target := by
+    rw [← hcoord]
+    exact e.map_source hyAmbient
+  refine ⟨?_, htarget⟩
+  calc
+    y.1 = e.symm (e y.1) := (e.left_inv hyAmbient).symm
+    _ = e.symm (euclidean_slice_inclusion D.hk D.c
+          (D.backward ((leeBoundaryModelWithCorners k) z))) := by rw [hcoord]
+
+/-- Helper for Theorem 5.51: every mixed overlap of induced charts is smooth, since its extended
+coordinate formula factors through an ambient maximal-atlas transition and affine maps. -/
+private theorem theorem551_chartAt_transition_contDiffOn
+    (S : Set M) (hS : Set.SatisfiesLocalSliceConditionWithBoundary n S k)
+    (x y : S) :
+    ContDiffOn ℝ (⊤ : WithTop ℕ∞)
+      ((leeBoundaryModelWithCorners k) ∘
+        (local_slice_condition_with_boundary_chartAt S hS x).symm.trans
+          (local_slice_condition_with_boundary_chartAt S hS y) ∘
+        (leeBoundaryModelWithCorners k).symm)
+      ((leeBoundaryModelWithCorners k).symm ⁻¹'
+          ((local_slice_condition_with_boundary_chartAt S hS x).symm.trans
+            (local_slice_condition_with_boundary_chartAt S hS y)).source ∩
+        Set.range (leeBoundaryModelWithCorners k)) := by
+  let Dx := theorem551_localChartData S hS x
+  let Dy := theorem551_localChartData S hS y
+  let ex := local_slice_condition_with_boundary_ambient_chart S hS x
+  let ey := local_slice_condition_with_boundary_ambient_chart S hS y
+  let chartx := local_slice_condition_with_boundary_chartAt S hS x
+  let charty := local_slice_condition_with_boundary_chartAt S hS y
+  let A : Set (EuclideanSpace ℝ (Fin k)) :=
+    (leeBoundaryModelWithCorners k).symm ⁻¹' (chartx.symm.trans charty).source ∩
+      Set.range (leeBoundaryModelWithCorners k)
+  have hcompat : ex.symm.trans ey ∈
+      contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n) := by
+    exact local_slice_condition_with_boundary_ambient_transition_mem_contDiffGroupoid
+      S hS x y
+  have hambient : ContDiffOn ℝ (⊤ : WithTop ℕ∞)
+      (fun u => ey (ex.symm u)) (ex.symm.trans ey).source := by
+    rw [contDiffGroupoid, mem_groupoid_of_pregroupoid, contDiffPregroupoid] at hcompat
+    simpa [ex, ey, Function.comp, modelWithCornersSelf_coe,
+      OpenPartialHomeomorph.coe_trans] using! hcompat.1
+  have hbackward : ContDiff ℝ (⊤ : WithTop ℕ∞) Dx.backward :=
+    Dx.backward_contDiff
+  have hinclusion : ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (fun u => euclidean_slice_inclusion Dx.hk Dx.c (Dx.backward u)) := by
+    exact (euclidean_slice_inclusion_contMDiff Dx.hk Dx.c).contDiff.comp hbackward
+  have hmaps : Set.MapsTo
+      (fun u => euclidean_slice_inclusion Dx.hk Dx.c (Dx.backward u))
+      A (ex.symm.trans ey).source := by
+    intro u hu
+    have huTrans : (leeBoundaryModelWithCorners k).symm u ∈
+        (chartx.symm.trans charty).source := hu.1
+    rw [OpenPartialHomeomorph.trans_source] at huTrans
+    have hdata := theorem551_chartAt_symm_image_data S hS x Dx huTrans.1
+    have hright :
+        (leeBoundaryModelWithCorners k)
+            ((leeBoundaryModelWithCorners k).symm u) = u :=
+      (leeBoundaryModelWithCorners k).right_inv hu.2
+    have htarget :
+        euclidean_slice_inclusion Dx.hk Dx.c (Dx.backward u) ∈ ex.target := by
+      simpa [ex, hright] using hdata.2
+    have hval :
+        (chartx.symm ((leeBoundaryModelWithCorners k).symm u)).1 =
+          ex.symm (euclidean_slice_inclusion Dx.hk Dx.c (Dx.backward u)) := by
+      simpa [chartx, ex, hright] using hdata.1
+    have hyAmbient :
+        ((chartx.symm ((leeBoundaryModelWithCorners k).symm u)).1) ∈ ey.source := by
+      exact local_slice_condition_with_boundary_chartAt_source_subset_ambient_source
+        S hS y huTrans.2
+    rw [OpenPartialHomeomorph.trans_source]
+    refine ⟨htarget, ?_⟩
+    simpa [hval] using hyAmbient
+  have hthroughAmbient : ContDiffOn ℝ (⊤ : WithTop ℕ∞)
+      (fun u => ey (ex.symm
+        (euclidean_slice_inclusion Dx.hk Dx.c (Dx.backward u)))) A :=
+    hambient.comp hinclusion.contDiffOn hmaps
+  have hprojection : ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (euclidean_slice_projection Dy.hk) :=
+    (euclidean_slice_projection_contMDiff Dy.hk).contDiff
+  have hprojectionOn : ContDiffOn ℝ (⊤ : WithTop ℕ∞)
+      (euclidean_slice_projection Dy.hk) Set.univ := hprojection.contDiffOn
+  have hprojected : ContDiffOn ℝ (⊤ : WithTop ℕ∞)
+      (fun u => euclidean_slice_projection Dy.hk
+        (ey (ex.symm
+          (euclidean_slice_inclusion Dx.hk Dx.c (Dx.backward u))))) A :=
+    hprojectionOn.comp hthroughAmbient (by intro u hu; exact Set.mem_univ _)
+  have hforwardOn : ContDiffOn ℝ (⊤ : WithTop ℕ∞)
+      Dy.forward Set.univ := Dy.forward_contDiff.contDiffOn
+  have hformula : ContDiffOn ℝ (⊤ : WithTop ℕ∞)
+      (fun u => Dy.forward
+        (euclidean_slice_projection Dy.hk
+          (ey (ex.symm
+            (euclidean_slice_inclusion Dx.hk Dx.c (Dx.backward u)))))) A :=
+    hforwardOn.comp hprojected (by intro u hu; exact Set.mem_univ _)
+  change ContDiffOn ℝ (⊤ : WithTop ℕ∞)
+      ((leeBoundaryModelWithCorners k) ∘ (chartx.symm.trans charty) ∘
+        (leeBoundaryModelWithCorners k).symm) A
+  refine hformula.congr ?_
+  intro u hu
+  have huTrans : (leeBoundaryModelWithCorners k).symm u ∈
+      (chartx.symm.trans charty).source := hu.1
+  rw [OpenPartialHomeomorph.trans_source] at huTrans
+  have hdata := theorem551_chartAt_symm_image_data S hS x Dx huTrans.1
+  have happly := Dy.chart_apply huTrans.2
+  have hright :
+      (leeBoundaryModelWithCorners k)
+          ((leeBoundaryModelWithCorners k).symm u) = u :=
+    (leeBoundaryModelWithCorners k).right_inv hu.2
+  simpa [Function.comp, OpenPartialHomeomorph.coe_trans, chartx, charty,
+    ex, ey, hdata.1, hright] using happly
+
+/-- Helper for Theorem 5.51: normalize an affine slice by subtracting its fixed-tail basepoint
+and applying the local free-coordinate change on the first product factor. -/
+private noncomputable def theorem551_ambientNormalization
+    {S : Set M} {hS : Set.SatisfiesLocalSliceConditionWithBoundary n S k} {x : S}
+    (D : Theorem551LocalChartData S hS x) :
+    EuclideanSpace ℝ (Fin n) ≃ₜ EuclideanSpace ℝ (Fin n) := by
+  let p := euclidean_slice_product_equiv D.hk
+  let base := euclidean_slice_inclusion D.hk D.c (0 : EuclideanSpace ℝ (Fin k))
+  refine
+    { toFun := fun z =>
+        p (D.forward ((p.symm (z - base)).1), (p.symm (z - base)).2)
+      invFun := fun z =>
+        p (D.backward ((p.symm z).1), (p.symm z).2) + base
+      left_inv := ?_
+      right_inv := ?_
+      continuous_toFun := ?_
+      continuous_invFun := ?_ }
+  · intro z
+    change
+      p (D.backward
+          ((p.symm (p
+            (D.forward ((p.symm (z - base)).1), (p.symm (z - base)).2))).1),
+        (p.symm (p
+          (D.forward ((p.symm (z - base)).1), (p.symm (z - base)).2))).2) + base = z
+    rw [p.symm_apply_apply, D.backward_forward, p.apply_symm_apply, sub_add_cancel]
+  · intro z
+    change
+      p (D.forward
+          ((p.symm (p (D.backward ((p.symm z).1), (p.symm z).2) + base - base)).1),
+        (p.symm (p (D.backward ((p.symm z).1), (p.symm z).2) + base - base)).2) = z
+    rw [add_sub_cancel_right, p.symm_apply_apply, D.forward_backward, p.apply_symm_apply]
+  · have hshift : Continuous fun z : EuclideanSpace ℝ (Fin n) => z - base :=
+      continuous_id.sub continuous_const
+    have hp : Continuous fun z : EuclideanSpace ℝ (Fin n) => p.symm (z - base) :=
+      p.symm.continuous.comp hshift
+    have hfst : Continuous fun z : EuclideanSpace ℝ (Fin n) =>
+        D.forward ((p.symm (z - base)).1) :=
+      D.forward_contDiff.continuous.comp (continuous_fst.comp hp)
+    have hsnd : Continuous fun z : EuclideanSpace ℝ (Fin n) =>
+        (p.symm (z - base)).2 := continuous_snd.comp hp
+    exact p.continuous.comp (hfst.prodMk hsnd)
+  · have hp : Continuous fun z : EuclideanSpace ℝ (Fin n) => p.symm z :=
+      p.symm.continuous
+    have hfst : Continuous fun z : EuclideanSpace ℝ (Fin n) =>
+        D.backward ((p.symm z).1) :=
+      D.backward_contDiff.continuous.comp (continuous_fst.comp hp)
+    have hsnd : Continuous fun z : EuclideanSpace ℝ (Fin n) =>
+        (p.symm z).2 := continuous_snd.comp hp
+    exact (p.continuous.comp (hfst.prodMk hsnd)).add continuous_const
+
+private theorem theorem551_ambientNormalization_contDiff
+    {S : Set M} {hS : Set.SatisfiesLocalSliceConditionWithBoundary n S k} {x : S}
+    (D : Theorem551LocalChartData S hS x) :
+    ContDiff ℝ (⊤ : WithTop ℕ∞) (theorem551_ambientNormalization D) := by
+  let p := euclidean_slice_product_equiv D.hk
+  let base := euclidean_slice_inclusion D.hk D.c (0 : EuclideanSpace ℝ (Fin k))
+  have hshift : ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (fun z : EuclideanSpace ℝ (Fin n) => z - base) := contDiff_id.sub contDiff_const
+  have hp : ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (fun z : EuclideanSpace ℝ (Fin n) => p.symm (z - base)) :=
+    p.symm.contDiff.comp hshift
+  have hfst : ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (fun z : EuclideanSpace ℝ (Fin n) => D.forward ((p.symm (z - base)).1)) :=
+    D.forward_contDiff.comp (contDiff_fst.comp hp)
+  have hsnd : ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (fun z : EuclideanSpace ℝ (Fin n) => (p.symm (z - base)).2) :=
+    contDiff_snd.comp hp
+  change ContDiff ℝ (⊤ : WithTop ℕ∞)
+    (fun z : EuclideanSpace ℝ (Fin n) =>
+      p (D.forward ((p.symm (z - base)).1), (p.symm (z - base)).2))
+  exact p.contDiff.comp (hfst.prodMk hsnd)
+
+private theorem theorem551_ambientNormalization_symm_contDiff
+    {S : Set M} {hS : Set.SatisfiesLocalSliceConditionWithBoundary n S k} {x : S}
+    (D : Theorem551LocalChartData S hS x) :
+    ContDiff ℝ (⊤ : WithTop ℕ∞) (theorem551_ambientNormalization D).symm := by
+  let p := euclidean_slice_product_equiv D.hk
+  let base := euclidean_slice_inclusion D.hk D.c (0 : EuclideanSpace ℝ (Fin k))
+  have hp : ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (fun z : EuclideanSpace ℝ (Fin n) => p.symm z) := p.symm.contDiff
+  have hfst : ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (fun z : EuclideanSpace ℝ (Fin n) => D.backward ((p.symm z).1)) :=
+    D.backward_contDiff.comp (contDiff_fst.comp hp)
+  have hsnd : ContDiff ℝ (⊤ : WithTop ℕ∞)
+      (fun z : EuclideanSpace ℝ (Fin n) => (p.symm z).2) := contDiff_snd.comp hp
+  change ContDiff ℝ (⊤ : WithTop ℕ∞)
+    (fun z : EuclideanSpace ℝ (Fin n) =>
+      p (D.backward ((p.symm z).1), (p.symm z).2) + base)
+  exact (p.contDiff.comp (hfst.prodMk hsnd)).add contDiff_const
+
+private theorem theorem551_ambientNormalization_mem_contDiffGroupoid
+    {S : Set M} {hS : Set.SatisfiesLocalSliceConditionWithBoundary n S k} {x : S}
+    (D : Theorem551LocalChartData S hS x) :
+    (theorem551_ambientNormalization D).toOpenPartialHomeomorph ∈
+      contDiffGroupoid (⊤ : WithTop ℕ∞) (𝓡 n) := by
+  rw [contDiffGroupoid, mem_groupoid_of_pregroupoid, contDiffPregroupoid]
+  constructor
+  · simpa [modelWithCornersSelf_coe] using
+      (theorem551_ambientNormalization_contDiff D).contDiffOn
+  · simpa [modelWithCornersSelf_coe] using
+      (theorem551_ambientNormalization_symm_contDiff D).contDiffOn
+
+private theorem theorem551_ambientNormalization_apply_inclusion
+    {S : Set M} {hS : Set.SatisfiesLocalSliceConditionWithBoundary n S k} {x : S}
+    (D : Theorem551LocalChartData S hS x) (z : EuclideanSpace ℝ (Fin k)) :
+    theorem551_ambientNormalization D
+        (euclidean_slice_inclusion D.hk D.c (D.backward z)) =
+      euclidean_slice_inclusion D.hk (fun _ : Fin (n - k) => (0 : ℝ)) z := by
+  let p := euclidean_slice_product_equiv D.hk
+  let base := euclidean_slice_inclusion D.hk D.c (0 : EuclideanSpace ℝ (Fin k))
+  have hsub :
+      euclidean_slice_inclusion D.hk D.c (D.backward z) - base =
+        euclidean_slice_inclusion D.hk (fun _ : Fin (n - k) => (0 : ℝ))
+          (D.backward z) := by
+    simpa [base] using
+      euclidean_slice_inclusion_sub_base D.hk D.c (D.backward z) 0
+  have hp :
+      p.symm (euclidean_slice_inclusion D.hk (fun _ : Fin (n - k) => (0 : ℝ))
+        (D.backward z)) =
+        (D.backward z, (0 : EuclideanSpace ℝ (Fin (n - k)))) := by
+    apply p.injective
+    simpa [p] using (euclidean_slice_product_equiv_apply_zero D.hk (D.backward z)).symm
+  rw [show theorem551_ambientNormalization D
+      (euclidean_slice_inclusion D.hk D.c (D.backward z)) =
+      p (D.forward
+          ((p.symm (euclidean_slice_inclusion D.hk D.c (D.backward z) - base)).1),
+        (p.symm (euclidean_slice_inclusion D.hk D.c (D.backward z) - base)).2) by rfl]
+  rw [hsub, hp, D.forward_backward]
+  exact euclidean_slice_product_equiv_apply_zero D.hk z
+
 /-- Helper for Theorem 5.51: the subtype atlas induced by the local slice-with-boundary condition
 is smooth in the boundary-model sense once the mixed slice/half-slice overlap maps are checked. -/
 private theorem local_slice_condition_with_boundary_chartedSpace_isManifold
@@ -2643,11 +3983,12 @@ private theorem local_slice_condition_with_boundary_chartedSpace_isManifold
   let cs : ChartedSpace (ℍ^{k}) S :=
     local_slice_condition_with_boundary_chartedSpace S hS
   let _ : ChartedSpace (ℍ^{k}) S := cs
-  -- TODO: copy the `slice_condition_chartedSpace_isManifold` proof shape with a four-way case
-  -- split on the chosen local witnesses `(slice/slice, slice/boundary, boundary/slice,
-  -- boundary/boundary)`, and factor each transition through the ambient maximal-atlas transition
-  -- together with the explicit slice or half-slice projection charts built above.
-  sorry
+  refine isManifold_of_contDiffOn (I := leeBoundaryModelWithCorners k)
+    (n := (⊤ : WithTop ℕ∞)) (M := S) ?_
+  intro e e' he he'
+  rcases he with ⟨x, rfl⟩
+  rcases he' with ⟨y, rfl⟩
+  exact theorem551_chartAt_transition_contDiffOn S hS x y
 
 /-- Helper for Theorem 5.51: once the induced smooth boundary atlas from the local
 slice-with-boundary condition is installed on `S`, the subtype inclusion is a smooth embedding
@@ -2669,12 +4010,76 @@ private theorem subtype_val_isSmoothEmbedding_of_local_slice_condition_with_boun
   let hs : IsManifold (leeBoundaryModelWithCorners k) (⊤ : WithTop ℕ∞) S :=
     local_slice_condition_with_boundary_chartedSpace_isManifold S hS
   let _ : IsManifold (leeBoundaryModelWithCorners k) (⊤ : WithTop ℕ∞) S := hs
-  -- TODO: imitate `subtype_val_isImmersionOfComplement_of_local_slice_condition` from
-  -- Theorem 5.8 on the boundary-model source side: center the induced subtype chart at `x`,
-  -- center the chosen ambient chart at `x.1`, prove the written-in-charts formula is either the
-  -- zero-tail slice inclusion or the corresponding half-slice inclusion, and combine that local
-  -- immersion statement with `Topology.IsEmbedding.subtypeVal`.
-  sorry
+  have hImm :
+      Manifold.IsImmersionOfComplement (EuclideanSpace ℝ (Fin (n - k)))
+        (leeBoundaryModelWithCorners k) (𝓡 n) (⊤ : WithTop ℕ∞)
+        (Subtype.val : S → M) := by
+    intro x
+    let D := theorem551_localChartData S hS x
+    let domChart := local_slice_condition_with_boundary_chartAt S hS x
+    let ex := local_slice_condition_with_boundary_ambient_chart S hS x
+    let norm := theorem551_ambientNormalization D
+    let codChart := ex.trans norm.toOpenPartialHomeomorph
+    have hxDom : x ∈ domChart.source := by
+      exact local_slice_condition_with_boundary_chartAt_mem_source S hS x
+    have hxEx : x.1 ∈ ex.source := by
+      exact local_slice_condition_with_boundary_ambient_chart_mem_source S hS x
+    have hxCod : x.1 ∈ codChart.source := by
+      rw [OpenPartialHomeomorph.trans_source]
+      exact ⟨hxEx, Set.mem_univ _⟩
+    have hdomAtlas : domChart ∈ cs.atlas := by
+      exact ⟨x, rfl⟩
+    have hdomMax : domChart ∈
+        IsManifold.maximalAtlas (leeBoundaryModelWithCorners k)
+          (⊤ : WithTop ℕ∞) S :=
+      IsManifold.subset_maximalAtlas hdomAtlas
+    have hcodMax : codChart ∈ IsManifold.maximalAtlas (𝓡 n)
+        (⊤ : WithTop ℕ∞) M := by
+      exact trans_mem_maximalAtlas_of_mem_groupoid
+        (local_slice_condition_with_boundary_ambient_chart_mem_maximalAtlas S hS x)
+        (theorem551_ambientNormalization_mem_contDiffGroupoid D)
+    refine Manifold.IsImmersionAtOfComplement.mk_of_charts
+      (euclidean_slice_product_equiv D.hk) domChart codChart
+      hxDom hxCod hdomMax hcodMax ?_ ?_
+    · intro y hy
+      have hyEx : y.1 ∈ ex.source := by
+        exact local_slice_condition_with_boundary_chartAt_source_subset_ambient_source
+          S hS x hy
+      rw [OpenPartialHomeomorph.trans_source]
+      exact ⟨hyEx, Set.mem_univ _⟩
+    · intro z hz
+      rw [OpenPartialHomeomorph.extend_target] at hz
+      have hzH : (leeBoundaryModelWithCorners k).symm z ∈ domChart.target := hz.1
+      have hzRange : z ∈ Set.range (leeBoundaryModelWithCorners k) := hz.2
+      have hdata := theorem551_chartAt_symm_image_data S hS x D hzH
+      have hright :
+          (leeBoundaryModelWithCorners k)
+              ((leeBoundaryModelWithCorners k).symm z) = z :=
+        (leeBoundaryModelWithCorners k).right_inv hzRange
+      have htarget :
+          euclidean_slice_inclusion D.hk D.c (D.backward z) ∈ ex.target := by
+        simpa [D, ex, hright] using hdata.2
+      calc
+        ((codChart.extend (𝓡 n)) ∘ Subtype.val ∘
+            (domChart.extend (leeBoundaryModelWithCorners k)).symm) z =
+            codChart
+              (((domChart.symm ((leeBoundaryModelWithCorners k).symm z)).1)) := by
+          simp [Function.comp, OpenPartialHomeomorph.extend_coe,
+            OpenPartialHomeomorph.extend_coe_symm, modelWithCornersSelf_coe]
+        _ = norm
+            (ex (((domChart.symm ((leeBoundaryModelWithCorners k).symm z)).1))) := by
+          rfl
+        _ = norm (euclidean_slice_inclusion D.hk D.c (D.backward z)) := by
+          rw [hdata.1]
+          simpa [D, ex, hright] using congrArg norm (ex.right_inv htarget)
+        _ = euclidean_slice_inclusion D.hk
+            (fun _ : Fin (n - k) => (0 : ℝ)) z :=
+          theorem551_ambientNormalization_apply_inclusion D z
+        _ = euclidean_slice_product_equiv D.hk
+            (z, (0 : EuclideanSpace ℝ (Fin (n - k)))) := by
+          symm
+          exact euclidean_slice_product_equiv_apply_zero D.hk z
+  exact ⟨hImm.isImmersion, Topology.IsEmbedding.subtypeVal⟩
 
 /-- A local `k`-slice structure with boundary on `S ⊆ M` yields a smooth
 `k`-manifold-with-boundary structure on the subtype `S` for which the inclusion into `M` is a

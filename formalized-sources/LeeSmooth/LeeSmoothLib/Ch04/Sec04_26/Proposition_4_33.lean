@@ -33,17 +33,25 @@ submersion. -/
 -- diffeomorphism field of the smooth covering map; this gives the smooth local section required by
 -- `Manifold.IsSmoothSubmersion`.
 theorem isSmoothSubmersion [IsManifold I ∞ M] [IsManifold I' ∞ M']
-    (hπ : Manifold.IsSmoothCoveringMap I I' π) : Manifold.IsSmoothSubmersion I I' π := sorry
+    (hπ : Manifold.IsSmoothCoveringMap I I' π) : Manifold.IsSmoothSubmersion I I' π := by
+  -- Smoothness is inherited from the local diffeomorphism field.
+  refine ⟨hπ.isLocalDiffeomorph.contMDiff, ?_⟩
+  intro p
+  -- Each local inverse branch makes `mfderiv π p` a linear equivalence, hence surjective.
+  rw [← hπ.isLocalDiffeomorph.mfderivToContinuousLinearEquiv_coe (by simp) p]
+  exact (hπ.isLocalDiffeomorph.mfderivToContinuousLinearEquiv (by simp) p).surjective
 
 /-- Proposition 4.33 (2): every smooth covering map is an open map. -/
 -- Proof sketch: forget to the local diffeomorphism field and apply
 -- `IsLocalDiffeomorph.isOpenMap`.
-theorem isOpenMap (hπ : Manifold.IsSmoothCoveringMap I I' π) : IsOpenMap π := sorry
+theorem isOpenMap (hπ : Manifold.IsSmoothCoveringMap I I' π) : IsOpenMap π :=
+  hπ.isLocalDiffeomorph.isOpenMap
 
 /-- Proposition 4.33 (3): every smooth covering map is a quotient map. -/
 -- Proof sketch: use the covering-map field together with the surjectivity field and apply
 -- `IsCoveringMap.isQuotientMap`.
-theorem isQuotientMap (hπ : Manifold.IsSmoothCoveringMap I I' π) : Topology.IsQuotientMap π := sorry
+theorem isQuotientMap (hπ : Manifold.IsSmoothCoveringMap I I' π) : Topology.IsQuotientMap π :=
+  IsCoveringMap.isQuotientMap hπ.isCoveringMap hπ.surjective
 
 /-- Proposition 4.33 (4): an injective smooth covering map is a diffeomorphism. -/
 -- Proof sketch: combine injectivity with the surjectivity field to get bijectivity, then apply
@@ -55,7 +63,8 @@ noncomputable def diffeomorphOfInjective (hπ : Manifold.IsSmoothCoveringMap I I
 /-- The diffeomorphism produced by `diffeomorphOfInjective` has underlying map `π`. -/
 theorem diffeomorphOfInjective_apply (hπ : Manifold.IsSmoothCoveringMap I I' π)
     (h_inj : Function.Injective π) (x : M) :
-    diffeomorphOfInjective hπ h_inj x = π x := sorry
+    diffeomorphOfInjective hπ h_inj x = π x :=
+  rfl
 
 end Manifold.IsSmoothCoveringMap
 
@@ -68,7 +77,8 @@ when it is a local diffeomorphism. -/
 -- the local diffeomorphism hypothesis.
 theorem isSmoothCoveringMap_iff_isLocalDiffeomorph (hπ : IsCoveringMap π)
     (h_surj : Function.Surjective π) :
-    Manifold.IsSmoothCoveringMap I I' π ↔ IsLocalDiffeomorph I I' ∞ π := sorry
+    Manifold.IsSmoothCoveringMap I I' π ↔ IsLocalDiffeomorph I I' ∞ π :=
+  ⟨fun h ↦ h.isLocalDiffeomorph, fun hlocal ↦ ⟨hπ, h_surj, hlocal⟩⟩
 
 end IsCoveringMap
 

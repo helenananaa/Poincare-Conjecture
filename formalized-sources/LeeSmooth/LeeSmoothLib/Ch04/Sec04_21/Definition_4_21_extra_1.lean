@@ -1,3 +1,5 @@
+import LeeSmoothLib.Ch04.Sec04_21.Proposition_4_1.Core
+import LeeSmoothLib.Ch04.Sec04_21.ImmersionDerivative
 import Mathlib.Tactic.Recall
 import LeeSmoothLib.Ch04.Sec04_21.Exercise_4_4
 import LeeSmoothLib.Ch04.Sec04_25.Proposition_4_28
@@ -46,7 +48,7 @@ model-space dimensions. -/
 theorem has_full_rank_at_iff_rank_at_eq_min_finrank {F : M → N} {p : M} :
     has_full_rank_at I J F p ↔
       MDifferentiableAt I J F p ∧
-        rankAt I J F p = min (Module.finrank ℝ E) (Module.finrank ℝ E') := sorry
+        rankAt I J F p = min (Module.finrank ℝ E) (Module.finrank ℝ E') := by rfl
 
 /-- Definition 4.21-extra-1 (4): a map has full rank when it has full rank at every point. -/
 def has_full_rank (I : ModelWithCorners ℝ E H) (J : ModelWithCorners ℝ E' H')
@@ -55,27 +57,70 @@ def has_full_rank (I : ModelWithCorners ℝ E H) (J : ModelWithCorners ℝ E' H'
 
 /-- Full rank is a pointwise condition. -/
 theorem has_full_rank_iff_forall_has_full_rank_at {F : M → N} :
-    has_full_rank I J F ↔ ∀ p : M, has_full_rank_at I J F p := sorry
+    has_full_rank I J F ↔ ∀ p : M, has_full_rank_at I J F p := by rfl
 
 /-- Definition 4.21-extra-1 (5): for a smooth map, being a smooth submersion is equivalent to
 surjectivity of the manifold derivative at every point. -/
 theorem is_smooth_submersion_iff_forall_surjective_mfderiv {F : M → N}
     (hF : ContMDiff I J ∞ F) :
-    IsSmoothSubmersion I J F ↔ ∀ p : M, Function.Surjective (mfderiv I J F p) := sorry
+    IsSmoothSubmersion I J F ↔ ∀ p : M, Function.Surjective (mfderiv I J F p) := by
+  exact ⟨fun h ↦ h.surjective_mfderiv, fun h ↦ ⟨hF, h⟩⟩
 
 /-- A smooth submersion has full rank at every point. -/
 theorem IsSmoothSubmersion.has_full_rank {F : M → N} (hF : IsSmoothSubmersion I J F) :
-    has_full_rank I J F := sorry
+    has_full_rank I J F := by
+  intro p
+  letI : FiniteDimensional ℝ (TangentSpace I p) := inferInstanceAs (FiniteDimensional ℝ E)
+  letI : FiniteDimensional ℝ (TangentSpace J (F p)) := inferInstanceAs (FiniteDimensional ℝ E')
+  refine ⟨hF.contMDiff.mdifferentiable (by simp) p, ?_⟩
+  have hsurj := hF.surjective_mfderiv p
+  have hdim := LinearMap.finrank_le_finrank_of_surjective hsurj
+  change Module.finrank ℝ E' ≤ Module.finrank ℝ E at hdim
+  rw [rankAt, LinearMap.range_eq_top.mpr hsurj, finrank_top]
+  exact (min_eq_right hdim).symm
 
 /-- Definition 4.21-extra-1 (6): for a smooth map, being a smooth immersion is equivalent to
 injectivity of the manifold derivative at every point. -/
-theorem is_immersion_iff_forall_injective_mfderiv {F : M → N}
+theorem is_immersion_iff_forall_injective_mfderiv [I.Boundaryless] [J.Boundaryless] {F : M → N}
     (hF : ContMDiff I J ∞ F) :
-    IsImmersion I J ∞ F ↔ ∀ p : M, Function.Injective (mfderiv I J F p) := sorry
+    IsImmersion I J ∞ F ↔ ∀ p : M, Function.Injective (mfderiv I J F p) := by
+  constructor
+  · intro h p
+    exact h.mfderiv_injective p
+  · intro h
+    classical
+    by_cases hEmpty : IsEmpty M
+    · exact ⟨PUnit, inferInstance, inferInstance, fun x ↦ (IsEmpty.false x).elim⟩
+    obtain ⟨p0⟩ := not_isEmpty_iff.mp hEmpty
+    obtain ⟨U0, hp0, h0⟩ :=
+      exists_open_restriction_isImmersion_of_injective_mfderiv hF (h p0)
+    let F0 := h0.complement
+    refine ⟨F0, inferInstance, inferInstance, ?_⟩
+    intro p
+    obtain ⟨U, hp, hu⟩ :=
+      exists_open_restriction_isImmersion_of_injective_mfderiv hF (h p)
+    haveI := finiteDimensional_isImmersion_complement hu ⟨p, hp⟩
+    haveI := finiteDimensional_isImmersion_complement h0 ⟨p0, hp0⟩
+    have hEq : Module.finrank ℝ hu.complement = Module.finrank ℝ F0 :=
+      Nat.add_left_cancel
+        ((finrank_prod_isImmersion_complement hu ⟨p, hp⟩).trans
+          (finrank_prod_isImmersion_complement h0 ⟨p0, hp0⟩).symm)
+    let eF : hu.complement ≃L[ℝ] F0 := ContinuousLinearEquiv.ofFinrankEq hEq
+    exact isImmersionAtOfComplement_of_restriction hp
+      ((hu.isImmersionOfComplement_complement ⟨p, hp⟩).trans_F eF)
 
 /-- A smooth immersion has full rank at every point. -/
 theorem IsImmersion.has_full_rank {F : M → N} (hF : IsImmersion I J ∞ F) :
-    has_full_rank I J F := sorry
+    has_full_rank I J F := by
+  intro p
+  letI : FiniteDimensional ℝ (TangentSpace I p) := inferInstanceAs (FiniteDimensional ℝ E)
+  letI : FiniteDimensional ℝ (TangentSpace J (F p)) := inferInstanceAs (FiniteDimensional ℝ E')
+  refine ⟨hF.contMDiff.mdifferentiable (by simp) p, ?_⟩
+  have hinj := hF.mfderiv_injective p
+  have hdim := LinearMap.finrank_le_finrank_of_injective hinj
+  change Module.finrank ℝ E ≤ Module.finrank ℝ E' at hdim
+  rw [rankAt, LinearMap.finrank_range_of_inj hinj]
+  exact (min_eq_left hdim).symm
 
 end
 

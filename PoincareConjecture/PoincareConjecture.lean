@@ -1,3 +1,9 @@
+import PoincareConjecture.Topology.FiberSaturation.SphereAntipodal
+import PoincareConjecture.Topology.FiberSaturation.SphereOpenEmbeddingSurjective
+import PoincareConjecture.Topology.FiberSaturation.ClosedCollarEndpoint
+import PoincareConjecture.Topology.FiberSaturation.PartialDiffeomorphOfHomeomorph
+import PoincareConjecture.ParallelMath.Transport.AddCirclePi1
+import PoincareConjecture.ParallelMath.Transport.TorusPi1
 import PoincareConjecture.ParallelMath.Transfer
 import PoincareConjecture.ParallelMath.Transport
 import PoincareConjecture.ParallelMath.Variational

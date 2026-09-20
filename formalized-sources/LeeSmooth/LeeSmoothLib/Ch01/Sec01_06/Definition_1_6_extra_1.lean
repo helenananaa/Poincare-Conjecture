@@ -1,4 +1,4 @@
-import Mathlib
+import LeeSmoothLib.Ch01.Sec01_06.SeeleyExtensionInfinite
 
 noncomputable section
 
@@ -190,6 +190,30 @@ lemma interior_halfSpace_image_exists_local_ambient_extension
 
 /-- Helper for Definition 1.6-extra-1: at boundary points of the half-space image, the remaining
 step is the genuine local ambient `C^∞` extension theorem from the closed half-space. -/
+lemma contDiffOn_range_halfSpace_exists_open_extension_at_finite
+    (r : ℕ)
+    {W : Set (EuclideanSpace ℝ (Fin n))}
+    {F : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin k)}
+    (hW : IsOpen W) {x : EuclideanSpace ℝ (Fin n)} (hxW : x ∈ W)
+    (_hxRange : x ∈ Set.range (𝓡∂ n)) (hx0 : x 0 = 0)
+    (hF : ContDiffOn ℝ r F (W ∩ Set.range (𝓡∂ n))) :
+    ∃ V : Set (EuclideanSpace ℝ (Fin n)),
+      IsOpen V ∧
+      x ∈ V ∧
+      V ⊆ W ∧
+      ∃ g : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin k),
+        ContDiffOn ℝ r g V ∧
+        Set.EqOn g F (V ∩ Set.range (𝓡∂ n)) := by
+  have hRange : Set.range (𝓡∂ n) =
+      LeeSmooth.SeeleyExtension.closedUpperHalfSpace (n := n) := by
+    simpa [LeeSmooth.SeeleyExtension.closedUpperHalfSpace] using
+      range_modelWithCornersEuclideanHalfSpace n
+  rw [hRange] at hF ⊢
+  exact LeeSmooth.SeeleyExtension.finite_contDiffOn_closedUpperHalfSpace_exists_open_extension_at
+    r hW hxW hx0 hF
+
+/-- Helper for Definition 1.6-extra-1: at boundary points of the half-space image, the remaining
+step is the genuine local ambient `C^∞` extension theorem from the closed half-space. -/
 lemma contDiffOn_range_halfSpace_exists_open_extension_at
     {W : Set (EuclideanSpace ℝ (Fin n))}
     {F : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin k)}
@@ -203,10 +227,13 @@ lemma contDiffOn_range_halfSpace_exists_open_extension_at
       ∃ g : EuclideanSpace ℝ (Fin n) → EuclideanSpace ℝ (Fin k),
         ContDiffOn ℝ ∞ g V ∧
         Set.EqOn g F (V ∩ Set.range (𝓡∂ n)) := by
-  -- TODO: prove the local closed-half-space extension theorem cited in Definition 1.6-extra-1,
-  -- producing an ambient smooth extension near a boundary point from `ContDiffOn` on
-  -- `W ∩ Set.range (𝓡∂ n)`.
-  sorry
+  have hRange : Set.range (𝓡∂ n) =
+      LeeSmooth.SeeleyExtension.closedUpperHalfSpace (n := n) := by
+    simpa [LeeSmooth.SeeleyExtension.closedUpperHalfSpace] using
+      range_modelWithCornersEuclideanHalfSpace n
+  rw [hRange] at hF ⊢
+  exact LeeSmooth.SeeleyExtension.contDiffOn_closedUpperHalfSpace_exists_open_extension_at
+    hW hxW hx0 hF
 
 /-- Helper for Definition 1.6-extra-1: at boundary points of the half-space image, the remaining
 step is the genuine local ambient `C^∞` extension theorem from the closed half-space. -/

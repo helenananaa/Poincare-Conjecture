@@ -38,6 +38,14 @@ private theorem restrictOpenImage_interiorOpens (Φ : M ≃ₘ^n⟮I, I'⟯ N) (
   simpa [ModelWithCorners.interiorOpens] using
     congrArg (fun s : Set N ↦ x ∈ s) (Φ.image_interior hn)
 
+omit [IsManifold I n M] [IsManifold I' n N] in
+private theorem restrictOpen_eq_apply (Φ : M ≃ₘ^n⟮I, I'⟯ N)
+    (U : TopologicalSpace.Opens M) (V : TopologicalSpace.Opens N)
+    (hUV : Φ.restrictOpenImage U = V) (x : U) :
+    (((hUV ▸ Φ.restrictOpen U) x : V) : N) = Φ x := by
+  subst V
+  exact Φ.restrictOpen_apply U x
+
 /-- Theorem 2.18 (2) (bridge/view): in the canonical `C^n` form, the restriction of a
 diffeomorphism to manifold interiors is a diffeomorphism. The source smooth statement is the
 specialization `n = ∞`. -/
@@ -48,7 +56,9 @@ abbrev restrictInterior (Φ : M ≃ₘ^n⟮I, I'⟯ N) (hn : n ≠ 0) :
 /-- The canonical interior restriction of `Φ` acts on underlying points by `Φ` itself. -/
 @[simp] theorem restrictInterior_apply (Φ : M ≃ₘ^n⟮I, I'⟯ N) (hn : n ≠ 0)
     (x : I.interiorOpens M hn) : ((Φ.restrictInterior hn x : I'.interiorOpens N hn) : N) = Φ x :=
-  sorry
+  by
+    exact restrictOpen_eq_apply Φ (I.interiorOpens M hn) (I'.interiorOpens N hn)
+      (restrictOpenImage_interiorOpens Φ hn) x
 
 end Diffeomorph
 

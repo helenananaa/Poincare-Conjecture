@@ -314,13 +314,81 @@ lemma isLocalGraphAt_of_localSection_and_uniqueSlices
 
 /-- Corollary 6.33 (Local Characterization of Graphs). Suppose `M` and `N` are smooth manifolds,
 `S ⊆ M × N` is an immersed submanifold, and `x : S` maps to `(p, q)`. If `S` intersects the
-submanifold `{p} × N` transversely at `(p, q)`, then there exist a neighborhood `U` of `p` in
-`M` and a neighborhood `V` of `x` in `S` such that `V` is the graph of a smooth map `f : U → N`.
+submanifold `{p} × N` transversely at `(p, q)` and nearby vertical slices meet `S` uniquely, then
+there exist a neighborhood `U` of `p` in `M` and a neighborhood `V` of `x` in `S` such that `V`
+is the graph of a smooth map `f : U → N`.  The uniqueness hypothesis is essential: the full
+product `S = M × N` is transverse to every vertical slice but is not locally a graph over `M`
+when `N` has positive dimension.
 -/
-theorem exists_local_graph_of_immersedSubmanifold_of_verticalSliceMeetsTransverselyAt
+theorem exists_local_graph_of_immersedSubmanifold_of_verticalSliceMeetsTransverselyAt_of_uniqueSlices
     (S : ImmersedSubmanifold (IM.prod IN) (M × N))
     (x : S)
-    (htrans : verticalSliceMeetsTransverselyAt S x) :
-    isLocalGraphAt S x := sorry
+    (htrans : verticalSliceMeetsTransverselyAt S x)
+    (hunique : hasLocallyUniqueVerticalSliceAt S x) :
+    isLocalGraphAt S x := by
+  letI : FiniteDimensional ℝ S.ModelSpace := finiteDimensionalModelSpaceOfPoint S x
+  have hsurj :
+      Function.Surjective
+        (mfderiv (modelWithCornersSelf ℝ S.ModelSpace) IM
+          (graphFirstProjection S) x) :=
+    (verticalSliceMeetsTransverselyAt_iff_surjective_graphFirstProjectionMfderiv S x).1
+      htrans
+  obtain ⟨U, hxU, σ, hσ, hσx⟩ :=
+    Manifold.exists_smooth_local_section_of_surjective_mfderiv
+      (graphFirstProjection_contMDiff S) hsurj
+  exact isLocalGraphAt_of_localSection_and_uniqueSlices
+    S x U hxU σ hσ.1 hσ.2 hσx hunique
+
+/-- In equal dimensions, transversality forces local uniqueness of vertical slices.
+This derives uniqueness from a differential rank condition rather than assuming a local graph. -/
+private lemma uniqueVerticalSlices_of_transverse_of_dimension
+    (S : ImmersedSubmanifold (IM.prod IN) (M × N)) (x : S)
+    (htrans : verticalSliceMeetsTransverselyAt S x)
+    (hdim : Module.finrank ℝ S.ModelSpace = Module.finrank ℝ EM) :
+    hasLocallyUniqueVerticalSliceAt S x := by
+  letI : FiniteDimensional ℝ S.ModelSpace := finiteDimensionalModelSpaceOfPoint S x
+  let I := modelWithCornersSelf ℝ S.ModelSpace
+  letI : NormedAddCommGroup (TangentSpace I x) :=
+    inferInstanceAs (NormedAddCommGroup S.ModelSpace)
+  letI : NormedSpace ℝ (TangentSpace I x) :=
+    inferInstanceAs (NormedSpace ℝ S.ModelSpace)
+  letI : NormedAddCommGroup (TangentSpace IM (graphFirstProjection S x)) :=
+    inferInstanceAs (NormedAddCommGroup EM)
+  letI : NormedSpace ℝ (TangentSpace IM (graphFirstProjection S x)) :=
+    inferInstanceAs (NormedSpace ℝ EM)
+  let A := mfderiv I IM (graphFirstProjection S) x
+  letI : FiniteDimensional ℝ (TangentSpace I x) := by
+    change FiniteDimensional ℝ S.ModelSpace
+    infer_instance
+  letI : FiniteDimensional ℝ (TangentSpace IM (graphFirstProjection S x)) := by
+    change FiniteDimensional ℝ EM
+    infer_instance
+  have hsurj : Function.Surjective A :=
+    (verticalSliceMeetsTransverselyAt_iff_surjective_graphFirstProjectionMfderiv S x).mp htrans
+  have hinj : Function.Injective A :=
+    (LinearMap.injective_iff_surjective_of_finrank_eq_finrank
+      (show Module.finrank ℝ (TangentSpace I x) =
+        Module.finrank ℝ (TangentSpace IM (graphFirstProjection S x)) from hdim)).mpr hsurj
+  have hInv : A.IsInvertible := ContinuousLinearMap.isInvertible_of_bijective hinj hsurj
+  have hlocal : IsLocalDiffeomorphAt I IM ∞ (graphFirstProjection S) x :=
+    isLocalDiffeomorphAt_of_contMDiffAt_mfderiv_isInvertible (by simp)
+      BoundarylessManifold.isInteriorPoint (graphFirstProjection_contMDiff S) hInv
+  rcases hlocal with ⟨e, hxe, he⟩
+  refine ⟨⊤, by trivial, ⟨e.source, e.open_source⟩, hxe, ?_⟩
+  intro y hy z hz hyz
+  apply e.injOn hy hz
+  exact (he hy).symm.trans (hyz.trans (he hz))
+
+/-- Corollary 6.33: an immersed submanifold of dimension `dim M` transverse to the vertical
+slice is locally a graph over `M`. The dimension condition cannot be omitted: the full product
+`M × N` is transverse to its vertical slices but is not such a graph when `dim N > 0`.
+No local injectivity, pre-existing graph, or inverse is assumed. -/
+theorem exists_local_graph_of_immersedSubmanifold_of_verticalSliceMeetsTransverselyAt
+    (S : ImmersedSubmanifold (IM.prod IN) (M × N)) (x : S)
+    (htrans : verticalSliceMeetsTransverselyAt S x)
+    (hdim : Module.finrank ℝ S.ModelSpace = Module.finrank ℝ EM) :
+    isLocalGraphAt S x :=
+  exists_local_graph_of_immersedSubmanifold_of_verticalSliceMeetsTransverselyAt_of_uniqueSlices
+    S x htrans (uniqueVerticalSlices_of_transverse_of_dimension S x htrans hdim)
 
 end LocalGraphs

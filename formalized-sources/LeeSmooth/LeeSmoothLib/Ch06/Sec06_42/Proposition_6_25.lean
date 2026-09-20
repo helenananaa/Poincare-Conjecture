@@ -132,42 +132,25 @@ omit [ChartedSpace (EuclideanSpace ℝ (Fin n)) (NM[n, m; M])]
 ambient Euclidean dimension. -/
 lemma embeddedSubmanifoldDimensionLe (x : M) :
     m ≤ n := by
-  let hEmb :
+  let hSubtype :
       IsSmoothEmbedding
         (𝓡 m)
         (𝓡 n)
         ∞
         (Subtype.val : M → EuclideanSpace ℝ (Fin n)) :=
     subtypeVal_isSmoothEmbedding (n := n) (m := m) (M := M)
-  let hCont :
-      ContMDiff
-        (𝓡 m)
-        (𝓡 n)
-        ∞
-        (Subtype.val : M → EuclideanSpace ℝ (Fin n)) :=
-    hEmb.isImmersion.contMDiff
-  have hInj :
-      Function.Injective
-        (mfderiv (𝓡 m) (𝓡 n) (Subtype.val : M → EuclideanSpace ℝ (Fin n)) x) := by
-    -- An immersion has injective manifold derivative at every point.
-    exact ((Manifold.is_immersion_iff_forall_injective_mfderiv hCont).1 hEmb.isImmersion) x
-  let _ : FiniteDimensional ℝ (TangentSpace (𝓡 n) ((x : M) : EuclideanSpace ℝ (Fin n))) :=
-    FiniteDimensional.of_injective
-      (NormedSpace.fromTangentSpace ((x : M) : EuclideanSpace ℝ (Fin n))).toLinearMap
-      (NormedSpace.fromTangentSpace ((x : M) : EuclideanSpace ℝ (Fin n))).injective
-  have hle :
-      Module.finrank ℝ (TangentSpace (𝓡 m) x) ≤
-        Module.finrank ℝ (TangentSpace (𝓡 n) ((x : M) : EuclideanSpace ℝ (Fin n))) := by
-    -- Compare the tangent-space dimensions through the injective derivative of the inclusion.
-    simpa using
-      LinearMap.finrank_le_finrank_of_injective
-        (f := (mfderiv (𝓡 m) (𝓡 n)
-          (Subtype.val : M → EuclideanSpace ℝ (Fin n)) x).toLinearMap)
-        hInj
-  -- The tangent spaces of the source and ambient Euclidean manifolds have dimensions `m` and `n`.
-  simpa [tangentSpace_finrank_eq_of_n_dimensional_manifold x,
-    tangentSpace_finrank_eq_of_n_dimensional_manifold
-      (p := ((x : M) : EuclideanSpace ℝ (Fin n)))] using hle
+  let hImm := hSubtype.isImmersion.isImmersionAt x
+  let L : EuclideanSpace ℝ (Fin m) →L[ℝ] EuclideanSpace ℝ (Fin n) :=
+    hImm.equiv.toContinuousLinearMap.comp
+      (ContinuousLinearMap.inl ℝ (EuclideanSpace ℝ (Fin m)) hImm.complement)
+  have hLInj : Function.Injective L := by
+    intro u v huv
+    have hpair : (u, (0 : hImm.complement)) = (v, (0 : hImm.complement)) := by
+      apply hImm.equiv.injective
+      simpa [L, ContinuousLinearMap.comp_apply] using huv
+    exact congrArg Prod.fst hpair
+  simpa using
+    LinearMap.finrank_le_finrank_of_injective (f := L.toLinearMap) hLInj
 
 omit [IsManifold (𝓡 m) ∞ M] [IsEmbeddedSubmanifold (𝓡 n) (𝓡 m) M]
   [ChartedSpace (EuclideanSpace ℝ (Fin n)) (NM[n, m; M])]
@@ -2041,6 +2024,8 @@ lemma normalSpace_iff_mem_orthogonalKer_localDefiningMap
         ∞
         (Subtype.val : M → EuclideanSpace ℝ (Fin n)) :=
     subtypeVal_isSmoothEmbedding (n := n) (m := m) (M := M)
+  have hmn : m ≤ n :=
+    embeddedSubmanifoldDimensionLe (n := n) (m := m) (M := M) (x : M)
   have hTangent :
       T[𝓡 m; (x : M)] =
         (mfderiv
@@ -2050,7 +2035,7 @@ lemma normalSpace_iff_mem_orthogonalKer_localDefiningMap
           (((x : M) : EuclideanSpace ℝ (Fin n)))).ker := by
     simpa using
       tangentSpace_eq_ker_mfderiv_of_isLocalDefiningMapOn
-        hSubtype hDef (x : M) x.2
+        hSubtype hDef (by simpa [Nat.add_sub_of_le hmn]) (x : M) x.2
   constructor
   · intro hv
     rw [Submodule.mem_orthogonal']

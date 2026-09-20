@@ -28,6 +28,14 @@ theorem contMDiff_toSubtype_of_isImmersedSubmanifold
     (hS : IsImmersedSubmanifold I J S)
     {F : N → M} (hF : ContMDiff K I ⊤ F) (hFS : ∀ x, F x ∈ S)
     (hcont : Continuous (Set.codRestrict F S hFS)) :
-    ContMDiff K J ⊤ (Set.codRestrict F S hFS) := sorry
+    ContMDiff K J ⊤ (Set.codRestrict F S hFS) := by
+  -- Smoothness into the immersed submanifold can be tested after composing with its
+  -- inclusion, provided continuity into the chosen topology is supplied separately.
+  refine (ContMDiff.iff_comp_isImmersion hS).2 ⟨hcont, ?_⟩
+  have hcomp :
+      (Subtype.val : S → M) ∘ Set.codRestrict F S hFS = F := by
+    rfl
+  rw [hcomp]
+  exact hF
 
 end RestrictingCodomainOfSmoothMaps

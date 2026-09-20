@@ -6,6 +6,7 @@ import Mathlib.Geometry.Manifold.IsManifold.Basic
 import Mathlib.Topology.Compactification.OnePoint.Sphere
 import Mathlib.Topology.Bases
 import Mathlib.Topology.Separation.Basic
+import LeeSmoothLib.External.InvarianceOfDomain.Unconditional
 
 -- Declarations for this item will be appended below by the statement pipeline.
 
@@ -681,13 +682,38 @@ transports its manifold structure onto the source carrier. -/
 
 /-- Helper for Definition 1-extra-1: the remaining positive-dimensional core is uniqueness of the
 Euclidean manifold model on one common nonempty carrier. -/
+private theorem euclideanDimensionLeOfOpenHomeomorph {n m : ℕ}
+    {Vn : Set (EuclideanSpace ℝ (Fin n))} {Vm : Set (EuclideanSpace ℝ (Fin m))}
+    (hVn : IsOpen Vn) (hVm : IsOpen Vm) (hn : Vn.Nonempty) (hm : Vm.Nonempty)
+    (hhomeo : Nonempty ((↑Vn) ≃ₜ ↑Vm)) :
+    m ≤ n := by
+  rcases sourceOpenHomeomorphToEuclideanOfOpenHomeomorph
+      hVn hVm hn hm hhomeo with ⟨U, _hU, _hUne, ⟨h⟩⟩
+  let f : EuclideanSpace ℝ (Fin m) → EuclideanSpace ℝ (Fin n) :=
+    fun x ↦ (h.symm x).1
+  have hf_cont : Continuous f := continuous_subtype_val.comp h.symm.continuous
+  have hf_inj : Function.Injective f := by
+    intro x y hxy
+    apply h.symm.injective
+    exact Subtype.ext hxy
+  simpa [finrank_euclideanSpace_fin] using
+    (LeeSmooth.External.InvarianceOfDomain.Unconditional.dim_le_of_injective_continuous
+      f hf_cont hf_inj)
+
+/-- Helper for Definition 1-extra-1: the remaining positive-dimensional core is uniqueness of the
+Euclidean manifold model on one common nonempty carrier. -/
 private theorem sameCarrierPositiveEuclideanModelDimensionEq {n m : ℕ}
     (M : Type u) [TopologicalSpace M] [Nonempty M]
     [TopologicalManifold (n + 1) M] [TopologicalManifold (m + 1) M] :
     m = n := by
-  -- Route correction: all punctured/open-subset normalization has been pushed upstream.
-  -- The only unresolved step is now the same-carrier uniqueness theorem for positive dimensions.
-  sorry
+  obtain ⟨p⟩ := (‹Nonempty M›)
+  rcases euclideanOpenHomeomorphAtPoint (n := n + 1) (m := m + 1) (M := M) p with
+    ⟨Vn, Vm, hVn, hVm, hn, hm, hhomeo⟩
+  have hmn : m + 1 ≤ n + 1 :=
+    euclideanDimensionLeOfOpenHomeomorph hVn hVm hn hm hhomeo
+  have hnm : n + 1 ≤ m + 1 :=
+    euclideanDimensionLeOfOpenHomeomorph hVm hVn hm hn ⟨hhomeo.some.symm⟩
+  omega
 
 /-- Helper for Definition 1-extra-1: the positive-dimensional owner theorem is the ambient
 dimension invariant for an ambient-open subset homeomorphic to punctured Euclidean space. -/

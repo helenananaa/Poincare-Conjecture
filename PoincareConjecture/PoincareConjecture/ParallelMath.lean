@@ -1,7 +1,19 @@
 import PoincareConjecture.ParallelMath.Extinction.ComparisonInterface
+import PoincareConjecture.ParallelMath.Extinction.CoupledComparison
+import PoincareConjecture.ParallelMath.Extinction.InhomogeneousFactor
+import PoincareConjecture.ParallelMath.Extinction.VariableCoefficient
+import PoincareConjecture.ParallelMath.Extinction.EventualNegative
+import PoincareConjecture.ParallelMath.Extinction.Restart
+import PoincareConjecture.ParallelMath.Extinction.LocalizedForcing
+import PoincareConjecture.ParallelMath.Extinction.ForwardDiniMeanValue
+import PoincareConjecture.ParallelMath.Extinction.JumpComparison
 import PoincareConjecture.ParallelMath.Extinction.PowerDerivative
 import PoincareConjecture.ParallelMath.Extinction.PowerNegative
+import PoincareConjecture.ParallelMath.Algebra.FreeProductFactors
 import PoincareConjecture.ParallelMath.Tensor.PositiveDefinite
+import PoincareConjecture.ParallelMath.Tensor.VolumeDistortion
+import PoincareConjecture.ParallelMath.Transfer.GramContinuity
+import PoincareConjecture.ParallelMath.Transfer.GramEvolution
 import PoincareConjecture.ParallelMath.SurgeryMetric.LengthGluing
 
 /-! Independently checked scalar, tensor and metric ingredients.

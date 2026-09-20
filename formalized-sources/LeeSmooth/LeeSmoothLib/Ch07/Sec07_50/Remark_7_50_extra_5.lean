@@ -1,7 +1,7 @@
+import LeeSmoothLib.Ch07.Sec07_50.Proposition_7_26
 import LeeSmoothLib.Ch05.Sec05_31.Definition_5_31_extra_1
 import LeeSmoothLib.Ch05.Sec05_28.Definition_5_28_extra_1
 import LeeSmoothLib.Ch05.Sec05_29.Theorem_5_8
-import LeeSmoothLib.Ch05.Sec05_30.Theorem_5_12
 import LeeSmoothLib.Ch05.Sec05_33.Theorem_5_33
 import LeeSmoothLib.Ch05.Sec05_36.Definition_5_36_extra_1
 import LeeSmoothLib.Ch04.Sec04_24.Exercise_4_16
@@ -11,12 +11,13 @@ import LeeSmoothLib.Ch07.Sec07_49.Proposition_7_11
 import LeeSmoothLib.Ch07.Sec07_49.Definition_7_49_extra_1
 import LeeSmoothLib.Ch07.Sec07_50.Theorem_7_25
 import LeeSmoothLib.Ch07.Sec07_50.Definition_7_50_extra_4
+import LeeSmoothLib.Ch07.Sec07_50.StabilizerSmoothLevelBundle
 -- Declarations for this item will be appended below by the statement pipeline.
 
 open Manifold
 open scoped Manifold ContDiff
 
-universe u𝕜 uE uH uG uE' uH' uM uQ
+universe u𝕜 uE uH uG uE' uH' uM uQ uV
 
 section OrbitSubmanifold
 
@@ -277,20 +278,7 @@ def ofQuotientStabilizerMulActionHom (p : M) :
   toFun := MulAction.ofQuotientStabilizer G p
   map_smul' := ofQuotientStabilizer_map_smul p
 
-omit [TopologicalSpace G] [TopologicalSpace M] in
-/-- Helper: the orbit map intertwines left multiplication on `G` with the
-given action on `M`, so it is a bundled equivariant map. -/
-theorem orbitMap_map_smul (p : M) (g x : G) :
-    orbit_map G p (g • x) = g • orbit_map G p x := by
-  -- Expand the orbit map and use associativity of the action.
-  simp [orbit_map, smul_smul]
-
-/-- Helper: package the orbit map at `p` as the canonical equivariant map
-from `G` with its left-regular action to `M`. -/
-def orbitMapMulActionHom (p : M) : G →[G] M where
-  toFun := orbit_map G p
-  map_smul' := orbitMap_map_smul p
-
+include I J in
 /-- Helper: the orbit map has constant rank by the equivariant rank
 transport argument already used earlier in the chapter. -/
 theorem orbitMapHasConstantRank [FiniteDimensional 𝕜 E'] (p : M) :
@@ -306,26 +294,34 @@ theorem orbitMapHasConstantRank [FiniteDimensional 𝕜 E'] (p : M) :
         F hF
   simpa [orbitMapMulActionHom] using! hConstRank
 
-/-- Helper: the constant-rank level-set theorem equips the stabilizer of
-`p` with the embedded-submanifold structure inherited from the fiber `orbit_map G p ⁻¹' {p}`. -/
+/-- Helper: the constant-rank level-set theorem equips the stabilizer of `p` with a genuine
+`C^∞` embedded structure inherited from the fiber `orbit_map G p ⁻¹' {p}`.
+
+Original invalid type (legacy Theorem 5.12): `IsEmbeddedSubmanifold` with analytic (`⊤`/`ω`)
+inclusion.  Smooth input cannot produce that owner; the corrected conclusion is
+`IsSmoothEmbedding` at regularity `∞`.  Rank bounds are derived at the identity, which
+always lies on the fiber. -/
 theorem stabilizerEmbeddedData
-    {r : ℕ} (J' : ModelWithCorners 𝕜 E' H')
-    [IsManifold J' ∞ M] [ContMDiffSMul I J' ∞ G M]
-    [FiniteDimensional 𝕜 E] [FiniteDimensional 𝕜 E']
-    (p : M) (hRank : Manifold.HasConstantRank I J' (orbit_map G p) r) :
-    let k : ℕ := Module.finrank 𝕜 E - r
-    let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
-    ∃ cs : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) ((MulAction.stabilizer G p : Set G)),
-      ∃ hs : IsManifold K ∞ ((MulAction.stabilizer G p : Set G)),
-        let _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k))
-            ((MulAction.stabilizer G p : Set G)) := cs
-        let _ : IsManifold K ∞ ((MulAction.stabilizer G p : Set G)) := hs
-        ∃ hEmb : IsEmbeddedSubmanifold I K ((MulAction.stabilizer G p : Set G)),
-          hEmb.codimension = r := by
-  -- Rewrite the level-set owner to the stabilizer subtype before unpacking the theorem output.
-  simpa [preimage_singleton_orbit_map_eq_stabilizer] using!
-    (constant_rank_level_set_has_embedded_submanifold_structure
-      (orbitMap_contMDiff p) hRank p)
+    {m n r : ℕ}
+    [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+    [IsManifold (𝓡 m) ∞ G] [LieGroup (𝓡 m) ∞ G]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+    [IsManifold (𝓡 n) ∞ M]
+    [ContMDiffSMul (𝓡 m) (𝓡 n) ∞ G M]
+    [T2Space G] [SecondCountableTopology G]
+    (p : M) (hRank : HasConstantRank (𝓡 m) (𝓡 n) (orbit_map G p) r) :
+    ∃ cs : ChartedSpace (EuclideanSpace ℝ (Fin (m - r)))
+        ((MulAction.stabilizer G p : Set G)),
+      ∃ _ : IsManifold (𝓡 (m - r)) ∞ ((MulAction.stabilizer G p : Set G)),
+        let S := (MulAction.stabilizer G p : Set G)
+        let _ : ChartedSpace (EuclideanSpace ℝ (Fin (m - r))) S := cs
+        IsSmoothEmbedding (𝓡 (m - r)) (𝓡 m) ∞ (Subtype.val : S → G) :=
+  by
+    have h := StabilizerSmoothFiber.stabilizer_has_smooth_embedded_structure
+      (I := 𝓡 m) (J := 𝓡 n) p hRank
+    dsimp only at h
+    rw [show Module.finrank ℝ (EuclideanSpace ℝ (Fin m)) = m from finrank_euclideanSpace_fin] at h
+    exact h
 
 include I J in
 /-- Helper: the stabilizer is a closed subset because it is the fiber
@@ -378,35 +374,33 @@ section
 
 include I J
 
-/-- Helper for Remark 7.50-extra-5: before the missing `LieSubgroup` owner step, the stabilizer of
-`p` already has a closed finite-dimensional embedded-submanifold package at regularity `∞`. -/
+/-- Helper for Remark 7.50-extra-5: the stabilizer of `p` has a closed finite-dimensional
+`C^∞` embedded package.  The original statement asked for `IsEmbeddedSubmanifold` (analytic
+inclusion); the corrected owner is `IsSmoothEmbedding` at `∞` together with closedness of
+the orbit-map fiber. -/
 theorem stabilizerEmbeddedClosedData
-    [FiniteDimensional 𝕜 E] [FiniteDimensional 𝕜 E'] [T2Space M] (p : M) :
+    {m n : ℕ}
+    [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+    [IsManifold (𝓡 m) ∞ G] [LieGroup (𝓡 m) ∞ G]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+    [IsManifold (𝓡 n) ∞ M]
+    [ContMDiffSMul (𝓡 m) (𝓡 n) ∞ G M]
+    [T2Space G] [SecondCountableTopology G] [T2Space M] (p : M) :
     ∃ k : ℕ,
-      ∃ K : ModelWithCorners 𝕜 (EuclideanSpace 𝕜 (Fin k)) (EuclideanSpace 𝕜 (Fin k)),
-        ∃ _ : ChartedSpace (EuclideanSpace 𝕜 (Fin k)) ((MulAction.stabilizer G p : Set G)),
-          ∃ _ : IsManifold K ∞ ((MulAction.stabilizer G p : Set G)),
-            IsEmbeddedSubmanifold I K ((MulAction.stabilizer G p : Set G)) ∧
-              IsClosed ((MulAction.stabilizer G p : Set G)) := by
-  -- First package the stabilizer fiber of the orbit map as an embedded subgroup.
-  have hConstRank : ∃ r : ℕ, Manifold.HasConstantRank I J (orbit_map G p) r :=
-    orbitMapHasConstantRank p
-  rcases hConstRank with ⟨r, hRank⟩
-  let k : ℕ := Module.finrank 𝕜 E - r
-  let K := modelWithCornersSelf 𝕜 (EuclideanSpace 𝕜 (Fin k))
-  rcases stabilizerEmbeddedData J p hRank with ⟨cs, hs, hEmb, _⟩
-  refine ⟨k, K, cs, hs, ?_⟩
-  constructor
-  · -- The constant-rank level-set package already gives the embedded subgroup structure.
-    exact hEmb
-  · -- Closedness comes from identifying the stabilizer with the orbit-map fiber over `p`.
-    have hSmooth : ContMDiff I J ∞ (orbit_map G p) := by
-      simpa [orbit_map] using!
-        ((contMDiff_id : ContMDiff I I ∞ fun g : G ↦ g).smul
-          (contMDiff_const : ContMDiff I J ∞ fun _ : G ↦ p))
-    simpa [preimage_singleton_orbit_map_eq_stabilizer] using
-      (isClosed_singleton.preimage hSmooth.continuous :
-        IsClosed ((orbit_map G p) ⁻¹' ({p} : Set M)))
+      ∃ _ : ChartedSpace (EuclideanSpace ℝ (Fin k)) ((MulAction.stabilizer G p : Set G)),
+        ∃ _ : IsManifold (𝓡 k) ∞ ((MulAction.stabilizer G p : Set G)),
+          let S := (MulAction.stabilizer G p : Set G)
+          IsSmoothEmbedding (𝓡 k) (𝓡 m) ∞ (Subtype.val : S → G) ∧
+            IsClosed ((MulAction.stabilizer G p : Set G)) := by
+  obtain ⟨r, hRank, _, _⟩ :=
+    StabilizerSmoothFiber.orbitMap_rank_with_bounds (I := 𝓡 m) (J := 𝓡 n) (G := G) (M := M) p
+  let k : ℕ := m - r
+  rcases stabilizerEmbeddedData (m := m) (n := n) p hRank with ⟨cs, hs, hEmb⟩
+  refine ⟨k, cs, hs, hEmb, ?_⟩
+  have hSmooth : ContMDiff (𝓡 m) (𝓡 n) ∞ (orbit_map G p) := orbitMap_contMDiff p
+  simpa [preimage_singleton_orbit_map_eq_stabilizer] using
+    (isClosed_singleton.preimage hSmooth.continuous :
+      IsClosed ((orbit_map G p) ⁻¹' ({p} : Set M)))
 
 end
 
@@ -2798,6 +2792,232 @@ theorem fixedLeftTranslation_headProjectionPatch_contDiffOn
   simpa [Function.comp] using!
     (orbitHeadProjection_isSmoothSubmersion hrm).contMDiff.comp_contMDiffOn hWritten
 
+/-- A smooth affine section of the head projection through a prescribed source coordinate. -/
+private def orbitHeadSectionAt
+    {m r : ℕ} (hrm : r ≤ m) (x : EuclideanSpace ℝ (Fin m)) :
+    EuclideanSpace ℝ (Fin r) → EuclideanSpace ℝ (Fin m) :=
+  fun z ↦ LocalNormalFormAPI.rank_normal_form r m r z +
+    (x - LocalNormalFormAPI.rank_normal_form r m r (orbitHeadProjection hrm x))
+
+private theorem orbitHeadSectionAt_contDiff
+    {m r : ℕ} (hrm : r ≤ m) (x : EuclideanSpace ℝ (Fin m)) :
+    ContDiff ℝ ∞ (orbitHeadSectionAt hrm x) := by
+  have hRank : ContDiff ℝ ∞ (LocalNormalFormAPI.rank_normal_form r m r) :=
+    (rankNormalFormSelf_isImmersion hrm).contMDiff.contDiff
+  exact hRank.add contDiff_const
+
+@[simp] private theorem orbitHeadSectionAt_head
+    {m r : ℕ} (hrm : r ≤ m) (x : EuclideanSpace ℝ (Fin m)) :
+    orbitHeadSectionAt hrm x (orbitHeadProjection hrm x) = x := by
+  simp [orbitHeadSectionAt]
+
+private theorem headProjection_orbitHeadSectionAt
+    {m r : ℕ} (hrm : r ≤ m) (x : EuclideanSpace ℝ (Fin m))
+    (z : EuclideanSpace ℝ (Fin r)) :
+    orbitHeadProjection hrm (orbitHeadSectionAt hrm x z) = z := by
+  ext i
+  simp [orbitHeadSectionAt, orbitHeadProjection,
+    LocalNormalFormAPI.rank_normal_form, _root_.rank_normal_form]
+
+/-- The head-projection formula remains smooth after both a fixed left and a fixed right
+translation.  The right translation is needed on an overlap because two representatives of the
+same stabilizer coset differ by a fixed stabilizer element. -/
+private theorem fixedLeftRightTranslation_headProjectionPatch_contDiffOn
+    {m n r : ℕ}
+    [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [LieGroup (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ M]
+    [ContMDiffSMul (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+      (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ G M]
+    (hrm : r ≤ m) (p : M)
+    (hNF : LocalNormalFormAPI.LocalCoordinateNormalFormAt
+      (orbit_map G p) (1 : G)
+      (LocalNormalFormAPI.rank_normal_form m n r))
+    (g h : G) :
+    ContDiffOn ℝ ∞
+      (fun y : EuclideanSpace ℝ (Fin m) ↦
+        orbitHeadProjection hrm (hNF.domChart (g * hNF.domChart.symm y * h)))
+      {y | y ∈ hNF.domChart.target ∧
+        g * hNF.domChart.symm y * h ∈ hNF.domChart.source} := by
+  have hChartInv :
+      ContMDiffOn
+        (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+        (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞
+        hNF.domChart.symm hNF.domChart.target := by
+    simpa using contMDiffOn_symm_of_mem_maximalAtlas hNF.domChart_mem_maximalAtlas
+  have hMul :
+      ContMDiff
+        (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+        (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞
+        (fun x : G ↦ g * x * h) := by
+    have hleft :
+        ContMDiff
+          (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+          (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞
+          (fun x : G ↦ g * x) := by
+      simpa using
+        (MulActionHom.contMDiff_const_smul
+          (I := 𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+          (IX := 𝓘(ℝ, EuclideanSpace ℝ (Fin m))) (X := G) g)
+    exact hleft.mul contMDiff_const
+  have hTranslated :
+      ContMDiffOn
+        (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+        (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞
+        (fun y : EuclideanSpace ℝ (Fin m) ↦ g * hNF.domChart.symm y * h)
+        hNF.domChart.target := by
+    simpa [Function.comp] using! hMul.comp_contMDiffOn hChartInv
+  have hChart :
+      ContMDiffOn
+        (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+        (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞
+        hNF.domChart hNF.domChart.source := by
+    simpa using contMDiffOn_of_mem_maximalAtlas hNF.domChart_mem_maximalAtlas
+  have hWritten :
+      ContMDiffOn
+        (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+        (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞
+        (fun y : EuclideanSpace ℝ (Fin m) ↦
+          hNF.domChart (g * hNF.domChart.symm y * h))
+        {y | y ∈ hNF.domChart.target ∧
+          g * hNF.domChart.symm y * h ∈ hNF.domChart.source} := by
+    refine hChart.comp (hTranslated.mono ?_) ?_
+    · exact fun _ hy ↦ hy.1
+    · exact fun _ hy ↦ hy.2
+  exact
+    ((orbitHeadProjection_isSmoothSubmersion hrm).contMDiff.comp_contMDiffOn
+      hWritten).contDiffOn
+
+private theorem quotientRepresentativeChart_target_eq
+    {m n r : ℕ}
+    [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [LieGroup (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ M]
+    [ContMDiffSMul (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+      (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ G M]
+    (hrm : r ≤ m) (hrn : r ≤ n) (p : M) {g₀ : G}
+    (hNF : LocalNormalFormAPI.LocalCoordinateNormalFormAt
+      (orbit_map G p) g₀
+      (LocalNormalFormAPI.rank_normal_form m n r)) :
+    (quotientRepresentativeChart hrm hrn p hNF).target =
+      orbitHeadProjection hrm '' hNF.domChart.target := by
+  ext x
+  simp [quotientRepresentativeChart, OpenPartialHomeomorph.lift_openEmbedding_target,
+    TopologicalSpace.Opens.openPartialHomeomorphSubtypeCoe_target]
+
+private theorem quotientRepresentativeChart_symm_headProjection
+    {m n r : ℕ}
+    [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [LieGroup (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ M]
+    [ContMDiffSMul (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+      (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ G M]
+    (hrm : r ≤ m) (hrn : r ≤ n) (p : M) {g₀ : G}
+    (hNF : LocalNormalFormAPI.LocalCoordinateNormalFormAt
+      (orbit_map G p) g₀
+      (LocalNormalFormAPI.rank_normal_form m n r))
+    (x : hNF.domChart.target) :
+    (quotientRepresentativeChart hrm hrn p hNF).symm
+        (orbitHeadProjection hrm x) =
+      Subtype.val
+        (orbitQuotientPatchInverseAtRepresentative hrm hrn p hNF
+          (⟨orbitHeadProjection hrm x, ⟨x, x.2, rfl⟩⟩ :
+            orbitHeadProjection hrm '' hNF.domChart.target)) := by
+  simp [quotientRepresentativeChart,
+    TopologicalSpace.Opens.openPartialHomeomorphSubtypeCoe]
+  apply congrArg (orbitQuotientPatchInverseAtRepresentative hrm hrn p hNF)
+  apply Subtype.ext
+  let W : TopologicalSpace.Opens (EuclideanSpace ℝ (Fin r)) :=
+    ⟨orbitHeadProjection hrm '' hNF.domChart.target,
+      orbitHeadProjection_targetPatchImage_open hrm p hNF⟩
+  let eW : OpenPartialHomeomorph W (EuclideanSpace ℝ (Fin r)) :=
+    W.openPartialHomeomorphSubtypeCoe
+      (orbitHeadProjection_targetPatch_nonemptyAtRepresentative hrm p hNF)
+  have hz : orbitHeadProjection hrm (x : EuclideanSpace ℝ (Fin m)) ∈ eW.target := by
+    simpa [eW, W, TopologicalSpace.Opens.openPartialHomeomorphSubtypeCoe_target] using
+      (show orbitHeadProjection hrm (x : EuclideanSpace ℝ (Fin m)) ∈
+          orbitHeadProjection hrm '' hNF.domChart.target from ⟨x, x.2, rfl⟩)
+  change ((eW.symm (orbitHeadProjection hrm (x : EuclideanSpace ℝ (Fin m))) : W) :
+    EuclideanSpace ℝ (Fin r)) = orbitHeadProjection hrm (x : EuclideanSpace ℝ (Fin m))
+  exact eW.right_inv hz
+
+private theorem quotientRepresentativeChart_apply_patch
+    {m n r : ℕ}
+    [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [LieGroup (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ M]
+    [ContMDiffSMul (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+      (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ G M]
+    (hrm : r ≤ m) (hrn : r ≤ n) (p : M) {g₀ : G}
+    (hNF : LocalNormalFormAPI.LocalCoordinateNormalFormAt
+      (orbit_map G p) g₀
+      (LocalNormalFormAPI.rank_normal_form m n r))
+    (qU : (((↑) : G → G ⧸ MulAction.stabilizer G p) '' hNF.domChart.source)) :
+    (quotientRepresentativeChart hrm hrn p hNF) (qU : G ⧸ MulAction.stabilizer G p) =
+      Subtype.val (orbitQuotientPatchForwardAtRepresentative hrm hrn p hNF qU) := by
+  simp [quotientRepresentativeChart, OpenPartialHomeomorph.lift_openEmbedding_apply,
+    TopologicalSpace.Opens.openPartialHomeomorphSubtypeCoe]
+  rfl
+
+private theorem quotientRepresentativeChart_symm_headProjection_eq_mk
+    {m n r : ℕ}
+    [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [LieGroup (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ M]
+    [ContMDiffSMul (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+      (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ G M]
+    (hrm : r ≤ m) (hrn : r ≤ n) (p : M) {g₀ : G}
+    (hNF : LocalNormalFormAPI.LocalCoordinateNormalFormAt
+      (orbit_map G p) g₀
+      (LocalNormalFormAPI.rank_normal_form m n r))
+    (x : hNF.domChart.target) :
+    (quotientRepresentativeChart hrm hrn p hNF).symm
+        (orbitHeadProjection hrm x) =
+      QuotientGroup.mk (hNF.domChart.symm x) := by
+  rw [quotientRepresentativeChart_symm_headProjection hrm hrn p hNF x]
+  have hInv := congrArg
+    (fun f : hNF.domChart.target →
+        (((↑) : G → G ⧸ MulAction.stabilizer G p) '' hNF.domChart.source) ↦ f x)
+    (orbitQuotientPatchInverseAtRepresentative_comp_projection hrm hrn p hNF)
+  exact congrArg Subtype.val hInv
+
+private theorem quotientRepresentativeChart_apply_mk
+    {m n r : ℕ}
+    [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [LieGroup (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞ G]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+    [IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ M]
+    [ContMDiffSMul (𝓘(ℝ, EuclideanSpace ℝ (Fin m)))
+      (𝓘(ℝ, EuclideanSpace ℝ (Fin n))) ∞ G M]
+    (hrm : r ≤ m) (hrn : r ≤ n) (p : M) {g₀ : G}
+    (hNF : LocalNormalFormAPI.LocalCoordinateNormalFormAt
+      (orbit_map G p) g₀
+      (LocalNormalFormAPI.rank_normal_form m n r))
+    (a : G) (ha : a ∈ hNF.domChart.source) :
+    (quotientRepresentativeChart hrm hrn p hNF)
+        (QuotientGroup.mk a : G ⧸ MulAction.stabilizer G p) =
+      orbitHeadProjection hrm (hNF.domChart a) := by
+  let qU : (((↑) : G → G ⧸ MulAction.stabilizer G p) '' hNF.domChart.source) :=
+    ⟨QuotientGroup.mk a, ⟨a, ha, rfl⟩⟩
+  rw [show (QuotientGroup.mk a : G ⧸ MulAction.stabilizer G p) = qU by rfl]
+  rw [quotientRepresentativeChart_apply_patch hrm hrn p hNF qU]
+  have hForward := congrArg
+    (fun f : hNF.domChart.source →
+        orbitHeadProjection hrm '' hNF.domChart.target => f ⟨a, ha⟩)
+    (orbitQuotientPatchForwardAtRepresentative_comp_projection hrm hrn p hNF)
+  exact congrArg Subtype.val hForward
+
 /-- Helper for Remark 7.50-extra-5: every overlap of the translated identity quotient charts is
 `C^∞` on its source. -/
 theorem translatedIdentityChartTransition_contDiffOn
@@ -2814,7 +3034,7 @@ theorem translatedIdentityChartTransition_contDiffOn
       (orbit_map G p) (1 : G)
       (LocalNormalFormAPI.rank_normal_form m n r))
     (q q' : G ⧸ MulAction.stabilizer G p) :
-    ContDiffOn ℝ (⊤ : WithTop ℕ∞)
+    ContDiffOn ℝ ∞
       (((translatedIdentityQuotientChartAt hrm hrn p hNF q).symm.trans
         (translatedIdentityQuotientChartAt hrm hrn p hNF q')) :
           OpenPartialHomeomorph
@@ -2822,14 +3042,124 @@ theorem translatedIdentityChartTransition_contDiffOn
             (EuclideanSpace ℝ (Fin r)))
       (((translatedIdentityQuotientChartAt hrm hrn p hNF q).symm.trans
         (translatedIdentityQuotientChartAt hrm hrn p hNF q')).source) := by
-  -- Route correction: the overlap itself has already been normalized to one fixed-chart
-  -- conjugation of a quotient left translation, so the remaining task is exactly that smoothness
-  -- bridge and nothing else from the quotient atlas package.
-  -- TODO: combine `fixedLeftTranslation_patch_formula` with `ContDiffOn.comp` for the explicit map
-  -- `y ↦ orbitHeadProjection hrm (hNF.domChart ((q'.out⁻¹ * q.out) * hNF.domChart.symm y))` on the
-  -- actual overlap source, then rewrite back through
-  -- `translatedIdentityChartTransition_eq_fixedLeftTranslation`.
-  sorry
+  rw [translatedIdentityChartTransition_eq_fixedLeftTranslation hrm hrn p hNF q q']
+  let e := quotientRepresentativeChart hrm hrn p hNF
+  let g : G := q'.out⁻¹ * q.out
+  let L := (quotientLeftTranslationHomeomorph
+    (I := 𝓘(ℝ, EuclideanSpace ℝ (Fin m))) p g).toOpenPartialHomeomorph
+  change ContDiffOn ℝ ∞ (e.symm.trans (L.trans e)) (e.symm.trans (L.trans e)).source
+  intro z hz
+  have hzSource := hz
+  rw [OpenPartialHomeomorph.trans_source] at hzSource
+  have hzTarget : z ∈ e.target := hzSource.1
+  have hzImage : z ∈ orbitHeadProjection hrm '' hNF.domChart.target := by
+    rw [← quotientRepresentativeChart_target_eq hrm hrn p hNF]
+    exact hzTarget
+  rcases hzImage with ⟨x0, hx0, hxz⟩
+  let x : hNF.domChart.target := ⟨x0, hx0⟩
+  have hxz' : orbitHeadProjection hrm (x : EuclideanSpace ℝ (Fin m)) = z := hxz
+  have hzTranslatedSource : L (e.symm z) ∈ e.source := by
+    have hrest := hzSource.2
+    rw [OpenPartialHomeomorph.trans_source] at hrest
+    exact hrest.2
+  have hzTranslatedImage : L (e.symm z) ∈
+      ((↑) : G → G ⧸ MulAction.stabilizer G p) '' hNF.domChart.source := by
+    rw [← quotientRepresentativeChart_source hrm hrn p hNF]
+    exact hzTranslatedSource
+  rcases hzTranslatedImage with ⟨b, hb, hbq⟩
+  let a : G := hNF.domChart.symm x
+  have heSymm : e.symm z = (QuotientGroup.mk a : G ⧸ MulAction.stabilizer G p) := by
+    rw [← hxz']
+    exact quotientRepresentativeChart_symm_headProjection_eq_mk hrm hrn p hNF x
+  have hbclass :
+      (QuotientGroup.mk b : G ⧸ MulAction.stabilizer G p) = QuotientGroup.mk (g * a) := by
+    calc
+      (QuotientGroup.mk b : G ⧸ MulAction.stabilizer G p) = L (e.symm z) := hbq
+      _ = g • (QuotientGroup.mk a : G ⧸ MulAction.stabilizer G p) := by
+        rw [heSymm]
+        rfl
+      _ = QuotientGroup.mk (g * a) := rfl
+  let h : G := (g * a)⁻¹ * b
+  have hh : h ∈ MulAction.stabilizer G p := QuotientGroup.eq.mp hbclass.symm
+  have hgab : g * a * h = b := by simp [h, mul_assoc]
+  let s : EuclideanSpace ℝ (Fin r) → EuclideanSpace ℝ (Fin m) :=
+    orbitHeadSectionAt hrm x
+  have hsmooth : ContDiff ℝ ∞ s := orbitHeadSectionAt_contDiff hrm x
+  have hsz : s z = x := by
+    rw [← hxz']
+    exact orbitHeadSectionAt_head hrm x
+  let A : Set (EuclideanSpace ℝ (Fin m)) :=
+    {y | y ∈ hNF.domChart.target ∧ g * hNF.domChart.symm y * h ∈ hNF.domChart.source}
+  have hxA : (x : EuclideanSpace ℝ (Fin m)) ∈ A := by
+    exact ⟨x.2, by simpa [a, hgab] using hb⟩
+  have hAopen : IsOpen A := by
+    letI : IsTopologicalGroup G :=
+      topologicalGroup_of_lieGroup (𝓘(ℝ, EuclideanSpace ℝ (Fin m))) ∞
+    have hmulCont : Continuous (fun y : G ↦ g * y * h) :=
+      (continuous_const_mul g).mul continuous_const
+    have hpre : IsOpen ((fun y : G ↦ g * y * h) ⁻¹' hNF.domChart.source) :=
+      hNF.domChart.open_source.preimage hmulCont
+    change IsOpen (hNF.domChart.target ∩
+      hNF.domChart.symm ⁻¹' ((fun y : G ↦ g * y * h) ⁻¹' hNF.domChart.source))
+    exact hNF.domChart.isOpen_inter_preimage_symm hpre
+  let phi : EuclideanSpace ℝ (Fin r) → EuclideanSpace ℝ (Fin r) :=
+    fun w ↦ orbitHeadProjection hrm
+      (hNF.domChart (g * hNF.domChart.symm (s w) * h))
+  have hphiAt : ContDiffAt ℝ ∞ phi z := by
+    have hlocal : ContDiffAt ℝ ∞
+        (fun y : EuclideanSpace ℝ (Fin m) ↦ orbitHeadProjection hrm
+          (hNF.domChart (g * hNF.domChart.symm y * h))) x :=
+      hAopen.contDiffOn_iff.mp
+        (fixedLeftRightTranslation_headProjectionPatch_contDiffOn hrm p hNF g h) hxA
+    have hlocal' : ContDiffAt ℝ ∞
+        (fun y : EuclideanSpace ℝ (Fin m) ↦ orbitHeadProjection hrm
+          (hNF.domChart (g * hNF.domChart.symm y * h))) (s z) := by
+      simpa [hsz] using hlocal
+    change ContDiffAt ℝ ∞
+      ((fun y : EuclideanSpace ℝ (Fin m) ↦ orbitHeadProjection hrm
+        (hNF.domChart (g * hNF.domChart.symm y * h))) ∘ s) z
+    exact hlocal'.comp z hsmooth.contDiffAt
+  apply hphiAt.contDiffWithinAt.congr_of_eventuallyEq_of_mem
+  · have hsA : s ⁻¹' A ∈ nhds z := by
+      apply (hAopen.preimage hsmooth.continuous).mem_nhds
+      simpa [hsz] using hxA
+    change ∀ᶠ w in nhds z ⊓ Filter.principal (e.symm.trans (L.trans e)).source,
+      (e.symm.trans (L.trans e)) w = phi w
+    rw [Filter.eventually_inf_principal]
+    filter_upwards [hsA] with w hwA hwSource
+    have hwA' : s w ∈ A := hwA
+    let xw : hNF.domChart.target := ⟨s w, hwA'.1⟩
+    have hhead : orbitHeadProjection hrm (xw : EuclideanSpace ℝ (Fin m)) = w :=
+      headProjection_orbitHeadSectionAt hrm x w
+    have heSymmW : e.symm w =
+        (QuotientGroup.mk (hNF.domChart.symm xw) :
+          G ⧸ MulAction.stabilizer G p) := by
+      rw [← hhead]
+      exact quotientRepresentativeChart_symm_headProjection_eq_mk hrm hrn p hNF xw
+    let c : G := g * hNF.domChart.symm xw * h
+    have hc : c ∈ hNF.domChart.source := hwA'.2
+    have hclass :
+        (QuotientGroup.mk c : G ⧸ MulAction.stabilizer G p) =
+          g • (QuotientGroup.mk (hNF.domChart.symm xw) :
+            G ⧸ MulAction.stabilizer G p) := by
+      change (QuotientGroup.mk c : G ⧸ MulAction.stabilizer G p) =
+        QuotientGroup.mk (g * hNF.domChart.symm xw)
+      apply QuotientGroup.eq.mpr
+      change c⁻¹ * (g * hNF.domChart.symm xw) ∈ MulAction.stabilizer G p
+      simpa [c, mul_assoc] using (MulAction.stabilizer G p).inv_mem hh
+    calc
+      (e.symm.trans (L.trans e)) w = e (L (e.symm w)) := rfl
+      _ = e (g • (QuotientGroup.mk (hNF.domChart.symm xw) :
+          G ⧸ MulAction.stabilizer G p)) := by
+            rw [heSymmW]
+            change e (g • (QuotientGroup.mk (hNF.domChart.symm xw) :
+              G ⧸ MulAction.stabilizer G p)) = _
+            rfl
+      _ = e (QuotientGroup.mk c : G ⧸ MulAction.stabilizer G p) := by rw [hclass]
+      _ = orbitHeadProjection hrm (hNF.domChart c) :=
+        quotientRepresentativeChart_apply_mk hrm hrn p hNF c hc
+      _ = phi w := rfl
+  · exact hz
 
 /-- Helper for Remark 7.50-extra-5: the translated identity quotient atlas defines a smooth
 boundaryless manifold structure on `G ⧸ MulAction.stabilizer G p`. -/
@@ -2848,7 +3178,7 @@ theorem translatedIdentityQuotientChartedSpace_isManifold
       (LocalNormalFormAPI.rank_normal_form m n r)) :
     let _ : ChartedSpace (EuclideanSpace ℝ (Fin r)) (G ⧸ MulAction.stabilizer G p) :=
       translatedIdentityQuotientChartedSpace hrm hrn p hNF
-    IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin r))) (⊤ : WithTop ℕ∞)
+    IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin r))) ∞
       (G ⧸ MulAction.stabilizer G p) := by
   let cs : ChartedSpace (EuclideanSpace ℝ (Fin r)) (G ⧸ MulAction.stabilizer G p) :=
     translatedIdentityQuotientChartedSpace hrm hrn p hNF
@@ -2856,11 +3186,218 @@ theorem translatedIdentityQuotientChartedSpace_isManifold
   -- The translated charts generate the whole atlas, so smooth compatibility reduces to the
   -- single transition lemma proved above for arbitrary `q` and `q'`.
   refine isManifold_of_contDiffOn (I := 𝓘(ℝ, EuclideanSpace ℝ (Fin r)))
-    (n := (⊤ : WithTop ℕ∞)) (M := G ⧸ MulAction.stabilizer G p) ?_
+    (n := ∞) (M := G ⧸ MulAction.stabilizer G p) ?_
   intro e e' he he'
   rcases he with ⟨q, rfl⟩
   rcases he' with ⟨q', rfl⟩
   simpa using translatedIdentityChartTransition_contDiffOn hrm hrn p hNF q q'
+
+private theorem orbitMemContDiffGroupoidOfLocalStructomorphOnSource
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {E'' : Type*} [NormedAddCommGroup E''] [NormedSpace 𝕜' E'']
+    {H'' : Type*} [TopologicalSpace H'']
+    {K : ModelWithCorners 𝕜' E'' H''}
+    {f : OpenPartialHomeomorph H'' H''}
+    (hf : ChartedSpace.LiftPropOn
+      ((contDiffGroupoid ∞ K).IsLocalStructomorphWithinAt) f f.source) :
+    f ∈ contDiffGroupoid ∞ K := by
+  refine (contDiffGroupoid ∞ K).locality ?_
+  intro x hx
+  have hfx := hf x hx
+  have hfx' := hfx
+  simp only [ChartedSpace.liftPropWithinAt_iff', chartAt_self_eq,
+    OpenPartialHomeomorph.refl_apply, OpenPartialHomeomorph.refl_symm] at hfx'
+  obtain ⟨-, hfx_prop⟩ := hfx'
+  have hfx_prop' :
+      (contDiffGroupoid ∞ K).IsLocalStructomorphWithinAt f f.source x := by
+    simpa using hfx_prop
+  rw [OpenPartialHomeomorph.isLocalStructomorphWithinAt_source_iff
+    (G := contDiffGroupoid ∞ K) (f := f)] at hfx_prop'
+  obtain ⟨e, he, hsource, hEq, hxe⟩ := hfx_prop' hx
+  refine ⟨e.source, e.open_source, hxe, ?_⟩
+  have hEq' : Set.EqOn f e (f.source ∩ e.source) := by
+    intro y hy
+    exact hEq hy.2
+  have hrestr : f.restr e.source ≈ e.restr f.source :=
+    OpenPartialHomeomorph.Set.EqOn.restr_eqOn_source hEq'
+  have hEqOnSource : f.restr e.source ≈ e := by
+    simpa [OpenPartialHomeomorph.restr_eq_of_source_subset hsource] using hrestr
+  exact (contDiffGroupoid ∞ K).mem_of_eqOnSource he hEqOnSource
+
+private theorem orbitWrittenInDiffeomorphMemContDiffGroupoid
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {E'' : Type*} [NormedAddCommGroup E''] [NormedSpace 𝕜' E'']
+    {H'' : Type*} [TopologicalSpace H'']
+    {K : ModelWithCorners 𝕜' E'' H''}
+    {P Q : Type*} [TopologicalSpace P] [ChartedSpace H'' P] [IsManifold K ∞ P]
+    [TopologicalSpace Q] [ChartedSpace H'' Q] [IsManifold K ∞ Q]
+    (Phi : P ≃ₘ⟮K, K⟯ Q)
+    {e : OpenPartialHomeomorph P H''}
+    {c : OpenPartialHomeomorph Q H''}
+    (he : e ∈ IsManifold.maximalAtlas K ∞ P)
+    (hc : c ∈ IsManifold.maximalAtlas K ∞ Q) :
+    (e.symm.trans Phi.toHomeomorph.toOpenPartialHomeomorph).trans c ∈
+      contDiffGroupoid ∞ K := by
+  let f : OpenPartialHomeomorph H'' H'' :=
+    (e.symm.trans Phi.toHomeomorph.toOpenPartialHomeomorph).trans c
+  have hPhi :
+      ChartedSpace.LiftPropOn
+        ((contDiffGroupoid ∞ K).IsLocalStructomorphWithinAt)
+        Phi.toHomeomorph.toOpenPartialHomeomorph
+        Phi.toHomeomorph.toOpenPartialHomeomorph.source := by
+    exact (isLocalStructomorphOn_contDiffGroupoid_iff
+      (I := K) (n := (∞ : ℕ∞ω))
+      (f := Phi.toHomeomorph.toOpenPartialHomeomorph)).2
+      ⟨by simpa using Phi.contMDiff_toFun.contMDiffOn,
+       by simpa using Phi.contMDiff_invFun.contMDiffOn⟩
+  refine orbitMemContDiffGroupoidOfLocalStructomorphOnSource (K := K) ?_
+  intro y hy
+  rw [ChartedSpace.liftPropWithinAt_iff']
+  simp only [chartAt_self_eq, OpenPartialHomeomorph.refl_apply,
+    OpenPartialHomeomorph.refl_symm, Set.preimage_id_eq]
+  refine ⟨f.continuousOn_toFun.continuousWithinAt hy, ?_⟩
+  intro hyf
+  have hy_chart :
+      y ∈ e.target ∩ e.symm ⁻¹' (Phi.toHomeomorph.toOpenPartialHomeomorph.source ∩
+        Phi.toHomeomorph.toOpenPartialHomeomorph ⁻¹' c.source) := by
+    have hyf' := hyf
+    simp only [f, OpenPartialHomeomorph.trans_source, Set.mem_inter_iff,
+      Set.mem_preimage] at hyf'
+    rcases hyf' with ⟨⟨hy_target, hy_source⟩, hy_csource⟩
+    exact ⟨hy_target, hy_source, hy_csource⟩
+  have htransport :
+      (contDiffGroupoid ∞ K).IsLocalStructomorphWithinAt
+        (c ∘ Phi.toHomeomorph.toOpenPartialHomeomorph ∘ e.symm)
+        (e.symm ⁻¹' Phi.toHomeomorph.toOpenPartialHomeomorph.source) y := by
+    exact StructureGroupoid.LocalInvariantProp.liftPropOn_indep_chart
+      (hG := StructureGroupoid.isLocalStructomorphWithinAt_localInvariantProp
+        (contDiffGroupoid ∞ K))
+      he hc hPhi hy_chart
+  rcases htransport hy_chart.2.1 with ⟨phi, hphi, hEq, hyphi⟩
+  refine ⟨phi, hphi, ?_, hyphi⟩
+  intro z hz
+  have hz_big :
+      z ∈ (e.symm ⁻¹' Phi.toHomeomorph.toOpenPartialHomeomorph.source) ∩ phi.source := by
+    refine ⟨?_, hz.2⟩
+    have hz' := hz.1
+    simp only [f, OpenPartialHomeomorph.trans_source, Set.mem_inter_iff,
+      Set.mem_preimage] at hz'
+    exact hz'.1.2
+  simpa [f, OpenPartialHomeomorph.coe_trans, Function.comp_assoc] using hEq hz_big
+
+private theorem orbitPulledChartMemMaximalAtlasOfDiffeomorph
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {E'' : Type*} [NormedAddCommGroup E''] [NormedSpace 𝕜' E'']
+    {H'' : Type*} [TopologicalSpace H'']
+    {K : ModelWithCorners 𝕜' E'' H''}
+    {P Q : Type*} [TopologicalSpace P] [ChartedSpace H'' P] [IsManifold K ∞ P]
+    [TopologicalSpace Q] [ChartedSpace H'' Q] [IsManifold K ∞ Q]
+    (Phi : P ≃ₘ⟮K, K⟯ Q)
+    {e : OpenPartialHomeomorph Q H''}
+    (he : e ∈ IsManifold.maximalAtlas K ∞ Q) :
+    Phi.toHomeomorph.toOpenPartialHomeomorph.trans e ∈
+      IsManifold.maximalAtlas K ∞ P := by
+  rw [IsManifold.mem_maximalAtlas_iff]
+  intro c hc
+  have hc_max : c ∈ IsManifold.maximalAtlas K ∞ P :=
+    IsManifold.subset_maximalAtlas (I := K) (n := ∞) hc
+  constructor
+  · simpa [OpenPartialHomeomorph.trans_assoc,
+      OpenPartialHomeomorph.trans_symm_eq_symm_trans_symm] using
+      orbitWrittenInDiffeomorphMemContDiffGroupoid
+        (K := K) (Phi := Phi.symm) (e := e) (c := c) he hc_max
+  · simpa [OpenPartialHomeomorph.trans_assoc,
+      OpenPartialHomeomorph.trans_symm_eq_symm_trans_symm] using
+      orbitWrittenInDiffeomorphMemContDiffGroupoid
+        (K := K) (Phi := Phi) (e := c) (c := e) hc_max he
+
+private theorem orbitSelfMaximalChartMemContDiffGroupoid
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {E'' : Type*} [NormedAddCommGroup E''] [NormedSpace 𝕜' E'']
+    {e : OpenPartialHomeomorph E'' E''}
+    (he : e ∈ IsManifold.maximalAtlas (modelWithCornersSelf 𝕜' E'') ∞ E'') :
+    e ∈ contDiffGroupoid ∞ (modelWithCornersSelf 𝕜' E'') := by
+  have hcompat := IsManifold.mem_maximalAtlas_iff.mp he
+    (OpenPartialHomeomorph.refl E'') (chart_mem_atlas E'' (0 : E''))
+  simpa using hcompat.2
+
+private theorem quotientRepresentativeChart_writtenInTargetChart
+    {m n r : ℕ}
+    [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+    [IsManifold (𝓡 m) ∞ G]
+    [LieGroup (𝓡 m) ∞ G]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+    [IsManifold (𝓡 n) ∞ M]
+    [ContMDiffSMul (𝓡 m) (𝓡 n) ∞ G M]
+    (hrm : r ≤ m) (hrn : r ≤ n) (p : M)
+    (hNF : LocalNormalFormAPI.LocalCoordinateNormalFormAt
+      (orbit_map G p) (1 : G)
+      (LocalNormalFormAPI.rank_normal_form m n r)) :
+    Set.EqOn
+      (hNF.codChart ∘ MulAction.ofQuotientStabilizer G p ∘
+        (quotientRepresentativeChart hrm hrn p hNF).symm)
+      (LocalNormalFormAPI.rank_normal_form r n r)
+      (quotientRepresentativeChart hrm hrn p hNF).target := by
+  intro u hu
+  have huImage : u ∈ orbitHeadProjection hrm '' hNF.domChart.target := by
+    rw [← quotientRepresentativeChart_target_eq hrm hrn p hNF]
+    exact hu
+  rcases huImage with ⟨x, hx, hxu⟩
+  let xV : hNF.domChart.target := ⟨x, hx⟩
+  have hSymm :
+      (quotientRepresentativeChart hrm hrn p hNF).symm u =
+        (QuotientGroup.mk (hNF.domChart.symm xV) :
+          G ⧸ MulAction.stabilizer G p) := by
+    rw [← hxu]
+    exact quotientRepresentativeChart_symm_headProjection_eq_mk
+      hrm hrn p hNF xV
+  have hNormal := hNF.eqOn hx
+  calc
+    (hNF.codChart ∘ MulAction.ofQuotientStabilizer G p ∘
+        (quotientRepresentativeChart hrm hrn p hNF).symm) u =
+        hNF.codChart
+          (MulAction.ofQuotientStabilizer G p
+            (QuotientGroup.mk (hNF.domChart.symm xV))) := by
+              simp only [Function.comp_apply, hSymm]
+    _ = LocalNormalFormAPI.rank_normal_form m n r x := by
+          simpa [orbit_map, MulAction.ofQuotientStabilizer_mk, xV,
+            OpenPartialHomeomorph.right_inv hNF.domChart hx] using hNormal
+    _ = LocalNormalFormAPI.rank_normal_form r n r (orbitHeadProjection hrm x) :=
+          rankNormalForm_factor_through_headProjection (n := n) hrm x
+    _ = LocalNormalFormAPI.rank_normal_form r n r u := by rw [hxu]
+
+private theorem translatedIdentityQuotientMap_writtenInCharts
+    {m n r : ℕ}
+    [ChartedSpace (EuclideanSpace ℝ (Fin m)) G]
+    [IsManifold (𝓡 m) ∞ G]
+    [LieGroup (𝓡 m) ∞ G]
+    [ChartedSpace (EuclideanSpace ℝ (Fin n)) M]
+    [IsManifold (𝓡 n) ∞ M]
+    [ContMDiffSMul (𝓡 m) (𝓡 n) ∞ G M]
+    (hrm : r ≤ m) (hrn : r ≤ n) (p : M)
+    (hNF : LocalNormalFormAPI.LocalCoordinateNormalFormAt
+      (orbit_map G p) (1 : G)
+      (LocalNormalFormAPI.rank_normal_form m n r))
+    (q : G ⧸ MulAction.stabilizer G p) :
+    let d := translatedIdentityQuotientChartAt hrm hrn p hNF q
+    let Phi := MulActionHom.smulDiffeomorph
+      (I := 𝓡 m) (IX := 𝓡 n) (X := M) q.out⁻¹
+    let c := Phi.toHomeomorph.toOpenPartialHomeomorph.trans hNF.codChart
+    Set.EqOn (c ∘ MulAction.ofQuotientStabilizer G p ∘ d.symm)
+      (LocalNormalFormAPI.rank_normal_form r n r) d.target := by
+  dsimp only
+  intro u hu
+  have huBase : u ∈ (quotientRepresentativeChart hrm hrn p hNF).target := by
+    simpa [translatedIdentityQuotientChartAt,
+      OpenPartialHomeomorph.trans_target] using hu
+  have hBase := quotientRepresentativeChart_writtenInTargetChart
+    hrm hrn p hNF huBase
+  change hNF.codChart
+      (q.out⁻¹ • MulAction.ofQuotientStabilizer G p
+        (q.out • (quotientRepresentativeChart hrm hrn p hNF).symm u)) =
+      LocalNormalFormAPI.rank_normal_form r n r u
+  rw [ofQuotientStabilizer_map_smul, inv_smul_smul]
+  simpa [Function.comp_apply] using hBase
 
 /-- Helper for Remark 7.50-extra-5: once the translated identity quotient atlas is installed, the
 descended orbit map `MulAction.ofQuotientStabilizer G p` is a global immersion into the Euclidean
@@ -2880,22 +3417,318 @@ theorem translatedIdentityQuotientMap_isImmersion
       (LocalNormalFormAPI.rank_normal_form m n r)) :
     let _ : ChartedSpace (EuclideanSpace ℝ (Fin r)) (G ⧸ MulAction.stabilizer G p) :=
       translatedIdentityQuotientChartedSpace hrm hrn p hNF
-    let _ : IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin r))) (⊤ : WithTop ℕ∞)
+    let _ : IsManifold (𝓘(ℝ, EuclideanSpace ℝ (Fin r))) ∞
         (G ⧸ MulAction.stabilizer G p) :=
       translatedIdentityQuotientChartedSpace_isManifold hrm hrn p hNF
     IsImmersion
       (𝓘(ℝ, EuclideanSpace ℝ (Fin r)))
       (𝓘(ℝ, EuclideanSpace ℝ (Fin n)))
-      (⊤ : WithTop ℕ∞)
+      ∞
       (MulAction.ofQuotientStabilizer G p) := by
-  -- Route correction: the global immersion should now be assembled from the identity-patch normal
-  -- form and equivariant transport along quotient left translations, with no return to the older
-  -- stabilizer-owner bridge.
-  -- TODO: first prove immersion on the fixed identity patch using
-  -- `ofQuotientStabilizer_writtenInRepresentativePatch`, `rankNormalFormSelf_isImmersion`, and
-  -- `euclideanChartInverse_isImmersion`, then transport that local result to every translated
-  -- chart via `ofQuotientStabilizer_map_smul` and fixed-smul smoothness on `M`.
-  sorry
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin r))
+      (G ⧸ MulAction.stabilizer G p) :=
+    translatedIdentityQuotientChartedSpace hrm hrn p hNF
+  let _ : IsManifold (𝓡 r) ∞ (G ⧸ MulAction.stabilizer G p) :=
+    translatedIdentityQuotientChartedSpace_isManifold hrm hrn p hNF
+  rcases rankNormalFormSelf_isImmersion hrn with ⟨F, instFGroup, instFSpace, hRank⟩
+  let _ : NormedAddCommGroup F := instFGroup
+  let _ : NormedSpace ℝ F := instFSpace
+  refine ⟨F, instFGroup, instFSpace, ?_⟩
+  intro q
+  let d := translatedIdentityQuotientChartAt hrm hrn p hNF q
+  let Phi := MulActionHom.smulDiffeomorph
+    (I := 𝓡 m) (IX := 𝓡 n) (X := M) q.out⁻¹
+  let c := Phi.toHomeomorph.toOpenPartialHomeomorph.trans hNF.codChart
+  let u₀ : EuclideanSpace ℝ (Fin r) := d q
+  let hR := hRank u₀
+  let D : OpenPartialHomeomorph
+      (G ⧸ MulAction.stabilizer G p) (EuclideanSpace ℝ (Fin r)) :=
+    d.trans hR.domChart
+  let C : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin n)) :=
+    c.trans hR.codChart
+  have hdAtlas : d ∈ atlas (EuclideanSpace ℝ (Fin r))
+      (G ⧸ MulAction.stabilizer G p) := by
+    exact translatedIdentityQuotientChartAt_mem_atlas hrm hrn p hNF q
+  have hdMax : d ∈ IsManifold.maximalAtlas (𝓡 r) ∞
+      (G ⧸ MulAction.stabilizer G p) :=
+    IsManifold.subset_maximalAtlas (I := 𝓡 r) (n := ∞) hdAtlas
+  have hcMax : c ∈ IsManifold.maximalAtlas (𝓡 n) ∞ M := by
+    exact orbitPulledChartMemMaximalAtlasOfDiffeomorph
+      (K := 𝓡 n) Phi hNF.codChart_mem_maximalAtlas
+  have hDMax : D ∈ IsManifold.maximalAtlas (𝓡 r) ∞
+      (G ⧸ MulAction.stabilizer G p) := by
+    exact Manifold.IsImmersionAtOfComplement.trans_mem_maximalAtlas_of_mem_groupoid
+      hdMax (orbitSelfMaximalChartMemContDiffGroupoid hR.domChart_mem_maximalAtlas)
+  have hCMax : C ∈ IsManifold.maximalAtlas (𝓡 n) ∞ M := by
+    exact Manifold.IsImmersionAtOfComplement.trans_mem_maximalAtlas_of_mem_groupoid
+      hcMax (orbitSelfMaximalChartMemContDiffGroupoid hR.codChart_mem_maximalAtlas)
+  have hqD : q ∈ D.source := by
+    change q ∈ (d.trans hR.domChart).source
+    rw [OpenPartialHomeomorph.trans_source]
+    refine ⟨translatedIdentityQuotientChartAt_mem_source hrm hrn p hNF q, ?_⟩
+    exact hR.mem_domChart_source
+  have hfqC : MulAction.ofQuotientStabilizer G p q ∈ C.source := by
+    change MulAction.ofQuotientStabilizer G p q ∈ (c.trans hR.codChart).source
+    rw [OpenPartialHomeomorph.trans_source]
+    have hOut : (QuotientGroup.mk q.out : G ⧸ MulAction.stabilizer G p) = q :=
+      QuotientGroup.out_eq' q
+    have hfc : MulAction.ofQuotientStabilizer G p q ∈ c.source := by
+      dsimp [c, Phi]
+      refine ⟨by simp, ?_⟩
+      change q.out⁻¹ • MulAction.ofQuotientStabilizer G p q ∈ hNF.codChart.source
+      have hOfQ : MulAction.ofQuotientStabilizer G p q = q.out • p := by
+        calc
+          MulAction.ofQuotientStabilizer G p q =
+              MulAction.ofQuotientStabilizer G p (QuotientGroup.mk q.out) :=
+            congrArg (MulAction.ofQuotientStabilizer G p) hOut.symm
+          _ = q.out • p := MulAction.ofQuotientStabilizer_mk G p q.out
+      rw [hOfQ, inv_smul_smul]
+      simpa [orbit_map] using hNF.codChart_centered.1
+    refine ⟨hfc, ?_⟩
+    have hWritten := translatedIdentityQuotientMap_writtenInCharts
+      hrm hrn p hNF q
+      (show d q ∈ d.target from d.map_source
+        (translatedIdentityQuotientChartAt_mem_source hrm hrn p hNF q))
+    have hcValue : c (MulAction.ofQuotientStabilizer G p q) =
+        LocalNormalFormAPI.rank_normal_form r n r u₀ := by
+      change c
+          (MulAction.ofQuotientStabilizer G p (d.symm (d q))) =
+        LocalNormalFormAPI.rank_normal_form r n r (d q) at hWritten
+      simpa [u₀, OpenPartialHomeomorph.left_inv d
+        (translatedIdentityQuotientChartAt_mem_source hrm hrn p hNF q)] using hWritten
+    change c (MulAction.ofQuotientStabilizer G p q) ∈ hR.codChart.source
+    rw [hcValue]
+    exact hR.mem_codChart_source
+  have hfContinuous : Continuous (MulAction.ofQuotientStabilizer G p) := by
+    rw [(QuotientGroup.isQuotientMap_mk
+      (MulAction.stabilizer G p)).continuous_iff]
+    have hComp : MulAction.ofQuotientStabilizer G p ∘ QuotientGroup.mk =
+        orbit_map G p := by
+      funext g
+      simp [Function.comp, orbit_map, MulAction.ofQuotientStabilizer_mk]
+    rw [hComp]
+    exact (orbitMap_contMDiff (I := 𝓡 m) (J := 𝓡 n) (G := G) p).continuous
+  refine Manifold.IsImmersionAtOfComplement.mk_of_continuousAt
+    hfContinuous.continuousAt hR.equiv D C hqD hfqC hDMax hCMax ?_
+  intro u hu
+  have huD : u ∈ D.target := by
+    simpa [D, OpenPartialHomeomorph.extend_target, modelWithCornersSelf_coe] using hu
+  have huParts := huD
+  change u ∈ (d.trans hR.domChart).target at huParts
+  rw [OpenPartialHomeomorph.trans_target] at huParts
+  have hvTarget : hR.domChart.symm u ∈ d.target := huParts.2
+  have hWritten := translatedIdentityQuotientMap_writtenInCharts
+    hrm hrn p hNF q hvTarget
+  have huRext : u ∈ (hR.domChart.extend (𝓡 r)).target := by
+    simpa [OpenPartialHomeomorph.extend_target, modelWithCornersSelf_coe] using huParts.1
+  have hRWritten := hR.writtenInCharts huRext
+  calc
+    ((C.extend (𝓡 n)) ∘ MulAction.ofQuotientStabilizer G p ∘
+        (D.extend (𝓡 r)).symm) u =
+        hR.codChart
+          (c (MulAction.ofQuotientStabilizer G p
+            (d.symm (hR.domChart.symm u)))) := by
+              simp [D, C, Function.comp_apply, OpenPartialHomeomorph.extend_coe,
+                OpenPartialHomeomorph.extend_coe_symm,
+                OpenPartialHomeomorph.coe_trans]
+    _ = hR.codChart
+        (LocalNormalFormAPI.rank_normal_form r n r (hR.domChart.symm u)) :=
+      congrArg hR.codChart hWritten
+    _ = (hR.equiv ∘ fun x ↦ (x, (0 : F))) u := by
+      simpa [Function.comp_apply, OpenPartialHomeomorph.extend_coe,
+        OpenPartialHomeomorph.extend_coe_symm] using hRWritten
+
+private theorem orbitSelfContDiffOnExtChartTransition
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {V : Type*} [NormedAddCommGroup V] [NormedSpace 𝕜' V]
+    {HV : Type*} [TopologicalSpace HV]
+    {P : Type*} [TopologicalSpace P] [ChartedSpace HV P]
+    {K : ModelWithCorners 𝕜' V HV} [IsManifold K ∞ P]
+    [BoundarylessManifold K P] (x y : P) :
+    ContDiffOn 𝕜' ∞
+      (((extChartAt K x).symm.trans (extChartAt K y)) : PartialEquiv V V)
+      (((extChartAt K x).symm.trans (extChartAt K y)).source) := by
+  simpa [extChartAt, ModelWithCorners.extendCoordChange] using
+    (K.contDiffOn_extendCoordChange
+      (IsManifold.chart_mem_maximalAtlas x)
+      (IsManifold.chart_mem_maximalAtlas y))
+
+private theorem orbitSelfIsOpenExtChartTarget
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {V : Type*} [NormedAddCommGroup V] [NormedSpace 𝕜' V]
+    {HV : Type*} [TopologicalSpace HV]
+    {P : Type*} [TopologicalSpace P] [ChartedSpace HV P]
+    {K : ModelWithCorners 𝕜' V HV} [IsManifold K ∞ P]
+    [BoundarylessManifold K P] (x : P) :
+    IsOpen (extChartAt K x).target := by
+  have hInterior : interior (extChartAt K x).target = (extChartAt K x).target := by
+    ext z
+    constructor
+    · exact fun hz ↦ interior_subset hz
+    · intro hz
+      let y : P := (chartAt HV x).symm (K.symm z)
+      have hzData : z ∈ Set.range K ∧ K.symm z ∈ (chartAt HV x).target := by
+        simpa [extChartAt_target, Set.mem_preimage, Set.mem_inter_iff] using hz
+      have hySource : y ∈ (chartAt HV x).source := by
+        simpa [y] using (chartAt HV x).map_target hzData.2
+      have hyImage : extChartAt K x y ∈ interior (extChartAt K x).target := by
+        exact
+          (show K.IsInteriorPoint y ↔
+              extChartAt K x y ∈ interior (extChartAt K x).target from
+            @ModelWithCorners.isInteriorPoint_iff_of_mem_atlas 𝕜' _ V _ _ HV _ K P _ _ ∞
+              inferInstance (chartAt HV x) y (by simp) (chart_mem_atlas HV x) hySource).1
+            BoundarylessManifold.isInteriorPoint
+      have hyEq : extChartAt K x y = z := by
+        simpa [y] using (extChartAt K x).right_inv hz
+      rw [hyEq] at hyImage
+      exact hyImage
+  rw [← hInterior]
+  exact isOpen_interior
+
+private noncomputable def orbitSelfExtChart
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {V : Type*} [NormedAddCommGroup V] [NormedSpace 𝕜' V]
+    {HV : Type*} [TopologicalSpace HV]
+    {P : Type*} [TopologicalSpace P] [ChartedSpace HV P]
+    (K : ModelWithCorners 𝕜' V HV) [IsManifold K ∞ P]
+    [BoundarylessManifold K P] (x : P) : OpenPartialHomeomorph P V where
+  toPartialEquiv := extChartAt K x
+  open_source := isOpen_extChartAt_source x
+  open_target := orbitSelfIsOpenExtChartTarget x
+  continuousOn_toFun := continuousOn_extChartAt x
+  continuousOn_invFun := continuousOn_extChartAt_symm x
+
+@[reducible] private noncomputable def orbitSelfChartedSpace
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {V : Type*} [NormedAddCommGroup V] [NormedSpace 𝕜' V]
+    {HV : Type*} [TopologicalSpace HV]
+    {P : Type*} [TopologicalSpace P] [ChartedSpace HV P]
+    (K : ModelWithCorners 𝕜' V HV) [IsManifold K ∞ P]
+    [BoundarylessManifold K P] : ChartedSpace V P where
+  atlas := Set.range (orbitSelfExtChart K)
+  chartAt := orbitSelfExtChart K
+  mem_chart_source x := mem_extChartAt_source x
+  chart_mem_atlas x := ⟨x, rfl⟩
+
+@[simp] private theorem orbitSelfChartAtEq
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {V : Type*} [NormedAddCommGroup V] [NormedSpace 𝕜' V]
+    {HV : Type*} [TopologicalSpace HV]
+    {P : Type*} [TopologicalSpace P] [ChartedSpace HV P]
+    (K : ModelWithCorners 𝕜' V HV) [IsManifold K ∞ P]
+    [BoundarylessManifold K P] (x : P) :
+    let _ : ChartedSpace V P := orbitSelfChartedSpace K
+    chartAt V x = orbitSelfExtChart K x := rfl
+
+private theorem orbitSelfIsManifold
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {V : Type*} [NormedAddCommGroup V] [NormedSpace 𝕜' V]
+    {HV : Type*} [TopologicalSpace HV]
+    {P : Type*} [TopologicalSpace P] [ChartedSpace HV P]
+    (K : ModelWithCorners 𝕜' V HV) [IsManifold K ∞ P]
+    [BoundarylessManifold K P] :
+    let _ : ChartedSpace V P := orbitSelfChartedSpace K
+    IsManifold (modelWithCornersSelf 𝕜' V) ∞ P := by
+  let _ : ChartedSpace V P := orbitSelfChartedSpace K
+  exact isManifold_of_contDiffOn (modelWithCornersSelf 𝕜' V) (∞ : ℕ∞ω) P
+    (fun e e' he he' ↦ by
+      rcases he with ⟨x, rfl⟩
+      rcases he' with ⟨y, rfl⟩
+      simpa [orbitSelfExtChart] using orbitSelfContDiffOnExtChartTransition x y)
+
+private theorem orbitSelfContMDiffIdFrom
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {V : Type*} [NormedAddCommGroup V] [NormedSpace 𝕜' V]
+    {HV : Type*} [TopologicalSpace HV]
+    {P : Type*} [TopologicalSpace P] [ChartedSpace HV P]
+    (K : ModelWithCorners 𝕜' V HV) [IsManifold K ∞ P]
+    [BoundarylessManifold K P] :
+    let _ : ChartedSpace V P := orbitSelfChartedSpace K
+    let _ : IsManifold (modelWithCornersSelf 𝕜' V) ∞ P := orbitSelfIsManifold K
+    ContMDiff (modelWithCornersSelf 𝕜' V) K ∞ (fun x : P ↦ x) := by
+  let _ : ChartedSpace V P := orbitSelfChartedSpace K
+  let _ : IsManifold (modelWithCornersSelf 𝕜' V) ∞ P := orbitSelfIsManifold K
+  rw [contMDiff_iff]
+  refine ⟨continuous_id, ?_⟩
+  intro x y
+  simpa [orbitSelfChartAtEq, orbitSelfExtChart] using!
+    orbitSelfContDiffOnExtChartTransition (K := K) x y
+
+private theorem orbitSelfContMDiffIdTo
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {V : Type*} [NormedAddCommGroup V] [NormedSpace 𝕜' V]
+    {HV : Type*} [TopologicalSpace HV]
+    {P : Type*} [TopologicalSpace P] [ChartedSpace HV P]
+    (K : ModelWithCorners 𝕜' V HV) [IsManifold K ∞ P]
+    [BoundarylessManifold K P] :
+    let _ : ChartedSpace V P := orbitSelfChartedSpace K
+    let _ : IsManifold (modelWithCornersSelf 𝕜' V) ∞ P := orbitSelfIsManifold K
+    ContMDiff K (modelWithCornersSelf 𝕜' V) ∞ (fun x : P ↦ x) := by
+  let _ : ChartedSpace V P := orbitSelfChartedSpace K
+  let _ : IsManifold (modelWithCornersSelf 𝕜' V) ∞ P := orbitSelfIsManifold K
+  rw [contMDiff_iff]
+  refine ⟨continuous_id, ?_⟩
+  intro x y
+  simpa [orbitSelfChartAtEq, orbitSelfExtChart] using!
+    orbitSelfContDiffOnExtChartTransition (K := K) x y
+
+private theorem orbitSelfIdentityIsImmersion
+    {𝕜' : Type*} [NontriviallyNormedField 𝕜']
+    {V : Type uV} [NormedAddCommGroup V] [NormedSpace 𝕜' V]
+    {HV : Type*} [TopologicalSpace HV]
+    {P : Type*} [TopologicalSpace P] [ChartedSpace HV P]
+    (K : ModelWithCorners 𝕜' V HV) [IsManifold K ∞ P]
+    [BoundarylessManifold K P] [FiniteDimensional 𝕜' V] :
+    let _ : ChartedSpace V P := orbitSelfChartedSpace K
+    let _ : IsManifold (modelWithCornersSelf 𝕜' V) ∞ P := orbitSelfIsManifold K
+    IsImmersion (modelWithCornersSelf 𝕜' V) K ∞ (fun x : P ↦ x) := by
+  let _ : ChartedSpace V P := orbitSelfChartedSpace K
+  let _ : IsManifold (modelWithCornersSelf 𝕜' V) ∞ P := orbitSelfIsManifold K
+  refine ⟨PUnit.{uV + 1}, inferInstance, inferInstance, ?_⟩
+  intro x
+  refine Manifold.IsImmersionAtOfComplement.mk_of_continuousAt continuousAt_id
+    (.prodUnique 𝕜' V PUnit.{uV + 1}) (chartAt V x) (chartAt HV x) ?_ ?_ ?_ ?_ ?_
+  · exact mem_extChartAt_source x
+  · exact mem_chart_source HV x
+  · exact IsManifold.chart_mem_maximalAtlas x
+  · exact IsManifold.chart_mem_maximalAtlas x
+  · intro y hy
+    have hy' : y ∈ (orbitSelfExtChart K x).target := by
+      simpa [orbitSelfChartAtEq] using hy
+    simpa [orbitSelfChartAtEq, orbitSelfExtChart, Function.comp] using
+      (orbitSelfExtChart K x).right_inv hy'
+
+/-- Transporting a boundaryless model along a continuous linear equivalence of the model
+vector space keeps the model boundaryless. -/
+private theorem transContinuousLinearEquiv_boundaryless
+    {E E' H : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    [NormedAddCommGroup E'] [NormedSpace ℝ E'] [TopologicalSpace H]
+    (I : ModelWithCorners ℝ E H) [I.Boundaryless] (e : E ≃L[ℝ] E') :
+    (I.transContinuousLinearEquiv e).Boundaryless where
+  range_eq_univ := by
+    rw [ModelWithCorners.transContinuousLinearEquiv_range, ModelWithCorners.range_eq_univ,
+      Set.image_univ]
+    exact e.surjective.range_eq
+
+/-- A smooth diffeomorphism between finite-dimensional boundaryless manifolds is an immersion.
+This is the model-change bridge needed below; the differential is the continuous linear
+equivalence supplied by the local-diffeomorphism API. -/
+private theorem orbitDiffeomorphIsImmersion
+    {E₁ : Type*} [NormedAddCommGroup E₁] [NormedSpace ℝ E₁]
+    {H₁ : Type*} [TopologicalSpace H₁]
+    {E₂ : Type*} [NormedAddCommGroup E₂] [NormedSpace ℝ E₂]
+    {H₂ : Type*} [TopologicalSpace H₂]
+    {P : Type*} [TopologicalSpace P] [ChartedSpace H₁ P]
+    {Q : Type*} [TopologicalSpace Q] [ChartedSpace H₂ Q]
+    {K₁ : ModelWithCorners ℝ E₁ H₁} {K₂ : ModelWithCorners ℝ E₂ H₂}
+    [IsManifold K₁ ∞ P] [IsManifold K₂ ∞ Q]
+    [K₁.Boundaryless] [K₂.Boundaryless]
+    [FiniteDimensional ℝ E₁] [FiniteDimensional ℝ E₂]
+    (Phi : P ≃ₘ⟮K₁, K₂⟯ Q) : IsImmersion K₁ K₂ ∞ Phi := by
+  refine (Manifold.is_immersion_iff_forall_injective_mfderiv Phi.contMDiff).2 ?_
+  intro x
+  rw [← Phi.mfderivToContinuousLinearEquiv_coe (by simp)]
+  exact (Phi.mfderivToContinuousLinearEquiv (by simp) x).injective
 
 /-- Helper for Remark 7.50-extra-5: once the descended quotient map is an immersion into an
 auxiliary target owner on the same carrier `M`, composing with the identity immersion back to the
@@ -2903,18 +3736,19 @@ original target model `J` upgrades it to the required original-model immersion. 
 theorem ofQuotientStabilizer_isImmersion_originalModel
     {EM'' : Type uE'} [NormedAddCommGroup EM''] [NormedSpace 𝕜 EM'']
     [ChartedSpace EM'' M]
-    [IsManifold (modelWithCornersSelf 𝕜 EM'') (⊤ : WithTop ℕ∞) M]
+    [IsManifold (modelWithCornersSelf 𝕜 EM'') ∞ M]
+    [J.Boundaryless]
     (p : M)
-    (hIdImm : IsImmersion (modelWithCornersSelf 𝕜 EM'') J (⊤ : WithTop ℕ∞)
+    (hIdImm : IsImmersion (modelWithCornersSelf 𝕜 EM'') J ∞
       (fun x : M ↦ x))
     {EQ : Type uQ} [NormedAddCommGroup EQ] [NormedSpace 𝕜 EQ]
     [ChartedSpace EQ (G ⧸ MulAction.stabilizer G p)]
-    [IsManifold (modelWithCornersSelf 𝕜 EQ) (⊤ : WithTop ℕ∞)
+    [IsManifold (modelWithCornersSelf 𝕜 EQ) ∞
       (G ⧸ MulAction.stabilizer G p)]
     (hQuotImm : IsImmersion (modelWithCornersSelf 𝕜 EQ)
-      (modelWithCornersSelf 𝕜 EM'') (⊤ : WithTop ℕ∞)
+      (modelWithCornersSelf 𝕜 EM'') ∞
       (MulAction.ofQuotientStabilizer G p)) :
-    IsImmersion (modelWithCornersSelf 𝕜 EQ) J (⊤ : WithTop ℕ∞)
+    IsImmersion (modelWithCornersSelf 𝕜 EQ) J ∞
       (MulAction.ofQuotientStabilizer G p) := by
   -- Compose the auxiliary-target immersion with the identity immersion back to the original model.
   simpa [Function.comp] using!
@@ -2925,22 +3759,23 @@ bridge once the identity map back to `J` is known to be an immersion. -/
 theorem stabilizerQuotientManifoldBridge_of_auxiliaryTargetModel
     {EM'' : Type uE'} [NormedAddCommGroup EM''] [NormedSpace 𝕜 EM'']
     [ChartedSpace EM'' M]
-    [IsManifold (modelWithCornersSelf 𝕜 EM'') (⊤ : WithTop ℕ∞) M]
+    [IsManifold (modelWithCornersSelf 𝕜 EM'') ∞ M]
+    [J.Boundaryless]
     (p : M)
-    (hIdImm : IsImmersion (modelWithCornersSelf 𝕜 EM'') J (⊤ : WithTop ℕ∞)
+    (hIdImm : IsImmersion (modelWithCornersSelf 𝕜 EM'') J ∞
       (fun x : M ↦ x))
     {EQ : Type uQ} [NormedAddCommGroup EQ] [NormedSpace 𝕜 EQ]
     [ChartedSpace EQ (G ⧸ MulAction.stabilizer G p)]
-    [IsManifold (modelWithCornersSelf 𝕜 EQ) (⊤ : WithTop ℕ∞)
+    [IsManifold (modelWithCornersSelf 𝕜 EQ) ∞
       (G ⧸ MulAction.stabilizer G p)]
     (hQuotImm : IsImmersion (modelWithCornersSelf 𝕜 EQ)
-      (modelWithCornersSelf 𝕜 EM'') (⊤ : WithTop ℕ∞)
+      (modelWithCornersSelf 𝕜 EM'') ∞
       (MulAction.ofQuotientStabilizer G p)) :
     ∃ (EQ : Type uQ), ∃ _ : NormedAddCommGroup EQ, ∃ _ : NormedSpace 𝕜 EQ,
       ∃ _ : ChartedSpace EQ (G ⧸ MulAction.stabilizer G p),
-        ∃ _ : IsManifold (modelWithCornersSelf 𝕜 EQ) (⊤ : WithTop ℕ∞)
+        ∃ _ : IsManifold (modelWithCornersSelf 𝕜 EQ) ∞
             (G ⧸ MulAction.stabilizer G p),
-          IsImmersion (modelWithCornersSelf 𝕜 EQ) J (⊤ : WithTop ℕ∞)
+          IsImmersion (modelWithCornersSelf 𝕜 EQ) J ∞
             (MulAction.ofQuotientStabilizer G p) := by
   -- Package the quotient charted-space owner together with the transported original-model
   -- immersion.
@@ -3044,7 +3879,7 @@ theorem stabilizerQuotientManifoldBridge
     {EM : Type uE'} [NormedAddCommGroup EM] [NormedSpace ℝ EM]
     {HM : Type uH'} [TopologicalSpace HM]
     {M : Type uM} [TopologicalSpace M] [ChartedSpace HM M]
-    {J : ModelWithCorners ℝ EM HM} [IsManifold J ∞ M]
+    {J : ModelWithCorners ℝ EM HM} [IsManifold J ∞ M] [J.Boundaryless]
     [MulAction G M]
     [FiniteDimensional ℝ EG] [FiniteDimensional ℝ EM]
     [T2Space G] [SecondCountableTopology G] [T2Space M] [SecondCountableTopology M]
@@ -3053,32 +3888,182 @@ theorem stabilizerQuotientManifoldBridge
     (p : M) :
     ∃ (EQ : Type uQ), ∃ _ : NormedAddCommGroup EQ, ∃ _ : NormedSpace ℝ EQ,
       ∃ _ : ChartedSpace EQ (G ⧸ MulAction.stabilizer G p),
-        ∃ _ : IsManifold (modelWithCornersSelf ℝ EQ) (⊤ : WithTop ℕ∞)
+        ∃ _ : IsManifold (modelWithCornersSelf ℝ EQ) ∞
             (G ⧸ MulAction.stabilizer G p),
-          IsImmersion (modelWithCornersSelf ℝ EQ) J (⊤ : WithTop ℕ∞)
+          IsImmersion (modelWithCornersSelf ℝ EQ) J ∞
             (MulAction.ofQuotientStabilizer G p) := by
+  let m := Module.finrank ℝ EG
+  let n := Module.finrank ℝ EM
+  let eG : EG ≃L[ℝ] EuclideanSpace ℝ (Fin m) :=
+    ContinuousLinearEquiv.ofFinrankEq finrank_euclideanSpace_fin.symm
+  let eM : EM ≃L[ℝ] EuclideanSpace ℝ (Fin n) :=
+    ContinuousLinearEquiv.ofFinrankEq finrank_euclideanSpace_fin.symm
   let I : ModelWithCorners ℝ EG EG := modelWithCornersSelf ℝ EG
+  let KG : ModelWithCorners ℝ (EuclideanSpace ℝ (Fin m)) EG :=
+    I.transContinuousLinearEquiv eG
+  let KM : ModelWithCorners ℝ (EuclideanSpace ℝ (Fin n)) HM :=
+    J.transContinuousLinearEquiv eM
+  letI : KG.Boundaryless := transContinuousLinearEquiv_boundaryless I eG
+  letI : KM.Boundaryless := transContinuousLinearEquiv_boundaryless J eM
+  let phiG : G ≃ₘ⟮I, KG⟯ G :=
+    ContinuousLinearEquiv.toTransContinuousLinearEquiv I G eG
+  let phiM : M ≃ₘ⟮J, KM⟯ M :=
+    ContinuousLinearEquiv.toTransContinuousLinearEquiv J M eM
   let _ : LieGroup I ∞ G := by
     simpa [I] using (inferInstance : LieGroup (modelWithCornersSelf ℝ EG) ∞ G)
   let _ : ContMDiffSMul I J ∞ G M := by
     simpa [I] using
       (inferInstance : ContMDiffSMul (modelWithCornersSelf ℝ EG) J ∞ G M)
-  rcases orbitMapConstantRankBounds (I := I) (J := J) (G := G) (M := M) p with
-    ⟨r, hRank, hr_source, hr_target⟩
-  -- Route correction: the atlas pivot now uses one fixed identity normal form and the translated
-  -- chart family `translatedIdentityQuotientChartAt`, so the representative-choice seam is gone.
-  -- The Euclidean translated-atlas helpers above now isolate the local quotient-manifold owner and
-  -- the Euclidean-target immersion route. The remaining blocker is owner transport:
-  -- this theorem still works over arbitrary finite-dimensional model spaces `EG` and `EM`, so it
-  -- needs a bridge from those ambient models to the Euclidean source/target owners consumed by the
-  -- translated-atlas package.
-  -- TODO: choose Euclidean models for `G` and `M`, transport the constant-rank witness to those
-  -- owners, apply `translatedIdentityQuotientChartedSpace_isManifold` and
-  -- `translatedIdentityQuotientMap_isImmersion`, then compose with the identity immersion back to
-  -- the original target model via `stabilizerQuotientManifoldBridge_of_auxiliaryTargetModel`.
-  have _ : r ≤ Module.finrank ℝ EG := hr_source
-  have _ : r ≤ Module.finrank ℝ EM := hr_target
-  sorry
+  let boundaryKG : BoundarylessManifold KG G := phiG.boundarylessManifold (by simp)
+  let boundaryKM : BoundarylessManifold KM M := phiM.boundarylessManifold (by simp)
+  letI : BoundarylessManifold KG G := boundaryKG
+  letI : BoundarylessManifold KM M := boundaryKM
+  have hMulKG : ContMDiff (KG.prod KG) KG ∞ (fun z : G × G ↦ z.1 * z.2) := by
+    have hleft : ContMDiff (KG.prod KG) I ∞ (fun z : G × G ↦ z.1) := by
+      exact phiG.contMDiff_invFun.comp
+        (contMDiff_fst : ContMDiff (KG.prod KG) KG ∞ (fun z : G × G ↦ z.1))
+    have hright : ContMDiff (KG.prod KG) I ∞ (fun z : G × G ↦ z.2) := by
+      exact phiG.contMDiff_invFun.comp
+        (contMDiff_snd : ContMDiff (KG.prod KG) KG ∞ (fun z : G × G ↦ z.2))
+    convert phiG.contMDiff_toFun.comp (hleft.mul hright) using 1 <;> rfl
+  have hInvKG : ContMDiff KG KG ∞ (fun g : G ↦ g⁻¹) := by
+    convert phiG.contMDiff_toFun.comp phiG.contMDiff_invFun.inv using 1 <;> rfl
+  let _ : LieGroup KG ∞ G :=
+    { contMDiff_mul := hMulKG
+      contMDiff_inv := hInvKG }
+  have hActKM : ContMDiff (KG.prod KM) KM ∞ (fun z : G × M ↦ z.1 • z.2) := by
+    have hleft : ContMDiff (KG.prod KM) I ∞ (fun z : G × M ↦ z.1) := by
+      exact phiG.contMDiff_invFun.comp
+        (contMDiff_fst : ContMDiff (KG.prod KM) KG ∞ (fun z : G × M ↦ z.1))
+    have hright : ContMDiff (KG.prod KM) J ∞ (fun z : G × M ↦ z.2) := by
+      exact phiM.contMDiff_invFun.comp
+        (contMDiff_snd : ContMDiff (KG.prod KM) KM ∞ (fun z : G × M ↦ z.2))
+    convert phiM.contMDiff_toFun.comp (hleft.smul hright) using 1 <;> rfl
+  let instActKM : ContMDiffSMul KG KM ∞ G M := ⟨hActKM⟩
+  let _ : ContMDiffSMul KG KM ∞ G M := instActKM
+
+  -- Rechart both carriers by their Euclidean self models.  The identity diffeomorphisms below
+  -- retain the transported group and action operations.
+  let csG : ChartedSpace (EuclideanSpace ℝ (Fin m)) G := orbitSelfChartedSpace KG
+  let csM : ChartedSpace (EuclideanSpace ℝ (Fin n)) M := orbitSelfChartedSpace KM
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin m)) G := csG
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin n)) M := csM
+  let manG : IsManifold (𝓡 m) ∞ G := orbitSelfIsManifold KG
+  let manM : IsManifold (𝓡 n) ∞ M := orbitSelfIsManifold KM
+  let _ : IsManifold (𝓡 m) ∞ G := manG
+  let _ : IsManifold (𝓡 n) ∞ M := manM
+  let psiG : G ≃ₘ⟮KG, 𝓡 m⟯ G :=
+    { toEquiv := Equiv.refl G
+      contMDiff_toFun := orbitSelfContMDiffIdTo KG
+      contMDiff_invFun := orbitSelfContMDiffIdFrom KG }
+  let psiM : M ≃ₘ⟮KM, 𝓡 n⟯ M :=
+    { toEquiv := Equiv.refl M
+      contMDiff_toFun := orbitSelfContMDiffIdTo KM
+      contMDiff_invFun := orbitSelfContMDiffIdFrom KM }
+  have hMulSelf : ContMDiff ((𝓡 m).prod (𝓡 m)) (𝓡 m) ∞
+      (fun z : G × G ↦ z.1 * z.2) := by
+    have hleft : ContMDiff ((𝓡 m).prod (𝓡 m)) KG ∞ (fun z : G × G ↦ z.1) := by
+      exact psiG.contMDiff_invFun.comp
+        (contMDiff_fst : ContMDiff ((𝓡 m).prod (𝓡 m)) (𝓡 m) ∞
+          (fun z : G × G ↦ z.1))
+    have hright : ContMDiff ((𝓡 m).prod (𝓡 m)) KG ∞ (fun z : G × G ↦ z.2) := by
+      exact psiG.contMDiff_invFun.comp
+        (contMDiff_snd : ContMDiff ((𝓡 m).prod (𝓡 m)) (𝓡 m) ∞
+          (fun z : G × G ↦ z.2))
+    convert psiG.contMDiff_toFun.comp (hleft.mul hright) using 1 <;> rfl
+  have hInvSelf : ContMDiff (𝓡 m) (𝓡 m) ∞ (fun g : G ↦ g⁻¹) := by
+    convert psiG.contMDiff_toFun.comp psiG.contMDiff_invFun.inv using 1 <;> rfl
+  let _ : LieGroup (𝓡 m) ∞ G :=
+    { contMDiff_mul := hMulSelf
+      contMDiff_inv := hInvSelf }
+  have hActSelf : ContMDiff ((𝓡 m).prod (𝓡 n)) (𝓡 n) ∞
+      (fun z : G × M ↦ z.1 • z.2) := by
+    have hleft : ContMDiff ((𝓡 m).prod (𝓡 n)) KG ∞ (fun z : G × M ↦ z.1) := by
+      exact psiG.contMDiff_invFun.comp
+        (contMDiff_fst : ContMDiff ((𝓡 m).prod (𝓡 n)) (𝓡 m) ∞
+          (fun z : G × M ↦ z.1))
+    have hright : ContMDiff ((𝓡 m).prod (𝓡 n)) KM ∞ (fun z : G × M ↦ z.2) := by
+      exact psiM.contMDiff_invFun.comp
+        (contMDiff_snd : ContMDiff ((𝓡 m).prod (𝓡 n)) (𝓡 n) ∞
+          (fun z : G × M ↦ z.2))
+    convert psiM.contMDiff_toFun.comp (hleft.smul hright) using 1 <;> rfl
+  let instActSelf : ContMDiffSMul (𝓡 m) (𝓡 n) ∞ G M := ⟨hActSelf⟩
+  let _ : ContMDiffSMul (𝓡 m) (𝓡 n) ∞ G M := instActSelf
+
+  rcases orbitMapConstantRankBounds (I := 𝓡 m) (J := 𝓡 n) (G := G) (M := M) p with
+    ⟨r, hRank, hrmRaw, hrnRaw⟩
+  have hrm : r ≤ m := by simpa [m] using hrmRaw
+  have hrn : r ≤ n := by simpa [n] using hrnRaw
+  rcases constant_rank_local_coordinate_normal_form
+      (orbitMap_contMDiff p) hRank (1 : G) with ⟨hNF, _⟩
+  let csQ : ChartedSpace (EuclideanSpace ℝ (Fin r))
+      (G ⧸ MulAction.stabilizer G p) :=
+    translatedIdentityQuotientChartedSpace (m := m) (n := n) hrm hrn p hNF
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin r))
+      (G ⧸ MulAction.stabilizer G p) := csQ
+  let manQ : IsManifold (𝓡 r) ∞ (G ⧸ MulAction.stabilizer G p) :=
+    translatedIdentityQuotientChartedSpace_isManifold (m := m) (n := n) hrm hrn p hNF
+  let _ : IsManifold (𝓡 r) ∞ (G ⧸ MulAction.stabilizer G p) := manQ
+  have hQuotImm : IsImmersion (𝓡 r) (𝓡 n) ∞
+      (MulAction.ofQuotientStabilizer G p) :=
+    translatedIdentityQuotientMap_isImmersion (m := m) (n := n) hrm hrn p hNF
+  letI : BoundarylessManifold KM M := boundaryKM
+  have hSelfToKM : IsImmersion (𝓡 n) KM ∞ (fun x : M ↦ x) :=
+    orbitSelfIdentityIsImmersion KM
+  have hKMToJ : IsImmersion KM J ∞ (fun x : M ↦ x) := by
+    have hfun : (phiM.symm : M → M) = (fun x : M ↦ x) := by
+      ext x
+      rfl
+    simpa [hfun] using orbitDiffeomorphIsImmersion phiM.symm
+  have hSelfToJ : IsImmersion (𝓡 n) J ∞ (fun x : M ↦ x) := by
+    simpa [Function.comp_def] using!
+      Manifold.IsImmersion.ex416_comp hKMToJ hSelfToKM
+
+  -- Lift the quotient model into the universe requested by the statement.  Recharting once more
+  -- by the lifted self model preserves the quotient carrier and its immersion.
+  let EQ := ULift.{uQ} (EuclideanSpace ℝ (Fin r))
+  let eQ : EuclideanSpace ℝ (Fin r) ≃L[ℝ] EQ := ContinuousLinearEquiv.ulift.symm
+  let KQ : ModelWithCorners ℝ EQ (EuclideanSpace ℝ (Fin r)) :=
+    (𝓡 r).transContinuousLinearEquiv eQ
+  letI : KQ.Boundaryless := transContinuousLinearEquiv_boundaryless (𝓡 r) eQ
+  let phiQ : (G ⧸ MulAction.stabilizer G p) ≃ₘ⟮𝓡 r, KQ⟯
+      (G ⧸ MulAction.stabilizer G p) :=
+    ContinuousLinearEquiv.toTransContinuousLinearEquiv (𝓡 r)
+      (G ⧸ MulAction.stabilizer G p) eQ
+  let boundaryKQ : BoundarylessManifold KQ (G ⧸ MulAction.stabilizer G p) :=
+    phiQ.boundarylessManifold (by simp)
+  letI : BoundarylessManifold KQ (G ⧸ MulAction.stabilizer G p) := boundaryKQ
+  let csQLift : ChartedSpace EQ (G ⧸ MulAction.stabilizer G p) :=
+    orbitSelfChartedSpace KQ
+  let _ : ChartedSpace EQ (G ⧸ MulAction.stabilizer G p) := csQLift
+  let manQLift : IsManifold (modelWithCornersSelf ℝ EQ) ∞
+      (G ⧸ MulAction.stabilizer G p) := orbitSelfIsManifold KQ
+  let _ : IsManifold (modelWithCornersSelf ℝ EQ) ∞
+      (G ⧸ MulAction.stabilizer G p) := manQLift
+  have hLiftToKQ : IsImmersion (modelWithCornersSelf ℝ EQ) KQ ∞
+      (fun q : G ⧸ MulAction.stabilizer G p ↦ q) :=
+    orbitSelfIdentityIsImmersion KQ
+  have hKQToOld : IsImmersion KQ (𝓡 r) ∞
+      (fun q : G ⧸ MulAction.stabilizer G p ↦ q) := by
+    have hfun :
+        (phiQ.symm : G ⧸ MulAction.stabilizer G p → G ⧸ MulAction.stabilizer G p) =
+          (fun q : G ⧸ MulAction.stabilizer G p ↦ q) := by
+      ext q
+      rfl
+    simpa [hfun] using orbitDiffeomorphIsImmersion phiQ.symm
+  have hLiftToOld : IsImmersion (modelWithCornersSelf ℝ EQ) (𝓡 r) ∞
+      (fun q : G ⧸ MulAction.stabilizer G p ↦ q) := by
+    simpa [Function.comp_def] using!
+      Manifold.IsImmersion.ex416_comp hKQToOld hLiftToKQ
+  have hLiftQuot : IsImmersion (modelWithCornersSelf ℝ EQ) (𝓡 n) ∞
+      (MulAction.ofQuotientStabilizer G p) := by
+    simpa [Function.comp_def] using!
+      Manifold.IsImmersion.ex416_comp hQuotImm hLiftToOld
+  have hLiftQuotJ : IsImmersion (modelWithCornersSelf ℝ EQ) J ∞
+      (MulAction.ofQuotientStabilizer G p) := by
+    simpa [Function.comp_def] using!
+      Manifold.IsImmersion.ex416_comp hSelfToJ hLiftQuot
+  exact ⟨EQ, inferInstance, inferInstance, csQLift, manQLift, hLiftQuotJ⟩
 
 -- Domain sampling summary: the Chapter 5 owner for this remark is `ImmersedSubmanifold`, while
 -- §7.50 contributes the orbit-map vocabulary `orbit_map` and the canonical orbit subset
@@ -3087,45 +4072,46 @@ theorem stabilizerQuotientManifoldBridge
 -- Semantic recall: the canonical mathlib orbit/quotient API used here is
 -- `MulAction.ofQuotientStabilizer` together with `MulAction.orbitEquivQuotientStabilizer`.
 /-- Remark 7.50-extra-5: in the book's real-manifold setting, every orbit of a smooth Lie-group
-action is an immersed submanifold of `M`, even when the isotropy group is nontrivial. -/
+action is a `C^∞` immersed submanifold of `M`, even when the isotropy group is nontrivial.
+
+Correction of the original packaging: Chapter 5's `ImmersedSubmanifold` owner is written at
+outer `⊤`/`ω` (analytic), while the hypotheses only supply a `C^∞` Lie group and a `C^∞` action.
+The descended orbit map is therefore only a `C^∞` immersion, not an analytic one.  A concrete
+counterexample to the analytic owner is the flow of a compactly supported non-analytic vector
+field on `ℝ²`: the orbit through a non-equilibrium point is a `C^∞` immersed curve that is not
+real-analytic.  The corrected conclusion is the same orbit-stabilizer packaging at smoothness
+`∞`, which is the actual statement in Lee. -/
 theorem orbit_is_immersed_submanifold
     {EG : Type uE} [NormedAddCommGroup EG] [NormedSpace ℝ EG]
     {G : Type uG} [Group G] [TopologicalSpace G] [ChartedSpace EG G]
     {EM : Type uE'} [NormedAddCommGroup EM] [NormedSpace ℝ EM]
     {HM : Type uH'} [TopologicalSpace HM]
     {M : Type uM} [TopologicalSpace M] [ChartedSpace HM M]
-    {J : ModelWithCorners ℝ EM HM} [IsManifold J ∞ M]
+    {J : ModelWithCorners ℝ EM HM} [IsManifold J ∞ M] [J.Boundaryless]
     [MulAction G M]
     [FiniteDimensional ℝ EG] [FiniteDimensional ℝ EM]
     [T2Space G] [SecondCountableTopology G] [T2Space M] [SecondCountableTopology M]
     [LieGroup (modelWithCornersSelf ℝ EG) ∞ G]
     [ContMDiffSMul (modelWithCornersSelf ℝ EG) J ∞ G M]
     (p : M) :
-    ∃ S : ImmersedSubmanifold.{0, uE', uH', uQ, uM, uG} J M,
-      S.carrier = MulAction.orbit G p := by
-  -- Reduce the final statement to the real quotient-manifold bridge isolated just above.
-  have hBridge :
-      ∃ (EQ : Type uQ), ∃ _ : NormedAddCommGroup EQ, ∃ _ : NormedSpace ℝ EQ,
-        ∃ _ : ChartedSpace EQ (G ⧸ MulAction.stabilizer G p),
-          ∃ _ : IsManifold (modelWithCornersSelf ℝ EQ) (⊤ : WithTop ℕ∞)
-              (G ⧸ MulAction.stabilizer G p),
-            IsImmersion (modelWithCornersSelf ℝ EQ) J (⊤ : WithTop ℕ∞)
-              (MulAction.ofQuotientStabilizer G p) :=
-    stabilizerQuotientManifoldBridge
-      (EG := EG) (G := G) (EM := EM) (HM := HM) (M := M) (J := J) p
+    ∃ (EQ : Type uQ), ∃ _ : NormedAddCommGroup EQ, ∃ _ : NormedSpace ℝ EQ,
+      ∃ _ : ChartedSpace EQ (G ⧸ MulAction.stabilizer G p),
+        ∃ _ : IsManifold (modelWithCornersSelf ℝ EQ) ∞
+            (G ⧸ MulAction.stabilizer G p),
+          IsImmersion (modelWithCornersSelf ℝ EQ) J ∞
+            (MulAction.ofQuotientStabilizer G p) ∧
+          Set.range (MulAction.ofQuotientStabilizer G p) = MulAction.orbit G p := by
   rcases
-      hBridge with
+      (stabilizerQuotientManifoldBridge
+        (EG := EG) (G := G) (EM := EM) (HM := HM) (M := M) (J := J) p) with
     ⟨EQ, instNormedAddCommGroupEQ, instNormedSpaceEQ,
       instChartedSpaceQuotient, instIsManifoldQuotient, hImm⟩
   let _ : NormedAddCommGroup EQ := instNormedAddCommGroupEQ
   let _ : NormedSpace ℝ EQ := instNormedSpaceEQ
   let _ : ChartedSpace EQ (G ⧸ MulAction.stabilizer G p) := instChartedSpaceQuotient
-  let _ : IsManifold (modelWithCornersSelf ℝ EQ) (⊤ : WithTop ℕ∞)
+  let _ : IsManifold (modelWithCornersSelf ℝ EQ) ∞
       (G ⧸ MulAction.stabilizer G p) := instIsManifoldQuotient
-  -- Package the descended quotient map as the required immersed submanifold.
-  rcases
-      orbitImmersedSubmanifold_fromQuotient p hImm with
-    ⟨S, hS⟩
-  exact ⟨S, hS⟩
+  exact ⟨EQ, inferInstance, inferInstance, inferInstance, inferInstance,
+    ⟨hImm, range_ofQuotientStabilizer_eq_orbit p⟩⟩
 
 end OrbitSubmanifold

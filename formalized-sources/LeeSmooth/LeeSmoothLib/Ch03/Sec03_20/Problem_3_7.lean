@@ -578,22 +578,23 @@ theorem chart_neighborhood_closure_subset_safe_set [IsManifold I ∞ M] (p : M) 
   refine ⟨U, hU_open, hqU, ?_⟩
   exact Set.Subset.trans (closure_minimal hUT hT_closed) hTS
 
-/-- Helper for Problem 3-7: near each point of a subset of the preferred chart target, the inverse
-chart pullback of a global smooth function admits an ambient-open smooth extension obtained by
-composing with the smooth extended-chart transition to a chart centered at that point. -/
-theorem chart_transition_local_extension [IsManifold I ∞ M] (p : M)
+/-- Helper for Problem 3-7: for a boundaryless model, the preferred chart target is ambient-open,
+so the inverse-chart pullback itself is a smooth local extension. -/
+theorem chart_transition_local_extension [IsManifold I ∞ M] [I.Boundaryless] (p : M)
     (f : C^∞⟮I, M; ℝ⟯) {A : Set E} (hA_target : A ⊆ (extChartAt I p).target) (x : A) :
     ∃ V : Set E, IsOpen V ∧ (x : E) ∈ V ∧
       ∃ G : E → ℝ, ContMDiffOn 𝓘(ℝ, E) 𝓘(ℝ) ∞ G V ∧
         ∀ y : A, (y : E) ∈ V → G y = f ((extChartAt I p).symm y) := by
-  -- TODO: choose an ambient-open neighborhood whose closed intersection with `range I` stays
-  -- inside the smooth extended-chart transition source around `x`, then compose that transition
-  -- with `writtenInExtChartAt I 𝓘(ℝ) x₀ f` and extend from the resulting closed subset.
-  sorry
+  refine ⟨(extChartAt I p).target, isOpen_extChartAt_target p,
+    hA_target x.2, fun y : E ↦ f ((extChartAt I p).symm y), ?_, ?_⟩
+  · exact writtenInExtChartAt_pullback_contMDiffOn_target (I := I) p f
+  · intro y hy
+    rfl
 
-/-- Helper for Problem 3-7: the scalar chart-written representative of a global smooth function can
-be extended to a global smooth model-space function near the chart point. -/
-theorem writtenInExtChartAt_pullback_restrict_isSmoothOn [IsManifold I ∞ M] (p : M)
+/-- Helper for Problem 3-7: on a boundaryless model, the scalar inverse-chart representative has
+the local ambient extensions required by `Function.IsSmoothOn`. -/
+theorem writtenInExtChartAt_pullback_restrict_isSmoothOn [IsManifold I ∞ M] [I.Boundaryless]
+    (p : M)
     (f : C^∞⟮I, M; ℝ⟯) {A : Set E} (hA_target : A ⊆ (extChartAt I p).target) :
     (fun y : A ↦ f ((extChartAt I p).symm y)).IsSmoothOn (𝓘(ℝ, E)) 𝓘(ℝ) := by
   -- Route correction: `extChartAt.target` is only relatively open in `range I`, so the boundary
@@ -674,9 +675,9 @@ theorem chart_pullback_germ_pointDerivation_eq_toPointDerivation_of_eventuallyEq
     _ = smooth_germ_derivation_at.toPointDerivation v f := by
           rfl
 
-/-- Helper for Problem 3-7: the scalar chart-written representative of a global smooth function can
-be extended to a global smooth model-space function near the chart point. -/
-theorem writtenInExtChartAt_globalize_near_chartPoint [IsManifold I ∞ M]
+/-- Helper for Problem 3-7: on a finite-dimensional boundaryless model, the scalar chart-written
+representative extends to a global smooth model-space function near the chart point. -/
+theorem writtenInExtChartAt_globalize_near_chartPoint [IsManifold I ∞ M] [I.Boundaryless]
     [FiniteDimensional ℝ E] (p : M) (f : C^∞⟮I, M; ℝ⟯) :
     ∃ g : C^∞⟮𝓘(ℝ, E), E; ℝ⟯,
       g =ᶠ[nhdsWithin (extChartAt I p p) (Set.range I)] writtenInExtChartAt I 𝓘(ℝ) p f :=
@@ -708,7 +709,7 @@ theorem writtenInExtChartAt_globalize_near_chartPoint [IsManifold I ∞ M]
 /-- Helper for Problem 3-7: a chart-side representing vector for the chart-source germ derivation
 already gives the desired tangent vector without any Hausdorff globalization step. -/
 theorem chart_representing_vector_gives_target_derivation_of_chart_pullback_germ
-    [IsManifold I ∞ M] [FiniteDimensional ℝ E] (p : M)
+    [IsManifold I ∞ M] [I.Boundaryless] [FiniteDimensional ℝ E] (p : M)
     (v : smooth_germ_derivation_at I p) (y : E)
     (hy : ∀ g : C^∞⟮𝓘(ℝ, E), E; ℝ⟯,
       chart_pullback_germ_pointDerivation (H := H) (I := I) p v g =
@@ -765,21 +766,6 @@ theorem chart_representing_vector_gives_target_derivation_of_chart_pullback_germ
           symm
           exact hy g
     _ = smooth_germ_derivation_at.toPointDerivation v f := hchart
-
-/-- Helper for Problem 3-7: any tangent vector whose induced point derivation equals the given germ
-derivation should push forward through the preferred chart to a vector representing the chart-side
-germ derivation. -/
-theorem chart_pushforward_represents_chart_pullback_germ_pointDerivation [IsManifold I ∞ M]
-    [FiniteDimensional ℝ E] (p : M) (v : smooth_germ_derivation_at I p) {X : TangentSpace I p}
-    (hX : TangentSpace.toPointDerivation X = smooth_germ_derivation_at.toPointDerivation v) :
-    ∀ g : C^∞⟮𝓘(ℝ, E), E; ℝ⟯,
-      chart_pullback_germ_pointDerivation (H := H) (I := I) p v g =
-        fderiv ℝ g (extChartAt I p p) (mfderiv I 𝓘(ℝ, E) (extChartAt I p) p X) := by
-  intro g
-  -- TODO: transport `X` to the open chart source using the invertible differential of the open
-  -- inclusion, compare its induced derivation on chart-pulled-back sections with the stalk
-  -- derivation, and then identify the resulting model-space derivative through `extChartAt`.
-  sorry
 
 /-- Helper for Problem 3-7: equality after pushing tangent vectors through the preferred chart
 forces equality of the original tangent vectors, without any separation hypothesis on `M`. -/
@@ -872,6 +858,33 @@ theorem globalizedChartPullback_eventuallyEq [IsManifold I ∞ M] [FiniteDimensi
     globalizedChartPullback (H := H) (I := I) p g =ᶠ[nhds p]
       fun x ↦ g (extChartAt I p x) :=
   (chartPullback_globalize_near_basepoint (H := H) (I := I) p g).choose_spec
+
+/-- Helper for Problem 3-7: a globalization agreeing near `p` with a chart pullback represents the
+same stalk germ as the chart-source section. -/
+theorem chart_pullback_section_germ_eq_topSection_of_eventuallyEq_pullback
+    [IsManifold I ∞ M] (p : M) (f : C^∞⟮I, M; ℝ⟯)
+    (g : C^∞⟮𝓘(ℝ, E), E; ℝ⟯)
+    (hfg : f =ᶠ[nhds p] fun x : M ↦ g (extChartAt I p x)) :
+    𝒪∞.presheaf.germ (chartSource (H := H) p) p (mem_chartSource (H := H) p)
+        (chart_pullback_section (H := H) (I := I) p g) =
+      𝒪∞.presheaf.Γgerm p (topSection f) := by
+  have hEq : {x : M | f x = g (extChartAt I p x)} ∈ nhds p := hfg
+  rcases mem_nhds_iff.1 hEq with ⟨U, hUsub, hUopen, hpU⟩
+  let W : Opens M :=
+    ⟨(chartSource (H := H) p : Set M) ∩ U,
+      (chartSource (H := H) p).2.inter hUopen⟩
+  let iSource : W ⟶ chartSource (H := H) p := homOfLE Set.inter_subset_left
+  let iTop : W ⟶ (⊤ : Opens M) := homOfLE le_top
+  refine (smoothSheafCommRing.germ_eq_iff (I := I) (p := p)
+    (U := chartSource (H := H) p) (V := (⊤ : Opens M))
+    (mem_chartSource (H := H) p) (by simp)
+    (chart_pullback_section (H := H) (I := I) p g) (topSection f)).2 ?_
+  refine ⟨W, ⟨mem_chartSource (H := H) p, hpU⟩, iSource, iTop, ?_⟩
+  apply ContMDiffMap.ext
+  intro x
+  have hxEq : f x.1 = g (extChartAt I p x.1) := hUsub x.2.2
+  change g (extChartAt I p x.1) = f x.1
+  exact hxEq.symm
 
 /-- Helper for Problem 3-7: the chosen globalization of a sum agrees near `p` with the sum of the
 chosen globalizations. -/
@@ -1073,7 +1086,8 @@ theorem globalChartModelPointDerivation_apply [IsManifold I ∞ M] [FiniteDimens
 model-space test functions, the corresponding tangent vector gives back the original germ
 derivation on global smooth functions. -/
 theorem chart_representing_vector_gives_target_derivation [IsManifold I ∞ M]
-    [FiniteDimensional ℝ E] (p : M) (v : smooth_germ_derivation_at I p) (y : E)
+    [I.Boundaryless] [FiniteDimensional ℝ E]
+    (p : M) (v : smooth_germ_derivation_at I p) (y : E)
     (hy : ∀ g : C^∞⟮𝓘(ℝ, E), E; ℝ⟯,
       globalChartModelPointDerivation (H := H) (I := I) p v g
         = fderiv ℝ g (extChartAt I p p) y) :
@@ -1194,6 +1208,33 @@ theorem chart_pushforward_represents_chartModelPointDerivation [IsManifold I ∞
           rw [← hX]
     _ = fderiv ℝ g q (mfderiv I 𝓘(ℝ, E) (extChartAt I p) p X) := hX_apply
 
+/-- Helper for Problem 3-7: any tangent vector whose induced point derivation equals the given germ
+derivation pushes forward through the preferred chart to a vector representing the chart-source
+germ derivation. -/
+theorem chart_pushforward_represents_chart_pullback_germ_pointDerivation [IsManifold I ∞ M]
+    [FiniteDimensional ℝ E] (p : M) (v : smooth_germ_derivation_at I p)
+    {X : TangentSpace I p}
+    (hX : TangentSpace.toPointDerivation X = smooth_germ_derivation_at.toPointDerivation v) :
+    ∀ g : C^∞⟮𝓘(ℝ, E), E; ℝ⟯,
+      chart_pullback_germ_pointDerivation (H := H) (I := I) p v g =
+        fderiv ℝ g (extChartAt I p p)
+          (mfderiv I 𝓘(ℝ, E) (extChartAt I p) p X) := by
+  intro g
+  let f := globalizedChartPullback (H := H) (I := I) p g
+  have hf : f =ᶠ[nhds p] fun x : M ↦ g (extChartAt I p x) :=
+    globalizedChartPullback_eventuallyEq (H := H) (I := I) p g
+  have hlocal_global :
+      chart_pullback_germ_pointDerivation (H := H) (I := I) p v g =
+        globalChartModelPointDerivation (H := H) (I := I) p v g := by
+    rw [chart_pullback_germ_pointDerivation_apply,
+      globalChartModelPointDerivation_apply]
+    exact congrArg v
+      (chart_pullback_section_germ_eq_topSection_of_eventuallyEq_pullback
+        (H := H) (I := I) p f g hf)
+  rw [hlocal_global]
+  exact chart_pushforward_represents_chartModelPointDerivation
+    (H := H) (I := I) p v hX g
+
 /-- Helper for Problem 3-7: pushing forward the inverse-chart vector recovers the original
 model-space vector at the chart point. -/
 theorem chart_pushforward_of_inverse_chart_vector [IsManifold I ∞ M]
@@ -1277,8 +1318,7 @@ theorem model_point_derivation_existsUnique_vector [FiniteDimensional ℝ E]
       calc
         w' = geometric_to_point_derivation_linear_equiv (n := n) (e q) z := by
           simp [z]
-        _ = directional_point_derivation (n := n) (e q) z :=
-          geometric_to_point_derivation_linear_equiv_apply (n := n) (e q) z
+        _ = directional_point_derivation (n := n) (e q) z := rfl
     have hf : DifferentiableAt ℝ f q := by
       -- Global smoothness on the model space gives ordinary differentiability at `q`.
       exact MDifferentiableAt.differentiableAt <|
@@ -1297,7 +1337,8 @@ theorem model_point_derivation_existsUnique_vector [FiniteDimensional ℝ E]
       _ = w' (f.comp eInvMap) := rfl
       _ = fderiv ℝ (f.comp eInvMap) (e q) z := by
         -- The Euclidean-space representative acts by directional derivative.
-        rw [hz, directional_point_derivation_apply]
+        rw [hz]
+        rfl
       _ = fderiv ℝ f q (e.symm z) := by
         -- Transport the directional derivative back along the linear equivalence.
         change fderiv ℝ (fun x : EuclideanSpace ℝ (Fin n) ↦ f (e.symm x)) (e q) z =
@@ -1331,15 +1372,14 @@ theorem model_point_derivation_existsUnique_vector [FiniteDimensional ℝ E]
     have hyz : directional_point_derivation (n := n) (e q) (e y) = w' := by
       -- The transported vector `e y` gives the same Euclidean derivation as `w'`.
       ext g
-      rw [directional_point_derivation_apply]
+      change fderiv ℝ g (e q) (e y) = w' g
       exact (hy' g).symm
     have heq : e y = z := by
       -- Uniqueness in Proposition 3.2 identifies the Euclidean vectors.
       apply (geometric_to_point_derivation_linear_equiv (n := n) (e q)).injective
       calc
         geometric_to_point_derivation_linear_equiv (n := n) (e q) (e y)
-            = directional_point_derivation (n := n) (e q) (e y) :=
-              geometric_to_point_derivation_linear_equiv_apply (n := n) (e q) (e y)
+            = directional_point_derivation (n := n) (e q) (e y) := rfl
         _ = w' := hyz
         _ = geometric_to_point_derivation_linear_equiv (n := n) (e q) z := by
               simp [z]
@@ -1348,46 +1388,36 @@ theorem model_point_derivation_existsUnique_vector [FiniteDimensional ℝ E]
 -- Proof sketch: identify tangent vectors with derivations in local coordinates around `p`, use the
 -- locality encoded by germs to show that every germ derivation is determined by its values on
 -- coordinate functions, and reconstruct the unique tangent vector from those coordinates.
-/-- Problem 3-7: every derivation `v : 𝒟_[p](I)` is represented by a unique tangent vector whose
-induced point derivation on global smooth functions is the one associated to `v`. -/
+/-- Problem 3-7: on a finite-dimensional Hausdorff manifold with a boundaryless model, every
+derivation `v : 𝒟_[p](I)` is represented by a unique tangent vector whose induced point derivation
+on global smooth functions is the one associated to `v`. -/
 theorem smooth_germ_derivation_existsUnique_tangentVector [IsManifold I ∞ M]
-    [FiniteDimensional ℝ E] (p : M) (v : 𝒟_[p](I)) :
+    [I.Boundaryless] [FiniteDimensional ℝ E] [T2Space M] (p : M) (v : 𝒟_[p](I)) :
     ∃! X : TangentSpace I p,
       TangentSpace.toPointDerivation X =
         smooth_germ_derivation_at.toPointDerivation v := by
   let w : PointDerivation 𝓘(ℝ, E) (extChartAt I p p) :=
-    smooth_germ_derivation_at.chart_pullback_germ_pointDerivation (H := H) (I := I) p v
+    smooth_germ_derivation_at.globalChartModelPointDerivation (H := H) (I := I) p v
   rcases model_point_derivation_existsUnique_vector (q := extChartAt I p p) w with ⟨y, hy, hyuniq⟩
   let X : TangentSpace I p :=
     mfderiv[Set.range I] (extChartAt I p).symm (extChartAt I p p) y
   refine ⟨X, ?_, ?_⟩
-  · have hrepr :
-        TangentSpace.toPointDerivation X =
-          smooth_germ_derivation_at.toPointDerivation v := by
-      -- The existence half now closes directly through the chart-source germ derivation.
-      simpa [X] using!
-        smooth_germ_derivation_at.chart_representing_vector_gives_target_derivation_of_chart_pullback_germ
-          (H := H) (I := I) p v y hy
-    exact hrepr
+  · simpa [X] using!
+      smooth_germ_derivation_at.chart_representing_vector_gives_target_derivation
+        (H := H) (I := I) p v y hy
   · intro X' hX'
     have hpushX :
         mfderiv I 𝓘(ℝ, E) (extChartAt I p) p X = y := by
-      -- The chosen tangent vector is defined by transporting `y` back through the inverse chart.
-      dsimp only [X]
-      convert! congrArg
-        (fun A : TangentSpace 𝓘(ℝ, E) (extChartAt I p p) →L[ℝ]
-            TangentSpace 𝓘(ℝ, E) (extChartAt I p p) ↦ A y)
-        (mfderiv_extChartAt_comp_mfderivWithin_extChartAt_symm' (I := I)
-          (x := p) (y := p) (hy := mem_extChartAt_source (I := I) p)) using 1 <;> simp
+      simpa [X] using
+        smooth_germ_derivation_at.chart_pushforward_of_inverse_chart_vector
+          (H := H) (I := I) p y
     have hreprX' :
         ∀ g : C^∞⟮𝓘(ℝ, E), E; ℝ⟯,
           w g = fderiv ℝ g (extChartAt I p p)
             (mfderiv I 𝓘(ℝ, E) (extChartAt I p) p X') := by
       intro g
-      -- The remaining local bridge compares the chart-source germ derivation with any competing
-      -- tangent vector that induces the same global point derivation.
       simpa [w] using
-        smooth_germ_derivation_at.chart_pushforward_represents_chart_pullback_germ_pointDerivation
+        smooth_germ_derivation_at.chart_pushforward_represents_chartModelPointDerivation
           (H := H) (I := I) p v hX' g
     have hpushX' :
         mfderiv I 𝓘(ℝ, E) (extChartAt I p) p X' = y :=
@@ -1405,16 +1435,19 @@ variable {p : M}
 /-- Problem 3-7, finite-dimensional bridge: a derivation `v : 𝒟_[p](I)` determines the
 corresponding tangent vector whose associated point derivation agrees with `v` on global smooth
 functions. -/
-noncomputable def toTangentSpace [IsManifold I ∞ M] [FiniteDimensional ℝ E]
-    (v : 𝒟_[p](I)) : TangentSpace I p :=
+noncomputable def toTangentSpace [IsManifold I ∞ M] [I.Boundaryless] [FiniteDimensional ℝ E]
+    [T2Space M] (v : 𝒟_[p](I)) : TangentSpace I p :=
   (smooth_germ_derivation_existsUnique_tangentVector p v).choose
 
-@[simp] theorem toPointDerivation_toTangentSpace [IsManifold I ∞ M] [FiniteDimensional ℝ E]
+@[simp] theorem toPointDerivation_toTangentSpace [IsManifold I ∞ M] [I.Boundaryless]
+    [FiniteDimensional ℝ E]
+    [T2Space M]
     (v : 𝒟_[p](I)) :
     TangentSpace.toPointDerivation (toTangentSpace v) = toPointDerivation v :=
   (smooth_germ_derivation_existsUnique_tangentVector p v).choose_spec.1
 
-theorem eq_toTangentSpace [IsManifold I ∞ M] [FiniteDimensional ℝ E]
+theorem eq_toTangentSpace [IsManifold I ∞ M] [I.Boundaryless] [FiniteDimensional ℝ E]
+    [T2Space M]
     (v : 𝒟_[p](I)) {X : TangentSpace I p}
     (hX : TangentSpace.toPointDerivation X = toPointDerivation v) :
     X = toTangentSpace v := by

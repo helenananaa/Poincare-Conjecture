@@ -77,7 +77,17 @@ theorem isDefiningMap_iff (I : ModelWithCorners ℝ E H) (J : ModelWithCorners �
       ∃ c : N,
         ContMDiff I J ∞ Φ ∧
           S = Φ ⁻¹' {c} ∧
-          ∀ x : M, x ∈ S → Function.Surjective (mfderiv I J Φ x) := sorry
+          ∀ x : M, x ∈ S → Function.Surjective (mfderiv I J Φ x) := by
+  constructor
+  · rintro ⟨h⟩
+    exact ⟨h.level, h.contMDiff, h.isLevelSet, h.surj_mfderiv⟩
+  · rintro ⟨c, hΦ, hlevel, hsurj⟩
+    exact ⟨{
+      level := c
+      contMDiff := hΦ
+      isLevelSet := hlevel
+      surj_mfderiv := hsurj
+    }⟩
 
 /-- Existence of a `Set.IsDefiningFunction` structure is equivalent to the corresponding explicit
 `ℝ^k`-valued defining-map conditions. -/
@@ -87,7 +97,8 @@ theorem isDefiningFunction_iff (I : ModelWithCorners ℝ E H) (S : Set M) {k : �
       ∃ c : Fin k → ℝ,
         ContMDiff I 𝓘(ℝ, Fin k → ℝ) ∞ f ∧
           S = f ⁻¹' {c} ∧
-          ∀ x : M, x ∈ S → Function.Surjective (mfderiv I 𝓘(ℝ, Fin k → ℝ) f x) := sorry
+          ∀ x : M, x ∈ S → Function.Surjective (mfderiv I 𝓘(ℝ, Fin k → ℝ) f x) := by
+  exact isDefiningMap_iff I 𝓘(ℝ, Fin k → ℝ) S f
 
 /-- Existence of a `Set.IsLocalDefiningMapOn` structure is equivalent to specifying the chosen
 level value on the open subset, the smoothness of `Φ`, the level-set equation, and surjectivity of
@@ -98,7 +109,17 @@ theorem isLocalDefiningMapOn_iff (I : ModelWithCorners ℝ E H)
       ∃ c : N,
         ContMDiff I J ∞ Φ ∧
           {x : U | (x : M) ∈ S} = Φ ⁻¹' {c} ∧
-          ∀ x : U, (x : M) ∈ S → Function.Surjective (mfderiv I J Φ x) := sorry
+          ∀ x : U, (x : M) ∈ S → Function.Surjective (mfderiv I J Φ x) := by
+  constructor
+  · rintro ⟨h⟩
+    exact ⟨h.level, h.contMDiff, h.isLevelSet, h.surj_mfderiv⟩
+  · rintro ⟨c, hΦ, hlevel, hsurj⟩
+    exact ⟨{
+      level := c
+      contMDiff := hΦ
+      isLevelSet := hlevel
+      surj_mfderiv := hsurj
+    }⟩
 
 /-- Existence of a `Set.IsLocalDefiningFunctionOn` structure is equivalent to the corresponding
 explicit `ℝ^k`-valued local defining-map conditions. -/
@@ -108,7 +129,8 @@ theorem isLocalDefiningFunctionOn_iff (I : ModelWithCorners ℝ E H) (S : Set M)
       ∃ c : Fin k → ℝ,
         ContMDiff I 𝓘(ℝ, Fin k → ℝ) ∞ f ∧
           {x : U | (x : M) ∈ S} = f ⁻¹' {c} ∧
-          ∀ x : U, (x : M) ∈ S → Function.Surjective (mfderiv I 𝓘(ℝ, Fin k → ℝ) f x) := sorry
+          ∀ x : U, (x : M) ∈ S → Function.Surjective (mfderiv I 𝓘(ℝ, Fin k → ℝ) f x) := by
+  exact isLocalDefiningMapOn_iff I 𝓘(ℝ, Fin k → ℝ) S U f
 
 end Set
 

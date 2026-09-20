@@ -745,6 +745,85 @@ lemma ex416_codomain_straightening_model_contDiff {x : M} {Ff : Type*}
       simpa only [Function.comp_def, hpre] using hcomp
     exact (hg.equiv.contDiffOn_comp_iff (f := xi.symm) (s := xi.target)).1 hcomp'
 
+/-- Helper for Exercise 4.16: for a boundaryless model, an extended manifold chart is an open
+partial homeomorphism into the whole model vector space. -/
+def ex416_extend_openPartialHomeomorph
+    (L : ModelWithCorners 𝕜 E H) [L.Boundaryless]
+    (e : OpenPartialHomeomorph M H) : OpenPartialHomeomorph M E where
+  toPartialEquiv := e.extend L
+  open_source := e.isOpen_extend_source
+  open_target := e.isOpen_extend_target
+  continuousOn_toFun := e.continuousOn_extend
+  continuousOn_invFun := e.continuousOn_extend_symm
+
+/-- Helper for Exercise 4.16: in a boundaryless middle model, the product straightening used in
+the composition proof is an honest open partial homeomorphism of the ambient product space. -/
+def ex416_middle_change_prod_open {x : M} {Ff : Type*} [NormedAddCommGroup Ff]
+    [NormedSpace 𝕜 Ff] {Fg : Type*} [NormedAddCommGroup Fg] [NormedSpace 𝕜 Fg]
+    [J.Boundaryless] (hg : IsImmersionAtOfComplement Fg J K n g (f x))
+    (hf : IsImmersionAtOfComplement Ff I J n f x) :
+    OpenPartialHomeomorph (F × Fg) (F × Fg) :=
+  let theta : OpenPartialHomeomorph F F :=
+    (ex416_extend_openPartialHomeomorph J hf.codChart).symm.trans
+      (ex416_extend_openPartialHomeomorph J hg.domChart)
+  theta.symm.prod (OpenPartialHomeomorph.refl Fg)
+
+/-- Helper for Exercise 4.16: the open product straightening, conjugated by the linear
+equivalence from the second immersion witness. -/
+def ex416_codomain_straightening_open {x : M} {Ff : Type*}
+    [NormedAddCommGroup Ff] [NormedSpace 𝕜 Ff] {Fg : Type*} [NormedAddCommGroup Fg]
+    [NormedSpace 𝕜 Fg] [J.Boundaryless]
+    (hg : IsImmersionAtOfComplement Fg J K n g (f x))
+    (hf : IsImmersionAtOfComplement Ff I J n f x) : OpenPartialHomeomorph G G :=
+  let eG : OpenPartialHomeomorph (F × Fg) G :=
+    hg.equiv.toHomeomorph.toOpenPartialHomeomorph
+  (eG.symm.trans (ex416_middle_change_prod_open (hg := hg) (hf := hf))).trans eG
+
+@[simp] lemma ex416_codomain_straightening_open_toPartialEquiv {x : M} {Ff : Type*}
+    [NormedAddCommGroup Ff] [NormedSpace 𝕜 Ff] {Fg : Type*} [NormedAddCommGroup Fg]
+    [NormedSpace 𝕜 Fg] [J.Boundaryless]
+    (hg : IsImmersionAtOfComplement Fg J K n g (f x))
+    (hf : IsImmersionAtOfComplement Ff I J n f x) :
+    (ex416_codomain_straightening_open (hg := hg) (hf := hf)).toPartialEquiv =
+      let rho : PartialEquiv (F × Fg) (F × Fg) :=
+        ex416_middle_change_prod_chart (hg := hg) (hf := hf)
+      let eG : OpenPartialHomeomorph (F × Fg) G :=
+        hg.equiv.toHomeomorph.toOpenPartialHomeomorph
+      (eG.toPartialEquiv.symm.trans rho).trans eG.toPartialEquiv := by
+  rfl
+
+/-- Helper for Exercise 4.16: the boundaryless ambient straightening, with the smoothness proved
+above, packaged as a partial diffeomorphism of the model vector space. -/
+def ex416_codomain_straightening_partialDiffeomorph {x : M} {Ff : Type*}
+    [NormedAddCommGroup Ff] [NormedSpace 𝕜 Ff] {Fg : Type*} [NormedAddCommGroup Fg]
+    [NormedSpace 𝕜 Fg] [J.Boundaryless]
+    (hg : IsImmersionAtOfComplement Fg J K n g (f x))
+    (hf : IsImmersionAtOfComplement Ff I J n f x) :
+    PartialDiffeomorph (modelWithCornersSelf 𝕜 G) (modelWithCornersSelf 𝕜 G) G G n where
+  toPartialEquiv := (ex416_codomain_straightening_open (hg := hg) (hf := hf)).toPartialEquiv
+  open_source := (ex416_codomain_straightening_open (hg := hg) (hf := hf)).open_source
+  open_target := (ex416_codomain_straightening_open (hg := hg) (hf := hf)).open_target
+  contMDiffOn_toFun := by
+    rw [contMDiffOn_iff_contDiffOn]
+    simpa using
+      (ex416_codomain_straightening_model_contDiff (hg := hg) (hf := hf)).1
+  contMDiffOn_invFun := by
+    rw [contMDiffOn_iff_contDiffOn]
+    simpa using
+      (ex416_codomain_straightening_model_contDiff (hg := hg) (hf := hf)).2
+
+/-- Helper for Exercise 4.16: a boundaryless model with corners is globally diffeomorphic to its
+model vector space. -/
+def ex416_boundarylessModelDiffeomorph
+    (L : ModelWithCorners 𝕜 E H) [L.Boundaryless] :
+    H ≃ₘ^n⟮L, modelWithCornersSelf 𝕜 E⟯ E where
+  toEquiv := L.toHomeomorph.toEquiv
+  contMDiff_toFun := L.contMDiff
+  contMDiff_invFun := by
+    change ContMDiff (modelWithCornersSelf 𝕜 E) L n L.symm
+    rw [← contMDiffOn_univ]
+    simpa [L.range_eq_univ] using (L.contMDiffOn_symm (n := n))
+
 /-- Helper for Exercise 4.16: a model-space open partial homeomorphism belongs to the
 `C^n` structure groupoid once its whole source is locally covered by `C^n` structomorph charts. -/
 theorem ex416_mem_contDiffGroupoid_of_local_structomorphOn_source
@@ -1430,10 +1509,11 @@ lemma ex416_aligned_codomain_straightening_on_restr {x : M} {Ff : Type*}
     _ = hg.equiv (v, (0 : Fg)) := by
           rw [(show θ.symm (θ v) = v from θ.left_inv hv_theta_source)]
 
-/-- Helper for Exercise 4.16: align the source chart of `g` with the codomain chart of `hf`
-before composing the two standard inclusion formulas. -/
+/-- Helper for Exercise 4.16: for boundaryless middle and codomain models, align the source chart
+of `g` with the codomain chart of `hf` before composing the two standard inclusion formulas. -/
 lemma ex416_exists_aligned_codomain_chart_for_g {x : M} {Ff : Type*} [NormedAddCommGroup Ff]
     [NormedSpace 𝕜 Ff] {Fg : Type*} [NormedAddCommGroup Fg] [NormedSpace 𝕜 Fg]
+    [J.Boundaryless] [K.Boundaryless]
     (hg : IsImmersionAtOfComplement Fg J K n g (f x))
     (hf : IsImmersionAtOfComplement Ff I J n f x) :
     ∃ W : Set N, IsOpen W ∧ f x ∈ W ∧ W ⊆ hf.codChart.source ∩ hg.domChart.source ∧
@@ -1459,29 +1539,57 @@ lemma ex416_exists_aligned_codomain_chart_for_g {x : M} {Ff : Type*} [NormedAddC
         chi ∈ contDiffGroupoid n K ∧
         hg.codChart (g (f x)) ∈ chi.source ∧
         Set.EqOn (fun y ↦ K (chi y)) (fun y ↦ xi (K y)) chi.source := by
+    let theta : PartialEquiv F F := J.extendCoordChange hf.codChart hg.domChart
+    let u0 : E := (hf.domChart.extend I) x
+    let v0 : F := theta (hf.equiv (u0, (0 : Ff)))
     let z0 : G := (hg.codChart.extend K) (g (f x))
-    let z0Range : Set.range (K : H'' → G) :=
-      ⟨z0, ex416_codomain_chart_basepoint_mem_model_range (hg := hg)⟩
-    have hrange :
-        ∃ chiRange : OpenPartialHomeomorph (Set.range (K : H'' → G)) (Set.range (K : H'' → G)),
-          let eRange : OpenPartialHomeomorph (Set.range (K : H'' → G)) H'' :=
-            (ex416_codomain_model_range_homeomorph (K := K)).symm.toOpenPartialHomeomorph
-          ((eRange.symm.trans chiRange).trans eRange) ∈ contDiffGroupoid n K ∧
-            z0Range ∈ chiRange.source ∧
-            Set.EqOn
-              (fun z ↦ ((chiRange z : Set.range (K : H'' → G)).1))
-              (fun z ↦ xi z.1) chiRange.source := by
-      -- TODO: construct the subtype-level straightening on `Set.range K` near `z0Range`
-      -- directly in the subtype topology; its transported groupoid membership should then be
-      -- obtained from the singleton-chart `PartialDiffeomorph` packaging.
-      sorry
-    rcases hrange with ⟨chiRange, hchiRange_mem, hz0Range, hEqRange⟩
-    -- The remaining transport back to `H''` is now isolated in a reusable packaging lemma.
-    exact ex416_writtenIn_range_straightening_to_chart_change
-      (K := K) (n := n) (xi := xi) (y0 := hg.codChart (g (f x))) (chiRange := chiRange)
-      hchiRange_mem
-      (by simpa [z0, z0Range] using hz0Range)
-      hEqRange
+    have hx_extend_source : x ∈ (hf.domChart.extend I).source := by
+      simpa [OpenPartialHomeomorph.extend_source] using hf.mem_domChart_source
+    have hu0_target : u0 ∈ (hf.domChart.extend I).target := by
+      exact (hf.domChart.extend I).map_source hx_extend_source
+    have hleft0 : (hf.domChart.extend I).symm u0 = x := by
+      exact (hf.domChart.extend I).left_inv hx_extend_source
+    have htheta_source0 : hf.equiv (u0, (0 : Ff)) ∈ theta.source := by
+      have hcoord0 :
+          hf.equiv (u0, (0 : Ff)) = (hf.codChart.extend J) (f x) := by
+        have hwritten0 := (hf.writtenInCharts hu0_target).symm
+        simp only [Function.comp_apply] at hwritten0
+        rw [hleft0] at hwritten0
+        exact hwritten0
+      rw [hcoord0, ← OpenPartialHomeomorph.extend_image_source_inter
+        (I := J) (f := hf.codChart) (f' := hg.domChart)]
+      exact ⟨f x, ⟨hf.mem_codChart_source, hg.mem_domChart_source⟩, rfl⟩
+    have hz0_eq : z0 = hg.equiv (v0, (0 : Fg)) := by
+      have hraw := ex416_comp_raw_middle_change
+        (hg := hg) (hf := hf) (u := u0) hu0_target
+        (by rw [hleft0]; exact hg.mem_domChart_source)
+      simp only [Function.comp_apply] at hraw
+      rw [hleft0] at hraw
+      simpa [z0, v0, theta] using hraw
+    have hz0_source : z0 ∈ xi.source := by
+      have hdata := ex416_codomain_straightening_basepoint_source_data
+        (hg := hg) (hf := hf) (domChart0 := hf.domChart) htheta_source0 hz0_eq
+      simpa [theta, rho, eG, xi, u0, v0, z0] using hdata.1
+    let xiD : PartialDiffeomorph (modelWithCornersSelf 𝕜 G)
+        (modelWithCornersSelf 𝕜 G) G G n :=
+      ex416_codomain_straightening_partialDiffeomorph (hg := hg) (hf := hf)
+    let dK : H'' ≃ₘ^n⟮K, modelWithCornersSelf 𝕜 G⟯ G :=
+      ex416_boundarylessModelDiffeomorph K
+    let chiD : PartialDiffeomorph K K H'' H'' n :=
+      (dK.toPartialDiffeomorph.trans xiD).trans dK.symm.toPartialDiffeomorph
+    let chi : OpenPartialHomeomorph H'' H'' := chiD.toOpenPartialHomeomorph
+    refine ⟨chi, ?_, ?_, ?_⟩
+    · simpa [chi] using
+        (ex416_model_partial_diffeomorph_mem_contDiffGroupoid (K := K) (Φ := chiD))
+    · change
+        (hg.codChart (g (f x)) ∈ Set.univ ∧
+            K (hg.codChart (g (f x))) ∈ xi.source) ∧
+          xi (K (hg.codChart (g (f x)))) ∈ Set.univ
+      simp only [Set.mem_univ, true_and, and_true]
+      simpa [z0] using hz0_source
+    · intro y hy
+      change K (K.symm (xi (K y))) = xi (K y)
+      exact K.right_inv (K.range_eq_univ.symm ▸ Set.mem_univ _)
   rcases ex416_transported_codomain_chart_package (hg := hg) (xi := xi) hchi with
     ⟨codChart1, hgf_codChart1, hcodChart1_mem, hcodChart1_eq⟩
   have hfx_overlap :
@@ -1529,9 +1637,11 @@ lemma ex416_exists_aligned_codomain_chart_for_g {x : M} {Ff : Type*} [NormedAddC
       _ = hg.equiv (v, (0 : Fg)) := hxi_raw hv
 
 /-- Helper for Exercise 4.16: if `f` and `g` are immersions at compatible points with fixed
-complements, then `g ∘ f` is an immersion at the source point with the product complement. -/
+complements and the middle and codomain models are boundaryless, then `g ∘ f` is an immersion
+at the source point with the product complement. -/
 theorem ex416_comp {x : M} {Ff : Type*} [NormedAddCommGroup Ff] [NormedSpace 𝕜 Ff]
     {Fg : Type*} [NormedAddCommGroup Fg] [NormedSpace 𝕜 Fg]
+    [J.Boundaryless] [K.Boundaryless]
     (hg : IsImmersionAtOfComplement Fg J K n g (f x))
     (hf : IsImmersionAtOfComplement Ff I J n f x) :
     IsImmersionAtOfComplement (Ff × Fg) I K n (g ∘ f) x := by
@@ -1645,9 +1755,10 @@ end IsImmersionAtOfComplement
 
 namespace IsImmersion
 
-/-- Helper for Exercise 4.16: composition preserves immersions once the pointwise fixed-complement
-normal forms are composed. -/
-theorem ex416_comp (hg : IsImmersion J K n g) (hf : IsImmersion I J n f) :
+/-- Helper for Exercise 4.16: for boundaryless middle and codomain models, composition preserves
+immersions once the pointwise fixed-complement normal forms are composed. -/
+theorem ex416_comp [J.Boundaryless] [K.Boundaryless]
+    (hg : IsImmersion J K n g) (hf : IsImmersion I J n f) :
     IsImmersion I K n (g ∘ f) := by
   -- Fix the global complements already supplied by the two immersion hypotheses.
   let hgf : IsImmersionOfComplement (hf.complement × hg.complement) I K n (g ∘ f) := by
@@ -1674,8 +1785,10 @@ lemma mk_comp_of_isImmersion
   -- The global embedding component is already closed under composition.
   exact hg.isEmbedding.comp hf.isEmbedding
 
-/-- Exercise 4.16: the composition of two `C^n` smooth embeddings is again a smooth embedding. -/
-theorem comp (hg : IsSmoothEmbedding J K n g) (hf : IsSmoothEmbedding I J n f) :
+/-- Exercise 4.16 (ordinary boundaryless form): the composition of two `C^n` smooth embeddings is
+again a smooth embedding. -/
+theorem comp [J.Boundaryless] [K.Boundaryless]
+    (hg : IsSmoothEmbedding J K n g) (hf : IsSmoothEmbedding I J n f) :
     IsSmoothEmbedding I K n (g ∘ f) := by
   -- Reduce the goal to the single missing immersion-composition input.
   refine mk_comp_of_isImmersion ?_ hg hf

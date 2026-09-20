@@ -56,10 +56,10 @@ lemma sliceMfderiv_eq_uncurryMfderiv_compInr
     rfl
   rw [← hslice]
   -- The chain rule identifies the derivative with the right-factor product derivative.
-  simpa [Function.comp, mfderiv_prod_right] using
-    (mfderiv_comp x
-      (hF.contMDiff.mdifferentiableAt (by simp : (∞ : ℕ∞ω) ≠ 0))
-      (mdifferentiableAt_const.prodMk mdifferentiableAt_id))
+  rw [← mfderiv_prod_right]
+  exact mfderiv_comp x
+    (hF.contMDiff.mdifferentiableAt (by simp : (∞ : ℕ∞ω) ≠ 0))
+    (mdifferentiableAt_const.prodMk mdifferentiableAt_id)
 
 /-- Helper lemma: if a product-valued derivative has first component equal to the
 identity on the parameter factor, then injectivity is equivalent to injectivity of its vertical
@@ -301,20 +301,17 @@ lemma injective_sliceMfderiv_iff_inTangentCoordinates
   -- Move the varying tangent-space map to fixed coordinates and remove the invertible chart
   -- changes on the left and right.
   rw [inTangentCoordinates_eq_mfderiv_comp hx hy]
-  let B : TangentSpace J (F p.1 p.2) →L[𝕜] E' :=
+  let B :=
     mfderiv% (extChartAt J (F p0.1 p0.2)) (F p.1 p.2)
-  let C : E →L[𝕜] TangentSpace I p.2 :=
+  let C :=
     mfderiv[range I] (extChartAt I p0.2).symm (extChartAt I p0.2 p.2)
   have hyExt : F p.1 p.2 ∈ (extChartAt J (F p0.1 p0.2)).source := by
     rwa [extChartAt_source]
   have hxExt : p.2 ∈ (extChartAt I p0.2).source := by
     rwa [extChartAt_source]
-  have hB : B.IsInvertible := by
-    simpa [B] using
-      isInvertible_mfderiv_extChartAt hyExt
-  have hC : C.IsInvertible := by
-    simpa [C] using
-      isInvertible_mfderivWithin_extChartAt_symm ((extChartAt I p0.2).map_source hxExt)
+  have hB : B.IsInvertible := isInvertible_mfderiv_extChartAt hyExt
+  have hC : C.IsInvertible :=
+    isInvertible_mfderivWithin_extChartAt_symm ((extChartAt I p0.2).map_source hxExt)
   -- The left chart derivative is injective, and the right chart derivative is bijective.
   calc
     Function.Injective (mfderiv I J (F p.1) p.2) ↔
@@ -345,20 +342,17 @@ lemma surjective_sliceMfderiv_iff_inTangentCoordinates
           (fun q ↦ mfderiv I J (F q.1) q.2) p0 p) := by
   -- The same coordinate change only inserts invertible linear maps on the left and right.
   rw [inTangentCoordinates_eq_mfderiv_comp hx hy]
-  let B : TangentSpace J (F p.1 p.2) →L[𝕜] E' :=
+  let B :=
     mfderiv% (extChartAt J (F p0.1 p0.2)) (F p.1 p.2)
-  let C : E →L[𝕜] TangentSpace I p.2 :=
+  let C :=
     mfderiv[range I] (extChartAt I p0.2).symm (extChartAt I p0.2 p.2)
   have hyExt : F p.1 p.2 ∈ (extChartAt J (F p0.1 p0.2)).source := by
     rwa [extChartAt_source]
   have hxExt : p.2 ∈ (extChartAt I p0.2).source := by
     rwa [extChartAt_source]
-  have hB : B.IsInvertible := by
-    simpa [B] using
-      isInvertible_mfderiv_extChartAt hyExt
-  have hC : C.IsInvertible := by
-    simpa [C] using
-      isInvertible_mfderivWithin_extChartAt_symm ((extChartAt I p0.2).map_source hxExt)
+  have hB : B.IsInvertible := isInvertible_mfderiv_extChartAt hyExt
+  have hC : C.IsInvertible :=
+    isInvertible_mfderivWithin_extChartAt_symm ((extChartAt I p0.2).map_source hxExt)
   -- Surjectivity is likewise unchanged after composing with bijective chart derivatives.
   calc
     Function.Surjective (mfderiv I J (F p.1) p.2) ↔
@@ -370,21 +364,6 @@ lemma surjective_sliceMfderiv_iff_inTangentCoordinates
           simpa [C] using!
             (Function.Surjective.of_comp_iff
               (B.comp (mfderiv I J (F p.1) p.2)) hC.bijective.2).symm
-
-/-- Helper lemma: a bijective continuous linear map is invertible. -/
-lemma ContinuousLinearMap.isInvertible_of_bijective
-    {U : Type _} [NormedAddCommGroup U] [NormedSpace 𝕜 U]
-    [CompleteSpace U] {V : Type _} [NormedAddCommGroup V] [NormedSpace 𝕜 V] [CompleteSpace V]
-    (A : U →L[𝕜] V) (hAinj : Function.Injective A) (hAsurj : Function.Surjective A) :
-    A.IsInvertible := by
-  -- Package the bijection as a continuous linear equivalence.
-  let e : U ≃L[𝕜] V := ContinuousLinearEquiv.ofBijective A
-    (LinearMap.ker_eq_bot.2 hAinj) (LinearMap.range_eq_top.2 hAsurj)
-  -- The inverse equivalence is exactly the required invertibility witness.
-  refine ⟨e, ?_⟩
-  simpa [e] using
-    (ContinuousLinearEquiv.coe_ofBijective A (LinearMap.ker_eq_bot.2 hAinj)
-      (LinearMap.range_eq_top.2 hAsurj))
 
 omit [FiniteDimensional ℝ E] [FiniteDimensional ℝ E']
     [IsManifold I ∞ N] [BoundarylessManifold I N]
@@ -439,7 +418,7 @@ lemma sliceLocalDiffeomorphAt_of_interior_bijectiveMfderiv
     infer_instance
   -- Package the bijective manifold derivative as an invertible continuous linear map.
   have hInv : (mfderiv I J (F p.1) p.2).IsInvertible :=
-    ContinuousLinearMap.isInvertible_of_bijective (mfderiv I J (F p.1) p.2) hInj hSurj
+    ContinuousLinearMap.isInvertible_of_bijective hInj hSurj
   -- The inverse function theorem upgrades pointwise invertibility to a local diffeomorphism.
   exact isLocalDiffeomorphAt_of_contMDiffAt_mfderiv_isInvertible
     (by simp) hpInterior (hF.contMDiff_slice p.1) hInv
@@ -822,19 +801,15 @@ lemma chartExtend_mfderiv_injective
       Linv (mfderiv J 𝓘(𝕜, E') (e.extend J) p w₂) := by
     simpa [Linv] using congrArg Linv hw
   have hw₁ :
-      ((Linv.comp (mfderiv J 𝓘(𝕜, E') (e.extend J) p)) w₁) = w₁ := by
+      Linv (mfderiv J 𝓘(𝕜, E') (e.extend J) p w₁) = w₁ := by
     simpa [Linv, hp_left, ContinuousLinearMap.comp_apply] using!
       congrArg (fun L ↦ L w₁) hleft
   have hw₂ :
-      ((Linv.comp (mfderiv J 𝓘(𝕜, E') (e.extend J) p)) w₂) = w₂ := by
+      Linv (mfderiv J 𝓘(𝕜, E') (e.extend J) p w₂) = w₂ := by
     simpa [Linv, hp_left, ContinuousLinearMap.comp_apply] using!
       congrArg (fun L ↦ L w₂) hleft
-  have hw₁' : w₁ = Linv (mfderiv J 𝓘(𝕜, E') (e.extend J) p w₁) := by
-    simpa [Linv, hp_left, ContinuousLinearMap.comp_apply] using hw₁.symm
-  have hw₂' : Linv (mfderiv J 𝓘(𝕜, E') (e.extend J) p w₂) = w₂ := by
-    simpa [Linv, hp_left, ContinuousLinearMap.comp_apply] using hw₂
   -- Apply the derivative-level left inverse to both chart-coordinate tangent vectors.
-  exact hw₁'.trans (hw_push.trans hw₂')
+  exact hw₁.symm.trans (hw_push.trans hw₂)
 
 omit [BoundarylessManifold I N] [BoundarylessManifold J M] in
 /-- Helper for compact-source stability: the derivative of an extended maximal-atlas chart is surjective on
@@ -872,7 +847,8 @@ lemma immersionComplementCoordinates_levelSetOn
     ∃ (K : Type uE') (_ : NormedAddCommGroup K) (_ : NormedSpace 𝕜 K)
       (_ : FiniteDimensional 𝕜 K) (U : Set M) (Φ : M → K),
       (x : M) ∈ U ∧
-        IsLocalDefiningMapOn J 𝓘(𝕜, K) X U Φ := by
+        IsLocalDefiningMapOn J 𝓘(𝕜, K) X U Φ ∧
+        Module.finrank 𝕜 EX + Module.finrank 𝕜 K = Module.finrank 𝕜 E' := by
   let hSubtype : IsSmoothEmbedding JX J ∞ ((↑) : X → M) := by
     -- Lower the canonical embedded-submanifold inclusion to the `∞` owner used here.
     exact
@@ -884,6 +860,13 @@ lemma immersionComplementCoordinates_levelSetOn
   let K := hImm.complement
   letI : FiniteDimensional 𝕜 (EX × K) :=
     FiniteDimensional.of_injective hImm.equiv.toLinearMap hImm.equiv.injective
+  letI : FiniteDimensional 𝕜 EX := by
+    exact
+      FiniteDimensional.of_injective
+        (ContinuousLinearMap.inl 𝕜 EX K).toLinearMap
+        (by
+          intro u v huv
+          exact congrArg Prod.fst huv)
   letI : FiniteDimensional 𝕜 K := by
     exact
       FiniteDimensional.of_injective
@@ -891,6 +874,15 @@ lemma immersionComplementCoordinates_levelSetOn
         (by
           intro u v huv
           exact congrArg Prod.snd huv)
+  have hcodim :
+      Module.finrank 𝕜 EX + Module.finrank 𝕜 K = Module.finrank 𝕜 E' := by
+    have hsum :
+        Module.finrank 𝕜 (EX × K) =
+          Module.finrank 𝕜 EX + Module.finrank 𝕜 K :=
+      Module.finrank_prod
+    have heq : Module.finrank 𝕜 (EX × K) = Module.finrank 𝕜 E' :=
+      hImm.equiv.toLinearEquiv.finrank_eq
+    exact hsum.symm.trans heq
   let front : E' →L[𝕜] EX :=
     (ContinuousLinearMap.fst 𝕜 EX K).comp hImm.equiv.symm.toContinuousLinearMap
   let tail : E' →L[𝕜] K :=
@@ -1032,7 +1024,7 @@ lemma immersionComplementCoordinates_levelSetOn
         _ = (qX : X) := by
           exact hImm.codChart.extend_left_inv hqXCod
     exact hEq ▸ qX.2
-  refine ⟨K, inferInstance, inferInstance, inferInstance, U, Φ, hxU, ?_⟩
+  refine ⟨K, inferInstance, inferInstance, inferInstance, U, Φ, hxU, ?_, hcodim⟩
   refine
     { isOpen_source := hUOpen
       smoothOn := ?_
@@ -1075,7 +1067,7 @@ lemma immersionComplementCoordinates_levelSetOn
         mfderiv J 𝓘(𝕜, K) Φ p =
           tail.comp (mfderiv J 𝓘(𝕜, E') (hImm.codChart.extend J) p) := by
       rw [show Φ = tail ∘ (hImm.codChart.extend J) by rfl]
-      simpa using mfderiv_comp p hTailDiff hChartDiff
+      rw [mfderiv_comp p hTailDiff hChartDiff, ContinuousLinearMap.mfderiv_eq]
     rw [hmf]
     exact hTailSurj.comp hChartSurj
 
@@ -1093,6 +1085,7 @@ lemma sliceTransverseAt_iff_surjective_definingComposite
     {K : Type _} [NormedAddCommGroup K] [NormedSpace 𝕜 K] [FiniteDimensional 𝕜 K]
     {U : Set M} {Φ : M → K} {p : S × N}
     (hΦ : IsLocalDefiningMapOn J 𝓘(𝕜, K) X U Φ)
+    (hcodim : Module.finrank 𝕜 EX + Module.finrank 𝕜 K = Module.finrank 𝕜 E')
     (hpU : F p.1 p.2 ∈ U) (hx : F p.1 p.2 ∈ X) :
     let x : X := ⟨F p.1 p.2, hx⟩
     let TX : Submodule 𝕜 (TangentSpace J (F p.1 p.2)) := T[JX; x]
@@ -1153,7 +1146,7 @@ lemma sliceTransverseAt_iff_surjective_definingComposite
     -- Route correction: rewrite the tangent summand as the kernel of the local defining-map
     -- derivative before invoking the linear-algebra surjectivity criterion.
     simpa [x, TX, B] using
-      tangentSpace_eq_ker_mfderiv_of_isLocalDefiningMapOn hSubtype hΦ x hpU
+      tangentSpace_eq_ker_mfderiv_of_isLocalDefiningMapOn hSubtype hΦ hcodim x hpU
   have hBSurj : Function.Surjective B := by
     -- A local defining map has surjective derivative throughout its open source.
     simpa [B] using hΦ.surjective_mfderiv hpU
@@ -1287,7 +1280,7 @@ lemma sliceComposite_mfderiv_eq
     (hF.contMDiff_slice s).mdifferentiableAt (by simp : (∞ : ℕ∞ω) ≠ 0)
   -- Differentiate the ambient slice composite directly by the chain rule.
   rw [show (fun z : N ↦ Φ (F s z)) = Φ ∘ F s by rfl]
-  simpa using mfderiv_comp y hΦDiff hSliceDiff
+  exact mfderiv_comp y hΦDiff hSliceDiff
 
 omit [BoundarylessManifold I N] [BoundarylessManifold J M] in
 /-- Helper for compact-source stability: on an open-source restriction, surjectivity of the restricted slice
@@ -1330,7 +1323,7 @@ lemma surjective_restrictSliceCompositeMfderiv_iff
     -- The restricted slice is the ambient slice composed with the open inclusion.
     rw [show (fun z : Oy ↦ Φ (F s z.1)) =
         (fun z : N ↦ Φ (F s z)) ∘ (Subtype.val : Oy → N) by rfl]
-    simpa [A, B] using mfderiv_comp y hAmbientDiff hSubtypeDiff
+    exact mfderiv_comp y hAmbientDiff hSubtypeDiff
   have hAInv : A.IsInvertible := by
     -- The derivative of an open-subset inclusion is an isomorphism.
     let e := Oy.openPartialHomeomorphSubtypeCoe ⟨y⟩
@@ -1366,7 +1359,8 @@ lemma surjective_restrictSliceCompositeMfderiv_iff
     have hinv : (mfderiv I I (Φopen : Oy → N) y).IsInvertible := by
       rw [← hlocal.mfderivToContinuousLinearEquiv_coe one_ne_zero]
       exact ContinuousLinearMap.isInvertible_equiv
-    simpa [A, Φopen, e] using hinv
+    change (mfderiv I I (Subtype.val : Oy → N) y).IsInvertible at hinv
+    exact hinv
   -- Surjectivity is unchanged after composing on the right with the bijective inclusion
   -- derivative.
   simpa [hComp, A, B] using!
@@ -1499,16 +1493,17 @@ lemma isOpen_setOf_sliceTransverseAt
     have hCoords :
         ∃ (K : Type uE') (_ : NormedAddCommGroup K) (_ : NormedSpace 𝕜 K)
           (_ : FiniteDimensional 𝕜 K) (U : Set M) (Φ : M → K),
-          (x0 : M) ∈ U ∧ IsLocalDefiningMapOn J 𝓘(𝕜, K) X U Φ :=
+          (x0 : M) ∈ U ∧ IsLocalDefiningMapOn J 𝓘(𝕜, K) X U Φ ∧
+            Module.finrank 𝕜 EX + Module.finrank 𝕜 K = Module.finrank 𝕜 E' :=
       immersionComplementCoordinates_levelSetOn JX x0
     rcases hCoords with
-      ⟨K, _, _, _, U, Φ, hx0U, hDef⟩
+      ⟨K, _, _, _, U, Φ, hx0U, hDef, hcodim⟩
     have hp0CompositeSurj :
         Function.Surjective
           ((mfderiv J 𝓘(𝕜, K) Φ (F p0.1 p0.2)).comp (mfderiv I J (F p0.1) p0.2)) := by
       -- At the basepoint, transversality is exactly surjectivity of the defining-map composite.
       exact
-        (sliceTransverseAt_iff_surjective_definingComposite IS JX hDef hx0U hx0).1
+        (sliceTransverseAt_iff_surjective_definingComposite IS JX hDef hcodim hx0U hx0).1
           (hp0 hx0)
     have hp0Surj :
         Function.Surjective (mfderiv I 𝓘(𝕜, K) (fun y : N ↦ Φ (F p0.1 y)) p0.2) := by
@@ -1529,7 +1524,7 @@ lemma isOpen_setOf_sliceTransverseAt
       have hCompEq := sliceComposite_mfderiv_eq IS hF JX hDef hqU
       simpa [hCompEq] using hVSurj q hq
     exact
-      (sliceTransverseAt_iff_surjective_definingComposite IS JX hDef hqU hx).2
+      (sliceTransverseAt_iff_surjective_definingComposite IS JX hDef hcodim hqU hx).2
         hCompositeSurj
   · haveI : T1Space M := J.t1Space M
     have hXclosed : IsClosed X := hXproper.isClosed
@@ -1796,8 +1791,10 @@ lemma parametricGraphMfderivInjective_of_sliceMfderivInjective
         (ContinuousLinearMap.inr 𝕜 (TangentSpace IS s) (TangentSpace I x))) =
       mfderiv I J (F s) x := by
     -- The vertical part of the graph derivative is exactly the slice derivative.
-    simpa [hΓderiv] using
-      (sliceMfderiv_eq_uncurryMfderiv_compInr hF s x).symm
+    rw [hΓderiv]
+    ext v
+    simpa [ContinuousLinearMap.comp_apply] using
+      congrArg (fun L ↦ L v) (sliceMfderiv_eq_uncurryMfderiv_compInr hF s x).symm
   -- Reduce injectivity of the graph derivative to injectivity of its vertical part.
   have hVertInj :
       Function.Injective

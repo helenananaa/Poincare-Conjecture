@@ -58,7 +58,9 @@ theorem IsSmoothLocalParametrization.isLocalParametrization
     {S : ImmersedSubmanifold I M} {k : ℕ}
     {U : Opens (EuclideanSpace ℝ (Fin k))} {X : U → M}
     (hX : IsSmoothLocalParametrization S U X) :
-    IsLocalParametrization S U X := sorry
+    IsLocalParametrization S U X := by
+  rcases hX with ⟨F, hXF, -, hF⟩
+  exact ⟨F, hXF, hF⟩
 
 -- Proof sketch: if `X = S.inclusion ∘ F` with `F` surjective, then every point of `S.carrier`
 -- comes from some `u : U`, and conversely every point in the range of `X` lies in the range of the
@@ -69,7 +71,15 @@ theorem IsGlobalParametrization.range_eq_carrier
     {S : ImmersedSubmanifold I M} {k : ℕ}
     {U : Opens (EuclideanSpace ℝ (Fin k))} {X : U → M}
     (hX : IsGlobalParametrization S U X) :
-    Set.range X = S.carrier := sorry
+    Set.range X = S.carrier := by
+  rcases hX with ⟨F, rfl, -, hFsurj⟩
+  ext y
+  constructor
+  · rintro ⟨u, rfl⟩
+    exact ⟨F u, rfl⟩
+  · rintro ⟨s, rfl⟩
+    rcases hFsurj s with ⟨u, rfl⟩
+    exact ⟨u, rfl⟩
 
 end ImmersedSubmanifold
 end Manifold

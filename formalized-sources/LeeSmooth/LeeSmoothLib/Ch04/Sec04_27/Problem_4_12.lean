@@ -16,6 +16,12 @@ local notation "R2" => EuclideanSpace ℝ (Fin 2)
 local notation "R3" => EuclideanSpace ℝ (Fin 3)
 local notation "T2Model" => ModelWithCorners.pi (fun _ : Fin 2 ↦ 𝓡 1)
 
+local instance torus_model_boundaryless :
+    (ModelWithCorners.pi (fun _ : Fin 2 ↦ 𝓡 1)).Boundaryless := by
+  constructor
+  change Set.range (Pi.map fun _ : Fin 2 ↦ (𝓡 1)) = Set.univ
+  simp
+
 /-- Helper for Problem 4-12: the transition map between finite product charts is the product of
 the factorwise transition maps. -/
 lemma open_partial_homeomorph_pi_symm_trans_pi

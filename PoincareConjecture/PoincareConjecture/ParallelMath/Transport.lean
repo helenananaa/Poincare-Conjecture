@@ -11,3 +11,5 @@ import PoincareConjecture.ParallelMath.Transport.MinmaxLocal
 import PoincareConjecture.ParallelMath.Transport.TorusCovering
 import PoincareConjecture.ParallelMath.Transport.TorusFiberIntegers
 import PoincareConjecture.ParallelMath.Transport.TorusUniversal
+import PoincareConjecture.ParallelMath.Transport.TorusPi1
+import PoincareConjecture.ParallelMath.Transport.AddCirclePi1

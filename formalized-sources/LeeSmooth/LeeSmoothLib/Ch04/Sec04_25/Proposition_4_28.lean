@@ -48,7 +48,10 @@ variable {E : Type uE} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensi
   {N : Type uN} [TopologicalSpace N] [ChartedSpace H' N] [IsManifold J ∞ N]
   {π : M → N}
 
-/-- A smooth submersion canonically determines a topological submersion. -/
+variable [I.Boundaryless]
+
+/-- A smooth submersion from a boundaryless model canonically determines a topological
+submersion. This source condition matches the verified local-section theorem (4.26). -/
 def toTopologicalSubmersion (hπ : IsSmoothSubmersion I J π) :
     Topology.IsTopologicalSubmersion π where
   continuous := hπ.continuous

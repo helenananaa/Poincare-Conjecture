@@ -51,18 +51,40 @@ def problem_8_30_cross_to_su2_matrix : R3 →ₗ[ℝ] Matrix (Fin 2) (Fin 2) ℂ
 theorem problem_8_30_cross_to_su2_matrix_apply (u : R3) :
     problem_8_30_cross_to_su2_matrix u =
       !![(u 2 / 2 : ℂ) * Complex.I, (u 0 / 2 : ℂ) + (u 1 / 2 : ℂ) * Complex.I;
-        -(u 0 / 2 : ℂ) + (u 1 / 2 : ℂ) * Complex.I, -((u 2 / 2 : ℂ) * Complex.I)] := sorry
+        -(u 0 / 2 : ℂ) + (u 1 / 2 : ℂ) * Complex.I, -((u 2 / 2 : ℂ) * Complex.I)] := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [problem_8_30_cross_to_su2_matrix, problem_8_30_su2_basis_x,
+      problem_8_30_su2_basis_y, problem_8_30_su2_basis_z] <;> ring
 
 /-- The explicit `su(2)` matrix attached to `u : ℝ^3` lies in `su₂`. -/
 theorem problem_8_30_cross_to_su2_matrix_mem (u : R3) :
-    problem_8_30_cross_to_su2_matrix u ∈ su₂ := sorry
+    problem_8_30_cross_to_su2_matrix u ∈ su₂ := by
+  rw [special_unitary_matrix_lie_subalgebra_mem]
+  constructor
+  · rw [problem_8_30_cross_to_su2_matrix_apply]
+    have hstar_two : (starRingEnd ℂ) (2 : ℂ) = 2 := star_ofNat 2
+    ext i j
+    fin_cases i <;> fin_cases j <;>
+      simp [Matrix.conjTranspose, hstar_two] <;> ring
+  · rw [problem_8_30_cross_to_su2_matrix_apply]
+    simp [Matrix.trace]
 
 private def crossToSu2Linear : R3 →ₗ[ℝ] su₂ :=
   problem_8_30_cross_to_su2_matrix.codRestrict su₂
     problem_8_30_cross_to_su2_matrix_mem
 
 private theorem crossToSu2Linear_map_lie (u v : R3) :
-    crossToSu2Linear ⁅u, v⁆ = ⁅crossToSu2Linear u, crossToSu2Linear v⁆ := sorry
+    crossToSu2Linear ⁅u, v⁆ = ⁅crossToSu2Linear u, crossToSu2Linear v⁆ := by
+  apply Subtype.ext
+  change problem_8_30_cross_to_su2_matrix ⁅u, v⁆ =
+    ⁅problem_8_30_cross_to_su2_matrix u, problem_8_30_cross_to_su2_matrix v⁆
+  rw [Cross.lie_eq_cross, problem_8_30_cross_to_su2_matrix_apply,
+    problem_8_30_cross_to_su2_matrix_apply, problem_8_30_cross_to_su2_matrix_apply]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [cross_apply, LieRing.of_associative_ring_bracket] <;>
+      ring_nf <;> simp [Complex.I_sq] <;> ring
 
 /-- The explicit Lie algebra homomorphism from `ℝ^3` with the cross product to `su(2)`. -/
 def problem_8_30_cross_to_su2_hom : R3 →ₗ⁅ℝ⁆ su₂ :=
@@ -73,11 +95,49 @@ def problem_8_30_cross_to_su2_hom : R3 →ₗ⁅ℝ⁆ su₂ :=
 formula. -/
 theorem problem_8_30_cross_to_su2_hom_apply (u : R3) :
     ((problem_8_30_cross_to_su2_hom u : su₂) :
-      Matrix (Fin 2) (Fin 2) ℂ) = problem_8_30_cross_to_su2_matrix u := sorry
+      Matrix (Fin 2) (Fin 2) ℂ) = problem_8_30_cross_to_su2_matrix u := rfl
 
 /-- The explicit `su(2)` parametrization is bijective. -/
 theorem problem_8_30_cross_to_su2_hom_bijective :
-    Function.Bijective problem_8_30_cross_to_su2_hom := sorry
+    Function.Bijective problem_8_30_cross_to_su2_hom := by
+  constructor
+  · intro u v huv
+    have huv' : problem_8_30_cross_to_su2_matrix u =
+        problem_8_30_cross_to_su2_matrix v := congrArg Subtype.val huv
+    rw [problem_8_30_cross_to_su2_matrix_apply,
+      problem_8_30_cross_to_su2_matrix_apply] at huv'
+    have h0 := congrArg (fun M : Matrix (Fin 2) (Fin 2) ℂ ↦ (M 0 1).re) huv'
+    have h1 := congrArg (fun M : Matrix (Fin 2) (Fin 2) ℂ ↦ (M 0 1).im) huv'
+    have h2 := congrArg (fun M : Matrix (Fin 2) (Fin 2) ℂ ↦ (M 0 0).im) huv'
+    simp at h0 h1 h2
+    funext i
+    fin_cases i
+    · simpa using h0
+    · simpa using h1
+    · simpa using h2
+  · intro A
+    let u : R3 := ![2 * ((A : Matrix (Fin 2) (Fin 2) ℂ) 0 1).re,
+      2 * ((A : Matrix (Fin 2) (Fin 2) ℂ) 0 1).im,
+      2 * ((A : Matrix (Fin 2) (Fin 2) ℂ) 0 0).im]
+    refine ⟨u, ?_⟩
+    apply Subtype.ext
+    rw [problem_8_30_cross_to_su2_hom_apply,
+      problem_8_30_cross_to_su2_matrix_apply]
+    rcases (special_unitary_matrix_lie_subalgebra_mem 2
+      (A : Matrix (Fin 2) (Fin 2) ℂ)).mp A.property with ⟨hskew, htrace⟩
+    have h00 := congrArg (fun M : Matrix (Fin 2) (Fin 2) ℂ ↦ M 0 0) hskew
+    have h01 := congrArg (fun M : Matrix (Fin 2) (Fin 2) ℂ ↦ M 0 1) hskew
+    have h11 := congrArg (fun M : Matrix (Fin 2) (Fin 2) ℂ ↦ M 1 1) hskew
+    simp only [Matrix.conjTranspose_apply, Matrix.neg_apply] at h00 h01 h11
+    have h00re := congrArg Complex.re h00
+    have h01re := congrArg Complex.re h01
+    have h01im := congrArg Complex.im h01
+    have h11re := congrArg Complex.re h11
+    have htraceim := congrArg Complex.im htrace
+    simp [Matrix.trace_fin_two] at h00re h01re h01im h11re htraceim
+    ext i j
+    fin_cases i <;> fin_cases j <;> apply Complex.ext <;>
+      simp [u] <;> linarith
 
 /-- The standard basis matrix in `o(3)` corresponding to rotation about the first coordinate axis.
 -/
@@ -103,18 +163,33 @@ def problem_8_30_cross_to_o3_matrix : R3 →ₗ[ℝ] Matrix (Fin 3) (Fin 3) ℝ 
 /-- Coordinate formula for `problem_8_30_cross_to_o3_matrix`. -/
 theorem problem_8_30_cross_to_o3_matrix_apply (u : R3) :
     problem_8_30_cross_to_o3_matrix u =
-      !![(0 : ℝ), -u 2, u 1; u 2, 0, -u 0; -u 1, u 0, 0] := sorry
+      !![(0 : ℝ), -u 2, u 1; u 2, 0, -u 0; -u 1, u 0, 0] := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [problem_8_30_cross_to_o3_matrix, problem_8_30_o3_basis_x,
+      problem_8_30_o3_basis_y, problem_8_30_o3_basis_z]
 
 /-- The explicit `o(3)` matrix attached to `u : ℝ^3` lies in `o₃`. -/
 theorem problem_8_30_cross_to_o3_matrix_mem (u : R3) :
-    problem_8_30_cross_to_o3_matrix u ∈ o₃ := sorry
+    problem_8_30_cross_to_o3_matrix u ∈ o₃ := by
+  rw [LieAlgebra.Orthogonal.mem_so, problem_8_30_cross_to_o3_matrix_apply]
+  ext i j
+  fin_cases i <;> fin_cases j <;> simp
 
 private def crossToO3Linear : R3 →ₗ[ℝ] o₃ :=
   problem_8_30_cross_to_o3_matrix.codRestrict o₃
     problem_8_30_cross_to_o3_matrix_mem
 
 private theorem crossToO3Linear_map_lie (u v : R3) :
-    crossToO3Linear ⁅u, v⁆ = ⁅crossToO3Linear u, crossToO3Linear v⁆ := sorry
+    crossToO3Linear ⁅u, v⁆ = ⁅crossToO3Linear u, crossToO3Linear v⁆ := by
+  apply Subtype.ext
+  change problem_8_30_cross_to_o3_matrix ⁅u, v⁆ =
+    ⁅problem_8_30_cross_to_o3_matrix u, problem_8_30_cross_to_o3_matrix v⁆
+  rw [Cross.lie_eq_cross, problem_8_30_cross_to_o3_matrix_apply,
+    problem_8_30_cross_to_o3_matrix_apply, problem_8_30_cross_to_o3_matrix_apply]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [cross_apply, LieRing.of_associative_ring_bracket] <;> ring
 
 /-- The explicit Lie algebra homomorphism from `ℝ^3` with the cross product to `o(3)`. -/
 def problem_8_30_cross_to_o3_hom : R3 →ₗ⁅ℝ⁆ o₃ :=
@@ -125,11 +200,42 @@ def problem_8_30_cross_to_o3_hom : R3 →ₗ⁅ℝ⁆ o₃ :=
 formula. -/
 theorem problem_8_30_cross_to_o3_hom_apply (u : R3) :
     ((problem_8_30_cross_to_o3_hom u : o₃) :
-      Matrix (Fin 3) (Fin 3) ℝ) = problem_8_30_cross_to_o3_matrix u := sorry
+      Matrix (Fin 3) (Fin 3) ℝ) = problem_8_30_cross_to_o3_matrix u := rfl
 
 /-- The explicit `o(3)` parametrization is bijective. -/
 theorem problem_8_30_cross_to_o3_hom_bijective :
-    Function.Bijective problem_8_30_cross_to_o3_hom := sorry
+    Function.Bijective problem_8_30_cross_to_o3_hom := by
+  constructor
+  · intro u v huv
+    have huv' : problem_8_30_cross_to_o3_matrix u =
+        problem_8_30_cross_to_o3_matrix v := congrArg Subtype.val huv
+    rw [problem_8_30_cross_to_o3_matrix_apply,
+      problem_8_30_cross_to_o3_matrix_apply] at huv'
+    funext i
+    fin_cases i
+    · simpa using congrArg (fun M : Matrix (Fin 3) (Fin 3) ℝ ↦ M 2 1) huv'
+    · simpa using congrArg (fun M : Matrix (Fin 3) (Fin 3) ℝ ↦ M 0 2) huv'
+    · simpa using congrArg (fun M : Matrix (Fin 3) (Fin 3) ℝ ↦ M 1 0) huv'
+  · intro A
+    let u : R3 := ![(A : Matrix (Fin 3) (Fin 3) ℝ) 2 1,
+      (A : Matrix (Fin 3) (Fin 3) ℝ) 0 2,
+      (A : Matrix (Fin 3) (Fin 3) ℝ) 1 0]
+    refine ⟨u, ?_⟩
+    apply Subtype.ext
+    rw [problem_8_30_cross_to_o3_hom_apply,
+      problem_8_30_cross_to_o3_matrix_apply]
+    have hskew : (A : Matrix (Fin 3) (Fin 3) ℝ)ᵀ = -(A : Matrix (Fin 3) (Fin 3) ℝ) :=
+      (LieAlgebra.Orthogonal.mem_so (Fin 3) ℝ
+        (A : Matrix (Fin 3) (Fin 3) ℝ)).mp A.property
+    have h00 := congrArg (fun M : Matrix (Fin 3) (Fin 3) ℝ ↦ M 0 0) hskew
+    have h01 := congrArg (fun M : Matrix (Fin 3) (Fin 3) ℝ ↦ M 0 1) hskew
+    have h02 := congrArg (fun M : Matrix (Fin 3) (Fin 3) ℝ ↦ M 0 2) hskew
+    have h11 := congrArg (fun M : Matrix (Fin 3) (Fin 3) ℝ ↦ M 1 1) hskew
+    have h12 := congrArg (fun M : Matrix (Fin 3) (Fin 3) ℝ ↦ M 1 2) hskew
+    have h22 := congrArg (fun M : Matrix (Fin 3) (Fin 3) ℝ ↦ M 2 2) hskew
+    simp only [Matrix.transpose_apply, Matrix.neg_apply] at h00 h01 h02 h11 h12 h22
+    ext i j
+    fin_cases i <;> fin_cases j <;> simp [u] <;> linarith
 
 /-- Problem 8-30 (1): the normalized Pauli-matrix parametrization gives an explicit Lie algebra
 equivalence from `ℝ^3` with the cross product to `su(2)`. -/
@@ -139,7 +245,7 @@ def problem_8_30_cross_equiv_su2 : R3 ≃ₗ⁅ℝ⁆ su₂ :=
 /-- Applying `problem_8_30_cross_equiv_su2` recovers the explicit `su(2)` matrix formula. -/
 theorem problem_8_30_cross_equiv_su2_apply (u : R3) :
     ((problem_8_30_cross_equiv_su2 u : su₂) :
-      Matrix (Fin 2) (Fin 2) ℂ) = problem_8_30_cross_to_su2_matrix u := sorry
+      Matrix (Fin 2) (Fin 2) ℂ) = problem_8_30_cross_to_su2_matrix u := rfl
 
 /-- Problem 8-30 (2): the standard skew-symmetric matrix parametrization gives an explicit Lie
 algebra equivalence from `ℝ^3` with the cross product to `o(3)`. -/
@@ -149,7 +255,7 @@ def problem_8_30_cross_equiv_o3 : R3 ≃ₗ⁅ℝ⁆ o₃ :=
 /-- Applying `problem_8_30_cross_equiv_o3` recovers the explicit `o(3)` matrix formula. -/
 theorem problem_8_30_cross_equiv_o3_apply (u : R3) :
     ((problem_8_30_cross_equiv_o3 u : o₃) :
-      Matrix (Fin 3) (Fin 3) ℝ) = problem_8_30_cross_to_o3_matrix u := sorry
+      Matrix (Fin 3) (Fin 3) ℝ) = problem_8_30_cross_to_o3_matrix u := rfl
 
 /-- Problem 8-30 (3): composing the two explicit identifications with `ℝ^3` yields an explicit
 Lie algebra equivalence between `su(2)` and `o(3)`. -/
@@ -160,4 +266,4 @@ def problem_8_30_su2_equiv_o3 : su₂ ≃ₗ⁅ℝ⁆ o₃ :=
 `o(3)` matrix. -/
 theorem problem_8_30_su2_equiv_o3_apply (A : su₂) :
     ((problem_8_30_su2_equiv_o3 A : o₃) : Matrix (Fin 3) (Fin 3) ℝ) =
-      problem_8_30_cross_to_o3_matrix (problem_8_30_cross_equiv_su2.symm A) := sorry
+      problem_8_30_cross_to_o3_matrix (problem_8_30_cross_equiv_su2.symm A) := rfl

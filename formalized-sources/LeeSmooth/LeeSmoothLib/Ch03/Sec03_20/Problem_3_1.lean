@@ -37,10 +37,93 @@ variable [IsManifold I 1 M] [IsManifold I' 1 N]
 derivative vanishes at every point. -/
 theorem isLocallyConstant_of_mfderiv_eq_zero {f : M → N} (hf : MDifferentiable I I' f)
     (hzero : ∀ p, mfderiv I I' f p = 0) : IsLocallyConstant f := by
-  -- Route correction: the chartwise proof now has the required `IsManifold` assumptions in scope.
-  -- The remaining implementation is the local transport from `mfderiv I I' f = 0` to a zero
-  -- `fderivWithin` statement on a convex chart neighborhood.
-  sorry
+  letI : RCLike 𝕜 := IsRCLikeNormedField.rclike 𝕜
+  letI : NormedSpace ℝ E := NormedSpace.restrictScalars ℝ 𝕜 E
+  letI : NormedSpace ℝ E' := NormedSpace.restrictScalars ℝ 𝕜 E'
+  rw [IsLocallyConstant.iff_eventually_eq]
+  intro p
+  let e := extChartAt I p
+  let e' := extChartAt I' (f p)
+  let g : E → E' := e' ∘ f ∘ e.symm
+  have hpre : e.symm ⁻¹' (f ⁻¹' e'.source) ∈ nhds (e p) := by
+    have hc : ContinuousAt (f ∘ e.symm) (e p) :=
+      (hf (e.symm (e p))).continuousAt.comp (continuousAt_extChartAt_symm p)
+    have hep : e.symm (e p) = p := e.left_inv (mem_extChartAt_source p)
+    have hs : e'.source ∈ nhds ((f ∘ e.symm) (e p)) := by
+      simpa only [Function.comp_apply, hep] using extChartAt_source_mem_nhds (I := I') (f p)
+    exact hc.preimage_mem_nhds hs
+  have hT : e.target ∩ e.symm ⁻¹' (f ⁻¹' e'.source) ∈
+      nhdsWithin (e p) (Set.range I) :=
+    Filter.inter_mem (extChartAt_target_mem_nhdsWithin p) (mem_nhdsWithin_of_mem_nhds hpre)
+  obtain ⟨r, hr, hrT⟩ := Metric.mem_nhdsWithin_iff.mp hT
+  have hpU : p ∈ e.source ∩ e ⁻¹' Metric.ball (e p) r := by
+    exact ⟨mem_extChartAt_source p, Metric.mem_ball_self hr⟩
+  have hUopen : IsOpen (e.source ∩ e ⁻¹' Metric.ball (e p) r) := by
+    simpa [e, extChartAt_source] using isOpen_extChartAt_preimage p Metric.isOpen_ball
+  filter_upwards [hUopen.mem_nhds hpU] with q hq
+  have hyTarget : e q ∈ e.target := e.map_source hq.1
+  have hyRange : e q ∈ Set.range I := extChartAt_target_subset_range p hyTarget
+  have hyBall : e q ∈ Metric.ball (e p) r := hq.2
+  have hyT : e q ∈ e.target ∩ e.symm ⁻¹' (f ⁻¹' e'.source) :=
+    hrT ⟨hyBall, hyRange⟩
+  have hfpSource : f p ∈ e'.source := mem_extChartAt_source (f p)
+  have hfqSource : f q ∈ e'.source := by
+    have h := hyT.2
+    change f (e.symm (e q)) ∈ e'.source at h
+    simpa only [e.left_inv hq.1] using h
+  have hdiff : DifferentiableOn 𝕜 g (Set.range I ∩ Metric.ball (e p) r) := by
+    intro y hy
+    have hyT' : y ∈ e.target ∩ e.symm ⁻¹' (f ⁻¹' e'.source) :=
+      hrT ⟨hy.2, hy.1⟩
+    have hsymm : MDifferentiableWithinAt 𝓘(𝕜, E) I e.symm (Set.range I) y :=
+      mdifferentiableWithinAt_extChartAt_symm hyT'.1
+    have hfe : MDifferentiableWithinAt 𝓘(𝕜, E) I' (f ∘ e.symm) (Set.range I) y := by
+      apply (hf (e.symm y)).comp_mdifferentiableWithinAt y hsymm
+    have he' : MDifferentiableAt I' 𝓘(𝕜, E') e' (f (e.symm y)) := by
+      apply mdifferentiableAt_extChartAt
+      simpa [e', extChartAt_source] using hyT'.2
+    have hg : MDifferentiableWithinAt 𝓘(𝕜, E) 𝓘(𝕜, E') g (Set.range I) y := by
+      exact he'.comp_mdifferentiableWithinAt y hfe
+    exact hg.differentiableWithinAt.mono Set.inter_subset_left
+  have hderivZero : ∀ y ∈ Set.range I ∩ Metric.ball (e p) r,
+      fderivWithin 𝕜 g (Set.range I ∩ Metric.ball (e p) r) y = 0 := by
+    intro y hy
+    have hyT' : y ∈ e.target ∩ e.symm ⁻¹' (f ⁻¹' e'.source) :=
+      hrT ⟨hy.2, hy.1⟩
+    have hsymm : MDifferentiableWithinAt 𝓘(𝕜, E) I e.symm (Set.range I) y :=
+      mdifferentiableWithinAt_extChartAt_symm hyT'.1
+    have hfe : MDifferentiableWithinAt 𝓘(𝕜, E) I' (f ∘ e.symm) (Set.range I) y := by
+      apply (hf (e.symm y)).comp_mdifferentiableWithinAt y hsymm
+    have he' : MDifferentiableAt I' 𝓘(𝕜, E') e' (f (e.symm y)) := by
+      apply mdifferentiableAt_extChartAt
+      simpa [e', extChartAt_source] using hyT'.2
+    have hfeZero : mfderivWithin 𝓘(𝕜, E) I' (f ∘ e.symm) (Set.range I) y = 0 := by
+      rw [mfderiv_comp_mfderivWithin y (hf (e.symm y)) hsymm
+        (I.uniqueDiffOn.uniqueMDiffOn y hy.1), hzero]
+      simp
+    have hgZero : mfderivWithin 𝓘(𝕜, E) 𝓘(𝕜, E') g (Set.range I) y = 0 := by
+      rw [mfderiv_comp_mfderivWithin y he' hfe
+        (I.uniqueDiffOn.uniqueMDiffOn y hy.1), hfeZero]
+      simp
+    have hgDiff : DifferentiableWithinAt 𝕜 g (Set.range I) y := by
+      have hg : MDifferentiableWithinAt 𝓘(𝕜, E) 𝓘(𝕜, E') g (Set.range I) y :=
+        he'.comp_mdifferentiableWithinAt y hfe
+      exact hg.differentiableWithinAt
+    rw [mfderivWithin_eq_fderivWithin] at hgZero
+    rw [fderivWithin_subset Set.inter_subset_left
+      ((I.uniqueDiffOn.inter Metric.isOpen_ball) y hy) hgDiff]
+    exact hgZero
+  have hx : e p ∈ Set.range I ∩ Metric.ball (e p) r :=
+    ⟨Set.mem_range_self _, Metric.mem_ball_self hr⟩
+  have hconst : g (e p) = g (e q) :=
+    (I.convex_range.inter (convex_ball (e p) r)).is_const_of_fderivWithin_eq_zero
+      hdiff hderivZero hx ⟨hyRange, hyBall⟩
+  have hconst' := congrArg e'.symm hconst
+  have hep : e.symm (e p) = p := e.left_inv (mem_extChartAt_source p)
+  have heq : e.symm (e q) = q := e.left_inv hq.1
+  have hefp : e'.symm (e' (f p)) = f p := e'.left_inv hfpSource
+  have hefq : e'.symm (e' (f q)) = f q := e'.left_inv hfqSource
+  simpa only [g, Function.comp_apply, hep, heq, hefp, hefq] using hconst'.symm
 
 /-- On a `C¹` manifold with corners, a differentiable map has vanishing manifold derivative at
 every point if and only if it is locally constant. -/

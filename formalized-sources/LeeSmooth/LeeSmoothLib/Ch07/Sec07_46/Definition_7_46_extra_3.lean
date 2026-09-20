@@ -20,7 +20,7 @@ abbrev leftTranslation (g : G) : G → G :=
 
 /-- `leftTranslation` evaluates by multiplication on the left. -/
 theorem leftTranslation_apply (g h : G) :
-    leftTranslation (I := I) g h = g * h := sorry
+    leftTranslation (I := I) g h = g * h := by rfl
 
 /-- Left translation by `g` as a global diffeomorphism of the Lie group `G`. -/
 def leftTranslationDiffeomorph (g : G) : G ≃ₘ⟮I, I⟯ G where
@@ -34,7 +34,7 @@ def leftTranslationDiffeomorph (g : G) : G ≃ₘ⟮I, I⟯ G where
 
 /-- `leftTranslationDiffeomorph` has the same underlying map as `leftTranslation`. -/
 theorem leftTranslationDiffeomorph_apply (g h : G) :
-    leftTranslationDiffeomorph (I := I) g h = leftTranslation (I := I) g h := sorry
+    leftTranslationDiffeomorph (I := I) g h = leftTranslation (I := I) g h := by rfl
 
 /-- Definition 7.46-extra-3 (2). For `g ∈ G`, the right translation `R_g : G → G` is the map
 `h ↦ h * g`. -/
@@ -43,7 +43,7 @@ abbrev rightTranslation (g : G) : G → G :=
 
 /-- `rightTranslation` evaluates by multiplication on the right. -/
 theorem rightTranslation_apply (g h : G) :
-    rightTranslation (I := I) g h = h * g := sorry
+    rightTranslation (I := I) g h = h * g := by rfl
 
 /-- Right translation by `g` as a global diffeomorphism of the Lie group `G`. -/
 def rightTranslationDiffeomorph (g : G) : G ≃ₘ⟮I, I⟯ G where
@@ -57,4 +57,4 @@ def rightTranslationDiffeomorph (g : G) : G ≃ₘ⟮I, I⟯ G where
 
 /-- `rightTranslationDiffeomorph` has the same underlying map as `rightTranslation`. -/
 theorem rightTranslationDiffeomorph_apply (g h : G) :
-    rightTranslationDiffeomorph (I := I) g h = rightTranslation (I := I) g h := sorry
+    rightTranslationDiffeomorph (I := I) g h = rightTranslation (I := I) g h := by rfl

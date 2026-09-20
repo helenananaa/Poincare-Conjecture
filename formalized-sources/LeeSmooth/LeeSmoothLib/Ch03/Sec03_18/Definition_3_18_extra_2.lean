@@ -36,4 +36,5 @@ scoped[Manifold] notation "𝒟_[" x "](" IM ")" =>
 /-- A smooth germ derivation satisfies the Leibniz rule on the smooth germ ring. -/
 theorem smooth_germ_derivation_at_map_mul (I : ModelWithCorners ℝ E H) (p : M)
     (v : 𝒟_[p](I)) (f g : C^∞_[p](I)) :
-    v (f * g) = f • v g + g • v f := sorry
+    v (f * g) = f • v g + g • v f :=
+  v.leibniz f g

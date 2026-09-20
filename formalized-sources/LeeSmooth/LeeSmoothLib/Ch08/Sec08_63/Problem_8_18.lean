@@ -282,10 +282,176 @@ theorem smoothVectorFieldOfDescendedTangentMap {Z : N → TangentBundle J N}
   -- The bundled smooth section recovers the original tangent-bundle map.
   simpa [Yfun] using hTY_eq
 
+/- The quotient theorem imported from Chapter 4 assumes the source model itself is boundaryless.
+   For this consumer the source manifold is the boundaryless object.  The local-section proof only
+   needs the chosen source chart point to lie in the interior of `Set.range I`, so we reproduce that
+   proof with the weaker and geometrically correct hypothesis. -/
+private theorem exists_smooth_local_section_of_surjective_mfderiv_of_boundarylessManifold
+    [BoundarylessManifold I M] {π : M → N}
+    (hπ : ContMDiff I J ∞ π) {p : M}
+    (hsurj : Function.Surjective (mfderiv I J π p)) :
+    ∃ U : TopologicalSpace.Opens N, ∃ hq : π p ∈ U, ∃ σ : U → M,
+      Manifold.IsSmoothLocalSection I J π U σ ∧ σ ⟨π p, hq⟩ = p := by
+  set φ := extChartAt I p
+  set ψ := extChartAt J (π p)
+  set a : E := φ p
+  set F : E → E' := writtenInExtChartAt I J p π
+  have hFa : F a = ψ (π p) := by
+    change ψ (π (φ.symm (φ p))) = ψ (π p)
+    rw [φ.left_inv (mem_extChartAt_source (I := I) p)]
+  have hΩ0 :
+      ContDiffOn ℝ ∞ F
+        (φ.target ∩ (π ∘ φ.symm) ⁻¹' ψ.source) :=
+    writtenInExtChartAt_contDiffOn_of_contMDiff (I := I) (J := J) (f := π) (p := p) hπ
+  let Ω : Set E := interior φ.target ∩ (π ∘ φ.symm) ⁻¹' ψ.source
+  have hΩ_open : IsOpen Ω := by
+    have hφt : IsOpen (interior φ.target) := isOpen_interior
+    have hcont : ContinuousOn (π ∘ φ.symm) (interior φ.target) :=
+      hπ.continuous.comp_continuousOn
+        ((contMDiffOn_extChartAt_symm (I := I) (n := ∞) p).continuousOn.mono
+          interior_subset)
+    exact hcont.isOpen_inter_preimage hφt (isOpen_extChartAt_source (I := J) (π p))
+  have haΩ : a ∈ Ω := by
+    refine ⟨(I.isInteriorPoint_iff).mp BoundarylessManifold.isInteriorPoint, ?_⟩
+    change π (φ.symm a) ∈ ψ.source
+    have : φ.symm a = p := extChartAt_to_inv (I := I) p
+    rw [this]
+    exact mem_extChartAt_source (I := J) (π p)
+  have hFsurj : Function.Surjective (fderiv ℝ F a) := by
+    have hmd : MDifferentiableAt I J π p := hπ.mdifferentiableAt (by simp)
+    have haInterior : a ∈ interior (Set.range I) := by
+      dsimp [a, φ]
+      apply interior_mono (extChartAt_target_subset_range (I := I) p)
+      exact (I.isInteriorPoint_iff).mp BoundarylessManifold.isInteriorPoint
+    rw [mfderiv, if_pos hmd,
+      fderivWithin_of_mem_nhds (mem_interior_iff_mem_nhds.mp haInterior)] at hsurj
+    exact hsurj
+  obtain ⟨W, hW_open, hψpW, σE, hσE, hσEa, hσEΩ, hσEsec⟩ :=
+    Manifold.exists_contDiffOn_localSection_of_surjective_fderiv
+      (f := F) (a := a) hΩ_open haΩ (hΩ0.mono (by
+        intro y hy
+        exact ⟨interior_subset hy.1, hy.2⟩)) hFsurj
+  have hψcont : ContinuousAt ψ (π p) := continuousAt_extChartAt (I := J) (π p)
+  have hψp_memW : ψ (π p) ∈ W := by simpa [hFa] using hψpW
+  let U0 : Set N := ψ.source ∩ ψ ⁻¹' W
+  have hU0_nhds : U0 ∈ nhds (π p) :=
+    Filter.inter_mem (extChartAt_source_mem_nhds (I := J) (π p))
+      (hψcont.preimage_mem_nhds (hW_open.mem_nhds hψp_memW))
+  obtain ⟨V, hV_sub, hV_open, hπpV⟩ := mem_nhds_iff.mp hU0_nhds
+  let U : TopologicalSpace.Opens N := ⟨V, hV_open⟩
+  have hq : π p ∈ U := hπpV
+  let s : N → M := fun y => φ.symm (σE (ψ y))
+  have hs_eq : s (π p) = p := by
+    have hσa : σE (ψ (π p)) = a := by simpa [hFa] using hσEa
+    change φ.symm (σE (ψ (π p))) = p
+    rw [hσa]
+    exact extChartAt_to_inv (I := I) p
+  have hsec : ∀ y ∈ V, π (s y) = y := by
+    intro y hy
+    have hyU0 : y ∈ U0 := hV_sub hy
+    have hyψ : y ∈ ψ.source := hyU0.1
+    have hyW : ψ y ∈ W := hyU0.2
+    have hΩy := hσEΩ hyW
+    have hysource : π (s y) ∈ ψ.source := hΩy.2
+    have hFeq : F (σE (ψ y)) = ψ y := hσEsec (ψ y) hyW
+    have hFdef : F (σE (ψ y)) = ψ (π (s y)) := rfl
+    refine ψ.injOn hysource hyψ ?_
+    rw [← hFeq, hFdef]
+  have hsmooth : ContMDiff J I ∞ (fun x : U => s x) := by
+    intro x
+    have hxU0 : (x : N) ∈ U0 := hV_sub x.2
+    have hxψ : (x : N) ∈ ψ.source := hxU0.1
+    have hxW : ψ (x : N) ∈ W := hxU0.2
+    have hxφ : σE (ψ (x : N)) ∈ φ.target := interior_subset (hσEΩ hxW).1
+    refine (contMDiffAt_subtype_iff (I := J) (I' := I) (U := U) (f := s) (x := x)).mpr ?_
+    have h1 : ContMDiffAt J 𝓘(ℝ, E') ∞ ψ (x : N) :=
+      contMDiffAt_extChartAt' (I := J) (x := π p) (x' := (x : N)) (by
+        simpa [ψ, extChartAt_source] using hxψ)
+    have h2 : ContMDiffAt 𝓘(ℝ, E') 𝓘(ℝ, E) ∞ σE (ψ (x : N)) :=
+      ((hσE (ψ (x : N)) hxW).contDiffAt (hW_open.mem_nhds hxW)).contMDiffAt
+    have h3within :
+        ContMDiffWithinAt 𝓘(ℝ, E) I ∞ φ.symm (interior φ.target)
+          (σE (ψ (x : N))) :=
+      ((contMDiffOn_extChartAt_symm (I := I) (n := ∞) p)
+        (σE (ψ (x : N))) (interior_subset (hσEΩ hxW).1)).mono interior_subset
+    have h3 : ContMDiffAt 𝓘(ℝ, E) I ∞ φ.symm (σE (ψ (x : N))) :=
+      h3within.contMDiffAt (isOpen_interior.mem_nhds (hσEΩ hxW).1)
+    exact h3.comp (x : N) (h2.comp (x : N) h1)
+  refine ⟨U, hq, fun x : U => s x, ⟨hsmooth, fun x => hsec x x.2⟩, ?_⟩
+  simpa [s] using hs_eq
+
+private theorem existsUnique_contMDiff_lift_of_surjective_smooth_submersion_of_boundarylessManifold
+    [BoundarylessManifold I M] {π : M → N}
+    (hπ : Manifold.IsSmoothSubmersion I J π) (h_surj : Function.Surjective π)
+    {G : M → TangentBundle J N} (hG : ContMDiff I J.tangent ∞ G)
+    (hFib : ∀ ⦃x y : M⦄, π x = π y → G x = G y) :
+    ∃! G_tilde : N → TangentBundle J N,
+      ContMDiff J J.tangent ∞ G_tilde ∧ G_tilde ∘ π = G := by
+  let proj : C(M, N) := ⟨π, hπ.continuous⟩
+  have htop : Topology.IsTopologicalSubmersion π := by
+    refine ⟨hπ.continuous, ?_⟩
+    intro x
+    rcases exists_smooth_local_section_of_surjective_mfderiv_of_boundarylessManifold
+        (I := I) (J := J) hπ.contMDiff (hπ.surjective_mfderiv x) with
+      ⟨U, hxU, σ, hσ, hx⟩
+    refine ⟨U, hxU, ⟨σ, hσ.1.continuous⟩, hσ.2, ?_⟩
+    simpa using hx
+  have hq : Topology.IsQuotientMap proj := by
+    simpa [proj] using htop.isQuotientMap h_surj
+  let raw : C(M, TangentBundle J N) := ⟨G, hG.continuous⟩
+  have hfactor : Function.FactorsThrough raw proj := by
+    intro x y hxy
+    exact hFib hxy
+  let G_tilde : N → TangentBundle J N := hq.lift raw hfactor
+  have hcomp : G_tilde ∘ π = G := by
+    funext x
+    change ((hq.lift raw hfactor).comp proj) x = raw x
+    exact congrArg (fun g : C(M, TangentBundle J N) => g x)
+      (Topology.IsQuotientMap.lift_comp hq raw hfactor)
+  have hsections :
+      ∀ x : M,
+        ∃ U : TopologicalSpace.Opens N, ∃ hxU : π x ∈ U, ∃ σ : U → M,
+      Manifold.IsSmoothLocalSection I J π U σ ∧ σ ⟨π x, hxU⟩ = x := by
+    intro x
+    exact exists_smooth_local_section_of_surjective_mfderiv_of_boundarylessManifold
+      (I := I) (J := J) hπ.contMDiff (hπ.surjective_mfderiv x)
+  have hsmooth : ContMDiff J J.tangent ∞ G_tilde := by
+    intro y
+    obtain ⟨x, hx⟩ := h_surj y
+    rcases hsections x with ⟨U, hxU, σ, hσ, -⟩
+    have hsmooth' := hG.comp hσ.1
+    have hEq : (fun z : U => G_tilde z) = (fun z : U => G (σ z)) := by
+      funext z
+      rw [← hcomp]
+      simp [Function.comp_apply, hσ.2 z]
+    have hGtildeAt :
+        ContMDiffAt J J.tangent ∞ (fun z : U => G_tilde z) ⟨π x, hxU⟩ := by
+      rw [hEq]
+      exact hsmooth' ⟨π x, hxU⟩
+    have hAt := contMDiffAt_subtype_iff.mp hGtildeAt
+    simpa [hx] using hAt
+  refine ⟨G_tilde, ⟨hsmooth, hcomp⟩, ?_⟩
+  intro G' hG'
+  funext y
+  obtain ⟨x, rfl⟩ := h_surj y
+  calc
+    G' (π x) = G x := congrFun hG'.2 x
+    _ = G_tilde (π x) := (congrFun hcomp x).symm
+
+/- Scope note: the three descent endpoints below require the source manifold itself
+   to be boundaryless, not its global model range. Derivative surjectivity for a map
+   from a boundary source does not supply local smooth sections. For example, map two
+   disjoint half-lines to the real line by t |-> t and t |-> -t. The source field with
+   coefficients t and -t has fiberwise constant pushforward |y|, which is not smooth
+   at zero. Thus the former unrestricted boundary-source descent statement is false.
+   The old lemma named with "lieBracket" still states only the fiberwise criterion;
+   no additional bracket characterization is claimed by this repair. -/
+
 /-- For Problem 8-18 (4): for a surjective smooth submersion, a smooth vector field on the source
 is a lift of some smooth vector field on the target exactly when its pushforward to `TN` is
 constant on each fiber of `F`. -/
 theorem liftable_iff_pushforward_constant_on_fibers {F : M → N}
+    [BoundarylessManifold I M]
     (hFsubm : Manifold.IsSmoothSubmersion I J F)
     (hFsurj : Function.Surjective F)
     {X : SmoothVectorFieldOnM} :
@@ -320,7 +486,7 @@ theorem liftable_iff_pushforward_constant_on_fibers {F : M → N}
       -- `PushforwardConstantOnFibers` is exactly the fiberwise constancy condition.
       intro p q hpq
       exact hconst hpq
-    rcases Manifold.existsUnique_contMDiff_lift_of_surjective_smooth_submersion
+    rcases existsUnique_contMDiff_lift_of_surjective_smooth_submersion_of_boundarylessManifold
         hFsubm hFsurj hG hFib with ⟨Z, hZ, _⟩
     have hproj : ∀ q : N, (Z q).proj = q := by
       -- The descended tangent-bundle map still lies over the identity on `N`.
@@ -343,6 +509,7 @@ theorem liftable_iff_pushforward_constant_on_fibers {F : M → N}
 /-- Problem 8-18: the proved global lifting criterion in this file is the fiberwise-constancy
 criterion formalized by `liftable_iff_pushforward_constant_on_fibers`. -/
 theorem liftable_iff_lieBracket_vertical_of_connected_fibers {F : M → N}
+    [BoundarylessManifold I M]
     (hFsubm : Manifold.IsSmoothSubmersion I J F)
     (hFsurj : Function.Surjective F)
     {X : SmoothVectorFieldOnM} :
@@ -353,6 +520,7 @@ theorem liftable_iff_lieBracket_vertical_of_connected_fibers {F : M → N}
 /-- For Problem 8-18 (5): under the same surjective-submersion hypotheses, fiberwise constancy of
 the pushforward determines a unique smooth vector field on the target that is lifted by `X`. -/
 theorem existsUnique_smooth_base_vector_field_of_pushforward_constant_on_fibers {F : M → N}
+    [BoundarylessManifold I M]
     (hFsubm : Manifold.IsSmoothSubmersion I J F)
     (hFsurj : Function.Surjective F)
     {X : SmoothVectorFieldOnM}

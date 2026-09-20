@@ -13,6 +13,8 @@ import LeeSmoothLib.Ch07.Sec07_51.Exercise_7_31
 import LeeSmoothLib.Ch07.Sec07_49.Theorem_7_21
 -- Declarations for this item will be appended below by the statement pipeline.
 
+-- This kernel-existence specialization uses ordinary finite-dimensional real Lie groups;
+-- the canonical kernel is a C∞ embedded subgroup, not an analytic owner.
 -- Semantic recall via `lean_leansearch` only surfaced generic kernel/group results; local Chapter 7
 -- owners fix the semidirect-product and smooth-kernel API used below.
 
@@ -22,26 +24,27 @@ noncomputable section
 
 section
 
-universe u𝕜 uEG uHG uG uEN uHN uN uEH uHH uH
+universe uℝ uEG uHG uG uEN uHN uN uEH uHH uH
 
-variable {𝕜 : Type u𝕜} [NontriviallyNormedField 𝕜]
-variable {EG : Type uEG} [NormedAddCommGroup EG] [NormedSpace 𝕜 EG] [FiniteDimensional 𝕜 EG]
+variable {EG : Type uEG} [NormedAddCommGroup EG] [NormedSpace ℝ EG] [FiniteDimensional ℝ EG]
 variable {HG : Type uHG} [TopologicalSpace HG]
-variable {EN : Type uEN} [NormedAddCommGroup EN] [NormedSpace 𝕜 EN] [FiniteDimensional 𝕜 EN]
+variable {EN : Type uEN} [NormedAddCommGroup EN] [NormedSpace ℝ EN] [FiniteDimensional ℝ EN]
 variable {HN : Type uHN} [TopologicalSpace HN]
-variable {EH : Type uEH} [NormedAddCommGroup EH] [NormedSpace 𝕜 EH] [FiniteDimensional 𝕜 EH]
+variable {EH : Type uEH} [NormedAddCommGroup EH] [NormedSpace ℝ EH] [FiniteDimensional ℝ EH]
 variable {HH : Type uHH} [TopologicalSpace HH]
-variable {I_G : ModelWithCorners 𝕜 EG HG}
-variable {I_N : ModelWithCorners 𝕜 EN HN}
-variable {I_H : ModelWithCorners 𝕜 EH HH}
+variable {I_G : ModelWithCorners ℝ EG HG}
+variable {I_N : ModelWithCorners ℝ EN HN}
+variable {I_H : ModelWithCorners ℝ EH HH}
 variable {G : Type uG} [Group G] [TopologicalSpace G] [ChartedSpace HG G]
 variable {N : Type uN} [Group N] [TopologicalSpace N] [ChartedSpace HN N]
 variable {H : Type uH} [Group H] [TopologicalSpace H] [ChartedSpace HH H]
 variable [LieGroup I_G ∞ G] [LieGroup I_N ∞ N] [LieGroup I_H ∞ H]
+variable [I_G.Boundaryless] [I_H.Boundaryless] [T2Space G] [SecondCountableTopology G]
+
 
 local notation "SemidirectProductLieIso" =>
   @LieGroupIsomorphicToSemidirectProduct
-    𝕜 inferInstance
+    ℝ inferInstance
     EN inferInstance inferInstance
     HN inferInstance
     N inferInstance inferInstance inferInstance
@@ -68,12 +71,12 @@ abbrev KernelLieGroupIsomorphism
   let W := KernelLieStructure φ
   let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
   let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-  let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instIsManifoldKer
-  let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instLieGroupKer
   LieGroupIsomorphism
-    (modelWithCornersSelf 𝕜 W.ModelSpace)
+    (modelWithCornersSelf ℝ W.ModelSpace)
     I_N
     φ.toMonoidHom.ker
     N
@@ -85,27 +88,23 @@ lemma kernelSubtype_isSmoothEmbedding
     let W := KernelLieStructure φ
     let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
     let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-    let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+    let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
       W.instIsManifoldKer
-    let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+    let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
       W.instLieGroupKer
     Manifold.IsSmoothEmbedding
-      (modelWithCornersSelf 𝕜 W.ModelSpace)
+      (modelWithCornersSelf ℝ W.ModelSpace)
       I_G
       ∞
       (Subtype.val : φ.toMonoidHom.ker → G) := by
   let W := KernelLieStructure φ
   let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
   let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-  let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instIsManifoldKer
-  let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instLieGroupKer
-  let hEmb :=
-    (ContMDiffMonoidMorphism.kerEmbeddedSubmanifold φ).hEmb
-  let hSubtype := hEmb.isSmoothEmbedding_subtype_val
-  -- Reuse the embedded-submanifold witness from Proposition 7.16 and lower the order to `∞`.
-  exact isSmoothEmbedding_of_le (by simp) hSubtype
+  exact W.subtype_val_isSmoothEmbeddingKer
 
 /-- Helper for Problem 7-19: the canonical inclusion `φ.toMonoidHom.ker → G` is smooth for the
 kernel Lie-group structure from Proposition 7.16. -/
@@ -114,21 +113,21 @@ lemma kernelSubtype_contMDiff
     let W := KernelLieStructure φ
     let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
     let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-    let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+    let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
       W.instIsManifoldKer
-    let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+    let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
       W.instLieGroupKer
     ContMDiff
-      (modelWithCornersSelf 𝕜 W.ModelSpace)
+      (modelWithCornersSelf ℝ W.ModelSpace)
       I_G
       ∞
       (Subtype.val : φ.toMonoidHom.ker → G) := by
   let W := KernelLieStructure φ
   let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
   let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-  let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instIsManifoldKer
-  let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instLieGroupKer
   -- The kernel inclusion is smooth because the embedded kernel inclusion is a smooth immersion.
   exact (kernelSubtype_isSmoothEmbedding φ).isImmersion.contMDiff
@@ -146,44 +145,44 @@ private theorem kernelCodRestrict_eq
 `C^∞` as a map to the canonical kernel Lie-group structure from Proposition 7.16. -/
 private theorem contMDiff_toKernelSubtype_infty
     (φ : ContMDiffMonoidMorphism I_G I_H ∞ G H)
-    {E' : Type*} [NormedAddCommGroup E'] [NormedSpace 𝕜 E']
+    {E' : Type*} [NormedAddCommGroup E'] [NormedSpace ℝ E']
     {H' : Type*} [TopologicalSpace H']
     {M : Type*} [TopologicalSpace M] [ChartedSpace H' M]
-    {L : ModelWithCorners 𝕜 E' H'} [IsManifold L ∞ M]
+    {L : ModelWithCorners ℝ E' H'} [IsManifold L ∞ M]
     {F : M → G}
     (hF : ContMDiff L I_G ∞ F)
     (hFker : ∀ x, F x ∈ φ.toMonoidHom.ker) :
     let W := KernelLieStructure φ
     let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
     let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-    let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+    let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
       W.instIsManifoldKer
     ContMDiff
       L
-      (modelWithCornersSelf 𝕜 W.ModelSpace)
+      (modelWithCornersSelf ℝ W.ModelSpace)
       ∞
       (fun x ↦ (⟨F x, hFker x⟩ : φ.toMonoidHom.ker)) := by
   let W := KernelLieStructure φ
   let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
   let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-  let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instIsManifoldKer
   let S : Set G := φ.toMonoidHom.ker
   letI : TopologicalSpace S := W.instTopologicalSpaceKer
   letI : ChartedSpace W.ModelSpace S := W.instChartedSpaceKer
   letI : IsManifold
-      (modelWithCornersSelf 𝕜 W.ModelSpace)
+      (modelWithCornersSelf ℝ W.ModelSpace)
       ∞
       S := W.instIsManifoldKer
   have hEmb :
       Manifold.IsSmoothEmbedding
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         I_G
         ∞
         (Subtype.val : S → G) := by
     change
       Manifold.IsSmoothEmbedding
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         I_G
         ∞
         (Subtype.val : φ.toMonoidHom.ker → G)
@@ -191,19 +190,19 @@ private theorem contMDiff_toKernelSubtype_infty
   have hCod :
       ContMDiff
         L
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         ∞
         (Set.codRestrict F S (fun x ↦ by simpa [S] using hFker x)) := by
     exact
       @Manifold.IsSmoothEmbedding.contMDiff_toSubtype_infty
-        𝕜 inferInstance
+        ℝ inferInstance
         EG inferInstance inferInstance
         HG inferInstance
         I_G
         G inferInstance inferInstance inferInstance inferInstance
         W.ModelSpace inferInstance inferInstance
         W.ModelSpace inferInstance
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         S W.instChartedSpaceKer W.instIsManifoldKer
         hEmb
         E' inferInstance inferInstance
@@ -375,12 +374,12 @@ private theorem kernelCoordinateLieIsoOfExplicitSection
       let W := KernelLieStructure φ
       let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
       let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-      let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+      let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
         W.instIsManifoldKer
-      let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+      let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
         W.instLieGroupKer
       LieGroupIsomorphism
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         I_N
         φ.toMonoidHom.ker
         N, True := by
@@ -402,9 +401,9 @@ private theorem kernelCoordinateLieIsoOfExplicitSection
   let W := KernelLieStructure φ
   let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
   let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-  let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instIsManifoldKer
-  let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instLieGroupKer
   let F : φ.toMonoidHom.ker → N := fun k ↦ (ΦG.symm k.1).1
   have hFinv_mem : ∀ n : N, ΦG (n, (1 : H)) ∈ φ.toMonoidHom.ker := by
@@ -442,13 +441,13 @@ private theorem kernelCoordinateLieIsoOfExplicitSection
       _ = F k * F l := rfl
   have hF_smooth :
       ContMDiff
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         I_N
         ∞
         F := by
     have hCoords :
         ContMDiff
-          (modelWithCornersSelf 𝕜 W.ModelSpace)
+          (modelWithCornersSelf ℝ W.ModelSpace)
           (I_N.prod I_H)
           ∞
           (fun k : φ.toMonoidHom.ker ↦ ΦG.symm k.1) := by
@@ -459,7 +458,7 @@ private theorem kernelCoordinateLieIsoOfExplicitSection
   have hFinv_smooth :
       ContMDiff
         I_N
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         ∞
         Finv := by
     have hAmbient :
@@ -469,7 +468,7 @@ private theorem kernelCoordinateLieIsoOfExplicitSection
     have hSubtype :
         ContMDiff
           I_N
-          (modelWithCornersSelf 𝕜 W.ModelSpace)
+          (modelWithCornersSelf ℝ W.ModelSpace)
           ∞
           (fun n : N ↦ (⟨ΦG (n, (1 : H)), hFinv_mem n⟩ : φ.toMonoidHom.ker)) := by
       exact contMDiff_toKernelSubtype_infty φ hAmbient hFinv_mem
@@ -496,7 +495,7 @@ private theorem kernelCoordinateLieIsoOfExplicitSection
       _ = n := rfl
   let eKer :
       LieGroupIsomorphism
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         I_N
         φ.toMonoidHom.ker
         N :=
@@ -528,12 +527,12 @@ lemma semidirectProductSplitWitness
           let W := KernelLieStructure φ
           let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
           let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-          let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+          let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
             W.instIsManifoldKer
-          let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+          let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
             W.instLieGroupKer
           LieGroupIsomorphism
-            (modelWithCornersSelf 𝕜 W.ModelSpace)
+            (modelWithCornersSelf ℝ W.ModelSpace)
             I_N
             φ.toMonoidHom.ker
             N, Function.LeftInverse φ ψ := by
@@ -582,12 +581,12 @@ lemma semidirectProductSplitWitness
         let W := KernelLieStructure φ
         let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
         let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-        let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+        let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
           W.instIsManifoldKer
-        let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+        let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
           W.instLieGroupKer
         LieGroupIsomorphism
-          (modelWithCornersSelf 𝕜 W.ModelSpace)
+          (modelWithCornersSelf ℝ W.ModelSpace)
           I_N
           φ.toMonoidHom.ker
           N, True) with ⟨e, -⟩
@@ -675,32 +674,32 @@ private theorem splitKernelConjugationKernelSmooth
     let W := KernelLieStructure φ
     let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
     let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-    let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+    let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
       W.instIsManifoldKer
-    let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+    let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
       W.instLieGroupKer
     ContMDiff
-      (I_H.prod (modelWithCornersSelf 𝕜 W.ModelSpace))
-      (modelWithCornersSelf 𝕜 W.ModelSpace)
+      (I_H.prod (modelWithCornersSelf ℝ W.ModelSpace))
+      (modelWithCornersSelf ℝ W.ModelSpace)
       ∞
       (fun p : H × φ.toMonoidHom.ker ↦ splitKernelConjugationMulAut φ ψ hsplit p.1 p.2) := by
   let W := KernelLieStructure φ
   let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
   let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-  let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instIsManifoldKer
-  let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instLieGroupKer
   let ambient : H × φ.toMonoidHom.ker → G := fun p ↦ ψ p.1 * (p.2 : G) * (ψ p.1)⁻¹
   have hAmbient :
       ContMDiff
-        (I_H.prod (modelWithCornersSelf 𝕜 W.ModelSpace))
+        (I_H.prod (modelWithCornersSelf ℝ W.ModelSpace))
         I_G
         ∞
         ambient := by
     have hSection :
         ContMDiff
-          (I_H.prod (modelWithCornersSelf 𝕜 W.ModelSpace))
+          (I_H.prod (modelWithCornersSelf ℝ W.ModelSpace))
           I_G
           ∞
           (fun p : H × φ.toMonoidHom.ker ↦ ψ p.1) := by
@@ -708,7 +707,7 @@ private theorem splitKernelConjugationKernelSmooth
       exact ψ.contMDiff_toFun.comp contMDiff_fst
     have hKernel :
         ContMDiff
-          (I_H.prod (modelWithCornersSelf 𝕜 W.ModelSpace))
+          (I_H.prod (modelWithCornersSelf ℝ W.ModelSpace))
           I_G
           ∞
           (fun p : H × φ.toMonoidHom.ker ↦ (p.2 : G)) := by
@@ -717,8 +716,8 @@ private theorem splitKernelConjugationKernelSmooth
         (kernelSubtype_contMDiff φ).comp
           (contMDiff_snd :
             ContMDiff
-              (I_H.prod (modelWithCornersSelf 𝕜 W.ModelSpace))
-              (modelWithCornersSelf 𝕜 W.ModelSpace)
+              (I_H.prod (modelWithCornersSelf ℝ W.ModelSpace))
+              (modelWithCornersSelf ℝ W.ModelSpace)
               ∞
               fun p : H × φ.toMonoidHom.ker ↦ p.2)
     -- The ambient conjugation formula is smooth before codomain restriction.
@@ -728,8 +727,8 @@ private theorem splitKernelConjugationKernelSmooth
     exact splitConjugate_mem_ker φ ψ hsplit p.1 p.2
   have hSubtype :
       ContMDiff
-        (I_H.prod (modelWithCornersSelf 𝕜 W.ModelSpace))
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (I_H.prod (modelWithCornersSelf ℝ W.ModelSpace))
+        (modelWithCornersSelf ℝ W.ModelSpace)
         ∞
         (fun p : H × φ.toMonoidHom.ker ↦
           (⟨ambient p, hMem p⟩ : φ.toMonoidHom.ker)) := by
@@ -746,35 +745,35 @@ private theorem transportedSplitActionSmooth
       let W := KernelLieStructure φ
       let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
       let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-      let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+      let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
         W.instIsManifoldKer
-      let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+      let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
         W.instLieGroupKer
       LieGroupIsomorphism
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         I_N
         φ.toMonoidHom.ker
         N) :
     let W := KernelLieStructure φ
     let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
     let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-    let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+    let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
       W.instIsManifoldKer
-    let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+    let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
       W.instLieGroupKer
     ContMDiff (I_H.prod I_N) I_N ∞
       (fun p : H × N ↦ e (splitKernelConjugationMulAut φ ψ hsplit p.1 (e.symm p.2))) := by
   let W := KernelLieStructure φ
   let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
   let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-  let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instIsManifoldKer
-  let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instLieGroupKer
   have hInput :
       ContMDiff
         (I_H.prod I_N)
-        (I_H.prod (modelWithCornersSelf 𝕜 W.ModelSpace))
+        (I_H.prod (modelWithCornersSelf ℝ W.ModelSpace))
         ∞
         (fun p : H × N ↦ (p.1, e.symm p.2)) := by
     -- Pair the identity map on `H` with the inverse kernel-coordinate diffeomorphism on `N`.
@@ -783,7 +782,7 @@ private theorem transportedSplitActionSmooth
   have hKernel :
       ContMDiff
         (I_H.prod I_N)
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         ∞
         (fun p : H × N ↦ splitKernelConjugationMulAut φ ψ hsplit p.1 (e.symm p.2)) := by
     -- Feed the kernel-side smooth action with the transported pair `(h, e.symm n)`.
@@ -802,12 +801,12 @@ private theorem splitSemidirectProductWitness
       let W := KernelLieStructure φ
       let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
       let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-      let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+      let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
         W.instIsManifoldKer
-      let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+      let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
         W.instLieGroupKer
       LieGroupIsomorphism
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         I_N
         φ.toMonoidHom.ker
         N) :
@@ -815,9 +814,9 @@ private theorem splitSemidirectProductWitness
   let W := KernelLieStructure φ
   let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
   let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-  let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instIsManifoldKer
-  let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+  let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
     W.instLieGroupKer
   let eMul : φ.toMonoidHom.ker ≃* N := e.toMulEquiv
   let eMulSymm : N ≃* φ.toMonoidHom.ker := eMul.symm
@@ -922,7 +921,7 @@ private theorem splitSemidirectProductWitness
   have hResidual_subtype :
       ContMDiff
         I_G
-        (modelWithCornersSelf 𝕜 W.ModelSpace)
+        (modelWithCornersSelf ℝ W.ModelSpace)
         ∞
         (fun g : G ↦
           (⟨g * (ψ (φ g))⁻¹, splitResidual_mem_ker φ ψ hsplit g⟩ :
@@ -1011,12 +1010,12 @@ theorem lie_group_isomorphic_to_semidirect_product_iff_exists_split_lie_homs :
             let W := KernelLieStructure φ
             let _ : TopologicalSpace φ.toMonoidHom.ker := W.instTopologicalSpaceKer
             let _ : ChartedSpace W.ModelSpace φ.toMonoidHom.ker := W.instChartedSpaceKer
-            let _ : IsManifold (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+            let _ : IsManifold (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
               W.instIsManifoldKer
-            let _ : LieGroup (modelWithCornersSelf 𝕜 W.ModelSpace) ∞ φ.toMonoidHom.ker :=
+            let _ : LieGroup (modelWithCornersSelf ℝ W.ModelSpace) ∞ φ.toMonoidHom.ker :=
               W.instLieGroupKer
             LieGroupIsomorphism
-              (modelWithCornersSelf 𝕜 W.ModelSpace)
+              (modelWithCornersSelf ℝ W.ModelSpace)
               I_N
               φ.toMonoidHom.ker
               N, Function.LeftInverse φ ψ := by

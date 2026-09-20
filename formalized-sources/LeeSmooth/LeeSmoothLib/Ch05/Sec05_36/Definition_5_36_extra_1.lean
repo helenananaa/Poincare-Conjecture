@@ -28,7 +28,7 @@ namespace Manifold.IsLocalDiffeomorph
 
 /-- A smooth local diffeomorphism between finite-dimensional real manifolds is a smooth
 immersion. -/
-theorem isImmersion (hf : IsLocalDiffeomorph I J ∞ f) : IsImmersion I J ∞ f := by
+theorem isImmersion [I.Boundaryless] [J.Boundaryless] (hf : IsLocalDiffeomorph I J ∞ f) : IsImmersion I J ∞ f := by
   -- The local diffeomorphism gives a continuous linear equivalence model for each manifold
   -- derivative, so the derivative is injective at every point.
   refine (Manifold.is_immersion_iff_forall_injective_mfderiv hf.contMDiff).2 ?_

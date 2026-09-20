@@ -1,6 +1,12 @@
 import Mathlib.Analysis.CStarAlgebra.Matrix
+import Mathlib.Analysis.Calculus.Deriv.Polynomial
+import Mathlib.Analysis.Calculus.FDeriv.Mul
+import Mathlib.Analysis.Calculus.FDeriv.RestrictScalars
+import Mathlib.Analysis.Calculus.LineDeriv.Basic
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 import Mathlib.Geometry.Manifold.Instances.UnitsOfNormedAlgebra
+import Mathlib.LinearAlgebra.Matrix.Adjugate
+import Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff
 import Mathlib.Geometry.Manifold.GroupLieAlgebra
 import LeeSmoothLib.Ch04.Sec04_21.Definition_4_21_extra_1
 import LeeSmoothLib.Ch08.Sec08_57.Definition_8_57_extra_1
@@ -980,7 +986,15 @@ identity on the group Lie algebra. -/
     {I : ModelWithCorners 𝕜 EG HG}
     {G : Type*} [TopologicalSpace G] [ChartedSpace HG G] [Group G]
     [LieGroup I ∞ G] :
-    ((ContMDiffMonoidMorphism.id : ContMDiffMonoidMorphism I I ∞ G G))_* = 1 := sorry
+    ((ContMDiffMonoidMorphism.id : ContMDiffMonoidMorphism I I ∞ G G))_* = 1 := by
+  apply LieHom.ext
+  intro X
+  change inducedLieAlgebraLinearMap
+    (ContMDiffMonoidMorphism.id : ContMDiffMonoidMorphism I I ∞ G G) X = X
+  rw [inducedLieAlgebraLinearMap_apply]
+  have h := mfderiv_id (I := I) (x := (1 : G))
+  simpa only [ContinuousLinearMap.id_apply] using!
+    congrArg (fun L : EG →L[𝕜] EG ↦ L X) h
 
 /-- Helper for Problem 8-29: induced Lie algebra homomorphisms are functorial under composition. -/
 @[simp] theorem inducedLieAlgebraHomomorphism_comp
@@ -1439,6 +1453,148 @@ theorem mem_groupLieSubalgebra_iff_exists_subgroupTangent
 end LieSubgroup
 
 end CanonicalLieSubalgebra
+
+/- These determinant lemmas are intentionally elaborated before the operator-norm matrix
+instances below.  This keeps the standard matrix additive/module structures coherent while the
+operator norm is introduced later only for the matrix Lie-group manifolds. -/
+
+private noncomputable def matrixTraceContinuousLinearMap
+    {R : Type*} [NontriviallyNormedField R] [CompleteSpace R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)] :
+    Matrix (Fin n) (Fin n) R →L[R] R :=
+  LinearMap.toContinuousLinearMap (Matrix.traceLinearMap (Fin n) R R)
+
+attribute [-instance] LieRing.ofAssociativeRing in
+private theorem matrixDet_differentiableAt_one
+    {R : Type*} [NontriviallyNormedField R] [CompleteSpace R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)] :
+    DifferentiableAt R
+      (Matrix.det : Matrix (Fin n) (Fin n) R → R) 1 := by
+  let detContinuous : (Fin n → R) [⋀^(Fin n)]→L[R] R :=
+    { toContinuousMultilinearMap :=
+        { toMultilinearMap :=
+            (Matrix.detRowAlternating : (Fin n → R) [⋀^(Fin n)]→ₗ[R] R).toMultilinearMap
+          cont := by
+            change Continuous
+              (fun M : Matrix (Fin n) (Fin n) R ↦ Matrix.det M)
+            exact Continuous.matrix_det continuous_id }
+      map_eq_zero_of_eq' :=
+        (Matrix.detRowAlternating :
+          (Fin n → R) [⋀^(Fin n)]→ₗ[R] R).map_eq_zero_of_eq' }
+  have h := detContinuous.differentiable (1 : Matrix (Fin n) (Fin n) R)
+  simpa [detContinuous] using! h
+
+attribute [-instance] LieRing.ofAssociativeRing in
+private theorem matrixDet_polynomialLine
+    {R : Type*} [NontriviallyNormedField R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)]
+    (X : Matrix (Fin n) (Fin n) R) :
+    (fun t : R ↦ Matrix.det (1 + t • X)) =
+      fun t ↦ Polynomial.eval t
+        (((1 : Matrix (Fin n) (Fin n) (Polynomial R)) +
+          (Polynomial.X : Polynomial R) • X.map Polynomial.C).det) := by
+  funext t
+  change (1 + t • X).det =
+    (Polynomial.evalRingHom t)
+      (((1 : Matrix (Fin n) (Fin n) (Polynomial R)) +
+        (Polynomial.X : Polynomial R) • X.map Polynomial.C).det)
+  rw [RingHom.map_det]
+  apply congrArg Matrix.det
+  ext i j
+  simp only [RingHom.mapMatrix_apply, Matrix.map_apply, Matrix.add_apply, Matrix.smul_apply,
+    smul_eq_mul, map_add, map_mul]
+  rw [mul_comm t (X i j)]
+  change (1 : Matrix (Fin n) (Fin n) R) i j + X i j * t =
+    Polynomial.eval t ((1 : Matrix (Fin n) (Fin n) (Polynomial R)) i j) +
+      Polynomial.eval t Polynomial.X * Polynomial.eval t (Polynomial.C (X i j))
+  rw [Polynomial.eval_X, Polynomial.eval_C, mul_comm]
+  by_cases hij : i = j
+  · subst j
+    rw [Matrix.one_apply_eq, Matrix.one_apply_eq, Polynomial.eval_one]
+  · rw [Matrix.one_apply_ne hij, Matrix.one_apply_ne hij, Polynomial.eval_zero]
+
+attribute [-instance] LieRing.ofAssociativeRing in
+private theorem matrixDet_line_hasDerivAt
+    {R : Type*} [NontriviallyNormedField R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)]
+    (X : Matrix (Fin n) (Fin n) R) :
+    HasDerivAt (fun t : R ↦ Matrix.det (1 + t • X)) (Matrix.trace X) 0 := by
+  rw [matrixDet_polynomialLine n X]
+  convert
+    (Polynomial.hasDerivAt
+      (((1 : Matrix (Fin n) (Fin n) (Polynomial R)) +
+        (Polynomial.X : Polynomial R) • X.map Polynomial.C).det) 0) using 1
+  exact (Matrix.derivative_det_one_add_X_smul X).symm
+
+attribute [-instance] LieRing.ofAssociativeRing in
+private theorem matrixDet_fderiv_one_apply
+    {R : Type*} [NontriviallyNormedField R] [CompleteSpace R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)]
+    (X : Matrix (Fin n) (Fin n) R) :
+    fderiv R (Matrix.det : Matrix (Fin n) (Fin n) R → R) 1 X =
+      Matrix.trace X := by
+  let detContinuous : (Fin n → R) [⋀^(Fin n)]→L[R] R :=
+    { toContinuousMultilinearMap :=
+        { toMultilinearMap :=
+            (Matrix.detRowAlternating : (Fin n → R) [⋀^(Fin n)]→ₗ[R] R).toMultilinearMap
+          cont := by
+            change Continuous
+              (fun M : Matrix (Fin n) (Fin n) R ↦ Matrix.det M)
+            exact Continuous.matrix_det continuous_id }
+      map_eq_zero_of_eq' :=
+        (Matrix.detRowAlternating :
+          (Fin n → R) [⋀^(Fin n)]→ₗ[R] R).map_eq_zero_of_eq' }
+  let oneM : Fin n → Fin n → R := fun i j => (1 : Matrix (Fin n) (Fin n) R) i j
+  have hfun :
+      (Matrix.det : Matrix (Fin n) (Fin n) R → R) = fun M => detContinuous M := by
+    funext M
+    exact (rfl : Matrix.det M = detContinuous M)
+  have hF : HasFDerivAt (fun M : Fin n → Fin n → R => detContinuous M)
+      (detContinuous.1.linearDeriv oneM) oneM :=
+    detContinuous.hasFDerivAt oneM
+  have hterm : ∀ i : Fin n,
+      detContinuous (Function.update oneM i (X i)) = X i i := by
+    intro i
+    have hupd :
+        Function.update oneM i (X i) =
+          Matrix.updateRow (1 : Matrix (Fin n) (Fin n) R) i (X i) := by
+      ext a b
+      simp [oneM, Matrix.updateRow]
+    change Matrix.det (Function.update oneM i (X i)) = X i i
+    rw [hupd, ← Matrix.cramer_transpose_apply, Matrix.transpose_one, Matrix.cramer_one]
+    simp
+  have hsum : detContinuous.1.linearDeriv oneM (fun i j => X i j) = Matrix.trace X := by
+    rw [ContinuousMultilinearMap.linearDeriv_apply]
+    refine Finset.sum_congr rfl ?_
+    intro i _
+    simpa [oneM] using hterm i
+  have hfderiv :
+      fderiv R (fun M : Fin n → Fin n → R => detContinuous M) oneM =
+        detContinuous.1.linearDeriv oneM :=
+    hF.fderiv
+  have hgoal :
+      fderiv R (Matrix.det : Matrix (Fin n) (Fin n) R → R) 1 X =
+        detContinuous.1.linearDeriv oneM (fun i j => X i j) := by
+    rw [hfun]
+    exact congrArg (fun L : (Fin n → Fin n → R) →L[R] R ↦ L (fun i j => X i j)) hfderiv
+  exact hgoal.trans hsum
+
+attribute [-instance] LieRing.ofAssociativeRing in
+private theorem matrixDet_hasFDerivAt_one
+    {R : Type*} [NontriviallyNormedField R] [CompleteSpace R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)] :
+    HasFDerivAt (Matrix.det : Matrix (Fin n) (Fin n) R → R)
+      (matrixTraceContinuousLinearMap n) 1 := by
+  have hd := (matrixDet_differentiableAt_one (R := R) n).hasFDerivAt
+  apply hd.congr_fderiv
+  ext X
+  exact matrixDet_fderiv_one_apply (R := R) n X
 
 /-- The operator-normed ring structure on real `n × n` matrices used by the real matrix models. -/
 local instance real_matrix_normedRing (n : ℕ) : NormedRing (Matrix (Fin n) (Fin n) ℝ) :=
@@ -2043,6 +2199,733 @@ private theorem lieSubalgebra_bracket_val
         Matrix (Fin n) (Fin n) R) := by
   rfl
 
+/- The next lemmas compute the first-order equations used for the classical matrix groups.  The
+determinant calculation is deliberately made at the identity only; this avoids requiring a
+general Jacobi formula. -/
+
+/- Superseded: the determinant block is elaborated above, before the operator-norm instances, to
+avoid typeclass-coherence problems between the two equivalent finite-dimensional matrix norms.
+private noncomputable def matrixTraceContinuousLinearMap
+    {R : Type*} [NontriviallyNormedField R] [CompleteSpace R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)] :
+    Matrix (Fin n) (Fin n) R →L[R] R :=
+  LinearMap.toContinuousLinearMap (Matrix.traceLinearMap (Fin n) R R)
+
+attribute [-instance] LieRing.ofAssociativeRing in
+private theorem matrixDet_differentiableAt_one
+    {R : Type*} [NontriviallyNormedField R] [CompleteSpace R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)] :
+    DifferentiableAt R
+      (Matrix.det : Matrix (Fin n) (Fin n) R → R) 1 := by
+  let detContinuous : (Fin n → R) [⋀^(Fin n)]→L[R] R :=
+    { toContinuousMultilinearMap :=
+        { toMultilinearMap :=
+            (Matrix.detRowAlternating : (Fin n → R) [⋀^(Fin n)]→ₗ[R] R).toMultilinearMap
+          cont := by
+            change Continuous
+              (fun M : Matrix (Fin n) (Fin n) R ↦ Matrix.det M)
+            exact Continuous.matrix_det continuous_id }
+      map_eq_zero_of_eq' :=
+        (Matrix.detRowAlternating :
+          (Fin n → R) [⋀^(Fin n)]→ₗ[R] R).map_eq_zero_of_eq' }
+  have h := detContinuous.differentiable (1 : Matrix (Fin n) (Fin n) R)
+  simpa [detContinuous] using! h
+
+attribute [-instance] LieRing.ofAssociativeRing in
+private theorem matrixDet_polynomialLine
+    {R : Type*} [NontriviallyNormedField R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)]
+    (X : Matrix (Fin n) (Fin n) R) :
+    (fun t : R ↦ Matrix.det (1 + t • X)) =
+      fun t ↦ Polynomial.eval t
+        (((1 : Matrix (Fin n) (Fin n) (Polynomial R)) +
+          (Polynomial.X : Polynomial R) • X.map Polynomial.C).det) := by
+  funext t
+  change (1 + t • X).det =
+    (Polynomial.evalRingHom t)
+      (((1 : Matrix (Fin n) (Fin n) (Polynomial R)) +
+        (Polynomial.X : Polynomial R) • X.map Polynomial.C).det)
+  rw [RingHom.map_det]
+  apply congrArg Matrix.det
+  ext i j
+  simp only [RingHom.mapMatrix_apply, Matrix.map_apply, Matrix.add_apply, Matrix.smul_apply,
+    smul_eq_mul, map_add, map_mul]
+  rw [mul_comm t (X i j)]
+  change (1 : Matrix (Fin n) (Fin n) R) i j + X i j * t =
+    Polynomial.eval t ((1 : Matrix (Fin n) (Fin n) (Polynomial R)) i j) +
+      Polynomial.eval t Polynomial.X * Polynomial.eval t (Polynomial.C (X i j))
+  rw [Polynomial.eval_X, Polynomial.eval_C, mul_comm]
+  by_cases hij : i = j
+  · subst j
+    rw [Matrix.one_apply_eq, Matrix.one_apply_eq, Polynomial.eval_one]
+  · rw [Matrix.one_apply_ne hij, Matrix.one_apply_ne hij, Polynomial.eval_zero]
+
+attribute [-instance] LieRing.ofAssociativeRing in
+private theorem matrixDet_line_hasDerivAt
+    {R : Type*} [NontriviallyNormedField R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)]
+    (X : Matrix (Fin n) (Fin n) R) :
+    HasDerivAt (fun t : R ↦ Matrix.det (1 + t • X)) (Matrix.trace X) 0 := by
+  rw [matrixDet_polynomialLine n X]
+  convert
+    (Polynomial.hasDerivAt
+      (((1 : Matrix (Fin n) (Fin n) (Polynomial R)) +
+        (Polynomial.X : Polynomial R) • X.map Polynomial.C).det) 0) using 1
+  exact (Matrix.derivative_det_one_add_X_smul X).symm
+
+attribute [-instance] LieRing.ofAssociativeRing real_matrix_normedRing
+  real_matrix_normedAlgebra complex_matrix_normedRing complex_matrix_normedAlgebra in
+private theorem matrixDet_fderiv_one_apply
+    {R : Type*} [NontriviallyNormedField R] [CompleteSpace R]
+    (n : ℕ) [hNR : NormedRing (Matrix (Fin n) (Fin n) R)]
+    [hNA : NormedAlgebra R (Matrix (Fin n) (Fin n) R)]
+    (X : Matrix (Fin n) (Fin n) R) :
+    fderiv R (Matrix.det : Matrix (Fin n) (Fin n) R → R) 1 X =
+      Matrix.trace X := by
+  letI : NormedAddCommGroup (Matrix (Fin n) (Fin n) R) :=
+    hNR.toNormedAddCommGroup
+  letI : NormedSpace R (Matrix (Fin n) (Fin n) R) := hNA.toNormedSpace
+  have hd := (matrixDet_differentiableAt_one (R := R) n).hasFDerivAt
+  let line : R →L[R] Matrix (Fin n) (Fin n) R :=
+    LinearMap.toContinuousLinearMap
+      { toFun := fun t ↦ t • X
+        map_add' := fun a b ↦ add_smul a b X
+        map_smul' := fun a b ↦ mul_smul a b X }
+  have hlineLinear :
+      HasFDerivAt (fun t : R ↦ t • X) line 0 := by
+    simpa [line] using! line.hasFDerivAt
+  have hinnerRaw := hlineLinear.add_const (1 : Matrix (Fin n) (Fin n) R)
+  have hinner :
+      HasFDerivAt
+        (fun t : R ↦ (1 : Matrix (Fin n) (Fin n) R) + t • X)
+        line 0 := by
+    simpa [add_comm] using! hinnerRaw
+  have hd' :
+      HasFDerivAt (Matrix.det : Matrix (Fin n) (Fin n) R → R)
+        (fderiv R (Matrix.det : Matrix (Fin n) (Fin n) R → R) 1)
+        ((fun t : R ↦ (1 : Matrix (Fin n) (Fin n) R) + t • X) 0) := by
+    simpa using! hd
+  have hcF :
+      HasFDerivAt
+        ((Matrix.det : Matrix (Fin n) (Fin n) R → R) ∘
+          fun t : R ↦ (1 : Matrix (Fin n) (Fin n) R) + t • X)
+        ((fderiv R (Matrix.det : Matrix (Fin n) (Fin n) R → R) 1).comp line) 0 :=
+    hd'.comp 0 hinner
+  have hc := hcF.hasDerivAt
+  have hline :
+      HasDerivAt (fun t : R ↦ Matrix.det (1 + t • X))
+        ((fderiv R (Matrix.det : Matrix (Fin n) (Fin n) R → R) 1) X) 0 := by
+    simpa [Function.comp_def, ContinuousLinearMap.comp_apply, line, one_smul] using! hc
+  exact (hline.unique (matrixDet_line_hasDerivAt (R := R) n X)).symm
+
+attribute [-instance] LieRing.ofAssociativeRing real_matrix_normedRing
+  real_matrix_normedAlgebra complex_matrix_normedRing complex_matrix_normedAlgebra in
+private theorem matrixDet_hasFDerivAt_one
+    {R : Type*} [NontriviallyNormedField R] [CompleteSpace R]
+    (n : ℕ) [NormedRing (Matrix (Fin n) (Fin n) R)]
+    [NormedAlgebra R (Matrix (Fin n) (Fin n) R)] :
+    HasFDerivAt (Matrix.det : Matrix (Fin n) (Fin n) R → R)
+      (matrixTraceContinuousLinearMap n) 1 := by
+  have hd := (matrixDet_differentiableAt_one (R := R) n).hasFDerivAt
+  apply hd.congr_fderiv
+  ext X
+  exact matrixDet_fderiv_one_apply (R := R) n X
+-/
+
+private noncomputable def realMatrixGramRawDerivAtOne (n : ℕ) :
+    Mℝ(n) →L[ℝ] Mℝ(n) :=
+  ContinuousLinearMap.id ℝ (Mℝ(n)) +
+    transposeContinuousLinearMap n
+
+private theorem realMatrixGramRawDerivAtOne_apply (n : ℕ) (X : Mℝ(n)) :
+    realMatrixGramRawDerivAtOne n X = X.transpose + X := by
+  simp [realMatrixGramRawDerivAtOne, ContinuousLinearMap.smulRight_apply,
+    transposeContinuousLinearMap_apply, add_comm]
+
+attribute [-instance] LieRing.ofAssociativeRing in
+private theorem realMatrixGram_hasFDerivAt_one (n : ℕ) :
+    HasFDerivAt (fun A : Mℝ(n) ↦ A.transpose * A)
+      (realMatrixGramRawDerivAtOne n) 1 := by
+  have hT : HasFDerivAt (fun A : Mℝ(n) ↦ A.transpose)
+      (transposeContinuousLinearMap n) 1 := by
+    simpa using! (transposeContinuousLinearMap n).hasFDerivAt
+  simpa [realMatrixGramRawDerivAtOne, ContinuousLinearMap.smulRight_apply] using!
+    (hT.mul' (ContinuousLinearMap.id ℝ (Mℝ(n))).hasFDerivAt)
+
+private noncomputable def matrixConjTransposeRealContinuousLinearMap (n : ℕ) :
+    Mℂ(n) →L[ℝ] Mℂ(n) :=
+  LinearMap.toContinuousLinearMap
+    { toFun := Matrix.conjTranspose
+      map_add' := Matrix.conjTranspose_add
+      map_smul' := by
+        intro r A
+        simpa using Matrix.conjTranspose_smul (R := ℝ) r A }
+
+private noncomputable def complexMatrixGramRawDerivAtOne (n : ℕ) :
+    Mℂ(n) →L[ℝ] Mℂ(n) :=
+  ContinuousLinearMap.id ℝ (Mℂ(n)) +
+    matrixConjTransposeRealContinuousLinearMap n
+
+private theorem complexMatrixGramRawDerivAtOne_apply (n : ℕ) (X : Mℂ(n)) :
+    complexMatrixGramRawDerivAtOne n X = Xᴴ + X := by
+  simp [complexMatrixGramRawDerivAtOne, ContinuousLinearMap.smulRight_apply,
+    matrixConjTransposeRealContinuousLinearMap, add_comm]
+
+attribute [-instance] LieRing.ofAssociativeRing in
+private theorem complexMatrixGram_hasFDerivAt_one (n : ℕ) :
+    HasFDerivAt (fun A : Mℂ(n) ↦ Aᴴ * A)
+      (complexMatrixGramRawDerivAtOne n) 1 := by
+  have hStar : HasFDerivAt (fun A : Mℂ(n) ↦ Aᴴ)
+      (matrixConjTransposeRealContinuousLinearMap n) 1 := by
+    simpa [matrixConjTransposeRealContinuousLinearMap] using!
+      (matrixConjTransposeRealContinuousLinearMap n).hasFDerivAt
+  simpa [complexMatrixGramRawDerivAtOne, ContinuousLinearMap.smulRight_apply] using!
+    (hStar.mul' (ContinuousLinearMap.id ℝ (Mℂ(n))).hasFDerivAt)
+
+/-- A smooth function that is constant on a Lie subgroup has zero derivative on the image of the
+subgroup tangent space. -/
+private theorem mfderiv_eq_zero_on_groupLieSubalgebra
+    {𝕜 : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜]
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace 𝕜 E] [CompleteSpace E]
+    {H : Type*} [TopologicalSpace H]
+    {I : ModelWithCorners 𝕜 E H}
+    {G : Type*} [Group G] [TopologicalSpace G] [ChartedSpace H G]
+    [LieGroup I (⊤ : WithTop ℕ∞) G]
+    {F : Type*} [NormedAddCommGroup F] [NormedSpace 𝕜 F]
+    (S : @LieSubgroup 𝕜 _ E _ _ H _ G _ _ _ I) [CompleteSpace S.ModelSpace]
+    (f : G → F)
+    (hf : MDifferentiableAt I (𝓘(𝕜, F)) f 1)
+    (hconst : ∀ x : S.carrier, f x.1 = f 1)
+    {A : GroupLieAlgebra I G} (hA : A ∈ LieSubgroup.groupLieSubalgebra S) :
+    mfderiv I (𝓘(𝕜, F)) f 1 A = 0 := by
+  have hex :
+      ∃ v : TangentSpace (modelWithCornersSelf 𝕜 S.ModelSpace) (1 : S.carrier),
+        mfderiv (modelWithCornersSelf 𝕜 S.ModelSpace) I
+          (Subtype.val : S.carrier → G) 1 v = A :=
+    (LieSubgroup.mem_groupLieSubalgebra_iff_exists_subgroupTangent S A).mp hA
+  rcases hex with ⟨v, hv⟩
+  have hsub :
+      MDifferentiableAt (modelWithCornersSelf 𝕜 S.ModelSpace) I
+        (Subtype.val : S.carrier → G) 1 :=
+    (LieSubgroup.contMDiff_subtype_val S).mdifferentiableAt (by simp)
+  have hcomp :=
+    mfderiv_comp_apply_of_eq (1 : S.carrier) hf hsub (by rfl) v
+  have heq : f ∘ (Subtype.val : S.carrier → G) = fun _ ↦ f 1 := by
+    funext x
+    exact hconst x
+  have hzero :
+      mfderiv (modelWithCornersSelf 𝕜 S.ModelSpace) (𝓘(𝕜, F))
+        (f ∘ (Subtype.val : S.carrier → G)) 1 v = 0 := by
+    rw [heq, mfderiv_const]
+    rfl
+  calc
+    mfderiv I (𝓘(𝕜, F)) f 1 A =
+        mfderiv I (𝓘(𝕜, F)) f 1
+          (mfderiv (modelWithCornersSelf 𝕜 S.ModelSpace) I
+            (Subtype.val : S.carrier → G) 1 v) := by rw [hv]
+    _ = mfderiv (modelWithCornersSelf 𝕜 S.ModelSpace) (𝓘(𝕜, F))
+          (f ∘ (Subtype.val : S.carrier → G)) 1 v := by
+      simpa using! hcomp.symm
+    _ = 0 := hzero
+
+/-- The units chart identifies the derivative of the real matrix-group inclusion with the
+identity map. -/
+private theorem realGeneralLinearGroup_val_mfderiv_eq_id
+    (n : ℕ) (g : GL (Fin n) ℝ) :
+    mfderiv (Iℝ(n)) (Iℝ(n)) (fun h : GL (Fin n) ℝ ↦ (h : Mℝ(n))) g =
+      ContinuousLinearMap.id ℝ (Mℝ(n)) := by
+  have hchart :
+      extChartAt (Iℝ(n)) g = fun h : GL (Fin n) ℝ ↦ (h : Mℝ(n)) := by
+    funext h
+    rfl
+  rw [← hchart]
+  simpa using! (mfderiv_extChartAt_self (I := Iℝ(n)) (x := g))
+
+/-- The complex units chart has identity derivative over the complex numbers. -/
+private theorem complexGeneralLinearGroup_val_mfderiv_eq_id
+    (n : ℕ) (g : GL (Fin n) ℂ) :
+    mfderiv (Iℂ(n)) (Iℂ(n)) (fun h : GL (Fin n) ℂ ↦ (h : Mℂ(n))) g =
+      ContinuousLinearMap.id ℂ (Mℂ(n)) := by
+  have hchart :
+      extChartAt (Iℂ(n)) g = fun h : GL (Fin n) ℂ ↦ (h : Mℂ(n)) := by
+    funext h
+    rfl
+  rw [← hchart]
+  simpa using! (mfderiv_extChartAt_self (I := Iℂ(n)) (x := g))
+
+/-- The complex units chart also has identity derivative for the underlying real manifold. -/
+private theorem realComplexGeneralLinearGroup_val_mfderiv_eq_id
+    (n : ℕ) (g : GL (Fin n) ℂ) :
+    mfderiv (Iℝℂ(n)) (Iℝℂ(n)) (fun h : GL (Fin n) ℂ ↦ (h : Mℂ(n))) g =
+      ContinuousLinearMap.id ℝ (Mℂ(n)) := by
+  have hchart :
+      extChartAt (Iℝℂ(n)) g = fun h : GL (Fin n) ℂ ↦ (h : Mℂ(n)) := by
+    funext h
+    rfl
+  rw [← hchart]
+  simpa using! (mfderiv_extChartAt_self (I := Iℝℂ(n)) (x := g))
+
+/-- The differential of determinant on the real general linear group at the identity is trace. -/
+private theorem realGeneralLinearGroup_det_mfderiv_one_apply
+    (n : ℕ) (A : Mℝ(n)) :
+    mfderiv (Iℝ(n)) (𝓘(ℝ))
+      (fun g : GL (Fin n) ℝ ↦ Matrix.det (g : Mℝ(n))) 1 A =
+        Matrix.trace A := by
+  have hdet :=
+    (matrixDet_hasFDerivAt_one (R := ℝ) n).hasMFDerivAt
+  have hdetDiff :
+      MDifferentiableAt (Iℝ(n)) (𝓘(ℝ))
+        (Matrix.det : Mℝ(n) → ℝ) 1 :=
+    hdet.mdifferentiableAt
+  have hvalDiff :
+      MDifferentiableAt (Iℝ(n)) (Iℝ(n))
+        (fun g : GL (Fin n) ℝ ↦ (g : Mℝ(n))) 1 := by
+    have hchart :
+        (fun g : GL (Fin n) ℝ ↦ (g : Mℝ(n))) =
+          extChartAt (Iℝ(n)) (1 : GL (Fin n) ℝ) := by
+      funext g
+      rfl
+    rw [hchart]
+    exact mdifferentiableAt_extChartAt (by simp)
+  have hcomp :=
+    mfderiv_comp_apply_of_eq (1 : GL (Fin n) ℝ) hdetDiff hvalDiff (by rfl) A
+  rw [realGeneralLinearGroup_val_mfderiv_eq_id] at hcomp
+  have hambient :=
+    congrArg (fun L : Mℝ(n) →L[ℝ] ℝ ↦ L A) hdet.mfderiv
+  calc
+    mfderiv (Iℝ(n)) (𝓘(ℝ))
+        (fun g : GL (Fin n) ℝ ↦ Matrix.det (g : Mℝ(n))) 1 A =
+        mfderiv (Iℝ(n)) (𝓘(ℝ)) (Matrix.det : Mℝ(n) → ℝ) 1 A := by
+      simpa [Function.comp_def] using! hcomp
+    _ = Matrix.trace A := by
+      simpa [matrixTraceContinuousLinearMap] using! hambient
+
+/-- The differential of determinant on the complex general linear group at the identity is
+complex trace. -/
+private theorem complexGeneralLinearGroup_det_mfderiv_one_apply
+    (n : ℕ) (A : Mℂ(n)) :
+    mfderiv (Iℂ(n)) (𝓘(ℂ))
+      (fun g : GL (Fin n) ℂ ↦ Matrix.det (g : Mℂ(n))) 1 A =
+        Matrix.trace A := by
+  have hdet :=
+    (matrixDet_hasFDerivAt_one (R := ℂ) n).hasMFDerivAt
+  have hdetDiff :
+      MDifferentiableAt (Iℂ(n)) (𝓘(ℂ))
+        (Matrix.det : Mℂ(n) → ℂ) 1 :=
+    hdet.mdifferentiableAt
+  have hvalDiff :
+      MDifferentiableAt (Iℂ(n)) (Iℂ(n))
+        (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) 1 := by
+    have hchart :
+        (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) =
+          extChartAt (Iℂ(n)) (1 : GL (Fin n) ℂ) := by
+      funext g
+      rfl
+    rw [hchart]
+    exact mdifferentiableAt_extChartAt (by simp)
+  have hcomp :=
+    mfderiv_comp_apply_of_eq (1 : GL (Fin n) ℂ) hdetDiff hvalDiff (by rfl) A
+  rw [complexGeneralLinearGroup_val_mfderiv_eq_id] at hcomp
+  have hambient :=
+    congrArg (fun L : Mℂ(n) →L[ℂ] ℂ ↦ L A) hdet.mfderiv
+  calc
+    mfderiv (Iℂ(n)) (𝓘(ℂ))
+        (fun g : GL (Fin n) ℂ ↦ Matrix.det (g : Mℂ(n))) 1 A =
+        mfderiv (Iℂ(n)) (𝓘(ℂ)) (Matrix.det : Mℂ(n) → ℂ) 1 A := by
+      simpa [Function.comp_def] using! hcomp
+    _ = Matrix.trace A := by
+      simpa [matrixTraceContinuousLinearMap] using! hambient
+
+/-- The same determinant differential after restricting scalars to the underlying real
+manifold. -/
+private theorem realComplexGeneralLinearGroup_det_mfderiv_one_apply
+    (n : ℕ) (A : Mℂ(n)) :
+    mfderiv (Iℝℂ(n)) (𝓘(ℝ, ℂ))
+      (fun g : GL (Fin n) ℂ ↦ Matrix.det (g : Mℂ(n))) 1 A =
+        Matrix.trace A := by
+  have hdet :=
+    (matrixDet_hasFDerivAt_one (R := ℂ) n).restrictScalars ℝ
+  have hdetDiff :
+      MDifferentiableAt (Iℝℂ(n)) (𝓘(ℝ, ℂ))
+        (Matrix.det : Mℂ(n) → ℂ) 1 :=
+    hdet.hasMFDerivAt.mdifferentiableAt
+  have hvalDiff :
+      MDifferentiableAt (Iℝℂ(n)) (Iℝℂ(n))
+        (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) 1 := by
+    have hchart :
+        (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) =
+          extChartAt (Iℝℂ(n)) (1 : GL (Fin n) ℂ) := by
+      funext g
+      rfl
+    rw [hchart]
+    exact mdifferentiableAt_extChartAt (by simp)
+  have hcomp :=
+    mfderiv_comp_apply_of_eq (1 : GL (Fin n) ℂ) hdetDiff hvalDiff (by rfl) A
+  rw [realComplexGeneralLinearGroup_val_mfderiv_eq_id] at hcomp
+  have hambient :=
+    congrArg (fun L : Mℂ(n) →L[ℝ] ℂ ↦ L A) hdet.hasMFDerivAt.mfderiv
+  calc
+    mfderiv (Iℝℂ(n)) (𝓘(ℝ, ℂ))
+        (fun g : GL (Fin n) ℂ ↦ Matrix.det (g : Mℂ(n))) 1 A =
+        mfderiv (Iℝℂ(n)) (𝓘(ℝ, ℂ)) (Matrix.det : Mℂ(n) → ℂ) 1 A := by
+      simpa [Function.comp_def] using! hcomp
+    _ = Matrix.trace A := by
+      simpa [matrixTraceContinuousLinearMap] using! hambient
+
+/-- The Gram-map differential on the real general linear group is transpose plus identity. -/
+private theorem realGeneralLinearGroup_gram_mfderiv_one_apply
+    (n : ℕ) (A : Mℝ(n)) :
+    mfderiv (Iℝ(n)) (Iℝ(n))
+      (fun g : GL (Fin n) ℝ ↦ (g : Mℝ(n)).transpose * (g : Mℝ(n))) 1 A =
+        A.transpose + A := by
+  have hgram := (realMatrixGram_hasFDerivAt_one n).hasMFDerivAt
+  have hgramDiff :
+      MDifferentiableAt (Iℝ(n)) (Iℝ(n))
+        (fun B : Mℝ(n) ↦ B.transpose * B) 1 :=
+    hgram.mdifferentiableAt
+  have hvalDiff :
+      MDifferentiableAt (Iℝ(n)) (Iℝ(n))
+        (fun g : GL (Fin n) ℝ ↦ (g : Mℝ(n))) 1 := by
+    have hchart :
+        (fun g : GL (Fin n) ℝ ↦ (g : Mℝ(n))) =
+          extChartAt (Iℝ(n)) (1 : GL (Fin n) ℝ) := by
+      funext g
+      rfl
+    rw [hchart]
+    exact mdifferentiableAt_extChartAt (by simp)
+  have hcomp :=
+    mfderiv_comp_apply_of_eq (1 : GL (Fin n) ℝ) hgramDiff hvalDiff (by rfl) A
+  rw [realGeneralLinearGroup_val_mfderiv_eq_id] at hcomp
+  have hambient :=
+    congrArg (fun L : Mℝ(n) →L[ℝ] Mℝ(n) ↦ L A) hgram.mfderiv
+  calc
+    mfderiv (Iℝ(n)) (Iℝ(n))
+        (fun g : GL (Fin n) ℝ ↦ (g : Mℝ(n)).transpose * (g : Mℝ(n))) 1 A =
+        mfderiv (Iℝ(n)) (Iℝ(n)) (fun B : Mℝ(n) ↦ B.transpose * B) 1 A := by
+      simpa [Function.comp_def] using! hcomp
+    _ = realMatrixGramRawDerivAtOne n A := by
+      simpa using! hambient
+    _ = A.transpose + A := realMatrixGramRawDerivAtOne_apply n A
+
+/-- The Gram-map differential on the underlying real complex general linear group is conjugate
+transpose plus identity. -/
+private theorem realComplexGeneralLinearGroup_gram_mfderiv_one_apply
+    (n : ℕ) (A : Mℂ(n)) :
+    mfderiv (Iℝℂ(n)) (Iℝℂ(n))
+      (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))ᴴ * (g : Mℂ(n))) 1 A =
+        Aᴴ + A := by
+  have hgram := (complexMatrixGram_hasFDerivAt_one n).hasMFDerivAt
+  have hgramDiff :
+      MDifferentiableAt (Iℝℂ(n)) (Iℝℂ(n))
+        (fun B : Mℂ(n) ↦ Bᴴ * B) 1 :=
+    hgram.mdifferentiableAt
+  have hvalDiff :
+      MDifferentiableAt (Iℝℂ(n)) (Iℝℂ(n))
+        (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) 1 := by
+    have hchart :
+        (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) =
+          extChartAt (Iℝℂ(n)) (1 : GL (Fin n) ℂ) := by
+      funext g
+      rfl
+    rw [hchart]
+    exact mdifferentiableAt_extChartAt (by simp)
+  have hcomp :=
+    mfderiv_comp_apply_of_eq (1 : GL (Fin n) ℂ) hgramDiff hvalDiff (by rfl) A
+  rw [realComplexGeneralLinearGroup_val_mfderiv_eq_id] at hcomp
+  have hambient :=
+    congrArg (fun L : Mℂ(n) →L[ℝ] Mℂ(n) ↦ L A) hgram.mfderiv
+  calc
+    mfderiv (Iℝℂ(n)) (Iℝℂ(n))
+        (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))ᴴ * (g : Mℂ(n))) 1 A =
+        mfderiv (Iℝℂ(n)) (Iℝℂ(n)) (fun B : Mℂ(n) ↦ Bᴴ * B) 1 A := by
+      simpa [Function.comp_def] using! hcomp
+    _ = complexMatrixGramRawDerivAtOne n A := by
+      simpa using! hambient
+    _ = Aᴴ + A := complexMatrixGramRawDerivAtOne_apply n A
+
+/- The next lemmas identify the intrinsic bracket on the units of an arbitrary complete normed
+algebra with its associative commutator.  They are the normed-algebra form of the calculation for
+general linear groups in Proposition 8.41. -/
+
+private theorem unitsVal_mfderiv_eq_id
+    {𝕜 R : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜]
+    [NormedRing R] [NormedAlgebra 𝕜 R] [CompleteSpace R]
+    (g : Rˣ) :
+    mfderiv (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R) (fun h : Rˣ ↦ (h : R)) g =
+      ContinuousLinearMap.id 𝕜 R := by
+  have hchart :
+      extChartAt (modelWithCornersSelf 𝕜 R) g = fun h : Rˣ ↦ (h : R) := by
+    funext h
+    rfl
+  rw [← hchart]
+  simpa using! (mfderiv_extChartAt_self (I := modelWithCornersSelf 𝕜 R) (x := g))
+
+private theorem units_leftMulToAmbient_hasMFDerivAt
+    {𝕜 R : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜]
+    [NormedRing R] [NormedAlgebra 𝕜 R] [CompleteSpace R]
+    (g : Rˣ) :
+    HasMFDerivAt (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R)
+      (fun h : Rˣ ↦ (g : R) * (h : R)) 1
+      ((g : R) • ContinuousLinearMap.id 𝕜 R) := by
+  have hconst :
+      HasMFDerivAt (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R)
+        (fun _ : Rˣ ↦ (g : R)) 1
+        (0 : GroupLieAlgebra (modelWithCornersSelf 𝕜 R) Rˣ →L[𝕜] R) := by
+    simpa using
+      (show HasMFDerivAt (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R)
+          (fun _ : Rˣ ↦ (g : R)) 1
+          (0 : GroupLieAlgebra (modelWithCornersSelf 𝕜 R) Rˣ →L[𝕜] R) from
+        hasMFDerivAt_const (c := (g : R)) (x := (1 : Rˣ)))
+  have hvalDiff :
+      MDifferentiableAt (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R)
+        (fun h : Rˣ ↦ (h : R)) 1 := by
+    rw [show (fun h : Rˣ ↦ (h : R)) = extChartAt (modelWithCornersSelf 𝕜 R) (1 : Rˣ) by
+      funext h
+      rfl]
+    exact mdifferentiableAt_extChartAt (by simp)
+  have hval :
+      HasMFDerivAt (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R)
+        (fun h : Rˣ ↦ (h : R)) 1 (ContinuousLinearMap.id 𝕜 R) :=
+    hvalDiff.hasMFDerivAt.congr_mfderiv (unitsVal_mfderiv_eq_id (g := (1 : Rˣ)))
+  have hmul := hconst.mul' hval
+  have hderiv :
+      ((g : R) • ContinuousLinearMap.id 𝕜 R +
+          MulOpposite.op (1 : R) • (0 : R →L[𝕜] R)) =
+        ((g : R) • ContinuousLinearMap.id 𝕜 R) := by
+    ext v
+    simp [ContinuousLinearMap.smul_apply]
+  exact hmul.congr_mfderiv hderiv
+
+private theorem units_mulInvariantVectorField_apply
+    {𝕜 R : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜]
+    [NormedRing R] [NormedAlgebra 𝕜 R] [CompleteSpace R]
+    (A : GroupLieAlgebra (modelWithCornersSelf 𝕜 R) Rˣ) (g : Rˣ) :
+    mulInvariantVectorField A g = (g : R) * (show R from A) := by
+  let valMap : Rˣ → R := fun h ↦ (h : R)
+  have hmin : minSmoothness 𝕜 3 ≠ 0 :=
+    lt_of_lt_of_le (by simp) le_minSmoothness |>.ne'
+  have hValAtg : MDifferentiableAt (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R) valMap g := by
+    rw [show valMap = extChartAt (modelWithCornersSelf 𝕜 R) g by
+      funext h
+      rfl]
+    exact mdifferentiableAt_extChartAt (by simp)
+  have hLeft : MDifferentiableAt (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R) (g * ·) (1 : Rˣ) :=
+    contMDiff_mul_left.contMDiffAt.mdifferentiableAt hmin
+  have hcomp :
+      mfderiv (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R) valMap g (mulInvariantVectorField A g) =
+        mfderiv (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R) (valMap ∘ (g * ·)) 1 A := by
+    simpa [valMap, mulInvariantVectorField] using
+      (mfderiv_comp_apply_of_eq (1 : Rˣ) hValAtg hLeft (mul_one g) A).symm
+  have hambient :
+      mfderiv (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R) (valMap ∘ (g * ·)) 1 A =
+        (g : R) * (show R from A) := by
+    have hEq : valMap ∘ (g * ·) = fun h : Rˣ ↦ (g : R) * (h : R) := by
+      funext h
+      rfl
+    rw [hEq]
+    have h := congrArg (fun f : GroupLieAlgebra (modelWithCornersSelf 𝕜 R) Rˣ →L[𝕜] R ↦ f A)
+      (units_leftMulToAmbient_hasMFDerivAt (g := g)).mfderiv
+    exact h
+  rw [unitsVal_mfderiv_eq_id (g := g)] at hcomp
+  exact hcomp.trans hambient
+
+private theorem unitsAmbientPullback_mulField
+    {𝕜 R : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜]
+    [NormedRing R] [NormedAlgebra 𝕜 R] [CompleteSpace R]
+    (A : R) :
+    VectorField.mpullback (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R)
+      (fun g : Rˣ ↦ (g : R))
+      (fun X : R ↦ X * A) = fun g : Rˣ ↦ (g : R) * A := by
+  have hInv : (ContinuousLinearMap.id 𝕜 R).inverse = ContinuousLinearMap.id 𝕜 R := by
+    simp
+  funext g
+  rw [VectorField.mpullback_apply, unitsVal_mfderiv_eq_id (g := g), hInv]
+  rfl
+
+private theorem unitsBracketAtOne_eq_ambientLieBracket
+    {𝕜 R : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜]
+    [NormedRing R] [NormedAlgebra 𝕜 R] [CompleteSpace R]
+    (A B : R) :
+    VectorField.mlieBracket (modelWithCornersSelf 𝕜 R)
+      (fun g : Rˣ ↦ (g : R) * A) (fun g : Rˣ ↦ (g : R) * B) 1 =
+      VectorField.lieBracket 𝕜 (fun X : R ↦ X * A) (fun X : R ↦ X * B) 1 := by
+  have hInv : (ContinuousLinearMap.id 𝕜 R).inverse = ContinuousLinearMap.id 𝕜 R := by
+    simp
+  have hA :=
+    ((contMDiffAt_vectorSpace_iff_contDiffAt (V := fun X : R ↦ X * A) (x := (1 : R))).2
+      (((ContinuousLinearMap.mul 𝕜 R).flip A).contDiff (n := 1)).contDiffAt).mdifferentiableAt
+        one_ne_zero
+  have hB :=
+    ((contMDiffAt_vectorSpace_iff_contDiffAt (V := fun X : R ↦ X * B) (x := (1 : R))).2
+      (((ContinuousLinearMap.mul 𝕜 R).flip B).contDiff (n := 1)).contDiffAt).mdifferentiableAt
+        one_ne_zero
+  have hval :
+      ContMDiffAt (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R) (minSmoothness 𝕜 2)
+        (fun g : Rˣ ↦ (g : R)) 1 := by
+    simpa using
+      (Units.contMDiff_val (𝕜 := 𝕜) (R := R) (n := minSmoothness 𝕜 2)).contMDiffAt
+  have hpull :
+      VectorField.mpullback (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R)
+          (fun g : Rˣ ↦ (g : R))
+          (VectorField.mlieBracket (modelWithCornersSelf 𝕜 R)
+            (fun X : R ↦ X * A) (fun X : R ↦ X * B)) (1 : Rˣ) =
+        VectorField.mlieBracket (modelWithCornersSelf 𝕜 R)
+          (VectorField.mpullback (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R)
+            (fun g : Rˣ ↦ (g : R)) (fun X : R ↦ X * A))
+          (VectorField.mpullback (modelWithCornersSelf 𝕜 R) (modelWithCornersSelf 𝕜 R)
+            (fun g : Rˣ ↦ (g : R)) (fun X : R ↦ X * B)) (1 : Rˣ) := by
+    exact VectorField.mpullback_mlieBracket hA hB hval le_rfl
+  rw [VectorField.mpullback_apply, unitsAmbientPullback_mulField (A := A),
+    unitsAmbientPullback_mulField (A := B), unitsVal_mfderiv_eq_id (g := (1 : Rˣ)),
+    ← VectorField.mlieBracketWithin_univ,
+    VectorField.mlieBracketWithin_eq_lieBracketWithin,
+    VectorField.lieBracketWithin_univ] at hpull
+  calc
+    VectorField.mlieBracket (modelWithCornersSelf 𝕜 R)
+        (fun g : Rˣ ↦ (g : R) * A) (fun g : Rˣ ↦ (g : R) * B) 1 =
+        (ContinuousLinearMap.id 𝕜 R).inverse
+          (VectorField.lieBracket 𝕜 (fun X : R ↦ X * A) (fun X : R ↦ X * B) 1) :=
+      hpull.symm
+    _ = VectorField.lieBracket 𝕜 (fun X : R ↦ X * A) (fun X : R ↦ X * B) 1 := by
+      rw [hInv]
+      rfl
+
+private theorem unitsAmbientLieBracket_apply
+    {𝕜 R : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜]
+    [NormedRing R] [NormedAlgebra 𝕜 R] [CompleteSpace R]
+    (A B X : R) :
+    VectorField.lieBracket 𝕜 (fun Y : R ↦ Y * A) (fun Y : R ↦ Y * B) X =
+      X * (A * B - B * A) := by
+  have hBderiv :=
+    fderiv_mul_const' (𝕜 := 𝕜) (a := fun Y : R ↦ Y) (x := X) differentiableAt_id B
+  have hAderiv :=
+    fderiv_mul_const' (𝕜 := 𝕜) (a := fun Y : R ↦ Y) (x := X) differentiableAt_id A
+  have hId : fderiv 𝕜 (fun Y : R ↦ Y) X = ContinuousLinearMap.id 𝕜 R :=
+    fderiv_id (x := X)
+  rw [VectorField.lieBracket, hBderiv, hAderiv, hId]
+  simpa [ContinuousLinearMap.smul_apply, mul_assoc] using (mul_sub X (A * B) (B * A)).symm
+
+private theorem unitsGroupLieBracket_eq_commutator
+    {𝕜 R : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜]
+    [NormedRing R] [NormedAlgebra 𝕜 R] [CompleteSpace R]
+    (A B : GroupLieAlgebra (modelWithCornersSelf 𝕜 R) Rˣ) :
+    ⁅A, B⁆ =
+      (show GroupLieAlgebra (modelWithCornersSelf 𝕜 R) Rˣ from
+        (show R from A) * (show R from B) - (show R from B) * (show R from A)) := by
+  rw [GroupLieAlgebra.bracket_def]
+  have hA : mulInvariantVectorField A = fun g : Rˣ ↦ (g : R) * (show R from A) := by
+    funext g
+    exact units_mulInvariantVectorField_apply A g
+  have hB : mulInvariantVectorField B = fun g : Rˣ ↦ (g : R) * (show R from B) := by
+    funext g
+    exact units_mulInvariantVectorField_apply B g
+  rw [hA, hB, unitsBracketAtOne_eq_ambientLieBracket]
+  simpa using unitsAmbientLieBracket_apply (show R from A) (show R from B) (1 : R)
+
+/-- The tangent-space carrier of the real matrix general linear group is linearly the ambient
+matrix space. -/
+private noncomputable def realGLGroupLieAlgebraEquivMatrix (n : ℕ) :
+    GroupLieAlgebra (Iℝ(n)) (GL (Fin n) ℝ) ≃ₗ[ℝ] Mℝ(n) where
+  toFun := fun A ↦ A
+  invFun := fun A ↦ A
+  map_add' := by intros; rfl
+  map_smul' := by intros; rfl
+  left_inv := fun A ↦ rfl
+  right_inv := fun A ↦ rfl
+
+/-- The complex-linear tangent-space carrier of the complex matrix general linear group is the
+ambient complex matrix space. -/
+private noncomputable def complexGLGroupLieAlgebraEquivMatrix (n : ℕ) :
+    GroupLieAlgebra (Iℂ(n)) (GL (Fin n) ℂ) ≃ₗ[ℂ] Mℂ(n) where
+  toFun := fun A ↦ A
+  invFun := fun A ↦ A
+  map_add' := by intros; rfl
+  map_smul' := by intros; rfl
+  left_inv := fun A ↦ rfl
+  right_inv := fun A ↦ rfl
+
+/-- The real tangent-space carrier of the complex matrix general linear group is the underlying
+real matrix space. -/
+private noncomputable def realComplexGLGroupLieAlgebraEquivMatrix (n : ℕ) :
+    GroupLieAlgebra (Iℝℂ(n)) (GL (Fin n) ℂ) ≃ₗ[ℝ] Mℂ(n) where
+  toFun := fun A ↦ A
+  invFun := fun A ↦ A
+  map_add' := by intros; rfl
+  map_smul' := by intros; rfl
+  left_inv := fun A ↦ rfl
+  right_inv := fun A ↦ rfl
+
+/-- After transporting the subgroup tangent image to a fixed finite-dimensional model, an
+inclusion of submodules is equality when their dimensions agree. -/
+private theorem mappedGroupLieSubalgebra_eq_of_le_of_finrank_eq
+    {𝕜 : Type*} [NontriviallyNormedField 𝕜] [IsRCLikeNormedField 𝕜]
+    {E : Type*} [NormedAddCommGroup E] [NormedSpace 𝕜 E] [CompleteSpace E]
+    [FiniteDimensional 𝕜 E]
+    {H : Type*} [TopologicalSpace H]
+    {I : ModelWithCorners 𝕜 E H}
+    {G : Type*} [Group G] [TopologicalSpace G] [ChartedSpace H G]
+    [LieGroup I (⊤ : WithTop ℕ∞) G]
+    (S : @LieSubgroup 𝕜 _ E _ _ H _ G _ _ _ I) [CompleteSpace S.ModelSpace]
+    {V : Type*} [AddCommGroup V] [Module 𝕜 V] [FiniteDimensional 𝕜 V]
+    (e : GroupLieAlgebra I G ≃ₗ[𝕜] V)
+    (L : Submodule 𝕜 V)
+    (hle :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map e.toLinearMap ≤ L)
+    (hdim : Module.finrank 𝕜 S.ModelSpace = Module.finrank 𝕜 L) :
+    (LieSubgroup.groupLieSubalgebra S).toSubmodule.map e.toLinearMap = L := by
+  haveI : FiniteDimensional 𝕜 S.ModelSpace :=
+    LieSubgroup.finiteDimensionalModelSpace S
+  have hsubgroupDim :
+      Module.finrank 𝕜 (LieSubgroup.groupLieSubalgebra S) =
+        Module.finrank 𝕜 S.ModelSpace := by
+    simpa [GroupLieAlgebra, TangentSpace] using
+      (LieSubgroup.groupLieSubalgebraEquiv S).toLinearEquiv.finrank_eq.symm
+  have hmapDim' :
+      Module.finrank 𝕜
+          ((LieSubgroup.groupLieSubalgebra S).toSubmodule.map e.toLinearMap) =
+        Module.finrank 𝕜 (LieSubgroup.groupLieSubalgebra S).toSubmodule :=
+    (e.submoduleMap (LieSubgroup.groupLieSubalgebra S).toSubmodule).finrank_eq.symm
+  have hsame :
+      Module.finrank 𝕜 (LieSubgroup.groupLieSubalgebra S).toSubmodule =
+        Module.finrank 𝕜 (LieSubgroup.groupLieSubalgebra S) := by
+    rfl
+  have hmapDim :
+      Module.finrank 𝕜
+          ((LieSubgroup.groupLieSubalgebra S).toSubmodule.map e.toLinearMap) =
+        Module.finrank 𝕜 (LieSubgroup.groupLieSubalgebra S) :=
+    hmapDim'.trans hsame
+  have hfin :
+      Module.finrank 𝕜
+          ((LieSubgroup.groupLieSubalgebra S).toSubmodule.map e.toLinearMap) =
+        Module.finrank 𝕜 L :=
+    hmapDim.trans (hsubgroupDim.trans hdim)
+  exact Submodule.eq_of_le_of_finrank_eq hle hfin
+
+/-- Membership is transported by an equality between the mapped subgroup tangent image and a
+fixed linear subspace. -/
+private theorem mem_groupLieSubalgebra_iff_equiv_mem
+    {𝕜 : Type*} [Semiring 𝕜]
+    {V W : Type*} [AddCommMonoid V] [Module 𝕜 V]
+    [AddCommMonoid W] [Module 𝕜 W]
+    (K : Submodule 𝕜 V) (e : V ≃ₗ[𝕜] W) (L : Submodule 𝕜 W)
+    (heq : K.map e.toLinearMap = L) (A : V) :
+    A ∈ K ↔ e A ∈ L := by
+  constructor
+  · intro hA
+    have hmap : e A ∈ K.map e.toLinearMap :=
+      Submodule.mem_map_of_mem hA
+    rwa [heq] at hmap
+  · intro hA
+    have hmap : e A ∈ K.map e.toLinearMap := by
+      rwa [heq]
+    rcases hmap with ⟨Y, hY, hYA⟩
+    have : Y = A := e.injective hYA
+    simpa [this] using hY
+
 -- Semantic recall: Theorem 8.46 already exposes the canonical ambient Lie-subalgebra owner as
 -- `LieSubgroup.groupLieSubalgebra` with equivalence `LieSubgroup.groupLieSubalgebraEquiv`; the
 -- matrix-side targets are mathlib's `sl`/`so` and the local `u`/`su` matrix Lie subalgebras.
@@ -2053,9 +2936,67 @@ private theorem special_linear_real_groupLieSubalgebra_eq_sl
     (n : ℕ)
     (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialLinearRealSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.SpecialLinear.sl (Fin n) ℝ))
     (A : Matrix (Fin n) (Fin n) ℝ) :
     A ∈ LieSubgroup.groupLieSubalgebra S ↔
-      A ∈ LieAlgebra.SpecialLinear.sl (Fin n) ℝ := sorry
+      A ∈ LieAlgebra.SpecialLinear.sl (Fin n) ℝ := by
+  let detGL : GL (Fin n) ℝ → ℝ :=
+    fun g ↦ Matrix.det (g : Mℝ(n))
+  have hdetDiff :
+      MDifferentiableAt (Iℝ(n)) (𝓘(ℝ)) detGL 1 := by
+    have hambient :
+        MDifferentiableAt (Iℝ(n)) (𝓘(ℝ))
+          (Matrix.det : Mℝ(n) → ℝ) 1 :=
+      (matrixDet_hasFDerivAt_one (R := ℝ) n).hasMFDerivAt.mdifferentiableAt
+    have hval :
+        MDifferentiableAt (Iℝ(n)) (Iℝ(n))
+          (fun g : GL (Fin n) ℝ ↦ (g : Mℝ(n))) 1 := by
+      have hchart :
+          (fun g : GL (Fin n) ℝ ↦ (g : Mℝ(n))) =
+            extChartAt (Iℝ(n)) (1 : GL (Fin n) ℝ) := by
+        funext g
+        rfl
+      rw [hchart]
+      exact mdifferentiableAt_extChartAt (by simp)
+    exact hambient.comp (1 : GL (Fin n) ℝ) hval
+  have hconst : ∀ x : S.carrier, detGL x.1 = detGL 1 := by
+    intro x
+    have hx : x.1 ∈ specialLinearRealSubgroupInGeneralLinearGroup n := by
+      rw [← hS]
+      exact x.2
+    rw [specialLinearRealSubgroupInGeneralLinearGroup_eq_det_ker] at hx
+    have hxdet :
+        Matrix.GeneralLinearGroup.det x.1 = 1 :=
+      (MonoidHom.mem_ker.mp hx)
+    simpa [detGL] using congrArg Units.val hxdet
+  have hle :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map
+          (realGLGroupLieAlgebraEquivMatrix n).toLinearMap ≤
+        (LieAlgebra.SpecialLinear.sl (Fin n) ℝ).toSubmodule := by
+    rintro X ⟨Y, hY, rfl⟩
+    change Matrix.trace (realGLGroupLieAlgebraEquivMatrix n Y) = 0
+    have hz :=
+      mfderiv_eq_zero_on_groupLieSubalgebra S detGL hdetDiff hconst hY
+    change
+      mfderiv (Iℝ(n)) (modelWithCornersSelf ℝ ℝ)
+        (fun g : GL (Fin n) ℝ ↦ Matrix.det (g : Mℝ(n))) 1 Y = 0 at hz
+    rw [realGeneralLinearGroup_det_mfderiv_one_apply] at hz
+    exact hz
+  have heq :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map
+          (realGLGroupLieAlgebraEquivMatrix n).toLinearMap =
+        (LieAlgebra.SpecialLinear.sl (Fin n) ℝ).toSubmodule :=
+    mappedGroupLieSubalgebra_eq_of_le_of_finrank_eq S
+      (realGLGroupLieAlgebraEquivMatrix n)
+      (LieAlgebra.SpecialLinear.sl (Fin n) ℝ).toSubmodule hle hdim
+  simpa [realGLGroupLieAlgebraEquivMatrix] using
+    mem_groupLieSubalgebra_iff_equiv_mem
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule
+      (realGLGroupLieAlgebraEquivMatrix n)
+      (LieAlgebra.SpecialLinear.sl (Fin n) ℝ).toSubmodule heq
+      (show GroupLieAlgebra (Iℝ(n)) (GL (Fin n) ℝ) from A)
 
 /-- The Lie subalgebra attached to a `GL(n, ℝ)` realization of `SL(n, ℝ)` with the canonical
 carrier is canonically identified with `𝔰𝔩(n, ℝ)` by the identity map on the underlying
@@ -2063,13 +3004,16 @@ matrices. -/
 private noncomputable def special_linear_real_groupLieSubalgebraEquivSl
     (n : ℕ)
     (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialLinearRealSubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialLinearRealSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.SpecialLinear.sl (Fin n) ℝ)) :
     LieSubgroup.groupLieSubalgebra S ≃ₗ⁅ℝ⁆
       LieAlgebra.SpecialLinear.sl (Fin n) ℝ where
   toFun := fun A ↦
-    ⟨A.1, (special_linear_real_groupLieSubalgebra_eq_sl n S hS A.1).1 A.2⟩
+    ⟨A.1, (special_linear_real_groupLieSubalgebra_eq_sl n S hS hdim A.1).1 A.2⟩
   invFun := fun A ↦
-    ⟨A.1, (special_linear_real_groupLieSubalgebra_eq_sl n S hS A.1).2 A.2⟩
+    ⟨A.1, (special_linear_real_groupLieSubalgebra_eq_sl n S hS hdim A.1).2 A.2⟩
   map_add' := by
     intro A B
     rfl
@@ -2077,7 +3021,12 @@ private noncomputable def special_linear_real_groupLieSubalgebraEquivSl
     intro c A
     rfl
   map_lie' := by
-    sorry
+    intro A B
+    apply Subtype.ext
+    simpa [matrixLieBracket_eq_commutator] using
+      congrArg
+        (fun X : GroupLieAlgebra (Iℝ(n)) (GL (Fin n) ℝ) ↦ (show Mℝ(n) from X))
+        (unitsGroupLieBracket_eq_commutator A.1 B.1)
   left_inv := by
     intro A
     rfl
@@ -2090,12 +3039,15 @@ canonical copy of `SL(n, ℝ)`, then its Lie algebra is canonically isomorphic t
 private noncomputable def special_linear_real_group_lie_isomorphic_to_sl
     (n : ℕ)
     (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialLinearRealSubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialLinearRealSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.SpecialLinear.sl (Fin n) ℝ)) :
     GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier ≃ₗ⁅ℝ⁆
       LieAlgebra.SpecialLinear.sl (Fin n) ℝ := by
   exact
     (LieSubgroup.groupLieSubalgebraEquiv S).trans
-      (special_linear_real_groupLieSubalgebraEquivSl n S hS)
+      (special_linear_real_groupLieSubalgebraEquivSl n S hS hdim)
 
 /-- After identifying the ambient image with `𝔰𝔩(n, ℝ)`, the canonical equivalence agrees with
 the inclusion into the ambient matrix Lie algebra. -/
@@ -2103,8 +3055,11 @@ private theorem special_linear_real_group_lie_isomorphic_to_sl_def
     (n : ℕ)
     (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialLinearRealSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.SpecialLinear.sl (Fin n) ℝ))
     (X : GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier) :
-    (special_linear_real_group_lie_isomorphic_to_sl n S hS X).1 =
+    (special_linear_real_group_lie_isomorphic_to_sl n S hS hdim X).1 =
       (LieSubgroup.groupLieSubalgebraEquiv S X).1 := by
   -- The second equivalence is the identity on the underlying ambient matrix.
   rfl
@@ -2115,26 +3070,89 @@ private theorem special_orthogonal_groupLieSubalgebra_eq_so
     (n : ℕ)
     (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialOrthogonalSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.Orthogonal.so (Fin n) ℝ))
     (A : Matrix (Fin n) (Fin n) ℝ) :
     A ∈ LieSubgroup.groupLieSubalgebra S ↔
       A ∈ LieAlgebra.Orthogonal.so (Fin n) ℝ := by
-  -- Route correction: compare the `SO(n)` carrier with the earlier `O(n)` tangent calculation near
-  -- the identity, then transport tangent-at-identity membership instead of reproving the full
-  -- Gram-map calculation in this file.
-  sorry
+  let gramGL : GL (Fin n) ℝ → Mℝ(n) :=
+    fun g ↦ (g : Mℝ(n)).transpose * (g : Mℝ(n))
+  have hgramDiff : MDifferentiableAt (Iℝ(n)) (Iℝ(n)) gramGL 1 := by
+    have hambient :
+        MDifferentiableAt (Iℝ(n)) (Iℝ(n))
+          (fun B : Mℝ(n) ↦ B.transpose * B) 1 :=
+      (realMatrixGram_hasFDerivAt_one n).hasMFDerivAt.mdifferentiableAt
+    have hval :
+        MDifferentiableAt (Iℝ(n)) (Iℝ(n))
+          (fun g : GL (Fin n) ℝ ↦ (g : Mℝ(n))) 1 := by
+      have hchart :
+          (fun g : GL (Fin n) ℝ ↦ (g : Mℝ(n))) =
+            extChartAt (Iℝ(n)) (1 : GL (Fin n) ℝ) := by
+        funext g
+        rfl
+      rw [hchart]
+      exact mdifferentiableAt_extChartAt (by simp)
+    exact hambient.comp (1 : GL (Fin n) ℝ) hval
+  have hconst : ∀ x : S.carrier, gramGL x.1 = gramGL 1 := by
+    intro x
+    have hx : x.1 ∈ specialOrthogonalSubgroupInGeneralLinearGroup n := by
+      rw [← hS]
+      exact x.2
+    have hxSO :=
+      (mem_specialOrthogonalSubgroupInGeneralLinearGroup_iff n x.1).1 hx
+    have hgram :=
+      (Matrix.mem_orthogonalGroup_iff' (Fin n) ℝ).1
+        ((Matrix.mem_specialOrthogonalGroup_iff).1 hxSO).1
+    simpa [gramGL] using hgram
+  have hle :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map
+          (realGLGroupLieAlgebraEquivMatrix n).toLinearMap ≤
+        (LieAlgebra.Orthogonal.so (Fin n) ℝ).toSubmodule := by
+    rintro X ⟨Y, hY, rfl⟩
+    change realGLGroupLieAlgebraEquivMatrix n Y ∈
+      LieAlgebra.Orthogonal.so (Fin n) ℝ
+    rw [mem_orthogonalLieSubalgebra_iff_transpose_add_eq_zero]
+    change
+      (realGLGroupLieAlgebraEquivMatrix n Y).transpose +
+          realGLGroupLieAlgebraEquivMatrix n Y = 0
+    have hz :=
+      mfderiv_eq_zero_on_groupLieSubalgebra S gramGL hgramDiff hconst hY
+    change
+      mfderiv (Iℝ(n)) (Iℝ(n))
+        (fun g : GL (Fin n) ℝ ↦
+          (g : Mℝ(n)).transpose * (g : Mℝ(n))) 1 Y = 0 at hz
+    rw [realGeneralLinearGroup_gram_mfderiv_one_apply] at hz
+    exact hz
+  have heq :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map
+          (realGLGroupLieAlgebraEquivMatrix n).toLinearMap =
+        (LieAlgebra.Orthogonal.so (Fin n) ℝ).toSubmodule :=
+    mappedGroupLieSubalgebra_eq_of_le_of_finrank_eq S
+      (realGLGroupLieAlgebraEquivMatrix n)
+      (LieAlgebra.Orthogonal.so (Fin n) ℝ).toSubmodule hle hdim
+  simpa [realGLGroupLieAlgebraEquivMatrix] using
+    mem_groupLieSubalgebra_iff_equiv_mem
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule
+      (realGLGroupLieAlgebraEquivMatrix n)
+      (LieAlgebra.Orthogonal.so (Fin n) ℝ).toSubmodule heq
+      (show GroupLieAlgebra (Iℝ(n)) (GL (Fin n) ℝ) from A)
 
 /-- The Lie subalgebra attached to a `GL(n, ℝ)` realization of `SO(n)` with the canonical carrier
 is canonically identified with `𝔬(n)` by the identity map on the underlying matrices. -/
 private noncomputable def special_orthogonal_groupLieSubalgebraEquivSo
     (n : ℕ)
     (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialOrthogonalSubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialOrthogonalSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.Orthogonal.so (Fin n) ℝ)) :
     LieSubgroup.groupLieSubalgebra S ≃ₗ⁅ℝ⁆
       LieAlgebra.Orthogonal.so (Fin n) ℝ where
   toFun := fun A ↦
-    ⟨A.1, (special_orthogonal_groupLieSubalgebra_eq_so n S hS A.1).1 A.2⟩
+    ⟨A.1, (special_orthogonal_groupLieSubalgebra_eq_so n S hS hdim A.1).1 A.2⟩
   invFun := fun A ↦
-    ⟨A.1, (special_orthogonal_groupLieSubalgebra_eq_so n S hS A.1).2 A.2⟩
+    ⟨A.1, (special_orthogonal_groupLieSubalgebra_eq_so n S hS hdim A.1).2 A.2⟩
   map_add' := by
     intro A B
     rfl
@@ -2142,7 +3160,12 @@ private noncomputable def special_orthogonal_groupLieSubalgebraEquivSo
     intro c A
     rfl
   map_lie' := by
-    sorry
+    intro A B
+    apply Subtype.ext
+    simpa [matrixLieBracket_eq_commutator] using
+      congrArg
+        (fun X : GroupLieAlgebra (Iℝ(n)) (GL (Fin n) ℝ) ↦ (show Mℝ(n) from X))
+        (unitsGroupLieBracket_eq_commutator A.1 B.1)
   left_inv := by
     intro A
     rfl
@@ -2155,12 +3178,15 @@ canonical copy of `SO(n)`, then its Lie algebra is canonically isomorphic to `�
 private noncomputable def special_orthogonal_group_lie_isomorphic_to_so
     (n : ℕ)
     (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialOrthogonalSubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialOrthogonalSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.Orthogonal.so (Fin n) ℝ)) :
     GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier ≃ₗ⁅ℝ⁆
       LieAlgebra.Orthogonal.so (Fin n) ℝ := by
   exact
     (LieSubgroup.groupLieSubalgebraEquiv S).trans
-      (special_orthogonal_groupLieSubalgebraEquivSo n S hS)
+      (special_orthogonal_groupLieSubalgebraEquivSo n S hS hdim)
 
 /-- After identifying the ambient image with `𝔬(n)`, the canonical equivalence agrees with the
 inclusion into the ambient matrix Lie algebra. -/
@@ -2168,8 +3194,11 @@ private theorem special_orthogonal_group_lie_isomorphic_to_so_def
     (n : ℕ)
     (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialOrthogonalSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.Orthogonal.so (Fin n) ℝ))
     (X : GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier) :
-    (special_orthogonal_group_lie_isomorphic_to_so n S hS X).1 =
+    (special_orthogonal_group_lie_isomorphic_to_so n S hS hdim X).1 =
       (LieSubgroup.groupLieSubalgebraEquiv S X).1 := by
   -- The second equivalence is the identity on the underlying ambient matrix.
   rfl
@@ -2180,13 +3209,66 @@ private theorem special_linear_complex_groupLieSubalgebra_eq_sl
     (n : ℕ)
     (S : ComplexLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialLinearComplexSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℂ S.ModelSpace =
+        Module.finrank ℂ (LieAlgebra.SpecialLinear.sl (Fin n) ℂ))
     (A : Matrix (Fin n) (Fin n) ℂ) :
     A ∈ LieSubgroup.groupLieSubalgebra S ↔
       A ∈ LieAlgebra.SpecialLinear.sl (Fin n) ℂ := by
-  -- Route correction: the real branch now uses a determinant-specific tangent-kernel proof.
-  -- TODO: port the same argument to `ℂ`, replacing the missing arbitrary-point complex
-  -- determinant derivative formula on `GL(n, ℂ)`.
-  sorry
+  let detGL : GL (Fin n) ℂ → ℂ :=
+    fun g ↦ Matrix.det (g : Mℂ(n))
+  have hdetDiff :
+      MDifferentiableAt (Iℂ(n)) (modelWithCornersSelf ℂ ℂ) detGL 1 := by
+    have hambient :
+        MDifferentiableAt (Iℂ(n)) (modelWithCornersSelf ℂ ℂ)
+          (Matrix.det : Mℂ(n) → ℂ) 1 :=
+      (matrixDet_hasFDerivAt_one (R := ℂ) n).hasMFDerivAt.mdifferentiableAt
+    have hval :
+        MDifferentiableAt (Iℂ(n)) (Iℂ(n))
+          (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) 1 := by
+      have hchart :
+          (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) =
+            extChartAt (Iℂ(n)) (1 : GL (Fin n) ℂ) := by
+        funext g
+        rfl
+      rw [hchart]
+      exact mdifferentiableAt_extChartAt (by simp)
+    exact hambient.comp (1 : GL (Fin n) ℂ) hval
+  have hconst : ∀ x : S.carrier, detGL x.1 = detGL 1 := by
+    intro x
+    have hx : x.1 ∈ specialLinearComplexSubgroupInGeneralLinearGroup n := by
+      rw [← hS]
+      exact x.2
+    rw [specialLinearComplexSubgroupInGeneralLinearGroup_eq_det_ker] at hx
+    have hxdet : Matrix.GeneralLinearGroup.det x.1 = 1 :=
+      MonoidHom.mem_ker.mp hx
+    simpa [detGL] using congrArg Units.val hxdet
+  have hle :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map
+          (complexGLGroupLieAlgebraEquivMatrix n).toLinearMap ≤
+        (LieAlgebra.SpecialLinear.sl (Fin n) ℂ).toSubmodule := by
+    rintro X ⟨Y, hY, rfl⟩
+    change Matrix.trace (complexGLGroupLieAlgebraEquivMatrix n Y) = 0
+    have hz :=
+      mfderiv_eq_zero_on_groupLieSubalgebra S detGL hdetDiff hconst hY
+    change
+      mfderiv (Iℂ(n)) (modelWithCornersSelf ℂ ℂ)
+        (fun g : GL (Fin n) ℂ ↦ Matrix.det (g : Mℂ(n))) 1 Y = 0 at hz
+    rw [complexGeneralLinearGroup_det_mfderiv_one_apply] at hz
+    exact hz
+  have heq :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map
+          (complexGLGroupLieAlgebraEquivMatrix n).toLinearMap =
+        (LieAlgebra.SpecialLinear.sl (Fin n) ℂ).toSubmodule :=
+    mappedGroupLieSubalgebra_eq_of_le_of_finrank_eq S
+      (complexGLGroupLieAlgebraEquivMatrix n)
+      (LieAlgebra.SpecialLinear.sl (Fin n) ℂ).toSubmodule hle hdim
+  simpa [complexGLGroupLieAlgebraEquivMatrix] using
+    mem_groupLieSubalgebra_iff_equiv_mem
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule
+      (complexGLGroupLieAlgebraEquivMatrix n)
+      (LieAlgebra.SpecialLinear.sl (Fin n) ℂ).toSubmodule heq
+      (show GroupLieAlgebra (Iℂ(n)) (GL (Fin n) ℂ) from A)
 
 /-- The Lie subalgebra attached to a `GL(n, ℂ)` realization of `SL(n, ℂ)` with the canonical
 carrier is canonically identified with `𝔰𝔩(n, ℂ)` by the identity map on the underlying
@@ -2194,13 +3276,16 @@ matrices. -/
 private noncomputable def special_linear_complex_groupLieSubalgebraEquivSl
     (n : ℕ)
     (S : ComplexLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialLinearComplexSubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialLinearComplexSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℂ S.ModelSpace =
+        Module.finrank ℂ (LieAlgebra.SpecialLinear.sl (Fin n) ℂ)) :
     LieSubgroup.groupLieSubalgebra S ≃ₗ⁅ℂ⁆
       LieAlgebra.SpecialLinear.sl (Fin n) ℂ where
   toFun := fun A ↦
-    ⟨A.1, (special_linear_complex_groupLieSubalgebra_eq_sl n S hS A.1).1 A.2⟩
+    ⟨A.1, (special_linear_complex_groupLieSubalgebra_eq_sl n S hS hdim A.1).1 A.2⟩
   invFun := fun A ↦
-    ⟨A.1, (special_linear_complex_groupLieSubalgebra_eq_sl n S hS A.1).2 A.2⟩
+    ⟨A.1, (special_linear_complex_groupLieSubalgebra_eq_sl n S hS hdim A.1).2 A.2⟩
   map_add' := by
     intro A B
     rfl
@@ -2208,7 +3293,12 @@ private noncomputable def special_linear_complex_groupLieSubalgebraEquivSl
     intro c A
     rfl
   map_lie' := by
-    sorry
+    intro A B
+    apply Subtype.ext
+    simpa [matrixLieBracket_eq_commutator] using
+      congrArg
+        (fun X : GroupLieAlgebra (Iℂ(n)) (GL (Fin n) ℂ) ↦ (show Mℂ(n) from X))
+        (unitsGroupLieBracket_eq_commutator A.1 B.1)
   left_inv := by
     intro A
     rfl
@@ -2221,12 +3311,15 @@ canonical copy of `SL(n, ℂ)`, then its Lie algebra is canonically isomorphic t
 private noncomputable def special_linear_complex_group_lie_isomorphic_to_sl
     (n : ℕ)
     (S : ComplexLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialLinearComplexSubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialLinearComplexSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℂ S.ModelSpace =
+        Module.finrank ℂ (LieAlgebra.SpecialLinear.sl (Fin n) ℂ)) :
     GroupLieAlgebra (modelWithCornersSelf ℂ S.ModelSpace) S.carrier ≃ₗ⁅ℂ⁆
       LieAlgebra.SpecialLinear.sl (Fin n) ℂ := by
   exact
     (LieSubgroup.groupLieSubalgebraEquiv S).trans
-      (special_linear_complex_groupLieSubalgebraEquivSl n S hS)
+      (special_linear_complex_groupLieSubalgebraEquivSl n S hS hdim)
 
 /-- `special_linear_complex_group_lie_isomorphic_to_sl` is the canonical equivalence after
 identifying the ambient image with `𝔰𝔩(n, ℂ)`. -/
@@ -2234,8 +3327,11 @@ private theorem special_linear_complex_group_lie_isomorphic_to_sl_def
     (n : ℕ)
     (S : ComplexLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialLinearComplexSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℂ S.ModelSpace =
+        Module.finrank ℂ (LieAlgebra.SpecialLinear.sl (Fin n) ℂ))
     (X : GroupLieAlgebra (modelWithCornersSelf ℂ S.ModelSpace) S.carrier) :
-    (special_linear_complex_group_lie_isomorphic_to_sl n S hS X).1 =
+    (special_linear_complex_group_lie_isomorphic_to_sl n S hS hdim X).1 =
       (LieSubgroup.groupLieSubalgebraEquiv S X).1 :=
   by
   -- The second equivalence is the identity on the underlying ambient matrix.
@@ -2247,25 +3343,84 @@ private theorem unitary_group_groupLieSubalgebra_eq_u
     (n : ℕ)
     (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = unitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (unitary_matrix_lie_subalgebra n))
     (A : Matrix (Fin n) (Fin n) ℂ) :
     A ∈ LieSubgroup.groupLieSubalgebra S ↔
       A ∈ unitary_matrix_lie_subalgebra n := by
-  -- Route correction: after the common tangent normalization, this branch should be closed by the
-  -- unitary Gram-map kernel calculation rather than by curve-level arguments.
-  sorry
+  let gramGL : GL (Fin n) ℂ → Mℂ(n) :=
+    fun g ↦ (g : Mℂ(n))ᴴ * (g : Mℂ(n))
+  have hgramDiff : MDifferentiableAt (Iℝℂ(n)) (Iℝℂ(n)) gramGL 1 := by
+    have hambient :
+        MDifferentiableAt (Iℝℂ(n)) (Iℝℂ(n))
+          (fun B : Mℂ(n) ↦ Bᴴ * B) 1 :=
+      (complexMatrixGram_hasFDerivAt_one n).hasMFDerivAt.mdifferentiableAt
+    have hval :
+        MDifferentiableAt (Iℝℂ(n)) (Iℝℂ(n))
+          (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) 1 := by
+      have hchart :
+          (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) =
+            extChartAt (Iℝℂ(n)) (1 : GL (Fin n) ℂ) := by
+        funext g
+        rfl
+      rw [hchart]
+      exact mdifferentiableAt_extChartAt (by simp)
+    exact hambient.comp (1 : GL (Fin n) ℂ) hval
+  have hconst : ∀ x : S.carrier, gramGL x.1 = gramGL 1 := by
+    intro x
+    have hx : x.1 ∈ unitarySubgroupInGeneralLinearGroup n := by
+      rw [← hS]
+      exact x.2
+    have hgram := (mem_unitarySubgroupInGeneralLinearGroup_iff n x.1).1 hx
+    simpa [gramGL, Matrix.star_eq_conjTranspose] using hgram
+  have hle :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map
+          (realComplexGLGroupLieAlgebraEquivMatrix n).toLinearMap ≤
+        (unitary_matrix_lie_subalgebra n).toSubmodule := by
+    rintro X ⟨Y, hY, rfl⟩
+    change realComplexGLGroupLieAlgebraEquivMatrix n Y ∈
+      unitary_matrix_lie_subalgebra n
+    rw [unitary_matrix_lie_subalgebra_mem]
+    change
+      (realComplexGLGroupLieAlgebraEquivMatrix n Y)ᴴ =
+        -(realComplexGLGroupLieAlgebraEquivMatrix n Y)
+    have hz :=
+      mfderiv_eq_zero_on_groupLieSubalgebra S gramGL hgramDiff hconst hY
+    change
+      mfderiv (Iℝℂ(n)) (Iℝℂ(n))
+        (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))ᴴ * (g : Mℂ(n))) 1 Y = 0 at hz
+    rw [realComplexGeneralLinearGroup_gram_mfderiv_one_apply] at hz
+    exact eq_neg_of_add_eq_zero_left hz
+  have heq :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map
+          (realComplexGLGroupLieAlgebraEquivMatrix n).toLinearMap =
+        (unitary_matrix_lie_subalgebra n).toSubmodule :=
+    mappedGroupLieSubalgebra_eq_of_le_of_finrank_eq S
+      (realComplexGLGroupLieAlgebraEquivMatrix n)
+      (unitary_matrix_lie_subalgebra n).toSubmodule hle hdim
+  simpa [realComplexGLGroupLieAlgebraEquivMatrix] using
+    mem_groupLieSubalgebra_iff_equiv_mem
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule
+      (realComplexGLGroupLieAlgebraEquivMatrix n)
+      (unitary_matrix_lie_subalgebra n).toSubmodule heq
+      (show GroupLieAlgebra (Iℝℂ(n)) (GL (Fin n) ℂ) from A)
 
 /-- The Lie subalgebra attached to a `GL(n, ℂ)` realization of `U(n)` with the canonical carrier
 is canonically identified with `𝔲(n)` by the identity map on the underlying matrices. -/
 private noncomputable def unitary_group_groupLieSubalgebraEquivU
     (n : ℕ)
     (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = unitarySubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = unitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (unitary_matrix_lie_subalgebra n)) :
     LieSubgroup.groupLieSubalgebra S ≃ₗ⁅ℝ⁆
       unitary_matrix_lie_subalgebra n where
   toFun := fun A ↦
-    ⟨A.1, (unitary_group_groupLieSubalgebra_eq_u n S hS A.1).1 A.2⟩
+    ⟨A.1, (unitary_group_groupLieSubalgebra_eq_u n S hS hdim A.1).1 A.2⟩
   invFun := fun A ↦
-    ⟨A.1, (unitary_group_groupLieSubalgebra_eq_u n S hS A.1).2 A.2⟩
+    ⟨A.1, (unitary_group_groupLieSubalgebra_eq_u n S hS hdim A.1).2 A.2⟩
   map_add' := by
     intro A B
     rfl
@@ -2273,7 +3428,12 @@ private noncomputable def unitary_group_groupLieSubalgebraEquivU
     intro c A
     rfl
   map_lie' := by
-    sorry
+    intro A B
+    apply Subtype.ext
+    simpa [matrixLieBracket_eq_commutator] using
+      congrArg
+        (fun X : GroupLieAlgebra (Iℝℂ(n)) (GL (Fin n) ℂ) ↦ (show Mℂ(n) from X))
+        (unitsGroupLieBracket_eq_commutator A.1 B.1)
   left_inv := by
     intro A
     rfl
@@ -2286,12 +3446,15 @@ canonical copy of `U(n)`, then its Lie algebra is canonically isomorphic to `�
 private noncomputable def unitary_group_lie_isomorphic_to_u
     (n : ℕ)
     (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = unitarySubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = unitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (unitary_matrix_lie_subalgebra n)) :
     GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier ≃ₗ⁅ℝ⁆
       unitary_matrix_lie_subalgebra n := by
   exact
     (LieSubgroup.groupLieSubalgebraEquiv S).trans
-      (unitary_group_groupLieSubalgebraEquivU n S hS)
+      (unitary_group_groupLieSubalgebraEquivU n S hS hdim)
 
 /-- `unitary_group_lie_isomorphic_to_u` is the canonical equivalence after identifying the ambient
 image with `𝔲(n)`. -/
@@ -2299,9 +3462,13 @@ private theorem unitary_group_lie_isomorphic_to_u_def
     (n : ℕ)
     (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = unitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (unitary_matrix_lie_subalgebra n))
     (X : GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier) :
-    (unitary_group_lie_isomorphic_to_u n S hS X).1 =
-      (LieSubgroup.groupLieSubalgebraEquiv S X).1 := sorry
+    (unitary_group_lie_isomorphic_to_u n S hS hdim X).1 =
+      (LieSubgroup.groupLieSubalgebraEquiv S X).1 := by
+  rfl
 
 /-- Membership in `special_unitary_matrix_lie_subalgebra n` means skew-Hermitian together with
 trace zero, equivalently membership in `𝔲(n)` plus the trace-zero condition. -/
@@ -2345,25 +3512,118 @@ private theorem special_unitary_group_groupLieSubalgebra_eq_su
     (n : ℕ)
     (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialUnitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (special_unitary_matrix_lie_subalgebra n))
     (A : Matrix (Fin n) (Fin n) ℂ) :
     A ∈ LieSubgroup.groupLieSubalgebra S ↔
       A ∈ special_unitary_matrix_lie_subalgebra n := by
-  -- Route correction: once the `U(n)` and `SL(n, ℂ)` branches are both rewritten through tangent
-  -- kernels at the identity, this final branch is just the intersection assembly.
-  sorry
+  let gramGL : GL (Fin n) ℂ → Mℂ(n) :=
+    fun g ↦ (g : Mℂ(n))ᴴ * (g : Mℂ(n))
+  let detGL : GL (Fin n) ℂ → ℂ :=
+    fun g ↦ Matrix.det (g : Mℂ(n))
+  have hgramDiff : MDifferentiableAt (Iℝℂ(n)) (Iℝℂ(n)) gramGL 1 := by
+    have hambient :
+        MDifferentiableAt (Iℝℂ(n)) (Iℝℂ(n))
+          (fun B : Mℂ(n) ↦ Bᴴ * B) 1 :=
+      (complexMatrixGram_hasFDerivAt_one n).hasMFDerivAt.mdifferentiableAt
+    have hval :
+        MDifferentiableAt (Iℝℂ(n)) (Iℝℂ(n))
+          (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) 1 := by
+      have hchart :
+          (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) =
+            extChartAt (Iℝℂ(n)) (1 : GL (Fin n) ℂ) := by
+        funext g
+        rfl
+      rw [hchart]
+      exact mdifferentiableAt_extChartAt (by simp)
+    exact hambient.comp (1 : GL (Fin n) ℂ) hval
+  have hdetDiff :
+      MDifferentiableAt (Iℝℂ(n)) (modelWithCornersSelf ℝ ℂ) detGL 1 := by
+    have hambient :
+        MDifferentiableAt (Iℝℂ(n)) (modelWithCornersSelf ℝ ℂ)
+          (Matrix.det : Mℂ(n) → ℂ) 1 :=
+      ((matrixDet_hasFDerivAt_one (R := ℂ) n).restrictScalars ℝ).hasMFDerivAt.mdifferentiableAt
+    have hval :
+        MDifferentiableAt (Iℝℂ(n)) (Iℝℂ(n))
+          (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) 1 := by
+      have hchart :
+          (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))) =
+            extChartAt (Iℝℂ(n)) (1 : GL (Fin n) ℂ) := by
+        funext g
+        rfl
+      rw [hchart]
+      exact mdifferentiableAt_extChartAt (by simp)
+    exact hambient.comp (1 : GL (Fin n) ℂ) hval
+  have hconstGram : ∀ x : S.carrier, gramGL x.1 = gramGL 1 := by
+    intro x
+    have hx : x.1 ∈ specialUnitarySubgroupInGeneralLinearGroup n := by
+      rw [← hS]
+      exact x.2
+    have hxU :=
+      (mem_specialUnitarySubgroupInGeneralLinearGroup_iff_mem_unitary_det_eq_one n x.1).1 hx |>.1
+    have hgram := (mem_unitarySubgroupInGeneralLinearGroup_iff n x.1).1 hxU
+    simpa [gramGL, Matrix.star_eq_conjTranspose] using hgram
+  have hconstDet : ∀ x : S.carrier, detGL x.1 = detGL 1 := by
+    intro x
+    have hx : x.1 ∈ specialUnitarySubgroupInGeneralLinearGroup n := by
+      rw [← hS]
+      exact x.2
+    have hxdet :=
+      (mem_specialUnitarySubgroupInGeneralLinearGroup_iff_mem_unitary_det_eq_one n x.1).1 hx |>.2
+    simpa [detGL] using congrArg Units.val hxdet
+  have hle :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map
+          (realComplexGLGroupLieAlgebraEquivMatrix n).toLinearMap ≤
+        (special_unitary_matrix_lie_subalgebra n).toSubmodule := by
+    rintro X ⟨Y, hY, rfl⟩
+    change realComplexGLGroupLieAlgebraEquivMatrix n Y ∈
+      special_unitary_matrix_lie_subalgebra n
+    rw [special_unitary_matrix_lie_subalgebra_mem]
+    constructor
+    · have hz :=
+        mfderiv_eq_zero_on_groupLieSubalgebra S gramGL hgramDiff hconstGram hY
+      change
+        mfderiv (Iℝℂ(n)) (Iℝℂ(n))
+          (fun g : GL (Fin n) ℂ ↦ (g : Mℂ(n))ᴴ * (g : Mℂ(n))) 1 Y = 0 at hz
+      rw [realComplexGeneralLinearGroup_gram_mfderiv_one_apply] at hz
+      exact eq_neg_of_add_eq_zero_left hz
+    · have hz :=
+        mfderiv_eq_zero_on_groupLieSubalgebra S detGL hdetDiff hconstDet hY
+      change
+        mfderiv (Iℝℂ(n)) (modelWithCornersSelf ℝ ℂ)
+          (fun g : GL (Fin n) ℂ ↦ Matrix.det (g : Mℂ(n))) 1 Y = 0 at hz
+      rw [realComplexGeneralLinearGroup_det_mfderiv_one_apply] at hz
+      exact hz
+  have heq :
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule.map
+          (realComplexGLGroupLieAlgebraEquivMatrix n).toLinearMap =
+        (special_unitary_matrix_lie_subalgebra n).toSubmodule :=
+    mappedGroupLieSubalgebra_eq_of_le_of_finrank_eq S
+      (realComplexGLGroupLieAlgebraEquivMatrix n)
+      (special_unitary_matrix_lie_subalgebra n).toSubmodule hle hdim
+  simpa [realComplexGLGroupLieAlgebraEquivMatrix] using
+    mem_groupLieSubalgebra_iff_equiv_mem
+      (LieSubgroup.groupLieSubalgebra S).toSubmodule
+      (realComplexGLGroupLieAlgebraEquivMatrix n)
+      (special_unitary_matrix_lie_subalgebra n).toSubmodule heq
+      (show GroupLieAlgebra (Iℝℂ(n)) (GL (Fin n) ℂ) from A)
 
 /-- The Lie subalgebra attached to a `GL(n, ℂ)` realization of `SU(n)` with the canonical carrier
 is canonically identified with `𝔰𝔲(n)` by the identity map on the underlying matrices. -/
 private noncomputable def special_unitary_group_groupLieSubalgebraEquivSu
     (n : ℕ)
     (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialUnitarySubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialUnitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (special_unitary_matrix_lie_subalgebra n)) :
     LieSubgroup.groupLieSubalgebra S ≃ₗ⁅ℝ⁆
       special_unitary_matrix_lie_subalgebra n where
   toFun := fun A ↦
-    ⟨A.1, (special_unitary_group_groupLieSubalgebra_eq_su n S hS A.1).1 A.2⟩
+    ⟨A.1, (special_unitary_group_groupLieSubalgebra_eq_su n S hS hdim A.1).1 A.2⟩
   invFun := fun A ↦
-    ⟨A.1, (special_unitary_group_groupLieSubalgebra_eq_su n S hS A.1).2 A.2⟩
+    ⟨A.1, (special_unitary_group_groupLieSubalgebra_eq_su n S hS hdim A.1).2 A.2⟩
   map_add' := by
     intro A B
     rfl
@@ -2371,7 +3631,12 @@ private noncomputable def special_unitary_group_groupLieSubalgebraEquivSu
     intro c A
     rfl
   map_lie' := by
-    sorry
+    intro A B
+    apply Subtype.ext
+    simpa [matrixLieBracket_eq_commutator] using
+      congrArg
+        (fun X : GroupLieAlgebra (Iℝℂ(n)) (GL (Fin n) ℂ) ↦ (show Mℂ(n) from X))
+        (unitsGroupLieBracket_eq_commutator A.1 B.1)
   left_inv := by
     intro A
     rfl
@@ -2384,12 +3649,15 @@ canonical copy of `SU(n)`, then its Lie algebra is canonically isomorphic to `�
 private noncomputable def special_unitary_group_lie_isomorphic_to_su
     (n : ℕ)
     (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialUnitarySubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialUnitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (special_unitary_matrix_lie_subalgebra n)) :
     GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier ≃ₗ⁅ℝ⁆
       special_unitary_matrix_lie_subalgebra n := by
   exact
     (LieSubgroup.groupLieSubalgebraEquiv S).trans
-      (special_unitary_group_groupLieSubalgebraEquivSu n S hS)
+      (special_unitary_group_groupLieSubalgebraEquivSu n S hS hdim)
 
 /-- `special_unitary_group_lie_isomorphic_to_su` is the canonical equivalence after identifying
 the ambient image with `𝔰𝔲(n)`. -/
@@ -2397,9 +3665,13 @@ private theorem special_unitary_group_lie_isomorphic_to_su_def
     (n : ℕ)
     (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialUnitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (special_unitary_matrix_lie_subalgebra n))
     (X : GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier) :
-    (special_unitary_group_lie_isomorphic_to_su n S hS X).1 =
-      (LieSubgroup.groupLieSubalgebraEquiv S X).1 := sorry
+    (special_unitary_group_lie_isomorphic_to_su n S hS hdim X).1 =
+      (LieSubgroup.groupLieSubalgebraEquiv S X).1 := by
+  rfl
 
 /-- The matrix Lie algebra `𝔰𝔲(n)` is the skew-Hermitian trace-zero Lie algebra, equivalently the
 matrices belonging both to `𝔲(n)` and to `𝔰𝔩(n, ℂ)`. -/
@@ -2414,93 +3686,123 @@ theorem special_unitary_matrix_lie_subalgebra_mem_iff
 identifies its Lie algebra canonically with `𝔰𝔩(n, ℝ)`. -/
 noncomputable def problem_8_29_special_linear_real
     (n : ℕ) (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialLinearRealSubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialLinearRealSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.SpecialLinear.sl (Fin n) ℝ)) :
     GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier ≃ₗ⁅ℝ⁆
       LieAlgebra.SpecialLinear.sl (Fin n) ℝ :=
-  special_linear_real_group_lie_isomorphic_to_sl n S hS
+  special_linear_real_group_lie_isomorphic_to_sl n S hS hdim
 
 /-- Under the canonical equivalence of Problem 8-29 (1), an element of `Lie(S)` is sent to the
 same underlying matrix as under the ambient-image identification from Theorem 8.46. -/
 theorem problem_8_29_special_linear_real_apply
     (n : ℕ) (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialLinearRealSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.SpecialLinear.sl (Fin n) ℝ))
     (A : GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier) :
-    (problem_8_29_special_linear_real n S hS A).1 =
+    (problem_8_29_special_linear_real n S hS hdim A).1 =
       (LieSubgroup.groupLieSubalgebraEquiv S A).1 :=
-  special_linear_real_group_lie_isomorphic_to_sl_def n S hS A
+  special_linear_real_group_lie_isomorphic_to_sl_def n S hS hdim A
 
 /-- Problem 8-29 (2): for a Lie subgroup realization of `SO(n)` in `GL(n, ℝ)`, Theorem 8.46
 identifies its Lie algebra canonically with `𝔬(n)`. -/
 noncomputable def problem_8_29_special_orthogonal
     (n : ℕ) (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialOrthogonalSubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialOrthogonalSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.Orthogonal.so (Fin n) ℝ)) :
     GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier ≃ₗ⁅ℝ⁆
       LieAlgebra.Orthogonal.so (Fin n) ℝ :=
-  special_orthogonal_group_lie_isomorphic_to_so n S hS
+  special_orthogonal_group_lie_isomorphic_to_so n S hS hdim
 
 /-- Under the canonical equivalence of Problem 8-29 (2), an element of `Lie(S)` is sent to the
 same underlying matrix as under the ambient-image identification from Theorem 8.46. -/
 theorem problem_8_29_special_orthogonal_apply
     (n : ℕ) (S : RealLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialOrthogonalSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (LieAlgebra.Orthogonal.so (Fin n) ℝ))
     (A : GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier) :
-    (problem_8_29_special_orthogonal n S hS A).1 =
+    (problem_8_29_special_orthogonal n S hS hdim A).1 =
       (LieSubgroup.groupLieSubalgebraEquiv S A).1 :=
-  special_orthogonal_group_lie_isomorphic_to_so_def n S hS A
+  special_orthogonal_group_lie_isomorphic_to_so_def n S hS hdim A
 
 /-- Problem 8-29 (3): for a Lie subgroup realization of `SL(n, ℂ)` in `GL(n, ℂ)`, Theorem 8.46
 identifies its Lie algebra canonically with `𝔰𝔩(n, ℂ)`. -/
 noncomputable def problem_8_29_special_linear_complex
     (n : ℕ) (S : ComplexLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialLinearComplexSubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialLinearComplexSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℂ S.ModelSpace =
+        Module.finrank ℂ (LieAlgebra.SpecialLinear.sl (Fin n) ℂ)) :
     GroupLieAlgebra (modelWithCornersSelf ℂ S.ModelSpace) S.carrier ≃ₗ⁅ℂ⁆
       LieAlgebra.SpecialLinear.sl (Fin n) ℂ :=
-  special_linear_complex_group_lie_isomorphic_to_sl n S hS
+  special_linear_complex_group_lie_isomorphic_to_sl n S hS hdim
 
 /-- Under the canonical equivalence of Problem 8-29 (3), an element of `Lie(S)` is sent to the
 same underlying matrix as under the ambient-image identification from Theorem 8.46. -/
 theorem problem_8_29_special_linear_complex_apply
     (n : ℕ) (S : ComplexLieSubgroupGL(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialLinearComplexSubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℂ S.ModelSpace =
+        Module.finrank ℂ (LieAlgebra.SpecialLinear.sl (Fin n) ℂ))
     (A : GroupLieAlgebra (modelWithCornersSelf ℂ S.ModelSpace) S.carrier) :
-    (problem_8_29_special_linear_complex n S hS A).1 =
+    (problem_8_29_special_linear_complex n S hS hdim A).1 =
       (LieSubgroup.groupLieSubalgebraEquiv S A).1 :=
-  special_linear_complex_group_lie_isomorphic_to_sl_def n S hS A
+  special_linear_complex_group_lie_isomorphic_to_sl_def n S hS hdim A
 
 /-- Problem 8-29 (4): for a Lie subgroup realization of `U(n)` in `GL(n, ℂ)`, Theorem 8.46
 identifies its Lie algebra canonically with `𝔲(n)`. -/
 noncomputable def problem_8_29_unitary
     (n : ℕ) (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = unitarySubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = unitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (unitary_matrix_lie_subalgebra n)) :
     GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier ≃ₗ⁅ℝ⁆
       unitary_matrix_lie_subalgebra n :=
-  unitary_group_lie_isomorphic_to_u n S hS
+  unitary_group_lie_isomorphic_to_u n S hS hdim
 
 /-- Under the canonical equivalence of Problem 8-29 (4), an element of `Lie(S)` is sent to the
 same underlying matrix as under the ambient-image identification from Theorem 8.46. -/
 theorem problem_8_29_unitary_apply
     (n : ℕ) (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = unitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (unitary_matrix_lie_subalgebra n))
     (A : GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier) :
-    (problem_8_29_unitary n S hS A).1 =
+    (problem_8_29_unitary n S hS hdim A).1 =
       (LieSubgroup.groupLieSubalgebraEquiv S A).1 :=
-  unitary_group_lie_isomorphic_to_u_def n S hS A
+  unitary_group_lie_isomorphic_to_u_def n S hS hdim A
 
 /-- Problem 8-29 (5): for a Lie subgroup realization of `SU(n)` in `GL(n, ℂ)`, Theorem 8.46
 identifies its Lie algebra canonically with `𝔰𝔲(n)`. -/
 noncomputable def problem_8_29_special_unitary
     (n : ℕ) (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
-    (hS : S.carrier = specialUnitarySubgroupInGeneralLinearGroup n) :
+    (hS : S.carrier = specialUnitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (special_unitary_matrix_lie_subalgebra n)) :
     GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier ≃ₗ⁅ℝ⁆
       special_unitary_matrix_lie_subalgebra n :=
-  special_unitary_group_lie_isomorphic_to_su n S hS
+  special_unitary_group_lie_isomorphic_to_su n S hS hdim
 
 /-- Under the canonical equivalence of Problem 8-29 (5), an element of `Lie(S)` is sent to the
 same underlying matrix as under the ambient-image identification from Theorem 8.46. -/
 theorem problem_8_29_special_unitary_apply
     (n : ℕ) (S : RealLieSubgroupGLComplex(n)) [CompleteSpace S.ModelSpace]
     (hS : S.carrier = specialUnitarySubgroupInGeneralLinearGroup n)
+    (hdim :
+      Module.finrank ℝ S.ModelSpace =
+        Module.finrank ℝ (special_unitary_matrix_lie_subalgebra n))
     (A : GroupLieAlgebra (modelWithCornersSelf ℝ S.ModelSpace) S.carrier) :
-    (problem_8_29_special_unitary n S hS A).1 =
+    (problem_8_29_special_unitary n S hS hdim A).1 =
       (LieSubgroup.groupLieSubalgebraEquiv S A).1 :=
-  special_unitary_group_lie_isomorphic_to_su_def n S hS A
+  special_unitary_group_lie_isomorphic_to_su_def n S hS hdim A

@@ -10,14 +10,14 @@ variable {H : Type uH} [TopologicalSpace H] {I : ModelWithCorners ℝ E H}
 variable {M : Type uM} [TopologicalSpace M] [ChartedSpace H M]
 variable [IsManifold I ∞ M] [CompactSpace M] [Nonempty M]
 
-/-- Problem 4-6: a nonempty compact smooth manifold admits no smooth submersion to `ℝ^k` for any
+/-- Problem 4-6: a nonempty compact smooth manifold without boundary admits no smooth submersion to `ℝ^k` for any
 positive integer `k`. -/
 -- Proof sketch: pointwise surjectivity of the manifold derivative gives the local projection form
 -- for `F`, hence `F` is an open map. Therefore `Set.range F` is a nonempty open subset of
 -- `EuclideanSpace ℝ (Fin k)`. Since `M` is compact and `F` is continuous, this range is also
 -- compact. For `k > 0`, a nonempty open subset of `ℝ^k` cannot be compact, giving a
 -- contradiction.
-theorem not_exists_smooth_submersion_to_euclideanSpace {k : ℕ} (hk : 0 < k) :
+theorem not_exists_smooth_submersion_to_euclideanSpace [I.Boundaryless] {k : ℕ} (hk : 0 < k) :
     ¬ ∃ F : M → EuclideanSpace ℝ (Fin k),
       Manifold.IsSmoothSubmersion I (𝓡 k) F := by
   rintro ⟨F, hF⟩

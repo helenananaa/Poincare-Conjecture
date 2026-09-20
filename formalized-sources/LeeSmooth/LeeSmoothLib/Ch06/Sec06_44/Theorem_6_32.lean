@@ -240,8 +240,10 @@ theorem ambientGraphMap_isEmbedding {f : M → N} (hf : ContMDiff I J ∞ f) :
     rfl
   exact hLeft.isEmbedding continuous_fst ((continuous_id).prodMk hf.continuous)
 
-/-- Helper for Theorem 6.32: the ambient graph parametrization is a smooth immersion. -/
-theorem ambientGraphMap_isImmersion {f : M → N} (hf : ContMDiff I J ∞ f) :
+/-- Helper for Theorem 6.32: the ambient graph parametrization is a smooth immersion
+in boundaryless models. This helper uses the derivative-to-immersion criterion;
+the graph-characterization endpoints below do not require this helper. -/
+theorem ambientGraphMap_isImmersion [I.Boundaryless] [J.Boundaryless] {f : M → N} (hf : ContMDiff I J ∞ f) :
     IsImmersion I (I.prod J) ∞ (ambientGraphMap f) := by
   have hΓ_cont : ContMDiff I (I.prod J) ∞ (ambientGraphMap f) :=
     ambientGraphMap_contMDiff hf
@@ -272,7 +274,7 @@ theorem ambientGraphMap_isImmersion {f : M → N} (hf : ContMDiff I J ∞ f) :
   simpa [mfderiv_id] using hId'
 
 /-- Helper for Theorem 6.32: the ambient graph parametrization is a smooth embedding. -/
-theorem ambientGraphMap_isSmoothEmbedding {f : M → N} (hf : ContMDiff I J ∞ f) :
+theorem ambientGraphMap_isSmoothEmbedding [I.Boundaryless] [J.Boundaryless] {f : M → N} (hf : ContMDiff I J ∞ f) :
     Manifold.IsSmoothEmbedding I (I.prod J) ∞ (ambientGraphMap f) := by
   -- Package the already-proved immersion and embedding parts into the owner predicate.
   exact ⟨ambientGraphMap_isImmersion hf, ambientGraphMap_isEmbedding hf⟩
@@ -315,9 +317,7 @@ theorem graphFirstProjection_mfderiv_injective_of_isGraphOfMap
   have hInclInj :
       Function.Injective
         (mfderiv (modelWithCornersSelf ℝ S.ModelSpace) (I.prod J) S.inclusion x) :=
-    (Manifold.is_immersion_iff_forall_injective_mfderiv
-      (ImmersedSubmanifold.inclusion_isImmersion_smooth S).contMDiff).1
-      (ImmersedSubmanifold.inclusion_isImmersion_smooth S) x
+    (ImmersedSubmanifold.inclusion_isImmersion_smooth S).mfderiv_injective x
   have hGraphProjDiff :
       MDifferentiableAt (modelWithCornersSelf ℝ S.ModelSpace) I (graphFirstProjection S) x :=
     (graphFirstProjection_contMDiff S).mdifferentiableAt (by simp : (∞ : ℕ∞ω) ≠ 0)

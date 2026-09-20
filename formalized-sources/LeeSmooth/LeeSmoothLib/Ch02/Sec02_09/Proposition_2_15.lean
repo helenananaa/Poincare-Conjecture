@@ -50,7 +50,8 @@ variable {J : ∀ i, ModelWithCorners 𝕜 (F i) (G i)}
 -- Proof sketch: the inverse is the coordinatewise product of the inverse diffeomorphisms, so
 -- injectivity and surjectivity both reduce to the corresponding pointwise identities.
 theorem pi_bijective (Φ : ∀ i, M i ≃ₘ⟮I i, J i⟯ N i) :
-    Function.Bijective (fun x : ∀ i, M i ↦ fun i ↦ Φ i (x i)) := sorry
+    Function.Bijective (fun x : ∀ i, M i ↦ fun i ↦ Φ i (x i)) :=
+  Function.Bijective.piMap fun i ↦ EquivLike.bijective (Φ i)
 
 /-- Proposition 2.15 (1): part (b), the coordinatewise product of a finite family of
 diffeomorphisms is a diffeomorphism of product manifolds. -/
@@ -80,7 +81,16 @@ variable {n : ℕ∞ω}
 -- Proof sketch: reinterpret the diffeomorphism as a homeomorphism and apply the standard theorem
 -- that homeomorphisms are open maps.
 theorem restrictOpen_image_isOpen (Φ : M ≃ₘ^n⟮I, J⟯ N) (U : TopologicalSpace.Opens M) :
-    IsOpen (Set.range fun x : U ↦ Φ x) := sorry
+    IsOpen (Set.range fun x : U ↦ Φ x) := by
+  have hr : Set.range (fun x : U ↦ Φ x) = Φ.toHomeomorph '' (U : Set M) := by
+    ext y
+    constructor
+    · rintro ⟨x, rfl⟩
+      exact ⟨(x : M), x.property, rfl⟩
+    · rintro ⟨x, hx, rfl⟩
+      exact ⟨⟨x, hx⟩, rfl⟩
+  rw [hr]
+  exact Φ.toHomeomorph.isOpenMap (U : Set M) U.isOpen
 
 /-- The open image of an open subset under a diffeomorphism. -/
 abbrev restrictOpenImage (Φ : M ≃ₘ^n⟮I, J⟯ N) (U : TopologicalSpace.Opens M) :
@@ -96,13 +106,47 @@ def restrictOpenMap (Φ : M ≃ₘ^n⟮I, J⟯ N) (U : TopologicalSpace.Opens M)
 -- Proof sketch: `Set.rangeFactorization` is always surjective onto the range, and injectivity comes
 -- from the injectivity of the ambient diffeomorphism.
 theorem restrictOpenMap_bijective (Φ : M ≃ₘ^n⟮I, J⟯ N) (U : TopologicalSpace.Opens M) :
-    Function.Bijective (restrictOpenMap Φ U) := sorry
+    Function.Bijective (restrictOpenMap Φ U) :=
+  (Set.rangeFactorization_bijective (f := fun x : U ↦ Φ x)).mpr
+    (Φ.injective.comp Subtype.val_injective)
 
 /-- The restricted map to the image is a local diffeomorphism. -/
 -- Proof sketch: restrict the ambient local diffeomorphism `Φ.isLocalDiffeomorph` along the open
 -- inclusion `U ↪ M`, and then transport the codomain to the open image subtype.
 theorem restrictOpenMap_isLocalDiffeomorph (Φ : M ≃ₘ^n⟮I, J⟯ N) (U : TopologicalSpace.Opens M) :
-    IsLocalDiffeomorph I J n (restrictOpenMap Φ U) := sorry
+    IsLocalDiffeomorph I J n (restrictOpenMap Φ U) := by
+  let F : U → restrictOpenImage Φ U := restrictOpenMap Φ U
+  let G : restrictOpenImage Φ U → U := fun y ↦
+    ⟨Φ.symm (y : N), by
+      obtain ⟨x, hx⟩ := y.property
+      have : Φ.symm (y : N) = (x : M) := by
+        rw [← hx]
+        exact Φ.symm_apply_apply x
+      rw [this]
+      exact x.property⟩
+  let ΦU : U ≃ₘ^n⟮I, J⟯ restrictOpenImage Φ U :=
+    { toFun := F
+      invFun := G
+      left_inv := by
+        intro x
+        ext
+        exact Φ.symm_apply_apply (x : M)
+      right_inv := by
+        intro y
+        ext
+        exact Φ.apply_symm_apply (y : N)
+      contMDiff_toFun := by
+        intro x
+        change ContMDiffWithinAt I J n F Set.univ x
+        rw [ContMDiffWithinAt,
+          ← ChartedSpace.liftPropWithinAt_subtypeVal_comp_iff (U := restrictOpenImage Φ U) F]
+        exact contMDiffAt_subtype_iff.mpr (Φ.contMDiff (x : M))
+      contMDiff_invFun := by
+        intro y
+        change ContMDiffWithinAt J I n G Set.univ y
+        rw [ContMDiffWithinAt, ← ChartedSpace.liftPropWithinAt_subtypeVal_comp_iff (U := U) G]
+        exact (Φ.symm.contMDiff.comp (contMDiff_subtype_val (U := restrictOpenImage Φ U))) y }
+  exact ΦU.isLocalDiffeomorph
 
 /-- Proposition 2.15 (2): part (d), in the canonical `C^n` form used downstream, restricting a
 diffeomorphism to an open submanifold yields a diffeomorphism onto its image. The source smooth
@@ -140,7 +184,8 @@ variable {I : ModelWithCorners 𝕜 E H} {J : ModelWithCorners 𝕜 F H'}
 -- Proof sketch: pass from the diffeomorphism to its underlying homeomorphism and use that every
 -- homeomorphism is an open map.
 /-- Proposition 2.15 (3): part (c), every diffeomorphism is an open map. -/
-theorem diffeomorph_isOpenMap (Φ : M ≃ₘ⟮I, J⟯ N) : IsOpenMap Φ := sorry
+theorem diffeomorph_isOpenMap (Φ : M ≃ₘ⟮I, J⟯ N) : IsOpenMap Φ :=
+  Φ.toHomeomorph.isOpenMap
 
 end Homeomorphisms
 
@@ -162,17 +207,20 @@ variable {P : Type uP} [TopologicalSpace P] [ChartedSpace H'' P] [IsManifold K (
 
 -- Proof sketch: use the identity diffeomorphism `Diffeomorph.refl`.
 /-- Proposition 2.15 (4): part (e), every smooth manifold is diffeomorphic to itself. -/
-theorem diffeomorphic_refl : Nonempty (M ≃ₘ⟮I, I⟯ M) := sorry
+theorem diffeomorphic_refl : Nonempty (M ≃ₘ⟮I, I⟯ M) :=
+  ⟨Diffeomorph.refl I M ∞⟩
 
 -- Proof sketch: reverse a chosen diffeomorphism using `Diffeomorph.symm`.
 /-- Proposition 2.15 (5): part (e), diffeomorphic smooth manifolds remain diffeomorphic after
 swapping source and target. -/
 theorem diffeomorphic_symm (h : Nonempty (M ≃ₘ⟮I, J⟯ N)) :
-    Nonempty (N ≃ₘ⟮J, I⟯ M) := sorry
+    Nonempty (N ≃ₘ⟮J, I⟯ M) :=
+  h.elim fun Φ ↦ ⟨Φ.symm⟩
 
 -- Proof sketch: compose chosen diffeomorphisms using `Diffeomorph.trans`.
 /-- Proposition 2.15 (6): part (e), diffeomorphism is transitive on smooth manifolds. -/
 theorem diffeomorphic_trans (hMN : Nonempty (M ≃ₘ⟮I, J⟯ N))
-    (hNP : Nonempty (N ≃ₘ⟮J, K⟯ P)) : Nonempty (M ≃ₘ⟮I, K⟯ P) := sorry
+    (hNP : Nonempty (N ≃ₘ⟮J, K⟯ P)) : Nonempty (M ≃ₘ⟮I, K⟯ P) :=
+  hMN.elim fun Φ ↦ hNP.elim fun Ψ ↦ ⟨Φ.trans Ψ⟩
 
 end DiffeomorphicRelation
