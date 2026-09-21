@@ -8,6 +8,7 @@ noncomputable section
 namespace MorganTianLib.SurgeryCap
 local notation "E3" => EuclideanSpace ℝ (Fin 3)
 
+set_option maxHeartbeats 800000 in
 /-- **Math.** A global smooth radial metric with its actual polar formula and
 Euclidean value at the tip. Curvature, completeness and surgery gluing remain separate. -/
 theorem exists_global_round_tip_metric (P : RoundCapProfile) :
