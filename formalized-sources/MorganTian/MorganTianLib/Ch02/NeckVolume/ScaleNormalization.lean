@@ -1,4 +1,4 @@
-import MorganTianLib.Ch02.EpsilonNeck
+import MorganTianLib.Ch02.NeckVolume.CylinderModelFacts
 
 open Set MeasureTheory Riemannian Matrix Function
 open scoped ContDiff Manifold Topology ENNReal Bundle BigOperators
