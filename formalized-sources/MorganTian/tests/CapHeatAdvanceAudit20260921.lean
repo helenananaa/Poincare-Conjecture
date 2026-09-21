@@ -9,6 +9,7 @@ import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.FractionalMoment
 import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.HessianCancellation
 import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.HessianEstimate
 import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.HolderInitialTrace
+import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.HolderSecondConvolution
 import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.HolderTimeKernel
 import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.KernelScaling
 import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation
@@ -54,6 +55,7 @@ run_cmd do
     ``MorganTianLib.ParabolicPDE.gaussianHeatKernel_hessian_cancellation,
     ``MorganTianLib.ParabolicPDE.gaussianHeatKernel_holder_initial_trace,
     ``MorganTianLib.ParabolicPDE.gaussianHeatKernel_hessian_holder_bound,
+    ``MorganTianLib.ParabolicPDE.gaussianHeatKernel_holder_second_convolution,
     ``MorganTianLib.ParabolicPDE.euclideanHeatKernel_mass_semigroup,
     ``MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_heat_equation,
     ``MorganTianLib.SurgeryCap.exists_complete_nonnegative_bounded_global_cap,
