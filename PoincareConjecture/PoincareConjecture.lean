@@ -1,3 +1,4 @@
+import PoincareConjecture.CriticalPath.SurgeryBudget.EventFiniteness
 import PoincareConjecture.Topology.FiberSaturation.SphereAntipodal
 import PoincareConjecture.Topology.FiberSaturation.SphereOpenEmbeddingSurjective
 import PoincareConjecture.Topology.FiberSaturation.ClosedCollarEndpoint
