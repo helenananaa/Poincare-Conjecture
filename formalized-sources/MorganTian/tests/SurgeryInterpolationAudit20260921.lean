@@ -1,3 +1,4 @@
+import MorganTianLib.Ch02.SurgeryInterpolation.ConcaveCapProfile
 import MorganTianLib.Ch02.SurgeryInterpolation.TipMetric
 import MorganTianLib.Ch02.SurgeryInterpolation.NativeNeckMetric
 import MorganTianLib.Ch02.SurgeryInterpolation.LengthComparison
@@ -44,7 +45,8 @@ run_cmd do
     ``nativeAxis_contMDiff,
     ``exists_native_neck_surgeryMetric,
     ``arcLength_le_of_metric_pullback_le,
-    ``exists_tip_smoothed_metric]
+    ``exists_tip_smoothed_metric,
+    ``exists_small_flat_concave_profile]
   let allowed : Array Name := #[``propext, ``Classical.choice, ``Quot.sound]
   for n in names do
     unless (← getEnv).contains n do throwError "Missing theorem: {n}"
