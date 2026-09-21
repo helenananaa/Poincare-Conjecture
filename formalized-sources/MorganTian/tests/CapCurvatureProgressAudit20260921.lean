@@ -3,6 +3,8 @@ import MorganTianLib.Ch02.SurgeryCap.PolarDiffeomorphism
 import MorganTianLib.Ch02.SurgeryCap.WarpedHorizontalConnection
 import MorganTianLib.Ch02.SurgeryCap.RadialSectional
 import MorganTianLib.Ch02.SurgeryCap.PolarMetric
+import MorganTianLib.Ch02.SurgeryCap.WarpedHorizontalCurvature
+import MorganTianLib.Ch02.SurgeryCap.SphereFieldAlgebra
 import Lean
 open Set Riemannian
 open scoped Manifold ContDiff Topology
@@ -22,6 +24,8 @@ example : ∃ (p : MorganTianLib.EpsilonNeckSphere)
 open Lean Elab Command in
 run_cmd do
   let names : Array Name := #[
+    ``MorganTianLib.SurgeryCap.warpedConnection_horizontal_curvature,
+    ``MorganTianLib.SurgeryCap.sphereAmbientField_smooth_tangent_bracket,
     ``MorganTianLib.SurgeryCap.exists_cap_polar_metric_preserving,
     ``MorganTianLib.SurgeryCap.exists_cap_polar_diffeomorph,
     ``MorganTianLib.SurgeryCap.warpedConnection_radial_formulas,
