@@ -5,6 +5,7 @@ open scoped ContDiff Manifold Topology ENNReal Bundle RealInnerProductSpace
 noncomputable section
 namespace MorganTianLib
 
+set_option maxHeartbeats 800000 in
 /-- **Math.** The actual transported-cylinder chart density is independent of
 its axial coordinate and the finite neck length. -/
 theorem roundCylinder_chartVolumeDensity_eq_coordinateDensity

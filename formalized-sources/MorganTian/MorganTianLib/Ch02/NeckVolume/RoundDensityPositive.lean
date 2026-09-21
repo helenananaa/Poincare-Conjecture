@@ -5,6 +5,7 @@ open scoped ContDiff Manifold Topology ENNReal Bundle RealInnerProductSpace
 noncomputable section
 namespace MorganTianLib
 
+set_option maxHeartbeats 800000 in
 /-- **Math.** The sphere--axis coordinate density is continuous and strictly positive
 on the actual sphere chart target, without reference to any neck length. -/
 theorem roundCylinderCoordinateDensity_continuous_pos (alpha : EpsilonNeckSphere) :
