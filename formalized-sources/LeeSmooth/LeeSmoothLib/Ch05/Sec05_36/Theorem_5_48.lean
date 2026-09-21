@@ -8,6 +8,8 @@ import LeeSmoothLib.Ch02.Sec02_11.Proposition_2_28
 import LeeSmoothLib.Ch04.Sec04_23.Theorem_4_15
 import LeeSmoothLib.Ch04.Sec04_22.Proposition_4_8
 import LeeSmoothLib.Ch04.Sec04_24.Exercise_4_16
+import LeeSmoothLib.Ch04.Sec04_21.HalfSpaceImmersionCriterion
+import LeeSmoothLib.Ch04.Sec04_22.Exercise_4_9
 import LeeSmoothLib.Ch05.Sec05_30.Definition_5_30_extra_2
 import LeeSmoothLib.Ch05.Sec05_35.Exercise_5_44
 import LeeSmoothLib.Ch05.Sec05_35.Proposition_5_41
@@ -631,6 +633,71 @@ lemma boundarylessAmbientId_isSmoothEmbedding
       OpenPartialHomeomorph.extend_coe, OpenPartialHomeomorph.extend_coe_symm] using
       domChart.right_inv hu_target
 
+private lemma boundarylessAmbientId_reverse_isImmersion
+    [IsManifold I (⊤ : WithTop ℕ∞) M]
+    [BoundarylessManifold I M] :
+    let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+    let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+      (boundarylessModelIsManifoldFor I :
+        let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+        IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+    Manifold.IsImmersion I (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) (id : M → M) := by
+  let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+  let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+    (boundarylessModelIsManifoldFor I :
+      let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+      IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+  refine ⟨PUnit.{uE + 1}, inferInstance, inferInstance, ?_⟩
+  intro x
+  let domChart : OpenPartialHomeomorph M H := chartAt H x
+  let codChart : OpenPartialHomeomorph M E := boundarylessLocalChartFor I x
+  let equiv : (E × PUnit.{uE + 1}) ≃L[ℝ] E :=
+    ContinuousLinearEquiv.prodUnique ℝ E PUnit.{uE + 1}
+  have hdomChart :
+      domChart ∈ IsManifold.maximalAtlas I (⊤ : WithTop ℕ∞) M := by
+    simpa [domChart] using (IsManifold.chart_mem_maximalAtlas x :
+      chartAt H x ∈ IsManifold.maximalAtlas I (⊤ : WithTop ℕ∞) M)
+  have hdomAtlas : domChart ∈ atlas H M := by
+    simpa [domChart] using (chart_mem_atlas H x)
+  have hcodChart :
+      codChart ∈ IsManifold.maximalAtlas (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M := by
+    simpa [codChart, boundarylessChartedSpaceFor, boundarylessLocalChartFor,
+      boundarylessModelChartedSpace] using!
+      (IsManifold.chart_mem_maximalAtlas x :
+        chartAt E x ∈ IsManifold.maximalAtlas
+          (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+  refine Manifold.IsImmersionAtOfComplement.mk_of_continuousAt
+    continuousAt_id equiv domChart codChart ?_ ?_ hdomChart hcodChart ?_
+  · simpa [domChart] using (mem_chart_source H x)
+  · simpa [codChart] using
+      (show x ∈ (boundarylessLocalChartFor I x).source from by
+        refine ⟨?_, ?_⟩
+        · show extChartAt I x x ∈ interior (extChartAt I x).target
+          exact (I.isInteriorPoint_iff).mp
+            (show I.IsInteriorPoint x from BoundarylessManifold.isInteriorPoint)
+        · rw [extChartAt_source I]
+          exact mem_chart_source H x)
+  · intro u hu
+    have hzDom :
+        (domChart.extend I).symm u ∈ domChart.source := by
+      simpa [OpenPartialHomeomorph.extend_source] using
+        (domChart.extend I).map_target hu
+    have hzCod :
+        (domChart.extend I).symm u ∈ codChart.source := by
+      refine ⟨?_, ?_⟩
+      · exact (I.isInteriorPoint_iff_of_mem_atlas (n := (∞ : ℕ∞ω))
+          (by simp) hdomAtlas hzDom).mp
+          (show I.IsInteriorPoint ((domChart.extend I).symm u) from
+            BoundarylessManifold.isInteriorPoint)
+      · simpa [domChart, extChartAt_source] using hzDom
+    have huCod :
+        (codChart.extend (modelWithCornersSelf ℝ E))
+            ((domChart.extend I).symm u) = u := by
+      simpa [domChart, codChart, boundarylessLocalChart, extChartAt, Function.comp,
+        OpenPartialHomeomorph.extend_coe, OpenPartialHomeomorph.extend_coe_symm] using
+        (domChart.extend I).right_inv hu
+    simpa [equiv, Function.comp, id_eq] using huCod
+
 /-- Helper for Theorem 5.48: after Euclideanizing the repaired boundaryless ambient atlas, the
 identity map remains a smooth embedding back into that self-modeled ambient structure. -/
 lemma ambientBasisBoundarylessAmbientId_isSmoothEmbedding
@@ -830,6 +897,342 @@ lemma boundarylessAmbientBasisId_isSmoothEmbedding
       OpenPartialHomeomorph.extend_coe, OpenPartialHomeomorph.extend_coe_symm] using
       codChart.right_inv hu_target
 
+set_option maxHeartbeats 800000 in
+private lemma ambientBasisBoundarylessAmbientId_isImmersionAt
+    [IsManifold I (⊤ : WithTop ℕ∞) M]
+    [BoundarylessManifold I M]
+    {n : ℕ} (hn : dimM = n + 1) (b : Module.Basis (Fin (n + 1)) ℝ E) (x : M) :
+    let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+    let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+      (boundarylessModelIsManifoldFor I :
+        let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+        IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin (n + 1))) M :=
+      ambientBasisChartedSpace I hn b
+    let _ : IsManifold (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M :=
+      ambientBasisIsManifold I hn b
+    let selfChart : OpenPartialHomeomorph M E := boundarylessLocalChartFor I x
+    let eModel : OpenPartialHomeomorph E (EuclideanSpace ℝ (Fin (n + 1))) :=
+      (ambientBasisDiffeomorph hn b).symm.toHomeomorph.toOpenPartialHomeomorph
+    let domChart : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin (n + 1))) :=
+      selfChart.trans eModel
+    Manifold.IsImmersionAtOfComplement PUnit.{uE + 1} (𝓡 (n + 1))
+      (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) (id : M → M) x := by
+  let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+  let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+    (boundarylessModelIsManifoldFor I :
+      let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+      IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin (n + 1))) M :=
+    ambientBasisChartedSpace I hn b
+  let _ : IsManifold (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M :=
+    ambientBasisIsManifold I hn b
+  let selfChart : OpenPartialHomeomorph M E := boundarylessLocalChartFor I x
+  let eModel : OpenPartialHomeomorph E (EuclideanSpace ℝ (Fin (n + 1))) :=
+    (ambientBasisDiffeomorph hn b).symm.toHomeomorph.toOpenPartialHomeomorph
+  let domChart : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin (n + 1))) :=
+    selfChart.trans eModel
+  let h1Equiv :
+      (EuclideanSpace ℝ (Fin (n + 1)) × PUnit.{uE + 1}) ≃L[ℝ] E :=
+    (ContinuousLinearEquiv.prodUnique ℝ (EuclideanSpace ℝ (Fin (n + 1))) PUnit.{uE + 1}).trans
+      (ambientBasisContinuousLinearEquiv hn b)
+  have hcod :
+      selfChart ∈ IsManifold.maximalAtlas
+        (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M := by
+    simpa [selfChart, boundarylessChartedSpaceFor, boundarylessLocalChartFor,
+      boundarylessModelChartedSpace] using!
+      (IsManifold.chart_mem_maximalAtlas x :
+        chartAt E x ∈
+          IsManifold.maximalAtlas (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+  have hdom :
+      domChart ∈ IsManifold.maximalAtlas (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M := by
+    simpa [domChart, selfChart, eModel] using!
+      (ambientBasisChart_mem_maximalAtlas I hn b hcod)
+  refine Manifold.IsImmersionAtOfComplement.mk_of_continuousAt
+    continuousAt_id h1Equiv domChart selfChart ?_ ?_ hdom hcod ?_
+  · have hxSelf : x ∈ selfChart.source := by
+      refine ⟨?_, ?_⟩
+      · show extChartAt I x x ∈ interior (extChartAt I x).target
+        exact (I.isInteriorPoint_iff).mp
+          (show I.IsInteriorPoint x from BoundarylessManifold.isInteriorPoint)
+      · show x ∈ (extChartAt I x).source
+        rw [extChartAt_source I]
+        exact mem_chart_source H x
+    simpa [domChart, selfChart, eModel, OpenPartialHomeomorph.trans_source] using hxSelf
+  · simpa [selfChart] using
+      (show x ∈ (boundarylessLocalChartFor I x).source from by
+        refine ⟨?_, ?_⟩
+        · exact (I.isInteriorPoint_iff).mp
+            (show I.IsInteriorPoint x from BoundarylessManifold.isInteriorPoint)
+        · rw [extChartAt_source I]
+          exact mem_chart_source H x)
+  · intro u hu
+    have huTarget :
+        (ambientBasisContinuousLinearEquiv hn b) u ∈ selfChart.target := by
+      simpa [domChart, selfChart, eModel, OpenPartialHomeomorph.extend_target,
+        OpenPartialHomeomorph.trans_target, ambientBasisDiffeomorph,
+        ambientBasisContinuousLinearEquiv] using hu
+    simpa [h1Equiv, domChart, selfChart, eModel, Function.comp,
+      ambientBasisDiffeomorph, ambientBasisContinuousLinearEquiv,
+      OpenPartialHomeomorph.extend_coe, OpenPartialHomeomorph.extend_coe_symm] using
+      selfChart.right_inv huTarget
+
+set_option maxHeartbeats 800000 in
+private lemma boundarylessAmbientId_isImmersionAt
+    [IsManifold I (⊤ : WithTop ℕ∞) M]
+    [BoundarylessManifold I M]
+    (x : M) :
+    let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+    let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+      (boundarylessModelIsManifoldFor I :
+        let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+        IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+    let selfChart : OpenPartialHomeomorph M E := boundarylessLocalChartFor I x
+    let codChart : OpenPartialHomeomorph M H := chartAt H x
+    Manifold.IsImmersionAtOfComplement PUnit.{uE + 1} (modelWithCornersSelf ℝ E) I
+      (⊤ : WithTop ℕ∞) (id : M → M) x := by
+  let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+  let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+    (boundarylessModelIsManifoldFor I :
+      let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+      IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+  let selfChart : OpenPartialHomeomorph M E := boundarylessLocalChartFor I x
+  let codChart : OpenPartialHomeomorph M H := chartAt H x
+  let h2Equiv : (E × PUnit.{uE + 1}) ≃L[ℝ] E :=
+    ContinuousLinearEquiv.prodUnique ℝ E PUnit.{uE + 1}
+  have hdom :
+      selfChart ∈ IsManifold.maximalAtlas
+        (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M := by
+    simpa [selfChart, boundarylessChartedSpaceFor, boundarylessLocalChartFor,
+      boundarylessModelChartedSpace] using!
+      (IsManifold.chart_mem_maximalAtlas x :
+        chartAt E x ∈
+          IsManifold.maximalAtlas (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+  have hcod : codChart ∈ IsManifold.maximalAtlas I (⊤ : WithTop ℕ∞) M := by
+    simpa [codChart] using (IsManifold.chart_mem_maximalAtlas x :
+      chartAt H x ∈ IsManifold.maximalAtlas I (⊤ : WithTop ℕ∞) M)
+  refine Manifold.IsImmersionAtOfComplement.mk_of_continuousAt
+    continuousAt_id h2Equiv selfChart codChart ?_ ?_ hdom hcod ?_
+  · simpa [selfChart] using
+      (show x ∈ (boundarylessLocalChartFor I x).source from by
+        refine ⟨?_, ?_⟩
+        · exact (I.isInteriorPoint_iff).mp
+            (show I.IsInteriorPoint x from BoundarylessManifold.isInteriorPoint)
+        · rw [extChartAt_source I]
+          exact mem_chart_source H x)
+  · simpa [codChart] using (mem_chart_source H x)
+  · intro u hu
+    have huTarget : u ∈ selfChart.target := by
+      simpa [selfChart, OpenPartialHomeomorph.extend_target', modelWithCornersSelf_coe] using hu
+    simpa [h2Equiv, selfChart, codChart, boundarylessLocalChart, extChartAt, Function.comp,
+      OpenPartialHomeomorph.extend_coe, OpenPartialHomeomorph.extend_coe_symm] using
+      selfChart.right_inv huTarget
+
+set_option maxHeartbeats 2000000 in
+private lemma ambientBasisAndBoundarylessAmbientId_isImmersionAt
+    [IsManifold I (⊤ : WithTop ℕ∞) M]
+    [BoundarylessManifold I M]
+    {n : ℕ} (hn : dimM = n + 1) (b : Module.Basis (Fin (n + 1)) ℝ E) (x : M) :
+    let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+    let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+      (boundarylessModelIsManifoldFor I :
+        let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+        IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin (n + 1))) M :=
+      ambientBasisChartedSpace I hn b
+    let _ : IsManifold (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M :=
+      ambientBasisIsManifold I hn b
+    ∃ h1Equiv :
+        (EuclideanSpace ℝ (Fin (n + 1)) × PUnit.{uE + 1}) ≃L[ℝ] E,
+      Set.EqOn
+        ((boundarylessLocalChartFor I x).extend (modelWithCornersSelf ℝ E) ∘ id ∘
+          (((boundarylessLocalChartFor I x).trans
+            (ambientBasisDiffeomorph hn b).symm.toHomeomorph.toOpenPartialHomeomorph).extend
+              (𝓡 (n + 1))).symm)
+        (h1Equiv ∘ (·, 0))
+        (((boundarylessLocalChartFor I x).trans
+            (ambientBasisDiffeomorph hn b).symm.toHomeomorph.toOpenPartialHomeomorph).extend
+              (𝓡 (n + 1))).target ∧
+      ∃ h2Equiv : (E × PUnit.{uE + 1}) ≃L[ℝ] E,
+        Set.EqOn
+          ((chartAt H x).extend I ∘ id ∘
+            ((boundarylessLocalChartFor I x).extend (modelWithCornersSelf ℝ E)).symm)
+          (h2Equiv ∘ (·, 0))
+          ((boundarylessLocalChartFor I x).extend (modelWithCornersSelf ℝ E)).target := by
+  let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+  let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+    (boundarylessModelIsManifoldFor I :
+      let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+      IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin (n + 1))) M :=
+    ambientBasisChartedSpace I hn b
+  let _ : IsManifold (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M :=
+    ambientBasisIsManifold I hn b
+  let selfChart : OpenPartialHomeomorph M E := boundarylessLocalChartFor I x
+  let eModel : OpenPartialHomeomorph E (EuclideanSpace ℝ (Fin (n + 1))) :=
+    (ambientBasisDiffeomorph hn b).symm.toHomeomorph.toOpenPartialHomeomorph
+  let domChart : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin (n + 1))) :=
+    selfChart.trans eModel
+  let codChart : OpenPartialHomeomorph M H := chartAt H x
+  let h1Equiv :
+      (EuclideanSpace ℝ (Fin (n + 1)) × PUnit.{uE + 1}) ≃L[ℝ] E :=
+    (ContinuousLinearEquiv.prodUnique ℝ (EuclideanSpace ℝ (Fin (n + 1))) PUnit.{uE + 1}).trans
+      (ambientBasisContinuousLinearEquiv hn b)
+  let h2Equiv : (E × PUnit.{uE + 1}) ≃L[ℝ] E :=
+    ContinuousLinearEquiv.prodUnique ℝ E PUnit.{uE + 1}
+  refine ⟨h1Equiv, ?_, h2Equiv, ?_⟩
+  · intro u hu
+    have huTarget :
+        (ambientBasisContinuousLinearEquiv hn b) u ∈ selfChart.target := by
+      simpa [domChart, selfChart, eModel, OpenPartialHomeomorph.extend_target,
+        OpenPartialHomeomorph.trans_target, ambientBasisDiffeomorph,
+        ambientBasisContinuousLinearEquiv] using hu
+    simpa [h1Equiv, domChart, selfChart, eModel, Function.comp,
+      ambientBasisDiffeomorph, ambientBasisContinuousLinearEquiv,
+      OpenPartialHomeomorph.extend_coe, OpenPartialHomeomorph.extend_coe_symm] using
+      selfChart.right_inv huTarget
+  · intro u hu
+    have huTarget : u ∈ selfChart.target := by
+      simpa [selfChart, OpenPartialHomeomorph.extend_target', modelWithCornersSelf_coe] using hu
+    simpa [h2Equiv, selfChart, codChart, boundarylessLocalChart, extChartAt, Function.comp,
+      OpenPartialHomeomorph.extend_coe, OpenPartialHomeomorph.extend_coe_symm] using
+      selfChart.right_inv huTarget
+
+set_option maxHeartbeats 3000000 in
+private lemma ambientBasisAmbientId_isImmersion
+    [IsManifold I (⊤ : WithTop ℕ∞) M]
+    [BoundarylessManifold I M]
+    {n : ℕ} (hn : dimM = n + 1) (b : Module.Basis (Fin (n + 1)) ℝ E) :
+    let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+    let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+      (boundarylessModelIsManifoldFor I :
+        let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+        IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+    let _ : ChartedSpace (EuclideanSpace ℝ (Fin (n + 1))) M :=
+      ambientBasisChartedSpace I hn b
+    let _ : IsManifold (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M :=
+      ambientBasisIsManifold I hn b
+    Manifold.IsImmersion (𝓡 (n + 1)) I (⊤ : WithTop ℕ∞) (id : M → M) := by
+  let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+  let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+    (boundarylessModelIsManifoldFor I :
+      let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+      IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+  let _ : ChartedSpace (EuclideanSpace ℝ (Fin (n + 1))) M :=
+    ambientBasisChartedSpace I hn b
+  let _ : IsManifold (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M :=
+    ambientBasisIsManifold I hn b
+  -- Compose the two identity normal forms pointwise.  The generic Exercise 4.16 composition
+  -- theorem also asks for a boundaryless codomain model, which the original model `I` need not
+  -- have; here the middle charts are literally the same repaired chart, so no such hypothesis is
+  -- needed.
+  refine ⟨PUnit.{uE + 1} × PUnit.{uE + 1}, inferInstance, inferInstance, ?_⟩
+  intro x
+  let selfChart : OpenPartialHomeomorph M E := boundarylessLocalChartFor I x
+  let eModel : OpenPartialHomeomorph E (EuclideanSpace ℝ (Fin (n + 1))) :=
+    (ambientBasisDiffeomorph hn b).symm.toHomeomorph.toOpenPartialHomeomorph
+  let domChart : OpenPartialHomeomorph M (EuclideanSpace ℝ (Fin (n + 1))) :=
+    selfChart.trans eModel
+  let codChart : OpenPartialHomeomorph M H := chartAt H x
+  have hpair := ambientBasisAndBoundarylessAmbientId_isImmersionAt
+    (I := I) (M := M) hn b x
+  dsimp at hpair
+  rcases hpair with ⟨h1Equiv, h1eq, h2Equiv, h2eq⟩
+
+  let equiv :
+      (EuclideanSpace ℝ (Fin (n + 1)) × (PUnit.{uE + 1} × PUnit.{uE + 1})) ≃L[ℝ] E :=
+    (ContinuousLinearEquiv.prodAssoc ℝ (EuclideanSpace ℝ (Fin (n + 1)))
+      PUnit.{uE + 1} PUnit.{uE + 1}).symm.trans
+      ((h1Equiv.prodCongr (ContinuousLinearEquiv.refl ℝ PUnit.{uE + 1})).trans h2Equiv)
+  have hdom : domChart ∈ IsManifold.maximalAtlas
+      (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M := by
+    have hself : selfChart ∈ IsManifold.maximalAtlas
+        (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M := by
+      simpa [selfChart, boundarylessChartedSpaceFor, boundarylessLocalChartFor,
+        boundarylessModelChartedSpace] using!
+        (IsManifold.chart_mem_maximalAtlas x :
+          chartAt E x ∈ IsManifold.maximalAtlas
+            (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+    simpa [domChart, selfChart, eModel] using!
+      (ambientBasisChart_mem_maximalAtlas I hn b hself)
+  have hself : selfChart ∈ IsManifold.maximalAtlas
+      (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M := by
+    simpa [selfChart, boundarylessChartedSpaceFor, boundarylessLocalChartFor,
+      boundarylessModelChartedSpace] using!
+      (IsManifold.chart_mem_maximalAtlas x :
+        chartAt E x ∈ IsManifold.maximalAtlas
+          (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
+  have hcod : codChart ∈ IsManifold.maximalAtlas I (⊤ : WithTop ℕ∞) M := by
+    simpa [codChart] using (IsManifold.chart_mem_maximalAtlas x :
+      chartAt H x ∈ IsManifold.maximalAtlas I (⊤ : WithTop ℕ∞) M)
+  refine Manifold.IsImmersionAtOfComplement.mk_of_continuousAt
+    continuousAt_id equiv domChart codChart ?_ ?_ hdom hcod ?_
+  · have hxSelf : x ∈ selfChart.source := by
+      refine ⟨?_, ?_⟩
+      · exact (I.isInteriorPoint_iff).mp
+          (show I.IsInteriorPoint x from BoundarylessManifold.isInteriorPoint)
+      · rw [extChartAt_source I]
+        exact mem_chart_source H x
+    simpa [domChart, selfChart, eModel, OpenPartialHomeomorph.trans_source] using hxSelf
+  · simpa [codChart] using (mem_chart_source H x)
+  · intro u hu
+    have hzDom :
+        (domChart.extend (𝓡 (n + 1))).symm u ∈ domChart.source := by
+      simpa [OpenPartialHomeomorph.extend_source] using
+        (domChart.extend (𝓡 (n + 1))).map_target hu
+    have hzSelfSource :
+        (domChart.extend (𝓡 (n + 1))).symm u ∈ selfChart.source := by
+      simpa [domChart, selfChart, eModel, OpenPartialHomeomorph.trans_source] using hzDom
+    have huSelf : h1Equiv (u, (0 : PUnit.{uE + 1})) ∈
+        (selfChart.extend (modelWithCornersSelf ℝ E)).target := by
+      have h1raw := h1eq (by simpa [domChart, selfChart, eModel,
+        OpenPartialHomeomorph.extend_target, OpenPartialHomeomorph.trans_target] using hu)
+      simp only [Function.comp_apply, id_eq] at h1raw
+      rw [← h1raw]
+      have hzSelfExt :
+          (domChart.extend (𝓡 (n + 1))).symm u ∈
+            (selfChart.extend (modelWithCornersSelf ℝ E)).source := by
+        simpa [domChart, selfChart, eModel, OpenPartialHomeomorph.extend_source,
+          OpenPartialHomeomorph.extend_coe_symm] using hzSelfSource
+      exact (selfChart.extend (modelWithCornersSelf ℝ E)).map_source hzSelfExt
+    have h1raw := h1eq (by simpa [domChart, selfChart, eModel,
+      OpenPartialHomeomorph.extend_target, OpenPartialHomeomorph.trans_target] using hu)
+    simp only [Function.comp_apply, id_eq] at h1raw
+    have hzSelfExt :
+        (domChart.extend (𝓡 (n + 1))).symm u ∈
+          (selfChart.extend (modelWithCornersSelf ℝ E)).source := by
+      simpa [domChart, selfChart, eModel, OpenPartialHomeomorph.extend_source,
+        OpenPartialHomeomorph.extend_coe_symm] using hzSelfSource
+    have hcoord :
+        (selfChart.extend (modelWithCornersSelf ℝ E)).symm
+            (h1Equiv (u, (0 : PUnit.{uE + 1}))) =
+          (domChart.extend (𝓡 (n + 1))).symm u := by
+      rw [← h1raw]
+      exact (selfChart.extend (modelWithCornersSelf ℝ E)).left_inv hzSelfExt
+    have h2raw := h2eq huSelf
+    simp only [Function.comp_apply, id_eq] at h2raw
+    have h2raw' :
+        (codChart.extend I) ((selfChart.extend (modelWithCornersSelf ℝ E)).symm
+          (h1Equiv (u, (0 : PUnit.{uE + 1})))) =
+          h2Equiv (h1Equiv (u, (0 : PUnit.{uE + 1})), (0 : PUnit.{uE + 1})) := by
+      simpa [codChart, selfChart, boundarylessLocalChart, extChartAt,
+        Function.comp, OpenPartialHomeomorph.extend_coe,
+        OpenPartialHomeomorph.extend_coe_symm] using h2raw
+    rw [hcoord] at h2raw'
+    have hequiv :
+        (equiv ∘ (·, (0 : PUnit.{uE + 1} × PUnit.{uE + 1}))) u =
+          h2Equiv (h1Equiv (u, (0 : PUnit.{uE + 1})), (0 : PUnit.{uE + 1})) := by
+      change h2Equiv (h1Equiv (u, (PUnit.unit : PUnit.{uE + 1})),
+        (PUnit.unit : PUnit.{uE + 1})) =
+        h2Equiv (h1Equiv (u, (PUnit.unit : PUnit.{uE + 1})),
+          (PUnit.unit : PUnit.{uE + 1}))
+      rfl
+    calc
+      (codChart.extend I ∘ id ∘ (domChart.extend (𝓡 (n + 1))).symm) u =
+          h2Equiv (h1Equiv (u, (0 : PUnit.{uE + 1})), (0 : PUnit.{uE + 1})) := by
+        simpa [Function.comp] using h2raw'
+      _ = (equiv ∘ (·, (0 : PUnit.{uE + 1} × PUnit.{uE + 1}))) u := hequiv.symm
+
 /-- Helper for Theorem 5.48: the Euclideanized ambient atlas should be transported back to the
 original ambient model only once, at the frontier normal-form step. -/
 lemma ambientBasisAmbientId_isSmoothEmbedding
@@ -855,12 +1258,8 @@ lemma ambientBasisAmbientId_isSmoothEmbedding
     ambientBasisChartedSpace I hn b
   let _ : IsManifold (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M :=
     ambientBasisIsManifold I hn b
-  -- Route correction: compose the Euclidean-to-self-model identity bridge with the repaired
-  -- self-model-to-ambient identity bridge in the same owner-normal form as Problem 5-21.
-  simpa [Function.comp] using
-    Manifold.IsSmoothEmbedding.comp
-      boundarylessAmbientId_isSmoothEmbedding
-      (ambientBasisBoundarylessAmbientId_isSmoothEmbedding hn b)
+  exact ⟨ambientBasisAmbientId_isImmersion (I := I) (M := M) hn b,
+    Topology.IsEmbedding.id⟩
 
 /-- Helper for Theorem 5.48: the regular-domain structure already provides the subtype inclusion as
 an `∞`-smooth embedding into the original ambient model. -/
@@ -1554,30 +1953,42 @@ lemma ambientId_isLocalDiffeomorph_toAmbientBasis
   let _ : IsManifold (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M :=
     ambientBasisIsManifold I hn b
   change IsLocalDiffeomorph I (𝓡 (n + 1)) ∞ (id : M → M)
-  have hdim :
-      Module.finrank ℝ (EuclideanSpace ℝ (Fin (n + 1))) = Module.finrank ℝ E := by
-    -- The Euclideanized ambient atlas has the same dimension as the original ambient model.
-    calc
-      Module.finrank ℝ (EuclideanSpace ℝ (Fin (n + 1))) = n + 1 := by simp
-      _ = dimM := by simpa using hn.symm
-      _ = Module.finrank ℝ E := rfl
+  have hForwardEmbedding :=
+    ambientBasisAmbientId_isSmoothEmbedding (I := I) (M := M) hn b
+  dsimp at hForwardEmbedding
+  have hForwardImmInf :
+      Manifold.IsImmersion (𝓡 (n + 1)) I ∞ (id : M → M) :=
+    isImmersion_of_le (m := (∞ : WithTop ℕ∞)) (n := (⊤ : WithTop ℕ∞)) (by simp)
+      hForwardEmbedding.isImmersion
   have hForward :
-      IsLocalDiffeomorph (𝓡 (n + 1)) I ∞ (id : M → M) := by
-    let hAmbientIdTop :=
-      ambientBasisAmbientId_isSmoothEmbedding (I := I) (M := M) hn b
-    have hAmbientIdInf :
-        Manifold.IsSmoothEmbedding (𝓡 (n + 1)) I ∞ (id : M → M) :=
-      ⟨isImmersion_of_le (m := (∞ : WithTop ℕ∞)) (n := (⊤ : WithTop ℕ∞)) (by simp)
-          hAmbientIdTop.isImmersion, hAmbientIdTop.isEmbedding⟩
-    -- Route correction: first prove the forward Euclidean-to-ambient identity is a local
-    -- diffeomorphism, then flip its local branches to read the reverse identity map.
-    exact hAmbientIdInf.isImmersion.isLocalDiffeomorph_of_eq_finrank hdim
-  intro x
-  let hx := hForward x
-  refine ⟨hx.localInverse, hx.localInverse_mem_source, ?_⟩
-  -- The local inverse of the forward identity branch is again the identity on its source patch.
-  intro y hy
-  simpa [Function.comp] using (hx.localInverse_eqOn_right hy).symm
+      ContMDiff (𝓡 (n + 1)) I ∞ (id : M → M) := hForwardImmInf.contMDiff
+  have hReverseSelf0 :=
+    boundarylessAmbientId_reverse_isImmersion (I := I) (M := M)
+  dsimp at hReverseSelf0
+  have hReverseSelf :
+      Manifold.IsImmersion I (modelWithCornersSelf ℝ E) ∞ (id : M → M) :=
+    isImmersion_of_le (m := (∞ : WithTop ℕ∞)) (n := (⊤ : WithTop ℕ∞)) (by simp)
+      hReverseSelf0
+  have hReverseToBasis0 :=
+    boundarylessAmbientBasisId_isSmoothEmbedding (I := I) (M := M) hn b
+  dsimp at hReverseToBasis0
+  have hReverseToBasis :
+      Manifold.IsImmersion (modelWithCornersSelf ℝ E) (𝓡 (n + 1))
+        ∞ (id : M → M) :=
+    isImmersion_of_le (m := (∞ : WithTop ℕ∞)) (n := (⊤ : WithTop ℕ∞)) (by simp)
+      hReverseToBasis0.isImmersion
+  have hReverse :
+      ContMDiff I (𝓡 (n + 1)) ∞ (id : M → M) := by
+    have hComp :
+        Manifold.IsImmersion I (𝓡 (n + 1)) ∞ (id : M → M) := by
+      simpa [Function.comp] using
+        Manifold.IsImmersion.ex416_comp hReverseToBasis hReverseSelf
+    exact hComp.contMDiff
+  let hDiffeo : Diffeomorph I (𝓡 (n + 1)) M M ∞ :=
+    { toEquiv := Equiv.refl M
+      contMDiff_toFun := hReverse
+      contMDiff_invFun := hForward }
+  exact hDiffeo.isLocalDiffeomorph
 
 /-- Helper for Theorem 5.48: after installing the Euclidean ambient atlas, the identity map is an
 immersion from the original ambient owner into the Euclidean owner. -/
@@ -1593,9 +2004,23 @@ lemma ambientId_isImmersion_toAmbientBasis
     ambientBasisChartedSpace I hn b
   let _ : IsManifold (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M :=
     ambientBasisIsManifold I hn b
+  let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+  let _ : IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M :=
+    (boundarylessModelIsManifoldFor I :
+      let _ : ChartedSpace E M := (boundarylessChartedSpaceFor I : ChartedSpace E M)
+      IsManifold (modelWithCornersSelf ℝ E) (⊤ : WithTop ℕ∞) M)
   change Manifold.IsImmersion I (𝓡 (n + 1)) ∞ (id : M → M)
-  -- The local-diffeomorphism bridge immediately yields the desired immersion.
-  exact (ambientId_isLocalDiffeomorph_toAmbientBasis (I := I) (M := M) hn b).isImmersion
+  have hSelf0 := boundarylessAmbientId_reverse_isImmersion (I := I) (M := M)
+  dsimp at hSelf0
+  have hSelf : Manifold.IsImmersion I (modelWithCornersSelf ℝ E) ∞ (id : M → M) :=
+    isImmersion_of_le (m := (∞ : WithTop ℕ∞)) (n := (⊤ : WithTop ℕ∞)) (by simp) hSelf0
+  have hBasis0 := boundarylessAmbientBasisId_isSmoothEmbedding (I := I) (M := M) hn b
+  dsimp at hBasis0
+  have hBasis :
+      Manifold.IsImmersion (modelWithCornersSelf ℝ E) (𝓡 (n + 1)) ∞ (id : M → M) :=
+    isImmersion_of_le (m := (∞ : WithTop ℕ∞)) (n := (⊤ : WithTop ℕ∞)) (by simp)
+      hBasis0.isImmersion
+  simpa [Function.comp] using Manifold.IsImmersion.ex416_comp hBasis hSelf
 
 /-- Helper for Theorem 5.48: once the Euclidean ambient immersion of the subtype inclusion is
 available, any boundary point of `D` has the Euclidean boundary normal form from Theorem 4.15. -/
@@ -1654,12 +2079,54 @@ lemma regularDomainSubtypeVal_isImmersion_toAmbientBasis
     -- Rewrite the regular-domain embedding once into successor-form boundary coordinates.
     exact (leeBoundaryModelWithCorners_isImmersion_iff_succ
       (I := I) (D := D) (n := n) hn hSucc_eq).1 hSubtypeImm0
-  -- Compose the subtype immersion with the ambient identity immersion into the Euclideanized
-  -- atlas.
-  simpa [Function.comp] using
-    Manifold.IsImmersion.ex416_comp
-      (ambientId_isImmersion_toAmbientBasis (I := I) hn b)
-      hSubtypeImm
+  -- Compose at the derivative level.  The ambient identity is a local diffeomorphism after the
+  -- intrinsic boundaryless recharting, so its derivative is injective even though the original
+  -- model `I` is not equipped with a model-level `Boundaryless` instance.  The half-space
+  -- criterion then converts the resulting injective derivatives into the required immersion.
+  have hAmbientLocal :
+      IsLocalDiffeomorph I (𝓡 (n + 1)) ∞ (id : M → M) :=
+    ambientId_isLocalDiffeomorph_toAmbientBasis (I := I) (M := M) hn b
+  have hAmbientSmooth :
+      ContMDiff I (𝓡 (n + 1)) ∞ (id : M → M) := hAmbientLocal.contMDiff
+  have hSubtypeSmooth :
+      ContMDiff (𝓡∂ (n + 1)) I ∞ (Subtype.val : D → M) := hSubtypeImm.contMDiff
+  have hCompositeSmooth :
+      ContMDiff (𝓡∂ (n + 1)) (𝓡 (n + 1)) ∞
+        ((id : M → M) ∘ (Subtype.val : D → M)) := by
+    exact hAmbientSmooth.comp hSubtypeSmooth
+  have hCompositeInjective :
+      ∀ p : D,
+        Function.Injective
+          (mfderiv (𝓡∂ (n + 1)) (𝓡 (n + 1))
+            ((id : M → M) ∘ (Subtype.val : D → M)) p) := by
+    intro p
+    have hAmbientInjective :
+        Function.Injective
+          (mfderiv I (𝓡 (n + 1)) (id : M → M) p.1) := by
+      rw [← hAmbientLocal.mfderivToContinuousLinearEquiv_coe (by simp) p.1]
+      exact (hAmbientLocal.mfderivToContinuousLinearEquiv (by simp) p.1).injective
+    have hSubtypeInjective :
+        Function.Injective
+          (mfderiv (𝓡∂ (n + 1)) I (Subtype.val : D → M) p) :=
+      hSubtypeImm.mfderiv_injective p
+    have hChain :
+        mfderiv (𝓡∂ (n + 1)) (𝓡 (n + 1))
+            ((id : M → M) ∘ (Subtype.val : D → M)) p =
+          (mfderiv I (𝓡 (n + 1)) (id : M → M) p.1).comp
+            (mfderiv (𝓡∂ (n + 1)) I (Subtype.val : D → M) p) := by
+      simpa [Function.comp] using
+        (mfderiv_comp (x := p) (g := (id : M → M))
+          (f := (Subtype.val : D → M))
+          (hAmbientSmooth.contMDiffAt.mdifferentiableAt (by simp))
+          (hSubtypeSmooth.contMDiffAt.mdifferentiableAt (by simp)))
+    rw [hChain]
+    exact hAmbientInjective.comp hSubtypeInjective
+  have hCompositeImmersion :
+      Manifold.IsImmersion (𝓡∂ (n + 1)) (𝓡 (n + 1)) ∞
+        ((id : M → M) ∘ (Subtype.val : D → M)) :=
+    Manifold.isImmersion_of_injective_mfderiv_halfSpace
+      hCompositeSmooth hCompositeInjective
+  simpa [Function.comp] using hCompositeImmersion
 
 /-- Helper for Theorem 5.48: after Theorem 4.15 is available at a boundary point, the source
 chart can be normalized to an ambient open patch of `M`, which is the exact source-side owner
@@ -2122,7 +2589,9 @@ lemma frontierSignedPatch_hasZeroIffFrontier
           ∃ ρ : M → ℝ,
             ContMDiff I 𝓘(ℝ, ℝ) ∞ ρ ∧
               (∀ x ∈ V, x ∈ D ↔ ρ x ≤ 0) ∧
-                (∀ x ∈ V, x ∈ frontier D ↔ ρ x = 0) := by
+                (∀ x ∈ V, x ∈ frontier D ↔ ρ x = 0) ∧
+                  (∀ x ∈ V, x ∈ frontier D →
+                    Function.Surjective (mfderiv I 𝓘(ℝ, ℝ) ρ x)) := by
   let _ : ChartedSpace (EuclideanSpace ℝ (Fin (n + 1))) M :=
     ambientBasisChartedSpace I hn b
   let _ : IsManifold (𝓡 (n + 1)) (⊤ : WithTop ℕ∞) M :=
@@ -2168,7 +2637,7 @@ lemma frontierSignedPatch_hasZeroIffFrontier
     intro x hxV
     exact (hClosureV (subset_closure hxV)).1
   have hClosureVV₀ : closure V ⊆ closure V₀ := closure_mono hVSubsetV₀
-  refine ⟨V, hVOpen, ?_, ρ, hρSmooth, ?_, ?_⟩
+  refine ⟨V, hVOpen, ?_, ρ, hρSmooth, ?_, ?_, ?_⟩
   · -- The refined neighborhood still contains the chosen frontier point.
     simpa using hyV (by simp)
   · intro x hxV
@@ -2264,10 +2733,218 @@ lemma frontierSignedPatch_hasZeroIffFrontier
         exact (leeBoundaryModelWithCorners_isBoundaryPoint_iff_succ
           (D := D) (n := n) hn hSucc_eq).2 hxBoundaryNew
       exact boundaryPoint_mem_frontier (I := I) (D := D) hxBoundaryOld
+  · intro x hxV hxFrontier'
+    have hxClosure : x ∈ closure V := subset_closure hxV
+    have hxRestrSource : x ∈ (hNF.codChart.restr W).source :=
+      (hClosureV hxClosure).2.1
+    have hxD : x ∈ D := by
+      simpa [hDClosed.closure_eq] using hxFrontier'.1
+    have hxW : x ∈ W := by
+      rw [hNF.codChart.restr_source' W hWOpen] at hxRestrSource
+      exact hxRestrSource.2
+    let xD : D := ⟨x, hxD⟩
+    have hxDom : xD ∈ hNF.domChart.source := by
+      simpa [hW_eq, xD] using hxW
+    let Φ :
+        PartialDiffeomorph
+          (𝓡∂ (n + 1))
+          (𝓡∂ (n + 1))
+          D
+          (EuclideanHalfSpace (n + 1))
+          ∞ :=
+      { toPartialEquiv := hNF.domChart.toPartialEquiv
+        open_source := hNF.domChart.open_source
+        open_target := hNF.domChart.open_target
+        contMDiffOn_toFun := contMDiffOn_of_mem_maximalAtlas hNF.domChart_mem_maximalAtlas
+        contMDiffOn_invFun := contMDiffOn_symm_of_mem_maximalAtlas hNF.domChart_mem_maximalAtlas }
+    have hLocal :
+        IsLocalDiffeomorphAt
+          (𝓡∂ (n + 1))
+          (𝓡∂ (n + 1))
+          ∞
+          (Φ : D → EuclideanHalfSpace (n + 1))
+          xD := by
+      exact ⟨Φ, hxDom, fun z _ => rfl⟩
+    have hΦSurjective :
+        Function.Surjective
+          (mfderiv (𝓡∂ (n + 1)) (𝓡∂ (n + 1))
+            (Φ : D → EuclideanHalfSpace (n + 1)) xD) := by
+      rw [← hLocal.mfderivToContinuousLinearEquiv_coe (by simp)]
+      exact (hLocal.mfderivToContinuousLinearEquiv (by simp)).surjective
+    let P : EuclideanSpace ℝ (Fin (n + 1)) →L[ℝ] ℝ :=
+      (EuclideanSpace.proj (𝕜 := ℝ) (0 : Fin (n + 1)))
+    let π : EuclideanHalfSpace (n + 1) → ℝ := fun z ↦ P z.1
+    have hπSmooth :
+        ContMDiff (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) ∞ π := by
+      change ContMDiff (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) ∞
+        (P ∘ (EuclideanHalfSpace.inclusion (n + 1)))
+      exact P.contMDiff.comp (euclideanHalfSpace_inclusion_contMDiff (n + 1))
+    have hπSurjective :
+        Function.Surjective
+          (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) π (hNF.domChart xD)) := by
+      change Function.Surjective
+        (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+          (fun z : EuclideanHalfSpace (n + 1) ↦ P z.1) (hNF.domChart xD))
+      have hπDeriv :
+          mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+              (fun z : EuclideanHalfSpace (n + 1) ↦ P z.1) (hNF.domChart xD) =
+            P.comp
+            (mfderiv (𝓡∂ (n + 1)) (𝓡 (n + 1))
+                (EuclideanHalfSpace.inclusion (n + 1)) (hNF.domChart xD)) := by
+        change
+          mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+            (P ∘ (EuclideanHalfSpace.inclusion (n + 1))) (hNF.domChart xD) = _
+        simpa using (mfderiv_comp (x := hNF.domChart xD)
+          (g := P) (f := (EuclideanHalfSpace.inclusion (n + 1)))
+          (P.contMDiff.contMDiffAt.mdifferentiableAt
+            (by simp : (∞ : ℕ∞ω) ≠ 0))
+          ((euclideanHalfSpace_inclusion_contMDiff (n + 1)).contMDiffAt.mdifferentiableAt
+            (by simp : (∞ : ℕ∞ω) ≠ 0)))
+      have hIncDeriv :
+          mfderiv (𝓡∂ (n + 1)) (𝓡 (n + 1))
+              (EuclideanHalfSpace.inclusion (n + 1)) (hNF.domChart xD) =
+            ContinuousLinearMap.id ℝ
+              (TangentSpace (𝓡∂ (n + 1)) (hNF.domChart xD)) :=
+        euclidean_half_space_inclusion_mfderiv_eq_id (n + 1) (hNF.domChart xD)
+      rw [hπDeriv, hIncDeriv]
+      intro z
+      change ℝ at z
+      refine ⟨EuclideanSpace.single (0 : Fin (n + 1)) z, ?_⟩
+      change (EuclideanSpace.single (0 : Fin (n + 1)) z) 0 = z
+      simp
+    let q : D → ℝ := π ∘ (Φ : D → EuclideanHalfSpace (n + 1))
+    have hqSurjective :
+        Function.Surjective
+          (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) q xD) := by
+      have hqDeriv :
+          mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) q xD =
+            (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) π (Φ xD)).comp
+              (mfderiv (𝓡∂ (n + 1)) (𝓡∂ (n + 1))
+                (Φ : D → EuclideanHalfSpace (n + 1)) xD) := by
+        simpa [q, Function.comp] using
+          (mfderiv_comp (x := xD) (g := π)
+            (f := (Φ : D → EuclideanHalfSpace (n + 1)))
+            (hπSmooth.contMDiffAt.mdifferentiableAt (by simp))
+            (hLocal.contMDiffAt.mdifferentiableAt (by simp)))
+      have hπSurjective' :
+          Function.Surjective
+            (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) π (Φ xD)) := by
+        simpa [Φ] using hπSurjective
+      rw [hqDeriv]
+      intro z
+      rcases hπSurjective' z with ⟨w, hw⟩
+      rcases hΦSurjective w with ⟨v, hv⟩
+      refine ⟨v, ?_⟩
+      change
+        (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) π (Φ xD))
+            ((mfderiv (𝓡∂ (n + 1)) (𝓡∂ (n + 1))
+              (Φ : D → EuclideanHalfSpace (n + 1)) xD) v) = z
+      rw [hv, hw]
+    have hNegEq :
+        (fun z : D ↦ -ρ z.1) =ᶠ[𝓝 xD] q := by
+      filter_upwards [(hVOpen.preimage continuous_subtype_val).mem_nhds hxV] with z hz
+      have hzClosure : z.1 ∈ closure V := subset_closure hz
+      have hzRestr : z.1 ∈ (hNF.codChart.restr W).source := (hClosureV hzClosure).2.1
+      have hzW : z.1 ∈ W := by
+        rw [hNF.codChart.restr_source' W hWOpen] at hzRestr
+        exact hzRestr.2
+      have hzDom : z ∈ hNF.domChart.source := by
+        simpa [hW_eq] using hzW
+      have hzTarget : hNF.domChart z ∈ hNF.domChart.target :=
+        hNF.domChart.map_source hzDom
+      have hcoord :
+          (hNF.codChart.restr W) z.1 0 = (hNF.domChart z).1 0 := by
+        have hcoordVec := congrArg (fun w : EuclideanSpace ℝ (Fin (n + 1)) ↦ w 0)
+          (hNF.eqOn hzTarget)
+        simpa [Function.comp, boundaryImmersionNormalForm_self,
+          hNF.domChart.left_inv hzDom] using hcoordVec
+      have hρz : ρ z.1 = -((hNF.codChart.restr W) z.1 0) :=
+        hρEq (hClosureVV₀ hzClosure)
+      calc
+        -ρ z.1 = -(-((hNF.codChart.restr W) z.1 0)) := by rw [hρz]
+        _ = (hNF.codChart.restr W) z.1 0 := by ring
+        _ = (hNF.domChart z).1 0 := hcoord
+        _ = q z := by simp [q, π, Φ, P]
+    have hNegEqAt :
+        (fun z : D ↦ -ρ z.1) xD = q xD := by
+      have hxClosure : x ∈ closure V := subset_closure hxV
+      have hxRestr : x ∈ (hNF.codChart.restr W).source :=
+        (hClosureV hxClosure).2.1
+      have hxW : x ∈ W := by
+        rw [hNF.codChart.restr_source' W hWOpen] at hxRestr
+        exact hxRestr.2
+      have hxDom : xD ∈ hNF.domChart.source := by
+        simpa [hW_eq] using hxW
+      have hxTarget : hNF.domChart xD ∈ hNF.domChart.target :=
+        hNF.domChart.map_source hxDom
+      have hcoord :
+          (hNF.codChart.restr W) x 0 = (hNF.domChart xD).1 0 := by
+        have hcoordVec := congrArg (fun w : EuclideanSpace ℝ (Fin (n + 1)) ↦ w 0)
+          (hNF.eqOn hxTarget)
+        simpa [Function.comp, boundaryImmersionNormalForm_self,
+          hNF.domChart.left_inv hxDom] using hcoordVec
+      have hρx' : ρ x = -((hNF.codChart.restr W) x 0) :=
+        hρEq (hClosureVV₀ hxClosure)
+      calc
+        -ρ x = -(-((hNF.codChart.restr W) x 0)) := by rw [hρx']
+        _ = (hNF.codChart.restr W) x 0 := by ring
+        _ = (hNF.domChart xD).1 0 := hcoord
+        _ = q xD := by simp [q, π, Φ, P]
+    have hRhoRestrSurjective :
+        Function.Surjective
+          (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+            (fun z : D ↦ ρ z.1) xD) := by
+      intro z
+      rcases hqSurjective (-z) with ⟨v, hv⟩
+      refine ⟨v, ?_⟩
+      have hmf :
+          mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+              (fun z : D ↦ -ρ z.1) xD =
+            mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) q xD := hNegEq.mfderiv_eq
+      have hmfv := congrArg
+        (fun L : TangentSpace (𝓡∂ (n + 1)) xD →L[ℝ]
+            TangentSpace 𝓘(ℝ, ℝ) ((fun z : D ↦ -ρ z.1) xD) ↦ L v) hmf
+      have hneg := congrArg (fun L => L v)
+        (mfderiv_neg (I := 𝓡∂ (n + 1))
+          (f := fun z : D ↦ ρ z.1) (x := xD))
+      change
+        (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+            (fun z : D ↦ -ρ z.1) xD) v =
+          (-(mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+            (fun z : D ↦ ρ z.1) xD)) v at hneg
+      rw [hneg] at hmfv
+      rw [← hNegEqAt] at hv
+      rw [← hmfv] at hv
+      simpa using congrArg Neg.neg hv
+    have hImmOld :
+        Manifold.IsImmersion (leeBoundaryModelWithCorners dimM) I ∞
+          (Subtype.val : D → M) :=
+      (regularDomainSubtypeVal_isSmoothEmbedding_infty (I := I) (D := D)).isImmersion
+    have hImmNew :
+        Manifold.IsImmersion (𝓡∂ (n + 1)) I ∞ (Subtype.val : D → M) :=
+      (leeBoundaryModelWithCorners_isImmersion_iff_succ
+        (I := I) (D := D) (n := n) hn hSucc_eq).1 hImmOld
+    have hRhoChain :
+        mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+            (ρ ∘ (Subtype.val : D → M)) xD =
+          (mfderiv I 𝓘(ℝ, ℝ) ρ x).comp
+            (mfderiv (𝓡∂ (n + 1)) I (Subtype.val : D → M) xD) := by
+      simpa [Function.comp] using
+        (mfderiv_comp (x := xD) (g := ρ) (f := (Subtype.val : D → M))
+          (hρSmooth.contMDiffAt.mdifferentiableAt (by simp))
+          (hImmNew.contMDiff.contMDiffAt.mdifferentiableAt (by simp)))
+    intro z
+    rcases hRhoRestrSurjective z with ⟨v, hv⟩
+    refine ⟨(mfderiv (𝓡∂ (n + 1)) I (Subtype.val : D → M) xD) v, ?_⟩
+    change
+      (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+        (ρ ∘ (Subtype.val : D → M)) xD) v = z at hv
+    rw [hRhoChain] at hv
+    exact hv
 
 /-- Helper for Theorem 5.48: negating a local signed patch and restricting it to `D` produces a
 source-side boundary-defining function at every local zero. -/
-lemma frontierSignedPatch_negRestrict_isBoundaryDefiningAt
+lemma frontierSignedPatch_negRestrict_isBoundaryDefiningAt_of_surjectiveMfderiv
     {D : Set M} {n : ℕ} [hOld : SmoothManifoldWithBoundary dimM D]
     [hSucc : SmoothManifoldWithBoundary (n + 1) D] [Set.IsRegularDomain I D]
     (hn : dimM = n + 1)
@@ -2276,7 +2953,8 @@ lemma frontierSignedPatch_negRestrict_isBoundaryDefiningAt
     (hρSmooth : ContMDiff I 𝓘(ℝ, ℝ) ∞ ρ)
     (hρSign : ∀ x ∈ V, x ∈ D ↔ ρ x ≤ 0)
     (hρZero : ∀ x ∈ V, x ∈ frontier D ↔ ρ x = 0)
-    {x : M} (hxV : x ∈ V) (hxD : x ∈ D) (hρx : ρ x = 0) :
+    {x : M} (hρRegular : Function.Surjective (mfderiv I 𝓘(ℝ, ℝ) ρ x))
+    (hxV : x ∈ V) (hxD : x ∈ D) (hρx : ρ x = 0) :
     let xD : D := ⟨x, hxD⟩
     IsBoundaryDefiningFunctionAt (M := D) (n := n + 1) xD (fun z : D ↦ -ρ z.1) := by
   let xD : D := ⟨x, hxD⟩
@@ -2302,7 +2980,74 @@ lemma frontierSignedPatch_negRestrict_isBoundaryDefiningAt
       ContMDiffAt (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) ∞ (fun z : D ↦ -ρ z.1) xD := by
     have hValSmooth : ContMDiff (𝓡∂ (n + 1)) I ∞ (Subtype.val : D → M) := hImmNew.contMDiff
     simpa [Function.comp] using! (hρSmooth.neg.comp hValSmooth).contMDiffAt
-  refine ⟨hxBoundaryMem, hNegSmooth, ?_⟩
+  have hValInjective :
+      Function.Injective (mfderiv (𝓡∂ (n + 1)) I (Subtype.val : D → M) xD) := by
+    exact Manifold.IsImmersion.mfderiv_injective hImmNew xD
+  have hdimT :
+      Module.finrank ℝ (TangentSpace (𝓡∂ (n + 1)) xD) =
+        Module.finrank ℝ (TangentSpace I xD.1) := by
+    change Module.finrank ℝ (EuclideanSpace ℝ (Fin (n + 1))) = Module.finrank ℝ E
+    simpa using hn.symm
+  letI : FiniteDimensional ℝ (TangentSpace (𝓡∂ (n + 1)) xD) := by
+    change FiniteDimensional ℝ (EuclideanSpace ℝ (Fin (n + 1)))
+    infer_instance
+  letI : FiniteDimensional ℝ (TangentSpace I xD.1) := by
+    change FiniteDimensional ℝ E
+    infer_instance
+  have hValSurjective :
+      Function.Surjective (mfderiv (𝓡∂ (n + 1)) I (Subtype.val : D → M) xD) := by
+    exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank hdimT).mp hValInjective
+  have hρRestrSurjective :
+      Function.Surjective
+        (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+          (fun z : D ↦ ρ z.1) xD) := by
+    have hcomp :
+        mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) (fun z : D ↦ ρ z.1) xD =
+          (mfderiv I 𝓘(ℝ, ℝ) ρ xD.1).comp
+            (mfderiv (𝓡∂ (n + 1)) I (Subtype.val : D → M) xD) := by
+      simpa [Function.comp] using!
+        (mfderiv_comp (x := xD) (g := ρ) (f := (Subtype.val : D → M))
+          (hρSmooth.contMDiffAt.mdifferentiableAt (by simp))
+          (hImmNew.contMDiff.contMDiffAt.mdifferentiableAt (by simp)))
+    rw [hcomp]
+    exact hρRegular.comp hValSurjective
+  have hNegRestrSurjective :
+      Function.Surjective
+        (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+          (fun z : D ↦ -ρ z.1) xD) := by
+    intro y
+    rcases hρRestrSurjective (-y) with ⟨v, hv⟩
+    refine ⟨v, ?_⟩
+    calc
+      (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+          (fun z : D ↦ -ρ z.1) xD) v =
+          (-(mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+            (fun z : D ↦ ρ z.1) xD)) v := by
+        have h := congrArg (fun L => L v)
+          (mfderiv_neg (I := 𝓡∂ (n + 1))
+            (f := fun z : D ↦ ρ z.1) (x := xD))
+        change
+          (mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+              (fun z : D ↦ -ρ z.1) xD) v =
+            (-(mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+              (fun z : D ↦ ρ z.1) xD)) v at h
+        exact h
+      _ = y := by
+        simpa using congrArg Neg.neg hv
+  have hOne :
+      NormedSpace.fromTangentSpace ((fun z : D ↦ -ρ z.1) xD)
+          (1 : TangentSpace 𝓘(ℝ, ℝ) ((fun z : D ↦ -ρ z.1) xD)) ≠ 0 := by
+    intro h
+    apply (one_ne_zero : (1 : ℝ) ≠ 0)
+    exact (NormedSpace.fromTangentSpace ((fun z : D ↦ -ρ z.1) xD)).injective h
+  obtain ⟨v, hv⟩ := hNegRestrSurjective
+    (1 : TangentSpace 𝓘(ℝ, ℝ) ((fun z : D ↦ -ρ z.1) xD))
+  have hDerivativeWitness :
+      boundary_defining_derivative (fun z : D ↦ -ρ z.1) v ≠ 0 := by
+    unfold boundary_defining_derivative
+    rw [hv]
+    exact hOne
+  refine ⟨hxBoundaryMem, hNegSmooth, ⟨v, hDerivativeWitness⟩, ?_⟩
   refine ⟨{z : D | z.1 ∈ V}, hVOpen.preimage continuous_subtype_val, ?_, ?_, ?_⟩
   · simpa [xD]
   · intro z hz
@@ -2555,6 +3300,7 @@ regular-value behavior. -/
 lemma frontierPartitionOfUnitySignedSum_hasSignZero
     {D : Set M} [SmoothManifoldWithBoundary dimM D] [Set.IsRegularDomain I D]
     [T2Space M] [SigmaCompactSpace M]
+    {n : ℕ} (hn : dimM = n + 1)
     (hFrontierSignedPatch :
       ∀ y ∈ frontier D,
         ∃ V : Set M,
@@ -2563,17 +3309,26 @@ lemma frontierPartitionOfUnitySignedSum_hasSignZero
               ∃ ρ : M → ℝ,
                 ContMDiff I 𝓘(ℝ, ℝ) ∞ ρ ∧
                   (∀ x ∈ V, x ∈ D ↔ ρ x ≤ 0) ∧
-                    (∀ x ∈ V, x ∈ frontier D ↔ ρ x = 0)) :
+                  (∀ x ∈ V, x ∈ frontier D ↔ ρ x = 0) ∧
+                  (∀ x ∈ V, x ∈ frontier D →
+                    Function.Surjective (mfderiv I 𝓘(ℝ, ℝ) ρ x))) :
     ∃ U : Set M, IsOpen U ∧ frontier D ⊆ U ∧
       ∃ ρ : M → ℝ, ContMDiff I 𝓘(ℝ, ℝ) ∞ ρ ∧
         (∀ y ∈ U, y ∈ D ↔ ρ y ≤ 0) ∧
-        (∀ y ∈ U, y ∈ frontier D ↔ ρ y = 0) := by
+        (∀ y ∈ U, y ∈ frontier D ↔ ρ y = 0) ∧
+        (∀ y ∈ U, ρ y = 0 → Function.Surjective (mfderiv I 𝓘(ℝ, ℝ) ρ y)) := by
   classical
   letI : LocallyCompactSpace H := I.locallyCompactSpace
   letI : LocallyCompactSpace M := ChartedSpace.locallyCompactSpace H M
   letI : ParacompactSpace M := paracompact_of_locallyCompact_sigmaCompact
   letI : T4Space M := T4Space.of_paracompactSpace_t2Space
-  choose W hWOpen hyW ρloc hρSmoothLocal hρSignLocal hρZeroLocal using hFrontierSignedPatch
+  letI : SmoothManifoldWithBoundary (n + 1) D := by
+    simpa [hn] using (inferInstance : SmoothManifoldWithBoundary dimM D)
+  have hSmoothBoundarySucc_eq :
+      (inferInstance : SmoothManifoldWithBoundary (n + 1) D) = by
+        simpa [hn] using (inferInstance : SmoothManifoldWithBoundary dimM D) := rfl
+  choose W hWOpen hyW ρloc hρSmoothLocal hρSignLocal hρZeroLocal hρRegularLocal
+    using hFrontierSignedPatch
   let cover : frontier D → Set M := fun y ↦ W y.1 y.2
   let localρ : frontier D → M → ℝ := fun y ↦ ρloc y.1 y.2
   have hcoverOpen : ∀ y : frontier D, IsOpen (cover y) := by
@@ -2737,7 +3492,310 @@ lemma frontierPartitionOfUnitySignedSum_hasSignZero
       have hxD : x ∈ D := (hSign x hxU).2 (by simpa [hρx])
       by_contra hxFrontier
       exact (ne_of_lt (hρ_neg_of_not_frontier x hxU hxD hxFrontier)) hρx
-  exact ⟨U, hUOpen, hFrontierU, ρ, hρSmooth, hSign, hZero⟩
+  have hRegular :
+      ∀ x ∈ U, ρ x = 0 → Function.Surjective (mfderiv I 𝓘(ℝ, ℝ) ρ x) := by
+    intro x hxU hρx
+    have hxFrontier : x ∈ frontier D := (hZero x hxU).2 hρx
+    have hxD : x ∈ D := (hSign x hxU).2 (by simpa [hρx])
+    let xD : D := ⟨x, hxD⟩
+    have hImmOld :
+        Manifold.IsImmersion (leeBoundaryModelWithCorners dimM) I ∞
+          (Subtype.val : D → M) :=
+      (regularDomainSubtypeVal_isSmoothEmbedding_infty (I := I) (D := D)).isImmersion
+    have hImmNew :
+        Manifold.IsImmersion (𝓡∂ (n + 1)) I ∞ (Subtype.val : D → M) := by
+      exact (leeBoundaryModelWithCorners_isImmersion_iff_succ
+        (I := I) (D := D) (n := n) hn hSmoothBoundarySucc_eq).1 hImmOld
+    have hValSmooth :
+        ContMDiff (𝓡∂ (n + 1)) I ∞ (Subtype.val : D → M) := hImmNew.contMDiff
+    have hmem_cover_of_fintsupport {y : frontier D}
+        (hy : y ∈ φ.fintsupport x) : x ∈ cover y := by
+      exact hφSub y ((φ.mem_fintsupport_iff x y).1 hy)
+    have hbd_of_active {y : frontier D} (hy : y ∈ φ.fintsupport x) :
+        IsBoundaryDefiningFunctionAt (M := D) (n := n + 1) xD
+          (fun z : D ↦ -localρ y z.1) := by
+      have hxCover : x ∈ cover y := hmem_cover_of_fintsupport hy
+      exact frontierSignedPatch_negRestrict_isBoundaryDefiningAt_of_surjectiveMfderiv
+        (I := I) (D := D) (n := n) hn hSmoothBoundarySucc_eq
+        (hWOpen y.1 y.2) (hρSmoothLocal y.1 y.2)
+        (hρSignLocal y.1 y.2) (hρZeroLocal y.1 y.2)
+        (hρRegularLocal y.1 y.2 x hxCover hxFrontier)
+        hxCover hxD ((hρZeroLocal y.1 y.2 x hxCover).1 hxFrontier)
+    rcases exists_active x hxU with ⟨y₀, hy₀⟩
+    have hy₀' : y₀ ∈ φ.fintsupport x := (φ.finsupport_subset_fintsupport x) hy₀
+    have hbd₀ := hbd_of_active hy₀'
+    rcases hbd₀.2.2.1 with ⟨v, hv⟩
+    have htrichotomy :
+        IsBoundaryTangentVector xD v ∨
+          IsInwardPointing xD v ∨ IsOutwardPointing xD v :=
+      boundary_vector_trichotomy hbd₀.1
+        (chart_mem_atlas (EuclideanHalfSpace (n + 1)) xD)
+        (mem_chart_source (EuclideanHalfSpace (n + 1)) xD)
+    -- The public inward/outward derivative equivalences are the boundary-chart comparison that
+    -- identifies every regular local covector with a positive multiple of the same normal covector.
+    -- Thus the one non-tangent witness `v` fixes the common coorientation for every active patch.
+    have hderiv_sign :
+        (∀ y : frontier D, y ∈ φ.fintsupport x →
+          0 < boundary_defining_derivative
+            (fun z : D ↦ -localρ y z.1) v) ∨
+        (∀ y : frontier D, y ∈ φ.fintsupport x →
+          boundary_defining_derivative
+            (fun z : D ↦ -localρ y z.1) v < 0) := by
+      rcases htrichotomy with htan | hin | hout
+      · exact False.elim (hv ((tangentToBoundary_iff_boundaryDefiningDerivative_eq_zero
+          hbd₀ v).1 htan))
+      · left
+        intro y hy
+        have hbd := hbd_of_active hy
+        exact (inwardPointing_iff_boundaryDefiningDerivative_pos hbd v).1 hin
+      · right
+        intro y hy
+        have hbd := hbd_of_active hy
+        exact (outwardPointing_iff_boundaryDefiningDerivative_neg hbd v).1 hout
+    let F : frontier D → D → ℝ := fun y z ↦
+      φ y z.1 * (-localρ y z.1)
+    let F' : frontier D →
+        (TangentSpace (𝓡∂ (n + 1)) xD →L[ℝ] ℝ) := fun y ↦
+      (φ y x) • mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+        (fun z : D ↦ -localρ y z.1) xD
+    have hHasMFDerivAtFinsetSum :
+        ∀ (t : Finset (frontier D)) (G : frontier D → D → ℝ)
+          (G' : frontier D →
+            (TangentSpace (𝓡∂ (n + 1)) xD →L[ℝ] ℝ)),
+          (∀ y ∈ t, HasMFDerivAt (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+            (G y) xD (G' y)) →
+          HasMFDerivAt (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+            (fun z ↦ ∑ y ∈ t, G y z) xD (∑ y ∈ t, G' y) := by
+      intro t G G' hG
+      induction t using Finset.induction_on with
+      | empty =>
+          simp only [Finset.sum_empty]
+          exact hasMFDerivAt_const (0 : ℝ) xD
+      | @insert y t hyt ih =>
+          have hfun :
+              (fun z ↦ ∑ j ∈ insert y t, G j z) =
+                G y + fun z ↦ ∑ j ∈ t, G j z := by
+            ext z
+            simp [Finset.sum_insert hyt]
+          rw [hfun, Finset.sum_insert hyt]
+          exact (hG y (Finset.mem_insert_self y t)).add
+            (ih (fun j hj ↦ hG j (Finset.mem_insert_of_mem hj)))
+    have hHasTerm {y : frontier D} (hy : y ∈ φ.fintsupport x) :
+        HasMFDerivAt (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) (F y) xD (F' y) := by
+      have hφValSmooth :
+          ContMDiff (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) ∞
+            (fun z : D ↦ φ y z.1) :=
+        (φ y).contMDiff.comp hValSmooth
+      have hρValSmooth :
+          ContMDiff (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) ∞
+            (fun z : D ↦ -localρ y z.1) :=
+        (hρSmoothLocal y.1 y.2).neg.comp hValSmooth
+      have hμ :=
+        ((hφValSmooth xD).mdifferentiableAt (by simp)).hasMFDerivAt.mul
+          ((hρValSmooth xD).mdifferentiableAt (by simp)).hasMFDerivAt
+      have hxCover : x ∈ cover y := hmem_cover_of_fintsupport hy
+      have hlocalZero : localρ y x = 0 :=
+        (hρZeroLocal y.1 y.2 x hxCover).1 hxFrontier
+      have hlocalZeroD : localρ y xD.1 = 0 := by simpa [xD] using hlocalZero
+      have hFeq : F y =
+          (fun z : D ↦ φ y z.1) * (fun z : D ↦ -localρ y z.1) := by
+        rfl
+      rw [hFeq]
+      simpa [F', hlocalZeroD, smul_eq_mul] using hμ
+    have hHasSum :
+        HasMFDerivAt (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+          (fun z : D ↦ ∑ y ∈ φ.fintsupport x, F y z) xD
+          (∑ y ∈ φ.fintsupport x, F' y) :=
+      hHasMFDerivAtFinsetSum (φ.fintsupport x) F F'
+        (fun y hy ↦ hHasTerm hy)
+    have hFinsupportEventual :
+        ∀ᶠ z in 𝓝 xD, φ.fintsupport z.1 ⊆ φ.fintsupport x := by
+      exact (continuous_subtype_val.continuousAt :
+        Filter.Tendsto (Subtype.val : D → M) (𝓝 xD) (𝓝 x)).eventually
+        (φ.eventually_fintsupport_subset x)
+    have hEq :
+        (fun z : D ↦ ∑ y ∈ φ.fintsupport x, F y z) =ᶠ[𝓝 xD]
+          (fun z : D ↦ -ρ z.1) := by
+      filter_upwards [hFinsupportEventual] with z hz
+      rw [← hρ_finsupport z.1]
+      have hz' : φ.finsupport z.1 ⊆ φ.fintsupport x :=
+        (φ.finsupport_subset_fintsupport z.1).trans hz
+      have hsum :
+          (φ.fintsupport x).sum (fun y ↦ φ y z.1 * localρ y z.1) =
+            (φ.finsupport z.1).sum (fun y ↦ φ y z.1 * localρ y z.1) := by
+        symm
+        exact Finset.sum_subset hz' (by
+          intro y hyx hynz
+          have hyzero : φ y z.1 = 0 := by
+            simpa [Function.support] using hynz
+          simp [hyzero])
+      simp [F, hsum]
+    have hmfderiv_negρ :
+        mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+            (fun z : D ↦ -ρ z.1) xD =
+          ∑ y ∈ φ.fintsupport x, F' y := by
+      rw [← hEq.mfderiv_eq]
+      exact hHasSum.mfderiv
+    have hsum_apply (w : TangentSpace (𝓡∂ (n + 1)) xD) :
+        ((∑ y ∈ φ.fintsupport x, F' y) w) =
+          ∑ y ∈ φ.fintsupport x, F' y w := by
+      induction φ.fintsupport x using Finset.induction_on with
+      | empty => simp
+      | @insert y t hyt ih =>
+          simp [Finset.sum_insert hyt, ih]
+    have hρxD : ρ xD.1 = 0 := by simpa [xD] using hρx
+    have hlocalZero_all :
+        ∀ y ∈ φ.fintsupport x, localρ y xD.1 = 0 := by
+      intro y hy
+      have hxCover : x ∈ cover y := hmem_cover_of_fintsupport hy
+      have hlocalZero : localρ y x = 0 :=
+        (hρZeroLocal y.1 y.2 x hxCover).1 hxFrontier
+      simpa [xD] using hlocalZero
+    have hbd_sum :
+        boundary_defining_derivative (fun z : D ↦ -ρ z.1) v =
+          ∑ y ∈ φ.fintsupport x,
+            φ y x * boundary_defining_derivative
+              (fun z : D ↦ -localρ y z.1) v := by
+      unfold boundary_defining_derivative
+      rw [hmfderiv_negρ]
+      change
+        (NormedSpace.fromTangentSpace (-ρ xD.1))
+            ((∑ y ∈ φ.fintsupport x, F' y) v) = _
+      rw [hsum_apply]
+      have hzeroR : -ρ xD.1 = 0 := by simp [hρxD]
+      rw [hzeroR]
+      refine Finset.sum_congr rfl ?_
+      intro y hy
+      have hyzero : -localρ y xD.1 = 0 := by
+        simp [hlocalZero_all y hy]
+      have hyzero' : (fun z : D ↦ -localρ y z.1) xD = 0 := by
+        simpa using hyzero
+      rw [hyzero']
+      change
+        ((φ y x) • mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+          (fun z : D ↦ -localρ y z.1) xD) v =
+          (φ y x) *
+            (NormedSpace.fromTangentSpace (0 : ℝ))
+              ((mfderiv (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ)
+                (fun z : D ↦ -localρ y z.1) xD) v)
+      rw [ContinuousLinearMap.smul_apply]
+      rfl
+    have hsum_ne :
+        (∑ y ∈ φ.fintsupport x,
+          φ y x * boundary_defining_derivative
+            (fun z : D ↦ -localρ y z.1) v) ≠ 0 := by
+      rcases hderiv_sign with hpos | hneg
+      · have hsum_pos :
+            0 < ∑ y ∈ φ.fintsupport x,
+              φ y x * boundary_defining_derivative
+                (fun z : D ↦ -localρ y z.1) v := by
+          refine Finset.sum_pos' ?_ ?_
+          · intro y hy
+            exact mul_nonneg (φ.nonneg y x) (le_of_lt (hpos y hy))
+          · exact ⟨y₀, (φ.finsupport_subset_fintsupport x) hy₀,
+              mul_pos (hcoeff_pos hy₀) (hpos y₀ ((φ.finsupport_subset_fintsupport x) hy₀))⟩
+        exact ne_of_gt hsum_pos
+      · have hsum_neg :
+            (∑ y ∈ φ.fintsupport x,
+              φ y x * boundary_defining_derivative
+                (fun z : D ↦ -localρ y z.1) v) < 0 := by
+          rw [Finset.sum_eq_add_sum_sdiff_singleton_of_mem
+            ((φ.finsupport_subset_fintsupport x) hy₀)]
+          apply add_neg_of_neg_of_nonpos
+          · exact mul_neg_of_pos_of_neg (hcoeff_pos hy₀)
+              (hneg y₀ ((φ.finsupport_subset_fintsupport x) hy₀))
+          · refine Finset.sum_nonpos ?_
+            intro y hy
+            have hyT : y ∈ φ.fintsupport x := (Finset.mem_sdiff.mp hy).1
+            exact mul_nonpos_of_nonneg_of_nonpos (φ.nonneg y x)
+              (le_of_lt (hneg y hyT))
+        exact ne_of_lt hsum_neg
+    have hbd_sum_ne :
+        boundary_defining_derivative (fun z : D ↦ -ρ z.1) v ≠ 0 := by
+      rw [hbd_sum]
+      exact hsum_ne
+    have hbd_glued :
+        IsBoundaryDefiningFunctionAt (M := D) (n := n + 1) xD
+          (fun z : D ↦ -ρ z.1) := by
+      have hNegSmooth :
+          ContMDiffAt (𝓡∂ (n + 1)) 𝓘(ℝ, ℝ) ∞
+            (fun z : D ↦ -ρ z.1) xD := by
+        simpa [Function.comp] using!
+          (hρSmooth.neg.comp hValSmooth).contMDiffAt
+      refine ⟨hbd₀.1, hNegSmooth, ⟨v, hbd_sum_ne⟩, ?_⟩
+      refine ⟨{z : D | z.1 ∈ U}, hUOpen.preimage continuous_subtype_val, ?_, ?_, ?_⟩
+      · simpa [xD]
+      · intro z hz
+        constructor
+        · intro hzBoundaryMem
+          have hzBoundaryNew : (𝓡∂ (n + 1)).IsBoundaryPoint z := by
+            simpa [ModelWithCorners.boundary] using hzBoundaryMem
+          have hzBoundaryOld : (leeBoundaryModelWithCorners dimM).IsBoundaryPoint z := by
+            exact (leeBoundaryModelWithCorners_isBoundaryPoint_iff_succ
+              (D := D) (n := n) hn hSmoothBoundarySucc_eq).2 hzBoundaryNew
+          have hzFrontier : z.1 ∈ frontier D :=
+            boundaryPoint_mem_frontier (I := I) (D := D) hzBoundaryOld
+          have hzZero : ρ z.1 = 0 := (hZero z.1 hz).1 hzFrontier
+          simpa [hzZero]
+        · intro hzZeroNeg
+          have hzZero : ρ z.1 = 0 := by linarith
+          have hzFrontier : z.1 ∈ frontier D := (hZero z.1 hz).2 hzZero
+          have hzBoundaryOld : (leeBoundaryModelWithCorners dimM).IsBoundaryPoint z := by
+            rcases (mem_frontier_iff_exists_boundaryPoint
+                (I := I) (D := D) (x := z.1)).1 hzFrontier with ⟨p, hp, hpz⟩
+            simpa using (Subtype.ext hpz) ▸ hp
+          have hzBoundaryNew : (𝓡∂ (n + 1)).IsBoundaryPoint z := by
+            exact (leeBoundaryModelWithCorners_isBoundaryPoint_iff_succ
+              (D := D) (n := n) hn hSmoothBoundarySucc_eq).1 hzBoundaryOld
+          simpa [ModelWithCorners.boundary] using hzBoundaryNew
+      · intro z hz
+        constructor
+        · intro hzInterior
+          have hzInteriorPoint : (𝓡∂ (n + 1)).IsInteriorPoint z := by
+            simpa [ModelWithCorners.interior] using hzInterior
+          have hzNotBoundaryNew :
+              ¬ (𝓡∂ (n + 1)).IsBoundaryPoint z :=
+            ((𝓡∂ (n + 1)).isInteriorPoint_iff_not_isBoundaryPoint z).1 hzInteriorPoint
+          have hzNotBoundaryOld :
+              ¬ (leeBoundaryModelWithCorners dimM).IsBoundaryPoint z := by
+            intro hzBoundaryOld
+            exact hzNotBoundaryNew <|
+              (leeBoundaryModelWithCorners_isBoundaryPoint_iff_succ
+                (D := D) (n := n) hn hSmoothBoundarySucc_eq).1 hzBoundaryOld
+          have hzLe : ρ z.1 ≤ 0 := (hSign z.1 hz).1 z.2
+          have hzNotFrontier : z.1 ∉ frontier D := by
+            intro hzFrontier
+            exact hzNotBoundaryOld <| by
+              rcases (mem_frontier_iff_exists_boundaryPoint
+                  (I := I) (D := D) (x := z.1)).1 hzFrontier with ⟨p, hp, hpz⟩
+              simpa using (Subtype.ext hpz) ▸ hp
+          have hzNe : ρ z.1 ≠ 0 := by
+            intro hzZero
+            exact hzNotFrontier ((hZero z.1 hz).2 hzZero)
+          have hzLt : ρ z.1 < 0 := lt_of_le_of_ne hzLe hzNe
+          linarith
+        · intro hzPos
+          have hzLt : ρ z.1 < 0 := by linarith
+          have hzNotFrontier : z.1 ∉ frontier D := by
+            intro hzFrontier
+            have hzZero : ρ z.1 = 0 := (hZero z.1 hz).1 hzFrontier
+            linarith
+          have hzNotBoundaryOld :
+              ¬ (leeBoundaryModelWithCorners dimM).IsBoundaryPoint z :=
+            not_boundaryPoint_of_mem_diff_frontier (I := I) (D := D)
+              ⟨z.2, hzNotFrontier⟩
+          have hzNotBoundaryNew :
+              ¬ (𝓡∂ (n + 1)).IsBoundaryPoint z := by
+            intro hzBoundaryNew
+            exact hzNotBoundaryOld <|
+              (leeBoundaryModelWithCorners_isBoundaryPoint_iff_succ
+                (D := D) (n := n) hn hSmoothBoundarySucc_eq).2 hzBoundaryNew
+          have hzInteriorPoint : (𝓡∂ (n + 1)).IsInteriorPoint z :=
+            ((𝓡∂ (n + 1)).isInteriorPoint_iff_not_isBoundaryPoint z).2 hzNotBoundaryNew
+          simpa [ModelWithCorners.interior] using hzInteriorPoint
+    exact boundaryDefiningAt_surjectiveAmbientMfderiv
+      (I := I) (D := D) (n := n) hn hSmoothBoundarySucc_eq hρSmooth hbd_glued
+  exact ⟨U, hUOpen, hFrontierU, ρ, hρSmooth, hSign, hZero, hRegular⟩
 
 /-- Helper for Theorem 5.48: in positive ambient dimension, the remaining task is to build one
 smooth signed function on an open neighborhood of `frontier D` with the correct local sign and
@@ -2783,14 +3841,16 @@ lemma existsFrontierNeighborhoodSignedFunction
               ∃ ρ : M → ℝ,
                 ContMDiff I 𝓘(ℝ, ℝ) ∞ ρ ∧
                   (∀ x ∈ V, x ∈ D ↔ ρ x ≤ 0) ∧
-                    (∀ x ∈ V, x ∈ frontier D ↔ ρ x = 0) := by
+                    (∀ x ∈ V, x ∈ frontier D ↔ ρ x = 0) ∧
+                      (∀ x ∈ V, x ∈ frontier D →
+                        Function.Surjective (mfderiv I 𝓘(ℝ, ℝ) ρ x)) := by
     intro y hyFrontier
     -- Route correction: the local patch now already carries the exact zero/frontier equivalence
     -- needed for the partition-of-unity glue step.
     exact frontierSignedPatch_hasZeroIffFrontier
       (I := I) (D := D) hn hSmoothBoundarySucc_eq b hyFrontier
-  rcases frontierPartitionOfUnitySignedSum_hasSignZero (I := I) (D := D) hFrontierSignedPatch with
-    ⟨U, hUOpen, hFrontierU, ρ, hρSmooth, hρSign, hρZero⟩
+  rcases frontierPartitionOfUnitySignedSum_hasSignZero (I := I) (D := D) hn hFrontierSignedPatch with
+    ⟨U, hUOpen, hFrontierU, ρ, hρSmooth, hρSign, hρZero, hρRegular⟩
   refine ⟨U, hUOpen, hFrontierU, ρ, hρSmooth, hρSign, hρZero, ?_⟩
   intro x hxU hρx
   have hxD : x ∈ D := (hρSign x hxU).2 (by simpa [hρx])
@@ -2798,9 +3858,9 @@ lemma existsFrontierNeighborhoodSignedFunction
   have hbd :
       IsBoundaryDefiningFunctionAt (M := D) (n := n + 1) xD (fun z : D ↦ -ρ z.1) := by
     -- The glued neighborhood function already has the exact sign/zero package needed on `D`.
-    exact frontierSignedPatch_negRestrict_isBoundaryDefiningAt
+    exact frontierSignedPatch_negRestrict_isBoundaryDefiningAt_of_surjectiveMfderiv
       (I := I) (D := D) (n := n) hn hSmoothBoundarySucc_eq
-      hUOpen hρSmooth hρSign hρZero hxU hxD hρx
+      hUOpen hρSmooth hρSign hρZero (hρRegular x hxU hρx) hxU hxD hρx
   -- The source-side boundary-defining function forces the ambient real derivative to be nonzero.
   exact boundaryDefiningAt_surjectiveAmbientMfderiv
     (I := I) (D := D) (n := n) hn hSmoothBoundarySucc_eq hρSmooth hbd
