@@ -4,6 +4,7 @@ open scoped ContDiff
 noncomputable section
 namespace MorganTianLib.SurgeryCap
 
+set_option maxHeartbeats 800000 in
 /-- **Math.** A constructed concave radial profile, spherical at the tip and cylindrical at infinity.
 This is scalar data for a cap metric; curvature, completeness and gluing are separate obligations. -/
 theorem exists_round_tip_cylindrical_warping :
