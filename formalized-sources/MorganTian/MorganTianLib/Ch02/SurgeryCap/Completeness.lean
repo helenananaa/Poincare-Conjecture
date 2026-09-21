@@ -12,8 +12,8 @@ proper and complete; this does not reuse Euclidean metric completeness. -/
 theorem globalCap_intrinsic_proper_complete (P : RoundCapProfile) :
     letI : RiemannianBundle (fun x : E3 => TangentSpace (𝓡 3) x) :=
       ⟨P.globalMetric.toRiemannianMetric⟩
-    letI : MetricSpace E3 := MetricSpace.ofRiemannianMetric (𝓡 3) E3
-    ProperSpace E3 ∧ CompleteSpace E3 := by
+    let m : MetricSpace E3 := MetricSpace.ofRiemannianMetric (𝓡 3) E3
+    @ProperSpace E3 m.toPseudoMetricSpace ∧ @CompleteSpace E3 m.toUniformSpace := by
 /- SWARM_PROOF_BEGIN -/
   letI : RiemannianBundle (fun x : E3 => TangentSpace (𝓡 3) x) :=
     ⟨P.globalMetric.toRiemannianMetric⟩
@@ -25,6 +25,7 @@ theorem globalCap_intrinsic_proper_complete (P : RoundCapProfile) :
   letI : MetricSpace E3 := intrinsicMetric
   let intrinsicPseudoMetric : PseudoMetricSpace E3 := intrinsicMetric.toPseudoMetricSpace
   letI : PseudoMetricSpace E3 := intrinsicPseudoMetric
+  letI : UniformSpace E3 := intrinsicMetric.toUniformSpace
   letI : Dist E3 := intrinsicPseudoMetric.toDist
   have hdist0 (x : E3) :
       @dist E3 intrinsicMetric.toPseudoMetricSpace.toDist (0 : E3) x = ‖x‖ := by
