@@ -1,0 +1,58 @@
+{
+  "reviews": [
+    {
+      "original_attempt": "b55d85e0-6bed-4020-b446-9c3a7ecb1411",
+      "original_status": "TIMEOUT",
+      "original_frozen_sha256": "f7df25d63d5086b3034f165c0cf8a5c18b04fbab99e19d340f83b6300301c738",
+      "source_sha256": "af2cbeb4f8809b3d434b4fae9bae7bcff137a8a71ea9d29978bfb265f2583ce6",
+      "verification": {
+        "compile_passed": true,
+        "sha256": "af2cbeb4f8809b3d434b4fae9bae7bcff137a8a71ea9d29978bfb265f2583ce6",
+        "cache_key": "3cdfee0de95b4a438f686aaf5df53cc2ff460550f1b27a30ad2e389699d2e8dd",
+        "cache_hit": false,
+        "compiler_wait_seconds": 2e-05,
+        "compile_seconds": 11.61393,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "audit_wait_seconds": 2.7e-05
+      },
+      "original_task_state_unchanged": true,
+      "source_path": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-20260922/hessian-review/source/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveHessianFormula.lean",
+      "review_kind": "independent coordinator source review; not a timeout-state promotion",
+      "task_id": "heat-hessian-formula",
+      "reviewed_statement_unchanged": true,
+      "coordinator_change": "Local first-derivative construction uses the correct PiLp projection and explicitly typed scalar multiplication; no hypotheses or conclusion changed."
+    },
+    {
+      "original_attempt": "86afeb28-211e-44fa-8bc3-6b640acb14ce",
+      "original_status": "TIMEOUT",
+      "original_frozen_sha256": "36e13925198c5f53959e8ef243bb94ffcf194f896abaa654bb71db5db207dba2",
+      "source_sha256": "36e13925198c5f53959e8ef243bb94ffcf194f896abaa654bb71db5db207dba2",
+      "verification": {
+        "compile_passed": true,
+        "sha256": "36e13925198c5f53959e8ef243bb94ffcf194f896abaa654bb71db5db207dba2",
+        "cache_key": "415d354a9297043da25dd4bd36f45cf7f7d4e767cd7570c2281b05468dacddb0",
+        "cache_hit": false,
+        "compiler_wait_seconds": 5.2e-05,
+        "compile_seconds": 8.99098,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "audit_wait_seconds": 3.5e-05
+      },
+      "original_task_state_unchanged": true,
+      "source_path": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-20260922/laplace-review/source/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveLaplaceExchange.lean",
+      "review_kind": "independent coordinator source review; not a timeout-state promotion",
+      "task_id": "heat-spatial-laplace-exchange",
+      "reviewed_statement_unchanged": true,
+      "coordinator_change": "Original frozen source compiled unchanged."
+    }
+  ],
+  "mathematical_scope": "Actual 3D heat-kernel Hessian formula and differentiation-under-convolution-integral. Not a nonlinear Ricci solver.",
+  "original_timeout_states_preserved": true
+}
