@@ -1,0 +1,271 @@
+[
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [],
+    "hint": "Choose a U loop using hsurj. Map it by r and cast endpoints by hr to obtain an A loop. Composing H with the original loop gives a based homotopy using hfix. Check FundamentalGroup.mapOfEq_apply and path homotopy maps/casts. Preserve the exact statement and fixed basepoint; only proof markers may change. Run swarm-check.sh.",
+    "id": "stage3-based-homotopy-surjection",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ProofContract.Proofs\nopen Function\nopen scoped Topology\n/-- Based homotopy transports pi1 surjectivity to a retracted domain. -/\ntheorem pi1_surjective_after_based_homotopy\n    {U A X : Type*} [TopologicalSpace U] [TopologicalSpace A] [TopologicalSpace X]\n    (j : C(U, X)) (k : C(A, X)) (r : C(U, A)) (c : U) (a : A)\n    (hr : r c = a) (hj : j c = k a) (H : j.Homotopy (k.comp r))\n    (hfix : ∀ t : unitInterval, H (t,c) = k a)\n    (hsurj : Surjective (FundamentalGroup.mapOfEq j hj)) :\n    Surjective (FundamentalGroup.map k a) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.pi1_surjective_after_based_homotopy",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/BasedHomotopySurjection.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [
+      "stage3-radial-capping-typed"
+    ],
+    "hint": "Use the accepted radial extension on the chart annulus 1<=norm(z)<=2; it vanishes at radius2. Transport along b.parametrization and paste with constant zero outside the chart collar. The closed radius-two ball is contained in the chart source, so the collar stays inside a genuine coordinate neighborhood. Prove global continuity on b.Complement using closed-set pasting or local chart argument. Do not assume a global chart or that b.Complement is itself a ball. This will provide actual pinch-map data for a later fundamental-group argument, not the whole connected-sum factors theorem. Preserve V1 and all definitions; prove only inside marked region; run swarm-check.sh. This is a new dependency route from the explicitly typed radial capping task; the consumer statement is unchanged.",
+    "id": "stage3-complement-capping",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import PoincareConjecture.ProofContract.Proofs.RadialCapping\nimport PoincareConjecture.ProofContract.Proofs.CoordinateClosureFrontier\nimport PoincareConjecture.ProofContract.Proofs.DoubleBallCore\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Extend a prescribed boundary sphere map across the actual punctured complement into a ball. -/\ntheorem coordinate_complement_capping {M : ClosedThreeManifold.{u}}\n    (b : CoordinateBall M) (h : Sphere2 ≃ₜ Sphere2) :\n    ∃ F : C(b.Complement, DoubleBall.Ball),\n      ∀ s : Sphere2, F (b.boundary s) = DoubleBall.boundary (h s) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.coordinate_complement_capping",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ComplementCapping.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [
+      "stage3-puncture-open-cover",
+      "stage3-euclidean-radial-deformation"
+    ],
+    "hint": "On the part of U in the image of the closed unit ball, use the inverse chart and radial_push_to_unit_complement. On U outside the removed open unit ball, use the identity. These are two relatively closed sets covering U and formulas agree on radius one. Paste in the product with unitInterval to get continuous H. Radial bounds keep images inside the chart source; H at 1 avoids the removed ball, defining r. Verify all boundary and basepoint identities. Do not assume the complement is a ball, and do not use only pointwise continuity. Keep V1 and the exact task type unchanged. Prove only inside proof markers, and run swarm-check.sh.",
+    "id": "stage3-coordinate-deformation",
+    "model": "luna",
+    "priority": 12,
+    "reasoning_effort": "xhigh",
+    "source": "import PoincareConjecture.ProofContract.Proofs.PunctureCover\nimport PoincareConjecture.ProofContract.Proofs.RadialDeformation\nimport PoincareConjecture.ProofContract.Proofs.CoordinateClosureFrontier\nimport PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\ndef complementIntoPuncture {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) :\n    C(b.Complement, punctureU b) :=\n  ⟨fun x => ⟨(x:M), (puncture_cover_sets b).2.2.2.1 x⟩,\n    continuous_subtype_val.subtype_mk _⟩\ndef punctureIntoManifold {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) :\n    C(punctureU b, M) := ⟨Subtype.val, continuous_subtype_val⟩\ndef complementIntoManifold {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) :\n    C(b.Complement, M) := ⟨Subtype.val, continuous_subtype_val⟩\n/-- A relative homotopy, not merely a pointwise map of the punctured neighborhood. -/\ntheorem coordinate_puncture_deformation {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) :\n    ∃ r : C(punctureU b, b.Complement), r.comp (complementIntoPuncture b) = ContinuousMap.id b.Complement ∧\n      ∃ H : (punctureIntoManifold b).Homotopy ((complementIntoManifold b).comp r),\n        ∀ (t : unitInterval) (c : b.Complement), H (t, complementIntoPuncture b c) = (c:M) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.coordinate_puncture_deformation",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/PunctureDeformation.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [
+      "stage3-puncture-open-cover",
+      "stage3-open-annulus"
+    ],
+    "hint": "V is chart-homeomorphic to a convex open ball, hence contractible. The overlap is the explicit annulus from puncture_cover_sets. For U connectedness, express U as the union of the already connected complement of the OPEN unit ball and the chart image of the connected annulus 1/2<norm<3/2; they intersect on the unit sphere. U is open in locally path connected M, so connectedness implies path connectedness. Use the actual complement-connectedness theorem; do not assume U connected or that the complement is a ball. Do not change V1 definitions or hypotheses. Only modify the marked proof and run swarm-check.sh.",
+    "id": "stage3-cover-connectivity",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import PoincareConjecture.ProofContract.Proofs.PunctureCover\nimport PoincareConjecture.ProofContract.Proofs.OpenAnnulus\nimport PoincareConjecture.ProofContract.Proofs.ComplementConnected\nimport PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Genuine connectedness and contractibility facts for the specified cover. -/\ntheorem puncture_cover_connectivity {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) :\n    IsPathConnected (punctureU b) ∧ IsSimplyConnected (punctureV b) ∧\n    IsPathConnected (punctureU b ∩ punctureV b) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.puncture_cover_connectivity",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/PunctureCoverConnected.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [],
+    "hint": "Use the specified scalar multiplier, positive norm on the exterior half-ball, and 0<=t<=1. Split norm(x)<=1 or >=1 for bounds. Norm of the scaled vector lies between norm(x) and max(1,norm(x)). Continuity follows inverse of a nonzero norm and max. This will be transported through an actual chart, not replace the global homotopy. Keep V1 and the exact task type unchanged. Prove only inside proof markers, and run swarm-check.sh.",
+    "id": "stage3-euclidean-radial-deformation",
+    "model": "luna",
+    "priority": 12,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Explicit homotopy pushing the punctured half-ball out to radius one. -/\ntheorem radial_push_to_unit_complement :\n    ∃ H : C(unitInterval × {x : Euclidean3 // (1/2 : ℝ) < ‖x‖}, Euclidean3),\n      (∀ (t : unitInterval) (x : {x : Euclidean3 // (1/2 : ℝ) < ‖x‖}),\n        H (t,x) = ((1-(t:ℝ)) + (t:ℝ)*max 1 (‖(x:Euclidean3)‖⁻¹)) • (x:Euclidean3)) ∧\n      (∀ (x : {x : Euclidean3 // (1/2 : ℝ) < ‖x‖}), H (0,x) = (x:Euclidean3)) ∧\n      (∀ (x : {x : Euclidean3 // (1/2 : ℝ) < ‖x‖}), 1 ≤ ‖H (1,x)‖) ∧\n      (∀ (t : unitInterval) (x : {x : Euclidean3 // (1/2 : ℝ) < ‖x‖}),\n        1 ≤ ‖(x:Euclidean3)‖ → H (t,x) = (x:Euclidean3)) ∧\n      (∀ (t : unitInterval) (x : {x : Euclidean3 // (1/2 : ℝ) < ‖x‖}),\n        (1/2 : ℝ) < ‖H (t,x)‖ ∧ ‖H (t,x)‖ ≤ max 1 ‖(x:Euclidean3)‖) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.radial_push_to_unit_complement",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/RadialDeformation.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [
+      "stage3-open-piece-connected",
+      "stage3-exterior-open-cover"
+    ],
+    "hint": "Use exterior_cover_sets and open_annulus_path_connected for radii 1 and 3/2 to prove the overlap path connected, with chart continuity/injectivity. The existing puncture_cover_connectivity already gives the second piece simply connected. Apply open_piece_preconnected to the actual ambient connected manifold and the overlap. Get nonemptiness of exteriorU from the overlap, then local path connectivity of this open subset of M yields path connectivity. This route uses the exterior already contained in the complement and needs no homotopy step. Preserve all exact definitions and V1 targets. Only edit proof markers; run swarm-check.sh.",
+    "id": "stage3-exterior-connectivity",
+    "model": "luna",
+    "priority": 15,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.Proofs.ExteriorCover\nimport PoincareConjecture.ProofContract.Proofs.OpenCoverConnectedPiece\nimport PoincareConjecture.ProofContract.Proofs.OpenAnnulus\nimport PoincareConjecture.ProofContract.Proofs.PunctureCoverConnected\nimport PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- The genuine exterior cover satisfies all van Kampen surjectivity hypotheses. -/\ntheorem exterior_cover_connectivity {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) :\n    IsPathConnected (exteriorU b) ∧ IsSimplyConnected (punctureV b) ∧\n    IsPathConnected (exteriorU b ∩ punctureV b) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.exterior_cover_connectivity",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ExteriorCoverConnected.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [],
+    "hint": "Use coordinate_closure_frontier for closure of the removed open ball. Closed unit ball lies in the open radius-3/2 ball and in the chart source. Chart injectivity identifies the exact annular overlap. Exterior membership implies not in removed by subset_closure. Reuse punctureV and prior image arguments without changing their types. Preserve all exact definitions and V1 targets. Only edit proof markers; run swarm-check.sh.",
+    "id": "stage3-exterior-open-cover",
+    "model": "luna",
+    "priority": 15,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.Proofs.PunctureCover\nimport PoincareConjecture.ProofContract.Proofs.CoordinateClosureFrontier\nimport PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\ndef exteriorU {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) : Set M := (closure b.removed)ᶜ\n/-- The open exterior lies inside the actual punctured complement. -/\ntheorem exterior_cover_sets {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) :\n    IsOpen (exteriorU b) ∧ exteriorU b ∪ punctureV b = univ ∧\n    (∀ x : exteriorU b, (x:M) ∉ b.removed) ∧\n    exteriorU b ∩ punctureV b = b.parametrization ''\n      {x : Euclidean3 | 1 < ‖x‖ ∧ ‖x‖ < (3/2 : ℝ)} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.exterior_cover_sets",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ExteriorCover.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [
+      "stage3-left-pinch",
+      "stage3-right-pinch",
+      "stage3-pi1-surjection-transfer"
+    ],
+    "hint": "For each factor use its complement inclusion as g, its actual insertion through the glued quotient into M as j, and the accepted left or right pinch as r. The pointwise identity gives r.comp j=g. Apply pi1_trivial_from_surjective_factorization and simplyConnected_of_trivial_pi1. The surjectivity input is an explicit unproved proposition. Do not claim that a pinch alone is a retraction of the full factor, and do not bind this conditional result as an unconditional V1 goal. Preserve V1 and only edit the proof markers; run swarm-check.sh.",
+    "id": "stage3-factors-from-complement-surjection",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.Proofs.ConnectedSumPinch\nimport PoincareConjecture.ProofContract.Proofs.ConnectedSumRightPinch\nimport PoincareConjecture.ProofContract.Proofs.Pi1SurjectionTransfer\nimport PoincareConjecture.ProofContract.Proofs.SimplyConnectedPi1\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Open local-topology obligation; no instance or axiom asserts it. -/\ndef CoordinateComplementPi1SurjectiveStatement : Prop :=\n  ∀ (M : ClosedThreeManifold.{u}) (b : CoordinateBall M),\n    ∃ c : b.Complement, Surjective (FundamentalGroup.map\n      (⟨Subtype.val, continuous_subtype_val⟩ : C(b.Complement, M)) c)\n/-- Conditional reduction using the actual left and right pinch maps. -/\ntheorem connectedSumFactors_of_complement_surjection\n    (surjectivity : CoordinateComplementPi1SurjectiveStatement.{u}) :\n    ConnectedSumFactorsStatement.{u} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.connectedSumFactors_of_complement_surjection",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ComplementPi1Reduction.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [
+      "stage3-complement-capping"
+    ],
+    "hint": "Use coordinate_complement_capping on the right complement with p.gluing.symm. Compose its ball-valued map with the left coordinate parametrization restricted to the closed unit ball (the radius-two condition gives source containment). It agrees with the left inclusion along the seam. Apply connectedSum_continuous_pasting, then compose with p.realization. Prove the identity on the punctured left factor. This is actual map data, NOT yet a pi1 injection or a retraction onto the whole closed factor. Do not assume the factor pi1 theorem. Only marked proof; run swarm-check.sh. This is a new dependency route from the explicitly typed radial capping task; the consumer statement is unchanged.",
+    "id": "stage3-left-pinch",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.Proofs.ComplementCapping\nimport PoincareConjecture.ProofContract.Proofs.ConnectedSumPasting\nimport PoincareConjecture.ProofContract.Proofs.DoubleBallCore\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Function Topology\nopen scoped Topology Manifold ContDiff\n/-- A genuine continuous collapse map to the left factor, identical on its punctured complement. -/\ntheorem connectedSum_left_pinch {A B M : ClosedThreeManifold.{u}}\n    (p : ConnectedSumPresentation A B M) :\n    ∃ f : C(M, A), ∀ x : p.leftBall.Complement,\n      f (p.realization.symm\n        (Quot.mk (connectedSumSeam p.leftBall p.rightBall p.gluing) (Sum.inl x))) = (x : A) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.connectedSum_left_pinch",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ConnectedSumPinch.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [],
+    "hint": "Use the radial homeomorphism x -> (norm(x)^(-1) smul x, norm(x)), with inverse (s,r)->r smul s. There is no zero because a>0. Derive PathConnectedSpace Sphere2 from isPathConnected_sphere and dimension 3 rank, then product with Ioo. Existing RadialAnnulus is for a closed interval only; use its proof pattern rather than assuming arbitrary radii. Do not change V1 definitions or hypotheses. Only modify the marked proof and run swarm-check.sh.",
+    "id": "stage3-open-annulus",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- A genuine open three-dimensional annulus is path connected. -/\ntheorem open_annulus_path_connected (a b : ℝ) (ha : 0 < a) (hab : a < b) :\n    Nonempty ({x : Euclidean3 // a < ‖x‖ ∧ ‖x‖ < b} ≃ₜ\n      (Sphere2 × Set.Ioo a b)) ∧\n    IsPathConnected {x : Euclidean3 | a < ‖x‖ ∧ ‖x‖ < b} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.open_annulus_path_connected",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/OpenAnnulus.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [],
+    "hint": "Given a hypothetical open separation of U into nonempty A and B, preconnectedness of the overlap puts U intersect V entirely in one side, say A. Then B and A union V form a nonempty open separation of all X. Formalize using IsPreconnected definition or subset_or_subset; include the possibly empty overlap case. No connectedness of U is assumed. Preserve all exact definitions and V1 targets. Only edit proof markers; run swarm-check.sh.",
+    "id": "stage3-open-piece-connected",
+    "model": "luna",
+    "priority": 15,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- A disconnected open piece would disconnect a connected ambient cover if its overlap is connected. -/\ntheorem open_piece_preconnected {X : Type*} [TopologicalSpace X] [PreconnectedSpace X]\n    (U V : Set X) (hU : IsOpen U) (hV : IsOpen V) (hcover : U ∪ V = univ)\n    (hinter : IsPreconnected (U ∩ V)) : IsPreconnected U :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.open_piece_preconnected",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/OpenCoverConnectedPiece.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [],
+    "hint": "Pull two target fundamental-group elements back along the surjection. Their images under j agree by simple connectivity of X. Map the equality through r and use Path.Homotopic.Quotient.map_comp and hcomp. Keep basepoints explicit. Preserve V1 and all frozen imports/definitions; prove only the marked proof. Do not use assumptions equivalent to the target. Run swarm-check.sh. These are sublemmas, not a completed Poincare proof.",
+    "id": "stage3-pi1-surjection-transfer",
+    "model": "luna",
+    "priority": 12,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- A pi1-surjective map through a simply connected space has trivial target pi1. -/\ntheorem pi1_trivial_from_surjective_factorization\n    {C X Y : Type*} [TopologicalSpace C] [TopologicalSpace X] [TopologicalSpace Y]\n    [SimplyConnectedSpace X] (j : C(C, X)) (r : C(X, Y)) (g : C(C, Y))\n    (hcomp : r.comp j = g) (c : C)\n    (hsurj : Surjective (FundamentalGroup.map g c)) :\n    Subsingleton (FundamentalGroup Y (g c)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.pi1_trivial_from_surjective_factorization",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/Pi1SurjectionTransfer.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [],
+    "hint": "The image of the compact closed half-ball is closed in Hausdorff M. The open radius-3/2 ball lies in the chart source since it is contained in the closed radius-two ball. Use chart injectivity for exact image differences. Covering follows closed half-ball subset open larger ball. This proves actual sets only, not path connectivity. Do not change V1 definitions or hypotheses. Only modify the marked proof and run swarm-check.sh.",
+    "id": "stage3-puncture-open-cover",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\ndef punctureU {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) : Set M :=\n  (b.parametrization '' Metric.closedBall 0 (1/2 : ℝ))ᶜ\ndef punctureV {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) : Set M :=\n  b.parametrization '' Metric.ball 0 (3/2 : ℝ)\n/-- Exact genuine open cover for removing a coordinate ball. -/\ntheorem puncture_cover_sets {M : ClosedThreeManifold.{u}} (b : CoordinateBall M) :\n    IsOpen (punctureU b) ∧ IsOpen (punctureV b) ∧ punctureU b ∪ punctureV b = Set.univ ∧\n    (∀ x : b.Complement, (x : M) ∈ punctureU b) ∧\n    punctureU b ∩ punctureV b = b.parametrization ''\n      {x : Euclidean3 | (1/2 : ℝ) < ‖x‖ ∧ ‖x‖ < (3/2 : ℝ)} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.puncture_cover_sets",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/PunctureCover.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [],
+    "hint": "Integration of a supplied previously checked proof, not a new mathematical result. The old task had an untyped final binder; this corrected task explicitly binds the exterior subtype. Preserve the supplied theorem and proof unless a local proof-body repair is required. Run swarm-check.sh. Do not modify V1, imports, definitions, or add assumptions. The original failed task remains unchanged.",
+    "id": "stage3-radial-capping-typed",
+    "model": "luna",
+    "priority": 30,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.Proofs.DoubleBallCore\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- A concrete collar-supported extension of a sphere map into the closed ball. -/\ntheorem radial_capping_extension (h : Sphere2 ≃ₜ Sphere2) :\n    ∃ F : C({x : Euclidean3 // 1 ≤ ‖x‖}, DoubleBall.Ball),\n      (∀ s : Sphere2, (F ⟨s, by simpa only [Metric.mem_sphere, dist_zero_right] using\n        (le_of_eq s.property.symm)⟩ : Euclidean3) = (h s : Euclidean3)) ∧\n      ∀ x : {x : Euclidean3 // 1 ≤ ‖x‖}, 2 ≤ ‖(x : Euclidean3)‖ → (F x : Euclidean3) = 0 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  let D := {x : Euclidean3 // 1 ≤ ‖x‖}\n  let r : D → ℝ := fun x => max 0 (2 - ‖(x : Euclidean3)‖)\n  have hnorm : Continuous (fun x : D => ‖(x : Euclidean3)‖) :=\n    continuous_norm.comp continuous_subtype_val\n  have hnorm0 : ∀ x : D, ‖(x : Euclidean3)‖ ≠ 0 := by\n    intro x\n    exact ne_of_gt (lt_of_lt_of_le zero_lt_one x.property)\n  have hnvec : Continuous (fun x : D =>\n      (‖(x : Euclidean3)‖ : ℝ)⁻¹ • (x : Euclidean3)) := by\n    exact (hnorm.inv₀ hnorm0).smul continuous_subtype_val\n  have hnmem : ∀ x : D, (‖(x : Euclidean3)‖ : ℝ)⁻¹ •\n      (x : Euclidean3) ∈ Sphere2 := by\n    intro x\n    rw [Metric.mem_sphere, dist_zero_right, norm_smul]\n    simp [hnorm0 x, norm_nonneg]\n  let n : D → Sphere2 := fun x =>\n    ⟨(‖(x : Euclidean3)‖ : ℝ)⁻¹ • (x : Euclidean3), hnmem x⟩\n  have hn : Continuous n := hnvec.subtype_mk hnmem\n  have hr : Continuous r := by\n    change Continuous (fun x : D => max 0 (2 - ‖(x : Euclidean3)‖))\n    exact (continuous_const.max (continuous_const.sub hnorm))\n  have hg : Continuous (fun x : D => (h (n x) : Euclidean3)) := by\n    exact continuous_subtype_val.comp (h.continuous.comp hn)\n  have hf : Continuous (fun x : D => r x • (h (n x) : Euclidean3)) :=\n    hr.smul hg\n  have hr_nonneg : ∀ x : D, 0 ≤ r x := by\n    intro x\n    exact le_max_left _ _\n  have hr_le_one : ∀ x : D, r x ≤ 1 := by\n    intro x\n    apply max_le\n    · norm_num\n    · linarith [x.property]\n  have hball : ∀ x : D, r x • (h (n x) : Euclidean3) ∈ DoubleBall.Ball := by\n    intro x\n    rw [Metric.mem_closedBall, dist_zero_right, norm_smul]\n    have hh : ‖(h (n x) : Euclidean3)‖ = 1 := by\n      simpa [Metric.mem_sphere, dist_zero_right] using (h (n x)).property\n    rw [Real.norm_of_nonneg (hr_nonneg x), hh, mul_one]\n    exact hr_le_one x\n  let F : C(D, DoubleBall.Ball) := ContinuousMap.mk\n    (fun x => ⟨r x • (h (n x) : Euclidean3), hball x⟩)\n    (hf.subtype_mk hball)\n  refine ⟨F, ?_, ?_⟩\n  · intro s\n    have hs_norm : ‖(s : Euclidean3)‖ = 1 := by\n      simpa [Metric.mem_sphere, dist_zero_right] using s.property\n    have hns : n ⟨(s : Euclidean3), by simpa using (le_of_eq s.property.symm)⟩ = s := by\n      apply Subtype.ext\n      simp [n, hs_norm]\n    have hrs : r ⟨(s : Euclidean3), by simpa using (le_of_eq s.property.symm)⟩ = 1 := by\n      norm_num [r, hs_norm]\n    simp [F, hns, hrs]\n  · intro x hx\n    have hrx : r x = 0 := by\n      simp [r, max_eq_left (sub_nonpos.mpr hx)]\n    simp [F, hrx]\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.radial_capping_extension",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/RadialCapping.lean",
+    "timeout_seconds": 600
+  },
+  {
+    "project": "poincare-recursive-topology-stage3-20260922",
+    "depends_on": [
+      "stage3-complement-capping"
+    ],
+    "hint": "Apply coordinate_complement_capping to the left complement with p.gluing, followed by the right coordinate ball map. This agrees on the seam with the inclusion of the right complement. Descend using connectedSum_continuous_pasting and compose p.realization. No retraction of the whole closed factor is being asserted. Preserve V1 and all frozen imports/definitions; prove only the marked proof. Do not use assumptions equivalent to the target. Run swarm-check.sh. These are sublemmas, not a completed Poincare proof.",
+    "id": "stage3-right-pinch",
+    "model": "luna",
+    "priority": 12,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.Proofs.ComplementCapping\nimport PoincareConjecture.ProofContract.Proofs.ConnectedSumPasting\nimport PoincareConjecture.ProofContract.Proofs.DoubleBallCore\nimport PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Actual projection to the right closed factor, fixing its punctured complement. -/\ntheorem connectedSum_right_pinch {A B M : ClosedThreeManifold.{u}}\n    (p : ConnectedSumPresentation A B M) :\n    ∃ f : C(M, B), ∀ y : p.rightBall.Complement,\n      f (p.realization.symm (Quot.mk (connectedSumSeam p.leftBall p.rightBall p.gluing)\n        (Sum.inr y))) = (y : B) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.connectedSum_right_pinch",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ConnectedSumRightPinch.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-hatcher-stage3-20260922",
+    "depends_on": [],
+    "hint": "Use the existing proved loop_decomposition_of_pathConnectedOpenCover or vanKampenMap_surjective in HatcherLib.Ch1.VanKampen. Build a two-member Bool cover with shared basepoint x; V loops map trivially because V is simply connected. Induction on covered loop words or the free product then places every ambient pi1 element in the image of U. Derive path connectivity of V from hVsimple. Preserve this exact statement and proof markers. Do not add nullhomotopy of ambient loops as a hypothesis. Run swarm-check.sh. This is the standard local van Kampen surjectivity step, not the full Poincare theorem.",
+    "id": "stage3-open-piece-pi1-surjection",
+    "model": "luna",
+    "priority": 15,
+    "reasoning_effort": "xhigh",
+    "source": "import HatcherLib.Ch1.VanKampen\nimport Mathlib.AlgebraicTopology.FundamentalGroupoid.SimplyConnected\nset_option autoImplicit false\nnoncomputable section\nnamespace HatcherLib\nopen Set Function\nopen scoped Topology\n/-- A simply connected second open piece contributes no generators to pi1. -/\ntheorem pi1_surjective_of_simply_connected_open_piece\n    {X : Type*} [TopologicalSpace X] (U V : Set X)\n    (hU : IsOpen U) (hV : IsOpen V) (hcover : U ∪ V = univ)\n    (hUpath : IsPathConnected U) (hVsimple : IsSimplyConnected V)\n    (hUV : IsPathConnected (U ∩ V)) (x : X) (hxU : x ∈ U) (hxV : x ∈ V) :\n    Surjective (FundamentalGroup.map\n      (⟨Subtype.val, continuous_subtype_val⟩ : C(U, X)) ⟨x, hxU⟩) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend HatcherLib\n",
+    "target_name": "HatcherLib.pi1_surjective_of_simply_connected_open_piece",
+    "target_path": "HatcherLib/Ch1/SimplyConnectedPieceSurjection.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-close-factors-stage3-20260922",
+    "depends_on": [],
+    "hint": "Choose an actual point x in the nonempty overlap exteriorU intersect punctureV using exterior_cover_connectivity. Regard it as c in b.Complement via exterior_cover_sets. Apply HatcherLib.pi1_surjective_of_simply_connected_open_piece to this exterior cover. The open exterior is already inside b.Complement, so its inclusion into M factors exactly through the complement inclusion. Induced fundamental-group maps compose; a surjective composite implies the second map surjective. Give the concrete complement basepoint c and keep all casts exact. No global homotopy or target-surjectivity premise is needed. Preserve the exact target and all V1 definitions. Use only accepted imports. Run swarm-check.sh and do not add any hypotheses.",
+    "id": "stage3-complement-pi1-closed",
+    "model": "luna",
+    "priority": 20,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.Proofs.ExteriorCoverConnected\nimport PoincareConjecture.ProofContract.Proofs.ComplementPi1Reduction\nimport HatcherLib.Ch1.SimplyConnectedPieceSurjection\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Actual complement pi1 surjectivity, with no outstanding theorem premise. -/\ntheorem coordinate_complement_pi1_surjective : CoordinateComplementPi1SurjectiveStatement.{u} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.coordinate_complement_pi1_surjective",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ComplementPi1Surjective.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-close-factors-stage3-20260922",
+    "depends_on": [
+      "stage3-v1-factors-closed"
+    ],
+    "hint": "Use topological_of_contracts with accepted sphere-cover recognition, handle exclusion and connectedSum_factors_proved; obtain the sphere-sum input from connectedSumSphere_of_complement_ball relativeBall. Keep all three unresolved assumptions visible. This is not an unconditional Poincare proof. Preserve the exact target and all V1 definitions. Use only accepted imports. Run swarm-check.sh and do not add any hypotheses.",
+    "id": "stage3-root-three-inputs",
+    "model": "luna",
+    "priority": 20,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Assembly\nimport PoincareConjecture.ProofContract.Proofs.CoverRecognition\nimport PoincareConjecture.ProofContract.Proofs.HandleExclusion\nimport PoincareConjecture.ProofContract.Proofs.ConnectedSumFactorsProof\nimport PoincareConjecture.ProofContract.Proofs.ConnectedSumSphereReduction\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Conditional root assembly: smoothing, geometric trace, and relative-ball recognition remain open. -/\ntheorem topological_of_three_contracts (smoothing : SmoothingStatement.{u})\n    (geometric : GeometricTraceStatement.{u}) (relativeBall : SphereComplementBallStatement.{u}) :\n    TopologicalPoincareStatement.{u} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.topological_of_three_contracts",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ThreeInputRootAssembly.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-close-factors-stage3-20260922",
+    "depends_on": [
+      "stage3-complement-pi1-closed"
+    ],
+    "hint": "Apply connectedSumFactors_of_complement_surjection to coordinate_complement_pi1_surjective. No new mathematical assumptions are needed. This fills exactly the existing V1 Prop, not a weakened version. Preserve the exact target and all V1 definitions. Use only accepted imports. Run swarm-check.sh and do not add any hypotheses.",
+    "id": "stage3-v1-factors-closed",
+    "model": "luna",
+    "priority": 20,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.Proofs.ComplementPi1Surjective\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Exact unconditional proof of the frozen V1 connected-sum factors obligation. -/\ntheorem connectedSum_factors_proved : ConnectedSumFactorsStatement.{u} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.connectedSum_factors_proved",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ConnectedSumFactorsProof.lean",
+    "timeout_seconds": 900
+  }
+]

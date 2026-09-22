@@ -1,0 +1,266 @@
+{
+  "checked_at": "2026-09-22T11:33:41.554026+08:00",
+  "source_head": "44df70976360783dc1b6c09a11627a66ed1eb785",
+  "source_snapshot_stable": true,
+  "base": "1994722c2ea85074d8347bd4728b3e0365e4d05a",
+  "branch": "integration",
+  "worktree_status": "",
+  "registry_counts": {
+    "INTEGRATED": 19
+  },
+  "task_count": 19,
+  "tasks": [
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-based-homotopy-surjection",
+      "status": "INTEGRATED",
+      "commit": "4caf3fcd8e440f3b18898083331b1c8f4b2d9a0f",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.pi1_surjective_after_based_homotopy",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/BasedHomotopySurjection.lean",
+      "effort": "xhigh",
+      "depends_on": [],
+      "source_sha256": "afdf4be10361861066779aeeb212c120c056af5c77255fb2829c1f38c6d03b5a"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-complement-capping",
+      "status": "INTEGRATED",
+      "commit": "9d723c3579e40bd981d5555209bc10620d575505",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.coordinate_complement_capping",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ComplementCapping.lean",
+      "effort": "xhigh",
+      "depends_on": [
+        "stage3-radial-capping-typed"
+      ],
+      "source_sha256": "7e16f3d298fd34cf58c98383d13e29a2afe14bd7b158991cac9a32f2fc81ed05"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-coordinate-deformation",
+      "status": "INTEGRATED",
+      "commit": "2229de2407375425bd9a2896e84cb61f892388b3",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.coordinate_puncture_deformation",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/PunctureDeformation.lean",
+      "effort": "xhigh",
+      "depends_on": [
+        "stage3-puncture-open-cover",
+        "stage3-euclidean-radial-deformation"
+      ],
+      "source_sha256": "8002f201fc1ded8498a18a17651810816dc5b5af894093064db1aa63e74cba40"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-cover-connectivity",
+      "status": "INTEGRATED",
+      "commit": "4e84e17eca28dac1ea8f135c000b5dc42298280a",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.puncture_cover_connectivity",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/PunctureCoverConnected.lean",
+      "effort": "xhigh",
+      "depends_on": [
+        "stage3-puncture-open-cover",
+        "stage3-open-annulus"
+      ],
+      "source_sha256": "f0eb2d2a27f0fc3ab55fe7716377dbbdb2203b3ebf7aca572ca4c4b5088bc95c"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-euclidean-radial-deformation",
+      "status": "INTEGRATED",
+      "commit": "0d1f1dfaacff3d43b9c28c6e61f94de2e02c183f",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.radial_push_to_unit_complement",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/RadialDeformation.lean",
+      "effort": "high",
+      "depends_on": [],
+      "source_sha256": "ed44bbdd8f60b805e6cc87454d0434924edbf860bb3cf1b67cca579484f0d01c"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-exterior-connectivity",
+      "status": "INTEGRATED",
+      "commit": "d7490be9945b0041ae544b70fc9214a0bb9a6db5",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.exterior_cover_connectivity",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ExteriorCoverConnected.lean",
+      "effort": "high",
+      "depends_on": [
+        "stage3-open-piece-connected",
+        "stage3-exterior-open-cover"
+      ],
+      "source_sha256": "12d18fdd3940a9b9c5c8fc4fdd0137ed1f940c38ab15136c6d6d380669aef07b"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-exterior-open-cover",
+      "status": "INTEGRATED",
+      "commit": "cf0900ee951f11810da2cb0581abc0fe5dc3c409",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.exterior_cover_sets",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ExteriorCover.lean",
+      "effort": "high",
+      "depends_on": [],
+      "source_sha256": "5a3b9e1257079deb9731bc0b8ada4457193196bbd693a8c4c51ecf3ffacd9a4e"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-factors-from-complement-surjection",
+      "status": "INTEGRATED",
+      "commit": "8b3e133bbcc6983eb6e4619e2c2aa759a809c4a3",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSumFactors_of_complement_surjection",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ComplementPi1Reduction.lean",
+      "effort": "high",
+      "depends_on": [
+        "stage3-left-pinch",
+        "stage3-right-pinch",
+        "stage3-pi1-surjection-transfer"
+      ],
+      "source_sha256": "477976fff31c43d0e5ee3d0d620da0a53534301b2c0874bba4b99f7465fc64c0"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-left-pinch",
+      "status": "INTEGRATED",
+      "commit": "f2e39cf3211c0f6be78159c80bfb2112da38161f",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_left_pinch",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ConnectedSumPinch.lean",
+      "effort": "high",
+      "depends_on": [
+        "stage3-complement-capping"
+      ],
+      "source_sha256": "e7330fbda3a53c1a08c0b61e29040c99e21ad0e7151b67b0917c70e60b76c1a8"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-open-annulus",
+      "status": "INTEGRATED",
+      "commit": "f3cb2e10c26b02d06ed039f9117abbd2b0285527",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.open_annulus_path_connected",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/OpenAnnulus.lean",
+      "effort": "high",
+      "depends_on": [],
+      "source_sha256": "b263429e3958f1cc4d5381099472f3c9751ff8ab29313e9a7e0bc11645db95e3"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-open-piece-connected",
+      "status": "INTEGRATED",
+      "commit": "aca9dea9ae2bcf869d8de6a6afd79abbd26a952c",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.open_piece_preconnected",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/OpenCoverConnectedPiece.lean",
+      "effort": "high",
+      "depends_on": [],
+      "source_sha256": "2abf1393e9da39bfbe3ccb5023cf7de47ff9e886bcc06b7ba27cf6c42a3f8cdf"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-pi1-surjection-transfer",
+      "status": "INTEGRATED",
+      "commit": "3dc9267ea48780f1dc1ba46a8161b756aaceed63",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.pi1_trivial_from_surjective_factorization",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/Pi1SurjectionTransfer.lean",
+      "effort": "high",
+      "depends_on": [],
+      "source_sha256": "d5194511b4e3d95894eed84da7bd0c19e42c2e27a59d5d1df150c200e1cbb79a"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-puncture-open-cover",
+      "status": "INTEGRATED",
+      "commit": "89954c8842cdc9bf7fc9151b5c7d94c931e6d7de",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.puncture_cover_sets",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/PunctureCover.lean",
+      "effort": "high",
+      "depends_on": [],
+      "source_sha256": "09a586073793d6d928a7198b7243dd6ac03cf5d378afbf6c25f8e19b165e6ffb"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-radial-capping-typed",
+      "status": "INTEGRATED",
+      "commit": "99815727c300226b445eb2f30a815249ab0399fb",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.radial_capping_extension",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/RadialCapping.lean",
+      "effort": "high",
+      "depends_on": [],
+      "source_sha256": "fc1ea56d59a29777051b92fb2a5e32a3d4b8737b818ca548ca25908423c2db8a"
+    },
+    {
+      "project": "poincare-recursive-topology-stage3-20260922",
+      "id": "stage3-right-pinch",
+      "status": "INTEGRATED",
+      "commit": "39928b39bf7567ece4a4ec519054c0f30ef47627",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_right_pinch",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ConnectedSumRightPinch.lean",
+      "effort": "high",
+      "depends_on": [
+        "stage3-complement-capping"
+      ],
+      "source_sha256": "d17aa4d7d483971bd63b52dbcd9380e3e6f88d24db2efce400ce99a1189401ee"
+    },
+    {
+      "project": "poincare-recursive-hatcher-stage3-20260922",
+      "id": "stage3-open-piece-pi1-surjection",
+      "status": "INTEGRATED",
+      "commit": "5641aeed9fe7b0e6ad8cc0d9693c425d4c009f78",
+      "declaration": "HatcherLib.pi1_surjective_of_simply_connected_open_piece",
+      "path": "formalized-sources/Hatcher/HatcherLib/Ch1/SimplyConnectedPieceSurjection.lean",
+      "effort": "xhigh",
+      "depends_on": [],
+      "source_sha256": "1553c009358a56fed3c315244193aee8b46f3356977caf3b43327348a222f02e"
+    },
+    {
+      "project": "poincare-recursive-close-factors-stage3-20260922",
+      "id": "stage3-complement-pi1-closed",
+      "status": "INTEGRATED",
+      "commit": "2bc731f3839bb093f1284c79a568c87d16c2baf5",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.coordinate_complement_pi1_surjective",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ComplementPi1Surjective.lean",
+      "effort": "high",
+      "depends_on": [],
+      "source_sha256": "48695798df3a47b5b608d8918509c56d91bf37d2a319998a233e1c29072cec2f"
+    },
+    {
+      "project": "poincare-recursive-close-factors-stage3-20260922",
+      "id": "stage3-root-three-inputs",
+      "status": "INTEGRATED",
+      "commit": "0e70e82cb7bccbf32236612dc3ca48ace478dead",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.topological_of_three_contracts",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ThreeInputRootAssembly.lean",
+      "effort": "high",
+      "depends_on": [
+        "stage3-v1-factors-closed"
+      ],
+      "source_sha256": "4b7923e24aa1915570f3eee73fe5c5a6b962ec90ba4c57609b1337e12f47d4b5"
+    },
+    {
+      "project": "poincare-recursive-close-factors-stage3-20260922",
+      "id": "stage3-v1-factors-closed",
+      "status": "INTEGRATED",
+      "commit": "67860650dba40441007cfa4816d3153c69d7db0f",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_factors_proved",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ConnectedSumFactorsProof.lean",
+      "effort": "high",
+      "depends_on": [
+        "stage3-complement-pi1-closed"
+      ],
+      "source_sha256": "5bba1e42616770609e6be5aac7e52df2c0cfc2dd6f6b5709fe252019d13191b1"
+    }
+  ],
+  "bindings": {
+    "schema": 1,
+    "bindings": {
+      "cover": {
+        "module": "PoincareConjecture.ProofContract.Proofs.CoverRecognition",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.sphere_cover_recognition"
+      },
+      "handle": {
+        "module": "PoincareConjecture.ProofContract.Proofs.HandleExclusion",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.handle_exclusion"
+      },
+      "sum_factors": {
+        "module": "PoincareConjecture.ProofContract.Proofs.ConnectedSumFactorsProof",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_factors_proved"
+      }
+    }
+  },
+  "frozen_lock_sha256": "60182ba380cc0ce7548c156c1dabb0a8e6a75bbbbc05ea2dfe3471591ed9aac5",
+  "remote_push_performed": false,
+  "upstream_pr_created": false
+}

@@ -1,0 +1,143 @@
+{
+  "scope": "Integrated fixed statements only; existing pinned dependencies; targeted source builds",
+  "projects": {
+    "poincare-recursive-topology-stage3-20260922": {
+      "checked_count": 15,
+      "source_sha256": {
+        "stage3-based-homotopy-surjection": "afdf4be10361861066779aeeb212c120c056af5c77255fb2829c1f38c6d03b5a",
+        "stage3-complement-capping": "7e16f3d298fd34cf58c98383d13e29a2afe14bd7b158991cac9a32f2fc81ed05",
+        "stage3-coordinate-deformation": "8002f201fc1ded8498a18a17651810816dc5b5af894093064db1aa63e74cba40",
+        "stage3-cover-connectivity": "f0eb2d2a27f0fc3ab55fe7716377dbbdb2203b3ebf7aca572ca4c4b5088bc95c",
+        "stage3-euclidean-radial-deformation": "ed44bbdd8f60b805e6cc87454d0434924edbf860bb3cf1b67cca579484f0d01c",
+        "stage3-exterior-connectivity": "12d18fdd3940a9b9c5c8fc4fdd0137ed1f940c38ab15136c6d6d380669aef07b",
+        "stage3-exterior-open-cover": "5a3b9e1257079deb9731bc0b8ada4457193196bbd693a8c4c51ecf3ffacd9a4e",
+        "stage3-factors-from-complement-surjection": "477976fff31c43d0e5ee3d0d620da0a53534301b2c0874bba4b99f7465fc64c0",
+        "stage3-left-pinch": "e7330fbda3a53c1a08c0b61e29040c99e21ad0e7151b67b0917c70e60b76c1a8",
+        "stage3-open-annulus": "b263429e3958f1cc4d5381099472f3c9751ff8ab29313e9a7e0bc11645db95e3",
+        "stage3-open-piece-connected": "2abf1393e9da39bfbe3ccb5023cf7de47ff9e886bcc06b7ba27cf6c42a3f8cdf",
+        "stage3-pi1-surjection-transfer": "d5194511b4e3d95894eed84da7bd0c19e42c2e27a59d5d1df150c200e1cbb79a",
+        "stage3-puncture-open-cover": "09a586073793d6d928a7198b7243dd6ac03cf5d378afbf6c25f8e19b165e6ffb",
+        "stage3-radial-capping-typed": "fc1ea56d59a29777051b92fb2a5e32a3d4b8737b818ca548ca25908423c2db8a",
+        "stage3-right-pinch": "d17aa4d7d483971bd63b52dbcd9380e3e6f88d24db2efce400ce99a1189401ee"
+      },
+      "axioms": {
+        "PoincareConjecture.ProofContract.Proofs.pi1_surjective_after_based_homotopy": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.coordinate_complement_capping": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.coordinate_puncture_deformation": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.puncture_cover_connectivity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.radial_push_to_unit_complement": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.exterior_cover_connectivity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.exterior_cover_sets": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.connectedSumFactors_of_complement_surjection": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.connectedSum_left_pinch": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.open_annulus_path_connected": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.open_piece_preconnected": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.pi1_trivial_from_surjective_factorization": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.puncture_cover_sets": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.radial_capping_extension": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.connectedSum_right_pinch": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-stage3-20260922/poincare-recursive-topology-stage3-20260922-Audit.lean"
+    },
+    "poincare-recursive-hatcher-stage3-20260922": {
+      "checked_count": 1,
+      "source_sha256": {
+        "stage3-open-piece-pi1-surjection": "1553c009358a56fed3c315244193aee8b46f3356977caf3b43327348a222f02e"
+      },
+      "axioms": {
+        "HatcherLib.pi1_surjective_of_simply_connected_open_piece": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-stage3-20260922/poincare-recursive-hatcher-stage3-20260922-Audit.lean"
+    },
+    "poincare-recursive-close-factors-stage3-20260922": {
+      "checked_count": 3,
+      "source_sha256": {
+        "stage3-complement-pi1-closed": "48695798df3a47b5b608d8918509c56d91bf37d2a319998a233e1c29072cec2f",
+        "stage3-root-three-inputs": "4b7923e24aa1915570f3eee73fe5c5a6b962ec90ba4c57609b1337e12f47d4b5",
+        "stage3-v1-factors-closed": "5bba1e42616770609e6be5aac7e52df2c0cfc2dd6f6b5709fe252019d13191b1"
+      },
+      "axioms": {
+        "PoincareConjecture.ProofContract.Proofs.coordinate_complement_pi1_surjective": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.topological_of_three_contracts": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.connectedSum_factors_proved": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-stage3-20260922/poincare-recursive-close-factors-stage3-20260922-Audit.lean"
+    }
+  }
+}
