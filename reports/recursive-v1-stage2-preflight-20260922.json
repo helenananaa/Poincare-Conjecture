@@ -1,0 +1,42 @@
+{
+  "source_base": "7c46e42298dd4844b55951b7199268f572df7ffb",
+  "core": {
+    "compile_passed": true,
+    "sha256": "d9dd64a2c68a40f55edd9def8b131599a39337da2322a3426c4eee2ed2aa6253",
+    "cache_key": "aeae447a80ed4e2b770dad6d473df8d569598ac0407c4fd72861e01df9e230cb",
+    "cache_hit": false,
+    "compiler_wait_seconds": 1.9e-05,
+    "compile_seconds": 4.742561,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_wait_seconds": 3e-05
+  },
+  "weighted_hessian_review": {
+    "original_attempt": "e1e16416-d40c-4cd9-8fbe-50b460e8904c",
+    "original_status": "TIMEOUT",
+    "original_frozen_sha256": "2ab5db17f229b790139b437073333fd9fef3afaaab37a7c2467ca07f67a1886c",
+    "source_sha256": "2ab5db17f229b790139b437073333fd9fef3afaaab37a7c2467ca07f67a1886c",
+    "verification": {
+      "compile_passed": true,
+      "sha256": "2ab5db17f229b790139b437073333fd9fef3afaaab37a7c2467ca07f67a1886c",
+      "cache_key": "820ab2e080012fbc81058c845fe8af61a709828f74bc1b13b3fc78339e363135",
+      "cache_hit": false,
+      "compiler_wait_seconds": 3.5e-05,
+      "compile_seconds": 6.649157,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_wait_seconds": 2.5e-05
+    },
+    "original_task_state_unchanged": true,
+    "source_path": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-stage2-20260922/weighted-review/source/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveHessianEstimate.lean",
+    "review_kind": "independent coordinator source review; not a timeout-state promotion"
+  },
+  "weighted_hessian_original_timeout_retained": true,
+  "scope": "Concrete double-ball definitions and norm decomposition; exact weighted 3D heat Hessian estimate, not Ricci flow existence."
+}
