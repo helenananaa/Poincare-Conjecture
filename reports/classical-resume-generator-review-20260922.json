@@ -1,0 +1,27 @@
+{
+  "project": "poincare-endpoint-repair-20260922",
+  "task_id": "repair-generator-exact-parent",
+  "original_attempt": "5ef7ea85-20c2-41e0-b850-9760cd984a94",
+  "original_status": "TIMEOUT",
+  "original_frozen_sha256": "ddd8693db98fee3f49f51c04ca47bd242d2cd9ecce737178eae8dac4bf2325cf",
+  "source_path": "/home/helenanana/projects/poincare-ops-20260919/classical-resume-20260922/generator-review/source/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/HeatGeneratorC2.lean",
+  "source_sha256": "27dfd237990a7ed80f88df5786b13bfa7c1c4adbf3301b8abed64bef79ffea83",
+  "verification": {
+    "compile_passed": true,
+    "sha256": "27dfd237990a7ed80f88df5786b13bfa7c1c4adbf3301b8abed64bef79ffea83",
+    "cache_key": "43627d492226cdcc3e9de1db7d2463b24167302798f3f98a29af36e80f29639c",
+    "cache_hit": false,
+    "compiler_wait_seconds": 2.2e-05,
+    "compile_seconds": 11.15718,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_wait_seconds": 1.8e-05
+  },
+  "original_task_state_preserved": true,
+  "review_scope": "Independent stopped-source review; not automatic acceptance or task-state promotion",
+  "statement_unchanged": true,
+  "coordinator_repairs": "Restored explicit time arguments; supplied genuine integrability facts; used an eventually-positive identity rather than a false all-real identity; completed a global/local remainder bound with its actual constant; explicitly identified Hessian coordinates. Compiler limits unchanged."
+}
