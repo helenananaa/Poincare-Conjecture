@@ -1,0 +1,82 @@
+[
+  {
+    "task": "reg-hemisphere-frontier",
+    "group": "topology",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "3d799755894e1a42e1803cd064c3ec7f67c19ff265f5df91236cf549614ddbc4",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "reg-lower-hemisphere-ball",
+    "group": "topology",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "b24a7500a90cdcb7139b1e030cc3067bcd735c8ca4f906680777968b30d9be99",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "reg-time-space-kernel-bound",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "3f13a0a16272bba39df13c489ee33cdbed1474316145a5168252a8954f9dc75a",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "reg-time-formula",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "706f9d6aefc6bb2ba336a290ef43a8479eb6d55d0b75010da61603292465c535",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "reg-equator-sphere",
+    "group": "topology",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "9c3fcb1e103d2d2115fc9014e72af1f6ebfa1603bd771dd40116d23a35810237",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "reg-actual-hessian-bound",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "49da4f6280abe7b97e4af905c6d755c20d53ca1879c72c2f73e692062a1bd6b7",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "reg-hessian-holder-space",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "3d4e15ddf35fc264b0519e96c2784d3e3e29c3492ad4db8d9c94b3a2311ac19f",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "reg-coefficient-commutator",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "0db1c5876015fa6caa4bf362afec292bd1ab18400f4d7f5235fca6f7b796d87a",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  }
+]

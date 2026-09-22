@@ -1,0 +1,66 @@
+{
+  "poincare-regularity-topology-20260922": {
+    "PoincareConjecture.ProofContract.Proofs.equator_homeomorph_sphere2": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Proofs.upper_hemisphere_frontier": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Proofs.lower_hemisphere_homeomorph_ball": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Proofs.round_coordinate_complement_recognition": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "poincare-regularity-heat-20260922": {
+    "MorganTianLib.ParabolicPDE.actual_heat_hessian_holder_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "MorganTianLib.ParabolicPDE.heat_hessian_coefficient_commutator": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "MorganTianLib.ParabolicPDE.actual_heat_hessian_spatial_holder": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "MorganTianLib.ParabolicPDE.integrated_coefficient_freezing_error": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "MorganTianLib.ParabolicPDE.laplacian_cutoff_product_rule": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "MorganTianLib.ParabolicPDE.euclideanHeatKernel_time_derivative_dominator": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_time_formula": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "MorganTianLib.ParabolicPDE.euclideanHeatKernel_compact_time_space_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  }
+}

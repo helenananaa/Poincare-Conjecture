@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-09-22T13:44:02.472604+08:00",
+  "source_commit": "1b9b311e7e17e954d4aefeb74c64b56d4a81c2ce",
+  "original_C2_type_regression": "'MorganTianLib.ParabolicPDE.original_bounded_hessian_regression' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "main_build_tail": "warning: PoincareConjecture/ProofContract/Proofs/RadialAnnulus.lean:21:25: This simp argument is unused:\n  abs_of_pos (inv_pos.mpr hx)\n\nHint: Omit it from the simp argument list.\n  simp [norm_smul, a̵b̵s̵_̵o̵f̵_̵p̵o̵s̵ ̵(̵i̵n̵v̵_̵p̵o̵s̵.̵m̵p̵r̵ ̵h̵x̵)̵,̵ ̵hx.ne']\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n⚠ [8959/8960] Built PoincareConjecture.ProofContract.Proofs.RoundComplementRecognition (7.5s)\nwarning: PoincareConjecture/ProofContract/Proofs/RoundComplementRecognition.lean:43:6: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`\nBuild completed successfully (8960 jobs).",
+  "regression_output": "{\n  \"original_frozen_fixture_reference\": \"9d6f10c8716fbe5eeffe7c81a00da20294cb8bdb\",\n  \"original_fixture_tests\": 23,\n  \"original_fixture_passed\": true,\n  \"live_multibinding_tests\": 5,\n  \"live_multibinding_passed\": true,\n  \"frozen_files_modified\": false,\n  \"legacy_direct_discovery_caveat\": \"Original live-data test harness has a single-binding fixture assumption; use this explicit fixture runner. Remote CI workflow has not been migrated.\"\n}\n.......................\n----------------------------------------------------------------------\nRan 23 tests in 0.020s\n\nOK\n.....\n----------------------------------------------------------------------\nRan 5 tests in 0.001s\n\nOK\n",
+  "completion_gate": "PROOF_CONTRACT_GUARD_FAILED: proof NOT COMPLETE; unresolved or unverified obligations: smoothing, geometric_trace, sum_sphere\n",
+  "blueprint_unchanged": true,
+  "remote_push_performed": false,
+  "upstream_pr_created": false
+}

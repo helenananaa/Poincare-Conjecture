@@ -1,0 +1,236 @@
+{
+  "checked_at": "2026-09-22T13:44:02.454169+08:00",
+  "source_head": "1b9b311e7e17e954d4aefeb74c64b56d4a81c2ce",
+  "source_snapshot_stable": true,
+  "start_source": "dcd32c00b3d06dd5b05849e3c2cc29b9d373c75d",
+  "previous_reply_source": "ac53a7542023193c7c04ff5c88db0a7abb1b3e3f",
+  "branch": "integration",
+  "worktree_status": "",
+  "task_count": 14,
+  "registry_counts": {
+    "INTEGRATED": 12,
+    "QUEUED": 1,
+    "RUNNING": 1
+  },
+  "ready_but_unclaimed": [],
+  "active_tasks": [
+    "reg-bounded-classical-time"
+  ],
+  "tasks": [
+    {
+      "project": "poincare-regularity-topology-20260922",
+      "id": "reg-equator-sphere",
+      "status": "INTEGRATED",
+      "commit": "1721853d744723c96e991214d5b11d6ec16e8f16",
+      "name": "PoincareConjecture.ProofContract.Proofs.equator_homeomorph_sphere2",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/EquatorSphere.lean",
+      "source_sha256": "b13fb02bc3dfa931b318134fd25fb336ba48e038f534e14bab502fe5aae55639",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-topology-20260922",
+      "id": "reg-hemisphere-frontier",
+      "status": "INTEGRATED",
+      "commit": "3383fde81c65d15f2ab0aa157d4b6d98bf25d944",
+      "name": "PoincareConjecture.ProofContract.Proofs.upper_hemisphere_frontier",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/HemisphereFrontier.lean",
+      "source_sha256": "5e05b3f313433c694cafc178a24dbb03fe7c7e2f10218fdeceac37e020b9d527",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-topology-20260922",
+      "id": "reg-lower-hemisphere-ball",
+      "status": "INTEGRATED",
+      "commit": "31d7212eb2a231f8d5bf102915432fe0554a3f1a",
+      "name": "PoincareConjecture.ProofContract.Proofs.lower_hemisphere_homeomorph_ball",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/LowerHemisphereBall.lean",
+      "source_sha256": "9f1794ef3688bf53e10471ab8a170b65abf664e3758d4065e412483552408219",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-topology-20260922",
+      "id": "reg-round-complement-marked",
+      "status": "INTEGRATED",
+      "commit": "1b9b311e7e17e954d4aefeb74c64b56d4a81c2ce",
+      "name": "PoincareConjecture.ProofContract.Proofs.round_coordinate_complement_recognition",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/RoundComplementRecognition.lean",
+      "source_sha256": "61a6bc48cda0bbefa63486bb97c08e50bfdde1c2b1a5026a5ff88648cb3f3e4a",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "reg-lower-hemisphere-ball",
+        "reg-equator-sphere",
+        "reg-hemisphere-frontier"
+      ],
+      "conditional_on_unproved_math": true
+    },
+    {
+      "project": "poincare-regularity-heat-20260922",
+      "id": "reg-actual-hessian-bound",
+      "status": "INTEGRATED",
+      "commit": "7582dd1c6a528172983412a5e1f2f72e07e9f94c",
+      "name": "MorganTianLib.ParabolicPDE.actual_heat_hessian_holder_bound",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/ActualHeatHessianBound.lean",
+      "source_sha256": "a440f1c88b03aa111c103e60fbde52af76f0a2c272fb0a0c937eda1c8e88f7e0",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-heat-20260922",
+      "id": "reg-bounded-classical-ivp",
+      "status": "QUEUED",
+      "commit": null,
+      "name": "MorganTianLib.ParabolicPDE.bounded_uniformly_continuous_heat_ivp",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/BoundedClassicalIVP.lean",
+      "source_sha256": null,
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "reg-bounded-classical-time"
+      ],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-heat-20260922",
+      "id": "reg-bounded-classical-time",
+      "status": "RUNNING",
+      "commit": null,
+      "name": "MorganTianLib.ParabolicPDE.bounded_heat_time_equation",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/BoundedHeatTimeEquation.lean",
+      "source_sha256": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "reg-time-derivative-dominator"
+      ],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-heat-20260922",
+      "id": "reg-coefficient-commutator",
+      "status": "INTEGRATED",
+      "commit": "095dbef020c6255c3543d0b2842b8fe914ecd06c",
+      "name": "MorganTianLib.ParabolicPDE.heat_hessian_coefficient_commutator",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/HeatCoefficientCommutator.lean",
+      "source_sha256": "650c482f379e5b3ba34b51a78464b63ae0243329c1c1ba9afadc4335d9d3c1a8",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-heat-20260922",
+      "id": "reg-hessian-holder-space",
+      "status": "INTEGRATED",
+      "commit": "8d432c5a85a06d639480ec83283cfca69c55dfce",
+      "name": "MorganTianLib.ParabolicPDE.actual_heat_hessian_spatial_holder",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/ActualHeatHessianHolder.lean",
+      "source_sha256": "30359bd3fec200cee28aa957fc5da7b7404235863da7dde9e5eeaed09eb09725",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-heat-20260922",
+      "id": "reg-integrated-coefficient-error",
+      "status": "INTEGRATED",
+      "commit": "3b402d2157775df70d23bddff8d187a474b92448",
+      "name": "MorganTianLib.ParabolicPDE.integrated_coefficient_freezing_error",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/IntegratedCoefficientError.lean",
+      "source_sha256": "c37131ae66e758b48f397a8770216fefc65eba365794aa6a6b58ab0ae40eea87",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "reg-coefficient-commutator"
+      ],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-heat-20260922",
+      "id": "reg-localization-product",
+      "status": "INTEGRATED",
+      "commit": "bc74719801e0aa29556f126254d84d275266e78f",
+      "name": "MorganTianLib.ParabolicPDE.laplacian_cutoff_product_rule",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/LaplacianLocalization.lean",
+      "source_sha256": "79de85994a435e4adaddffd7258599c4f85e5651699579148eb1510921e949ae",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-heat-20260922",
+      "id": "reg-time-derivative-dominator",
+      "status": "INTEGRATED",
+      "commit": "ce052035c1dc0fd70578bb72466b32e122f1073d",
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_time_derivative_dominator",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/TimeDerivativeDominator.lean",
+      "source_sha256": "ae7e2fc106ff51d58de05129b4e1212484df99255cb586f081d8d2a8df9d1592",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "reg-time-formula",
+        "reg-time-space-kernel-bound"
+      ],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-heat-20260922",
+      "id": "reg-time-formula",
+      "status": "INTEGRATED",
+      "commit": "90d7c34c6e709d36f3890de263a7216a1fbbd207",
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_time_formula",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/ActualHeatTimeFormula.lean",
+      "source_sha256": "b00423fd048a1083293711fa2a79dad62d9c20ec27ef06d7b540550e0a1e02c7",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "conditional_on_unproved_math": false
+    },
+    {
+      "project": "poincare-regularity-heat-20260922",
+      "id": "reg-time-space-kernel-bound",
+      "status": "INTEGRATED",
+      "commit": "375770107d6654234384c91641ab374ebd9d2467",
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_compact_time_space_bound",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/TimeSpaceGaussianBound.lean",
+      "source_sha256": "c6a5df351cbbd66db2ce06a514403f092f39e3da7eed19d94ca92e3bed2b2155",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "conditional_on_unproved_math": false
+    }
+  ],
+  "bindings": {
+    "schema": 1,
+    "bindings": {
+      "cover": {
+        "module": "PoincareConjecture.ProofContract.Proofs.CoverRecognition",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.sphere_cover_recognition"
+      },
+      "handle": {
+        "module": "PoincareConjecture.ProofContract.Proofs.HandleExclusion",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.handle_exclusion"
+      },
+      "sum_factors": {
+        "module": "PoincareConjecture.ProofContract.Proofs.ConnectedSumFactorsProof",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_factors_proved"
+      }
+    }
+  },
+  "frozen_lock_sha256": "60182ba380cc0ce7548c156c1dabb0a8e6a75bbbbc05ea2dfe3471591ed9aac5",
+  "remote_push_performed": false,
+  "upstream_pr_created": false
+}
