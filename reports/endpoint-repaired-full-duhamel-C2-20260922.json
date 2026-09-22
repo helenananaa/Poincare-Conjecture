@@ -1,0 +1,27 @@
+{
+  "project": "poincare-root-directed-analysis-20260922",
+  "task_id": "root-full-duhamel-C2",
+  "original_attempt": "103ee704-e38a-4245-93e2-add428d52a7c",
+  "original_status": "TIMEOUT",
+  "original_frozen_sha256": "e85d556f62dfbae5854cf472b8d04c8d9392e68cb6529a59f687f41557746dd2",
+  "source_path": "/home/helenanana/projects/poincare-ops-20260919/endpoint-repair-20260922/full-C2-review/source/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/FullDuhamelSpatialC2.lean",
+  "source_sha256": "b3c10fc1b8ff74818971ff138946b1cc20450c9bf599e6a52a9d945a337faca4",
+  "verification": {
+    "compile_passed": true,
+    "sha256": "b3c10fc1b8ff74818971ff138946b1cc20450c9bf599e6a52a9d945a337faca4",
+    "cache_key": "ca1ea426033723353171b09c2c11787e2850d8c3cda791deeffac094cff984c6",
+    "cache_hit": false,
+    "compiler_wait_seconds": 3e-05,
+    "compile_seconds": 10.436425,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_wait_seconds": 2.2e-05
+  },
+  "original_task_state_preserved": true,
+  "review_scope": "Independent stopped-source review; not automatic acceptance or task-state promotion",
+  "proof_body_repairs": "Removed one no-progress dsimp and corrected the order of the final derivative rewrites; exact imports, theorem statement and resource limits preserved.",
+  "mathematical_scope": "Actual untruncated Duhamel spatial C2 regularity, Hessian integral identity and Holder bound. No time derivative or nonlinear Ricci theorem claimed."
+}
