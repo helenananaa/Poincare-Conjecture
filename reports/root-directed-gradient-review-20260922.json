@@ -1,0 +1,27 @@
+{
+  "project": "poincare-broadened-heat-20260922",
+  "task_id": "broad-truncated-gradient",
+  "original_attempt": "897ca212-1c75-48b1-9e68-5c1906f47825",
+  "original_status": "TIMEOUT",
+  "original_frozen_sha256": "f08f4cd538759199166c57d177399225b0145a894235f7c573c8ada866b2cbc2",
+  "source_path": "/home/helenanana/projects/poincare-ops-20260919/root-directed-20260922/gradient-review/source/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/TruncatedDuhamelGradientDerivative.lean",
+  "source_sha256": "6f3e0465ed22698d480b67a1e8d55336eafd7bee2970549e5f8636909c831f6a",
+  "verification": {
+    "compile_passed": true,
+    "sha256": "6f3e0465ed22698d480b67a1e8d55336eafd7bee2970549e5f8636909c831f6a",
+    "cache_key": "d6100edfb801f62975a1d8032a4e5701b45c80bc5b8d4b749004616562ede758",
+    "cache_hit": false,
+    "compiler_wait_seconds": 2.1e-05,
+    "compile_seconds": 9.485948,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_wait_seconds": 2.4e-05
+  },
+  "original_task_state_preserved": true,
+  "review_scope": "Independent stopped-source review; not automatic acceptance or task-state promotion",
+  "statement_unchanged": true,
+  "coordinator_repairs": "Explicit coordinate subtraction algebra, correct symmetry and finite intersection of almost-everywhere equalities, explicit restricted-measure types, and scalar-multiple integrability on both interval orientations. No premises, conclusion, V1 files or compiler limits changed."
+}
