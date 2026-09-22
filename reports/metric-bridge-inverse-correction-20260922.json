@@ -1,0 +1,26 @@
+{
+  "old_task_id": "bridge-operator-matrix-inverse",
+  "original_status": "FAILED",
+  "original_frozen_sha256": "276f56e9c44f0a1c1e71aa137b0e1c47a66a7697055a9a3ef801fb966d2059da",
+  "source_sha256": "5d1c0338d0aea9581e45541a6c19627bf064d47d46e4b777b2c756e9f8719eef",
+  "source_path": "/home/helenanana/projects/poincare-ops-20260919/metric-bridge-20260922/matrix-inverse-review/OperatorMatrixInverse.lean",
+  "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/OperatorMatrixInverse.lean",
+  "target_name": "MorganTianLib.MetricCoefficient.operator_matrix_inverse",
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "compile_passed": true,
+  "axiom_audit_budget": 200000,
+  "type_change": "Explicit Matrix.inv replaces unintended pointwise Pi.inv. This is a semantic specification correction, not an exact-old-type proof.",
+  "old_template_unchanged": true,
+  "V1_changed": false,
+  "counterexample_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "default_lake_build_passed": true,
+  "correction_policy": "The old false Pi-inverse task and original worker history remain unchanged. This separate acceptance explicitly corrects the mathematical specification. No claim of original-type equivalence."
+}
