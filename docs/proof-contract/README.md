@@ -125,3 +125,16 @@ administrator disabling hooks or altering repository settings. The workflow
 file alone does not configure GitHub branch-protection requirements. No remote
 settings, upstream pull requests, or original blueprint completion markers are
 changed by this work.
+
+### Local hook installation
+
+```bash
+python3 tools/proof_contract/install_hook.py
+```
+
+The installer refuses to overwrite an unrelated hook or alter a custom
+`core.hooksPath`. Its launcher gives the immutable V1 checker a nested temporary
+location and still passes the actual repository explicitly. This avoids the
+initial checker's shallow-temporary-path default calculation without changing
+its bytes, disabling any checks, or changing the mathematical contract.
+CI's runner-temporary directory already has the required path depth.
