@@ -1,3 +1,4 @@
+import PoincareConjecture.ProofContract.Proofs.HandleExclusion
 import PoincareConjecture.ProofContract.V1.Assembly
 import PoincareConjecture.ProofContract.Proofs.CoverRecognition
 

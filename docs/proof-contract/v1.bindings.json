@@ -4,6 +4,10 @@
     "cover": {
       "module": "PoincareConjecture.ProofContract.Proofs.CoverRecognition",
       "declaration": "PoincareConjecture.ProofContract.Proofs.sphere_cover_recognition"
+    },
+    "handle": {
+      "module": "PoincareConjecture.ProofContract.Proofs.HandleExclusion",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.handle_exclusion"
     }
   }
 }

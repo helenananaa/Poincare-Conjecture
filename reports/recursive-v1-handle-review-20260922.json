@@ -1,0 +1,101 @@
+{
+  "original_attempt": "c3bef196-ffb1-4fd9-bedc-57cb15f74824",
+  "original_status": "TIMEOUT",
+  "original_frozen_sha256": "806c41fdc04076f16142893e92e7eead69d9ffa3b78b692b30f8bf30f0256a11",
+  "source_sha256": "806c41fdc04076f16142893e92e7eead69d9ffa3b78b692b30f8bf30f0256a11",
+  "verification": {
+    "compile_passed": true,
+    "sha256": "806c41fdc04076f16142893e92e7eead69d9ffa3b78b692b30f8bf30f0256a11",
+    "cache_key": "e1cdedc912fb27ef85cb7639b3a7d4ba2e66f7c3d1d5cf20e7bb3f5be615f3af",
+    "cache_hit": false,
+    "compiler_wait_seconds": 7.6e-05,
+    "compile_seconds": 6.199877,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_wait_seconds": 5.7e-05
+  },
+  "original_task_state_unchanged": true,
+  "source_path": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-20260922/handle-review/source/PoincareConjecture/ProofContract/Proofs/HandleExclusion.lean",
+  "review_kind": "independent coordinator source review; not a timeout-state promotion",
+  "mathematical_review": "Exact frozen HandleExclusionStatement; transfers simple connectivity through a homeomorphism, uses the actual circle covering to establish nontrivial pi1, and uses the section/retraction to contradict simple connectivity of S2 x Circle. No extra hypotheses.",
+  "binding_guard": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "bound_but_not_yet_checked": [],
+    "complete": false,
+    "assembly_is_conditional": true,
+    "verified_bindings": [
+      "cover",
+      "handle"
+    ],
+    "axioms": {
+      "public_target_unbundled": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "standardSphere_trace": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "PoincareConjecture.ProofContract.V1.TopologicalStep.reconstruct": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "PoincareConjecture.ProofContract.V1.FiniteExtinctionTrace.decomposes": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "PoincareConjecture.ProofContract.V1.recognize_standard_decomposition": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "PoincareConjecture.ProofContract.V1.smooth_topological_of_trace": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "PoincareConjecture.ProofContract.V1.topological_of_smoothing_and_smooth_topological": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "PoincareConjecture.ProofContract.V1.smooth_topological_of_smooth": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "PoincareConjecture.ProofContract.V1.topological_of_contracts": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "ProofContractBindingAudit.bound_cover": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "ProofContractBindingAudit.bound_handle": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "scope": "own source targets and existing pinned dependency cache; no full dependency rebuild"
+  }
+}
