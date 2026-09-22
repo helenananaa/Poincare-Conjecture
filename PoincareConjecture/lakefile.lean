@@ -11,6 +11,8 @@ require mathlib from git
   "https://github.com/leanprover-community/mathlib4.git"
     @ "520045ab14e26149ee970e2e617ca04b09bde5d6"
 
+require HatcherLib from "../formalized-sources/Hatcher"
+
 @[default_target]
 lean_lib PoincareConjecture where
   roots := #[`PoincareConjecture]
