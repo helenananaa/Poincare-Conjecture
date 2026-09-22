@@ -146,72 +146,18 @@ by
     simpa [ricciLowerOrder] using hsum.add hQuadratic
   constructor
   · exact hF
-  · obtain ⟨U, hU, hFU⟩ := hF.contDiffOn (m := (1 : ℕ∞ω)) (by simp) (by simp)
-    obtain ⟨ρ, hρ, hρU⟩ := Metric.mem_nhds_iff.mp hU
-    have hBall : ContDiffOn ℝ (1 : ℕ∞ω)
+  · have hF1 : ContDiffAt ℝ 1
         (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>
-          ricciLowerOrder q.1 q.2 i j) (Metric.ball (A, P) ρ) :=
-      hFU.mono hρU
-    have hDeriv : ContinuousOn
-        (fderiv ℝ (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>
-          ricciLowerOrder q.1 q.2 i j)) (Metric.ball (A, P) ρ) :=
-      hBall.continuousOn_fderiv_of_isOpen Metric.isOpen_ball (by simp)
-    let r : ℝ := ρ / 2
-    have hr : 0 < r := by
-      dsimp [r]
-      linarith
-    have hrho : r < ρ := by
-      dsimp [r]
-      linarith
-    have hclosedsub : Metric.closedBall (A, P) r ⊆ Metric.ball (A, P) ρ := by
-      intro q hq
-      rw [Metric.mem_closedBall] at hq
-      change dist q (A, P) < ρ
-      exact lt_of_le_of_lt hq hrho
-    have hballsub : Metric.ball (A, P) r ⊆ Metric.ball (A, P) ρ :=
-      Metric.ball_subset_closedBall.trans hclosedsub
-    have hDerivClosed := hDeriv.mono hclosedsub
-    obtain ⟨C, hC⟩ :=
-      (isCompact_closedBall (A, P) r).exists_bound_of_continuousOn hDerivClosed
-    have hCnonneg : 0 ≤ C := by
-      have hx : (A, P) ∈ Metric.closedBall (A, P) r :=
-        Metric.mem_closedBall_self hr.le
-      exact (norm_nonneg _).trans (hC (A, P) hx)
-    let K : ℝ := C + 1
-    have hK : 0 < K := by
-      dsimp [K]
-      linarith
-    have hbound : ∀ q ∈ Metric.ball (A, P) r,
-        ‖fderiv ℝ (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>
-          ricciLowerOrder q.1 q.2 i j) q‖ ≤ K := by
-      intro q hq
-      have hq' := hC q (Metric.ball_subset_closedBall hq)
-      dsimp [K]
-      linarith
-    have hdiff : ∀ q ∈ Metric.ball (A, P) r,
-        DifferentiableAt ℝ
-          (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>
-            ricciLowerOrder q.1 q.2 i j) q := by
-      intro q hq
-      have hDiffOn := (hBall.mono hballsub).differentiableOn (by simp)
-      exact hDiffOn.differentiableAt (Metric.isOpen_ball.mem_nhds hq)
-    refine ⟨r, K, hr, hK, ?_⟩
+          ricciLowerOrder q.1 q.2 i j) (A,P) := hF.of_le (by simp)
+    obtain ⟨K, U, hU, hLip⟩ := hF1.exists_lipschitzOnWith
+    obtain ⟨r, hr, hrU⟩ := Metric.mem_nhds_iff.mp hU
+    refine ⟨r, (K : ℝ)+1, hr, by positivity, ?_⟩
     intro q z hq hz
-    have hq' : q ∈ Metric.ball (A, P) r := by
-      rw [Metric.mem_ball, dist_eq_norm]
-      exact hq
-    have hz' : z ∈ Metric.ball (A, P) r := by
-      rw [Metric.mem_ball, dist_eq_norm]
-      exact hz
-    have hm :
-        ‖(fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>
-            ricciLowerOrder q.1 q.2 i j) q -
-          (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>
-            ricciLowerOrder q.1 q.2 i j) z‖ ≤ K * ‖q - z‖ := by
-      exact (convex_ball (A, P) r).norm_image_sub_le_of_norm_fderiv_le
-        (f := fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>
-          ricciLowerOrder q.1 q.2 i j)
-        (C := K) (x := z) (y := q) hdiff hbound hz' hq'
-    simpa [Real.norm_eq_abs] using hm
+    have hqU : q ∈ U := hrU (by simpa [Metric.mem_ball, dist_eq_norm] using hq)
+    have hzU : z ∈ U := hrU (by simpa [Metric.mem_ball, dist_eq_norm] using hz)
+    have h := hLip.dist_le_mul q hqU z hzU
+    have h' : |ricciLowerOrder q.1 q.2 i j-ricciLowerOrder z.1 z.2 i j| ≤
+        (K : ℝ)*‖q-z‖ := by simpa [Real.dist_eq, dist_eq_norm] using h
+    exact h'.trans (mul_le_mul_of_nonneg_right (by linarith) (norm_nonneg _))
 /- SWARM_PROOF_END -/
 end MorganTianLib.MetricCoefficient

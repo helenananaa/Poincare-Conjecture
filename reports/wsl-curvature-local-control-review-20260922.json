@@ -1,0 +1,15 @@
+{
+  "original_sha256": "8cd8c757760228e422077cc7a5e3f8472d497348e3b157b3ad2b0e8129d0a05b",
+  "candidate_sha256": "46c7a436ee865c1bf560fd8c4c9ef4ab5d9b13d6cddb2fc67101e1fb3d4e803e",
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "default_budget": 200000,
+  "statement_unchanged": true,
+  "source": "/home/helenanana/projects/poincare-ops-20260919/wsl-curvature-20260922/local-control-review/RicciLowerLocalControl.lean",
+  "relative_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/RicciLowerLocalControl.lean",
+  "proof_change": "Replace compact-derivative-bound argument with the existing ContDiffAt local Lipschitz theorem; all original statement hypotheses and V1 definitions unchanged.",
+  "ordinary_target_build_passed": true
+}
