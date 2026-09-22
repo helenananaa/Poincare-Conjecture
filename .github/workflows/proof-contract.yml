@@ -1,0 +1,58 @@
+name: Frozen proof boundary V1
+on:
+  push:
+    branches: [main, integration, feat/proof-contract-freeze-v1]
+    paths:
+      - 'PoincareConjecture/**'
+      - 'docs/proof-contract/**'
+      - 'tools/proof_contract/**'
+      - 'tools/lean_swarm/resources.py'
+      - '.githooks/**'
+      - '.github/workflows/proof-contract.yml'
+  pull_request:
+    branches: [main, integration]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  boundary-and-leaf-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Check immutable boundary against trusted git base
+        env:
+          EVENT_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          base="$EVENT_BASE"
+          if ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            base=$(git rev-parse HEAD^)
+          fi
+          if git cat-file -e "$base:docs/proof-contract/v1.lock.json" 2>/dev/null; then
+            git show "$base:tools/proof_contract/check.py" > "$RUNNER_TEMP/previous_guard.py"
+            python "$RUNNER_TEMP/previous_guard.py" --repo "$PWD" --base "$base"
+          else
+            python tools/proof_contract/check.py --repo "$PWD" --bootstrap
+          fi
+      - name: Negative guard tests
+        run: python -m unittest discover -s tools/proof_contract -p 'test_*.py' -v
+      - name: Install pinned Lean launcher
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - uses: actions/cache@v4
+        with:
+          path: |
+            PoincareConjecture/.lake/packages
+            PoincareConjecture/.lake/build
+          key: proof-contract-${{ runner.os }}-${{ hashFiles('PoincareConjecture/lake-manifest.json', 'PoincareConjecture/lean-toolchain') }}
+      - name: Fetch pinned dependency cache
+        working-directory: PoincareConjecture
+        run: lake exe cache get
+      - name: Compile boundary, nonvacuity tests and exact leaf proof bindings
+        run: python tools/proof_contract/check.py --repo "$PWD" --lean --report reports/proof-contract-ci.json

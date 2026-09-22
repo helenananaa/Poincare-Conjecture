@@ -38,3 +38,13 @@
 - Running research workers are adopted without interruption; returned source snapshots require independent target-axiom verification and explicit semantic review.
 - Compiler/verifier resource limits remain independent of model concurrency. Never grant a worker write access to the full trusted scheduler state directory.
 - Auto-integration is allowed only for accepted fixed statements; research acceptance gates require a reviewed manifest matching an actual integration commit. No automatic upstream push.
+
+## Frozen public proof boundary — V1, 2026-09-22
+
+- The public goal and recursive topology interface live in `PoincareConjecture.ProofContract.V1`.
+- Run `python3 tools/proof_contract/check.py` before integration. Do not edit/re-hash V1 frozen files to make a task pass.
+- Implement leaf proofs in new modules outside the immutable V1 files; bind the exact theorem in `docs/proof-contract/v1.bindings.json` and run the `--lean` audit.
+- Conditional assembly, declarations of Props, interface counts, and green freeze CI are not Poincare completion. `--lean --require-complete` must pass before any completion claim.
+- The topological public target and the smooth diffeomorphism target remain distinct. Do not mark the old blueprint target `leanok` from the conditional assembly.
+- `GeometricTraceStatement` is an open, concrete output obligation, not an already constructed Ricci flow. Its internal PDE/flow/surgery definitions are not claimed frozen. Preserve the V1 output while refining that subtree.
+- The existing model/provider and resource policies above are unchanged.

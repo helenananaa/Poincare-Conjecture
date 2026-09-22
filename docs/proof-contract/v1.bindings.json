@@ -1,0 +1,9 @@
+{
+  "schema": 1,
+  "bindings": {
+    "cover": {
+      "module": "PoincareConjecture.ProofContract.Proofs.CoverRecognition",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.sphere_cover_recognition"
+    }
+  }
+}

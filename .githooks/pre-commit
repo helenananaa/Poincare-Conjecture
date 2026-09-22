@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Check staged content with the previous committed guard, not a candidate guard.
+set -euo pipefail
+root=$(git rev-parse --show-toplevel)
+manifest=docs/proof-contract/v1.lock.json
+guard=tools/proof_contract/check.py
+if git cat-file -e ":$manifest" 2>/dev/null; then
+  if git cat-file -e "HEAD:$manifest" 2>/dev/null; then
+    previous=$(mktemp)
+    trap 'rm -f "$previous"' EXIT
+    git show "HEAD:$guard" > "$previous"
+    python3 "$previous" --repo "$root" --base HEAD --ref INDEX
+  else
+    python3 "$root/$guard" --repo "$root" --bootstrap --ref INDEX
+  fi
+elif git cat-file -e "HEAD:$manifest" 2>/dev/null; then
+  echo 'Refusing to delete the V1 proof boundary manifest.' >&2
+  exit 1
+fi

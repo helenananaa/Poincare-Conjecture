@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "root": "public_root",
+  "assembly_argument_order": [
+    "smoothing",
+    "geometric_trace",
+    "cover",
+    "handle",
+    "sum_factors",
+    "sum_sphere"
+  ],
+  "nodes": [
+    {
+      "id": "public_root",
+      "kind": "public_target",
+      "declaration": "PoincareConjecture.ProofContract.V1.TopologicalPoincareStatement",
+      "depends_on": [
+        "root_assembly"
+      ]
+    },
+    {
+      "id": "root_assembly",
+      "kind": "checked_assembly",
+      "declaration": "PoincareConjecture.ProofContract.V1.topological_of_contracts",
+      "depends_on": [
+        "smoothing",
+        "smooth_assembly"
+      ]
+    },
+    {
+      "id": "smooth_assembly",
+      "kind": "checked_assembly",
+      "declaration": "PoincareConjecture.ProofContract.V1.smooth_topological_of_trace",
+      "depends_on": [
+        "geometric_trace",
+        "reconstruction",
+        "recognition"
+      ]
+    },
+    {
+      "id": "reconstruction",
+      "kind": "checked_assembly",
+      "declaration": "PoincareConjecture.ProofContract.V1.FiniteExtinctionTrace.decomposes",
+      "depends_on": []
+    },
+    {
+      "id": "recognition",
+      "kind": "checked_assembly",
+      "declaration": "PoincareConjecture.ProofContract.V1.recognize_standard_decomposition",
+      "depends_on": [
+        "cover",
+        "handle",
+        "sum_factors",
+        "sum_sphere"
+      ]
+    },
+    {
+      "id": "smoothing",
+      "kind": "goal",
+      "declaration": "PoincareConjecture.ProofContract.V1.SmoothingStatement",
+      "depends_on": []
+    },
+    {
+      "id": "geometric_trace",
+      "kind": "goal",
+      "declaration": "PoincareConjecture.ProofContract.V1.GeometricTraceStatement",
+      "depends_on": []
+    },
+    {
+      "id": "cover",
+      "kind": "goal",
+      "declaration": "PoincareConjecture.ProofContract.V1.SphereCoverRecognitionStatement",
+      "depends_on": []
+    },
+    {
+      "id": "handle",
+      "kind": "goal",
+      "declaration": "PoincareConjecture.ProofContract.V1.HandleExclusionStatement",
+      "depends_on": []
+    },
+    {
+      "id": "sum_factors",
+      "kind": "goal",
+      "declaration": "PoincareConjecture.ProofContract.V1.ConnectedSumFactorsStatement",
+      "depends_on": []
+    },
+    {
+      "id": "sum_sphere",
+      "kind": "goal",
+      "declaration": "PoincareConjecture.ProofContract.V1.ConnectedSumSphereStatement",
+      "depends_on": []
+    }
+  ]
+}

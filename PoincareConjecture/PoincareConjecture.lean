@@ -1,3 +1,4 @@
+import PoincareConjecture.ProofContract
 import PoincareConjecture.CriticalPath.SurgeryBudget.MeasuredHistory
 import PoincareConjecture.CriticalPath.SurgeryBudget.EventFiniteness
 import PoincareConjecture.Topology.FiberSaturation.SphereAntipodal

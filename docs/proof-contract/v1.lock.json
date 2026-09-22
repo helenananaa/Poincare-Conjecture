@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "version": "v1",
+  "base_commit": "48b1bb05937e086d7561399affd5f7999e3e9ba8",
+  "lean_toolchain": "leanprover/lean4:v4.32.1",
+  "files": {
+    "PoincareConjecture/PoincareConjecture/ProofContract/V1/Assembly.lean": "26fc51dcb8571f7313c6ff8863a825733409c8dbf0048138e141e5ee2c2f8999",
+    "PoincareConjecture/PoincareConjecture/ProofContract/V1/ConnectedSum.lean": "038bc450823ee12b7f781b7a12dd8419381fce2b4d69a18424faf68cb5349bb1",
+    "PoincareConjecture/PoincareConjecture/ProofContract/V1/Decomposition.lean": "8b78d4b8ca9584309475bab6f2792cd284b950ae2701f41c8c5faaec68382d46",
+    "PoincareConjecture/PoincareConjecture/ProofContract/V1/Manifolds.lean": "c4672185750073de9a9cd717bfba4935f997bb112a29be7afe0854e35bb7528a",
+    "PoincareConjecture/PoincareConjecture/ProofContract/V1/Obligations.lean": "ba493a6718946a3f8151359b8b1fa8d0b9d8b589c326d80ef510d7e9ec3be139",
+    "PoincareConjecture/PoincareConjecture/ProofContract/V1/Root.lean": "6c38f513f5a7b8cd8fc548ad1142c4410c343f44899eceb84e67cd77b68faefe",
+    "PoincareConjecture/tests/ProofContract/TargetAudit.lean": "1fa889ef356ccde2ce041f32e6910922b5d182e61ab3954281919fd7c2008f15",
+    "PoincareConjecture/lean-toolchain": "8e3538e0ab5f81a3ee04927d8838c8c674e0e112838b4b3ce87ec218143276af",
+    "docs/proof-contract/v1.dag.json": "64ca9faac561da933eda02b79306291d8686ddd46384744a23f745811d324e81",
+    "tools/proof_contract/check.py": "38c1c30b58edacb0770974999b0b706c5450b98b489a6bf05f10700acce46fcd",
+    "tools/proof_contract/test_guard.py": "912af619095609c17199968f1cf2cb3fe27bac70ad7f2d47798b491eae291fc9",
+    ".githooks/pre-commit": "278d8b8c83540e16ac822ad16a6a7c53b40ce94a1d6ad9a76f6ffac44d3e8f2d",
+    ".github/workflows/proof-contract.yml": "79dd2d271ce50cc8a0bf3d380f2abc7326d52f7a3020b5952bbe1e2996c693fe"
+  },
+  "dependencies": {
+    "mathlib": {
+      "type": "git",
+      "url": "https://github.com/leanprover-community/mathlib4.git",
+      "rev": "520045ab14e26149ee970e2e617ca04b09bde5d6",
+      "subDir": null
+    },
+    "plausible": {
+      "type": "git",
+      "url": "https://github.com/leanprover-community/plausible",
+      "rev": "e12c1910fe855cbfc38803cd4e55543906d5fa62",
+      "subDir": null
+    },
+    "LeanSearchClient": {
+      "type": "git",
+      "url": "https://github.com/leanprover-community/LeanSearchClient",
+      "rev": "c5d5b8fe6e5158def25cd28eb94e4141ad97c843",
+      "subDir": null
+    },
+    "importGraph": {
+      "type": "git",
+      "url": "https://github.com/leanprover-community/import-graph",
+      "rev": "7e9612bf0b9ee66db3cb5b9988a35afc706f5a12",
+      "subDir": null
+    },
+    "proofwidgets": {
+      "type": "git",
+      "url": "https://github.com/leanprover-community/ProofWidgets4",
+      "rev": "6e311e2a844da9b2cc3971187df2fe0066947b93",
+      "subDir": null
+    },
+    "aesop": {
+      "type": "git",
+      "url": "https://github.com/leanprover-community/aesop",
+      "rev": "a7dbf0c63b694e47f425f3dcddbc0e178bb432d3",
+      "subDir": null
+    },
+    "Qq": {
+      "type": "git",
+      "url": "https://github.com/leanprover-community/quote4",
+      "rev": "38d591e778f100aec9762bb582f9c7f55f50e9dc",
+      "subDir": null
+    },
+    "batteries": {
+      "type": "git",
+      "url": "https://github.com/leanprover-community/batteries",
+      "rev": "023ce7d62a0531e22a5331e20b587817a80d49ff",
+      "subDir": null
+    },
+    "Cli": {
+      "type": "git",
+      "url": "https://github.com/leanprover/lean4-cli",
+      "rev": "88679d088c9720c27ebdf2ba4dafe17341747f94",
+      "subDir": null
+    }
+  },
+  "required_imports": {
+    "PoincareConjecture/PoincareConjecture.lean": [
+      "PoincareConjecture.ProofContract"
+    ],
+    "PoincareConjecture/PoincareConjecture/ProofContract.lean": [
+      "PoincareConjecture.ProofContract.V1.Assembly"
+    ]
+  },
+  "audited_declarations": [
+    "public_target_unbundled",
+    "standardSphere_trace",
+    "PoincareConjecture.ProofContract.V1.TopologicalStep.reconstruct",
+    "PoincareConjecture.ProofContract.V1.FiniteExtinctionTrace.decomposes",
+    "PoincareConjecture.ProofContract.V1.recognize_standard_decomposition",
+    "PoincareConjecture.ProofContract.V1.smooth_topological_of_trace",
+    "PoincareConjecture.ProofContract.V1.topological_of_smoothing_and_smooth_topological",
+    "PoincareConjecture.ProofContract.V1.smooth_topological_of_smooth",
+    "PoincareConjecture.ProofContract.V1.topological_of_contracts"
+  ]
+}
