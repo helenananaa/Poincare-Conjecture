@@ -1,0 +1,102 @@
+[
+  {
+    "task": "broad-punctured-sphere",
+    "group": "topology",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "c7592a800d78ca5c0d0f38ef7fcf85e6d424defee1d74123dfb6d5768c26d960",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "broad-nested-cells-collapse",
+    "group": "topology",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "01591a9a707889e095b3494da9929b75bd43a204a40638d8358d032e0ea3df6e",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "broad-coordinate-cellular",
+    "group": "topology",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "dfdf480fe0836b5b6eb975b20a3ea1669060b567e3d443874ab1ee803a899dfd",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "broad-uniform-C2-limit",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "e420456468965f4dc9809af7d67321468277fd3e1de8bba2179f0a23eae09547",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "broad-gradient-terminal-tail",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "8ef6d3c5f98cce24b225476469dd324a04fb2c3d41df2587cf98477611cadba6",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "broad-compact-spatial-dominator",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "1a929bf6460773010824020be875a2ae8211a560a6f8dd3946a90691553f52ad",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "metric-coercive-inverse",
+    "group": "geometry",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "5c5d8adacaac32274a74d279c6d725b4399fb1e6bee4123123f38b21b9c68ebe",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "metric-compact-coercivity",
+    "group": "geometry",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "8f8d6e9c0d5c67165a4d2b6997e00774135fbd6b457eafdad82ed2c110554121",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "metric-inverse-difference",
+    "group": "geometry",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "b882d2c9841271c148aa3ca57f74b0351d8d192502b45f0faeecbc05be78fa90",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "metric-positive-perturbation",
+    "group": "geometry",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "09001c5c99c782f22d153251e36dae096d30e27f09410c78fae17c967a8046e0",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  }
+]

@@ -1,0 +1,1105 @@
+{
+  "checked_at": "2026-09-22T15:54:13.312758+08:00",
+  "source_head": "37ca734e581d4f850b96e82694af4aa417214a57",
+  "source_snapshot_stable": true,
+  "start_source": "a25c542c32288a58c1446ab54c9107fcea7ab0e7",
+  "branch": "integration",
+  "worktree_status": "",
+  "task_count": 24,
+  "distinct_target_names": 24,
+  "registry_counts": {
+    "INTEGRATED": 21,
+    "QUEUED": 2,
+    "RUNNING": 1
+  },
+  "group_counts": {
+    "poincare-broadened-topology-20260922": {
+      "INTEGRATED": 7
+    },
+    "poincare-broadened-geometry-20260922": {
+      "INTEGRATED": 7
+    },
+    "poincare-broadened-heat-20260922": {
+      "INTEGRATED": 7,
+      "QUEUED": 2,
+      "RUNNING": 1
+    }
+  },
+  "ready_but_unclaimed": [],
+  "active_tasks": [
+    "broad-truncated-gradient"
+  ],
+  "peak_in_flight_attempts": 10,
+  "peak_definition": "Claim-to-completion overlap includes preparation and independent verification; not a count of simultaneous model subprocesses.",
+  "model_limits": {
+    "luna": 0,
+    "grok": 0
+  },
+  "frozen_lock_sha256": "60182ba380cc0ce7548c156c1dabb0a8e6a75bbbbc05ea2dfe3471591ed9aac5",
+  "bindings": {
+    "schema": 1,
+    "bindings": {
+      "cover": {
+        "module": "PoincareConjecture.ProofContract.Proofs.CoverRecognition",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.sphere_cover_recognition"
+      },
+      "handle": {
+        "module": "PoincareConjecture.ProofContract.Proofs.HandleExclusion",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.handle_exclusion"
+      },
+      "sum_factors": {
+        "module": "PoincareConjecture.ProofContract.Proofs.ConnectedSumFactorsProof",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_factors_proved"
+      }
+    }
+  },
+  "tasks": [
+    {
+      "project": "poincare-broadened-topology-20260922",
+      "id": "broad-coordinate-cellular",
+      "status": "INTEGRATED",
+      "commit": "9fc63833e965ec62fc156cfa93c9fe23d59bc88c",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.coordinate_closed_ball_cellular",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/CoordinateBallCellular.lean"
+    },
+    {
+      "project": "poincare-broadened-topology-20260922",
+      "id": "broad-coordinate-open-exterior",
+      "status": "INTEGRATED",
+      "commit": "437ccb02528af79d74af09d14b2f2da9b324fbdb",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "broad-coordinate-cellular",
+        "broad-nested-open-exterior"
+      ],
+      "name": "PoincareConjecture.ProofContract.Proofs.coordinate_open_exterior_euclidean",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/CoordinateOpenExterior.lean"
+    },
+    {
+      "project": "poincare-broadened-topology-20260922",
+      "id": "broad-marked-collapse-recognition",
+      "status": "INTEGRATED",
+      "commit": "d7a59323cdb067a0e9e5906ac54efa212e58c07a",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.recognition_from_equal_collapse_fibers",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/MarkedCollapseRecognition.lean"
+    },
+    {
+      "project": "poincare-broadened-topology-20260922",
+      "id": "broad-nested-cells-collapse",
+      "status": "INTEGRATED",
+      "commit": "57025a72b2cabcd08a1bb1639a76ee92baa10c68",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.nested_cells_actual_collapse",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/NestedCellsActualCollapse.lean"
+    },
+    {
+      "project": "poincare-broadened-topology-20260922",
+      "id": "broad-nested-open-exterior",
+      "status": "INTEGRATED",
+      "commit": "dbc5a56823731048c9eb27f639f4640601e85233",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "broad-punctured-sphere",
+        "broad-nested-cells-collapse"
+      ],
+      "name": "PoincareConjecture.ProofContract.Proofs.nested_cell_open_exterior_euclidean",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/NestedCellOpenExterior.lean"
+    },
+    {
+      "project": "poincare-broadened-topology-20260922",
+      "id": "broad-punctured-sphere",
+      "status": "INTEGRATED",
+      "commit": "bab358720c7fb61d993050f944164aff0c5caf2b",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.punctured_sphere3_euclidean",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/PuncturedSphereEuclidean.lean"
+    },
+    {
+      "project": "poincare-broadened-topology-20260922",
+      "id": "broad-relative-collapse",
+      "status": "INTEGRATED",
+      "commit": "02e39797d112853a95ef4cccf8a4239f6f9161ce",
+      "model": "luna",
+      "effort": "max",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.squeezable_compact_relative_collapse",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/RelativeCompactCollapse.lean"
+    },
+    {
+      "project": "poincare-broadened-geometry-20260922",
+      "id": "metric-coercive-inverse",
+      "status": "INTEGRATED",
+      "commit": "e44eca149c6cbebbf9df0cca356c3e71e759d5a0",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "MorganTianLib.MetricCoefficient.coercive_operator_inverse",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoerciveInverse.lean"
+    },
+    {
+      "project": "poincare-broadened-geometry-20260922",
+      "id": "metric-compact-coercivity",
+      "status": "INTEGRATED",
+      "commit": "8488f5f284802239d3f56946b2331205ca272ec1",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "MorganTianLib.MetricCoefficient.compact_positive_operator_coercivity",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CompactCoercivity.lean"
+    },
+    {
+      "project": "poincare-broadened-geometry-20260922",
+      "id": "metric-heat-preserves-coercivity",
+      "status": "INTEGRATED",
+      "commit": "f8c9aa0ac8b4b48c611ae4ec70e8d0eec462da9b",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.heat_preserves_operator_coercivity",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/HeatPreservesCoercivity.lean"
+    },
+    {
+      "project": "poincare-broadened-geometry-20260922",
+      "id": "metric-inverse-difference",
+      "status": "INTEGRATED",
+      "commit": "acff38fefe7801721c2bb575501589a3f0fee85f",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "MorganTianLib.MetricCoefficient.inverse_operator_difference_bound",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/InverseDifference.lean"
+    },
+    {
+      "project": "poincare-broadened-geometry-20260922",
+      "id": "metric-local-inverse-lipschitz",
+      "status": "INTEGRATED",
+      "commit": "80f00d3ca2a08de51b832edd631630d6e47d0e7f",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "metric-coercive-inverse",
+        "metric-inverse-difference",
+        "metric-positive-perturbation"
+      ],
+      "name": "MorganTianLib.MetricCoefficient.positive_ball_inverse_control",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalInverseControl.lean"
+    },
+    {
+      "project": "poincare-broadened-geometry-20260922",
+      "id": "metric-positive-perturbation",
+      "status": "INTEGRATED",
+      "commit": "fa65590028dc5f9e461fb6472b82e696ae1d1e34",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "MorganTianLib.MetricCoefficient.coercivity_survives_operator_perturbation",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/PositivePerturbation.lean"
+    },
+    {
+      "project": "poincare-broadened-geometry-20260922",
+      "id": "metric-six-component-heat",
+      "status": "INTEGRATED",
+      "commit": "6d3fffdd5f713cf63f971e5179a4d32e085dc055",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.six_component_heat_hessian",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/SixComponentHeatHessian.lean"
+    },
+    {
+      "project": "poincare-broadened-heat-20260922",
+      "id": "broad-compact-spatial-dominator",
+      "status": "INTEGRATED",
+      "commit": "9ad79580546c2bcce8f19c1279b7776068dd1856",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.compact_time_spatial_derivative_dominator",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/CompactSpatialDerivativeDominator.lean"
+    },
+    {
+      "project": "poincare-broadened-heat-20260922",
+      "id": "broad-full-duhamel-C2",
+      "status": "QUEUED",
+      "commit": null,
+      "model": "luna",
+      "effort": "max",
+      "depends_on": [
+        "broad-truncated-C2-assembly",
+        "broad-uniform-C2-limit",
+        "broad-truncation-values",
+        "broad-truncation-derivative-limits"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.full_duhamel_spatial_C2",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/FullDuhamelSpatialC2.lean"
+    },
+    {
+      "project": "poincare-broadened-heat-20260922",
+      "id": "broad-gradient-terminal-tail",
+      "status": "INTEGRATED",
+      "commit": "fdc917cbd28bdcbbdcf9d65f27fcdd0ebd85416a",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.duhamel_gradient_terminal_tail",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/DuhamelGradientTerminalTail.lean"
+    },
+    {
+      "project": "poincare-broadened-heat-20260922",
+      "id": "broad-truncated-C2-assembly",
+      "status": "QUEUED",
+      "commit": null,
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "broad-truncated-first",
+        "broad-truncated-gradient",
+        "broad-truncated-hessian-continuity"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.truncated_duhamel_hessian",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/TruncatedDuhamelHessian.lean"
+    },
+    {
+      "project": "poincare-broadened-heat-20260922",
+      "id": "broad-truncated-first",
+      "status": "INTEGRATED",
+      "commit": "37ca734e581d4f850b96e82694af4aa417214a57",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "broad-compact-spatial-dominator"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.truncated_duhamel_first_derivative",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/TruncatedDuhamelFirstDerivative.lean"
+    },
+    {
+      "project": "poincare-broadened-heat-20260922",
+      "id": "broad-truncated-gradient",
+      "status": "RUNNING",
+      "commit": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "broad-compact-spatial-dominator"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.truncated_duhamel_gradient_derivative",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/TruncatedDuhamelGradientDerivative.lean"
+    },
+    {
+      "project": "poincare-broadened-heat-20260922",
+      "id": "broad-truncated-hessian-continuity",
+      "status": "INTEGRATED",
+      "commit": "1a086185b7816609baff2e33d3430c9163d14c11",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "broad-compact-spatial-dominator"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.truncated_duhamel_hessian_continuous",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/TruncatedDuhamelHessianContinuous.lean"
+    },
+    {
+      "project": "poincare-broadened-heat-20260922",
+      "id": "broad-truncation-derivative-limits",
+      "status": "INTEGRATED",
+      "commit": "8e6a610f37ad117fa46d42b815ae21073eb68817",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "broad-gradient-terminal-tail"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.duhamel_uniform_derivative_limits",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/DuhamelUniformDerivativeLimits.lean"
+    },
+    {
+      "project": "poincare-broadened-heat-20260922",
+      "id": "broad-truncation-values",
+      "status": "INTEGRATED",
+      "commit": "b4c12723cb5ca14ce60ec686689cc1bff450933e",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.duhamel_uniform_value_limit",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/DuhamelUniformValueLimit.lean"
+    },
+    {
+      "project": "poincare-broadened-heat-20260922",
+      "id": "broad-uniform-C2-limit",
+      "status": "INTEGRATED",
+      "commit": "b3112e3d12010f1c4ac62655933053d0de6871ff",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.contDiff_two_of_uniform_derivative_limits",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/UniformC2Limit.lean"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "3fa633c4-5671-48dd-b8f7-50a0b0fe4e3d",
+      "task": "broad-nested-cells-collapse",
+      "project": "poincare-broadened-topology-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790061755.0657623,
+        "finished_unix": 1790062141.1465585,
+        "prepare_finished_unix": 1790061756.0644054,
+        "prepare_started_unix": 1790061755.066181,
+        "queue_wait_seconds": 0.01618337631225586,
+        "queue_wait_started_unix": 1790061755.049579,
+        "service_started_unix": 1790061756.1339493,
+        "service_stopped_unix": 1790062132.579651,
+        "verification_finished_unix": 1790062141.1465514,
+        "verification_resource_wait_seconds": 2e-05,
+        "verification_seconds": 7.026924,
+        "verification_started_unix": 1790062132.583926
+      },
+      "verification": {
+        "audit_wait_seconds": 1.9e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "2e87a776edd24bb8bc83cf627a0eb3fe4045fcaa4a27e9193a11d3d4292c5e12",
+        "compile_passed": true,
+        "compile_seconds": 3.430707,
+        "compiler_wait_seconds": 5.4e-05,
+        "sha256": "1f669932ae3495cb7cdbad35cefc3264a63964397d146b94ea3afa80dcaeb2c1"
+      },
+      "error": null
+    },
+    {
+      "id": "d8b25f17-29dc-4dcb-ad5e-37ea3f31e1ca",
+      "task": "broad-punctured-sphere",
+      "project": "poincare-broadened-topology-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790061755.0755267,
+        "finished_unix": 1790061933.5707357,
+        "prepare_finished_unix": 1790061755.719105,
+        "prepare_started_unix": 1790061755.075861,
+        "queue_wait_seconds": 0.02594780921936035,
+        "queue_wait_started_unix": 1790061755.049579,
+        "service_started_unix": 1790061755.776812,
+        "service_stopped_unix": 1790061924.8677197,
+        "verification_finished_unix": 1790061933.5707295,
+        "verification_resource_wait_seconds": 4.3e-05,
+        "verification_seconds": 6.954874,
+        "verification_started_unix": 1790061924.8690376
+      },
+      "verification": {
+        "audit_wait_seconds": 3.5e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "d65f0649cc7313dbc6fe0fd999d261d99852b815e325bea92e900c88eed56a9b",
+        "compile_passed": true,
+        "compile_seconds": 3.773956,
+        "compiler_wait_seconds": 0.00012,
+        "sha256": "2a41d7fd056ca8cce380a6d4c12f66cce876fedb02195754b84566e451c3ca6f"
+      },
+      "error": null
+    },
+    {
+      "id": "f851acb8-8e9c-4ac4-af7c-06eabf3ff89a",
+      "task": "broad-coordinate-cellular",
+      "project": "poincare-broadened-topology-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790061755.082722,
+        "finished_unix": 1790062188.6410124,
+        "prepare_finished_unix": 1790061755.4155154,
+        "prepare_started_unix": 1790061755.0830739,
+        "queue_wait_seconds": 0.033143043518066406,
+        "queue_wait_started_unix": 1790061755.049579,
+        "service_started_unix": 1790061755.460723,
+        "service_stopped_unix": 1790062170.760067,
+        "verification_finished_unix": 1790062188.6410017,
+        "verification_resource_wait_seconds": 9.8e-05,
+        "verification_seconds": 15.87367,
+        "verification_started_unix": 1790062170.765948
+      },
+      "verification": {
+        "audit_wait_seconds": 5.4e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "8d57bb7592c74934f879f44c157cc8869ed193b11280692b9f03b59f101c0dbd",
+        "compile_passed": true,
+        "compile_seconds": 7.268397,
+        "compiler_wait_seconds": 8.2e-05,
+        "sha256": "cf4555a1efc0b81c0e440cda305512690a7adda0479a06826a66fbd0eb7ad236"
+      },
+      "error": null
+    },
+    {
+      "id": "19bba0e8-7c5d-4f14-822b-085e1c2ca58e",
+      "task": "broad-relative-collapse",
+      "project": "poincare-broadened-topology-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062085.3465528,
+        "finished_unix": 1790062611.2672553,
+        "prepare_finished_unix": 1790062085.6710784,
+        "prepare_started_unix": 1790062085.3470383,
+        "queue_wait_seconds": 330.2969739437103,
+        "queue_wait_started_unix": 1790061755.049579,
+        "service_started_unix": 1790062085.725386,
+        "service_stopped_unix": 1790062585.248319,
+        "verification_finished_unix": 1790062611.2672439,
+        "verification_resource_wait_seconds": 9.267867,
+        "verification_seconds": 24.178274,
+        "verification_started_unix": 1790062585.2492456
+      },
+      "verification": {
+        "audit_wait_seconds": 0.000331,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "f6e4c9ea02ca49f0b7e149531a41f3a89d561ea0e8f82a2082ed53f62ccea6da",
+        "compile_passed": true,
+        "compile_seconds": 7.433727,
+        "compiler_wait_seconds": 6.3e-05,
+        "sha256": "d6fd9bf7da2dd1eb1334325a486fdc2aac97eff61295cf4785f16375bb934ec4"
+      },
+      "error": null
+    },
+    {
+      "id": "613b3fc2-f13f-4258-b8b3-8c77a5a1ef38",
+      "task": "broad-marked-collapse-recognition",
+      "project": "poincare-broadened-topology-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062085.3625088,
+        "finished_unix": 1790062200.1694272,
+        "prepare_finished_unix": 1790062086.0034747,
+        "prepare_started_unix": 1790062085.36295,
+        "queue_wait_seconds": 330.3129298686981,
+        "queue_wait_started_unix": 1790061755.049579,
+        "service_started_unix": 1790062086.0574708,
+        "service_stopped_unix": 1790062189.6764123,
+        "verification_finished_unix": 1790062200.169418,
+        "verification_resource_wait_seconds": 5.7e-05,
+        "verification_seconds": 10.491108,
+        "verification_started_unix": 1790062189.6773894
+      },
+      "verification": {
+        "audit_wait_seconds": 5.9e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "4bd114c905ec4c22b35c3f8eab427eb718d69d9555ea7a2320058dfdd3d73a5c",
+        "compile_passed": true,
+        "compile_seconds": 5.194964,
+        "compiler_wait_seconds": 0.000136,
+        "sha256": "5983332d23bc525c76703ec4dac6beaf75153ef942ad699e7a52302464618d94"
+      },
+      "error": null
+    },
+    {
+      "id": "996e83d4-4e7b-4b96-8039-c4ce671b7cc2",
+      "task": "broad-nested-open-exterior",
+      "project": "poincare-broadened-topology-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062148.646515,
+        "finished_unix": 1790062276.133905,
+        "prepare_finished_unix": 1790062163.7559242,
+        "prepare_started_unix": 1790062148.6470063,
+        "queue_wait_seconds": 393.59693598747253,
+        "queue_wait_started_unix": 1790061755.049579,
+        "service_started_unix": 1790062163.8695912,
+        "service_stopped_unix": 1790062267.6546352,
+        "verification_finished_unix": 1790062276.1338956,
+        "verification_resource_wait_seconds": 2.1e-05,
+        "verification_seconds": 8.477086,
+        "verification_started_unix": 1790062267.6560702
+      },
+      "verification": {
+        "audit_wait_seconds": 7.5e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "dc1454093db0cfdc222db63a4b70efc2844dd18aba73c5b40157feb4180855c0",
+        "compile_passed": true,
+        "compile_seconds": 4.311091,
+        "compiler_wait_seconds": 3.9e-05,
+        "sha256": "d189d53eca3ea8088972ae6c92bfe2d08e79ab83d9c0de00192d5529d7e6e096"
+      },
+      "error": null
+    },
+    {
+      "id": "1043536c-c4bf-4e36-b73e-7a6f9eb46515",
+      "task": "broad-coordinate-open-exterior",
+      "project": "poincare-broadened-topology-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062305.8318887,
+        "finished_unix": 1790062485.1747801,
+        "prepare_finished_unix": 1790062355.4270298,
+        "prepare_started_unix": 1790062305.8325222,
+        "queue_wait_seconds": 550.7823097705841,
+        "queue_wait_started_unix": 1790061755.049579,
+        "service_started_unix": 1790062355.4875393,
+        "service_stopped_unix": 1790062473.8207946,
+        "verification_finished_unix": 1790062485.174766,
+        "verification_resource_wait_seconds": 3.3e-05,
+        "verification_seconds": 11.352084,
+        "verification_started_unix": 1790062473.8216143
+      },
+      "verification": {
+        "audit_wait_seconds": 6.2e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "09536d130c9fffbb6956580b1278be46d667f9b1a9ea767f559a3822b866bf7e",
+        "compile_passed": true,
+        "compile_seconds": 5.7181,
+        "compiler_wait_seconds": 6.3e-05,
+        "sha256": "195a7bf9794cefae345a6b460393f173d8bf2a5e6ce2e6deaaae6a770b969277"
+      },
+      "error": null
+    },
+    {
+      "id": "09bb8d82-9631-4d61-ae6f-a5bc8806c7e1",
+      "task": "metric-coercive-inverse",
+      "project": "poincare-broadened-geometry-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790061782.7995515,
+        "finished_unix": 1790062004.2325222,
+        "prepare_finished_unix": 1790061783.1124635,
+        "prepare_started_unix": 1790061782.7999067,
+        "queue_wait_seconds": 0.013589143753051758,
+        "queue_wait_started_unix": 1790061782.7859623,
+        "service_started_unix": 1790061783.1613207,
+        "service_stopped_unix": 1790061993.838568,
+        "verification_finished_unix": 1790062004.2325158,
+        "verification_resource_wait_seconds": 5.9e-05,
+        "verification_seconds": 8.677224,
+        "verification_started_unix": 1790061993.8397093
+      },
+      "verification": {
+        "audit_wait_seconds": 1.4e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "1a2f031be340ee68d16c98d999106f010f6d5aff0b52e9de1104f7b51822b9d2",
+        "compile_passed": true,
+        "compile_seconds": 4.136837,
+        "compiler_wait_seconds": 2.1e-05,
+        "sha256": "5eb883d2b77d1062829fd713c6dd52ec1e4c8b3a308e3b6f79661fe563f5a059"
+      },
+      "error": null
+    },
+    {
+      "id": "5537695e-227c-4787-94b5-ff0ce79f9e97",
+      "task": "metric-inverse-difference",
+      "project": "poincare-broadened-geometry-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790061782.8101892,
+        "finished_unix": 1790062153.1580403,
+        "prepare_finished_unix": 1790061783.775655,
+        "prepare_started_unix": 1790061782.8105884,
+        "queue_wait_seconds": 0.024226903915405273,
+        "queue_wait_started_unix": 1790061782.7859623,
+        "service_started_unix": 1790061783.8359268,
+        "service_stopped_unix": 1790062144.1720135,
+        "verification_finished_unix": 1790062153.1580367,
+        "verification_resource_wait_seconds": 4.6e-05,
+        "verification_seconds": 8.983241,
+        "verification_started_unix": 1790062144.1737244
+      },
+      "verification": {
+        "audit_wait_seconds": 1.9e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "601ed00f76390a05041fac9d124ee78f33b81b73e78276d13bfece96d06a5bd9",
+        "compile_passed": true,
+        "compile_seconds": 4.447137,
+        "compiler_wait_seconds": 4.5e-05,
+        "sha256": "289d3b82a85ceb9bc84bfa2415a9a9ee04b651814a7293c89b52fe39c228d6e4"
+      },
+      "error": null
+    },
+    {
+      "id": "c32eb0de-2319-4426-aa9f-59916b04f2de",
+      "task": "metric-positive-perturbation",
+      "project": "poincare-broadened-geometry-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790061782.818413,
+        "finished_unix": 1790061920.746082,
+        "prepare_finished_unix": 1790061783.4114997,
+        "prepare_started_unix": 1790061782.8187318,
+        "queue_wait_seconds": 0.03245067596435547,
+        "queue_wait_started_unix": 1790061782.7859623,
+        "service_started_unix": 1790061783.4624736,
+        "service_stopped_unix": 1790061913.2212112,
+        "verification_finished_unix": 1790061920.7460768,
+        "verification_resource_wait_seconds": 1.7e-05,
+        "verification_seconds": 7.522923,
+        "verification_started_unix": 1790061913.221835
+      },
+      "verification": {
+        "audit_wait_seconds": 1.8e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "583866fab42a34b4d7407c4c2e913e6c1408628e64c1f6644129cfabac3437fe",
+        "compile_passed": true,
+        "compile_seconds": 3.54849,
+        "compiler_wait_seconds": 4.1e-05,
+        "sha256": "06c692fe83139e741339e938ee773a020d9f1992becaed6af3a2d25145032bbb"
+      },
+      "error": null
+    },
+    {
+      "id": "d8ace4a9-09de-4378-b2f6-357211d48bbf",
+      "task": "metric-compact-coercivity",
+      "project": "poincare-broadened-geometry-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790061782.832953,
+        "finished_unix": 1790062287.0168989,
+        "prepare_finished_unix": 1790061784.13262,
+        "prepare_started_unix": 1790061782.8333044,
+        "queue_wait_seconds": 0.04699063301086426,
+        "queue_wait_started_unix": 1790061782.7859623,
+        "service_started_unix": 1790061784.1979373,
+        "service_stopped_unix": 1790062274.354396,
+        "verification_finished_unix": 1790062287.0168939,
+        "verification_resource_wait_seconds": 0.000214,
+        "verification_seconds": 10.613654,
+        "verification_started_unix": 1790062274.3563194
+      },
+      "verification": {
+        "audit_wait_seconds": 2.1e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "c26f75d921e0921ab502b5fe276ddeaa4d559616df9c64cfe5b0a02040d6b642",
+        "compile_passed": true,
+        "compile_seconds": 5.05958,
+        "compiler_wait_seconds": 3.4e-05,
+        "sha256": "48fbdc59ae886a6fcabf74c9d5996266b3739dd02e0f68ef01317728187b576a"
+      },
+      "error": null
+    },
+    {
+      "id": "e78e7658-1875-4fb3-b450-4a2cbf1717b6",
+      "task": "metric-local-inverse-lipschitz",
+      "project": "poincare-broadened-geometry-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062163.2270272,
+        "finished_unix": 1790062501.5594978,
+        "prepare_finished_unix": 1790062203.5854068,
+        "prepare_started_unix": 1790062163.2276063,
+        "queue_wait_seconds": 380.4410648345947,
+        "queue_wait_started_unix": 1790061782.7859623,
+        "service_started_unix": 1790062203.633166,
+        "service_stopped_unix": 1790062479.9335568,
+        "verification_finished_unix": 1790062501.5594816,
+        "verification_resource_wait_seconds": 5.7e-05,
+        "verification_seconds": 19.798089,
+        "verification_started_unix": 1790062479.9344032
+      },
+      "verification": {
+        "audit_wait_seconds": 0.00013,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "5276162db3d076ec56633d6744f1b5891b0c476950ce31c931f777d5a8efa0ed",
+        "compile_passed": true,
+        "compile_seconds": 10.22672,
+        "compiler_wait_seconds": 9.6e-05,
+        "sha256": "7fa14587a9f0f17bbd28423d13f9a33c0419af7199777e8f635ca21a4cf570ab"
+      },
+      "error": null
+    },
+    {
+      "id": "3319e591-69cf-4021-a83e-77dc326a0424",
+      "task": "metric-six-component-heat",
+      "project": "poincare-broadened-geometry-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062234.3899024,
+        "finished_unix": 1790063154.1066647,
+        "prepare_finished_unix": 1790062235.244474,
+        "prepare_started_unix": 1790062234.390644,
+        "queue_wait_seconds": 451.6039400100708,
+        "queue_wait_started_unix": 1790061782.7859623,
+        "service_started_unix": 1790062235.3111258,
+        "service_stopped_unix": 1790063133.9181128,
+        "verification_finished_unix": 1790063154.1066594,
+        "verification_resource_wait_seconds": 2.3e-05,
+        "verification_seconds": 18.478609,
+        "verification_started_unix": 1790063133.9286613
+      },
+      "verification": {
+        "audit_wait_seconds": 2.4e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "be9f90ed2625e7e5dfb21826e927d971f7ffa1863b212b1768f3df22670d0ab0",
+        "compile_passed": true,
+        "compile_seconds": 9.285141,
+        "compiler_wait_seconds": 8.2e-05,
+        "sha256": "3ea73d0e4004c856557bffe252e7a74c214b653b842e7781a3dfaf76a0e7ec7a"
+      },
+      "error": null
+    },
+    {
+      "id": "67471b25-b270-400b-8073-dc1ba2c3c3f8",
+      "task": "metric-heat-preserves-coercivity",
+      "project": "poincare-broadened-geometry-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062234.4106314,
+        "finished_unix": 1790062428.585999,
+        "prepare_finished_unix": 1790062234.8404615,
+        "prepare_started_unix": 1790062234.411291,
+        "queue_wait_seconds": 451.6246690750122,
+        "queue_wait_started_unix": 1790061782.7859623,
+        "service_started_unix": 1790062234.9220564,
+        "service_stopped_unix": 1790062404.058998,
+        "verification_finished_unix": 1790062428.5859888,
+        "verification_resource_wait_seconds": 3e-05,
+        "verification_seconds": 22.421791,
+        "verification_started_unix": 1790062404.061342
+      },
+      "verification": {
+        "audit_wait_seconds": 9.7e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "e50f2b87a7eaa89763f568abfe2a36b9a2a3635a1a3cf83e510ac43387308f10",
+        "compile_passed": true,
+        "compile_seconds": 10.701385,
+        "compiler_wait_seconds": 6.1e-05,
+        "sha256": "73160e489252c497dbb855449edd02c438e3735679569a40afce13855bef7b72"
+      },
+      "error": null
+    },
+    {
+      "id": "24afb6f7-964e-4d1d-a430-88f66818dab8",
+      "task": "broad-compact-spatial-dominator",
+      "project": "poincare-broadened-heat-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790061808.2217107,
+        "finished_unix": 1790062596.3534532,
+        "prepare_finished_unix": 1790061808.8550038,
+        "prepare_started_unix": 1790061808.2228084,
+        "queue_wait_seconds": 0.012189388275146484,
+        "queue_wait_started_unix": 1790061808.2095213,
+        "service_started_unix": 1790061808.9263866,
+        "service_stopped_unix": 1790062565.3272798,
+        "verification_finished_unix": 1790062596.353446,
+        "verification_resource_wait_seconds": 4.7e-05,
+        "verification_seconds": 29.187662,
+        "verification_started_unix": 1790062565.3292925
+      },
+      "verification": {
+        "audit_wait_seconds": 6e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "574fa6252d96cd3d17ec81eb7cc6ceabd147c9b7b88519b82dc1b45b61f01a9e",
+        "compile_passed": true,
+        "compile_seconds": 13.509413,
+        "compiler_wait_seconds": 0.000105,
+        "sha256": "df988b4ddff30f7a0956467b556c759f5434121f57ab7451a2534e103dabb442"
+      },
+      "error": null
+    },
+    {
+      "id": "e6974952-a8fa-42ab-93ba-6a6e8c23beca",
+      "task": "broad-gradient-terminal-tail",
+      "project": "poincare-broadened-heat-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790061808.2291179,
+        "finished_unix": 1790062440.9432201,
+        "prepare_finished_unix": 1790061808.5602365,
+        "prepare_started_unix": 1790061808.229502,
+        "queue_wait_seconds": 0.019596576690673828,
+        "queue_wait_started_unix": 1790061808.2095213,
+        "service_started_unix": 1790061808.6292737,
+        "service_stopped_unix": 1790062423.280721,
+        "verification_finished_unix": 1790062440.9432163,
+        "verification_resource_wait_seconds": 0.000161,
+        "verification_seconds": 17.656119,
+        "verification_started_unix": 1790062423.2840698
+      },
+      "verification": {
+        "audit_wait_seconds": 6.4e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "3cfbfee1673d944a9f07e5c80208e70e543ba4842130496304018ce0fffac90e",
+        "compile_passed": true,
+        "compile_seconds": 8.958597,
+        "compiler_wait_seconds": 7.4e-05,
+        "sha256": "9b712fed4939bdab7a39681e9ddeb693f17cecd4499a712e9f28fdb688f9a003"
+      },
+      "error": null
+    },
+    {
+      "id": "ccabeca6-cb08-4258-a1e2-f9c26703286c",
+      "task": "broad-uniform-C2-limit",
+      "project": "poincare-broadened-heat-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790061808.2379158,
+        "finished_unix": 1790062231.3046815,
+        "prepare_finished_unix": 1790061809.2481632,
+        "prepare_started_unix": 1790061808.2384677,
+        "queue_wait_seconds": 0.028394460678100586,
+        "queue_wait_started_unix": 1790061808.2095213,
+        "service_started_unix": 1790061809.3007355,
+        "service_stopped_unix": 1790062218.133431,
+        "verification_finished_unix": 1790062231.304669,
+        "verification_resource_wait_seconds": 0.0001,
+        "verification_seconds": 13.165004,
+        "verification_started_unix": 1790062218.137269
+      },
+      "verification": {
+        "audit_wait_seconds": 2.1e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "67c5109db0a8d86b435130685b79fd955b520f12f5146bb289da9ff19beda35f",
+        "compile_passed": true,
+        "compile_seconds": 6.380479,
+        "compiler_wait_seconds": 3.6e-05,
+        "sha256": "db74a7c3286fc00426cb63a1969c8c88ea45a22bbff958508679598ec2dad8f9"
+      },
+      "error": null
+    },
+    {
+      "id": "70a15df5-7204-43e6-b41a-822be092414e",
+      "task": "broad-truncation-values",
+      "project": "poincare-broadened-heat-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062458.878615,
+        "finished_unix": 1790063218.7118118,
+        "prepare_finished_unix": 1790062459.3082824,
+        "prepare_started_unix": 1790062458.8795176,
+        "queue_wait_seconds": 650.6690936088562,
+        "queue_wait_started_unix": 1790061808.2095213,
+        "service_started_unix": 1790062459.3978868,
+        "service_stopped_unix": 1790063191.916955,
+        "verification_finished_unix": 1790063218.7117233,
+        "verification_resource_wait_seconds": 4.042921,
+        "verification_seconds": 25.192443,
+        "verification_started_unix": 1790063191.9190748
+      },
+      "verification": {
+        "audit_wait_seconds": 3.4e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "edb758f38566feb1aa5716a78ca4537a9b7b71343d533fbbaa3d44da4ef1c077",
+        "compile_passed": true,
+        "compile_seconds": 10.248541,
+        "compiler_wait_seconds": 0.001279,
+        "sha256": "fd9f945034fc14b54dce6ca114281ca45a5f716ffe86b967db781b75add5e390"
+      },
+      "error": null
+    },
+    {
+      "id": "65af05f3-5d00-493c-95b8-0dfb6a26ca4f",
+      "task": "broad-truncation-derivative-limits",
+      "project": "poincare-broadened-heat-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062468.3091366,
+        "finished_unix": 1790063394.5446627,
+        "prepare_finished_unix": 1790062491.6715448,
+        "prepare_started_unix": 1790062468.3099015,
+        "queue_wait_seconds": 660.0996153354645,
+        "queue_wait_started_unix": 1790061808.2095213,
+        "service_started_unix": 1790062491.7403457,
+        "service_stopped_unix": 1790063377.7217472,
+        "verification_finished_unix": 1790063394.544657,
+        "verification_resource_wait_seconds": 5.3e-05,
+        "verification_seconds": 14.833914,
+        "verification_started_unix": 1790063377.7250943
+      },
+      "verification": {
+        "audit_wait_seconds": 2.3e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "3330e4d10f771b605dc27f2c92207d129c2407d8ab8b601e2c95a398619f0520",
+        "compile_passed": true,
+        "compile_seconds": 7.299994,
+        "compiler_wait_seconds": 3.2e-05,
+        "sha256": "25a58f3d08a592a4c03304a808acbebc4d53c131d6175a2dcc68cf8ef615930a"
+      },
+      "error": null
+    },
+    {
+      "id": "02cf5a31-1e33-4836-b269-e448ac050bcf",
+      "task": "broad-truncated-first",
+      "project": "poincare-broadened-heat-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062630.4825857,
+        "finished_unix": 1790063556.1192088,
+        "prepare_finished_unix": 1790062672.1063788,
+        "prepare_started_unix": 1790062630.483124,
+        "queue_wait_seconds": 822.2730643749237,
+        "queue_wait_started_unix": 1790061808.2095213,
+        "service_started_unix": 1790062672.1632195,
+        "service_stopped_unix": 1790063519.9865174,
+        "verification_finished_unix": 1790063556.1191943,
+        "verification_resource_wait_seconds": 9.2e-05,
+        "verification_seconds": 34.12868,
+        "verification_started_unix": 1790063520.003662
+      },
+      "verification": {
+        "audit_wait_seconds": 5.3e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "a304fe9cdad13f7b99f83efac3bcce7f8456877e6d5e9bc95ca955c34f4e29a3",
+        "compile_passed": true,
+        "compile_seconds": 15.83965,
+        "compiler_wait_seconds": 1.8e-05,
+        "sha256": "9a7ced49c0a3fde16c65ebd95adeb4019fa18d3a7c561e689b4c19f78e2bb47e"
+      },
+      "error": null
+    },
+    {
+      "id": "897ca212-1c75-48b1-9e68-5c1906f47825",
+      "task": "broad-truncated-gradient",
+      "project": "poincare-broadened-heat-20260922",
+      "status": "RUNNING",
+      "timing": {},
+      "verification": {},
+      "error": null
+    },
+    {
+      "id": "8f2ad3e2-5ae5-43c9-841b-1ca90103ddc5",
+      "task": "broad-truncated-hessian-continuity",
+      "project": "poincare-broadened-heat-20260922",
+      "status": "VERIFIED",
+      "timing": {
+        "claimed_unix": 1790062630.5667229,
+        "finished_unix": 1790063198.6323261,
+        "prepare_finished_unix": 1790062672.1941574,
+        "prepare_started_unix": 1790062630.5674288,
+        "queue_wait_seconds": 822.3572015762329,
+        "queue_wait_started_unix": 1790061808.2095213,
+        "service_started_unix": 1790062672.2670414,
+        "service_stopped_unix": 1790063180.0606022,
+        "verification_finished_unix": 1790063198.6323087,
+        "verification_resource_wait_seconds": 3.4e-05,
+        "verification_seconds": 18.564918,
+        "verification_started_unix": 1790063180.064532
+      },
+      "verification": {
+        "audit_wait_seconds": 4.3e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "5ccc358747250023fa5a4b7ce110ffbd964372e4309b807c4146eb245fd781bb",
+        "compile_passed": true,
+        "compile_seconds": 8.208931,
+        "compiler_wait_seconds": 0.00018,
+        "sha256": "3fd118514dcdb478e37102ddbac3c22bf9ce57a0c148b0781ae85f09f3a6417f"
+      },
+      "error": null
+    }
+  ],
+  "replacement_routes": [
+    {
+      "original_project": "poincare-restored-duhamel-20260922",
+      "original_task": "restore-truncated-duhamel-C2",
+      "new_task": "broad-truncated-C2-assembly",
+      "exact_statement_unchanged": true
+    }
+  ],
+  "remote_push_performed": false,
+  "upstream_pr_created": false
+}

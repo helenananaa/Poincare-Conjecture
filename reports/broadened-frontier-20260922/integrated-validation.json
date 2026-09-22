@@ -1,0 +1,119 @@
+{
+  "scope": "Integrated fixed statements only; existing pinned dependencies; targeted source builds",
+  "projects": {
+    "poincare-broadened-topology-20260922": {
+      "checked_count": 6,
+      "source_sha256": {
+        "broad-coordinate-cellular": "cf4555a1efc0b81c0e440cda305512690a7adda0479a06826a66fbd0eb7ad236",
+        "broad-coordinate-open-exterior": "195a7bf9794cefae345a6b460393f173d8bf2a5e6ce2e6deaaae6a770b969277",
+        "broad-marked-collapse-recognition": "5983332d23bc525c76703ec4dac6beaf75153ef942ad699e7a52302464618d94",
+        "broad-nested-cells-collapse": "1f669932ae3495cb7cdbad35cefc3264a63964397d146b94ea3afa80dcaeb2c1",
+        "broad-nested-open-exterior": "d189d53eca3ea8088972ae6c92bfe2d08e79ab83d9c0de00192d5529d7e6e096",
+        "broad-punctured-sphere": "2a41d7fd056ca8cce380a6d4c12f66cce876fedb02195754b84566e451c3ca6f"
+      },
+      "axioms": {
+        "PoincareConjecture.ProofContract.Proofs.coordinate_closed_ball_cellular": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.coordinate_open_exterior_euclidean": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.recognition_from_equal_collapse_fibers": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.nested_cells_actual_collapse": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.nested_cell_open_exterior_euclidean": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.punctured_sphere3_euclidean": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/broadened-frontier-20260922/poincare-broadened-topology-20260922-Audit.lean"
+    },
+    "poincare-broadened-geometry-20260922": {
+      "checked_count": 6,
+      "source_sha256": {
+        "metric-coercive-inverse": "5eb883d2b77d1062829fd713c6dd52ec1e4c8b3a308e3b6f79661fe563f5a059",
+        "metric-compact-coercivity": "48fbdc59ae886a6fcabf74c9d5996266b3739dd02e0f68ef01317728187b576a",
+        "metric-heat-preserves-coercivity": "73160e489252c497dbb855449edd02c438e3735679569a40afce13855bef7b72",
+        "metric-inverse-difference": "289d3b82a85ceb9bc84bfa2415a9a9ee04b651814a7293c89b52fe39c228d6e4",
+        "metric-local-inverse-lipschitz": "7fa14587a9f0f17bbd28423d13f9a33c0419af7199777e8f635ca21a4cf570ab",
+        "metric-positive-perturbation": "06c692fe83139e741339e938ee773a020d9f1992becaed6af3a2d25145032bbb"
+      },
+      "axioms": {
+        "MorganTianLib.MetricCoefficient.coercive_operator_inverse": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.MetricCoefficient.compact_positive_operator_coercivity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.heat_preserves_operator_coercivity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.MetricCoefficient.inverse_operator_difference_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.MetricCoefficient.positive_ball_inverse_control": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.MetricCoefficient.coercivity_survives_operator_perturbation": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/broadened-frontier-20260922/poincare-broadened-geometry-20260922-Audit.lean"
+    },
+    "poincare-broadened-heat-20260922": {
+      "checked_count": 3,
+      "source_sha256": {
+        "broad-compact-spatial-dominator": "df988b4ddff30f7a0956467b556c759f5434121f57ab7451a2534e103dabb442",
+        "broad-gradient-terminal-tail": "9b712fed4939bdab7a39681e9ddeb693f17cecd4499a712e9f28fdb688f9a003",
+        "broad-uniform-C2-limit": "db74a7c3286fc00426cb63a1969c8c88ea45a22bbff958508679598ec2dad8f9"
+      },
+      "axioms": {
+        "MorganTianLib.ParabolicPDE.compact_time_spatial_derivative_dominator": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.duhamel_gradient_terminal_tail": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.contDiff_two_of_uniform_derivative_limits": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/broadened-frontier-20260922/poincare-broadened-heat-20260922-Audit.lean"
+    }
+  }
+}
