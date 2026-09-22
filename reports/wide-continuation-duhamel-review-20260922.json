@@ -1,0 +1,28 @@
+{
+  "project": "poincare-wide-heat-20260922",
+  "task_id": "wide-heat-duhamel-three",
+  "original_attempt": "00ccf63b-4197-403a-a437-8f0c6f8c1895",
+  "original_status": "TIMEOUT",
+  "original_frozen_sha256": "01609b993da24999d79f436c3b22219d864f65bfb30f1a284d8615b19dcf5090",
+  "source_path": "/home/helenanana/projects/poincare-ops-20260919/wide-continuation-20260922/duhamel-review/source/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/WideDuhamelHessianThree.lean",
+  "source_sha256": "23d1b5f6b5214c04e8a8f7c5a4e33b1b2b6550be7860e4843049f17e2df1a6f4",
+  "verification": {
+    "compile_passed": true,
+    "sha256": "23d1b5f6b5214c04e8a8f7c5a4e33b1b2b6550be7860e4843049f17e2df1a6f4",
+    "cache_key": "0b0c091069b85623876706665632dcd4e7b1785bf7a86de61dfcaf34a15e627b",
+    "cache_hit": false,
+    "compiler_wait_seconds": 6.7e-05,
+    "compile_seconds": 8.740774,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_wait_seconds": 4.9e-05
+  },
+  "original_task_state_preserved": true,
+  "review_scope": "Independent stopped-source review; not automatic acceptance or task-state promotion",
+  "statement_unchanged": true,
+  "coordinator_changes": "Removed unsupported local heartbeat override; replaced costly measurability search and kernel simplification with direct measurable arithmetic/product integration; repaired the empty reverse interval proof. No theorem premise, conclusion, or definition changed.",
+  "mathematical_scope": "Actual three-dimensional time integral of the Hessian convolution, with the Holder small-time bound; not a closed-manifold nonlinear Ricci theorem."
+}
