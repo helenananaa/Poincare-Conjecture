@@ -12,6 +12,10 @@
     "sum_factors": {
       "module": "PoincareConjecture.ProofContract.Proofs.ConnectedSumFactorsProof",
       "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_factors_proved"
+    },
+    "sum_sphere": {
+      "module": "PoincareConjecture.ProofContract.Proofs.ConnectedSumSphereProof",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_sphere_proved"
     }
   }
 }
