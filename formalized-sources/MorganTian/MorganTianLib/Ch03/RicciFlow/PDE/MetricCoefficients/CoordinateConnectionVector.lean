@@ -116,13 +116,13 @@ by
       calc
         ‖∑ k : Fin 3, ∑ i : Fin 3, ∑ j : Fin 3, R k i j‖ ≤
             ∑ k : Fin 3, ‖∑ i : Fin 3, ∑ j : Fin 3, R k i j‖ := by
-              exact norm_sum_le (Finset.univ : Finset (Fin 3)) _
+              exact norm_sum_le (Finset.univ : Finset (Fin 3)) (fun k : Fin 3 => ∑ i : Fin 3, ∑ j : Fin 3, R k i j)
         _ ≤ ∑ k : Fin 3, ∑ i : Fin 3, ‖∑ j : Fin 3, R k i j‖ := by
               gcongr with k hk
-              exact norm_sum_le (Finset.univ : Finset (Fin 3)) _
+              exact norm_sum_le (Finset.univ : Finset (Fin 3)) (fun i : Fin 3 => ∑ j : Fin 3, R k i j)
         _ ≤ ∑ k : Fin 3, ∑ i : Fin 3, ∑ j : Fin 3, ‖R k i j‖ := by
               gcongr with k hk i hi
-              exact norm_sum_le (Finset.univ : Finset (Fin 3)) _
+              exact norm_sum_le (Finset.univ : Finset (Fin 3)) (fun j : Fin 3 => R k i j)
     calc
       ‖B‖ ≤ ∑ k : Fin 3, ∑ i : Fin 3, ∑ j : Fin 3,
           |coordinateChristoffel A P k i j| := by
