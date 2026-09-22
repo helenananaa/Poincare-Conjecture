@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-09-22T09:37:55.087645+08:00",
-  "source_head": "470a95d53f40c815f0611d7b5e080f48636bd507",
+  "checked_at": "2026-09-22T09:44:02.592937+08:00",
+  "source_head": "c3d911610c1cb3adbedeffa334db31476cfc96c6",
   "base": "34a7d544d81ea5822653599a4c6f2097c84bb5a8",
   "model": "gpt-5.6-luna",
   "efforts": [
@@ -12,14 +12,14 @@
   "compiler_slots": 6,
   "verifier_slots": 2,
   "registry_status_counts": {
-    "INTEGRATED": 13,
-    "QUEUED": 5,
+    "INTEGRATED": 14,
+    "QUEUED": 4,
     "TIMEOUT": 4,
     "RUNNING": 2
   },
   "registry_cards": 24,
   "distinct_mathematical_targets": 21,
-  "accepted_distinct_mathematical_targets": 16,
+  "accepted_distinct_mathematical_targets": 17,
   "coordinator_reviewed_timeout_targets": 3,
   "freeze_check": {
     "freeze_check": "PASS",
@@ -247,8 +247,8 @@
     {
       "project": "poincare-recursive-heat-20260922",
       "id": "heat-classical-after-reviewed-exchange",
-      "status": "RUNNING",
-      "commit": null,
+      "status": "INTEGRATED",
+      "commit": "d88d9805be0916df17b5877bef8c13d585767059",
       "model": "luna",
       "effort": "high",
       "depends_on": [
@@ -257,7 +257,7 @@
       ],
       "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_compact_classical_recursive",
       "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveClassicalSolution.lean",
-      "mathematically_accepted": false
+      "mathematically_accepted": true
     },
     {
       "project": "poincare-recursive-heat-20260922",
@@ -329,7 +329,7 @@
     {
       "project": "poincare-recursive-heat-20260922",
       "id": "heat-initial-value-after-reviewed-classical",
-      "status": "QUEUED",
+      "status": "RUNNING",
       "commit": null,
       "model": "luna",
       "effort": "high",
