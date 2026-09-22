@@ -1,0 +1,464 @@
+{
+  "checked_at": "2026-09-22T09:37:55.087645+08:00",
+  "source_head": "470a95d53f40c815f0611d7b5e080f48636bd507",
+  "base": "34a7d544d81ea5822653599a4c6f2097c84bb5a8",
+  "model": "gpt-5.6-luna",
+  "efforts": [
+    "high",
+    "xhigh",
+    "max"
+  ],
+  "model_concurrency_limit": 0,
+  "compiler_slots": 6,
+  "verifier_slots": 2,
+  "registry_status_counts": {
+    "INTEGRATED": 13,
+    "QUEUED": 5,
+    "TIMEOUT": 4,
+    "RUNNING": 2
+  },
+  "registry_cards": 24,
+  "distinct_mathematical_targets": 21,
+  "accepted_distinct_mathematical_targets": 16,
+  "coordinator_reviewed_timeout_targets": 3,
+  "freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "frozen_lock_sha256": "60182ba380cc0ce7548c156c1dabb0a8e6a75bbbbc05ea2dfe3471591ed9aac5",
+  "blueprint_unchanged": true,
+  "remote_push_performed": false,
+  "upstream_pr_created": false,
+  "proof_complete": false,
+  "superseded_blocked_routes": [
+    {
+      "original_blocked_task": "heat-classical-assembly",
+      "replacement_task": "heat-classical-after-reviewed-exchange",
+      "reviewed_prerequisite_commit": "470a95d53f40c815f0611d7b5e080f48636bd507",
+      "statement_unchanged": true
+    },
+    {
+      "original_blocked_task": "heat-weighted-hessian-assembly",
+      "replacement_task": "heat-weighted-hessian-after-reviewed-formula",
+      "reviewed_prerequisite_commit": "470a95d53f40c815f0611d7b5e080f48636bd507",
+      "statement_unchanged": true
+    },
+    {
+      "original_blocked_task": "heat-initial-value-assembly",
+      "replacement_task": "heat-initial-value-after-reviewed-classical",
+      "reviewed_prerequisite_commit": "470a95d53f40c815f0611d7b5e080f48636bd507",
+      "statement_unchanged": true
+    }
+  ],
+  "tasks": [
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-alexander-ball-extension",
+      "status": "INTEGRATED",
+      "commit": "cb38ada14e208085f2f6e14143a23f54cfebd9a1",
+      "model": "luna",
+      "effort": "max",
+      "depends_on": [],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.sphere_homeomorph_extends_closedBall",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/AlexanderExtension.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-coordinate-ball-exists",
+      "status": "INTEGRATED",
+      "commit": "ac3f0248ef78956176a4b372a5bab9a96a56d915",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.coordinate_ball_exists",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/CoordinateBallExists.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-coordinate-boundary-embedding",
+      "status": "INTEGRATED",
+      "commit": "f978cd1775de4d7853b4bb817ded201637fff9e8",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.coordinate_boundary_isClosedEmbedding",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/CoordinateBoundary.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-coordinate-closure-frontier",
+      "status": "INTEGRATED",
+      "commit": "019d3c81a3ebf1f656c4eda33a44f7912f20556b",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "v1-coordinate-open-compact"
+      ],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.coordinate_closure_frontier",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/CoordinateClosureFrontier.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-coordinate-open-compact",
+      "status": "INTEGRATED",
+      "commit": "73a7170372447e091fc8d941b85e96404f6bb1f3",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.coordinate_removed_open_complement_compact",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/CoordinateOpenCompact.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-double-ball-arbitrary-gluing",
+      "status": "QUEUED",
+      "commit": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "v1-double-ball-sphere",
+        "v1-alexander-ball-extension"
+      ],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.doubleBall_arbitrary_gluing_sphere",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/DoubleBallGluing.lean",
+      "mathematically_accepted": false
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-double-ball-sphere",
+      "status": "TIMEOUT",
+      "commit": null,
+      "model": "luna",
+      "effort": "max",
+      "depends_on": [],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.doubleBall_identity_sphere",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/DoubleBallSphere.lean",
+      "mathematically_accepted": false
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-handle-exclusion",
+      "status": "TIMEOUT",
+      "commit": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.handle_exclusion",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/HandleExclusion.lean",
+      "reviewed_source_accepted": true,
+      "queue_status_preserved": true,
+      "review": {
+        "original_attempt": "c3bef196-ffb1-4fd9-bedc-57cb15f74824",
+        "original_status": "TIMEOUT",
+        "original_frozen_sha256": "806c41fdc04076f16142893e92e7eead69d9ffa3b78b692b30f8bf30f0256a11",
+        "source_sha256": "806c41fdc04076f16142893e92e7eead69d9ffa3b78b692b30f8bf30f0256a11",
+        "verification": {
+          "compile_passed": true,
+          "sha256": "806c41fdc04076f16142893e92e7eead69d9ffa3b78b692b30f8bf30f0256a11",
+          "cache_key": "e1cdedc912fb27ef85cb7639b3a7d4ba2e66f7c3d1d5cf20e7bb3f5be615f3af",
+          "cache_hit": false,
+          "compiler_wait_seconds": 7.6e-05,
+          "compile_seconds": 6.199877,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "audit_wait_seconds": 5.7e-05
+        },
+        "original_task_state_unchanged": true,
+        "source_path": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-20260922/handle-review/source/PoincareConjecture/ProofContract/Proofs/HandleExclusion.lean",
+        "review_kind": "independent coordinator source review; not a timeout-state promotion"
+      },
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-punctured-complement-connected",
+      "status": "INTEGRATED",
+      "commit": "9d887044c557c00665c2a27436d3ee0f98d5a8a7",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "v1-coordinate-boundary-embedding",
+        "v1-coordinate-closure-frontier"
+      ],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.coordinate_complement_connected",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ComplementConnected.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-quotient-fiber-classification",
+      "status": "INTEGRATED",
+      "commit": "a8566db255450c746a8b8a272119114370fefe67",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "v1-coordinate-boundary-embedding"
+      ],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_quotient_fibers",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ConnectedSumFibers.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-quotient-pasting",
+      "status": "INTEGRATED",
+      "commit": "31ee33bd60dc9e953aa8bfb46bb6d06f85237a3a",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_continuous_pasting",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ConnectedSumPasting.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-v1-20260922",
+      "id": "v1-radial-annulus-homeomorph",
+      "status": "INTEGRATED",
+      "commit": "2781817af7a8c8f0d8080d16a67b23cb55765226",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "declaration": "PoincareConjecture.ProofContract.Proofs.radial_annulus_homeomorph",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/RadialAnnulus.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-classical-after-reviewed-exchange",
+      "status": "RUNNING",
+      "commit": null,
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "heat-compact-joint-convolution",
+        "heat-time-exchange"
+      ],
+      "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_compact_classical_recursive",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveClassicalSolution.lean",
+      "mathematically_accepted": false
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-classical-assembly",
+      "status": "QUEUED",
+      "commit": null,
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "heat-compact-joint-convolution",
+        "heat-time-exchange",
+        "heat-spatial-laplace-exchange"
+      ],
+      "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_compact_classical_recursive",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveClassicalSolution.lean",
+      "mathematically_accepted": false
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-compact-joint-convolution",
+      "status": "INTEGRATED",
+      "commit": "ed72aa9c61f836a6fed3769c983b04522d5dc51e",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "heat-joint-smooth"
+      ],
+      "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_compact_convolution_smooth",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveCompactSmooth.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-hessian-formula",
+      "status": "TIMEOUT",
+      "commit": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_hessian_formula",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveHessianFormula.lean",
+      "reviewed_source_accepted": true,
+      "queue_status_preserved": true,
+      "review": {
+        "original_attempt": "b55d85e0-6bed-4020-b446-9c3a7ecb1411",
+        "original_status": "TIMEOUT",
+        "original_frozen_sha256": "f7df25d63d5086b3034f165c0cf8a5c18b04fbab99e19d340f83b6300301c738",
+        "source_sha256": "af2cbeb4f8809b3d434b4fae9bae7bcff137a8a71ea9d29978bfb265f2583ce6",
+        "verification": {
+          "compile_passed": true,
+          "sha256": "af2cbeb4f8809b3d434b4fae9bae7bcff137a8a71ea9d29978bfb265f2583ce6",
+          "cache_key": "3cdfee0de95b4a438f686aaf5df53cc2ff460550f1b27a30ad2e389699d2e8dd",
+          "cache_hit": false,
+          "compiler_wait_seconds": 2e-05,
+          "compile_seconds": 11.61393,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "audit_wait_seconds": 2.7e-05
+        },
+        "original_task_state_unchanged": true,
+        "source_path": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-20260922/hessian-review/source/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveHessianFormula.lean",
+        "review_kind": "independent coordinator source review; not a timeout-state promotion"
+      },
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-initial-value-after-reviewed-classical",
+      "status": "QUEUED",
+      "commit": null,
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "heat-classical-after-reviewed-exchange"
+      ],
+      "declaration": "MorganTianLib.ParabolicPDE.exists_three_dimensional_classical_heat_solution_recursive",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveClassicalIVP.lean",
+      "mathematically_accepted": false
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-initial-value-assembly",
+      "status": "QUEUED",
+      "commit": null,
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "heat-classical-assembly"
+      ],
+      "declaration": "MorganTianLib.ParabolicPDE.exists_three_dimensional_classical_heat_solution_recursive",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveClassicalIVP.lean",
+      "mathematically_accepted": false
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-joint-smooth",
+      "status": "INTEGRATED",
+      "commit": "e43eb77b8908c7b39c901dde0b2a5c22ae7eaaf2",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_joint_smooth",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveJointSmooth.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-nonnegative-moments",
+      "status": "INTEGRATED",
+      "commit": "25ec22532c38fe97966f83cd66fa033a61bb7bf9",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_nonnegative_moment",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursivePolynomialMoment.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-spatial-laplace-exchange",
+      "status": "TIMEOUT",
+      "commit": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "heat-joint-smooth"
+      ],
+      "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_compact_laplace_integral",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveLaplaceExchange.lean",
+      "reviewed_source_accepted": true,
+      "queue_status_preserved": true,
+      "review": {
+        "original_attempt": "86afeb28-211e-44fa-8bc3-6b640acb14ce",
+        "original_status": "TIMEOUT",
+        "original_frozen_sha256": "36e13925198c5f53959e8ef243bb94ffcf194f896abaa654bb71db5db207dba2",
+        "source_sha256": "36e13925198c5f53959e8ef243bb94ffcf194f896abaa654bb71db5db207dba2",
+        "verification": {
+          "compile_passed": true,
+          "sha256": "36e13925198c5f53959e8ef243bb94ffcf194f896abaa654bb71db5db207dba2",
+          "cache_key": "415d354a9297043da25dd4bd36f45cf7f7d4e767cd7570c2281b05468dacddb0",
+          "cache_hit": false,
+          "compiler_wait_seconds": 5.2e-05,
+          "compile_seconds": 8.99098,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "audit_wait_seconds": 3.5e-05
+        },
+        "original_task_state_unchanged": true,
+        "source_path": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-20260922/laplace-review/source/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveLaplaceExchange.lean",
+        "review_kind": "independent coordinator source review; not a timeout-state promotion"
+      },
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-time-exchange",
+      "status": "INTEGRATED",
+      "commit": "3cd5928657fdfd97ee3a04b3d49a0a12fb80161d",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "heat-joint-smooth"
+      ],
+      "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_compact_time_derivative",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveTimeExchange.lean",
+      "mathematically_accepted": true
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-weighted-hessian-after-reviewed-formula",
+      "status": "RUNNING",
+      "commit": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "heat-nonnegative-moments"
+      ],
+      "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_weighted_hessian_recursive",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveHessianEstimate.lean",
+      "mathematically_accepted": false
+    },
+    {
+      "project": "poincare-recursive-heat-20260922",
+      "id": "heat-weighted-hessian-assembly",
+      "status": "QUEUED",
+      "commit": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "heat-hessian-formula",
+        "heat-nonnegative-moments"
+      ],
+      "declaration": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_weighted_hessian_recursive",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveHessianEstimate.lean",
+      "mathematically_accepted": false
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+[
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [],
+    "hint": "Construct radial extension H(0)=0, H(x)=norm(x) * h(x/norm(x)), inverse using h.symm. Crucial continuity at zero follows norm(Hx)=norm(x), not continuity of normalization at zero. Prove exact boundary behavior. This is topological only; no smooth extension is asserted. The source and target are real closed 3-balls, not new arbitrary types. All auxiliaries may be local lets/haves in the proof. Preserve ALL V1 files and the exact frozen goal. Use only the marked proof body. Source is in your own worktree and Mathlib/; do not inspect other attempts. Only report a proved result after swarm-check.sh succeeds. These lemmas do not prove the full Poincare conjecture.",
+    "id": "v1-alexander-ball-extension",
+    "mathematical_line": "frozen-v1-topology",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "max",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Topological Alexander extension with exact boundary values. -/\ntheorem sphere_homeomorph_extends_closedBall (h : Sphere2 ≃ₜ Sphere2) :\n    ∃ H : Metric.closedBall (0 : Euclidean3) 1 ≃ₜ Metric.closedBall (0 : Euclidean3) 1,\n      ∀ x : Sphere2, (H ⟨x, by have hx := x.property; simpa using (le_of_eq hx)⟩ : Euclidean3) = h x :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.sphere_homeomorph_extends_closedBall",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/AlexanderExtension.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [],
+    "hint": "Pick a point, its chart and a small open ball around its chart image contained in the chart target. Compose the inverse chart with translation and a sufficiently small positive rescaling so its source contains the closed radius-two ball. Use actual Homeomorph and OpenPartialHomeomorph composition; prove source containment. Do not add an existence assumption. Do not edit V1. Work only in the marked proof and run swarm-check.sh. This is not a full Poincare proof.",
+    "id": "v1-coordinate-ball-exists",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Every allowed manifold has a coordinate ball with the required larger chart neighborhood. -/\ntheorem coordinate_ball_exists (M : ClosedThreeManifold.{u}) : Nonempty (CoordinateBall M) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.coordinate_ball_exists",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/CoordinateBallExists.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [],
+    "hint": "Prove continuous subtype map via OpenPartialHomeomorph.continuousOn restricted to the unit sphere, whose points lie in the chart source by contains_two. Prove injectivity using the chart left inverse. Sphere2 is compact; the codomain is Hausdorff, so continuous injection yields a closed embedding. This is used to build actual connected-sum collars, not a formal statement that the quotient is already a manifold. Preserve ALL V1 files and the exact frozen goal. Use only the marked proof body. Source is in your own worktree and Mathlib/; do not inspect other attempts. Only report a proved result after swarm-check.sh succeeds. These lemmas do not prove the full Poincare conjecture.",
+    "id": "v1-coordinate-boundary-embedding",
+    "mathematical_line": "frozen-v1-topology",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- The actual coordinate-ball boundary is embedded in its punctured complement. -/\ntheorem coordinate_boundary_isClosedEmbedding {M : ClosedThreeManifold.{u}}\n    (b : CoordinateBall M) : IsClosedEmbedding b.boundary :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.coordinate_boundary_isClosedEmbedding",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/CoordinateBoundary.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [
+      "v1-coordinate-open-compact"
+    ],
+    "hint": "Use compactness of the closed unit ball to get the closed image, continuity of the chart on the radius-two source, and density of the open unit ball in the closed unit ball. Frontier is closure minus open ball; injectivity of the chart on its source gives exact image difference. Do not infer that an arbitrary continuous map preserves frontier; justify source containment and compactness. The open-complement lemma is available as a dependency. Preserve ALL V1 files and the exact frozen goal. Use only the marked proof body. Source is in your own worktree and Mathlib/; do not inspect other attempts. Only report a proved result after swarm-check.sh succeeds. These lemmas do not prove the full Poincare conjecture.",
+    "id": "v1-coordinate-closure-frontier",
+    "mathematical_line": "frozen-v1-topology",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import PoincareConjecture.ProofContract.Proofs.CoordinateOpenCompact\nimport PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- The coordinate-ball closure and frontier agree with the actual closed ball and sphere. -/\ntheorem coordinate_closure_frontier {M : ClosedThreeManifold.{u}}\n    (b : CoordinateBall M) :\n    closure b.removed = b.parametrization '' Metric.closedBall 0 1 ∧\n    frontier b.removed = b.parametrization '' Metric.sphere 0 1 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.coordinate_closure_frontier",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/CoordinateClosureFrontier.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [],
+    "hint": "OpenPartialHomeomorph maps an open subset of its source to an open subset; the unit ball lies in the source because the closed radius-two ball does. The closed complement in a compact Hausdorff M has CompactSpace subtype. Preserve the actual removed image and quotient topology. Preserve ALL V1 files and the exact frozen goal. Use only the marked proof body. Source is in your own worktree and Mathlib/; do not inspect other attempts. Only report a proved result after swarm-check.sh succeeds. These lemmas do not prove the full Poincare conjecture.",
+    "id": "v1-coordinate-open-compact",
+    "mathematical_line": "frozen-v1-topology",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- The removed ball is genuinely open and its complement is compact. -/\ntheorem coordinate_removed_open_complement_compact {M : ClosedThreeManifold.{u}}\n    (b : CoordinateBall M) : IsOpen b.removed ∧ CompactSpace b.Complement :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.coordinate_removed_open_complement_compact",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/CoordinateOpenCompact.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [
+      "v1-double-ball-sphere",
+      "v1-alexander-ball-extension"
+    ],
+    "hint": "Use the checked Alexander extension for h or its inverse to change gluing on the second ball, leaving the first ball fixed. Descend the pair of ball homeomorphisms and their inverses to the two actual Quot spaces, check continuity and inverse identities by quotient induction, then compose with doubleBall_identity_sphere. No new assumption is allowed. This still does not prove an arbitrary sphere-factor complement is a ball. Preserve V1 and all supplied definitions, and run swarm-check.sh.",
+    "id": "v1-double-ball-arbitrary-gluing",
+    "model": "luna",
+    "priority": 8,
+    "reasoning_effort": "xhigh",
+    "source": "import PoincareConjecture.ProofContract.Proofs.DoubleBallSphere\nimport PoincareConjecture.ProofContract.Proofs.AlexanderExtension\nimport PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Arbitrary boundary gluing of two real balls gives the three-sphere. -/\ntheorem doubleBall_arbitrary_gluing_sphere (h : Sphere2 ≃ₜ Sphere2) :\n    Nonempty (DoubleBallSpace h ≃ₜ Sphere3) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.doubleBall_arbitrary_gluing_sphere",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/DoubleBallGluing.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [],
+    "hint": "Use the two hemispheres of the unit sphere in R4. A ball point x maps to (x, plus or minus sqrt(1-norm(x)^2)), identified through EuclideanSpace.finAddEquivProd for 4=3+1. These maps agree exactly at the boundary and yield a continuous bijection from the actual quotient; compactness of the quotient and Hausdorff sphere give a homeomorphism. Alternatively use an existing exact ball/hemisphere homeomorphism if present. Prove every continuity, quotient-identification and surjectivity step. Do not assume Schoenflies, a sphere homeomorphism or Poincare. This proves only the standard double-ball model, not complements of arbitrary embedded balls. Preserve the supplied definitions and all V1 files. Use only the marked proof and run swarm-check.sh.",
+    "id": "v1-double-ball-sphere",
+    "model": "luna",
+    "priority": 8,
+    "reasoning_effort": "max",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Actual closed Euclidean three-ball. -/\nabbrev UnitBall3 := Metric.closedBall (0 : Euclidean3) 1\n/-- Inclusion of the actual unit sphere into the closed ball. -/\ndef unitBallBoundary (s : Sphere2) : UnitBall3 := ⟨s, le_of_eq s.property⟩\n/-- Only opposite boundary points prescribed by h are glued. -/\ndef doubleBallSeam (h : Sphere2 ≃ₜ Sphere2) (x y : UnitBall3 ⊕ UnitBall3) : Prop :=\n  ∃ s : Sphere2, x = Sum.inl (unitBallBoundary s) ∧ y = Sum.inr (unitBallBoundary (h s))\nabbrev DoubleBallSpace (h : Sphere2 ≃ₜ Sphere2) := Quot (doubleBallSeam h)\n/-- Two actual closed balls glued by the identity form the actual three-sphere. -/\ntheorem doubleBall_identity_sphere :\n    Nonempty (DoubleBallSpace (Homeomorph.refl Sphere2) ≃ₜ Sphere3) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.doubleBall_identity_sphere",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/DoubleBallSphere.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [],
+    "hint": "Show that S² × Circle cannot be simply connected: Circle is a retract using one explicit sphere point and the second projection. Use induced maps on fundamental groups and Mathlib's circle pi1 result, or nontrivial loop plus the section/retraction. The homeomorphism in IsSphereHandle transports the simply connected instance. Do NOT assume S² is simply connected (it is unnecessary for a retraction argument). Search Mathlib/AlgebraicTopology/FundamentalGroupoid and Mathlib/Topology/Homotopy. Supply the exact existing Prop, no change of Circle to AddCircle without an explicit verified homeomorphism. Preserve ALL V1 files and the exact frozen goal. Use only the marked proof body. Source is in your own worktree and Mathlib/; do not inspect other attempts. Only report a proved result after swarm-check.sh succeeds. These lemmas do not prove the full Poincare conjecture.",
+    "id": "v1-handle-exclusion",
+    "mathematical_line": "frozen-v1-topology",
+    "model": "luna",
+    "priority": 20,
+    "reasoning_effort": "xhigh",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Exact frozen top-level handle exclusion; no extra premise. -/\ntheorem handle_exclusion : HandleExclusionStatement.{u} :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.handle_exclusion",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/HandleExclusion.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [
+      "v1-coordinate-boundary-embedding",
+      "v1-coordinate-closure-frontier"
+    ],
+    "hint": "Use dimension-three sphere connectedness and the exact frontier identification. A clopen separation of the complement would restrict to a clopen separation of the boundary sphere. The side missing the whole boundary is then clopen in M, contradicting ConnectedSpace M. Alternatively construct paths avoiding the ball via its connected spherical boundary and a collar. Do not add simply-connectedness, a preconnected-complement premise, or boundary-connectedness as a hypothesis; derive sphere connectedness from normed module API. The boundary embedding and closure/frontier lemmas are available. Preserve ALL V1 files and the exact frozen goal. Use only the marked proof body. Source is in your own worktree and Mathlib/; do not inspect other attempts. Only report a proved result after swarm-check.sh succeeds. These lemmas do not prove the full Poincare conjecture.",
+    "id": "v1-punctured-complement-connected",
+    "mathematical_line": "frozen-v1-topology",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import PoincareConjecture.ProofContract.Proofs.CoordinateBoundary\nimport PoincareConjecture.ProofContract.Proofs.CoordinateClosureFrontier\nimport PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Removing an open coordinate three-ball does not disconnect a closed connected manifold. -/\ntheorem coordinate_complement_connected {M : ClosedThreeManifold.{u}}\n    (b : CoordinateBall M) : ConnectedSpace b.Complement :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.coordinate_complement_connected",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ComplementConnected.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [
+      "v1-coordinate-boundary-embedding"
+    ],
+    "hint": "Define an explicit equivalence relation on the disjoint sum: same-side equality or cross-side seam matching. Boundary injectivity and h.injective give transitivity. Compare with Relation.EqvGen of the directed generator connectedSumSeam and use Quot.exact and Quot.sound. Do not treat the raw relation as already symmetric/transitive. This supplies factor inclusion injections for actual connected-sum topology. Preserve every V1 definition, add no assumptions, work only in the marked proof, and compile with swarm-check.sh.",
+    "id": "v1-quotient-fiber-classification",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import PoincareConjecture.ProofContract.Proofs.CoordinateBoundary\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- The connected-sum quotient makes exactly the prescribed boundary identifications. -/\ntheorem connectedSum_quotient_fibers {A B : ClosedThreeManifold.{u}}\n    (a : CoordinateBall A) (b : CoordinateBall B) (h : Sphere2 ≃ₜ Sphere2) :\n    Function.Injective (fun x : a.Complement => Quot.mk (connectedSumSeam a b h) (Sum.inl x)) ∧\n    Function.Injective (fun y : b.Complement => Quot.mk (connectedSumSeam a b h) (Sum.inr y)) ∧\n    ∀ (x : a.Complement) (y : b.Complement),\n      Quot.mk (connectedSumSeam a b h) (Sum.inl x) =\n        Quot.mk (connectedSumSeam a b h) (Sum.inr y) ↔\n          ∃ s : Sphere2, x = a.boundary s ∧ y = b.boundary (h s) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.connectedSum_quotient_fibers",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ConnectedSumFibers.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [],
+    "hint": "Use Quot.lift on Sum.elim with the given generator relation; quotient topology makes the lift continuous exactly when its composition with Quot.mk is continuous. Check continuous_quot_lift / quotientMap_quot_mk API. Uniqueness by Quot induction. This is the universal-map constructor for later pinch maps, with actual quotient, not an assumed universal property. Preserve ALL V1 files and the exact frozen goal. Use only the marked proof body. Source is in your own worktree and Mathlib/; do not inspect other attempts. Only report a proved result after swarm-check.sh succeeds. These lemmas do not prove the full Poincare conjecture.",
+    "id": "v1-quotient-pasting",
+    "mathematical_line": "frozen-v1-topology",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Continuous maps agreeing on the actual seam descend to the actual quotient. -/\ntheorem connectedSum_continuous_pasting {A B : ClosedThreeManifold.{u}}\n    (a : CoordinateBall A) (b : CoordinateBall B) (glue : Sphere2 ≃ₜ Sphere2)\n    {Y : Type*} [TopologicalSpace Y]\n    (f : C(a.Complement, Y)) (g : C(b.Complement, Y))\n    (hfg : ∀ s : Sphere2, f (a.boundary s) = g (b.boundary (glue s))) :\n    ∃! F : C(ConnectedSumSpace a b glue, Y),\n      (∀ x, F (Quot.mk (connectedSumSeam a b glue) (Sum.inl x)) = f x) ∧\n      (∀ y, F (Quot.mk (connectedSumSeam a b glue) (Sum.inr y)) = g y) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.connectedSum_continuous_pasting",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/ConnectedSumPasting.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-v1-20260922",
+    "depends_on": [],
+    "hint": "Build the homeomorphism with inverse (s,r) -> r • s. Nonzero norm follows from norm>=1. Prove both inverses, norm identities and continuity on subtypes. This explicit collar supplies the coordinate boundary neighborhood used for topological connected-sum proofs. Do not replace the map with an unconstrained existence theorem. Preserve ALL V1 files and the exact frozen goal. Use only the marked proof body. Source is in your own worktree and Mathlib/; do not inspect other attempts. Only report a proved result after swarm-check.sh succeeds. These lemmas do not prove the full Poincare conjecture.",
+    "id": "v1-radial-annulus-homeomorph",
+    "mathematical_line": "frozen-v1-topology",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import PoincareConjecture.ProofContract.V1.Obligations\nset_option autoImplicit false\nnoncomputable section\nuniverse u\nnamespace PoincareConjecture.ProofContract.Proofs\nopen V1 Set Function Topology\nopen scoped Topology Manifold ContDiff\n/-- Explicit radial collar for a closed Euclidean annulus. -/\ntheorem radial_annulus_homeomorph :\n    ∃ e : {x : Euclidean3 // 1 ≤ ‖x‖ ∧ ‖x‖ ≤ 2} ≃ₜ\n      (Sphere2 × Set.Icc (1 : ℝ) 2),\n      ∀ x, ((e x).1 : Euclidean3) = ‖(x : Euclidean3)‖⁻¹ • (x : Euclidean3) ∧\n        ((e x).2 : ℝ) = ‖(x : Euclidean3)‖ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend PoincareConjecture.ProofContract.Proofs\n",
+    "target_name": "PoincareConjecture.ProofContract.Proofs.radial_annulus_homeomorph",
+    "target_path": "PoincareConjecture/ProofContract/Proofs/RadialAnnulus.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [
+      "heat-compact-joint-convolution",
+      "heat-time-exchange"
+    ],
+    "hint": "Compose the three accepted consumer dependencies and euclideanHeatKernel_three_heat_equation. Integrability of K*f follows continuity and compact support of f. Rewrite the derivative integral using the actual kernel equation and the Laplace exchange; no new analytic estimates or assumptions are needed. Target is exactly the old unresolved classical solution strength, under a new checked decomposition. Work only in your assigned proof body and your own worktree. Do not change pinned definitions, broaden conclusions, assume differentiation under integrals, add hypotheses, or claim a manifold Ricci solver. Run swarm-check.sh. This task is a concrete prerequisite behind the V1 GeometricTraceStatement, not that whole statement.\nCoordinator acceptance: the original Hessian and Laplace exchange timeout source has been independently reviewed and committed at 470a95d53f40c815f0611d7b5e080f48636bd507. Imports refer to those actual accepted theorems in the base, not assumed hypotheses. The original blocked task record is retained. The mathematical statement and target file are unchanged. Use this new dependency route; do not rerun the timed-out parent.",
+    "id": "heat-classical-after-reviewed-exchange",
+    "mathematical_line": "geometric-trace-linear-pde",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveCompactSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveTimeExchange\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveLaplaceExchange\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation\nimport Mathlib.Analysis.Calculus.ContDiff.Convolution\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Checked composition of the independent positive-time convolution leaves. -/\ntheorem euclideanHeatKernel_three_compact_classical_recursive (f : E3 → ℝ)\n    (hf : ContDiff ℝ ∞ f) (hfc : HasCompactSupport f) :\n    let u : ℝ → E3 → ℝ := fun t x => ∫ y : E3, euclideanHeatKernel 3 t (x-y) * f y\n    (∀ t : ℝ, 0 < t → ∀ x : E3,\n      Integrable (fun y : E3 => euclideanHeatKernel 3 t (x-y) * f y) volume) ∧\n    ContDiffOn ℝ ∞ (fun p : ℝ × E3 => u p.1 p.2) (Ioi (0 : ℝ) ×ˢ (univ : Set E3)) ∧\n    ∀ t : ℝ, 0 < t → ∀ x : E3,\n      HasDerivAt (fun s => u s x) (∑ i : Fin 3, iteratedDeriv 2\n        (fun z : ℝ => u t (WithLp.toLp 2 (Function.update (WithLp.ofLp x) i z))) (x i)) t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_compact_classical_recursive",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveClassicalSolution.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [
+      "heat-compact-joint-convolution",
+      "heat-time-exchange",
+      "heat-spatial-laplace-exchange"
+    ],
+    "hint": "Compose the three accepted consumer dependencies and euclideanHeatKernel_three_heat_equation. Integrability of K*f follows continuity and compact support of f. Rewrite the derivative integral using the actual kernel equation and the Laplace exchange; no new analytic estimates or assumptions are needed. Target is exactly the old unresolved classical solution strength, under a new checked decomposition. Work only in your assigned proof body and your own worktree. Do not change pinned definitions, broaden conclusions, assume differentiation under integrals, add hypotheses, or claim a manifold Ricci solver. Run swarm-check.sh. This task is a concrete prerequisite behind the V1 GeometricTraceStatement, not that whole statement.",
+    "id": "heat-classical-assembly",
+    "mathematical_line": "geometric-trace-linear-pde",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveCompactSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveTimeExchange\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveLaplaceExchange\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation\nimport Mathlib.Analysis.Calculus.ContDiff.Convolution\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Checked composition of the independent positive-time convolution leaves. -/\ntheorem euclideanHeatKernel_three_compact_classical_recursive (f : E3 → ℝ)\n    (hf : ContDiff ℝ ∞ f) (hfc : HasCompactSupport f) :\n    let u : ℝ → E3 → ℝ := fun t x => ∫ y : E3, euclideanHeatKernel 3 t (x-y) * f y\n    (∀ t : ℝ, 0 < t → ∀ x : E3,\n      Integrable (fun y : E3 => euclideanHeatKernel 3 t (x-y) * f y) volume) ∧\n    ContDiffOn ℝ ∞ (fun p : ℝ × E3 => u p.1 p.2) (Ioi (0 : ℝ) ×ˢ (univ : Set E3)) ∧\n    ∀ t : ℝ, 0 < t → ∀ x : E3,\n      HasDerivAt (fun s => u s x) (∑ i : Fin 3, iteratedDeriv 2\n        (fun z : ℝ => u t (WithLp.toLp 2 (Function.update (WithLp.ofLp x) i z))) (x i)) t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_compact_classical_recursive",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveClassicalSolution.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [
+      "heat-joint-smooth"
+    ],
+    "hint": "Use RecursiveJointSmooth and a compact-support parameter integration/convolution theorem. Fixed compact support of f gives uniform support in y on each parameter neighborhood; compactness is in integration variable, not in all x. A workable approach writes h p z=K(p.t,p.x+z)*f(-z), uses contDiffOn_convolution_right_with_param_comp against constant 1 and evaluation at 0. Verify every support, locally-integrable and open-domain side condition. Work only in your assigned proof body and your own worktree. Do not change pinned definitions, broaden conclusions, assume differentiation under integrals, add hypotheses, or claim a manifold Ricci solver. Run swarm-check.sh. This task is a concrete prerequisite behind the V1 GeometricTraceStatement, not that whole statement.",
+    "id": "heat-compact-joint-convolution",
+    "mathematical_line": "geometric-trace-linear-pde",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveJointSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation\nimport Mathlib.Analysis.Calculus.ContDiff.Convolution\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Actual compactly supported heat convolution is jointly smooth for positive time. -/\ntheorem euclideanHeatKernel_compact_convolution_smooth (f : E3 → ℝ)\n    (hf : ContDiff ℝ ∞ f) (hfc : HasCompactSupport f) :\n    ContDiffOn ℝ ∞ (fun p : ℝ × E3 =>\n      ∫ y : E3, euclideanHeatKernel 3 p.1 (p.2 - y) * f y)\n      (Ioi (0 : ℝ) ×ˢ (univ : Set E3)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_compact_convolution_smooth",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveCompactSmooth.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [],
+    "hint": "Differentiate the product of three 1D Gaussians using checked gaussianHeatKernel_derivatives. First derive directional first derivative = -(x_i/(2t))*K, then differentiate along e_j; handle diagonal and mixed terms. All fderiv differentiability conditions must be justified by existing smooth kernel theorem. This leaf has no integration or moment bound, so do not reproduce the previous 506-line all-in-one proof. Work only in your assigned proof body and your own worktree. Do not change pinned definitions, broaden conclusions, assume differentiation under integrals, add hypotheses, or claim a manifold Ricci solver. Run swarm-check.sh. This task is a concrete prerequisite behind the V1 GeometricTraceStatement, not that whole statement.",
+    "id": "heat-hessian-formula",
+    "mathematical_line": "geometric-trace-linear-pde",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation\nimport Mathlib.Analysis.Calculus.ContDiff.Convolution\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Exact coordinate Hessian entries of the actual three-dimensional Gaussian. -/\ntheorem euclideanHeatKernel_three_hessian_formula {t : ℝ} (ht : 0 < t)\n    (x : E3) (i j : Fin 3) :\n    fderiv ℝ (fun z : E3 => fderiv ℝ (euclideanHeatKernel 3 t) z\n      (EuclideanSpace.single i 1)) x (EuclideanSpace.single j 1) =\n      (x i * x j / (4*t^2) - (if i=j then 1/(2*t) else 0)) * euclideanHeatKernel 3 t x :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_hessian_formula",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveHessianFormula.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [
+      "heat-classical-after-reviewed-exchange"
+    ],
+    "hint": "Combine the two accepted prerequisites into an actual initial-value solution for the given f. Set u(0)=f and use the integral at positive times, with arbitrary extension for negative times. Derive boundedness and uniform continuity from continuous compact support; do not add either as a new hypothesis. HasCompactSupport.uniformContinuous_of_continuous comes from HeineCantor. Convert integral orientations by translation/reflection with the actual Lebesgue measure. Prove the change at t=0 does not affect local derivatives at positive t. The final u must have the exact initial value and uniform initial trace, not just solve the kernel equation. This is a Euclidean linear heat theorem, not Ricci flow. Keep the frozen target and all imports, compile with the supplied checker and check transitive axioms. No unproved shortcuts, child models or whole-package builds. The refined parent theorem is euclideanHeatKernel_three_compact_classical_recursive in RecursiveClassicalSolution. The original initial-value goal strength is unchanged; only its proved prerequisite route and new declaration name differ. Preserve all V1 public interfaces.\nCoordinator acceptance: the original Hessian and Laplace exchange timeout source has been independently reviewed and committed at 470a95d53f40c815f0611d7b5e080f48636bd507. Imports refer to those actual accepted theorems in the base, not assumed hypotheses. The original blocked task record is retained. The mathematical statement and target file are unchanged. Use this new dependency route; do not rerun the timed-out parent.",
+    "id": "heat-initial-value-after-reviewed-classical",
+    "model": "luna",
+    "priority": 992,
+    "reasoning_effort": "high",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveClassicalSolution\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalInitialTrace\nimport Mathlib.Topology.UniformSpace.HeineCantor\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** An actual three-dimensional heat initial-value solution with smooth compact initial datum. -/\ntheorem exists_three_dimensional_classical_heat_solution_recursive\n    (f : E3 → ℝ) (hf : ContDiff ℝ ∞ f) (hfc : HasCompactSupport f) :\n    ∃ u : ℝ → E3 → ℝ, u 0 = f ∧\n      (∀ t : ℝ, 0 < t → ∀ x : E3,\n        u t x = ∫ y : E3, euclideanHeatKernel 3 t (x - y) * f y) ∧\n      ContDiffOn ℝ ∞ (fun p : ℝ × E3 => u p.1 p.2) (Ioi (0 : ℝ) ×ˢ (univ : Set E3)) ∧\n      TendstoUniformly u f (𝓝[>] (0 : ℝ)) ∧\n      ∀ t : ℝ, 0 < t → ∀ x : E3,\n        HasDerivAt (fun s => u s x) (∑ i : Fin 3, iteratedDeriv 2\n          (fun z : ℝ => u t (WithLp.toLp 2 (Function.update (WithLp.ofLp x) i z))) (x i)) t := by\n/- SWARM_PROOF_BEGIN -/\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.exists_three_dimensional_classical_heat_solution_recursive",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveClassicalIVP.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [
+      "heat-classical-assembly"
+    ],
+    "hint": "Combine the two accepted prerequisites into an actual initial-value solution for the given f. Set u(0)=f and use the integral at positive times, with arbitrary extension for negative times. Derive boundedness and uniform continuity from continuous compact support; do not add either as a new hypothesis. HasCompactSupport.uniformContinuous_of_continuous comes from HeineCantor. Convert integral orientations by translation/reflection with the actual Lebesgue measure. Prove the change at t=0 does not affect local derivatives at positive t. The final u must have the exact initial value and uniform initial trace, not just solve the kernel equation. This is a Euclidean linear heat theorem, not Ricci flow. Keep the frozen target and all imports, compile with the supplied checker and check transitive axioms. No unproved shortcuts, child models or whole-package builds. The refined parent theorem is euclideanHeatKernel_three_compact_classical_recursive in RecursiveClassicalSolution. The original initial-value goal strength is unchanged; only its proved prerequisite route and new declaration name differ. Preserve all V1 public interfaces.",
+    "id": "heat-initial-value-assembly",
+    "model": "luna",
+    "priority": 992,
+    "reasoning_effort": "high",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveClassicalSolution\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalInitialTrace\nimport Mathlib.Topology.UniformSpace.HeineCantor\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** An actual three-dimensional heat initial-value solution with smooth compact initial datum. -/\ntheorem exists_three_dimensional_classical_heat_solution_recursive\n    (f : E3 → ℝ) (hf : ContDiff ℝ ∞ f) (hfc : HasCompactSupport f) :\n    ∃ u : ℝ → E3 → ℝ, u 0 = f ∧\n      (∀ t : ℝ, 0 < t → ∀ x : E3,\n        u t x = ∫ y : E3, euclideanHeatKernel 3 t (x - y) * f y) ∧\n      ContDiffOn ℝ ∞ (fun p : ℝ × E3 => u p.1 p.2) (Ioi (0 : ℝ) ×ˢ (univ : Set E3)) ∧\n      TendstoUniformly u f (𝓝[>] (0 : ℝ)) ∧\n      ∀ t : ℝ, 0 < t → ∀ x : E3,\n        HasDerivAt (fun s => u s x) (∑ i : Fin 3, iteratedDeriv 2\n          (fun z : ℝ => u t (WithLp.toLp 2 (Function.update (WithLp.ofLp x) i z))) (x i)) t := by\n/- SWARM_PROOF_BEGIN -/\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.exists_three_dimensional_classical_heat_solution_recursive",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveClassicalIVP.lean",
+    "timeout_seconds": 900
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [],
+    "hint": "Expand euclideanHeatKernel and gaussianHeatKernel. On positive times sqrt(4*pi*t), its inverse, and exp(-x_i²/(4t)) are smooth. Use local ContDiffAt on the open time domain and finite products. No integration is part of this leaf; n=0 is allowed. This extracts the valid first subproblem from the old overly-large classical-solution task. Work only in your assigned proof body and your own worktree. Do not change pinned definitions, broaden conclusions, assume differentiation under integrals, add hypotheses, or claim a manifold Ricci solver. Run swarm-check.sh. This task is a concrete prerequisite behind the V1 GeometricTraceStatement, not that whole statement.",
+    "id": "heat-joint-smooth",
+    "mathematical_line": "geometric-trace-linear-pde",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "high",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation\nimport Mathlib.Analysis.Calculus.ContDiff.Convolution\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Smoothness of the actual product Gaussian in joint positive-time and space variables. -/\ntheorem euclideanHeatKernel_joint_smooth (n : ℕ) :\n    ContDiffOn ℝ ∞ (fun p : ℝ × EuclideanSpace ℝ (Fin n) => euclideanHeatKernel n p.1 p.2)\n      (Ioi (0 : ℝ) ×ˢ (univ : Set (EuclideanSpace ℝ (Fin n)))) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_joint_smooth",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveJointSmooth.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [],
+    "hint": "Generalize the accepted ThreeDimensionalMoment proof, which only covers 0<alpha<1, to beta>=0; its norm<=sum(abs coordinates) argument uses a max and works with factor 3^beta, not the bound 3. Use Gaussian integral real-power integrability (s>-1) and product Haar measure, then scale sqrt(t). Do not assume beta<1, since beta=alpha+2 is required for Hessian. Handle beta=0 correctly with Real.rpow_zero. Existing source ThreeDimensionalMoment is available in YOUR worktree. Work only in your assigned proof body and your own worktree. Do not change pinned definitions, broaden conclusions, assume differentiation under integrals, add hypotheses, or claim a manifold Ricci solver. Run swarm-check.sh. This task is a concrete prerequisite behind the V1 GeometricTraceStatement, not that whole statement.",
+    "id": "heat-nonnegative-moments",
+    "mathematical_line": "geometric-trace-linear-pde",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalMoment\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation\nimport Mathlib.Analysis.Calculus.ContDiff.Convolution\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Uniform-in-time moment bound in the actual Euclidean three-dimensional norm. -/\ntheorem euclideanHeatKernel_three_nonnegative_moment (beta : ℝ) (hb : 0 ≤ beta) :\n    ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, 0 < t →\n      Integrable (fun y : E3 => euclideanHeatKernel 3 t y * ‖y‖^beta) volume ∧\n      (∫ y : E3, euclideanHeatKernel 3 t y * ‖y‖^beta) ≤ C*t^(beta/2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_nonnegative_moment",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursivePolynomialMoment.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [
+      "heat-joint-smooth"
+    ],
+    "hint": "Prove derivative-under-integral twice along the coordinate affine line, on compact neighborhoods and tsupport f, or use ContDiff/fderiv convolution API. The (x-y) i versus x i basepoint shift is essential. All integrals on RHS must be shown integrable. Then commute finite sum with integral. Do not replace actual iteratedDeriv with a formal placeholder. Independent of time exchange once joint kernel smoothness is available. Work only in your assigned proof body and your own worktree. Do not change pinned definitions, broaden conclusions, assume differentiation under integrals, add hypotheses, or claim a manifold Ricci solver. Run swarm-check.sh. This task is a concrete prerequisite behind the V1 GeometricTraceStatement, not that whole statement.",
+    "id": "heat-spatial-laplace-exchange",
+    "mathematical_line": "geometric-trace-linear-pde",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveJointSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation\nimport Mathlib.Analysis.Calculus.ContDiff.Convolution\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Actual coordinate Laplacian of convolution equals integral of the kernel Laplacian. -/\ntheorem euclideanHeatKernel_compact_laplace_integral (f : E3 → ℝ)\n    (hf : ContDiff ℝ ∞ f) (hfc : HasCompactSupport f)\n    {t : ℝ} (ht : 0 < t) (x : E3) :\n    (∀ i : Fin 3, Integrable (fun y : E3 =>\n      iteratedDeriv 2 (fun z : ℝ => euclideanHeatKernel 3 t\n        (WithLp.toLp 2 (Function.update (WithLp.ofLp (x-y)) i z))) ((x-y) i) * f y) volume) ∧\n    (∑ i : Fin 3, iteratedDeriv 2 (fun z : ℝ =>\n      ∫ y : E3, euclideanHeatKernel 3 t\n        (WithLp.toLp 2 (Function.update (WithLp.ofLp x) i z) - y) * f y) (x i)) =\n      ∫ y : E3, (∑ i : Fin 3, iteratedDeriv 2 (fun z : ℝ =>\n        euclideanHeatKernel 3 t (WithLp.toLp 2 (Function.update (WithLp.ofLp (x-y)) i z))) ((x-y) i)) * f y :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_compact_laplace_integral",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveLaplaceExchange.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [
+      "heat-joint-smooth"
+    ],
+    "hint": "Use a compact time interval around t>0 and tsupport f. Joint smoothness makes time derivatives bounded on this compact set; multiply by bounded compactly supported f for an integrable majorant. Apply hasDerivAt_integral_of_dominated_loc_of_deriv_le or compact-support integral derivative API. This task ONLY exchanges the time derivative; do not try to solve all second spatial derivatives too. Work only in your assigned proof body and your own worktree. Do not change pinned definitions, broaden conclusions, assume differentiation under integrals, add hypotheses, or claim a manifold Ricci solver. Run swarm-check.sh. This task is a concrete prerequisite behind the V1 GeometricTraceStatement, not that whole statement.",
+    "id": "heat-time-exchange",
+    "mathematical_line": "geometric-trace-linear-pde",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveJointSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation\nimport Mathlib.Analysis.Calculus.ContDiff.Convolution\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Time differentiation passes under the actual compactly supported convolution integral. -/\ntheorem euclideanHeatKernel_compact_time_derivative (f : E3 → ℝ)\n    (hf : ContDiff ℝ ∞ f) (hfc : HasCompactSupport f)\n    {t : ℝ} (ht : 0 < t) (x : E3) :\n    Integrable (fun y : E3 => deriv (fun s => euclideanHeatKernel 3 s (x-y)) t * f y) volume ∧\n    HasDerivAt (fun s => ∫ y : E3, euclideanHeatKernel 3 s (x-y) * f y)\n      (∫ y : E3, deriv (fun s => euclideanHeatKernel 3 s (x-y)) t * f y) t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_compact_time_derivative",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveTimeExchange.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [
+      "heat-nonnegative-moments"
+    ],
+    "hint": "Use the exact Hessian formula and norm coordinate bound |y_i|<=norm y. Dominate every entry by K*(norm(y)^(alpha+2)/(4t²)+norm(y)^alpha/(2t)). Two nonnegative-moment instances beta=alpha and beta=alpha+2 give one constant for all 9 entries. Establish measurability/integrability before integral_mono. Exponent algebra uses t>0. This is a true estimate for the fderiv entries, not an assumed Hessian formula. Work only in your assigned proof body and your own worktree. Do not change pinned definitions, broaden conclusions, assume differentiation under integrals, add hypotheses, or claim a manifold Ricci solver. Run swarm-check.sh. This task is a concrete prerequisite behind the V1 GeometricTraceStatement, not that whole statement.\nCoordinator acceptance: the original Hessian and Laplace exchange timeout source has been independently reviewed and committed at 470a95d53f40c815f0611d7b5e080f48636bd507. Imports refer to those actual accepted theorems in the base, not assumed hypotheses. The original blocked task record is retained. The mathematical statement and target file are unchanged. Use this new dependency route; do not rerun the timed-out parent.",
+    "id": "heat-weighted-hessian-after-reviewed-formula",
+    "mathematical_line": "geometric-trace-linear-pde",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveHessianFormula\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursivePolynomialMoment\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation\nimport Mathlib.Analysis.Calculus.ContDiff.Convolution\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Weighted L1 Hessian control assembled from formula and Gaussian moments. -/\ntheorem euclideanHeatKernel_three_weighted_hessian_recursive (alpha : ℝ)\n    (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, 0 < t → ∀ i j : Fin 3,\n      Integrable (fun y : E3 =>\n        |fderiv ℝ (fun z : E3 => fderiv ℝ (euclideanHeatKernel 3 t) z\n          (EuclideanSpace.single i 1)) y (EuclideanSpace.single j 1)| * ‖y‖^alpha) volume ∧\n      (∫ y : E3, |fderiv ℝ (fun z : E3 => fderiv ℝ (euclideanHeatKernel 3 t) z\n        (EuclideanSpace.single i 1)) y (EuclideanSpace.single j 1)| * ‖y‖^alpha) ≤\n        C*t^(alpha/2-1) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_weighted_hessian_recursive",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveHessianEstimate.lean",
+    "timeout_seconds": 1200
+  },
+  {
+    "project": "poincare-recursive-heat-20260922",
+    "depends_on": [
+      "heat-hessian-formula",
+      "heat-nonnegative-moments"
+    ],
+    "hint": "Use the exact Hessian formula and norm coordinate bound |y_i|<=norm y. Dominate every entry by K*(norm(y)^(alpha+2)/(4t²)+norm(y)^alpha/(2t)). Two nonnegative-moment instances beta=alpha and beta=alpha+2 give one constant for all 9 entries. Establish measurability/integrability before integral_mono. Exponent algebra uses t>0. This is a true estimate for the fderiv entries, not an assumed Hessian formula. Work only in your assigned proof body and your own worktree. Do not change pinned definitions, broaden conclusions, assume differentiation under integrals, add hypotheses, or claim a manifold Ricci solver. Run swarm-check.sh. This task is a concrete prerequisite behind the V1 GeometricTraceStatement, not that whole statement.",
+    "id": "heat-weighted-hessian-assembly",
+    "mathematical_line": "geometric-trace-linear-pde",
+    "model": "luna",
+    "priority": 10,
+    "reasoning_effort": "xhigh",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveHessianFormula\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursivePolynomialMoment\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalEquation\nimport Mathlib.Analysis.Calculus.ContDiff.Convolution\nopen Set MeasureTheory Filter\nopen scoped ContDiff Topology BigOperators BoundedContinuousFunction\nnoncomputable section\nnamespace MorganTianLib.ParabolicPDE\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Weighted L1 Hessian control assembled from formula and Gaussian moments. -/\ntheorem euclideanHeatKernel_three_weighted_hessian_recursive (alpha : ℝ)\n    (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, 0 < t → ∀ i j : Fin 3,\n      Integrable (fun y : E3 =>\n        |fderiv ℝ (fun z : E3 => fderiv ℝ (euclideanHeatKernel 3 t) z\n          (EuclideanSpace.single i 1)) y (EuclideanSpace.single j 1)| * ‖y‖^alpha) volume ∧\n      (∫ y : E3, |fderiv ℝ (fun z : E3 => fderiv ℝ (euclideanHeatKernel 3 t) z\n        (EuclideanSpace.single i 1)) y (EuclideanSpace.single j 1)| * ‖y‖^alpha) ≤\n        C*t^(alpha/2-1) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.ParabolicPDE\n",
+    "target_name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_weighted_hessian_recursive",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/RecursiveHessianEstimate.lean",
+    "timeout_seconds": 1200
+  }
+]

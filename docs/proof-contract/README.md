@@ -47,7 +47,7 @@ to the exact public root. All six input propositions are explicit parameters of
 | `SmoothingStatement` | Open |
 | `GeometricTraceStatement` | Open |
 | `SphereCoverRecognitionStatement` | Proved by unique covering lifts; exact binding checked |
-| `HandleExclusionStatement` | Open |
+| `HandleExclusionStatement` | Proved and exactly bound; see reports/recursive-v1-20260922 |
 | `ConnectedSumFactorsStatement` | Open |
 | `ConnectedSumSphereStatement` | Open |
 

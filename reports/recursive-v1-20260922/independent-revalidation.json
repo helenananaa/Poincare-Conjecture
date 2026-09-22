@@ -1,0 +1,99 @@
+{
+  "scope": "Integrated fixed statements only; existing pinned dependencies; targeted source builds",
+  "projects": {
+    "poincare-recursive-v1-20260922": {
+      "checked_count": 9,
+      "source_sha256": {
+        "v1-alexander-ball-extension": "e32cf0a5ea49a6fd13553cf05d9a8e1c8ae4c092db72052bdc2bd40c1ae6ed96",
+        "v1-coordinate-ball-exists": "d0ecaac4a854804dbf4f43c22fe1d66e12d058c2ea8c53c23ce5616a85bf18db",
+        "v1-coordinate-boundary-embedding": "51793188cde145d2e8fe461123830d190fd7201155e4863bacd6b49c1c88ec13",
+        "v1-coordinate-closure-frontier": "bad68a3fb4d75a2b2cf98425503e1e1d89b58e6a8bfce5660baee0cc6c634418",
+        "v1-coordinate-open-compact": "a1a94964989bc00d96d1f69e6dae6f95bcd51400e41f3892d91ccad6826ae2c6",
+        "v1-punctured-complement-connected": "bc87cade299f8d63298a77ad63ca8e0cbdca6cf69f886ea27b5e6c30259a5ad8",
+        "v1-quotient-fiber-classification": "e27e847e793b8a0d1d0136ef7935ca90bd344fb985077e1caa7d36311680eafe",
+        "v1-quotient-pasting": "186f78f550c1cf3ec584b3f0db311f001d93326045b3604b56ac91bc93bee2fb",
+        "v1-radial-annulus-homeomorph": "0ccc3e88b64e94236e7bc9766442cb2d4a03107f0f43d24925b0c21751b4b4c0"
+      },
+      "axioms": {
+        "PoincareConjecture.ProofContract.Proofs.sphere_homeomorph_extends_closedBall": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.coordinate_ball_exists": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.coordinate_boundary_isClosedEmbedding": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.coordinate_closure_frontier": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.coordinate_removed_open_complement_compact": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.coordinate_complement_connected": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.connectedSum_quotient_fibers": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.connectedSum_continuous_pasting": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.radial_annulus_homeomorph": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-20260922/poincare-recursive-v1-20260922-Audit.lean"
+    },
+    "poincare-recursive-heat-20260922": {
+      "checked_count": 4,
+      "source_sha256": {
+        "heat-compact-joint-convolution": "3669f5f662099ab047029b2b1443417c74296d448c732dc603bbd10934620f81",
+        "heat-joint-smooth": "21e950327eec85385a55d88d5f8dcf19c190d5e6ccac751849d05b5141d4f53b",
+        "heat-nonnegative-moments": "bec86277e06d9f03e8a979563b22a66a813c3786c96e3bef36f72bae97f0b968",
+        "heat-time-exchange": "47d0d39ca6d18457d664faa23d23e292eb0b58476aa107409d01dbae1fb3f694"
+      },
+      "axioms": {
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_compact_convolution_smooth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_joint_smooth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_nonnegative_moment": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_compact_time_derivative": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/recursive-v1-20260922/poincare-recursive-heat-20260922-Audit.lean"
+    }
+  }
+}
