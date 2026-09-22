@@ -89,7 +89,7 @@ From the repository root, with the pinned `lake` on PATH:
 
 ```bash
 python3 tools/proof_contract/check.py
-python3 -m unittest discover -s tools/proof_contract -p 'test_*.py' -v
+python3 tools/proof_contract/regression_v1.py "$PWD"
 python3 tools/proof_contract/check.py --lean --report reports/proof-contract-current.json
 python3 tools/proof_contract/check.py --lean --require-complete
 ```
@@ -138,3 +138,14 @@ location and still passes the actual repository explicitly. This avoids the
 initial checker's shallow-temporary-path default calculation without changing
 its bytes, disabling any checks, or changing the mathematical contract.
 CI's runner-temporary directory already has the required path depth.
+
+### Expanded-binding regression fixture
+
+The original frozen injection test assumes its original cover-only binding
+fixture. Directly running it against a later live binding file gives an early
+unknown-goal rejection instead of the injection rejection it expects. The new
+regression_v1.py runs all 23 unchanged tests on their exact initial git fixture,
+then separately tests the current multi-binding configuration (5 tests).
+It does not change or suppress V1 tests; --lean still verifies the real current
+proofs. The old frozen CI workflow has NOT yet been migrated to this entrypoint,
+so no claim of green remote CI is made.

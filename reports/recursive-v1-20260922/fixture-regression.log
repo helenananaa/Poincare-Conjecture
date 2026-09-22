@@ -1,0 +1,19 @@
+{
+  "original_frozen_fixture_reference": "9d6f10c8716fbe5eeffe7c81a00da20294cb8bdb",
+  "original_fixture_tests": 23,
+  "original_fixture_passed": true,
+  "live_multibinding_tests": 5,
+  "live_multibinding_passed": true,
+  "frozen_files_modified": false,
+  "legacy_direct_discovery_caveat": "Original live-data test harness has a single-binding fixture assumption; use this explicit fixture runner. Remote CI workflow has not been migrated."
+}
+.......................
+----------------------------------------------------------------------
+Ran 23 tests in 0.014s
+
+OK
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK
