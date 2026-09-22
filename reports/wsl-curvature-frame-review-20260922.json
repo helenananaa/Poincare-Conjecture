@@ -1,0 +1,28 @@
+{
+  "project": "poincare-connection-frontier-20260922",
+  "task_id": "wsl-connection-frame-bridge",
+  "original_attempt": "4afa9d04-a8c7-46ed-a1a7-fbf3504c4764",
+  "original_status": "TIMEOUT",
+  "original_frozen_sha256": "c4df82f5c8f623c7d3b6be030ed4e9494fb3141008dce78047d06ecad0ee8ece",
+  "source_path": "/home/helenanana/projects/poincare-ops-20260919/wsl-curvature-20260922/frame-bridge-review/source/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionFrameBridge.lean",
+  "source_sha256": "c4df82f5c8f623c7d3b6be030ed4e9494fb3141008dce78047d06ecad0ee8ece",
+  "verification": {
+    "compile_passed": true,
+    "sha256": "c4df82f5c8f623c7d3b6be030ed4e9494fb3141008dce78047d06ecad0ee8ece",
+    "cache_key": "26c4401555a3cf4cee0afa4f2af0b0d4e4072eaf899a0c0e63ec879da35d0d5a",
+    "cache_hit": false,
+    "compiler_wait_seconds": 5.3e-05,
+    "compile_seconds": 6.729536,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_wait_seconds": 3.9e-05
+  },
+  "original_task_state_preserved": true,
+  "review_scope": "Independent stopped-source review; not automatic acceptance or task-state promotion",
+  "accepted_unchanged": true,
+  "ordinary_target_build_passed": true,
+  "meaning": "Explicit coordinate-frame conjugacy between the PDE connection vector and the existing geometric bilinear Christoffel map; not a Ricci-flow solution."
+}
