@@ -8,6 +8,10 @@
     "handle": {
       "module": "PoincareConjecture.ProofContract.Proofs.HandleExclusion",
       "declaration": "PoincareConjecture.ProofContract.Proofs.handle_exclusion"
+    },
+    "sum_factors": {
+      "module": "PoincareConjecture.ProofContract.Proofs.ConnectedSumFactorsProof",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_factors_proved"
     }
   }
 }

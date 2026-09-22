@@ -48,7 +48,7 @@ to the exact public root. All six input propositions are explicit parameters of
 | `GeometricTraceStatement` | Open |
 | `SphereCoverRecognitionStatement` | Proved by unique covering lifts; exact binding checked |
 | `HandleExclusionStatement` | Proved and exactly bound; see reports/recursive-v1-20260922 |
-| `ConnectedSumFactorsStatement` | Open |
+| `ConnectedSumFactorsStatement` | Proved and exactly bound; see stage3 factor audit |
 | `ConnectedSumSphereStatement` | Open |
 
 These are interface counts, not percentages of the mathematical workload.
