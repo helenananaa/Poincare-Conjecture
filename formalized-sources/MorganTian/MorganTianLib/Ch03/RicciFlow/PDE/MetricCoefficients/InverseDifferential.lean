@@ -21,75 +21,16 @@ by
   · rw [← he]
     exact contDiffAt_map_inverse e
   intro H
-  have hfun :
-      (fun B : E3 →L[ℝ] E3 => B.inverse) =
-        (fun B : E3 →L[ℝ] E3 =>
-          Ring.inverse ((e.symm : E3 →L[ℝ] E3).comp B) ∘L
-            (e.symm : E3 →L[ℝ] E3)) := by
-    funext B
-    exact ContinuousLinearMap.inverse_eq_ringInverse e B
-  rw [hfun]
-  have hleft :
-      HasFDerivAt
-        (fun B : E3 →L[ℝ] E3 => (e.symm : E3 →L[ℝ] E3).comp B)
-        (ContinuousLinearMap.compL ℝ E3 E3 E3 (e.symm : E3 →L[ℝ] E3)) A := by
-    simpa using
-      (hasFDerivAt_const (e.symm : E3 →L[ℝ] E3) A).clm_comp
-        (hasFDerivAt_id A)
-  have hmid :
-      HasFDerivAt
-        (fun B : E3 →L[ℝ] E3 =>
-          Ring.inverse ((e.symm : E3 →L[ℝ] E3).comp B))
-        ((-ContinuousLinearMap.mulLeftRight ℝ (E3 →L[ℝ] E3)
-            (↑(1 : (E3 →L[ℝ] E3)ˣ)⁻¹) (↑(1 : (E3 →L[ℝ] E3)ˣ)⁻¹)).comp
-          (ContinuousLinearMap.compL ℝ E3 E3 E3 (e.symm : E3 →L[ℝ] E3))) A := by
-    have hbase :
-        (e.symm : E3 →L[ℝ] E3).comp A =
-          (1 : E3 →L[ℝ] E3) := by
-      rw [← he]
-      ext v
-      simp
-    have hring :
-        HasFDerivAt Ring.inverse
-          (-ContinuousLinearMap.mulLeftRight ℝ (E3 →L[ℝ] E3)
-            (↑(1 : (E3 →L[ℝ] E3)ˣ)⁻¹) (↑(1 : (E3 →L[ℝ] E3)ˣ)⁻¹))
-          ((e.symm : E3 →L[ℝ] E3).comp A) := by
-      simpa [hbase] using
-        (hasFDerivAt_ringInverse (𝕜 := ℝ) (1 : (E3 →L[ℝ] E3)ˣ))
-    have hring' := hring.comp A hleft
-    simpa [Function.comp_def] using hring'
-  have hright :
-      HasFDerivAt
-        (fun D : E3 →L[ℝ] E3 => D.comp (e.symm : E3 →L[ℝ] E3))
-        ((ContinuousLinearMap.compL ℝ E3 E3 E3).flip
-          (e.symm : E3 →L[ℝ] E3))
-        (Ring.inverse ((e.symm : E3 →L[ℝ] E3).comp A)) := by
-    have hbase :
-        (e.symm : E3 →L[ℝ] E3).comp A =
-          (1 : E3 →L[ℝ] E3) := by
-      rw [← he]
-      ext v
-      simp
-    simpa [hbase] using
-      (hasFDerivAt_id (Ring.inverse ((e.symm : E3 →L[ℝ] E3).comp A))).clm_comp
-        (hasFDerivAt_const (e.symm : E3 →L[ℝ] E3)
-          (Ring.inverse ((e.symm : E3 →L[ℝ] E3).comp A)))
-  have htotal := hright.comp A hmid
-  have hderiv := htotal.fderiv
-  have hderiv' :
-      fderiv ℝ
-          (fun B : E3 →L[ℝ] E3 =>
-            Ring.inverse ((e.symm : E3 →L[ℝ] E3).comp B) ∘L
-              (e.symm : E3 →L[ℝ] E3)) A =
-        (ContinuousLinearMap.compL ℝ E3 E3 E3).flip
-            (e.symm : E3 →L[ℝ] E3) ∘L
-          ((-ContinuousLinearMap.mulLeftRight ℝ (E3 →L[ℝ] E3)
-              (↑(1 : (E3 →L[ℝ] E3)ˣ)⁻¹) (↑(1 : (E3 →L[ℝ] E3)ˣ)⁻¹)).comp
-            (ContinuousLinearMap.compL ℝ E3 E3 E3 (e.symm : E3 →L[ℝ] E3))) := by
-    simpa [Function.comp_def] using hderiv
-  rw [hderiv']
-  rw [← he, ContinuousLinearMap.inverse_equiv]
-  ext K
-  simp [ContinuousLinearMap.comp_apply, ContinuousLinearMap.comp_assoc]
+  have h := (hasFDerivAt_ringInverse (𝕜 := ℝ) e.toUnit).fderiv
+  rw [ContinuousLinearMap.ringInverse_eq_inverse] at h
+  have hv : (e.toUnit : E3 →L[ℝ] E3) = A := he
+  rw [hv] at h
+  rw [h]
+  have hinv : ((e.toUnit⁻¹ : (E3 →L[ℝ] E3)ˣ) : E3 →L[ℝ] E3) = A.inverse := by
+    rw [← he, ContinuousLinearMap.inverse_equiv]
+    rfl
+  rw [hinv]
+  ext v
+  simp [ContinuousLinearMap.mulLeftRight_apply, ContinuousLinearMap.comp_apply]
 /- SWARM_PROOF_END -/
 end MorganTianLib.MetricCoefficient

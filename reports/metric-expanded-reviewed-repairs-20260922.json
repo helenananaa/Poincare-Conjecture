@@ -1,0 +1,23 @@
+{
+  "original_joint_attempt": "b63cd70c-4e46-4c36-a3ab-9f2ae6209301",
+  "original_timeout_preserved": true,
+  "joint_source_unchanged": true,
+  "inverse_old_sha256": "06621e05f65744b8042e6758f1e135e03536d30207545a59f94e92ad72116b4a",
+  "inverse_new_sha256": "04938431b6d8407f4040d3c04aab8c48727d751cd44252a1b661c2bc3ff64672",
+  "joint_sha256": "61ecdf7bd2b7f7b1f9d7f3b3662f04881a877022cfadf7d21a7a292b9a05564c",
+  "ordinary_lake_build_passed": true,
+  "audit_budget": 200000,
+  "axioms": {
+    "MorganTianLib.MetricCoefficient.coercive_inverse_differential": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "MorganTianLib.ParabolicPDE.semilinear_mild_joint_hessian_continuity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "frozen_statement_changed": false
+}
