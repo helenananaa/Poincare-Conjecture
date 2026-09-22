@@ -1,0 +1,119 @@
+{
+  "new_batch_attempts": 18,
+  "peak_simultaneous_in_flight_attempts": 7,
+  "definition": "Intervals from claim to attempt completion; includes preparation and independent verification, not a count of live model subprocesses.",
+  "model_limits": {
+    "luna": 0,
+    "grok": 0
+  },
+  "attempts": [
+    {
+      "task": "cont-radial-lift",
+      "status": "VERIFIED",
+      "start": 1790051298.523121,
+      "end": 1790051764.1762238
+    },
+    {
+      "task": "cont-radius-profile",
+      "status": "VERIFIED",
+      "start": 1790051298.5385938,
+      "end": 1790051665.5050607
+    },
+    {
+      "task": "cont-chart-supported-extension",
+      "status": "VERIFIED",
+      "start": 1790051298.5490534,
+      "end": 1790051745.383642
+    },
+    {
+      "task": "cont-coordinate-ball-basis",
+      "status": "VERIFIED",
+      "start": 1790051298.5678205,
+      "end": 1790051492.418513
+    },
+    {
+      "task": "cont-euclidean-compression",
+      "status": "VERIFIED",
+      "start": 1790051796.6302524,
+      "end": 1790051917.0611944
+    },
+    {
+      "task": "cont-ambient-ball-compression",
+      "status": "VERIFIED",
+      "start": 1790051930.9036975,
+      "end": 1790052081.727424
+    },
+    {
+      "task": "shrink-marked-complement",
+      "status": "VERIFIED",
+      "start": 1790052395.7681377,
+      "end": 1790052693.8956141
+    },
+    {
+      "task": "shrink-neighborhood",
+      "status": "VERIFIED",
+      "start": 1790052395.7897537,
+      "end": 1790052638.5798006
+    },
+    {
+      "task": "cont-heat-norm-form",
+      "status": "VERIFIED",
+      "start": 1790051312.9925375,
+      "end": 1790051540.03598
+    },
+    {
+      "task": "cont-heat-duhamel-bounded",
+      "status": "VERIFIED",
+      "start": 1790051313.0067117,
+      "end": 1790051589.3989418
+    },
+    {
+      "task": "cont-heat-time-L1",
+      "status": "VERIFIED",
+      "start": 1790051313.0172408,
+      "end": 1790051706.186258
+    },
+    {
+      "task": "cont-shifted-kernel-bound",
+      "status": "VERIFIED",
+      "start": 1790051558.1011207,
+      "end": 1790051990.8013935
+    },
+    {
+      "task": "cont-shifted-derivative-dominator",
+      "status": "VERIFIED",
+      "start": 1790052020.2797348,
+      "end": 1790052534.545715
+    },
+    {
+      "task": "cont-duhamel-nonlinear-difference",
+      "status": "VERIFIED",
+      "start": 1790052278.9040124,
+      "end": 1790052546.569636
+    },
+    {
+      "task": "cont-heat-spatial-lipschitz",
+      "status": "VERIFIED",
+      "start": 1790052278.9214964,
+      "end": 1790052581.9629002
+    },
+    {
+      "task": "cont-bounded-first-fderiv",
+      "status": "RUNNING",
+      "start": 1790052604.4208775,
+      "end": 1790053227.1723866
+    },
+    {
+      "task": "cont-bounded-gradient-fderiv",
+      "status": "RUNNING",
+      "start": 1790052604.4449573,
+      "end": 1790053227.1723866
+    },
+    {
+      "task": "cont-bounded-hessian-continuous",
+      "status": "VERIFIED",
+      "start": 1790052604.4693844,
+      "end": 1790053036.0955987
+    }
+  ]
+}

@@ -1,0 +1,1390 @@
+{
+  "checked_at": "2026-09-22T13:00:27.128499+08:00",
+  "source_head": "7684698eab57dedebd6db41e3a60b59781948a81",
+  "source_snapshot_stable": true,
+  "baseline": "79e8e34c31d5d69b1b6148020a0c71642390db9d",
+  "branch": "integration",
+  "worktree_status": "",
+  "task_rows": 29,
+  "distinct_targets": 28,
+  "accepted_distinct_targets": 25,
+  "status_counts": {
+    "INTEGRATED": 24,
+    "TIMEOUT": 2,
+    "RUNNING": 2,
+    "QUEUED": 1
+  },
+  "new_batch_status_counts": {
+    "INTEGRATED": 16,
+    "RUNNING": 2,
+    "QUEUED": 1
+  },
+  "ready_but_unclaimed": [],
+  "active_tasks": [
+    "cont-bounded-first-fderiv",
+    "cont-bounded-gradient-fderiv"
+  ],
+  "manual_acceptances": [
+    {
+      "task": "wide-heat-duhamel-three",
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_duhamel_hessian_control",
+      "source_sha256": "23d1b5f6b5214c04e8a8f7c5a4e33b1b2b6550be7860e4843049f17e2df1a6f4",
+      "commit": "260a4b415595c2cda41ed3edb2327805082b63ea",
+      "original_state_preserved": true
+    }
+  ],
+  "bindings": {
+    "schema": 1,
+    "bindings": {
+      "cover": {
+        "module": "PoincareConjecture.ProofContract.Proofs.CoverRecognition",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.sphere_cover_recognition"
+      },
+      "handle": {
+        "module": "PoincareConjecture.ProofContract.Proofs.HandleExclusion",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.handle_exclusion"
+      },
+      "sum_factors": {
+        "module": "PoincareConjecture.ProofContract.Proofs.ConnectedSumFactorsProof",
+        "declaration": "PoincareConjecture.ProofContract.Proofs.connectedSum_factors_proved"
+      }
+    }
+  },
+  "frozen_lock_sha256": "60182ba380cc0ce7548c156c1dabb0a8e6a75bbbbc05ea2dfe3471591ed9aac5",
+  "tasks": [
+    {
+      "project": "poincare-wide-topology-20260922",
+      "id": "wide-coordinate-bicollar",
+      "status": "INTEGRATED",
+      "commit": "7f77e7b782c1c247bb2b0846057b7fd8567503d7",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.coordinate_boundary_bicollar",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/CoordinateBoundaryBicollar.lean"
+    },
+    {
+      "project": "poincare-wide-topology-20260922",
+      "id": "wide-coordinate-homeomorph-transport",
+      "status": "INTEGRATED",
+      "commit": "7f7349a70873ebcfea43fceb37f5ea416763e14f",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.coordinate_ball_homeomorph_transport",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/CoordinateBallTransport.lean"
+    },
+    {
+      "project": "poincare-wide-topology-20260922",
+      "id": "wide-finite-coordinate-cover",
+      "status": "INTEGRATED",
+      "commit": "ef85a32bf17bd6e5c065f920c96288ec8cacf9e1",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.finite_coordinate_ball_cover",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/FiniteCoordinateBallCover.lean"
+    },
+    {
+      "project": "poincare-wide-topology-20260922",
+      "id": "wide-smoothing-transport",
+      "status": "INTEGRATED",
+      "commit": "0b9fa38b9d8eba253883cde4325eed5c0a4a3c33",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.smoothing_transport_homeomorph",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/SmoothingTransport.lean"
+    },
+    {
+      "project": "poincare-wide-heat-20260922",
+      "id": "wide-heat-bounded-hessian-identification",
+      "status": "TIMEOUT",
+      "commit": null,
+      "model": "luna",
+      "effort": "max",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_bounded_hessian_identification",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/WideBoundedHessianIdentification.lean"
+    },
+    {
+      "project": "poincare-wide-heat-20260922",
+      "id": "wide-heat-duhamel-three",
+      "status": "TIMEOUT",
+      "commit": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_duhamel_hessian_control",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/WideDuhamelHessianThree.lean"
+    },
+    {
+      "project": "poincare-wide-heat-20260922",
+      "id": "wide-heat-gradient-L1",
+      "status": "INTEGRATED",
+      "commit": "c7e32cb11fe0ce2703c0155cbdca06e90b89572e",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "wide-heat-gradient-formula"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_gradient_L1",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/WideGradientL1.lean"
+    },
+    {
+      "project": "poincare-wide-heat-20260922",
+      "id": "wide-heat-gradient-formula",
+      "status": "INTEGRATED",
+      "commit": "2c87b431d420318e7586e9c77a956b4eeac9269d",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_gradient_formula",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/WideGradientFormula.lean"
+    },
+    {
+      "project": "poincare-wide-heat-20260922",
+      "id": "wide-heat-hessian-unweighted",
+      "status": "INTEGRATED",
+      "commit": "dfab164cf6aa2df28e6dae51421f0d5343bce76a",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_hessian_L1",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/WideHessianUnweighted.lean"
+    },
+    {
+      "project": "poincare-wide-heat-20260922",
+      "id": "wide-heat-translation-L1",
+      "status": "INTEGRATED",
+      "commit": "e9daa54aeed26c98b75d6b4e147ad1773943d56f",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "wide-heat-gradient-L1"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_translation_L1",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/WideTranslationL1.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-topology-20260922",
+      "id": "cont-ambient-ball-compression",
+      "status": "INTEGRATED",
+      "commit": "36f71cf49c03b4f27cf2f5ac04113e98983bb36d",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "cont-euclidean-compression",
+        "cont-chart-supported-extension"
+      ],
+      "name": "PoincareConjecture.ProofContract.Proofs.coordinate_ball_ambient_compression",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/AmbientBallCompression.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-topology-20260922",
+      "id": "cont-chart-supported-extension",
+      "status": "INTEGRATED",
+      "commit": "180fef7caa7a32cbb2fcee84b6ff30af890b8835",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.chart_supported_homeomorph",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ChartSupportedHomeomorph.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-topology-20260922",
+      "id": "cont-coordinate-ball-basis",
+      "status": "INTEGRATED",
+      "commit": "f2bce974ed4f16d35f8e70ec24db734f3a54863d",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.coordinate_ball_in_neighborhood",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/CoordinateBallNeighborhood.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-topology-20260922",
+      "id": "cont-euclidean-compression",
+      "status": "INTEGRATED",
+      "commit": "b1d1c858669f721f796281002e509380c9a43508",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "cont-radius-profile",
+        "cont-radial-lift"
+      ],
+      "name": "PoincareConjecture.ProofContract.Proofs.euclidean_buffered_ball_compression",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/EuclideanBallCompression.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-topology-20260922",
+      "id": "cont-radial-lift",
+      "status": "INTEGRATED",
+      "commit": "5fb23cb6b5b3087691adb87652f4df92a6c126ea",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.radial_homeomorph_lift",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/RadialHomeomorphLift.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-topology-20260922",
+      "id": "cont-radius-profile",
+      "status": "INTEGRATED",
+      "commit": "27ff3da22dd0f67f519a7001ebb664a73a30f1b1",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "PoincareConjecture.ProofContract.Proofs.buffered_radius_profile",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/BufferedRadiusProfile.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-topology-20260922",
+      "id": "shrink-marked-complement",
+      "status": "INTEGRATED",
+      "commit": "330489c9e249501d209715a054e7b384dfbfcfdd",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "cont-ambient-ball-compression",
+        "cont-coordinate-ball-basis"
+      ],
+      "name": "PoincareConjecture.ProofContract.Proofs.shrunk_coordinate_complement_homeomorph",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/ShrunkCoordinateComplement.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-topology-20260922",
+      "id": "shrink-neighborhood",
+      "status": "INTEGRATED",
+      "commit": "095046a34d2d48b346c41d16712652e3f345df2f",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "cont-ambient-ball-compression",
+        "cont-coordinate-ball-basis"
+      ],
+      "name": "PoincareConjecture.ProofContract.Proofs.coordinate_ball_shrink_into_neighborhood",
+      "path": "PoincareConjecture/PoincareConjecture/ProofContract/Proofs/CoordinateBallShrinking.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-bounded-first-fderiv",
+      "status": "RUNNING",
+      "commit": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "cont-shifted-derivative-dominator"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.bounded_heat_first_fderiv",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/BoundedHeatFirstFDeriv.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-bounded-gradient-fderiv",
+      "status": "RUNNING",
+      "commit": null,
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "cont-shifted-derivative-dominator"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.bounded_heat_gradient_fderiv",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/BoundedHeatGradientFDeriv.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-bounded-hessian-assembly",
+      "status": "QUEUED",
+      "commit": null,
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "cont-bounded-first-fderiv",
+        "cont-bounded-gradient-fderiv",
+        "cont-bounded-hessian-continuous"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_bounded_hessian_identification",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/WideBoundedHessianIdentification.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-bounded-hessian-continuous",
+      "status": "INTEGRATED",
+      "commit": "7684698eab57dedebd6db41e3a60b59781948a81",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "cont-shifted-derivative-dominator"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.bounded_heat_hessian_continuous",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/BoundedHeatHessianContinuous.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-duhamel-nonlinear-difference",
+      "status": "INTEGRATED",
+      "commit": "abe19e4a8527b40e6ffe5114273597dda9381296",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "cont-heat-duhamel-bounded"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.bounded_duhamel_nonlinear_difference",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/BoundedDuhamelNonlinearDifference.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-heat-duhamel-bounded",
+      "status": "INTEGRATED",
+      "commit": "6a90091197708500eb65594ba1106e161fecbbd3",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_bounded_duhamel",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/DuhamelBoundedForcing.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-heat-norm-form",
+      "status": "INTEGRATED",
+      "commit": "05b62deb7d06ba22a3e2de77e5dfc78a359f5d86",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_norm_form",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/GaussianNormForm.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-heat-spatial-lipschitz",
+      "status": "INTEGRATED",
+      "commit": "6bcb3192de80802e0766368834c9123762149258",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.bounded_heat_spatial_lipschitz",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/BoundedHeatSpatialLipschitz.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-heat-time-L1",
+      "status": "INTEGRATED",
+      "commit": "b7dc24f2c0206c323f729635baf2903982fc5f4e",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_time_derivative_L1",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/HeatTimeDerivativeL1.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-shifted-derivative-dominator",
+      "status": "INTEGRATED",
+      "commit": "fd1978ce56af42397d45ac109ab3b68d0464a23e",
+      "model": "luna",
+      "effort": "xhigh",
+      "depends_on": [
+        "cont-shifted-kernel-bound"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_shifted_derivative_dominator",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/ShiftedDerivativeDominator.lean"
+    },
+    {
+      "project": "poincare-wide-continuation-heat-20260922",
+      "id": "cont-shifted-kernel-bound",
+      "status": "INTEGRATED",
+      "commit": "06c776f55dbe5b447cd5f50b492ac417f035d093",
+      "model": "luna",
+      "effort": "high",
+      "depends_on": [
+        "cont-heat-norm-form"
+      ],
+      "name": "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_shifted_bound",
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/HeatKernel/ShiftedGaussianBound.lean"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "729a1bf7-98f6-47c9-aab4-a0bf845f6841",
+      "project": "poincare-wide-topology-20260922",
+      "task": "wide-coordinate-bicollar",
+      "status": "VERIFIED",
+      "started_at": 1790049797.5602677,
+      "elapsed_seconds": 393.669,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790049797.5692372,
+        "finished_unix": 1790050226.2858887,
+        "prepare_finished_unix": 1790049800.1281803,
+        "prepare_started_unix": 1790049797.5707805,
+        "queue_wait_seconds": 0.02142047882080078,
+        "queue_wait_started_unix": 1790049797.5478168,
+        "service_started_unix": 1790049800.204686,
+        "service_stopped_unix": 1790050212.2864938,
+        "verification_finished_unix": 1790050226.2858748,
+        "verification_resource_wait_seconds": 3.4e-05,
+        "verification_seconds": 13.995129,
+        "verification_started_unix": 1790050212.2889
+      },
+      "verification": {
+        "audit_wait_seconds": 2.8e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "42d201a4454048202565b738846902a5c8b58bbaa8f6be94a140bfc0e942a7b3",
+        "compile_passed": true,
+        "compile_seconds": 6.432839,
+        "compiler_wait_seconds": 4.7e-05,
+        "sha256": "8d19e4f77af4dc3fb77135929b6c08ff8c2586766750f094959464592105c5da"
+      }
+    },
+    {
+      "id": "33fc75d6-81b0-4e79-a2cc-12debf67749e",
+      "project": "poincare-wide-topology-20260922",
+      "task": "wide-coordinate-homeomorph-transport",
+      "status": "VERIFIED",
+      "started_at": 1790049797.5753398,
+      "elapsed_seconds": 239.017,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790049797.5817742,
+        "finished_unix": 1790050061.791905,
+        "prepare_finished_unix": 1790049798.6436424,
+        "prepare_started_unix": 1790049797.5831997,
+        "queue_wait_seconds": 0.033957481384277344,
+        "queue_wait_started_unix": 1790049797.5478168,
+        "service_started_unix": 1790049798.7889552,
+        "service_stopped_unix": 1790050048.7335145,
+        "verification_finished_unix": 1790050061.791893,
+        "verification_resource_wait_seconds": 7e-05,
+        "verification_seconds": 11.798237,
+        "verification_started_unix": 1790050048.7382119
+      },
+      "verification": {
+        "audit_wait_seconds": 7.2e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "7c4cc68014cff290f087b810f42f269d621f490156bf510ec39e3327b182bd1e",
+        "compile_passed": true,
+        "compile_seconds": 5.672451,
+        "compiler_wait_seconds": 0.000179,
+        "sha256": "55a6b21abc1d29a94687c17dafc3242b658bf7c22c9e019854d934abdb336755"
+      }
+    },
+    {
+      "id": "a468f6d3-2288-4cfc-826b-62d21b6fbaae",
+      "project": "poincare-wide-topology-20260922",
+      "task": "wide-finite-coordinate-cover",
+      "status": "VERIFIED",
+      "started_at": 1790049797.587908,
+      "elapsed_seconds": 199.801,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790049797.5914865,
+        "finished_unix": 1790050025.0580747,
+        "prepare_finished_unix": 1790049799.0708935,
+        "prepare_started_unix": 1790049797.5926762,
+        "queue_wait_seconds": 0.043669700622558594,
+        "queue_wait_started_unix": 1790049797.5478168,
+        "service_started_unix": 1790049799.1470184,
+        "service_stopped_unix": 1790050008.1982555,
+        "verification_finished_unix": 1790050025.05806,
+        "verification_resource_wait_seconds": 9.9e-05,
+        "verification_seconds": 15.173212,
+        "verification_started_unix": 1790050008.2020535
+      },
+      "verification": {
+        "audit_wait_seconds": 6.5e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "a363fcbbfdae444f977a3c81d2c209fb2c97bbabd9ac47550115a2c849a9fc92",
+        "compile_passed": true,
+        "compile_seconds": 7.401836,
+        "compiler_wait_seconds": 0.000276,
+        "sha256": "d86ac4d2801e6c598b17d240aafea76458cb56d591d99666b6c08d00c39e7195"
+      }
+    },
+    {
+      "id": "78d1994b-c43c-41ba-8828-a7c6fa3deec8",
+      "project": "poincare-wide-topology-20260922",
+      "task": "wide-smoothing-transport",
+      "status": "VERIFIED",
+      "started_at": 1790049797.6070454,
+      "elapsed_seconds": 1173.601,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790049797.6115534,
+        "finished_unix": 1790051041.7451735,
+        "prepare_finished_unix": 1790049799.570189,
+        "prepare_started_unix": 1790049797.612727,
+        "queue_wait_seconds": 0.0637366771697998,
+        "queue_wait_started_unix": 1790049797.5478168,
+        "service_started_unix": 1790049799.6692579,
+        "service_stopped_unix": 1790051028.6575494,
+        "verification_finished_unix": 1790051041.745159,
+        "verification_resource_wait_seconds": 4.3e-05,
+        "verification_seconds": 13.074602,
+        "verification_started_unix": 1790051028.6659615
+      },
+      "verification": {
+        "audit_wait_seconds": 2.9e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "fa6db4fcc6625897f7a66db4ea644732df17491e600e0e8b7baeebf961a1bcb0",
+        "compile_passed": true,
+        "compile_seconds": 6.688904,
+        "compiler_wait_seconds": 4.1e-05,
+        "sha256": "ae8b9a123d0b16746576069591fe9bdcb8ddf98e621515b7c7a72c9089e8247e"
+      }
+    },
+    {
+      "id": "4477d815-7b9b-443e-9ba1-2c341a4ed74a",
+      "project": "poincare-wide-heat-20260922",
+      "task": "wide-heat-gradient-formula",
+      "status": "VERIFIED",
+      "started_at": 1790049813.3223584,
+      "elapsed_seconds": 169.598,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790049813.331817,
+        "finished_unix": 1790050014.0822608,
+        "prepare_finished_unix": 1790049814.4244006,
+        "prepare_started_unix": 1790049813.3330112,
+        "queue_wait_seconds": 0.02045893669128418,
+        "queue_wait_started_unix": 1790049813.311358,
+        "service_started_unix": 1790049814.528491,
+        "service_stopped_unix": 1790049993.384925,
+        "verification_finished_unix": 1790050014.0822456,
+        "verification_resource_wait_seconds": 3.4e-05,
+        "verification_seconds": 20.69015,
+        "verification_started_unix": 1790049993.3886573
+      },
+      "verification": {
+        "audit_wait_seconds": 0.000114,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "e794a7731cf9cf83a2bf36402860d430f78285484000967f4614f9a5614a4391",
+        "compile_passed": true,
+        "compile_seconds": 10.297689,
+        "compiler_wait_seconds": 0.000313,
+        "sha256": "ceaf62d07ed2afdea1e00762ea87f2274efc733f764387c311dd9134a09e0944"
+      }
+    },
+    {
+      "id": "fa50b44a-7963-4c2a-b5ab-96779862ca0b",
+      "project": "poincare-wide-heat-20260922",
+      "task": "wide-heat-bounded-hessian-identification",
+      "status": "TIMEOUT",
+      "started_at": 1790049813.3395371,
+      "elapsed_seconds": 1200.526,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790049813.346326,
+        "finished_unix": 1790051071.5018718,
+        "prepare_finished_unix": 1790049813.889483,
+        "prepare_started_unix": 1790049813.347082,
+        "queue_wait_seconds": 0.03496813774108887,
+        "queue_wait_started_unix": 1790049813.311358,
+        "service_started_unix": 1790049813.9682696,
+        "service_stopped_unix": 1790051071.4867146
+      },
+      "verification": {}
+    },
+    {
+      "id": "00ccf63b-4197-403a-a437-8f0c6f8c1895",
+      "project": "poincare-wide-heat-20260922",
+      "task": "wide-heat-duhamel-three",
+      "status": "TIMEOUT",
+      "started_at": 1790049813.3878613,
+      "elapsed_seconds": 1200.346,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790049813.3989272,
+        "finished_unix": 1790051072.8361802,
+        "prepare_finished_unix": 1790049815.0114589,
+        "prepare_started_unix": 1790049813.3996289,
+        "queue_wait_seconds": 0.0875692367553711,
+        "queue_wait_started_unix": 1790049813.311358,
+        "service_started_unix": 1790049815.1946335,
+        "service_stopped_unix": 1790051072.832669
+      },
+      "verification": {}
+    },
+    {
+      "id": "1e1b0a6e-0eda-4f1b-8a1b-fcdb67f1911e",
+      "project": "poincare-wide-heat-20260922",
+      "task": "wide-heat-hessian-unweighted",
+      "status": "VERIFIED",
+      "started_at": 1790049813.4077687,
+      "elapsed_seconds": 238.776,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790049813.4209666,
+        "finished_unix": 1790050082.9982116,
+        "prepare_finished_unix": 1790049815.606469,
+        "prepare_started_unix": 1790049813.423285,
+        "queue_wait_seconds": 0.10960865020751953,
+        "queue_wait_started_unix": 1790049813.311358,
+        "service_started_unix": 1790049815.6904054,
+        "service_stopped_unix": 1790050066.6545568,
+        "verification_finished_unix": 1790050082.9981973,
+        "verification_resource_wait_seconds": 5.4e-05,
+        "verification_seconds": 16.339174,
+        "verification_started_unix": 1790050066.656919
+      },
+      "verification": {
+        "audit_wait_seconds": 2.8e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "733d4dec2d3c1e9f29168a309edbd7560c71b283a2219eef59e53d54d3669c20",
+        "compile_passed": true,
+        "compile_seconds": 8.176917,
+        "compiler_wait_seconds": 0.000129,
+        "sha256": "1d0eee0c4ba2e5261ef69a5eac9f4e24edaf4dcf9417cfcb34c8b798b13c9118"
+      }
+    },
+    {
+      "id": "c227baca-c132-44bd-bb17-56caa595faa3",
+      "project": "poincare-wide-heat-20260922",
+      "task": "wide-heat-gradient-L1",
+      "status": "VERIFIED",
+      "started_at": 1790050033.6956983,
+      "elapsed_seconds": 231.208,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790050033.7021403,
+        "finished_unix": 1790050307.4582329,
+        "prepare_finished_unix": 1790050050.0126424,
+        "prepare_started_unix": 1790050033.7026584,
+        "queue_wait_seconds": 220.3907823562622,
+        "queue_wait_started_unix": 1790049813.311358,
+        "service_started_unix": 1790050050.0680223,
+        "service_stopped_unix": 1790050291.4934378,
+        "verification_finished_unix": 1790050307.458221,
+        "verification_resource_wait_seconds": 2.6e-05,
+        "verification_seconds": 14.352765,
+        "verification_started_unix": 1790050291.4949758
+      },
+      "verification": {
+        "audit_wait_seconds": 2.5e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "d36fba3f3bdc72a818a469deb38a4db979dd40f26e125dffdc1f4e12c1ad845a",
+        "compile_passed": true,
+        "compile_seconds": 6.751648,
+        "compiler_wait_seconds": 2.8e-05,
+        "sha256": "504a22873dee168875fb87aa856d9dfdc921af1e16c8c00aa7ec8dc7f8ba6c87"
+      }
+    },
+    {
+      "id": "c591de9b-0fc3-42c8-8822-d11480305615",
+      "project": "poincare-wide-heat-20260922",
+      "task": "wide-heat-translation-L1",
+      "status": "VERIFIED",
+      "started_at": 1790050336.3806171,
+      "elapsed_seconds": 813.295,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790050336.387204,
+        "finished_unix": 1790051254.6567962,
+        "prepare_finished_unix": 1790050369.2789705,
+        "prepare_started_unix": 1790050336.3880947,
+        "queue_wait_seconds": 523.0758459568024,
+        "queue_wait_started_unix": 1790049813.311358,
+        "service_started_unix": 1790050369.345263,
+        "service_stopped_unix": 1790051221.688125,
+        "verification_finished_unix": 1790051254.6567802,
+        "verification_resource_wait_seconds": 5.4e-05,
+        "verification_seconds": 31.404448,
+        "verification_started_unix": 1790051221.6972969
+      },
+      "verification": {
+        "audit_wait_seconds": 2.1e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "a156d277566cf96bd05eafd91540f2090c2d0aef8c49f4547ae17af25a88fe8e",
+        "compile_passed": true,
+        "compile_seconds": 13.20933,
+        "compiler_wait_seconds": 2.8e-05,
+        "sha256": "72d6b9ad98a87d7519ffb935bccec676202683bc1cfd8d1978d95fa9ec82ff1d"
+      }
+    },
+    {
+      "id": "ac0e3ca9-cbd4-420a-b609-06b43120ef10",
+      "project": "poincare-wide-continuation-topology-20260922",
+      "task": "cont-radial-lift",
+      "status": "VERIFIED",
+      "started_at": 1790051298.523121,
+      "elapsed_seconds": 387.994,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790051298.5319405,
+        "finished_unix": 1790051764.1762238,
+        "prepare_finished_unix": 1790051300.3828738,
+        "prepare_started_unix": 1790051298.5332747,
+        "queue_wait_seconds": 0.01757073402404785,
+        "queue_wait_started_unix": 1790051298.5143697,
+        "service_started_unix": 1790051300.478025,
+        "service_stopped_unix": 1790051708.3693287,
+        "verification_finished_unix": 1790051764.1762125,
+        "verification_resource_wait_seconds": 35.81002,
+        "verification_seconds": 52.779455,
+        "verification_started_unix": 1790051708.372475
+      },
+      "verification": {
+        "audit_wait_seconds": 4.6e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "57d92058dc6d7e3e57850e9589fda3096b531b60431efade74166019ed4e3687",
+        "compile_passed": true,
+        "compile_seconds": 8.355024,
+        "compiler_wait_seconds": 8.4e-05,
+        "sha256": "11fa8840e071ce9acd813a28e1c19db731d618ecb0b2ae8442a8fda976c6bf3d"
+      }
+    },
+    {
+      "id": "d03db8ea-7c09-4dd1-b7b1-c1b20821c71e",
+      "project": "poincare-wide-continuation-topology-20260922",
+      "task": "cont-radius-profile",
+      "status": "VERIFIED",
+      "started_at": 1790051298.5385938,
+      "elapsed_seconds": 327.361,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790051298.5431194,
+        "finished_unix": 1790051665.5050607,
+        "prepare_finished_unix": 1790051298.9747663,
+        "prepare_started_unix": 1790051298.54392,
+        "queue_wait_seconds": 0.028749704360961914,
+        "queue_wait_started_unix": 1790051298.5143697,
+        "service_started_unix": 1790051299.0701592,
+        "service_stopped_unix": 1790051642.686281,
+        "verification_finished_unix": 1790051665.5050364,
+        "verification_resource_wait_seconds": 0.000334,
+        "verification_seconds": 21.238819,
+        "verification_started_unix": 1790051642.689657
+      },
+      "verification": {
+        "audit_wait_seconds": 9.7e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "272650b8f60efc78a63fae7e22397ef37fcf4665f98e0a85a7d4935353e35a38",
+        "compile_passed": true,
+        "compile_seconds": 10.203148,
+        "compiler_wait_seconds": 7.7e-05,
+        "sha256": "7430320c50311c992648af641dad7b44b8a130f8da4974a17983d13aeb5c9a21"
+      }
+    },
+    {
+      "id": "416f3f26-6253-4867-84f5-cbe0591e38d2",
+      "project": "poincare-wide-continuation-topology-20260922",
+      "task": "cont-chart-supported-extension",
+      "status": "VERIFIED",
+      "started_at": 1790051298.5490534,
+      "elapsed_seconds": 350.96,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790051298.5533211,
+        "finished_unix": 1790051745.383642,
+        "prepare_finished_unix": 1790051299.8875484,
+        "prepare_started_unix": 1790051298.5542507,
+        "queue_wait_seconds": 0.03895139694213867,
+        "queue_wait_started_unix": 1790051298.5143697,
+        "service_started_unix": 1790051299.987464,
+        "service_stopped_unix": 1790051668.794403,
+        "verification_finished_unix": 1790051745.3836308,
+        "verification_resource_wait_seconds": 58.614616,
+        "verification_seconds": 73.298387,
+        "verification_started_unix": 1790051668.799346
+      },
+      "verification": {
+        "audit_wait_seconds": 0.000245,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "b126958ebf92f11e2c50f8d1330dc932dbdd4b33f5d3a462286fd2c2670da1bf",
+        "compile_passed": true,
+        "compile_seconds": 7.394538,
+        "compiler_wait_seconds": 4.4e-05,
+        "sha256": "29ee15bd30804bd1073e91f1147a213c8318db168bf96a67a65f828d9ca9204a"
+      }
+    },
+    {
+      "id": "3d898b9b-cfb5-4035-bcea-c25be876a816",
+      "project": "poincare-wide-continuation-topology-20260922",
+      "task": "cont-coordinate-ball-basis",
+      "status": "VERIFIED",
+      "started_at": 1790051298.5678205,
+      "elapsed_seconds": 165.67,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790051298.5750873,
+        "finished_unix": 1790051492.418513,
+        "prepare_finished_unix": 1790051299.4151123,
+        "prepare_started_unix": 1790051298.5762253,
+        "queue_wait_seconds": 0.06071758270263672,
+        "queue_wait_started_unix": 1790051298.5143697,
+        "service_started_unix": 1790051299.4962308,
+        "service_stopped_unix": 1790051473.4734828,
+        "verification_finished_unix": 1790051492.4184966,
+        "verification_resource_wait_seconds": 6.5e-05,
+        "verification_seconds": 17.317335,
+        "verification_started_unix": 1790051473.478341
+      },
+      "verification": {
+        "audit_wait_seconds": 7e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "03ec8fe282078b725f7ca90cd130ecd47169cceef0723ce54444f5ab9dde8f62",
+        "compile_passed": true,
+        "compile_seconds": 8.121519,
+        "compiler_wait_seconds": 0.000398,
+        "sha256": "70d6e649d9efbb559a6cd53de75505eb76f6c6efc83800289d77e2143c08e614"
+      }
+    },
+    {
+      "id": "23998c8b-aff7-4389-bdc4-c54cfd322ef6",
+      "project": "poincare-wide-continuation-topology-20260922",
+      "task": "cont-euclidean-compression",
+      "status": "VERIFIED",
+      "started_at": 1790051796.6302524,
+      "elapsed_seconds": 70.216,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790051796.6366398,
+        "finished_unix": 1790051917.0611944,
+        "prepare_finished_unix": 1790051832.539815,
+        "prepare_started_unix": 1790051796.637336,
+        "queue_wait_seconds": 498.1222701072693,
+        "queue_wait_started_unix": 1790051298.5143697,
+        "service_started_unix": 1790051832.6099043,
+        "service_stopped_unix": 1790051905.704286,
+        "verification_finished_unix": 1790051917.061183,
+        "verification_resource_wait_seconds": 0.000212,
+        "verification_seconds": 11.35518,
+        "verification_started_unix": 1790051905.7051194
+      },
+      "verification": {
+        "audit_wait_seconds": 8e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "832f3ce9eba7207346db11760ecbd06bc7fa9c9f18193eaa08e45bb35bd455c1",
+        "compile_passed": true,
+        "compile_seconds": 5.605156,
+        "compiler_wait_seconds": 2.2e-05,
+        "sha256": "e114caaf51dfc079655d5580598d60cd7b9c0adfe9218d028102ed5f908d0a40"
+      }
+    },
+    {
+      "id": "6d5728ae-f7a9-4b85-bc89-9d2af5084d6f",
+      "project": "poincare-wide-continuation-topology-20260922",
+      "task": "cont-ambient-ball-compression",
+      "status": "VERIFIED",
+      "started_at": 1790051930.9036975,
+      "elapsed_seconds": 75.608,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790051930.9077747,
+        "finished_unix": 1790052081.727424,
+        "prepare_finished_unix": 1790051989.6376073,
+        "prepare_started_unix": 1790051930.908765,
+        "queue_wait_seconds": 632.3934049606323,
+        "queue_wait_started_unix": 1790051298.5143697,
+        "service_started_unix": 1790051989.6990557,
+        "service_stopped_unix": 1790052070.3809285,
+        "verification_finished_unix": 1790052081.7274094,
+        "verification_resource_wait_seconds": 4.3e-05,
+        "verification_seconds": 11.344587,
+        "verification_started_unix": 1790052070.38174
+      },
+      "verification": {
+        "audit_wait_seconds": 2.7e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "837e373d0f04bdb332dea7da08b4e700ea5991478849bd88ea4dbf7e9ce03b4d",
+        "compile_passed": true,
+        "compile_seconds": 5.772765,
+        "compiler_wait_seconds": 2.7e-05,
+        "sha256": "fa4ea8c00264cf93b63d3ed87ef90f607f9a32708add808f0ced9ec096dc0957"
+      }
+    },
+    {
+      "id": "22dce5a4-992b-4a0f-8814-522727816c6a",
+      "project": "poincare-wide-continuation-topology-20260922",
+      "task": "shrink-marked-complement",
+      "status": "VERIFIED",
+      "started_at": 1790052395.7681377,
+      "elapsed_seconds": 175.099,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790052395.7745485,
+        "finished_unix": 1790052693.8956141,
+        "prepare_finished_unix": 1790052488.8477662,
+        "prepare_started_unix": 1790052395.775455,
+        "queue_wait_seconds": 0.017030954360961914,
+        "queue_wait_started_unix": 1790052395.7575176,
+        "service_started_unix": 1790052488.9442432,
+        "service_stopped_unix": 1790052674.4880931,
+        "verification_finished_unix": 1790052693.8955994,
+        "verification_resource_wait_seconds": 7.1e-05,
+        "verification_seconds": 19.403487,
+        "verification_started_unix": 1790052674.4905162
+      },
+      "verification": {
+        "audit_wait_seconds": 0.001706,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "fb96a2ab7d2b30218945fbe44abf11a97085bfa5753d4e02c7b353e20f0bebb3",
+        "compile_passed": true,
+        "compile_seconds": 10.785766,
+        "compiler_wait_seconds": 0.000303,
+        "sha256": "5f77a125924aa2f26220a11b53f0ec89829c7372b199a062b4f46a40b2ac5c83"
+      }
+    },
+    {
+      "id": "f1264140-061a-4026-bc38-4fa0fa8839b0",
+      "project": "poincare-wide-continuation-topology-20260922",
+      "task": "shrink-neighborhood",
+      "status": "VERIFIED",
+      "started_at": 1790052395.7897537,
+      "elapsed_seconds": 122.407,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790052395.7936509,
+        "finished_unix": 1790052638.5798006,
+        "prepare_finished_unix": 1790052488.853478,
+        "prepare_started_unix": 1790052395.7943456,
+        "queue_wait_seconds": 0.0361332893371582,
+        "queue_wait_started_unix": 1790052395.7575176,
+        "service_started_unix": 1790052488.941674,
+        "service_stopped_unix": 1790052618.4691913,
+        "verification_finished_unix": 1790052638.5797846,
+        "verification_resource_wait_seconds": 7.3e-05,
+        "verification_seconds": 18.573851,
+        "verification_started_unix": 1790052618.4716108
+      },
+      "verification": {
+        "audit_wait_seconds": 0.000108,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "7c82bf30f10e5edae0b39f1a1ddcaa727a4bb85f03b999eecbbf3617096b148f",
+        "compile_passed": true,
+        "compile_seconds": 9.702685,
+        "compiler_wait_seconds": 0.000345,
+        "sha256": "108df7810a339b08cfa284c64da514bc212cd18d79b5d1c0024440e43da64222"
+      }
+    },
+    {
+      "id": "21890995-108a-4b10-a5ca-29833a40ee63",
+      "project": "poincare-wide-continuation-heat-20260922",
+      "task": "cont-heat-norm-form",
+      "status": "VERIFIED",
+      "started_at": 1790051312.9925375,
+      "elapsed_seconds": 199.221,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790051312.999479,
+        "finished_unix": 1790051540.03598,
+        "prepare_finished_unix": 1790051314.4822762,
+        "prepare_started_unix": 1790051313.0002375,
+        "queue_wait_seconds": 0.018021345138549805,
+        "queue_wait_started_unix": 1790051312.9814577,
+        "service_started_unix": 1790051314.5610378,
+        "service_stopped_unix": 1790051523.8284419,
+        "verification_finished_unix": 1790051540.03597,
+        "verification_resource_wait_seconds": 3.2e-05,
+        "verification_seconds": 16.203713,
+        "verification_started_unix": 1790051523.8306568
+      },
+      "verification": {
+        "audit_wait_seconds": 8.9e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "18422365dbca9a3e2184475947ce76dbd415591b21af79472dc1eb967d8f80ad",
+        "compile_passed": true,
+        "compile_seconds": 8.08952,
+        "compiler_wait_seconds": 0.00015,
+        "sha256": "cf900402b44820a730d3e640aa690f032bc7cb4f32eabbea64531d91240bd7fc"
+      }
+    },
+    {
+      "id": "4b77a4da-753b-4b82-9106-7b167a28c76c",
+      "project": "poincare-wide-continuation-heat-20260922",
+      "task": "cont-heat-duhamel-bounded",
+      "status": "VERIFIED",
+      "started_at": 1790051313.0067117,
+      "elapsed_seconds": 239.997,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790051313.010986,
+        "finished_unix": 1790051589.3989418,
+        "prepare_finished_unix": 1790051313.4479878,
+        "prepare_started_unix": 1790051313.0116541,
+        "queue_wait_seconds": 0.029528379440307617,
+        "queue_wait_started_unix": 1790051312.9814577,
+        "service_started_unix": 1790051313.5245035,
+        "service_stopped_unix": 1790051565.0522573,
+        "verification_finished_unix": 1790051589.3989284,
+        "verification_resource_wait_seconds": 3.7e-05,
+        "verification_seconds": 22.774252,
+        "verification_started_unix": 1790051565.0550127
+      },
+      "verification": {
+        "audit_wait_seconds": 5.7e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "8883e1ab73f7af140c9a3d174981c5a4817b7001d90e2502f0ccbeed6c5d79a5",
+        "compile_passed": true,
+        "compile_seconds": 11.823261,
+        "compiler_wait_seconds": 7.3e-05,
+        "sha256": "63fc9c5ae1584d07d7ead9cc3bf47d8e7d05e4b4e42f83c2f1259f079aab4f67"
+      }
+    },
+    {
+      "id": "fda66316-971a-4735-b2bb-385001198080",
+      "project": "poincare-wide-continuation-heat-20260922",
+      "task": "cont-heat-time-L1",
+      "status": "VERIFIED",
+      "started_at": 1790051313.0172408,
+      "elapsed_seconds": 355.163,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790051313.0213578,
+        "finished_unix": 1790051706.186258,
+        "prepare_finished_unix": 1790051313.9195118,
+        "prepare_started_unix": 1790051313.0221379,
+        "queue_wait_seconds": 0.03990006446838379,
+        "queue_wait_started_unix": 1790051312.9814577,
+        "service_started_unix": 1790051314.0029063,
+        "service_stopped_unix": 1790051687.4437904,
+        "verification_finished_unix": 1790051706.1862442,
+        "verification_resource_wait_seconds": 1.780625,
+        "verification_seconds": 18.730509,
+        "verification_started_unix": 1790051687.4497244
+      },
+      "verification": {
+        "audit_wait_seconds": 0.000108,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "57264ef78d70faa541a593072388bd21185ed96b260992a36aa7e0a4d413433b",
+        "compile_passed": true,
+        "compile_seconds": 8.125826,
+        "compiler_wait_seconds": 7.4e-05,
+        "sha256": "4e0a55e4aa6d61628abbbb0764acdfa37a13468962185a1d3136692c947b11ac"
+      }
+    },
+    {
+      "id": "16f33eba-9bf3-4d4f-badf-b682bb0b4eae",
+      "project": "poincare-wide-continuation-heat-20260922",
+      "task": "cont-shifted-kernel-bound",
+      "status": "VERIFIED",
+      "started_at": 1790051558.1011207,
+      "elapsed_seconds": 378.943,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790051558.1064494,
+        "finished_unix": 1790051990.8013935,
+        "prepare_finished_unix": 1790051575.4981458,
+        "prepare_started_unix": 1790051558.1076813,
+        "queue_wait_seconds": 245.12499165534973,
+        "queue_wait_started_unix": 1790051312.9814577,
+        "service_started_unix": 1790051575.58567,
+        "service_stopped_unix": 1790051973.3979182,
+        "verification_finished_unix": 1790051990.8013833,
+        "verification_resource_wait_seconds": 0.000117,
+        "verification_seconds": 17.400117,
+        "verification_started_unix": 1790051973.3995159
+      },
+      "verification": {
+        "audit_wait_seconds": 4.9e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "9a5d2edbf9c119f9c2c0e6b55d289fec9d18f761a3933d40536ce56dbe503eb6",
+        "compile_passed": true,
+        "compile_seconds": 8.243289,
+        "compiler_wait_seconds": 7.2e-05,
+        "sha256": "aace51f2f9eeb830cd806aa625524b7b049c1612faeae702e7a864415697a3ec"
+      }
+    },
+    {
+      "id": "99eb703c-4191-4d4a-8ed6-42cd4cb4062f",
+      "project": "poincare-wide-continuation-heat-20260922",
+      "task": "cont-shifted-derivative-dominator",
+      "status": "VERIFIED",
+      "started_at": 1790052020.2797348,
+      "elapsed_seconds": 428.613,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790052020.2858415,
+        "finished_unix": 1790052534.545715,
+        "prepare_finished_unix": 1790052050.0825884,
+        "prepare_started_unix": 1790052020.286588,
+        "queue_wait_seconds": 707.3043837547302,
+        "queue_wait_started_unix": 1790051312.9814577,
+        "service_started_unix": 1790052050.156072,
+        "service_stopped_unix": 1790052499.7366736,
+        "verification_finished_unix": 1790052534.545704,
+        "verification_resource_wait_seconds": 6.1e-05,
+        "verification_seconds": 32.915709,
+        "verification_started_unix": 1790052499.7381303
+      },
+      "verification": {
+        "audit_wait_seconds": 9.1e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "ee3c4d86933d46d5cb7b71dc8b04df6667cfe5099952f048840aaed664cef4c2",
+        "compile_passed": true,
+        "compile_seconds": 16.15985,
+        "compiler_wait_seconds": 6.6e-05,
+        "sha256": "cf6ab67e3d0aeca9a7a710e6f2665f609372b7f126ec6d44bc070264b603173b"
+      }
+    },
+    {
+      "id": "ac4a44ed-2c51-4f55-911e-9cf374de1fa2",
+      "project": "poincare-wide-continuation-heat-20260922",
+      "task": "cont-duhamel-nonlinear-difference",
+      "status": "VERIFIED",
+      "started_at": 1790052278.9040124,
+      "elapsed_seconds": 223.086,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790052278.914866,
+        "finished_unix": 1790052546.569636,
+        "prepare_finished_unix": 1790052295.0597568,
+        "prepare_started_unix": 1790052278.9156945,
+        "queue_wait_seconds": 965.9334082603455,
+        "queue_wait_started_unix": 1790051312.9814577,
+        "service_started_unix": 1790052295.1287384,
+        "service_stopped_unix": 1790052530.3601418,
+        "verification_finished_unix": 1790052546.5696237,
+        "verification_resource_wait_seconds": 0.000332,
+        "verification_seconds": 16.205633,
+        "verification_started_unix": 1790052530.3623102
+      },
+      "verification": {
+        "audit_wait_seconds": 0.000111,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "01c44cde92865ab712b269eb74951c9dac57a0006e47c90894134f25b62eafda",
+        "compile_passed": true,
+        "compile_seconds": 7.410825,
+        "compiler_wait_seconds": 5.2e-05,
+        "sha256": "8803853179cf822ccaa2b49f877f41846d09705288bca10f674a0d69952321a6"
+      }
+    },
+    {
+      "id": "52192163-b48e-4c44-9fd0-e6b8f66f940c",
+      "project": "poincare-wide-continuation-heat-20260922",
+      "task": "cont-heat-spatial-lipschitz",
+      "status": "VERIFIED",
+      "started_at": 1790052278.9214964,
+      "elapsed_seconds": 267.845,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790052278.927772,
+        "finished_unix": 1790052581.9629002,
+        "prepare_finished_unix": 1790052279.642929,
+        "prepare_started_unix": 1790052278.9289875,
+        "queue_wait_seconds": 965.9463143348694,
+        "queue_wait_started_unix": 1790051312.9814577,
+        "service_started_unix": 1790052279.7196493,
+        "service_stopped_unix": 1790052559.707112,
+        "verification_finished_unix": 1790052581.9628873,
+        "verification_resource_wait_seconds": 7.1e-05,
+        "verification_seconds": 20.598806,
+        "verification_started_unix": 1790052559.7100053
+      },
+      "verification": {
+        "audit_wait_seconds": 4.9e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "8174d89862d7d8d073b7a8f349d8be8afddaba03f1ba3bb68d3d2e06ed44da7b",
+        "compile_passed": true,
+        "compile_seconds": 10.040497,
+        "compiler_wait_seconds": 0.00048,
+        "sha256": "aa7592acca740094e298d7d574d5489583fdd960e993f1550a101933331999c1"
+      }
+    },
+    {
+      "id": "13d97f56-cb0f-4e61-8b9d-f836403fb9ab",
+      "project": "poincare-wide-continuation-heat-20260922",
+      "task": "cont-bounded-first-fderiv",
+      "status": "RUNNING",
+      "started_at": 1790052604.4208775,
+      "elapsed_seconds": null,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {},
+      "verification": {}
+    },
+    {
+      "id": "52941e9c-01dc-4eed-ac50-517dde0db4e8",
+      "project": "poincare-wide-continuation-heat-20260922",
+      "task": "cont-bounded-gradient-fderiv",
+      "status": "RUNNING",
+      "started_at": 1790052604.4449573,
+      "elapsed_seconds": null,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {},
+      "verification": {}
+    },
+    {
+      "id": "1189b531-367d-4030-a222-513c2495bdca",
+      "project": "poincare-wide-continuation-heat-20260922",
+      "task": "cont-bounded-hessian-continuous",
+      "status": "VERIFIED",
+      "started_at": 1790052604.4693844,
+      "elapsed_seconds": 307.175,
+      "preparation_complete": true,
+      "error": null,
+      "timing": {
+        "claimed_unix": 1790052604.4763303,
+        "finished_unix": 1790053036.0955987,
+        "prepare_finished_unix": 1790052698.0751011,
+        "prepare_started_unix": 1790052604.4771338,
+        "queue_wait_seconds": 1291.4948725700378,
+        "queue_wait_started_unix": 1790051312.9814577,
+        "service_started_unix": 1790052698.1751492,
+        "service_stopped_unix": 1790053022.143744,
+        "verification_finished_unix": 1790053036.0955892,
+        "verification_resource_wait_seconds": 2.4e-05,
+        "verification_seconds": 13.943507,
+        "verification_started_unix": 1790053022.1494231
+      },
+      "verification": {
+        "audit_wait_seconds": 6.3e-05,
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "cache_hit": false,
+        "cache_key": "53cb315ccbd4be9c33fa2f44d30cb53f34aa14e50fa6d29e8eb20bf95e12f94b",
+        "compile_passed": true,
+        "compile_seconds": 6.725237,
+        "compiler_wait_seconds": 2.9e-05,
+        "sha256": "cd48bde0ffdb0e8552548e457e7a7214a38d700785a31ab248aab990009518c5"
+      }
+    }
+  ],
+  "remote_push_performed": false,
+  "upstream_pr_created": false,
+  "resource_alias_patch_status": "Isolated candidate tested only; not applied to the repository."
+}

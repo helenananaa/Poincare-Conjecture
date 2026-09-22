@@ -1,0 +1,163 @@
+{
+  "scope": "Integrated fixed statements only; existing pinned dependencies; targeted source builds",
+  "projects": {
+    "poincare-wide-topology-20260922": {
+      "checked_count": 4,
+      "source_sha256": {
+        "wide-coordinate-bicollar": "8d19e4f77af4dc3fb77135929b6c08ff8c2586766750f094959464592105c5da",
+        "wide-coordinate-homeomorph-transport": "55a6b21abc1d29a94687c17dafc3242b658bf7c22c9e019854d934abdb336755",
+        "wide-finite-coordinate-cover": "d86ac4d2801e6c598b17d240aafea76458cb56d591d99666b6c08d00c39e7195",
+        "wide-smoothing-transport": "ae8b9a123d0b16746576069591fe9bdcb8ddf98e621515b7c7a72c9089e8247e"
+      },
+      "axioms": {
+        "PoincareConjecture.ProofContract.Proofs.coordinate_boundary_bicollar": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.coordinate_ball_homeomorph_transport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.finite_coordinate_ball_cover": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.smoothing_transport_homeomorph": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/wide-continuation-20260922/poincare-wide-topology-20260922-Audit.lean"
+    },
+    "poincare-wide-heat-20260922": {
+      "checked_count": 4,
+      "source_sha256": {
+        "wide-heat-gradient-L1": "504a22873dee168875fb87aa856d9dfdc921af1e16c8c00aa7ec8dc7f8ba6c87",
+        "wide-heat-gradient-formula": "ceaf62d07ed2afdea1e00762ea87f2274efc733f764387c311dd9134a09e0944",
+        "wide-heat-hessian-unweighted": "1d0eee0c4ba2e5261ef69a5eac9f4e24edaf4dcf9417cfcb34c8b798b13c9118",
+        "wide-heat-translation-L1": "72d6b9ad98a87d7519ffb935bccec676202683bc1cfd8d1978d95fa9ec82ff1d"
+      },
+      "axioms": {
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_gradient_L1": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_gradient_formula": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_hessian_L1": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_translation_L1": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/wide-continuation-20260922/poincare-wide-heat-20260922-Audit.lean"
+    },
+    "poincare-wide-continuation-topology-20260922": {
+      "checked_count": 6,
+      "source_sha256": {
+        "cont-ambient-ball-compression": "fa4ea8c00264cf93b63d3ed87ef90f607f9a32708add808f0ced9ec096dc0957",
+        "cont-chart-supported-extension": "29ee15bd30804bd1073e91f1147a213c8318db168bf96a67a65f828d9ca9204a",
+        "cont-coordinate-ball-basis": "70d6e649d9efbb559a6cd53de75505eb76f6c6efc83800289d77e2143c08e614",
+        "cont-euclidean-compression": "e114caaf51dfc079655d5580598d60cd7b9c0adfe9218d028102ed5f908d0a40",
+        "cont-radial-lift": "11fa8840e071ce9acd813a28e1c19db731d618ecb0b2ae8442a8fda976c6bf3d",
+        "cont-radius-profile": "7430320c50311c992648af641dad7b44b8a130f8da4974a17983d13aeb5c9a21"
+      },
+      "axioms": {
+        "PoincareConjecture.ProofContract.Proofs.coordinate_ball_ambient_compression": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.chart_supported_homeomorph": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.coordinate_ball_in_neighborhood": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.euclidean_buffered_ball_compression": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.radial_homeomorph_lift": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "PoincareConjecture.ProofContract.Proofs.buffered_radius_profile": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/wide-continuation-20260922/poincare-wide-continuation-topology-20260922-Audit.lean"
+    },
+    "poincare-wide-continuation-heat-20260922": {
+      "checked_count": 7,
+      "source_sha256": {
+        "cont-duhamel-nonlinear-difference": "8803853179cf822ccaa2b49f877f41846d09705288bca10f674a0d69952321a6",
+        "cont-heat-duhamel-bounded": "63fc9c5ae1584d07d7ead9cc3bf47d8e7d05e4b4e42f83c2f1259f079aab4f67",
+        "cont-heat-norm-form": "cf900402b44820a730d3e640aa690f032bc7cb4f32eabbea64531d91240bd7fc",
+        "cont-heat-spatial-lipschitz": "aa7592acca740094e298d7d574d5489583fdd960e993f1550a101933331999c1",
+        "cont-heat-time-L1": "4e0a55e4aa6d61628abbbb0764acdfa37a13468962185a1d3136692c947b11ac",
+        "cont-shifted-derivative-dominator": "cf6ab67e3d0aeca9a7a710e6f2665f609372b7f126ec6d44bc070264b603173b",
+        "cont-shifted-kernel-bound": "aace51f2f9eeb830cd806aa625524b7b049c1612faeae702e7a864415697a3ec"
+      },
+      "axioms": {
+        "MorganTianLib.ParabolicPDE.bounded_duhamel_nonlinear_difference": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_bounded_duhamel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_norm_form": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.bounded_heat_spatial_lipschitz": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_time_derivative_L1": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_shifted_derivative_dominator": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "MorganTianLib.ParabolicPDE.euclideanHeatKernel_three_shifted_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      "audit_source": "/home/helenanana/projects/poincare-ops-20260919/wide-continuation-20260922/poincare-wide-continuation-heat-20260922-Audit.lean"
+    }
+  }
+}

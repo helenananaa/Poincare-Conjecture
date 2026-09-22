@@ -1,0 +1,72 @@
+[
+  {
+    "task": "cont-radius-profile",
+    "group": "topology",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "abd9bc0d85bb9da8f9842a3438ae04458954b6c857bb52d25ee0dfc876d2626a",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "cont-coordinate-ball-basis",
+    "group": "topology",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "9596d2712a904153be4d8e796f6f4ccc8fabd9203be5687b964ee8aa41943683",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "cont-heat-norm-form",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "4137b4990b74bf5d5102756611e4ce91ef8b10d181494210f3e093b7cf32e2bb",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "cont-heat-duhamel-bounded",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "a626d3aa96a7035e00bd9517942ebc6b16e58e0f466f663edac45f46b10c86ca",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "cont-radial-lift",
+    "group": "topology",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "a238c60e97673901f1ca4204b4dccf012c94d5f9c7fc7355082235f4620670d3",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "cont-chart-supported-extension",
+    "group": "topology",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "8e382cceb819ac2e57e4c2fd592363cee344ff818b3a26ec5ac68f717c899d96",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  },
+  {
+    "task": "cont-heat-time-L1",
+    "group": "heat",
+    "statement_typechecks": true,
+    "errors": [],
+    "exit_code": 0,
+    "source_sha256": "cb0b5add17bd8bb5b0aa139a2248aa38a038f5eefb2a57c7cf45cdf7fb5bc181",
+    "is_proof": false,
+    "purpose": "Only statement elaboration. The deliberate proof hole must be solved and audited by workers."
+  }
+]
