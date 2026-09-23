@@ -64,7 +64,9 @@ by
       have hχzero : χ =ᶠ[𝓝 y] (fun _ => (0 : ℝ)) :=
         (notMem_tsupport_iff_eventuallyEq).mp hyts
       have hHconst : H =ᶠ[𝓝 y] (fun _ => G x) :=
-        hχzero.mono fun z hz => by simp [H, hz]
+        hχzero.mono fun z hz => by
+          change G x + χ z • (G z-G x) = G x
+          rw [hz, zero_smul ℝ (G z-G x), add_zero]
       exact contDiff_const.contDiffAt.congr_of_eventuallyEq hHconst
   refine ⟨H, hHcont, ?_, ?_, ?_, ?_⟩
   · intro y v w
@@ -155,7 +157,8 @@ by
         have hχne : χ y ≠ 0 := by
           intro hχzero
           apply hy
-          simp [H, hχzero]
+          change G x + χ y • (G y-G x) - G x = 0
+          rw [hχzero, zero_smul ℝ (G y-G x), add_zero, sub_self]
         have hyball : y ∈ Metric.ball x d := by
           rw [← b.support_eq]
           change χ y ≠ 0
