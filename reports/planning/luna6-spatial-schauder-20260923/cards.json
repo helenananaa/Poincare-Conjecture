@@ -1,0 +1,197 @@
+[
+  {
+    "id": "j6-third-kernel-formula",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianThirdDerivative.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.gaussian_third_derivative",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveHessianFormula\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.WideGradientFormula\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\ndef heatHessian3 (t : ℝ) (i j : Fin 3) (x : E3) : ℝ :=\n  fderiv ℝ (fun z : E3 => fderiv ℝ (MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 t) z\n    (EuclideanSpace.single i 1)) x (EuclideanSpace.single j 1)\n\n/-- **Math.** gaussian third derivative. -/\ntheorem gaussian_third_derivative \n    {t : ℝ} (ht : 0 < t) (x : E3) (i j k : Fin 3) :\n    fderiv ℝ (heatHessian3 t i j) x (EuclideanSpace.single k 1) =\n      (((if i=j then x k else 0)+(if i=k then x j else 0)+(if j=k then x i else 0))/(4*t^2) -\n        x i*x j*x k/(8*t^3))*MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 t x :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Differentiate the accepted exact Hessian formula, using the accepted gradient formula and derivatives of coordinate projections. Finite case splits on index equalities and field/ring normalization are enough; do not invent a polynomial definition instead of the real derivative. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-gaussian-small-shift",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianParabolicShift.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.gaussian_parabolic_shift",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.GaussianNormForm\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** gaussian parabolic shift. -/\ntheorem gaussian_parabolic_shift \n    (t : ℝ) (ht : 0 < t) (y h : E3) (hh : ‖h‖ ≤ Real.sqrt t) :\n    MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 t (y+h) ≤\n      (8*Real.exp 1)*MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 (2*t) y :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use the radial Gaussian formula. Derive norm(y+h)^2 >= norm(y)^2/2 - norm(h)^2. The exponential loss is at most exp(1/4) and the normalization ratio is sqrt(2)^3 <= 8. Crucially the displayed constant is independent of t. Existing shifted_bound has a t-dependent existential constant and cannot by itself prove this target. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-weighted-translation",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/WeightedTranslationControl.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.weighted_translation_control",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** weighted translation control. -/\ntheorem weighted_translation_control \n    (f : E3 → ℝ) (hf : ContDiff ℝ 1 f) (alpha R : ℝ) (ha : 0 < alpha) (hR : 0 ≤ R)\n    (D : E3 → ℝ) (hDi : Integrable D volume) (hD : ∀ y, 0 ≤ D y)\n    (hder : ∀ y u v : E3, ‖u‖ ≤ R →\n      |fderiv ℝ f (y+u) v| * ‖y‖^alpha ≤ D y*‖v‖)\n    (h : E3) (hh : ‖h‖ ≤ R) :\n    Integrable (fun y : E3 => |f (y+h)-f y| * ‖y‖^alpha) volume ∧\n      (∫ y : E3, |f (y+h)-f y| * ‖y‖^alpha) ≤ ‖h‖*(∫ y : E3, D y) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "For fixed y, apply the scalar mean-value theorem on [0,1] to s ↦ norm(y)^alpha*f(y+s•h), with derivative bounded by D(y)*norm(h). This avoids dividing by the weight at y=0. Then use integrable domination and integrate the pointwise bound; alpha>0 gives continuity/measurability of the weight. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-time-split",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/SchauderTimeSplit.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.schauder_time_split",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** schauder time split. -/\ntheorem schauder_time_split \n    (alpha rho T : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) (hr : 0 < rho) (hT : 0 ≤ T) :\n    IntervalIntegrable (fun t : ℝ => min (t^(alpha/2-1)) (rho*t^(alpha/2-3/2))) volume 0 T ∧\n      (∫ t in (0:ℝ)..T, min (t^(alpha/2-1)) (rho*t^(alpha/2-3/2))) ≤\n        (2/alpha+2/(1-alpha))*rho^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Split the integral at rho^2 (or compare T with that threshold). Use the integrable t^(alpha/2-1) near zero and rho*t^(alpha/2-3/2) beyond rho^2. The latter has exponent below -1; its finite integral is bounded by 2/(1-alpha)*rho^alpha. Endpoint t=0 is measure zero. No arbitrary full-exponent Holder continuity at t=0 is needed. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-anisotropic-pullback",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicConvolutionPullback.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_convolution_pullback",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHeatKernel\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** anisotropic convolution pullback. -/\ntheorem anisotropic_convolution_pullback \n    (B : E3 ≃L[ℝ] E3) (t : ℝ) (ht : 0 < t) (f : E3 →ᵇ ℝ) (x : E3) :\n    Integrable (fun y : E3 => anisotropicHeatKernel B t (x-y)*f y) volume ∧\n      (∫ y : E3, anisotropicHeatKernel B t (x-y)*f y) =\n        ∫ z : E3, MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 t (B.symm x-z)*f (B z) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "h6-anisotropic-kernel-mass"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use actual Jacobian change of variables y=B z with determinant absolute value. It cancels the anisotropic kernel normalization, not an extra guessed factor. Boundedness of f and mass-one kernel give integrability; do not use formal integral rewrites without checking hypotheses. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-C2-holder-complete",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedC2HolderCompleteness.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.bounded_C2_holder_completeness",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BoundedC2JetCompleteness\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BoundedHolderGraphNorm\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\ndef boundedC2HolderJetSet (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V]\n    (alpha : ℝ) : Set ((E3 →ᵇ V) × ((E3 →ᵇ (E3 →L[ℝ] V)) ×\n      ((E3 →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)) × (Ω →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V))))) :=\n  {z | (z.1,z.2.1,z.2.2.1) ∈ boundedC2JetSet V ∧\n    (z.2.2.1,z.2.2.2) ∈ boundedHolderGraph (E3 →L[ℝ] E3 →L[ℝ] V) alpha}\n\n/-- **Math.** bounded C2 holder completeness. -/\ntheorem bounded_C2_holder_completeness \n    (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] (alpha : ℝ) :\n    IsComplete (boundedC2HolderJetSet V alpha) ∧ ∀ z ∈ boundedC2HolderJetSet V alpha,\n      ContDiff ℝ 2 (fun x : E3 => z.1 x) ∧ ∀ x y : E3,\n        ‖z.2.2.1 x-z.2.2.1 y‖ ≤ ‖z.2.2.2‖*‖x-y‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "i6-C2-jet-completeness",
+      "h6-holder-graph-norm"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use the closed preimages of the already complete genuine C2 jet relation and the normalized Holder increment relation. Cache nested BCF/CLM metric instances locally if needed rather than raising options. This space ties the Hessian to real derivatives; it does not supply time regularity. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-hessian-holder-pullback",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LinearHessianHolderTransport.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.linear_hessian_holder_transport",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LinearPullbackSecondDerivative\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** linear hessian holder transport. -/\ntheorem linear_hessian_holder_transport \n    (f : E3 → ℝ) (hf : ContDiff ℝ 2 f) (B : E3 →L[ℝ] E3)\n    (alpha H : ℝ) (ha : 0 < alpha) (hH : 0 ≤ H)\n    (hhold : ∀ x z : E3, ∀ i j : Fin 3,\n      |fderiv ℝ (fun y => fderiv ℝ f y (EuclideanSpace.single i 1)) x (EuclideanSpace.single j 1)-\n       fderiv ℝ (fun y => fderiv ℝ f y (EuclideanSpace.single i 1)) z (EuclideanSpace.single j 1)| ≤ H*‖x-z‖^alpha) :\n    ∀ x z : E3, ∀ i j : Fin 3,\n      |fderiv ℝ (fun y => fderiv ℝ (fun w => f (B w)) y (EuclideanSpace.single i 1)) x (EuclideanSpace.single j 1)-\n       fderiv ℝ (fun y => fderiv ℝ (fun w => f (B w)) y (EuclideanSpace.single i 1)) z (EuclideanSpace.single j 1)| ≤\n      (9*H*‖B‖^2*‖B‖^alpha)*‖x-z‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-linear-second-derivative"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Apply the actual linear pullback second derivative theorem and expand both direction vectors in the Euclidean basis. There are nine terms, each bounded by norm(B)^2; the displacement is bounded by norm(B)*norm(x-z). No diagonal-only trace identity suffices for each Hessian component. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-third-shift-majorant",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianShiftedThirdMajorant.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.gaussian_shifted_third_majorant",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.GaussianThirdDerivative\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.GaussianParabolicShift\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursivePolynomialMoment\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** gaussian shifted third majorant. -/\ntheorem gaussian_shifted_third_majorant \n    (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, 0 < t → ∃ D : E3 → ℝ,\n      Integrable D volume ∧ (∀ y : E3, 0 ≤ D y) ∧\n      (∫ y : E3, D y) ≤ C*t^(alpha/2-3/2) ∧\n      ∀ y h v : E3, ‖h‖ ≤ Real.sqrt t → ∀ i j : Fin 3,\n        |fderiv ℝ (heatHessian3 t i j) (y+h) v| * ‖y‖^alpha ≤ D y*‖v‖ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "j6-third-kernel-formula",
+      "j6-gaussian-small-shift"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Expand arbitrary direction v in the 3 coordinate vectors. From the third polynomial formula bound by a constant times ((norm(y)+sqrt(t))/t^2 +(norm(y)+sqrt(t))^3/t^3)*K_(2t)(y)*norm(y)^alpha. The new shifted Gaussian constant is uniform in t. Expand the natural powers 1 and 3, use moments alpha, alpha+1, alpha+2, alpha+3 at time 2t; every term scales as t^(alpha/2-3/2). Construct one explicit nonnegative dominating function D; no Hessian smoothness assumption can replace this estimate. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-weighted-hessian-translation",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianHessianTranslation.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.gaussian_hessian_weighted_translation",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.GaussianShiftedThirdMajorant\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.WeightedTranslationControl\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveJointSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** gaussian hessian weighted translation. -/\ntheorem gaussian_hessian_weighted_translation \n    (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (t : ℝ), 0 < t → ∀ (h : E3), ‖h‖ ≤ Real.sqrt t → ∀ i j : Fin 3,\n      Integrable (fun y : E3 => |heatHessian3 t i j (y+h)-heatHessian3 t i j y| * ‖y‖^alpha) volume ∧\n      (∫ y : E3, |heatHessian3 t i j (y+h)-heatHessian3 t i j y| * ‖y‖^alpha) ≤\n        C*‖h‖*t^(alpha/2-3/2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "j6-third-shift-majorant",
+      "j6-weighted-translation"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Apply weighted_translation_control to the actual heat Hessian using its global spatial C1 smoothness at fixed positive t. Consume the integrable uniform third-derivative majorant; then integrate the bound. Do not replace the weighted estimate by unweighted translation continuity. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-hessian-small-shift",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HeatHessianSmallShift.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.heat_hessian_small_shift",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.GaussianHessianTranslation\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.HessianCancellationThree\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.HolderHessianConvolutionThree\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** heat hessian small shift. -/\ntheorem heat_hessian_small_shift \n    (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (f : E3 →ᵇ ℝ) (L : ℝ), 0 ≤ L →\n      (∀ x z : E3, |f x-f z| ≤ L*‖x-z‖^alpha) → ∀ t : ℝ, 0 < t →\n      ∀ (x z : E3), ‖x-z‖ ≤ Real.sqrt t → ∀ i j : Fin 3,\n      |(∫ y : E3, heatHessian3 t i j y*f (x-y))-(∫ y : E3, heatHessian3 t i j y*f (z-y))| ≤\n        C*L*‖x-z‖*t^(alpha/2-3/2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "j6-weighted-hessian-translation"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Change variables to use [H(y+x-z)-H(y)]*[f(z-y)-f(z)]. The subtracted constant vanishes by both Hessian cancellations. Check integrability using bounded f, L1 Hessian and the weighted translation estimate; then bound the actual difference integrals. This is the small displacement regime, not a full Schauder claim yet. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-hessian-modulus",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HeatHessianSchauderModulus.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.heat_hessian_schauder_modulus",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.HeatHessianSmallShift\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.HolderHessianConvolutionThree\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** heat hessian schauder modulus. -/\ntheorem heat_hessian_schauder_modulus \n    (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (f : E3 →ᵇ ℝ) (L : ℝ), 0 ≤ L →\n      (∀ x z : E3, |f x-f z| ≤ L*‖x-z‖^alpha) → ∀ t : ℝ, 0 < t →\n      ∀ (x z : E3) (i j : Fin 3),\n      |(∫ y : E3, heatHessian3 t i j y*f (x-y))-(∫ y : E3, heatHessian3 t i j y*f (z-y))| ≤\n        C*L*min (t^(alpha/2-1)) (‖x-z‖*t^(alpha/2-3/2)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "j6-hessian-small-shift"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "The first bound holds globally by twice the existing cancellation-based Holder-to-Hessian bound. The second bound is needed only for norm(x-z)<=sqrt(t); outside that range it is larger than the first. Use the maximum of the two positive constants and keep all rpow identities restricted to t>0. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-duhamel-hessian-holder",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DuhamelHessianSpatialHolder.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.duhamel_hessian_spatial_holder",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.HeatHessianSchauderModulus\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.SchauderTimeSplit\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.WideDuhamelHessianThree\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** duhamel hessian spatial holder. -/\ntheorem duhamel_hessian_spatial_holder \n    (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (F : (ℝ × E3) →ᵇ ℝ) (L T : ℝ), 0 ≤ L → 0 ≤ T →\n      (∀ s ∈ Icc (0:ℝ) T, ∀ x z : E3, |F (s,x)-F (s,z)| ≤ L*‖x-z‖^alpha) →\n      ∀ (x z : E3) (i j : Fin 3),\n        |(∫ s in (0:ℝ)..T, ∫ y : E3, heatHessian3 (T-s) i j y*F (s,x-y))-\n         (∫ s in (0:ℝ)..T, ∫ y : E3, heatHessian3 (T-s) i j y*F (s,z-y))| ≤\n          C*L*‖x-z‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "j6-hessian-modulus",
+      "j6-time-split"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use the existing Duhamel Hessian theorem for actual IntervalIntegrable values, then subtract the integrals. The new min modulus is integrable by schauder_time_split after r=T-s. Handle x=z and T=0 first. This closes the spatial seminorm without a divergent integral of 1/r; it is not obtained by naively integrating actual_heat_hessian_spatial_holder. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-actual-duhamel-schauder",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualDuhamelSpatialSchauder.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_duhamel_spatial_schauder",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DuhamelHessianSpatialHolder\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.FullDuhamelSpatialC2\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** actual duhamel spatial schauder. -/\ntheorem actual_duhamel_spatial_schauder \n    (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (F : (ℝ × E3) →ᵇ ℝ) (L T : ℝ), 0 ≤ L → 0 < T →\n      (∀ s ∈ Icc (0:ℝ) T, ∀ x z : E3, |F (s,x)-F (s,z)| ≤ L*‖x-z‖^alpha) →\n      let u : E3 → ℝ := fun x => ∫ s in (0:ℝ)..T, ∫ y : E3,\n        MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 (T-s) (x-y)*F (s,y);\n      ContDiff ℝ 2 u ∧ (∀ (x : E3) (i j : Fin 3),\n        |fderiv ℝ (fun z => fderiv ℝ u z (EuclideanSpace.single i 1)) x (EuclideanSpace.single j 1)| ≤ C*L*T^(alpha/2)) ∧\n      ∀ (x z : E3) (i j : Fin 3),\n        |fderiv ℝ (fun w => fderiv ℝ u w (EuclideanSpace.single i 1)) x (EuclideanSpace.single j 1)-\n         fderiv ℝ (fun w => fderiv ℝ u w (EuclideanSpace.single i 1)) z (EuclideanSpace.single j 1)| ≤ C*L*‖x-z‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "j6-duhamel-hessian-holder"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Combine the accepted genuine C2 Duhamel derivative identification with the new spatial Holder bound on the actual Hessian integrals. Take a common constant. No new smoothness assumption about the resulting u is allowed. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  },
+  {
+    "id": "j6-anisotropic-duhamel-schauder",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicDuhamelSpatialSchauder.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_duhamel_spatial_schauder",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualDuhamelSpatialSchauder\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicConvolutionPullback\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LinearHessianHolderTransport\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LinearPullbackSecondDerivative\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** anisotropic duhamel spatial schauder. -/\ntheorem anisotropic_duhamel_spatial_schauder \n    (B : E3 ≃L[ℝ] E3) (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (F : (ℝ × E3) →ᵇ ℝ) (L T : ℝ), 0 ≤ L → 0 < T →\n      (∀ s ∈ Icc (0:ℝ) T, ∀ x z : E3, |F (s,x)-F (s,z)| ≤ L*‖x-z‖^alpha) →\n      let u : E3 → ℝ := fun x => ∫ s in (0:ℝ)..T, ∫ y : E3,\n        anisotropicHeatKernel B (T-s) (x-y)*F (s,y);\n      ContDiff ℝ 2 u ∧ (∀ (x : E3) (i j : Fin 3),\n        |fderiv ℝ (fun z => fderiv ℝ u z (EuclideanSpace.single i 1)) x (EuclideanSpace.single j 1)| ≤ C*L*T^(alpha/2)) ∧\n      ∀ (x z : E3) (i j : Fin 3),\n        |fderiv ℝ (fun w => fderiv ℝ u w (EuclideanSpace.single i 1)) x (EuclideanSpace.single j 1)-\n         fderiv ℝ (fun w => fderiv ℝ u w (EuclideanSpace.single i 1)) z (EuclideanSpace.single j 1)| ≤ C*L*‖x-z‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "j6-actual-duhamel-schauder",
+      "j6-anisotropic-pullback",
+      "j6-hessian-holder-pullback",
+      "g6-linear-second-derivative"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Conjugate the actual Duhamel integral by the constant B using anisotropic_convolution_pullback for s<T; the endpoint has measure zero. The pulled-back bounded continuous forcing is F(s,Bz) with Holder constant L*norm(B)^alpha. Apply the isotropic spatial Schauder theorem, pull derivatives back by B.symm and use linear_hessian_holder_transport. C may depend on B and alpha, but NOT on F,L,T. Preserve both the sup estimate and full spatial Holder estimate; no time Holder regularity is asserted. Keep the exact frozen statement and definitions, editing only the marked proof. No sorry/admit, new hypotheses/axioms, native_decide, resource-option changes, extra agents or reads of other attempts. Use the shared swarm-check.sh compiler wrapper. Spatial Schauder control alone is not full parabolic regularity or quasilinear existence."
+  }
+]

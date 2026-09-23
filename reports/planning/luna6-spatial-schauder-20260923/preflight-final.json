@@ -1,0 +1,21 @@
+{
+  "purpose": "syntax check only; not proof evidence",
+  "passed": [
+    "j6-third-kernel-formula",
+    "j6-gaussian-small-shift",
+    "j6-weighted-translation",
+    "j6-time-split",
+    "j6-anisotropic-pullback",
+    "j6-C2-holder-complete",
+    "j6-hessian-holder-pullback",
+    "j6-third-shift-majorant",
+    "j6-weighted-hessian-translation",
+    "j6-hessian-small-shift",
+    "j6-hessian-modulus",
+    "j6-duhamel-hessian-holder",
+    "j6-actual-duhamel-schauder",
+    "j6-anisotropic-duhamel-schauder"
+  ],
+  "failed": [],
+  "blocked": []
+}
