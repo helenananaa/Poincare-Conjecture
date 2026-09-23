@@ -1,0 +1,36 @@
+{
+  "old_task": "c6-lowered-gauge-smooth",
+  "old_attempt": "ac384e33-2db2-41de-8246-be2c4082ea06",
+  "snapshot_sha256": "68e931f8c40c9ea7d18bfc07d7fbd922eb656190340cdae27af7ead73d38801b",
+  "dependency_commit": "de4238b364b933c5fc849034590aad8e4e6cbff6",
+  "dependency": {
+    "compile_passed": true,
+    "sha256": "2e3ba706e0700690fedda35dd59f9f8165d5db19a83b6019d280e4216f7f9662",
+    "cache_key": "e45ac191a34c0a2c23eb25bcc17e0b18cfdad684f1088bcbdcdd4717eac41368",
+    "cache_hit": false,
+    "compiler_wait_seconds": 0.000131,
+    "compile_seconds": 17.261321,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_wait_seconds": 7.4e-05
+  },
+  "candidate": {
+    "compile_passed": true,
+    "sha256": "68e931f8c40c9ea7d18bfc07d7fbd922eb656190340cdae27af7ead73d38801b",
+    "cache_key": "1640c0d57d4df12471c8a33ed55c7ffd7e7b28344956ea138bb78d61ecca580b",
+    "cache_hit": false,
+    "compiler_wait_seconds": 8.2e-05,
+    "compile_seconds": 15.452363,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_wait_seconds": 7.9e-05
+  },
+  "statement_preserved": true,
+  "original_failure_retained": true
+}

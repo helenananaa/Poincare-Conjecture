@@ -1,0 +1,118 @@
+[
+  {
+    "id": "d6-frame-coordinate",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/FrameInverseCoordinate.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.frame_inverse_coordinate",
+    "source": "import DoCarmoLib.Riemannian.Geodesic.CovariantDerivative\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"E6\" => EuclideanSpace ℝ (Fin 6)\n\n/-- **Math.** frame inverse coordinate. -/\ntheorem frame_inverse_coordinate (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ i : Fin 3, B (EuclideanSpace.single i 1) = Module.finBasis ℝ E3 (e i))\n    (v : E3) (k : Fin 3) :\n    (B.symm v) k = Riemannian.Geodesic.chartCoord (E := E3) (e k) v :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Expand B.symm v in the standard Euclidean basis and apply B. Evaluate chartCoord using Module.finBasis repr and the bijection e; use B.apply_symm_apply. Keep the exact statement and imports. Only change the marked proof. No new assumptions, axioms, options, model calls or other-attempt reads. Use swarm-check.sh. A successful local lemma does not establish PDE existence or final Poincare."
+  },
+  {
+    "id": "d6-curvature-sign-coefficient",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartCurvatureCoefficientSign.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.chart_curvature_coefficient_sign",
+    "source": "import MorganTianLib.Ch01.ChartCurvature\nimport DoCarmoLib.Riemannian.Jacobi.ChartCurvatureContraction\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"E6\" => EuclideanSpace ℝ (Fin 6)\n\n/-- **Math.** chart curvature coefficient sign. -/\ntheorem chart_curvature_coefficient_sign {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M) (y : E3)\n    (hy : y ∈ (extChartAt (𝓡 3) a).target)\n    (i j l k : Fin (Module.finrank ℝ E3)) :\n    Riemannian.Geodesic.chartCoord (E := E3) k\n      (MorganTianLib.chartCurvature g a y (Module.finBasis ℝ E3 i)\n        (Module.finBasis ℝ E3 j) (Module.finBasis ℝ E3 l)) =\n      Riemannian.Jacobi.chartCurvatureCoef g a j i l k y :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Important sign: the DoCarmo coefficient is ordered j i l k, not i j l k. Expand chartChristoffelBilin on Module.finBasis; derivatives commute with continuous linear evaluations. The coordinate derivative uses Module.finBasis, not EuclideanSpace.single. Use smoothness on the open chart target. Compare ∂i Γjl - ∂j Γil + ΓiΓjl - ΓjΓil with the actual DoCarmo definition. Keep the exact statement and imports. Only change the marked proof. No new assumptions, axioms, options, model calls or other-attempt reads. Use swarm-check.sh. A successful local lemma does not establish PDE existence or final Poincare."
+  },
+  {
+    "id": "d6-chart-trace-tensor",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartTraceIntrinsicRicci.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.chart_trace_intrinsic_ricci",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.FrameInverseCoordinate\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartCurvatureCoefficientSign\nimport MorganTianLib.Ch03.RicciFlow.CurvatureCoordinateVariation\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"E6\" => EuclideanSpace ℝ (Fin 6)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** chart trace intrinsic ricci. -/\ntheorem chart_trace_intrinsic_ricci {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r)) (y : E3) (hy : y ∈ (extChartAt (𝓡 3) a).target) (i j : Fin 3) :\n    (∑ k : Fin 3, (B.symm (MorganTianLib.chartCurvature g a y\n      (B (EuclideanSpace.single k 1)) (B (EuclideanSpace.single j 1))\n      (B (EuclideanSpace.single i 1)))) k) =\n    MorganTianLib.ricciTensorAt g ((extChartAt (𝓡 3) a).symm y)\n      (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e j) ((extChartAt (𝓡 3) a).symm y))\n      (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) ((extChartAt (𝓡 3) a).symm y)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "d6-frame-coordinate",
+      "d6-curvature-sign-coefficient"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use frame_inverse_coordinate and chart_curvature_coefficient_sign termwise, reindex Fin 3 with e to get chartRicciCoefOnE g a (e j) (e i), then use chartRicciCoefOnE_eq_ricciTensorAt_chartBasis. Preserve the reversed j i ordering explicitly; do not assume a sign convention. Keep the exact statement and imports. Only change the marked proof. No new assumptions, axioms, options, model calls or other-attempt reads. Use swarm-check.sh. A successful local lemma does not establish PDE existence or final Poincare."
+  },
+  {
+    "id": "d6-actual-intrinsic-ricci",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualIntrinsicRicci.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_coordinate_ricci_eq_intrinsic",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualChartRicci\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartTraceIntrinsicRicci\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"E6\" => EuclideanSpace ℝ (Fin 6)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** actual coordinate ricci eq intrinsic. -/\ntheorem actual_coordinate_ricci_eq_intrinsic {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r)) (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) (i j : Fin 3) :\n    let p := (extChartAt (𝓡 3) a).symm (B x);\n    let G : E3 → (E3 →L[ℝ] E3) := fun z =>\n      chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm (B z)) e;\n    actualCoordinateRicci G x i j = MorganTianLib.ricciTensorAt g p\n      (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e j) p)\n      (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) p) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "c6-chart-ricci",
+      "d6-chart-trace-tensor"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Consume actual_chart_ricci_contraction and chart_trace_intrinsic_ricci. This closes an actual PDE-coordinate-to-intrinsic-tensor bridge, but not the gauge tensor bridge or the existence theorem. Keep the exact statement and imports. Only change the marked proof. No new assumptions, axioms, options, model calls or other-attempt reads. Use swarm-check.sh. A successful local lemma does not establish PDE existence or final Poincare."
+  },
+  {
+    "id": "d6-inverse-holder",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/InverseCoefficientHolder.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.inverse_coefficient_holder",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LocalInverseControl\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"E6\" => EuclideanSpace ℝ (Fin 6)\n\n/-- **Math.** inverse coefficient holder. -/\ntheorem inverse_coefficient_holder (A0 : E3 →L[ℝ] E3) (G : E3 → (E3 →L[ℝ] E3))\n    (c L alpha : ℝ) (hc : 0 < c) (hL : 0 ≤ L)\n    (hA0 : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A0 v) v)\n    (hball : ∀ x : E3, ‖G x-A0‖ ≤ c/2)\n    (hholder : ∀ x y : E3, ‖G x-G y‖ ≤ L*‖x-y‖^alpha) :\n    ∀ x y : E3, ∀ i j : Fin 3,\n      |((G x).inverse (EuclideanSpace.single j 1)) i -\n        ((G y).inverse (EuclideanSpace.single j 1)) i| ≤\n        (4*L/c^2)*‖x-y‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use positive_ball_inverse_control at G x and G y, identify inverses using ContinuousLinearMap.inverse_equiv, then bound one coordinate by operator norm. Alpha need not be positive for this implication; the supplied Holder inequality and nonnegative real rpow suffice. Keep the exact statement and imports. Only change the marked proof. No new assumptions, axioms, options, model calls or other-attempt reads. Use swarm-check.sh. A successful local lemma does not establish PDE existence or final Poincare."
+  },
+  {
+    "id": "d6-frozen-principal-difference",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/FrozenPrincipalDifference.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.frozen_principal_difference",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LocalInverseControl\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.PrincipalPartDifference\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"E6\" => EuclideanSpace ℝ (Fin 6)\n\n/-- **Math.** frozen principal difference. -/\ntheorem frozen_principal_difference (A0 A B : E3 →L[ℝ] E3) (c : ℝ) (hc : 0 < c)\n    (hA0 : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A0 v) v)\n    (hA : ‖A-A0‖ ≤ c/2) (hB : ‖B-A0‖ ≤ c/2)\n    (Q R : Fin 3 → Fin 3 → E6) :\n    ‖(∑ i : Fin 3, ∑ j : Fin 3, ((A.inverse-A0.inverse) (EuclideanSpace.single j 1)) i • Q i j) -\n      (∑ i : Fin 3, ∑ j : Fin 3, ((B.inverse-A0.inverse) (EuclideanSpace.single j 1)) i • R i j)‖ ≤\n      (4/c^2)*‖A-A0‖*(∑ i : Fin 3, ∑ j : Fin 3, ‖Q i j-R i j‖) +\n      (4/c^2)*‖A-B‖*(∑ i : Fin 3, ∑ j : Fin 3, ‖R i j‖) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Crucial smallness factor on the Hessian difference: split (Ainv-A0inv)(Q-R)+(Ainv-Binv)R. Apply positive_ball_inverse_control also to A,A0. Do not replace the first coefficient by 2/c, which loses the needed contraction smallness. Keep the exact statement and imports. Only change the marked proof. No new assumptions, axioms, options, model calls or other-attempt reads. Use swarm-check.sh. A successful local lemma does not establish PDE existence or final Poincare."
+  },
+  {
+    "id": "d6-uniform-ellipticity",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/UniformInverseEllipticity.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.uniform_inverse_ellipticity",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.SymmetricInverseBounds\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"E6\" => EuclideanSpace ℝ (Fin 6)\n\n/-- **Math.** uniform inverse ellipticity. -/\ntheorem uniform_inverse_ellipticity (A : E3 →L[ℝ] E3) (c K : ℝ) (hc : 0 < c) (hK : 0 < K)\n    (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (hsym : ∀ v w : E3, inner ℝ (A v) w = inner ℝ v (A w))\n    (hbound : ‖A‖ ≤ K) (xi : E3) :\n    (c/K^2)*‖xi‖^2 ≤\n      (∑ i : Fin 3, ∑ j : Fin 3, (A.inverse (EuclideanSpace.single j 1)) i * xi i * xi j) ∧\n    (∑ i : Fin 3, ∑ j : Fin 3, (A.inverse (EuclideanSpace.single j 1)) i * xi i * xi j) ≤\n      (1/c)*‖xi‖^2 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Identify the double coefficient sum with inner(A.inverse xi,xi), then apply symmetric_inverse_bounds and weaken c/norm(A)^2 to c/K^2. Prove norm(A)>0 from coercivity on a basis vector. This gives actual coefficient ellipticity, not only an abstract symbol certificate. Keep the exact statement and imports. Only change the marked proof. No new assumptions, axioms, options, model calls or other-attempt reads. Use swarm-check.sh. A successful local lemma does not establish PDE existence or final Poincare."
+  },
+  {
+    "id": "d6-selfadjoint-extension",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalSelfadjointExtension.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.local_selfadjoint_extension",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"E6\" => EuclideanSpace ℝ (Fin 6)\n\n/-- **Math.** local selfadjoint extension. -/\ntheorem local_selfadjoint_extension (G : E3 → (E3 →L[ℝ] E3)) (x : E3) (hG : ContDiffAt ℝ 2 G x)\n    (hsym : ∀ᶠ y : E3 in 𝓝 x, ∀ v w : E3, inner ℝ (G y v) w = inner ℝ v (G y w)) :\n    ∃ H : E3 → (E3 →L[ℝ] E3), ContDiff ℝ 2 H ∧\n      (∀ y v w : E3, inner ℝ (H y v) w = inner ℝ v (H y w)) ∧\n      H =ᶠ[𝓝 x] G :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Search Mathlib for extension of a locally C2 function by a bump function. Obtain a global C2 extension agreeing near x, then symmetrize with the continuous-linear adjoint map, or use a scalar cutoff supported inside the symmetry neighborhood. Do not assume G globally smooth or its values symmetric away from x. This enables global-formula lemmas on actual local chart data. Keep the exact statement and imports. Only change the marked proof. No new assumptions, axioms, options, model calls or other-attempt reads. Use swarm-check.sh. A successful local lemma does not establish PDE existence or final Poincare."
+  },
+  {
+    "id": "d6-inverse-heat-commutator",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 25,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/InverseMetricHeatCommutator.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.inverse_metric_heat_commutator",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseCoefficientHolder\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.HeatCoefficientCommutator\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped BoundedContinuousFunction Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"E6\" => EuclideanSpace ℝ (Fin 6)\n\n/-- **Math.** inverse metric heat commutator. -/\ntheorem inverse_metric_heat_commutator (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (A0 : E3 →L[ℝ] E3) (G : E3 → (E3 →L[ℝ] E3)),\n      Continuous G → ∀ (c L : ℝ), 0 < c → 0 ≤ L →\n      (∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A0 v) v) →\n      (∀ x : E3, ‖G x-A0‖ ≤ c/2) →\n      (∀ x y : E3, ‖G x-G y‖ ≤ L*‖x-y‖^alpha) →\n      ∀ (f : E3 →ᵇ ℝ) (t : ℝ), 0 < t → ∀ (x : E3) (i j p q : Fin 3),\n        let a : E3 → ℝ := fun z => ((G z).inverse (EuclideanSpace.single q 1)) p;\n        MeasureTheory.Integrable (fun y : E3 => (a x-a (x-y))*\n          fderiv ℝ (fun z : E3 => fderiv ℝ (MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 t) z\n            (EuclideanSpace.single i 1)) y (EuclideanSpace.single j 1)*f (x-y)) MeasureTheory.volume ∧\n        |∫ y : E3, (a x-a (x-y))*fderiv ℝ (fun z : E3 =>\n          fderiv ℝ (MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 t) z (EuclideanSpace.single i 1)) y\n            (EuclideanSpace.single j 1)*f (x-y)| ≤ (C*L/c^2)*‖f‖*t^(alpha/2-1) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "d6-inverse-holder"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Apply heat_hessian_coefficient_commutator to actual inverse metric entries. Establish their continuity using the Holder estimate with alpha>0 or the smooth inverse on the coercive ball. Absorb 4 into the universal C. Preserve the actual integral and its integrability; no abstract coefficient is left uninstantiated. Keep the exact statement and imports. Only change the marked proof. No new assumptions, axioms, options, model calls or other-attempt reads. Use swarm-check.sh. A successful local lemma does not establish PDE existence or final Poincare."
+  }
+]

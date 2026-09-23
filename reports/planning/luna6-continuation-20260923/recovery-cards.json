@@ -1,0 +1,47 @@
+[
+  {
+    "depends_on": [
+      "gauge-lower-jet-bound"
+    ],
+    "hint": "This exact preserved candidate was independently recompiled with its previously omitted committed LoweredGaugeJet dependency, and its axiom audit passed. Verify the already supplied proof with swarm-check.sh; preserve its statement, imports and definitions. Do not rewrite a correct proof gratuitously. No extra assumptions, axioms or option changes. Prior failure was an absent compiled dependency, not accepted proof evidence.",
+    "id": "c6-lowered-gauge-smooth-recovered",
+    "model": "luna",
+    "priority": 22,
+    "reasoning_effort": "high",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LoweredGaugeJet\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseDifferential\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** lowered gauge jet smooth. -/\ntheorem lowered_gauge_jet_smooth (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (r j : Fin 3) :\n    ContDiffAt ℝ ∞ (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n      loweredGaugeJet q.1 q.2 r j) (A,P) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  classical\n  have hInv : ContDiffAt ℝ ∞\n      (fun B : E3 →L[ℝ] E3 => B.inverse) A :=\n    (coercive_inverse_differential A c hc hA).1\n  have hInv' : ContDiffAt ℝ ∞\n      (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) => q.1.inverse) (A, P) :=\n    hInv.comp (A, P) contDiffAt_fst\n  have hP : ∀ s : Fin 3, ContDiffAt ℝ ∞\n      (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) => q.2 s) (A, P) := by\n    intro s\n    fun_prop\n  have hJetComp : ContDiffAt ℝ ∞\n      (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n        q.1.inverse.comp ((q.2 r).comp q.1.inverse)) (A, P) :=\n    hInv'.clm_comp ((hP r).clm_comp hInv')\n  have hcoord : ∀ (s l t : Fin 3), ContDiffAt ℝ ∞\n      (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n        (q.2 s (EuclideanSpace.single l 1)) t) (A, P) := by\n    intro s l t\n    fun_prop\n  have hterm : ∀ p q : Fin 3, ContDiffAt ℝ ∞\n      (fun z : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n        ((-(z.1.inverse.comp ((z.2 r).comp z.1.inverse)))\n          (EuclideanSpace.single q 1)) p *\n          (z.2 p (EuclideanSpace.single q 1) j +\n            z.2 q (EuclideanSpace.single p 1) j -\n              z.2 j (EuclideanSpace.single q 1) p)) (A, P) := by\n    intro p q\n    have hfirst : ContDiffAt ℝ ∞\n        (fun z : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n          ((-(z.1.inverse.comp ((z.2 r).comp z.1.inverse)))\n            (EuclideanSpace.single q 1)) p) (A, P) := by\n      simpa [Function.comp_def, EuclideanSpace.coe_proj] using\n        ((EuclideanSpace.proj (𝕜 := ℝ) p).contDiff.contDiffAt.comp (A, P)\n          (((hJetComp.neg).clm_apply contDiffAt_const)))\n    exact hfirst.mul ((hcoord p q j).add (hcoord q p j) |>.sub (hcoord j q p))\n  have hsumq : ∀ p : Fin 3, ContDiffAt ℝ ∞\n      (fun z : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n        ∑ q : Fin 3,\n          ((-(z.1.inverse.comp ((z.2 r).comp z.1.inverse)))\n            (EuclideanSpace.single q 1)) p *\n            (z.2 p (EuclideanSpace.single q 1) j +\n              z.2 q (EuclideanSpace.single p 1) j -\n                z.2 j (EuclideanSpace.single q 1) p)) (A, P) := by\n    intro p\n    simpa using (ContDiffAt.sum (s := (Finset.univ : Finset (Fin 3)))\n      (fun q _ => hterm p q))\n  have hsum : ContDiffAt ℝ ∞\n      (fun z : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n        ∑ p : Fin 3, ∑ q : Fin 3,\n          ((-(z.1.inverse.comp ((z.2 r).comp z.1.inverse)))\n            (EuclideanSpace.single q 1)) p *\n            (z.2 p (EuclideanSpace.single q 1) j +\n              z.2 q (EuclideanSpace.single p 1) j -\n                z.2 j (EuclideanSpace.single q 1) p)) (A, P) := by\n    simpa using (ContDiffAt.sum (s := (Finset.univ : Finset (Fin 3)))\n      (fun p _ => hsumq p))\n  simpa [loweredGaugeJet] using hsum.const_smul (1 / 2 : ℝ)\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "target_name": "MorganTianLib.MetricCoefficient.lowered_gauge_jet_smooth",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LoweredGaugeJetSmooth.lean",
+    "timeout_seconds": 1800
+  },
+  {
+    "depends_on": [
+      "c6-lowered-gauge-smooth-recovered",
+      "gauge-coefficients-smooth",
+      "gauge-lie-lower-bound"
+    ],
+    "hint": "Consume lowered_gauge_jet_smooth and project coordinate_deturck_gauge_smooth to each coordinate; combine the actual displayed polynomial terms. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare.",
+    "id": "c6-gauge-lower-smooth-recovered",
+    "model": "luna",
+    "priority": 22,
+    "reasoning_effort": "xhigh",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LoweredGaugeJetSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckLieLowerOrder\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckGaugeSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** deturck lie lower order smooth. -/\ntheorem deturck_lie_lower_order_smooth (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (i j : Fin 3) :\n    ContDiffAt ℝ ∞ (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n      deturckLieLowerOrder q.1 q.2 i j) (A,P) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "target_name": "MorganTianLib.MetricCoefficient.deturck_lie_lower_order_smooth",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DeTurckLieLowerSmooth.lean",
+    "timeout_seconds": 1800
+  },
+  {
+    "depends_on": [
+      "c6-gauge-lower-smooth-recovered",
+      "wsl-lower-order-local-control"
+    ],
+    "hint": "Combine Ricci and gauge smoothness, then use ContDiffAt.exists_lipschitzOnWith on a neighborhood; extract positive radius and K. Do not confuse pointwise quadratic size control with Lipschitz control. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare.",
+    "id": "c6-nonlinearity-local-control-recovered",
+    "model": "luna",
+    "priority": 22,
+    "reasoning_effort": "xhigh",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckLieLowerSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.RicciLowerLocalControl\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** deturck nonlinearity local control. -/\ntheorem deturck_nonlinearity_local_control (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (i j : Fin 3) :\n    let F := fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n      -2*ricciLowerOrder q.1 q.2 i j + deturckLieLowerOrder q.1 q.2 i j;\n    ContDiffAt ℝ ∞ F (A,P) ∧ ∃ r K : ℝ, 0 < r ∧ 0 < K ∧\n      ∀ q z, ‖q-(A,P)‖ < r → ‖z-(A,P)‖ < r → |F q-F z| ≤ K*‖q-z‖ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "target_name": "MorganTianLib.MetricCoefficient.deturck_nonlinearity_local_control",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DeTurckNonlinearityLocalControl.lean",
+    "timeout_seconds": 1800
+  }
+]

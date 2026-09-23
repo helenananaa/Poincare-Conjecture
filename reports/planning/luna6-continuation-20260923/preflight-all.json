@@ -1,0 +1,14 @@
+{
+  "purpose": "all nine declarations passed syntax preflight, not proof acceptance",
+  "passed": [
+    "d6-actual-intrinsic-ricci",
+    "d6-chart-trace-tensor",
+    "d6-curvature-sign-coefficient",
+    "d6-frame-coordinate",
+    "d6-frozen-principal-difference",
+    "d6-inverse-heat-commutator",
+    "d6-inverse-holder",
+    "d6-selfadjoint-extension",
+    "d6-uniform-ellipticity"
+  ]
+}
