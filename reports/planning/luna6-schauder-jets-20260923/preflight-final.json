@@ -1,0 +1,23 @@
+{
+  "purpose": "declaration-only preflight, never proof evidence",
+  "passed": [
+    "i6-C2-jet-completeness",
+    "i6-anisotropic-moment",
+    "i6-convolution-linear",
+    "i6-convolution-trace-error",
+    "i6-cutoff-commutator",
+    "i6-derivative-graph-closed",
+    "i6-heat-lower-holder-trace",
+    "i6-heat-trace-rate",
+    "i6-hessian-cancellation",
+    "i6-hessian-identification",
+    "i6-hessian-weighted-moment",
+    "i6-holder-graph-contraction",
+    "i6-holder-hessian",
+    "i6-holder-interpolation",
+    "i6-holder-product",
+    "i6-kernel-second-derivative"
+  ],
+  "failed": [],
+  "blocked": []
+}

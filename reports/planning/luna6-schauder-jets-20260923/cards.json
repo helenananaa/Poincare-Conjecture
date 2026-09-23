@@ -1,0 +1,224 @@
+[
+  {
+    "id": "i6-holder-interpolation",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HolderScaleInterpolation.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.holder_scale_interpolation",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** holder scale interpolation. -/\ntheorem holder_scale_interpolation \n    {V : Type*} [NormedAddCommGroup V] (f : E3 → V)\n    (alpha beta H delta r : ℝ) (hb : 0 < beta) (hba : beta < alpha)\n    (hH : 0 ≤ H) (hd : 0 ≤ delta) (hr : 0 < r)\n    (hbound : ∀ x, ‖f x‖ ≤ delta)\n    (hholder : ∀ x y, ‖f x-f y‖ ≤ H*‖x-y‖^alpha) :\n    ∀ x y, ‖f x-f y‖ ≤ (H*r^(alpha-beta)+2*delta/r^beta)*‖x-y‖^beta :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Split x=y, then distance at most r versus at least r. Near uses d^alpha=d^(alpha-beta)*d^beta; far uses 2delta and monotonicity of rpow. This is the epsilon-scale interpolation bound; no claimed strong continuity in the full original Holder exponent. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-convolution-trace-error",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ProbabilityConvolutionTrace.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.probability_convolution_trace_error",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** probability convolution trace error. -/\ntheorem probability_convolution_trace_error \n    (k : E3 → ℝ) (hk : Integrable k volume) (hpos : ∀ x, 0 ≤ k x)\n    (hmass : (∫ x : E3, k x) = 1) (alpha H : ℝ) (hH : 0 ≤ H)\n    (hmoment : Integrable (fun y : E3 => k y*‖y‖^alpha) volume)\n    (f : E3 →ᵇ ℝ) (hf : ∀ x y, |f x-f y| ≤ H*‖x-y‖^alpha) :\n    ∀ x, |(∫ y : E3, k y*f (x-y))-f x| ≤ H*(∫ y : E3, k y*‖y‖^alpha) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "First show integrability using the BC sup bound and integrable k. Rewrite f x as the integral of k times this constant using unit mass. Bound the difference under the integral by the supplied actual moment. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-anisotropic-moment",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicFractionalMoment.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_fractional_moment",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHeatKernel\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ThreeDimensionalMoment\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** anisotropic fractional moment. -/\ntheorem anisotropic_fractional_moment \n    (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (B : E3 ≃L[ℝ] E3) (t : ℝ), 0 < t →\n      Integrable (fun y : E3 => anisotropicHeatKernel B t y*‖y‖^alpha) volume ∧\n      (∫ y : E3, anisotropicHeatKernel B t y*‖y‖^alpha) ≤\n        C*‖B.toContinuousLinearMap‖^alpha*t^(alpha/2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "h6-anisotropic-kernel-mass"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use y=B z and the determinant cancellation from anisotropic_heat_kernel_mass. Dominate norm(B z)^alpha by opNorm(B)^alpha*norm(z)^alpha, then use the actual isotropic fractional moment. Preserve uniformity of C in B. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-derivative-graph-closed",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedDerivativeGraph.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.bounded_derivative_graph_closed",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\ndef boundedDerivativeGraph (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] :\n    Set ((E3 →ᵇ V) × (E3 →ᵇ (E3 →L[ℝ] V))) :=\n  {z | ∀ x : E3, HasFDerivAt (fun y : E3 => z.1 y) (z.2 x) x}\n\n/-- **Math.** bounded derivative graph closed. -/\ntheorem bounded_derivative_graph_closed \n    (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :\n    IsClosed (boundedDerivativeGraph V) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "A convergent sequence in BC product has uniformly convergent functions and derivatives. Apply hasFDerivAt_of_tendstoUniformly from UniformLimitsDeriv and metric isClosed_iff_seqClosed. The conclusion must establish the actual derivative relation at the limit, not assume it. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-kernel-second-derivative",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHessianFormula.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_hessian_formula",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHeatKernel\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LinearPullbackSecondDerivative\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** anisotropic hessian formula. -/\ntheorem anisotropic_hessian_formula \n    (B : E3 ≃L[ℝ] E3) (t : ℝ) (ht : 0 < t) (x v w : E3) :\n    fderiv ℝ (fun y : E3 => fderiv ℝ (anisotropicHeatKernel B t) y v) x w =\n      |LinearMap.det B.toLinearEquiv.toLinearMap|⁻¹ *\n        fderiv ℝ (fun y : E3 => fderiv ℝ (MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 t) y\n          (B.symm v)) (B.symm x) (B.symm w) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "h6-anisotropic-kernel-mass",
+      "g6-linear-second-derivative"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Gaussian is C-infinity for positive t. Apply linear_pullback_second_derivative to B.symm and pull the constant determinant factor through two derivatives. Obtain the neighborhood differentiability required for derivative congruence. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-convolution-linear",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ProbabilityConvolutionLinear.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.probability_convolution_linear",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** probability convolution linear. -/\ntheorem probability_convolution_linear \n    (k : E3 → ℝ) (hk : Integrable k volume) (hpos : ∀ x, 0 ≤ k x)\n    (hmass : (∫ x : E3, k x) = 1) :\n    ∃ S : (E3 →ᵇ ℝ) →L[ℝ] (E3 →ᵇ ℝ), ‖S‖ ≤ 1 ∧\n      ∀ (f : E3 →ᵇ ℝ) (x : E3), (S f) x = ∫ y : E3, k y*f (x-y) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use dominated convergence for continuity in x, boundedness by norm f, and integral linearity to build an actual bounded linear operator. No Holder or uniform-continuity assumption is needed for this positive-time map on BC. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-holder-product",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HolderProductEstimate.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.holder_product_estimate",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** holder product estimate. -/\ntheorem holder_product_estimate \n    (f g : E3 →ᵇ ℝ) (alpha Hf Hg : ℝ) (hf0 : 0 ≤ Hf) (hg0 : 0 ≤ Hg)\n    (hf : ∀ x y, |f x-f y| ≤ Hf*‖x-y‖^alpha)\n    (hg : ∀ x y, |g x-g y| ≤ Hg*‖x-y‖^alpha) :\n    ∀ x y, |f x*g x-f y*g y| ≤ (‖f‖*Hg+‖g‖*Hf)*‖x-y‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Split the product increment f(x)(g(x)-g(y)) + (f(x)-f(y))g(y). Use the BC sup bounds and triangle inequality; do not assume differentiability. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-cutoff-commutator",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DiffusionCutoffCommutator.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.diffusion_cutoff_commutator",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** diffusion cutoff commutator. -/\ntheorem diffusion_cutoff_commutator \n    (A : E3 →L[ℝ] E3) (f chi : E3 → ℝ) (x : E3)\n    (hf : ContDiffAt ℝ 2 f x) (hchi : ContDiffAt ℝ 2 chi x) :\n    let e := fun i : Fin 3 => EuclideanSpace.single i (1 : ℝ);\n    let L := fun u : E3 → ℝ => ∑ i : Fin 3, ∑ j : Fin 3,\n      (A (e j)) i * fderiv ℝ (fun y : E3 => fderiv ℝ u y (e j)) x (e i);\n    L (fun y => chi y*f y) - chi x*L f = f x*L chi +\n      ∑ i : Fin 3, ∑ j : Fin 3, (A (e j)) i *\n        (fderiv ℝ chi x (e i)*fderiv ℝ f x (e j) +\n          fderiv ℝ chi x (e j)*fderiv ℝ f x (e i)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Prove the local second product rule by differentiating the first product rule on a neighborhood, then sum. A need not be symmetric. The commutator contains no second derivative of unknown f after cancellation. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-heat-trace-rate",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicTraceRate.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_trace_rate",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicFractionalMoment\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ProbabilityConvolutionTrace\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHolderOperator\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** anisotropic trace rate. -/\ntheorem anisotropic_trace_rate \n    (B : E3 ≃L[ℝ] E3) (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (f : E3 →ᵇ ℝ) (H : ℝ), 0 ≤ H →\n      (∀ x y, |f x-f y| ≤ H*‖x-y‖^alpha) →\n      ∀ t : ℝ, 0 < t → ∃ S : E3 →ᵇ ℝ,\n        (∀ x, S x = ∫ y : E3, anisotropicHeatKernel B t y*f (x-y)) ∧\n        ‖S-f‖ ≤ C*H*t^(alpha/2) ∧\n        ∀ x y, |S x-S y| ≤ H*‖x-y‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "i6-anisotropic-moment",
+      "i6-convolution-trace-error",
+      "h6-anisotropic-holder-operator"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Combine actual normalized anisotropic kernel moment with probability_convolution_trace_error and anisotropic_holder_operator. Uniform pointwise error bounds imply the BC norm error bound. C may depend on B and alpha, but not on f,H,t. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-heat-lower-holder-trace",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicLowerHolderTrace.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_lower_holder_trace",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicTraceRate\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.HolderScaleInterpolation\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** anisotropic lower holder trace. -/\ntheorem anisotropic_lower_holder_trace \n    (B : E3 ≃L[ℝ] E3) (alpha beta : ℝ) (hb : 0 < beta)\n    (hba : beta < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (f : E3 →ᵇ ℝ) (H : ℝ), 0 ≤ H →\n      (∀ x y, |f x-f y| ≤ H*‖x-y‖^alpha) →\n      ∀ t : ℝ, 0 < t → ∃ S : E3 →ᵇ ℝ,\n        (∀ x, S x = ∫ y : E3, anisotropicHeatKernel B t y*f (x-y)) ∧\n        ‖S-f‖ ≤ C*H*t^(alpha/2) ∧ ∀ x y,\n          |(S x-f x)-(S y-f y)| ≤ C*H*t^((alpha-beta)/2)*‖x-y‖^beta :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "i6-heat-trace-rate",
+      "i6-holder-interpolation"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Interpolate the error S-f: sup error is O(H*t^(alpha/2)) and its alpha Holder bound is 2H. Choose interpolation radius t^(1/2). Prove the rpow algebra only for t>0. This is loss-of-exponent convergence, not original-exponent continuity. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-C2-jet-completeness",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedC2JetCompleteness.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.bounded_C2_jet_completeness",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BoundedDerivativeGraph\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\ndef boundedC2JetSet (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] :\n    Set ((E3 →ᵇ V) × ((E3 →ᵇ (E3 →L[ℝ] V)) × (E3 →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)))) :=\n  {z | (∀ x : E3, HasFDerivAt (fun y : E3 => z.1 y) (z.2.1 x) x) ∧\n       (∀ x : E3, HasFDerivAt (fun y : E3 => z.2.1 y) (z.2.2 x) x)}\n\n/-- **Math.** bounded C2 jet completeness. -/\ntheorem bounded_C2_jet_completeness \n    (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :\n    IsComplete (boundedC2JetSet V) ∧ ∀ z ∈ boundedC2JetSet V,\n      ContDiff ℝ 2 (fun x : E3 => z.1 x) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "i6-derivative-graph-closed"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Two continuous projections of the triple land in boundedDerivativeGraph V and boundedDerivativeGraph (E3→L V). Thus the compatibility set is closed in a complete BC product. Show C2 using continuous derivative fields and contDiff_succ/contDiff_one APIs; mere differentiability is not enough. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-hessian-cancellation",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHessianCancellation.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_hessian_cancellation",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHessianFormula\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.HessianCancellationThree\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** anisotropic hessian cancellation. -/\ntheorem anisotropic_hessian_cancellation \n    (B : E3 ≃L[ℝ] E3) (t : ℝ) (ht : 0 < t) (i j : Fin 3) :\n    let H := fun y : E3 => fderiv ℝ (fun z : E3 => fderiv ℝ (anisotropicHeatKernel B t) z\n      (EuclideanSpace.single i 1)) y (EuclideanSpace.single j 1);\n    Integrable H volume ∧ (∫ y : E3, H y) = 0 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "i6-kernel-second-derivative"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Expand the two constant directions B.symm(e_i), B.symm(e_j) in the Euclidean basis. Use the exact kernel Hessian chain rule and change of variables; each isotropic Hessian component has zero integral and is integrable. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-hessian-weighted-moment",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicWeightedHessian.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_weighted_hessian",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHessianFormula\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursiveHessianEstimate\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** anisotropic weighted hessian. -/\ntheorem anisotropic_weighted_hessian \n    (B : E3 ≃L[ℝ] E3) (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, 0 < t → ∀ i j : Fin 3,\n      let H := fun y : E3 => fderiv ℝ (fun z : E3 => fderiv ℝ (anisotropicHeatKernel B t) z\n        (EuclideanSpace.single i 1)) y (EuclideanSpace.single j 1);\n      Integrable (fun y : E3 => |H y| *‖y‖^alpha) volume ∧\n        (∫ y : E3, |H y| *‖y‖^alpha) ≤ C*t^(alpha/2-1) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "i6-kernel-second-derivative"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "After y=Bz, bound the weighted directional Hessian by a finite sum of isotropic components with fixed coefficients. Control norm(Bz)^alpha with opNorm(B)^alpha. A finite maximum or sum gives one positive C for all i,j. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-holder-hessian",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHolderHessian.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_holder_hessian",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHessianCancellation\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicWeightedHessian\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** anisotropic holder hessian. -/\ntheorem anisotropic_holder_hessian \n    (B : E3 ≃L[ℝ] E3) (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (f : E3 →ᵇ ℝ) (L : ℝ), 0 ≤ L →\n      (∀ x y, |f x-f y| ≤ L*‖x-y‖^alpha) → ∀ t : ℝ, 0 < t →\n      ∀ (x : E3) (i j : Fin 3),\n        let H := fun y : E3 => fderiv ℝ (fun z : E3 => fderiv ℝ (anisotropicHeatKernel B t) z\n          (EuclideanSpace.single i 1)) y (EuclideanSpace.single j 1);\n        Integrable (fun y : E3 => H y*f (x-y)) volume ∧\n          |∫ y : E3, H y*f (x-y)| ≤ C*L*t^(alpha/2-1) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "i6-hessian-cancellation",
+      "i6-hessian-weighted-moment"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use cancellation to replace f(x-y) by f(x-y)-f(x) inside the actual integral. Bound with the Holder modulus and the weighted Hessian moment. Keep integrability proofs separate from the inequality. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-holder-graph-contraction",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HolderGraphHeatContraction.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.holder_graph_heat_contraction",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BoundedHolderGraphNorm\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BoundedHolderIncrement\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHolderOperator\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ProbabilityConvolutionLinear\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** holder graph heat contraction. -/\ntheorem holder_graph_heat_contraction \n    (B : E3 ≃L[ℝ] E3) (alpha t : ℝ) (ha : 0 < alpha) (ht : 0 < t) :\n    ∃ S : (boundedHolderGraph ℝ alpha) → (boundedHolderGraph ℝ alpha),\n      (∀ z, ∀ x : E3, (S z).1.1 x =\n        ∫ y : E3, anisotropicHeatKernel B t y*z.1.1 (x-y)) ∧\n      ∀ z w, dist (S z) (S w) ≤ dist z w :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "i6-convolution-linear",
+      "h6-holder-graph-norm",
+      "h6-holder-increment-lift",
+      "h6-anisotropic-holder-operator"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use the actual BC linear convolution map and bounded_holder_increment to lift the output to its unique normalized-increment graph. For differences use bounded_holder_graph_norm and kernel positivity to contract both product components. Use product max distance, not a different norm. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  },
+  {
+    "id": "i6-hessian-identification",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHessianIdentification.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_hessian_identification",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHessianFormula\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHessianCancellation\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BoundedLinearPullback\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.WideBoundedHessianIdentification\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\n\n/-- **Math.** anisotropic hessian identification. -/\ntheorem anisotropic_hessian_identification \n    (B : E3 ≃L[ℝ] E3) (t : ℝ) (ht : 0 < t) (f : E3 →ᵇ ℝ) :\n    let u : E3 → ℝ := fun x => ∫ y : E3, anisotropicHeatKernel B t y*f (x-y);\n    ContDiff ℝ 2 u ∧ ∀ (x : E3) (i j : Fin 3),\n      fderiv ℝ (fun z : E3 => fderiv ℝ u z (EuclideanSpace.single i 1)) x\n        (EuclideanSpace.single j 1) = ∫ y : E3,\n          fderiv ℝ (fun z : E3 => fderiv ℝ (anisotropicHeatKernel B t) z\n            (EuclideanSpace.single i 1)) y (EuclideanSpace.single j 1)*f (x-y) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "i6-kernel-second-derivative",
+      "i6-hessian-cancellation",
+      "g6-bounded-pullback"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use f pulled back by B as bounded input to euclideanHeatKernel_bounded_hessian_identification. Change variables to express u as that isotropic convolution composed with B.symm; extend component identities by bilinearity to arbitrary constant directions, then consume anisotropic_hessian_formula. Prove actual C2 first; a bound on formal kernel integrals is not sufficient. Preserve exact statement and definitions; edit only marked proof body. No added assumptions, axioms, sorry/admit, native_decide, resource-option changes or extra agents. Use shared swarm-check.sh. A local estimate is not a quasilinear PDE existence proof."
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "task": "i6-hessian-weighted-moment",
+  "before": "|H y|*",
+  "after": "|H y| *",
+  "meaning_changed": false,
+  "prior_to_enqueue": true
+}
