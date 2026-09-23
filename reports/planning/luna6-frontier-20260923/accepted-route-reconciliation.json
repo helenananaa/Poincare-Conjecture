@@ -1,0 +1,62 @@
+[
+  {
+    "old": "conn-actual-principal-jet",
+    "old_status": "FAILED",
+    "accepted_successor": "wsl-actual-principal-jet-syntax-repair",
+    "commit": "0381195d643ac6ea62215ce3a281e96236359100",
+    "current_matches_accepted": true,
+    "ancestor": true,
+    "target": "MorganTianLib.MetricCoefficient.actual_metric_principal_jet_identity",
+    "sha256": "978b869e078d1534a94f8f000f1a4a049ded459f31e80b54a4e5f935f582f15a"
+  },
+  {
+    "old": "conn-christoffel-differential",
+    "old_status": "TIMEOUT",
+    "accepted_successor": "wsl-christoffel-differential-reviewed-retry",
+    "commit": "8ce151ae7b545ee2803640fed5b99d8b600997da",
+    "current_matches_accepted": true,
+    "ancestor": true,
+    "target": "MorganTianLib.MetricCoefficient.coordinate_christoffel_differential",
+    "sha256": "ee6172f0142f9eda2395986056cc96ec7f8ce4f2b81be01770ae1a9f5a17c843"
+  },
+  {
+    "old": "conn-christoffel-field-derivative",
+    "old_status": "QUEUED",
+    "accepted_successor": "wsl-connection-field-recovered-route",
+    "commit": "27b05bb1b6319adbb08cd2db4861ecb31db05de3",
+    "current_matches_accepted": true,
+    "ancestor": true,
+    "target": "MorganTianLib.MetricCoefficient.coordinate_connection_field_derivative",
+    "sha256": "1bb9771637fc55b77c4b5dd599223bc6630a886762ac102d20c2bc3c7633e79b"
+  },
+  {
+    "old": "wsl-actual-ricci-decomposition",
+    "old_status": "QUEUED",
+    "accepted_successor": "wsl-actual-ricci-recovered-route",
+    "commit": "b86c4928cb1e2216f5ebdd4362df21cbee5963ac",
+    "current_matches_accepted": true,
+    "ancestor": true,
+    "target": "MorganTianLib.MetricCoefficient.actual_coordinate_ricci_decomposition",
+    "sha256": "3c236910e8557c9d0af2d1e281c5056afe6cfd29502d6ebb75a8134befdd6da9"
+  },
+  {
+    "old": "wsl-christoffel-principal-lower",
+    "old_status": "QUEUED",
+    "accepted_successor": "wsl-connection-split-recovered-route",
+    "commit": "830c6720d3f2abaa66c015af0aad61305955c92e",
+    "current_matches_accepted": true,
+    "ancestor": true,
+    "target": "MorganTianLib.MetricCoefficient.connection_principal_lower_split",
+    "sha256": "ae1c66f454157fbe0c8fb923d528bf23f0910f875c5da26355e239c5c1f43047"
+  },
+  {
+    "old": "wsl-principal-residual-control",
+    "old_status": "QUEUED",
+    "accepted_successor": "wsl-principal-residual-recovered-route",
+    "commit": "feac0d9c4cb08573da24d24e6e7149421f5e01f0",
+    "current_matches_accepted": true,
+    "ancestor": true,
+    "target": "MorganTianLib.MetricCoefficient.actual_ricci_principal_residual_control",
+    "sha256": "c2a202f07fd4242f3a727f6e51609792ca7c672aa26f2396aacdf015184ac91d"
+  }
+]

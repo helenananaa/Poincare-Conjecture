@@ -1,0 +1,186 @@
+[
+  {
+    "id": "l6-connection-basis-expansion",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionBasisExpansion.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.connection_vector_basis_expansion",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateConnectionVector\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** Evaluate the coordinate connection on two standard basis vectors. -/\ntheorem connection_vector_basis_expansion (A : E3 →L[ℝ] E3)\n    (P : Fin 3 → E3 →L[ℝ] E3) (r j : Fin 3) :\n    connectionVector A P (EuclideanSpace.single r 1) (EuclideanSpace.single j 1) =\n      ∑ k : Fin 3, coordinateChristoffel A P k r j • EuclideanSpace.single k 1 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "conn-vector-bilinear"
+    ],
+    "priority": 20,
+    "timeout_seconds": 1500,
+    "mathematical_line": "luna6-independent-frontier",
+    "hint": "Unfold connectionVector and use extensionality plus EuclideanSpace.single_apply. Prove it symbolically; avoid expanding all Fin 3 indices. Preserve the statement and V1 contract. Prove only the marked body. Do not spawn agents or change resource limits. Run swarm-check.sh."
+  },
+  {
+    "id": "l6-trilinear-extension",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/MetricTrilinearExtension.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.metric_trilinear_extension",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** Equality of the two trilinear metric expressions follows from equality on a basis. -/\ntheorem metric_trilinear_extension (A : E3 →L[ℝ] E3)\n    (P : Fin 3 → E3 →L[ℝ] E3) (B : E3 →L[ℝ] E3 →L[ℝ] E3)\n    (hbasis : ∀ r i j : Fin 3,\n      inner ℝ (P r (EuclideanSpace.single i 1)) (EuclideanSpace.single j 1) =\n        inner ℝ (A (B (EuclideanSpace.single r 1) (EuclideanSpace.single i 1)))\n          (EuclideanSpace.single j 1) +\n        inner ℝ (A (EuclideanSpace.single i 1))\n          (B (EuclideanSpace.single r 1) (EuclideanSpace.single j 1)))\n    (X Y Z : E3) :\n    inner ℝ ((∑ r : Fin 3, X r • P r) Y) Z =\n      inner ℝ (A (B X Y)) Z + inner ℝ (A Y) (B X Z) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "priority": 20,
+    "timeout_seconds": 1500,
+    "mathematical_line": "luna6-independent-frontier",
+    "hint": "This is pure linear algebra; no geometric or positivity assumptions are needed. Expand X,Y,Z using EuclideanSpace.basisFun.sum_repr, or prove multilinear extensionality. Keep a consistent sum order (r,i,j); use Finset.sum_comm explicitly rather than assuming simp reorders sums. Do not use full Fin 3 numeric expansion. Preserve the statement and V1 contract. Prove only the marked body. Do not spawn agents or change resource limits. Run swarm-check.sh."
+  },
+  {
+    "id": "l6-connection-metric-basis",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionMetricBasis.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.connection_metric_basis",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ConnectionBasisExpansion\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateMetricCompatibility\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** Metric compatibility for three coordinate basis vectors. -/\ntheorem connection_metric_basis (A : E3 →L[ℝ] E3)\n    (P : Fin 3 → E3 →L[ℝ] E3) (c : ℝ) (hc : 0 < c)\n    (hA : ∀ v : E3, c * ‖v‖ ^ 2 ≤ inner ℝ (A v) v)\n    (hsym : ∀ v w : E3, inner ℝ (A v) w = inner ℝ v (A w))\n    (hP : ∀ r : Fin 3, ∀ v w : E3, inner ℝ (P r v) w = inner ℝ v (P r w))\n    (r i j : Fin 3) :\n    inner ℝ (P r (EuclideanSpace.single i 1)) (EuclideanSpace.single j 1) =\n      inner ℝ (A (connectionVector A P (EuclideanSpace.single r 1)\n        (EuclideanSpace.single i 1))) (EuclideanSpace.single j 1) +\n      inner ℝ (A (EuclideanSpace.single i 1))\n        (connectionVector A P (EuclideanSpace.single r 1) (EuclideanSpace.single j 1)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "l6-connection-basis-expansion"
+    ],
+    "priority": 20,
+    "timeout_seconds": 1500,
+    "mathematical_line": "luna6-independent-frontier",
+    "hint": "Use connection_vector_basis_expansion twice and (coordinate_metric_compatibility A c hc hA hsym P hP).2. Align the final two matrix indices using hsym and EuclideanSpace.inner_single_left/right. Only basis-level algebra, not arbitrary-vector expansion. Preserve the statement and V1 contract. Prove only the marked body. Do not spawn agents or change resource limits. Run swarm-check.sh."
+  },
+  {
+    "depends_on": [
+      "l6-trilinear-extension",
+      "l6-connection-metric-basis",
+      "conn-vector-bilinear"
+    ],
+    "hint": "Assemble the accepted basis equality and the generic metric_trilinear_extension. Obtain B and its equality with connectionVector from connection_vector_bilinear. The long original expansion has been split; do not redo it. Preserve the exact original theorem statement; only edit marked proof body; run swarm-check.sh.",
+    "id": "l6-connection-metric-trilinear",
+    "mathematical_line": "connection-metric-compatibility-reduction",
+    "model": "luna",
+    "priority": 24,
+    "reasoning_effort": "high",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MetricTrilinearExtension\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ConnectionMetricBasis\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateConnectionVector\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateMetricCompatibility\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateChristoffel\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseDifferential\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- The coordinate metric-compatibility identity extended to three arbitrary vectors. -/\ntheorem connection_metric_trilinear (A : E3 →L[ℝ] E3)\n    (P : Fin 3 → E3 →L[ℝ] E3) (c : ℝ) (hc : 0<c)\n    (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (hsym : ∀ v w : E3, inner ℝ (A v) w=inner ℝ v (A w))\n    (hP : ∀ r : Fin 3, ∀ v w : E3, inner ℝ (P r v) w=inner ℝ v (P r w))\n    (X Y Z : E3) :\n    inner ℝ ((∑ r : Fin 3, X r • P r) Y) Z =\n      inner ℝ (A (connectionVector A P X Y)) Z +\n      inner ℝ (A Y) (connectionVector A P X Z) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "target_name": "MorganTianLib.MetricCoefficient.connection_metric_trilinear",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionMetricTrilinear.lean",
+    "timeout_seconds": 1800
+  },
+  {
+    "depends_on": [
+      "l6-connection-metric-trilinear",
+      "conn-symmetric-derivative"
+    ],
+    "hint": "Use the accepted connection_metric_trilinear for the algebraic cancellation, and differentiate the actual metric pairing by continuous-bilinear product rules. Preserve all original assumptions and conclusion. Preserve the exact original theorem statement; only edit marked proof body; run swarm-check.sh.",
+    "id": "l6-actual-metric-product-rule",
+    "mathematical_line": "actual-coordinate-connection-and-principal-jet",
+    "model": "luna",
+    "priority": 24,
+    "reasoning_effort": "high",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ConnectionMetricTrilinear\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MetricJetSymmetry\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateConnectionVector\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateMetricCompatibility\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateChristoffelSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseDifferential\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.SymmetricInverseBounds\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Metric compatibility holds for actual differentiable metric and vector fields. -/\ntheorem coordinate_covariant_metric_rule (G : E3 → (E3 →L[ℝ] E3))\n    (Y Z : E3 → E3) (x V : E3) (c : ℝ) (hc : 0<c)\n    (hG : DifferentiableAt ℝ G x) (hY : DifferentiableAt ℝ Y x) (hZ : DifferentiableAt ℝ Z x)\n    (hpos : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v)\n    (hsym : ∀ y v w : E3, inner ℝ (G y v) w=inner ℝ v (G y w)) :\n    let P := fun r : Fin 3 => fderiv ℝ G x (EuclideanSpace.single r 1)\n    fderiv ℝ (fun y : E3 => inner ℝ (G y (Y y)) (Z y)) x V =\n      inner ℝ (G x (fderiv ℝ Y x V+connectionVector (G x) P V (Y x))) (Z x) +\n      inner ℝ (G x (Y x)) (fderiv ℝ Z x V+connectionVector (G x) P V (Z x)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  classical\n  let P : Fin 3 → E3 →L[ℝ] E3 := fun r =>\n    fderiv ℝ G x (EuclideanSpace.single r 1)\n  change fderiv ℝ (fun y : E3 => inner ℝ (G y (Y y)) (Z y)) x V =\n    inner ℝ (G x (fderiv ℝ Y x V + connectionVector (G x) P V (Y x))) (Z x) +\n      inner ℝ (G x (Y x))\n        (fderiv ℝ Z x V + connectionVector (G x) P V (Z x))\n  have hself : ∀ h a b : E3,\n      inner ℝ ((fderiv ℝ G x h) a) b =\n        inner ℝ a ((fderiv ℝ G x h) b) :=\n    metric_jet_selfadjoint G x hG hsym\n  have hcompat := coordinate_metric_compatibility (G x) c hc (hpos) (hsym x)\n      P (fun r v w => hself (EuclideanSpace.single r 1) v w)\n  have h_expand : ∀ u : E3,\n      (∑ i : Fin 3, u i • EuclideanSpace.single i (1 : ℝ)) = u := by\n    intro u\n    simpa [EuclideanSpace.basisFun_repr, EuclideanSpace.basisFun_apply] using\n      (EuclideanSpace.basisFun (Fin 3) ℝ).sum_repr u\n  have h_expand_coord : ∀ u : E3, ∀ i : Fin 3,\n      (∑ j : Fin 3, u j • EuclideanSpace.single j (1 : ℝ)) i = u i := by\n    intro u i\n    exact congrArg (fun z : E3 => z i) (h_expand u)\n  have hderiv : ∀ d : E3,\n      fderiv ℝ G x d = ∑ r : Fin 3, d r • P r := by\n    intro d\n    calc\n      fderiv ℝ G x d = fderiv ℝ G x\n          (∑ r : Fin 3, d r • EuclideanSpace.single r (1 : ℝ)) := by\n            rw [h_expand d]\n      _ = ∑ r : Fin 3, d r • fderiv ℝ G x (EuclideanSpace.single r 1) := by\n        simp only [map_sum, map_smul]\n      _ = ∑ r : Fin 3, d r • P r := by rfl\n  have hmetric : ∀ d a b : E3,\n      inner ℝ ((fderiv ℝ G x d) a) b =\n        inner ℝ (G x (connectionVector (G x) P d a)) b +\n          inner ℝ (G x a) (connectionVector (G x) P d b) := by\n    intro d a b\n    rw [hderiv d]\n    exact connection_metric_trilinear (G x) P c hc hpos (hsym x)\n      (fun r v w => hself (EuclideanSpace.single r 1) v w) d a b\n  have hprod := fderiv_inner_apply ℝ (hG.clm_apply hY) hZ V\n  rw [fderiv_clm_apply hG hY] at hprod\n  simp only [ContinuousLinearMap.add_apply, ContinuousLinearMap.comp_apply,\n    ContinuousLinearMap.flip_apply] at hprod\n  calc\n    fderiv ℝ (fun y : E3 => inner ℝ (G y (Y y)) (Z y)) x V =\n        inner ℝ (G x (fderiv ℝ Y x V)) (Z x) +\n          inner ℝ ((fderiv ℝ G x V) (Y x)) (Z x) +\n            inner ℝ (G x (Y x)) (fderiv ℝ Z x V) := by\n      simpa [inner_add_left, add_assoc, add_left_comm, add_comm] using hprod\n    _ = inner ℝ (G x (fderiv ℝ Y x V +\n          connectionVector (G x) P V (Y x))) (Z x) +\n          inner ℝ (G x (Y x)) (fderiv ℝ Z x V +\n            connectionVector (G x) P V (Z x)) := by\n      rw [hmetric V (Y x) (Z x)]\n      simp only [ContinuousLinearMap.add_apply, inner_add_left, inner_add_right]\n      ring\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "target_name": "MorganTianLib.MetricCoefficient.coordinate_covariant_metric_rule",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoordinateCovariantMetricRule.lean",
+    "timeout_seconds": 1800
+  },
+  {
+    "id": "l6-local-coercivity",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalMetricCoercivity.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.metric_coercive_eventually",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.PositivePerturbation\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** Pointwise coercivity persists locally for a continuous operator field. -/\ntheorem metric_coercive_eventually (G : E3 → (E3 →L[ℝ] E3))\n    (x : E3) (hG : ContinuousAt G x) (c : ℝ) (hc : 0 < c)\n    (hpos : ∀ v : E3, c * ‖v‖ ^ 2 ≤ inner ℝ (G x v) v) :\n    ∀ᶠ y : E3 in 𝓝 x, ∀ v : E3,\n      (c / 2) * ‖v‖ ^ 2 ≤ inner ℝ (G y v) v :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "priority": 20,
+    "timeout_seconds": 1500,
+    "mathematical_line": "luna6-independent-frontier",
+    "hint": "Apply continuity to ‖G y - G x‖ < c/2, then coercivity_survives_operator_perturbation. Do not assume global positivity. Preserve the statement and V1 contract. Prove only the marked body. Do not spawn agents or change resource limits. Run swarm-check.sh."
+  },
+  {
+    "id": "l6-gauge-field-differentiable",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualGaugeDifferentiable.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_deturck_gauge_differentiable",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckGaugeSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** Differentiability of the actual DeTurck vector built from a twice smooth metric field. -/\ntheorem actual_deturck_gauge_differentiable (G : E3 → (E3 →L[ℝ] E3))\n    (hG : ContDiff ℝ 2 G) (x : E3) (c : ℝ) (hc : 0 < c)\n    (hpos : ∀ v : E3, c * ‖v‖ ^ 2 ≤ inner ℝ (G x v) v) :\n    DifferentiableAt ℝ (fun y : E3 => (WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y)\n        (fun a : Fin 3 => fderiv ℝ G y (EuclideanSpace.single a 1)) k) : E3)) x :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "gauge-coefficients-smooth"
+    ],
+    "priority": 20,
+    "timeout_seconds": 1500,
+    "mathematical_line": "luna6-independent-frontier",
+    "hint": "Use coordinate_deturck_gauge_smooth composed with y ↦ (G y, first metric jet y). Derive DifferentiableAt (fderiv ℝ G) from ContDiff 2 G. Watch differentiableAt_pi and the ContDiff order APIs. No metric symmetry needed. Preserve the statement and V1 contract. Prove only the marked body. Do not spawn agents or change resource limits. Run swarm-check.sh."
+  },
+  {
+    "id": "l6-gauge-lowering-neighborhood",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualGaugeLoweringNeighborhood.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_gauge_lowering_eventually",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LocalMetricCoercivity\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckGaugeLowering\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MetricJetSymmetry\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** The actual lowered vector agrees near the base point with its coefficient formula. -/\ntheorem actual_gauge_lowering_eventually (G : E3 → (E3 →L[ℝ] E3))\n    (hG : ContDiff ℝ 2 G)\n    (hsym : ∀ y v w : E3, inner ℝ (G y v) w = inner ℝ v (G y w))\n    (x : E3) (c : ℝ) (hc : 0 < c)\n    (hpos : ∀ v : E3, c * ‖v‖ ^ 2 ≤ inner ℝ (G x v) v) (j : Fin 3) :\n    (fun y : E3 => (G y (WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y)\n        (fun a : Fin 3 => fderiv ℝ G y (EuclideanSpace.single a 1)) k))) j)\n      =ᶠ[𝓝 x]\n    (fun y : E3 => loweredDeTurckGauge (G y)\n      (fun a : Fin 3 => fderiv ℝ G y (EuclideanSpace.single a 1)) j) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "l6-local-coercivity",
+      "gauge-lowering-identity",
+      "conn-symmetric-derivative"
+    ],
+    "priority": 20,
+    "timeout_seconds": 1500,
+    "mathematical_line": "luna6-independent-frontier",
+    "hint": "Use metric_coercive_eventually with c/2, metric_jet_selfadjoint at each y, then coordinate_deturck_gauge_lowering. Expand G y applied to a vector using EuclideanSpace.basisFun.sum_repr. Prove actual eventual equality, not an assumed derivative equality. Preserve the statement and V1 contract. Prove only the marked body. Do not spawn agents or change resource limits. Run swarm-check.sh."
+  },
+  {
+    "id": "l6-gauge-principal-sum",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DeTurckPrincipalContraction.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.deturck_principal_contraction",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** Symmetric contraction combines the two half principal terms of the Lie derivative. -/\ntheorem deturck_principal_contraction (C : Matrix (Fin 3) (Fin 3) ℝ)\n    (Q : Fin 3 → Fin 3 → Fin 3 → Fin 3 → ℝ)\n    (hC : ∀ p q : Fin 3, C p q = C q p)\n    (hQ : ∀ a b m n : Fin 3, Q a b m n = Q b a m n) (i j : Fin 3) :\n    (1 / 2 : ℝ) * (∑ p : Fin 3, ∑ q : Fin 3,\n      C p q * (Q i p j q + Q i q j p - Q i j p q)) +\n    (1 / 2 : ℝ) * (∑ p : Fin 3, ∑ q : Fin 3,\n      C p q * (Q j p i q + Q j q i p - Q j i p q)) =\n    ∑ p : Fin 3, ∑ q : Fin 3,\n      C p q * (Q i p j q + Q j p i q - Q i j p q) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "priority": 20,
+    "timeout_seconds": 1500,
+    "mathematical_line": "luna6-independent-frontier",
+    "hint": "Pure finite sums. Swap p,q using Finset.sum_comm and hC. Distribute sums and use hQ i j p q for the negative half terms. Avoid expanding 81 concrete tensor entries. Preserve the statement and V1 contract. Prove only the marked body. Do not spawn agents or change resource limits. Run swarm-check.sh."
+  },
+  {
+    "depends_on": [
+      "l6-gauge-field-differentiable",
+      "l6-gauge-lowering-neighborhood",
+      "l6-gauge-principal-sum",
+      "gauge-lowered-field-derivative",
+      "gauge-lie-metric-lowering",
+      "gauge-lie-lower-bound",
+      "conn-actual-secondjet-symmetry"
+    ],
+    "hint": "Use actual_deturck_gauge_differentiable for W; actual_gauge_lowering_eventually and Filter.EventuallyEq.fderiv_eq to replace derivatives; lowered_gauge_field_derivative and coordinate_lie_metric_lowering; deturck_principal_contraction for the remaining finite-sum identity. Get C symmetry from symmetric_inverse_bounds and Q symmetry from metric_second_jets_symmetric. This is assembly of separately proved leaves, not a fresh expansion. Preserve the exact original theorem statement; only edit marked proof body; run swarm-check.sh.",
+    "id": "l6-gauge-lie-principal-split",
+    "mathematical_line": "actual-flat-background-deturck-gauge",
+    "model": "luna",
+    "priority": 18,
+    "reasoning_effort": "xhigh",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualGaugeDifferentiable\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualGaugeLoweringNeighborhood\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckPrincipalContraction\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckGaugeLowering\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckGaugeSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LoweredGaugeFieldDerivative\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateLieMetricLowering\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckLieLowerOrder\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MetricJetSymmetry\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MetricSecondJetSymmetry\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.SymmetricInverseBounds\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.PositivePerturbation\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateChristoffel\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseDifferential\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- The complete coordinate Lie expression of the actual DeTurck vector has the expected principal term. -/\ntheorem actual_deturck_lie_principal_split (G : E3 → (E3 →L[ℝ] E3))\n    (hG : ContDiff ℝ 2 G)\n    (hsym : ∀ y v w : E3, inner ℝ (G y v) w=inner ℝ v (G y w))\n    (x : E3) (c : ℝ) (hc : 0<c)\n    (hpos : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v) (i j : Fin 3) :\n    let P := fun a : Fin 3 => fderiv ℝ G x (EuclideanSpace.single a 1);\n    let C : Matrix (Fin 3) (Fin 3) ℝ := fun a b => ((G x).inverse (EuclideanSpace.single b 1)) a;\n    let Q := fun a b m n : Fin 3 =>\n      (fderiv ℝ (fun y : E3 => fderiv ℝ G y (EuclideanSpace.single b 1)) x\n        (EuclideanSpace.single a 1) (EuclideanSpace.single n 1)) m;\n    let W : E3 → E3 := fun y => WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y) (fun a : Fin 3 => fderiv ℝ G y (EuclideanSpace.single a 1)) k);\n    coordinateLieMetricExpr G W x i j =\n      (∑ p : Fin 3, ∑ q : Fin 3, C p q*(Q i p j q+Q j p i q-Q i j p q))+\n        deturckLieLowerOrder (G x) P i j :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_deturck_lie_principal_split",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualDeTurckLiePrincipal.lean",
+    "timeout_seconds": 1800
+  },
+  {
+    "depends_on": [
+      "l6-gauge-lie-principal-split",
+      "wsl-principal-residual-recovered-route"
+    ],
+    "hint": "Combine the newly integrated actual_deturck_lie_principal_split with actual_ricci_principal_residual_control. Reuse lower-order bounds and preserve the original quantitative statement. Preserve the exact original theorem statement; only edit marked proof body; run swarm-check.sh.",
+    "id": "l6-gauge-actual-residual",
+    "mathematical_line": "actual-flat-background-deturck-gauge",
+    "model": "luna",
+    "priority": 18,
+    "reasoning_effort": "high",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualDeTurckLiePrincipal\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualRicciPrincipalResidual\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateChristoffel\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseDifferential\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- Actual local Ricci and gauge-Lie coordinate expressions differ from the elliptic principal term only quadratically in first jets.\nThis is a local identity estimate, not an existence theorem or intrinsic tensor identification. -/\ntheorem actual_deturck_coordinate_residual_bound (G : E3 → (E3 →L[ℝ] E3))\n    (hG : ContDiff ℝ 2 G)\n    (hsym : ∀ y v w : E3, inner ℝ (G y v) w=inner ℝ v (G y w))\n    (x : E3) (c : ℝ) (hc : 0<c)\n    (hpos : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v) (i j : Fin 3) :\n    let C : Matrix (Fin 3) (Fin 3) ℝ := fun a b => ((G x).inverse (EuclideanSpace.single b 1)) a;\n    let Q := fun a b m n : Fin 3 =>\n      (fderiv ℝ (fun y : E3 => fderiv ℝ G y (EuclideanSpace.single b 1)) x\n        (EuclideanSpace.single a 1) (EuclideanSpace.single n 1)) m;\n    let W : E3 → E3 := fun y => WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y) (fun a : Fin 3 => fderiv ℝ G y (EuclideanSpace.single a 1)) k);\n    |-2*actualCoordinateRicci G x i j+coordinateLieMetricExpr G W x i j-\n      (∑ p : Fin 3, ∑ q : Fin 3, C p q*Q p q i j)| ≤\n      (1200/c^2)*(∑ l : Fin 3, ‖fderiv ℝ G x (EuclideanSpace.single l 1)‖)^2 :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_deturck_coordinate_residual_bound",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualDeTurckResidual.lean",
+    "timeout_seconds": 1800
+  },
+  {
+    "depends_on": [],
+    "hint": "Continue the supplied source checkpoint, which is NOT verified. Independent compilation found support/finite-support obligations and the final metric constructor unfinished; earlier local smoothness may also require fixes. Finish symmetry, strict positivity, bounded unit ball and smooth section fields, using smooth partition of unity. No HasMetric assumption. You have the preserved proof in this file; do not inspect other attempts. If needed isolate intermediate lemmas inside the marked body. This is a genuine initial metric, not the smoothing theorem or a flow. Preserve the exact original theorem statement; only edit marked proof body; run swarm-check.sh.",
+    "id": "l6-initial-metric-recovery",
+    "mathematical_line": "geometric_trace-actual-initial-metric",
+    "model": "luna",
+    "priority": 15,
+    "reasoning_effort": "max",
+    "source": "import DoCarmoLib.Riemannian.Metric.RiemannianMetric\nimport Mathlib.Geometry.Manifold.PartitionOfUnity\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateChristoffel\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseDifferential\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nopen scoped Manifold Bundle\n/-- Construct an actual initial metric on a compact smooth three-manifold.\nThe existence of the smooth structure is an assumption here, not the smoothing theorem. -/\ntheorem compact_smooth_initial_metric (M : Type*) [TopologicalSpace M]\n    [T2Space M] [SecondCountableTopology M] [CompactSpace M]\n    [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M] :\n    Nonempty (Riemannian.RiemannianMetric (𝓡 3) M) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  classical\n  let V : M → Type _ :=\n    fun x => TangentSpace (𝓡 3) x →L[ℝ] TangentSpace (𝓡 3) x →L[ℝ] ℝ\n  let B : E3 →L[ℝ] E3 →L[ℝ] ℝ := innerSL ℝ\n  have hB_symm : ∀ u v : E3, B u v = B v u := by\n    intro u v\n    change @inner ℝ E3 _ u v = @inner ℝ E3 _ v u\n    exact real_inner_comm _ _\n  have hB_pos : ∀ u : E3, u ≠ 0 → 0 < B u u := by\n    intro u hu\n    change 0 < @inner ℝ E3 _ u u\n    exact real_inner_self_pos.mpr hu\n  have hB_nonneg : ∀ u : E3, 0 ≤ B u u := by\n    intro u\n    change 0 ≤ @inner ℝ E3 _ u u\n    exact real_inner_self_nonneg\n  obtain ⟨ρ, hρ⟩ :=\n    SmoothPartitionOfUnity.exists_isSubordinate_chartAt_source (𝓡 3) M\n  let e (i : M) :=\n    trivializationAt E3 (TangentSpace (𝓡 3) : M → Type _) i\n  let localInner (i x : M) : V x :=\n    if hx : x ∈ (e i).baseSet then\n      ((e i).continuousLinearEquivAt ℝ x hx).symm.arrowCongr\n        (((e i).continuousLinearEquivAt ℝ x hx).symm.arrowCongr\n          (ContinuousLinearEquiv.refl ℝ ℝ)) B\n    else 0\n  have hlocal_apply (i x : M) (hx : x ∈ (e i).baseSet)\n      (u v : TangentSpace (𝓡 3) x) :\n      localInner i x u v =\n        B ((e i).continuousLinearEquivAt ℝ x hx u)\n          ((e i).continuousLinearEquivAt ℝ x hx v) := by\n    simp only [localInner, dif_pos hx]\n    rfl\n  have hlocal_smooth (i : M) :\n      ContMDiffOn (𝓡 3)\n        ((𝓡 3).prod 𝓘(ℝ, E3 →L[ℝ] E3 →L[ℝ] ℝ)) ∞\n        (fun x => Bundle.TotalSpace.mk' (E3 →L[ℝ] E3 →L[ℝ] ℝ) x (localInner i x))\n        (chartAt E3 i).source := by\n    set eT := trivializationAt E3 (TangentSpace (𝓡 3) : M → Type _) i with heT\n    have hchart : eT.baseSet = (chartAt E3 i).source := by\n      simp [eT, TangentBundle.trivializationAt_baseSet]\n    have hbase :\n        (trivializationAt (E3 →L[ℝ] E3 →L[ℝ] ℝ) V i).baseSet = eT.baseSet := by\n      have htriv0 :\n          (trivializationAt ℝ (Bundle.Trivial M ℝ) i) =\n            Bundle.Trivial.trivialization M ℝ :=\n        Bundle.Trivial.eq_trivialization M ℝ _\n      change (trivializationAt (E3 →L[ℝ] E3 →L[ℝ] ℝ) V i).baseSet =\n        (trivializationAt E3 (TangentSpace (𝓡 3) : M → Type _) i).baseSet\n      simp only [hom_trivializationAt_baseSet, ← heT, htriv0,\n        Bundle.Trivial.trivialization, Set.inter_univ, Set.inter_self]\n    rw [← hchart, ← hbase, Bundle.Trivialization.contMDiffOn_section_baseSet_iff]\n    refine (contMDiffOn_const (c := B)).congr ?_\n    intro y hy\n    rw [hbase] at hy\n    refine ContinuousLinearMap.ext fun a => ContinuousLinearMap.ext fun b => ?_\n    simp only [hom_trivializationAt_apply, ContinuousLinearMap.inCoordinates,\n      ContinuousLinearMap.comp_apply]\n    have hy₂ :\n        y ∈ (trivializationAt (E3 →L[ℝ] ℝ)\n          (fun x => TangentSpace (𝓡 3) x →L[ℝ] ℝ) i).baseSet := by\n      rw [hom_trivializationAt_baseSet]\n      exact ⟨hy, Set.mem_univ y⟩\n    rw [Bundle.Trivialization.continuousLinearMapAt_apply_of_mem ℝ\n      (trivializationAt (E3 →L[ℝ] ℝ)\n        (fun x => TangentSpace (𝓡 3) x →L[ℝ] ℝ) i) hy₂]\n    simp only [hom_trivializationAt_apply, ContinuousLinearMap.inCoordinates,\n      ContinuousLinearMap.comp_apply, ← heT]\n    have htriv :\n        (trivializationAt ℝ (Bundle.Trivial M ℝ) i) =\n          Bundle.Trivial.trivialization M ℝ :=\n      Bundle.Trivial.eq_trivialization M ℝ _\n    have hy' : y ∈ (e i).baseSet := by\n      simpa [eT, e] using hy\n    have hei : e i = eT := by\n      simp [eT, e]\n    simp only [htriv, Bundle.Trivial.continuousLinearMapAt_trivialization,\n      ContinuousLinearMap.id_apply, hei, hlocal_apply i y hy',\n      ← Bundle.Trivialization.symm_continuousLinearEquivAt_eq' eT hy,\n      ContinuousLinearEquiv.coe_coe, ContinuousLinearEquiv.apply_symm_apply]\n  let inner : (x : M) → V x := fun x => ∑ᶠ i, (ρ i x) • localInner i x\n  have hweighted (i : M) :\n      ContMDiff (𝓡 3)\n        ((𝓡 3).prod 𝓘(ℝ, E3 →L[ℝ] E3 →L[ℝ] ℝ)) ∞\n        (fun x => Bundle.TotalSpace.mk' (E3 →L[ℝ] E3 →L[ℝ] ℝ) x\n          ((ρ i x) • localInner i x)) := by\n    refine ContMDiffOn.smul_section_of_tsupport\n      ((ρ i).contMDiff.contMDiffOn) (chartAt E3 i).open_source (hρ i)\n      (hlocal_smooth i)\n  have hweighted_locallyFinite :\n      LocallyFinite (fun i : M => {x : M | (ρ i x) • localInner i x ≠ 0}) := by\n    apply ρ.locallyFinite.subset\n    intro i x hx\n    rw [support]\n    rw [mem_setOf_eq] at hx ⊢\n    exact left_ne_zero_of_smul hx\n  have hinner_smooth :\n      ContMDiff (𝓡 3)\n        ((𝓡 3).prod 𝓘(ℝ, E3 →L[ℝ] E3 →L[ℝ] ℝ)) ∞\n        (fun x => Bundle.TotalSpace.mk' (E3 →L[ℝ] E3 →L[ℝ] ℝ) x (inner x)) := by\n    apply ContMDiff.finsum_section_of_locallyFinite hweighted_locallyFinite\n    intro i\n    simpa [inner] using hweighted i\n  have inner_apply (x : M) (u v : TangentSpace (𝓡 3) x) :\n      inner x u v = ∑ᶠ i, (ρ i x) * localInner i x u v := by\n    change (∑ᶠ i, (ρ i x) • localInner i x) u v = _\n    rw [← ρ.sum_finsupport_smul_eq_finsum (x₀ := x)\n      (fun i _y => localInner i x)]\n    simpa [smul_eq_mul] using\n      (ρ.sum_finsupport_smul_eq_finsum (x₀ := x)\n        (fun i _y => localInner i x u v))\n  have hlocal_nonneg (i x : M) (v : TangentSpace (𝓡 3) x) :\n      0 ≤ localInner i x v v := by\n    by_cases hx : x ∈ (e i).baseSet\n    · rw [hlocal_apply i x hx v v]\n      exact hB_nonneg _\n    · simp [localInner, hx]\n  have hlocal_symm (i x : M) (v w : TangentSpace (𝓡 3) x) :\n      localInner i x v w = localInner i x w v := by\n    by_cases hx : x ∈ (e i).baseSet\n    · rw [hlocal_apply i x hx v w, hlocal_apply i x hx w v]\n      exact hB_symm _ _\n    · simp [localInner, hx]\n  have hlocal_pos (i x : M) (hx : x ∈ (e i).baseSet)\n      (v : TangentSpace (𝓡 3) x) (hv : v ≠ 0) :\n      0 < localInner i x v v := by\n    rw [hlocal_apply i x hx v v]\n    apply hB_pos\n    intro hzero\n    apply hv\n    apply ((e i).continuousLinearEquivAt ℝ x hx).injective\n    rw [map_zero]\n    exact hzero\n  have hfinite (x : M) (u v : TangentSpace (𝓡 3) x) :\n      HasFiniteSupport (fun i : M => (ρ i x) * localInner i x u v) := by\n    apply (ρ.locallyFinite.point_finite x).subset\n    intro i hi\n    rw [mem_setOf_eq] at hi\n    rw [mem_support] at hi ⊢\n    exact left_ne_zero_of_mul hi\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "target_name": "MorganTianLib.MetricCoefficient.compact_smooth_initial_metric",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CompactInitialMetric.lean",
+    "timeout_seconds": 1800
+  }
+]

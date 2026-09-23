@@ -1,0 +1,75 @@
+[
+  {
+    "id": "l6-chart-operator-smooth-onE",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartOperatorEuclideanSmooth.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.chart_operator_contDiffAt",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartCoefficientOperator\nimport DoCarmoLib.Riemannian.Connection.ChartChristoffelSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** Smoothness of the actual coefficient operator in Euclidean chart coordinates. -/\ntheorem chart_operator_contDiffAt {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (y : E3)\n    (hy : y ∈ (extChartAt (𝓡 3) a).target) :\n    ContDiffAt ℝ ∞ (fun z : E3 => chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm z) e) y :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "priority": 23,
+    "timeout_seconds": 1800,
+    "mathematical_line": "actual-chart-jet-geometric-identification",
+    "hint": "Apply Riemannian.chartGramOnE_contDiffOn entrywise on the open target, then the continuous linear map Matrix.toEuclideanCLM. Avoid confusing manifold ContMDiff with the ordinary ContDiff required by PDE modules. The target is open because the model is boundaryless. Preserve every statement and the public V1 contract; only edit the marked body. No extra axioms, hypotheses, agents, cache modifications or resource overrides. Run swarm-check.sh. Local tensor identification is not global Ricci-flow existence."
+  },
+  {
+    "id": "l6-matrix-operator-derivative",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/MatrixOperatorDerivative.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.matrix_operator_fderiv",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** Differentiate matrix-to-operator conversion entrywise. -/\ntheorem matrix_operator_fderiv (F : E3 → Matrix (Fin 3) (Fin 3) ℝ)\n    (x v : E3) (hF : DifferentiableAt ℝ F x) :\n    fderiv ℝ (fun y : E3 => Matrix.toEuclideanCLM (n := Fin 3) (𝕜 := ℝ) (F y)) x v =\n      Matrix.toEuclideanCLM (n := Fin 3) (𝕜 := ℝ)\n        (fun i j : Fin 3 => fderiv ℝ (fun y : E3 => F y i j) x v) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "priority": 23,
+    "timeout_seconds": 1800,
+    "mathematical_line": "actual-chart-jet-geometric-identification",
+    "hint": "Treat Matrix.toEuclideanCLM as a continuous linear map using its toAlgEquiv.toLinearEquiv.toLinearMap and LinearMap.toContinuousLinearMap. Combine the chain rule with fderiv_pi; do not expand matrix entries numerically. Preserve every statement and the public V1 contract; only edit the marked body. No extra axioms, hypotheses, agents, cache modifications or resource overrides. Run swarm-check.sh. Local tensor identification is not global Ricci-flow existence."
+  },
+  {
+    "id": "l6-chart-partial-actual-derivative",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartPartialActualDerivative.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.chart_partial_eq_actual_fderiv",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartChristoffelIdentification\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartOperatorEuclideanSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MatrixOperatorDerivative\nimport DoCarmoLib.Riemannian.Connection.ChartChristoffelSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** The geometric chart jet is the genuine directional derivative of the coefficient operator. -/\ntheorem chart_partial_eq_actual_fderiv {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (y : E3)\n    (hy : y ∈ (extChartAt (𝓡 3) a).target) (r : Fin 3) :\n    chartCoefficientPartial g a y e r =\n      fderiv ℝ (fun z : E3 => chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm z) e) y (Module.finBasis ℝ E3 (e r)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "l6-chart-operator-smooth-onE",
+      "l6-matrix-operator-derivative"
+    ],
+    "priority": 23,
+    "timeout_seconds": 1800,
+    "mathematical_line": "actual-chart-jet-geometric-identification",
+    "hint": "Unfold chartCoefficientPartial, Riemannian.partialDeriv and Riemannian.chartGramOnE. Apply matrix_operator_fderiv to the reindexed Gram matrix; derive differentiability entrywise from chartGramOnE_contDiffOn. Directions must be Module.finBasis, NOT EuclideanSpace.single. Preserve every statement and the public V1 contract; only edit the marked body. No extra axioms, hypotheses, agents, cache modifications or resource overrides. Run swarm-check.sh. Local tensor identification is not global Ricci-flow existence."
+  },
+  {
+    "id": "l6-reparametrized-actual-christoffel",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ReparametrizedActualChristoffel.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.reparametrized_actual_christoffel",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartPartialActualDerivative\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartChristoffelIdentification\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartOperatorEuclideanSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** Actual PDE Christoffel coefficients agree with the geometric chart coefficients after a fixed frame reparametrization. -/\ntheorem reparametrized_actual_christoffel {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) (k i j : Fin 3) :\n    let G : E3 → (E3 →L[ℝ] E3) := fun z =>\n      chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm (B z)) e;\n    coordinateChristoffel (G x)\n      (fun r : Fin 3 => fderiv ℝ G x (EuclideanSpace.single r 1)) k i j =\n      Riemannian.chartChristoffel g a (e i) (e j) (e k) (B x) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "l6-chart-partial-actual-derivative"
+    ],
+    "priority": 23,
+    "timeout_seconds": 1800,
+    "mathematical_line": "actual-chart-jet-geometric-identification",
+    "hint": "Apply the ordinary chain rule for the constant continuous linear equivalence B. Use hB to convert each actual coordinate derivative to chartCoefficientPartial, then coordinate_christoffel_eq_geometric_chart. Obtain its base-set hypothesis from extChartAt.map_target hx. Do not identify the two different bases without B. Preserve every statement and the public V1 contract; only edit the marked body. No extra axioms, hypotheses, agents, cache modifications or resource overrides. Run swarm-check.sh. Local tensor identification is not global Ricci-flow existence."
+  },
+  {
+    "id": "l6-actual-connection-geometric-frame",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualConnectionGeometricFrame.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_connection_geometric_frame",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ReparametrizedActualChristoffel\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateConnectionVector\nimport MorganTianLib.Ch01.ChartCurvature\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n/-- **Math.** Actual metric-derivative connection vectors match the geometric connection after frame transport. -/\ntheorem actual_connection_geometric_frame {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) (X Y : E3) :\n    let G : E3 → (E3 →L[ℝ] E3) := fun z =>\n      chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm (B z)) e;\n    B (connectionVector (G x)\n      (fun r : Fin 3 => fderiv ℝ G x (EuclideanSpace.single r 1)) X Y) =\n      MorganTianLib.chartChristoffelBilin g a (B x) (B X) (B Y) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "l6-reparametrized-actual-christoffel",
+      "conn-vector-bilinear"
+    ],
+    "priority": 23,
+    "timeout_seconds": 1800,
+    "mathematical_line": "actual-chart-jet-geometric-identification",
+    "hint": "Use reparametrized_actual_christoffel and expand B X and B Y in the standard Euclidean basis using hB. The geometric chartChristoffelBilin is bilinear in Module.finBasis coordinates. Reindex finite sums using e; group sums symbolically. Unlike the older frame lemma, this theorem uses actual fderiv of a reparametrized metric, not supplied symbolic jets. Preserve every statement and the public V1 contract; only edit the marked body. No extra axioms, hypotheses, agents, cache modifications or resource overrides. Run swarm-check.sh. Local tensor identification is not global Ricci-flow existence."
+  }
+]

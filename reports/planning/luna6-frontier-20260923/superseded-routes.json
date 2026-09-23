@@ -1,0 +1,8 @@
+{
+  "conn-actual-metric-product-rule": "l6-actual-metric-product-rule",
+  "conn-metric-trilinear-reduction": "l6-connection-metric-trilinear",
+  "conn-metric-product-trilinear-route": "l6-actual-metric-product-rule",
+  "gauge-lie-principal-split": "l6-gauge-lie-principal-split",
+  "gauge-actual-deturck-residual": "l6-gauge-actual-residual",
+  "wsl-initial-riemannian-metric": "l6-initial-metric-recovery"
+}
