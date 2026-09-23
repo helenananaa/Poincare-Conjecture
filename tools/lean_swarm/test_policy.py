@@ -9,7 +9,7 @@ from policy import ALLOWED_EFFORTS, LUNA_MODEL, parse_limit, resolve_effort
 
 class PolicyTests(unittest.TestCase):
     def test_exports_and_limit_sentinels(self) -> None:
-        self.assertEqual(LUNA_MODEL, "gpt-5.6-luna")
+        self.assertEqual(LUNA_MODEL, "gpt-6-luna")
         self.assertEqual(ALLOWED_EFFORTS, {"high", "xhigh", "max"})
         for value in (None, 0, "0", "none", "unlimited", "NONE"):
             self.assertEqual(parse_limit(value), 0)

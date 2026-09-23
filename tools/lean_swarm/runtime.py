@@ -15,7 +15,7 @@ except ImportError:  # pragma: no cover - package-style imports in downstream ca
     from . import resources as _resources
 
 
-_LOCAL_LUNA_MODEL = 'gpt-5.6-luna'
+_LOCAL_LUNA_MODEL = 'gpt-6-luna'
 _EFFORTS = frozenset(('high', 'xhigh', 'max'))
 _DEFAULT_LEAN_OPTIONS = ('-j2', '-DmaxHeartbeats=800000')
 _FORBIDDEN_LEAN_OPTION = re.compile(

@@ -1,8 +1,8 @@
 # Proof project operating rules
 
-## Model policy — latest user instruction, 2026-09-20
+## Model policy — latest user instruction, 2026-09-23
 
-- Default provider is Codex, with exact model `gpt-5.6-luna` only.
+- Default provider is Codex, with exact model `gpt-6-luna` only.
 - Explicitly pass both the model and reasoning effort on every invocation.
 - Allowed reasoning efforts: `high`, `xhigh`, `max`. Never select lower levels.
 - Use high for integration repairs, xhigh for substantial proofs, max for hard foundations.

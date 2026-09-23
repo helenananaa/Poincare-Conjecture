@@ -16,7 +16,8 @@ Public API
 
 ``import_batch(project_id, batch_root, depends_on=None) -> list[dict]``
     Adopt the records in ``batch_root/tasks.json``.  The accepted model
-    spellings are ``luna``/``grok`` and ``gpt-5.6-luna``/``grok-4.6``;
+    spellings are ``luna``/``grok`` and ``gpt-6-luna``/``grok-4.6``;
+    historical ``gpt-5.6-luna`` records remain readable;
     the latter are normalized to the former.  Effort must be one of
     ``high``, ``xhigh``, or ``max``.  Re-importing
     the same ``(batch_root, task_id)`` returns the frozen existing row and
@@ -103,6 +104,7 @@ MODELS = frozenset({"luna", "grok"})
 EFFORTS = frozenset({"high", "xhigh", "max"})
 _MODEL_ALIASES = {
     "luna": "luna",
+    "gpt-6-luna": "luna",
     "gpt-5.6-luna": "luna",
     "grok": "grok",
     "grok-4.6": "grok",
@@ -344,7 +346,7 @@ class ResearchQueue:
     @staticmethod
     def _model(value: Any) -> str:
         if not isinstance(value, str) or value not in _MODEL_ALIASES:
-            raise ValueError("research model must be luna/grok or gpt-5.6-luna/grok-4.6")
+            raise ValueError("research model must be luna/grok or gpt-6-luna/grok-4.6 (legacy gpt-5.6-luna is read-only compatible)")
         return _MODEL_ALIASES[value]
 
     @staticmethod

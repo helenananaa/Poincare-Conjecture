@@ -61,7 +61,7 @@ class FrozenProofTests(unittest.TestCase):
             root = Path(directory); prompt = root/'prompt'; prompt.write_text('proof')
             for effort in ('high', 'xhigh', 'max'):
                 logdir = root/effort; logdir.mkdir()
-                spec = {'model': 'luna', 'luna_model': 'gpt-5.6-luna',
+                spec = {'model': 'luna', 'luna_model': 'gpt-6-luna',
                         'luna_reasoning_effort': effort, 'codex': '/bin/false',
                         'cwd': str(root), 'logdir': str(logdir),
                         'prompt_file': str(prompt), 'home': str(root),

@@ -6,7 +6,7 @@ import re
 from typing import Any
 
 
-LUNA_MODEL = "gpt-5.6-luna"
+LUNA_MODEL = "gpt-6-luna"
 ALLOWED_EFFORTS = frozenset(("high", "xhigh", "max"))
 SQLITE_MAX_INTEGER = 2**63 - 1
 

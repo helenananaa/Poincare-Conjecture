@@ -1,6 +1,6 @@
 # Lean Swarm：依赖驱动的证明流水线
 
-默认使用 gpt-5.6-luna，并显式选择 high、xhigh 或 max。历史 Grok 记录保留，但当前额度策略暂停新的 Grok 任务，不自动回退其他模型。
+默认使用 gpt-6-luna，并显式选择 high、xhigh 或 max。历史 Grok 记录保留，但当前额度策略暂停新的 Grok 任务，不自动回退其他模型。
 
 ## 并行与资源
 
@@ -33,7 +33,7 @@ python3 tools/lean_swarm/cli.py run PROJECT --jobs unlimited --integrate
 python3 tools/lean_swarm/status_report.py --project PROJECT
 ```
 
-本机配置包含 repo、integration_branch、package_dir、lean_bin、lean_path、mathlib_source、codex、grok；luna_model 必须等于 gpt-5.6-luna。模型认证文件只留在本机，不上传仓库。使用固定工具链和已验证基线，不自动清缓存或升级依赖。
+本机配置包含 repo、integration_branch、package_dir、lean_bin、lean_path、mathlib_source、codex、grok；luna_model 必须等于 gpt-6-luna。模型认证文件只留在本机，不上传仓库。使用固定工具链和已验证基线，不自动清缓存或升级依赖。
 
 任务卡字段保留 id、source、target_path、target_name、depends_on；source 只允许 SWARM_PROOF_BEGIN/END 之间的证明体由工人编辑。省略 model 默认 luna。可显式指定 reasoning_effort，或 difficulty 为 integration/proof/foundation，分别选 high/xhigh/max。无效模型或档位直接失败，不回退。
 
