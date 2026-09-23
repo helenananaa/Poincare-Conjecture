@@ -19,6 +19,18 @@ theorem compact_smooth_initial_metric (M : Type*) [TopologicalSpace M]
 /- SWARM_PROOF_BEGIN -/
 by
   classical
+  letI : ∀ x : M, AddCommGroup (TangentSpace (𝓡 3) x) := fun x => inferInstance
+  letI : ∀ x : M, Module ℝ (TangentSpace (𝓡 3) x) := fun x => inferInstance
+  letI : ∀ x : M, IsTopologicalAddGroup (TangentSpace (𝓡 3) x) := fun x => inferInstance
+  letI : ∀ x : M, ContinuousSMul ℝ (TangentSpace (𝓡 3) x) := fun x => inferInstance
+  letI : ∀ x : M, AddCommGroup (TangentSpace (𝓡 3) x →L[ℝ] ℝ) := fun x => inferInstance
+  letI : ∀ x : M, Module ℝ (TangentSpace (𝓡 3) x →L[ℝ] ℝ) := fun x => inferInstance
+  letI : ∀ x : M, IsTopologicalAddGroup (TangentSpace (𝓡 3) x →L[ℝ] ℝ) := fun x => inferInstance
+  letI : ∀ x : M, ContinuousSMul ℝ (TangentSpace (𝓡 3) x →L[ℝ] ℝ) := fun x => inferInstance
+  letI : ∀ x : M, AddCommGroup (TangentSpace (𝓡 3) x →L[ℝ] TangentSpace (𝓡 3) x →L[ℝ] ℝ) := fun x => inferInstance
+  letI : ∀ x : M, Module ℝ (TangentSpace (𝓡 3) x →L[ℝ] TangentSpace (𝓡 3) x →L[ℝ] ℝ) := fun x => inferInstance
+  letI : ∀ x : M, IsTopologicalAddGroup (TangentSpace (𝓡 3) x →L[ℝ] TangentSpace (𝓡 3) x →L[ℝ] ℝ) := fun x => inferInstance
+  letI : ∀ x : M, ContinuousSMul ℝ (TangentSpace (𝓡 3) x →L[ℝ] TangentSpace (𝓡 3) x →L[ℝ] ℝ) := fun x => inferInstance
   let V : M → Type _ :=
     fun x => TangentSpace (𝓡 3) x →L[ℝ] TangentSpace (𝓡 3) x →L[ℝ] ℝ
   let B : E3 →L[ℝ] E3 →L[ℝ] ℝ := innerSL ℝ
