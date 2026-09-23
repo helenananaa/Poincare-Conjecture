@@ -21,6 +21,10 @@ theorem chart_curvature_coefficient_sign {M : Type*} [TopologicalSpace M] [Chart
 /- SWARM_PROOF_BEGIN -/
 by
   classical
+  letI : NormedAddCommGroup (E3 →L[ℝ] E3) := inferInstance
+  letI : NormedSpace ℝ (E3 →L[ℝ] E3) := inferInstance
+  letI : NormedAddCommGroup (E3 →L[ℝ] E3 →L[ℝ] E3) := inferInstance
+  letI : NormedSpace ℝ (E3 →L[ℝ] E3 →L[ℝ] E3) := inferInstance
   haveI : Nontrivial E3 := inferInstance
   haveI : NeZero (Module.finrank ℝ E3) :=
     ⟨Nat.ne_of_gt Module.finrank_pos⟩
