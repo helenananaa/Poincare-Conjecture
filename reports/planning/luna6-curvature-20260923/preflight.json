@@ -1,0 +1,22 @@
+{
+  "purpose": "declaration-only preflight; admitted temporary objects are not proofs",
+  "passed": [
+    "c6-bilinear-realization",
+    "c6-bilinear-evaluation-derivative",
+    "c6-curvature-naturality",
+    "c6-metric-jet-germ",
+    "c6-chart-symmetry",
+    "c6-lowered-gauge-smooth",
+    "c6-exact-nonlinearity",
+    "c6-curvature-components",
+    "c6-connection-differentiable",
+    "c6-chart-connection-germ",
+    "c6-gauge-lower-smooth",
+    "c6-actual-ricci-trace",
+    "c6-chart-curvature",
+    "c6-nonlinearity-local-control",
+    "c6-chart-ricci"
+  ],
+  "failed": [],
+  "blocked": []
+}

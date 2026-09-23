@@ -1,0 +1,213 @@
+[
+  {
+    "id": "c6-bilinear-realization",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoefficientConnectionBilin.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.coefficient_connection_bilin_apply",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateConnectionVector\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\ndef coefficientConnectionBilin (A : E3 →L[ℝ] E3)\n    (P : Fin 3 → E3 →L[ℝ] E3) : E3 →L[ℝ] E3 →L[ℝ] E3 :=\n  ∑ i : Fin 3, ∑ j : Fin 3, ∑ k : Fin 3,\n    (EuclideanSpace.proj (𝕜 := ℝ) i).smulRight\n      ((EuclideanSpace.proj (𝕜 := ℝ) j).smulRight\n        (coordinateChristoffel A P k i j • EuclideanSpace.single k 1))\n\n/-- **Math.** coefficient connection bilin apply. -/\ntheorem coefficient_connection_bilin_apply (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3) (X Y : E3) :\n    coefficientConnectionBilin A P X Y = connectionVector A P X Y :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Expand the finite sum, project to each coordinate, and use basis single delta sums. No positivity is needed for this algebraic packaging. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-bilinear-evaluation-derivative",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BilinearEvaluationDerivative.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.bilinear_evaluation_fderiv",
+    "source": "import MorganTianLib.Ch01.CurvatureCommutation\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** bilinear evaluation fderiv. -/\ntheorem bilinear_evaluation_fderiv (Γ : E3 → E3 →L[ℝ] E3 →L[ℝ] E3) (x v X Y : E3)\n    (hΓ : DifferentiableAt ℝ Γ x) (k : Fin 3) :\n    fderiv ℝ (fun y : E3 => (Γ y X Y) k) x v = (fderiv ℝ Γ x v X Y) k :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Compose the Frechet derivative with two constant-vector continuous-linear evaluations and EuclideanSpace.proj. Keep argument orders explicit. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-curvature-components",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CurvatureCoordinateComponents.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.curvature_coordinate_components",
+    "source": "import MorganTianLib.Ch01.CurvatureCommutation\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BilinearEvaluationDerivative\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** curvature coordinate components. -/\ntheorem curvature_coordinate_components (Γ : E3 → E3 →L[ℝ] E3 →L[ℝ] E3) (x : E3)\n    (hΓ : DifferentiableAt ℝ Γ x) (i j l k : Fin 3) :\n    let e := fun a : Fin 3 => EuclideanSpace.single a (1 : ℝ);\n    (MorganTianLib.christoffelCurvature Γ x (e i) (e j) (e l)) k =\n      fderiv ℝ (fun y : E3 => (Γ y (e j) (e l)) k) x (e i) -\n      fderiv ℝ (fun y : E3 => (Γ y (e i) (e l)) k) x (e j) +\n      ∑ m : Fin 3, ((Γ x (e i) (e m)) k * (Γ x (e j) (e l)) m -\n        (Γ x (e j) (e m)) k * (Γ x (e i) (e l)) m) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "c6-bilinear-evaluation-derivative"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use the evaluation derivative lemma and expand only the inner connection vector in the Euclidean basis. Do not expand Fin 3 into large ring expressions. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-curvature-naturality",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CurvatureLinearNaturality.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.curvature_linear_naturality",
+    "source": "import MorganTianLib.Ch01.CurvatureCommutation\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** curvature linear naturality. -/\ntheorem curvature_linear_naturality (Γ Γ₂ : E3 → E3 →L[ℝ] E3 →L[ℝ] E3) (B : E3 ≃L[ℝ] E3)\n    (x : E3) (hΓ : DifferentiableAt ℝ Γ x) (hΓ₂ : DifferentiableAt ℝ Γ₂ (B x))\n    (hrel : ∀ᶠ y : E3 in 𝓝 x, ∀ U V : E3, B (Γ y U V) = Γ₂ (B y) (B U) (B V))\n    (X Y Z : E3) :\n    B (MorganTianLib.christoffelCurvature Γ x X Y Z) =\n      MorganTianLib.christoffelCurvature Γ₂ (B x) (B X) (B Y) (B Z) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Differentiate the eventual equality for fixed U,V with respect to y, in each needed direction. Apply chain rule for B and Γ₂, then use the value equality at x for both nested connection terms. The linear frame is constant; no nonlinear chart-change second derivative is needed. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-connection-differentiable",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoefficientConnectionDifferentiable.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.coefficient_connection_differentiable",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoefficientConnectionBilin\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateChristoffelSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** coefficient connection differentiable. -/\ntheorem coefficient_connection_differentiable (G : E3 → (E3 →L[ℝ] E3)) (x : E3) (hG : ContDiffAt ℝ 2 G x)\n    (c : ℝ) (hc : 0 < c) (hpos : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v) :\n    DifferentiableAt ℝ (fun y : E3 => coefficientConnectionBilin (G y)\n      (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1))) x :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "c6-bilinear-realization"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "The joint input (G, first derivative jets) is differentiable from ContDiffAt 2. Compose coordinate_christoffel_smooth and sum smulRight constants. Do not assume global differentiability. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-metric-jet-germ",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/MetricJetGermSymmetry.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.metric_jet_selfadjoint_of_eventually",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MetricJetSymmetry\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** metric jet selfadjoint of eventually. -/\ntheorem metric_jet_selfadjoint_of_eventually (G : E3 → (E3 →L[ℝ] E3)) (x : E3) (hG : DifferentiableAt ℝ G x)\n    (hsym : ∀ᶠ y : E3 in 𝓝 x, ∀ v w : E3, inner ℝ (G y v) w = inner ℝ v (G y w)) :\n    ∀ h v w : E3, inner ℝ (fderiv ℝ G x h v) w = inner ℝ v (fderiv ℝ G x h w) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Localize metric_jet_selfadjoint: equality of scalar functions is eventual rather than global. Use EventuallyEq.fderiv_eq and evaluate the two inner-product derivatives. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-actual-ricci-trace",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualRicciCurvatureTrace.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_ricci_eq_curvature_trace",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualCoordinateRicci\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoefficientConnectionDifferentiable\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CurvatureCoordinateComponents\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MetricJetGermSymmetry\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LocalMetricCoercivity\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** actual ricci eq curvature trace. -/\ntheorem actual_ricci_eq_curvature_trace (G : E3 → (E3 →L[ℝ] E3)) (x : E3) (hG : ContDiffAt ℝ 2 G x)\n    (hsym : ∀ᶠ y : E3 in 𝓝 x, ∀ v w : E3, inner ℝ (G y v) w = inner ℝ v (G y w))\n    (c : ℝ) (hc : 0 < c) (hpos : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v)\n    (i j : Fin 3) :\n    let Γ := fun y : E3 => coefficientConnectionBilin (G y)\n      (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1));\n    actualCoordinateRicci G x i j = ∑ k : Fin 3,\n      (MorganTianLib.christoffelCurvature Γ x (EuclideanSpace.single k 1)\n        (EuclideanSpace.single j 1) (EuclideanSpace.single i 1)) k :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "c6-connection-differentiable",
+      "c6-curvature-components",
+      "c6-metric-jet-germ",
+      "l6-local-coercivity"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use ContDiffAt 2 to obtain an eventual C1 neighborhood, and local coercivity and symmetry there. coordinate_metric_compatibility gives torsion symmetry in that neighborhood, so derivatives of the swapped lower-index coefficients agree. Use coefficient_connection_bilin_apply and basis delta sums to identify coefficients; compare actual derivatives and quadraticRicciProduct with curvature_coordinate_components. Preserve the sign R(e_k,e_j)e_i and the coordinate trace; no metric inverse enters this trace. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-chart-symmetry",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartOperatorSymmetry.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.chart_operator_selfadjoint",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartCoefficientOperator\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** chart operator selfadjoint. -/\ntheorem chart_operator_selfadjoint {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a x : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (v w : E3) :\n    inner ℝ (chartCoefficientOperator g a x e v) w =\n      inner ℝ v (chartCoefficientOperator g a x e w) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use chartGramMatrix_isHermitian, which holds without membership in the chart. Transport the star equality through Matrix.toEuclideanCLM. This removes a needless positivity/domain premise from just the symmetry statement. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-chart-connection-germ",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartConnectionGerm.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.chart_connection_germ",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualConnectionGeometricFrame\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoefficientConnectionBilin\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** chart connection germ. -/\ntheorem chart_connection_germ {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) :\n    let G : E3 → (E3 →L[ℝ] E3) := fun z =>\n      chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm (B z)) e;\n    let Γ := fun y : E3 => coefficientConnectionBilin (G y)\n      (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1));\n    ∀ᶠ y : E3 in 𝓝 x, ∀ U V : E3, B (Γ y U V) =\n      MorganTianLib.chartChristoffelBilin g a (B y) (B U) (B V) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "l6-actual-connection-geometric-frame",
+      "c6-bilinear-realization"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use openness of extChartAt target and continuity of B to stay within the domain. Then consume actual_connection_geometric_frame and coefficient_connection_bilin_apply pointwise. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-chart-curvature",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualChartCurvature.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_chart_curvature_transport",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartConnectionGerm\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoefficientConnectionDifferentiable\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CurvatureLinearNaturality\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartOperatorEuclideanSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** actual chart curvature transport. -/\ntheorem actual_chart_curvature_transport {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) (X Y Z : E3) :\n    let G : E3 → (E3 →L[ℝ] E3) := fun z =>\n      chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm (B z)) e;\n    let Γ := fun y : E3 => coefficientConnectionBilin (G y)\n      (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1));\n    B (MorganTianLib.christoffelCurvature Γ x X Y Z) =\n      MorganTianLib.chartCurvature g a (B x) (B X) (B Y) (B Z) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "c6-chart-connection-germ",
+      "c6-connection-differentiable",
+      "c6-curvature-naturality",
+      "l6-chart-operator-smooth-onE"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Derive local smoothness of G via chart_operator_contDiffAt composed with B; obtain coercivity from chart_coefficient_coercivity. Invoke curvature_linear_naturality with chart_connection_germ; use differentiableAt_chartChristoffelBilin on the open chart target. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-chart-ricci",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualChartRicci.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_chart_ricci_contraction",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualChartCurvature\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualRicciCurvatureTrace\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartOperatorSymmetry\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** actual chart ricci contraction. -/\ntheorem actual_chart_ricci_contraction {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) (i j : Fin 3) :\n    let G : E3 → (E3 →L[ℝ] E3) := fun z =>\n      chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm (B z)) e;\n    actualCoordinateRicci G x i j = ∑ k : Fin 3,\n      (B.symm (MorganTianLib.chartCurvature g a (B x) (B (EuclideanSpace.single k 1))\n        (B (EuclideanSpace.single j 1)) (B (EuclideanSpace.single i 1)))) k :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "c6-chart-curvature",
+      "c6-actual-ricci-trace",
+      "c6-chart-symmetry"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Combine actual_ricci_eq_curvature_trace and actual_chart_curvature_transport. Establish C2 at x, local symmetry, and positivity from actual chart data, not new hypotheses. This identifies coordinate Ricci with chart curvature contraction; an intrinsic tensor API bridge remains separate. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-lowered-gauge-smooth",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LoweredGaugeJetSmooth.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.lowered_gauge_jet_smooth",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LoweredGaugeJet\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseDifferential\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** lowered gauge jet smooth. -/\ntheorem lowered_gauge_jet_smooth (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (r j : Fin 3) :\n    ContDiffAt ℝ ∞ (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n      loweredGaugeJet q.1 q.2 r j) (A,P) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Inverse is smooth from coercive_inverse_differential; bilinear composition and finite scalar sums/products preserve smoothness. Search clm_comp and clm_apply APIs; do not expand giant sums. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-gauge-lower-smooth",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DeTurckLieLowerSmooth.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.deturck_lie_lower_order_smooth",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LoweredGaugeJetSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckLieLowerOrder\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckGaugeSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** deturck lie lower order smooth. -/\ntheorem deturck_lie_lower_order_smooth (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (i j : Fin 3) :\n    ContDiffAt ℝ ∞ (fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n      deturckLieLowerOrder q.1 q.2 i j) (A,P) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "c6-lowered-gauge-smooth",
+      "gauge-coefficients-smooth"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Consume lowered_gauge_jet_smooth and project coordinate_deturck_gauge_smooth to each coordinate; combine the actual displayed polynomial terms. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-nonlinearity-local-control",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DeTurckNonlinearityLocalControl.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.deturck_nonlinearity_local_control",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckLieLowerSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.RicciLowerLocalControl\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** deturck nonlinearity local control. -/\ntheorem deturck_nonlinearity_local_control (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (i j : Fin 3) :\n    let F := fun q : (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3) =>\n      -2*ricciLowerOrder q.1 q.2 i j + deturckLieLowerOrder q.1 q.2 i j;\n    ContDiffAt ℝ ∞ F (A,P) ∧ ∃ r K : ℝ, 0 < r ∧ 0 < K ∧\n      ∀ q z, ‖q-(A,P)‖ < r → ‖z-(A,P)‖ < r → |F q-F z| ≤ K*‖q-z‖ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "c6-gauge-lower-smooth",
+      "wsl-lower-order-local-control"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Combine Ricci and gauge smoothness, then use ContDiffAt.exists_lipschitzOnWith on a neighborhood; extract positive radius and K. Do not confuse pointwise quadratic size control with Lipschitz control. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  },
+  {
+    "id": "c6-exact-nonlinearity",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 22,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualDeTurckEquationSplit.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_deturck_equation_split",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualDeTurckLiePrincipal\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualCoordinateRicci\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualMetricPrincipalJet\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** actual deturck equation split. -/\ntheorem actual_deturck_equation_split (G : E3 → (E3 →L[ℝ] E3)) (hG : ContDiff ℝ 2 G)\n    (hsym : ∀ y v w : E3, inner ℝ (G y v) w = inner ℝ v (G y w))\n    (x : E3) (c : ℝ) (hc : 0 < c)\n    (hpos : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v) (i j : Fin 3) :\n    let P := fun r : Fin 3 => fderiv ℝ G x (EuclideanSpace.single r 1);\n    let W : E3 → E3 := fun y => WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y) (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1)) k);\n    -2*actualCoordinateRicci G x i j + coordinateLieMetricExpr G W x i j =\n      (∑ p : Fin 3, ∑ q : Fin 3, ((G x).inverse (EuclideanSpace.single q 1)) p *\n        (fderiv ℝ (fun y : E3 => fderiv ℝ G y (EuclideanSpace.single q 1)) x\n          (EuclideanSpace.single p 1) (EuclideanSpace.single j 1)) i) +\n      (-2*ricciLowerOrder (G x) P i j + deturckLieLowerOrder (G x) P i j) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "l6-gauge-lie-principal-split",
+      "wsl-actual-ricci-recovered-route",
+      "wsl-actual-principal-jet-syntax-repair"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Combine the two exact decompositions and actual_metric_principal_jet_identity. Unlike the old residual bound, this freezes the exact first-jet nonlinearity needed for the PDE. No estimate implies equality; use exact accepted identities. Preserve exact statement and definitions. Only edit marked proof body; no option overrides, new axioms, assumptions, extra agents or reads of other attempts. Use the supplied shared compiler wrapper. This is a local prerequisite, not proof of PDE existence or Poincare."
+  }
+]
