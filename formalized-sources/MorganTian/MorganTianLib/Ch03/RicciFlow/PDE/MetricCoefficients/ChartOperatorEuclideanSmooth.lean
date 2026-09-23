@@ -19,6 +19,10 @@ by
   letI : TopologicalSpace (Matrix (Fin 3) (Fin 3) ℝ) := Pi.topologicalSpace
   letI : NormedAddCommGroup (Matrix (Fin 3) (Fin 3) ℝ) := Pi.normedAddCommGroup
   letI : NormedSpace ℝ (Matrix (Fin 3) (Fin 3) ℝ) := Pi.normedSpace
+  letI : IsTopologicalAddGroup (Matrix (Fin 3) (Fin 3) ℝ) :=
+    inferInstanceAs (IsTopologicalAddGroup (Fin 3 → Fin 3 → ℝ))
+  letI : ContinuousSMul ℝ (Matrix (Fin 3) (Fin 3) ℝ) :=
+    inferInstanceAs (ContinuousSMul ℝ (Fin 3 → Fin 3 → ℝ))
   let G : E3 → Matrix (Fin 3) (Fin 3) ℝ := fun z i j =>
     Riemannian.chartGramOnE (I := 𝓡 3) g a (e i) (e j) z
   have hG : ContDiffOn ℝ ∞ G (extChartAt (𝓡 3) a).target := by
