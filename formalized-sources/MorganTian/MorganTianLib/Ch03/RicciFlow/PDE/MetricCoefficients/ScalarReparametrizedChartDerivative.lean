@@ -57,24 +57,16 @@ by
     rw [(chartAt E3 a).left_inv hr]
   have hcoord := mfderiv_comp_extChartAt_chartBasisVecFiber
       (I := 𝓡 3) hq hFdiffq (e i)
-  calc
-    fderiv ℝ (fun z : E3 => f ((extChartAt (𝓡 3) a).symm (B z))) x
-        (EuclideanSpace.single i 1) =
-        fderiv ℝ (F ∘ B) x (EuclideanSpace.single i 1) := rfl
-    _ = fderiv ℝ F (B x) (B (EuclideanSpace.single i 1)) := by
-      rw [hchain]
-      rfl
-    _ = fderiv ℝ F (B x) (Module.finBasis ℝ E3 (e i)) := by
-      rw [hB i]
-    _ = Riemannian.partialDeriv (e i) F (B x) := by
-      simp [Riemannian.partialDeriv]
-    _ = mfderiv (𝓡 3) 𝓘(ℝ, ℝ) (fun z : M => F ((extChartAt (𝓡 3) a) z)) q
-        (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) q) := by
-      rw [← hyt]
-      exact hcoord.symm
-    _ = mfderiv (𝓡 3) 𝓘(ℝ, ℝ) f q
-        (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) q) := by
-      rw [← hfeq.mfderiv_eq]
-      rfl
+  change fderiv ℝ (F ∘ B) x (EuclideanSpace.single i 1) =
+    (mfderiv (𝓡 3) 𝓘(ℝ, ℝ) f q
+      (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) q) : ℝ)
+  rw [hchain]
+  change fderiv ℝ F (B x) (B (EuclideanSpace.single i 1)) =
+    (mfderiv (𝓡 3) 𝓘(ℝ, ℝ) f q
+      (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) q) : ℝ)
+  rw [hB i, hfeq.mfderiv_eq]
+  change Riemannian.partialDeriv (e i) F (B x) = _
+  rw [← hyt]
+  exact hcoord.symm
 /- SWARM_PROOF_END -/
 end MorganTianLib.MetricCoefficient
