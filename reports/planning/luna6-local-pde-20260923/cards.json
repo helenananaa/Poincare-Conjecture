@@ -1,0 +1,178 @@
+[
+  {
+    "id": "e6-metric-germ-jets",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/MetricGermJets.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.metric_germ_first_second_jets",
+    "source": "import Mathlib\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\n\n/-- **Math.** metric germ first second jets. -/\ntheorem metric_germ_first_second_jets (G H : E3 → (E3 →L[ℝ] E3)) (x : E3) (h : G =ᶠ[𝓝 x] H) :\n    G x = H x ∧ fderiv ℝ G x = fderiv ℝ H x ∧\n      ∀ v : E3, fderiv ℝ (fun y : E3 => fderiv ℝ G y v) x =\n        fderiv ℝ (fun y : E3 => fderiv ℝ H y v) x :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use EventuallyEq.eq_of_nhds, EventuallyEq.fderiv_eq and protected EventuallyEq.fderiv; evaluate the latter at v and differentiate the resulting eventual equality. No differentiability hypotheses are required for germ invariance of fderiv. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-ricci-germ",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualRicciGerm.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_coordinate_ricci_germ",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MetricGermJets\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualCoordinateRicci\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\n\n/-- **Math.** actual coordinate ricci germ. -/\ntheorem actual_coordinate_ricci_germ (G H : E3 → (E3 →L[ℝ] E3)) (x : E3) (h : G =ᶠ[𝓝 x] H)\n    (i j : Fin 3) : actualCoordinateRicci G x i j = actualCoordinateRicci H x i j :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "e6-metric-germ-jets",
+      "wsl-actual-ricci-recovered-route"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "First jets are eventually equal. Thus the whole coordinateChristoffel scalar field is eventually equal, so its actual fderiv agrees. Rewrite both actual Ricci derivative terms and the quadratic product at x. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-gauge-lie-germ",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualGaugeLieGerm.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_gauge_lie_germ",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MetricGermJets\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckGaugeVector\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateLieMetricLowering\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\n\n/-- **Math.** actual gauge lie germ. -/\ntheorem actual_gauge_lie_germ (G H : E3 → (E3 →L[ℝ] E3)) (x : E3) (h : G =ᶠ[𝓝 x] H) (i j : Fin 3) :\n    let WG : E3 → E3 := fun y => WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y) (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1)) k);\n    let WH : E3 → E3 := fun y => WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (H y) (fun r : Fin 3 => fderiv ℝ H y (EuclideanSpace.single r 1)) k);\n    coordinateLieMetricExpr G WG x i j = coordinateLieMetricExpr H WH x i j :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "e6-metric-germ-jets",
+      "gauge-vector-bound",
+      "gauge-lie-metric-lowering"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Construct WG = eventually WH from germ equality of G and fderiv G. Then the values and fderiv of W agree. Unfold coordinateLieMetricExpr and rewrite exact equalities. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-local-equation",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalDeTurckEquationSplit.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.local_deturck_equation_split",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualDeTurckEquationSplit\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LocalSelfadjointExtension\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualRicciGerm\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualGaugeLieGerm\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\n\n/-- **Math.** local deturck equation split. -/\ntheorem local_deturck_equation_split (G : E3 → (E3 →L[ℝ] E3)) (x : E3) (hG : ContDiffAt ℝ 2 G x)\n    (hsym : ∀ᶠ y : E3 in 𝓝 x, ∀ v w : E3, inner ℝ (G y v) w = inner ℝ v (G y w))\n    (c : ℝ) (hc : 0 < c) (hpos : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v) (i j : Fin 3) :\n    let P := fun r : Fin 3 => fderiv ℝ G x (EuclideanSpace.single r 1);\n    let W : E3 → E3 := fun y => WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y) (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1)) k);\n    -2*actualCoordinateRicci G x i j + coordinateLieMetricExpr G W x i j =\n      (∑ p : Fin 3, ∑ q : Fin 3, ((G x).inverse (EuclideanSpace.single q 1)) p *\n        (fderiv ℝ (fun y : E3 => fderiv ℝ G y (EuclideanSpace.single q 1)) x\n          (EuclideanSpace.single p 1) (EuclideanSpace.single j 1)) i) +\n      (-2*ricciLowerOrder (G x) P i j + deturckLieLowerOrder (G x) P i j) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "e6-metric-germ-jets",
+      "e6-ricci-germ",
+      "e6-gauge-lie-germ",
+      "d6-selfadjoint-extension",
+      "c6-exact-nonlinearity"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use local_selfadjoint_extension to obtain a global C2 selfadjoint H agreeing locally with G. Transfer point positivity to H x, apply actual_deturck_equation_split, and transfer both sides back by germ invariance. Do not assume global C2 or global positivity of G. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-lie-covariant",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoordinateLieCovariant.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.coordinate_lie_metric_covariant",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateLieMetricLowering\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ConnectionMetricTrilinear\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.MetricJetGermSymmetry\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\n\n/-- **Math.** coordinate lie metric covariant. -/\ntheorem coordinate_lie_metric_covariant (G : E3 → (E3 →L[ℝ] E3)) (W : E3 → E3) (x : E3)\n    (hG : DifferentiableAt ℝ G x) (hW : DifferentiableAt ℝ W x)\n    (hsym : ∀ᶠ y : E3 in 𝓝 x, ∀ v w : E3, inner ℝ (G y v) w = inner ℝ v (G y w))\n    (c : ℝ) (hc : 0 < c) (hpos : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v) (i j : Fin 3) :\n    let e := fun k : Fin 3 => EuclideanSpace.single k (1 : ℝ);\n    let P := fun r : Fin 3 => fderiv ℝ G x (e r);\n    coordinateLieMetricExpr G W x i j =\n      inner ℝ (G x (fderiv ℝ W x (e i) + connectionVector (G x) P (e i) (W x))) (e j) +\n      inner ℝ (G x (e i)) (fderiv ℝ W x (e j) + connectionVector (G x) P (e j) (W x)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "l6-connection-metric-trilinear",
+      "c6-metric-jet-germ",
+      "gauge-lie-metric-lowering"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use metric_jet_selfadjoint_of_eventually and metric compatibility. Expand the directional metric derivative along W using basis expansion, apply connection_metric_trilinear at W,e_i,e_j, and use torsion symmetry to swap connection arguments. The expression is the sum g(nabla_i W,e_j)+g(e_i,nabla_j W). Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-inverse-integrated-error",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/InverseMetricIntegratedError.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.inverse_metric_integrated_freezing_error",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseCoefficientHolder\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.IntegratedCoefficientError\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\n\n/-- **Math.** inverse metric integrated freezing error. -/\ntheorem inverse_metric_integrated_freezing_error (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ (A0 : E3 →L[ℝ] E3) (G : E3 → (E3 →L[ℝ] E3)),\n      Continuous G → ∀ (c L : ℝ), 0 < c → 0 ≤ L →\n      (∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A0 v) v) →\n      (∀ x : E3, ‖G x-A0‖ ≤ c/2) →\n      (∀ x y : E3, ‖G x-G y‖ ≤ L*‖x-y‖^alpha) →\n      ∀ (F : (ℝ × E3) →ᵇ ℝ) (T : ℝ), 0 ≤ T → ∀ (x : E3) (i j p q : Fin 3),\n        let a : E3 → ℝ := fun z => ((G z).inverse (EuclideanSpace.single q 1)) p;\n        IntervalIntegrable (fun s => ∫ y : E3, (a x-a (x-y))*\n          fderiv ℝ (fun z : E3 => fderiv ℝ (MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 (T-s)) z\n            (EuclideanSpace.single i 1)) y (EuclideanSpace.single j 1)*F (s,x-y)) volume 0 T ∧\n        |∫ s in (0:ℝ)..T, ∫ y : E3, (a x-a (x-y))*fderiv ℝ (fun z : E3 =>\n          fderiv ℝ (MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 (T-s)) z (EuclideanSpace.single i 1)) y\n            (EuclideanSpace.single j 1)*F (s,x-y)| ≤ (C*L/c^2)*‖F‖*T^(alpha/2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "d6-inverse-holder"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Apply integrated_coefficient_freezing_error to the actual inverse coefficient using inverse_coefficient_holder. Track the constant 4/c^2 into a universal C. Keep the actual nested integral and endpoint integrability; do not replace by an abstract error assumption. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-nonlinearity-smooth",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/FullDeTurckNonlinearity.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.full_deturck_nonlinearity_smooth",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckNonlinearityLocalControl\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\ndef fullDeTurckNonlinearity (q : J3) : E9 :=\n  WithLp.toLp 2 (fun ij : Fin 3 × Fin 3 =>\n    -2*ricciLowerOrder q.1 q.2 ij.1 ij.2 + deturckLieLowerOrder q.1 q.2 ij.1 ij.2)\n\n/-- **Math.** full deturck nonlinearity smooth. -/\ntheorem full_deturck_nonlinearity_smooth (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v) :\n    ContDiffAt ℝ ∞ fullDeTurckNonlinearity (A,P) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "c6-nonlinearity-local-control-recovered"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use contDiffAt_euclidean coordinatewise and deturck_nonlinearity_local_control. This packages all nine actual coefficients with the Euclidean norm, not arbitrary placeholder nonlinearities. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-C2-derivative-bounds",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalC2DerivativeControl.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.local_C2_derivative_control",
+    "source": "import Mathlib\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\n\n/-- **Math.** local C2 derivative control. -/\ntheorem local_C2_derivative_control {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n    [NormedAddCommGroup F] [NormedSpace ℝ F]\n    (f : E → F) (x0 : E) (hf : ContDiffAt ℝ 2 f x0) :\n    ∃ r M L : ℝ, 0 < r ∧ 0 < M ∧ 0 < L ∧\n      (∀ x ∈ Metric.ball x0 r, DifferentiableAt ℝ f x ∧ ‖fderiv ℝ f x‖ ≤ M) ∧\n      ∀ x ∈ Metric.ball x0 r, ∀ y ∈ Metric.ball x0 r,\n        ‖fderiv ℝ f x-fderiv ℝ f y‖ ≤ L*‖x-y‖ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "From ContDiffAt 2 get a neighborhood where f is C1 and ContDiffAt 1 of fderiv f at x0. Apply ContDiffAt.exists_lipschitzOnWith to fderiv f, shrink a ball into the intersection. Bound its norm from Lipschitz control relative to x0. Constants must be positive; no compactness or global regularity is assumed. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-four-point",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/NonlinearFourPointEstimate.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.nonlinear_four_point_estimate",
+    "source": "import Mathlib\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\n\n/-- **Math.** nonlinear four point estimate. -/\ntheorem nonlinear_four_point_estimate {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n    [NormedAddCommGroup F] [NormedSpace ℝ F]\n    (f : E → F) (s : Set E) (hs : Convex ℝ s)\n    (hf : ∀ x ∈ s, DifferentiableAt ℝ f x) (M L : ℝ) (hM : 0 ≤ M) (hL : 0 ≤ L)\n    (hbound : ∀ x ∈ s, ‖fderiv ℝ f x‖ ≤ M)\n    (hLip : ∀ x ∈ s, ∀ y ∈ s, ‖fderiv ℝ f x-fderiv ℝ f y‖ ≤ L*‖x-y‖)\n    (a b c d : E) (ha : a ∈ s) (hb : b ∈ s) (hc : c ∈ s) (hd : d ∈ s) :\n    ‖f a-f b-f c+f d‖ ≤ M*‖(a-b)-(c-d)‖ +\n      L*(‖a-c‖+‖b-d‖)*‖c-d‖ :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Let H(t)=f(b+t*(a-b))-f(d+t*(c-d)), t in [0,1]. Convexity keeps both segments in s. Differentiate H and split its derivative into Df at first path applied to (a-b)-(c-d), plus the difference of derivatives applied to c-d. Segment separation is at most norm(a-c)+norm(b-d). Apply norm_image_sub_le_of_norm_deriv_le_segment_01 with an explicit HasDerivAt/WithinAt formula and abel at endpoints. Do not assume the four-point inequality. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-holder-composition",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HolderNonlinearityDifference.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.holder_nonlinearity_difference",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.NonlinearFourPointEstimate\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\n\n/-- **Math.** holder nonlinearity difference. -/\ntheorem holder_nonlinearity_difference {E F : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]\n    [NormedAddCommGroup F] [NormedSpace ℝ F]\n    (f : E → F) (s : Set E) (hs : Convex ℝ s)\n    (hf : ∀ x ∈ s, DifferentiableAt ℝ f x) (M L : ℝ) (hM : 0 ≤ M) (hL : 0 ≤ L)\n    (hbound : ∀ x ∈ s, ‖fderiv ℝ f x‖ ≤ M)\n    (hLip : ∀ x ∈ s, ∀ y ∈ s, ‖fderiv ℝ f x-fderiv ℝ f y‖ ≤ L*‖x-y‖)\n    (u v : E3 → E) (hu : ∀ x, u x ∈ s) (hv : ∀ x, v x ∈ s)\n    (alpha H D delta : ℝ) (hH : 0 ≤ H) (hD : 0 ≤ D) (hdelta : 0 ≤ delta)\n    (hclose : ∀ x, ‖u x-v x‖ ≤ delta)\n    (huHolder : ∀ x y, ‖u x-u y‖ ≤ H*‖x-y‖^alpha)\n    (hvHolder : ∀ x y, ‖v x-v y‖ ≤ H*‖x-y‖^alpha)\n    (hdiffHolder : ∀ x y, ‖(u x-v x)-(u y-v y)‖ ≤ D*‖x-y‖^alpha) :\n    ∀ x y, ‖(f (u x)-f (v x))-(f (u y)-f (v y))‖ ≤\n      (M*D+2*L*H*delta)*‖x-y‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "e6-four-point"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Apply nonlinear_four_point_estimate at a=u x,b=v x,c=u y,d=v y. Bound all three factors using the hypotheses and nonnegative real rpow. This is the Holder seminorm difference bound needed by nonlinear composition, not just pointwise continuity. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-actual-holder-control",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DeTurckHolderLocalControl.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.deturck_holder_local_control",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.FullDeTurckNonlinearity\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LocalC2DerivativeControl\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.HolderNonlinearityDifference\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\n\n/-- **Math.** deturck holder local control. -/\ntheorem deturck_holder_local_control (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v) :\n    ∃ r K : ℝ, 0 < r ∧ 0 < K ∧ ∀ (u v : E3 → J3),\n      (∀ x, u x ∈ Metric.ball (A,P) r) → (∀ x, v x ∈ Metric.ball (A,P) r) →\n      ∀ (alpha H D delta : ℝ), 0 ≤ H → 0 ≤ D → 0 ≤ delta →\n      (∀ x, ‖u x-v x‖ ≤ delta) →\n      (∀ x y, ‖u x-u y‖ ≤ H*‖x-y‖^alpha) →\n      (∀ x y, ‖v x-v y‖ ≤ H*‖x-y‖^alpha) →\n      (∀ x y, ‖(u x-v x)-(u y-v y)‖ ≤ D*‖x-y‖^alpha) →\n      ∀ x y, ‖(fullDeTurckNonlinearity (u x)-fullDeTurckNonlinearity (v x))-\n        (fullDeTurckNonlinearity (u y)-fullDeTurckNonlinearity (v y))‖ ≤\n        K*(D+H*delta)*‖x-y‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "e6-nonlinearity-smooth",
+      "e6-C2-derivative-bounds",
+      "e6-holder-composition"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Apply local_C2_derivative_control to fullDeTurckNonlinearity using its actual proved smoothness. Then holder_nonlinearity_difference on the convex ball. Choose positive K≥M and K≥2L, for example M+2L. This estimate is for the full concrete Ricci-DeTurck lower-order nonlinearity. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  },
+  {
+    "id": "e6-chart-local-equation",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalChartDeTurckSplit.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.local_chart_ricci_deturck_split",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LocalDeTurckEquationSplit\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualIntrinsicRicci\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartOperatorSymmetry\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartOperatorEuclideanSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"M3\" => Fin 3 → Fin 3 → ℝ\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** local chart ricci deturck split. -/\ntheorem local_chart_ricci_deturck_split {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) (i j : Fin 3) :\n    let p := (extChartAt (𝓡 3) a).symm (B x);\n    let G : E3 → (E3 →L[ℝ] E3) := fun z =>\n      chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm (B z)) e;\n    let P := fun r : Fin 3 => fderiv ℝ G x (EuclideanSpace.single r 1);\n    let W : E3 → E3 := fun y => WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y) (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1)) k);\n    -2*MorganTianLib.ricciTensorAt g p\n        (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e j) p)\n        (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) p) +\n      coordinateLieMetricExpr G W x i j =\n      (∑ r : Fin 3, ∑ s : Fin 3, ((G x).inverse (EuclideanSpace.single s 1)) r *\n        (fderiv ℝ (fun y : E3 => fderiv ℝ G y (EuclideanSpace.single s 1)) x\n          (EuclideanSpace.single r 1) (EuclideanSpace.single j 1)) i) +\n      (-2*ricciLowerOrder (G x) P i j+deturckLieLowerOrder (G x) P i j) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "e6-local-equation",
+      "d6-actual-intrinsic-ricci",
+      "c6-chart-symmetry",
+      "l6-chart-operator-smooth-onE"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "First derive only LOCAL C2 regularity of chart G using chart_operator_contDiffAt and B. Get point coercivity and symmetry from the actual geometric metric. Apply local_deturck_equation_split and actual_coordinate_ricci_eq_intrinsic, respecting the j,i tangent argument order. The Ricci term is intrinsic; identification of the coordinate Lie term with the manifold metricLieDerivativeAt is deliberately not claimed. Preserve all declarations and definitions, editing only the marked proof body. No additional assumptions, axioms, holes, option overrides, additional agents, other-attempt reads, or remote operations. Run the supplied swarm-check.sh. For default Lean portability pre-cache concrete norm/space instances with letI when necessary; never raise resource limits. This is an actual local PDE prerequisite, not PDE existence or Poincare completion."
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "purpose": "syntax check only; not proof evidence",
+  "passed": [
+    "e6-metric-germ-jets",
+    "e6-lie-covariant",
+    "e6-inverse-integrated-error",
+    "e6-nonlinearity-smooth",
+    "e6-C2-derivative-bounds",
+    "e6-four-point",
+    "e6-ricci-germ",
+    "e6-gauge-lie-germ",
+    "e6-holder-composition",
+    "e6-local-equation",
+    "e6-actual-holder-control",
+    "e6-chart-local-equation"
+  ],
+  "failed": [],
+  "blocked": []
+}
