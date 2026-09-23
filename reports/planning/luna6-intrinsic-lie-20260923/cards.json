@@ -1,0 +1,130 @@
+[
+  {
+    "id": "f6-scalar-chart-derivative",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 20,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ScalarReparametrizedChartDerivative.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.scalar_reparametrized_chart_derivative",
+    "source": "import MorganTianLib.Ch01.CurvatureFrameBridge\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartCoefficientOperator\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** scalar reparametrized chart derivative. -/\ntheorem scalar_reparametrized_chart_derivative {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) (f : M → ℝ) (hf : ContMDiff (𝓡 3) 𝓘(ℝ) ∞ f) (i : Fin 3) :\n    fderiv ℝ (fun z : E3 => f ((extChartAt (𝓡 3) a).symm (B z))) x\n      (EuclideanSpace.single i 1) =\n    mfderiv (𝓡 3) 𝓘(ℝ) f ((extChartAt (𝓡 3) a).symm (B x))\n      (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i)\n        ((extChartAt (𝓡 3) a).symm (B x))) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use the chain rule through the inverse chart and B. Alternatively apply mfderiv_comp_extChartAt_chartBasisVecFiber to the local Euclidean reading of f and use eventual equality back to f. Explicitly use hB, never equate the two bases. Keep all statements and imports frozen; edit only the marked proof. No extra assumptions, axioms, sorry, option/resource overrides, other-attempt reads or extra agents. Compile with swarm-check.sh. These are local geometric prerequisites, not a global gauge or PDE existence theorem."
+  },
+  {
+    "id": "f6-chart-metric-pairing",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 20,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartCoefficientMetricPairing.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.chart_coefficient_metric_pairing",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartCoefficientOperator\nimport MorganTianLib.Ch01.CurvatureFrameBridge\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** chart coefficient metric pairing. -/\ntheorem chart_coefficient_metric_pairing {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a p : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (U V : E3) :\n    g.metricInner p\n      (∑ k : Fin 3, U k • Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) p)\n      (∑ k : Fin 3, V k • Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) p) =\n      inner ℝ (chartCoefficientOperator g a p e U) V :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Expand both finite sums using metricInner_sum_smul_left/right, identify chartGramMatrix entries, and use Matrix.inner_toEuclideanCLM. Gram symmetry aligns the input order. This total identity needs no positive-domain premise. Keep all statements and imports frozen; edit only the marked proof. No extra assumptions, axioms, sorry, option/resource overrides, other-attempt reads or extra agents. Compile with swarm-check.sh. These are local geometric prerequisites, not a global gauge or PDE existence theorem."
+  },
+  {
+    "id": "f6-scalar-component-extensions",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 20,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartScalarComponentExtensions.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.chart_scalar_component_extensions",
+    "source": "import MorganTianLib.Ch01.CurvatureFrameBridge\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartCoefficientOperator\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** chart scalar component extensions. -/\ntheorem chart_scalar_component_extensions {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) (W : E3 → E3) (U : Set E3) (hU : IsOpen U) (hxU : x ∈ U)\n    (hW : ContDiffOn ℝ ∞ W U) :\n    ∃ f : Fin 3 → M → ℝ, (∀ k, ContMDiff (𝓡 3) 𝓘(ℝ) ∞ (f k)) ∧\n      ∀ᶠ q : M in 𝓝 ((extChartAt (𝓡 3) a).symm (B x)), ∀ k : Fin 3,\n        f k q = W (B.symm (extChartAt (𝓡 3) a q)) k :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use the supplied open C-infinity neighborhood U; do not try to infer it from ContDiffAt infinity. Pull it back by B.symm and extChartAt on a chart neighborhood. Use exists_contMDiff_eventuallyEq separately for finitely many scalar components, then combine the eventual equalities. Keep all statements and imports frozen; edit only the marked proof. No extra assumptions, axioms, sorry, option/resource overrides, other-attempt reads or extra agents. Compile with swarm-check.sh. These are local geometric prerequisites, not a global gauge or PDE existence theorem."
+  },
+  {
+    "id": "f6-covariant-components",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 20,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LeviCivitaComponentDerivative.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.levi_civita_component_derivative",
+    "source": "import MorganTianLib.Ch01.CurvatureFrameBridge\nimport DoCarmoLib.Riemannian.Connection.ChartCurvatureMovingPoint\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** levi civita component derivative. -/\ntheorem levi_civita_component_derivative {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M] (g : Riemannian.RiemannianMetric (𝓡 3) M)\n    (a p : M) (hp : p ∈ (chartAt E3 a).source) (e : Fin 3 ≃ Fin (Module.finrank ℝ E3))\n    (V : Riemannian.SmoothVectorField (𝓡 3) M) (f : Fin 3 → M → ℝ)\n    (hf : ∀ k, ContMDiff (𝓡 3) 𝓘(ℝ) ∞ (f k))\n    (hV : ∀ᶠ q : M in 𝓝 p, V q = ∑ k : Fin 3,\n      f k q • Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) q) (i : Fin 3) :\n    let df : Fin 3 → ℝ := fun k => mfderiv (𝓡 3) 𝓘(ℝ) (f k) p\n      (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) p);\n    (g.leviCivitaConnection.cov\n      (MorganTianLib.extendVector p (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) p)) V) p =\n      ∑ k : Fin 3, (df k +\n        ∑ l : Fin 3, f l p * Riemannian.chartChristoffel g a (e i) (e l) (e k)\n          (extChartAt (𝓡 3) a p)) • Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) p :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Choose the existing smooth chart frame near p; use cov_apply_of_eventuallyEq_sum_smul and cov_congr_apply_left. Reindex the frame sum with e and rearrange finite sums. Do not prove the connection construction again. Keep all statements and imports frozen; edit only the marked proof. No extra assumptions, axioms, sorry, option/resource overrides, other-attempt reads or extra agents. Compile with swarm-check.sh. These are local geometric prerequisites, not a global gauge or PDE existence theorem."
+  },
+  {
+    "id": "f6-vector-field-extension",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 20,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartVectorFieldExtension.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.chart_vector_field_extension",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartScalarComponentExtensions\nimport MorganTianLib.Ch01.CurvatureFrameBridge\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** chart vector field extension. -/\ntheorem chart_vector_field_extension {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) (W : E3 → E3) (U : Set E3) (hU : IsOpen U) (hxU : x ∈ U)\n    (hW : ContDiffOn ℝ ∞ W U) :\n    ∃ V : Riemannian.SmoothVectorField (𝓡 3) M,\n      ∀ᶠ q : M in 𝓝 ((extChartAt (𝓡 3) a).symm (B x)),\n        V q = ∑ k : Fin 3, W (B.symm (extChartAt (𝓡 3) a q)) k •\n          Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) q :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "f6-scalar-component-extensions"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Extend the three scalar components using chart_scalar_component_extensions. Choose smooth frame fields agreeing near p using exists_chartFrame_leviCivita_christoffel_nhds; form their finite smooth scalar linear combination. No claim about a globally canonical gauge. Keep all statements and imports frozen; edit only the marked proof. No extra assumptions, axioms, sorry, option/resource overrides, other-attempt reads or extra agents. Compile with swarm-check.sh. These are local geometric prerequisites, not a global gauge or PDE existence theorem."
+  },
+  {
+    "id": "f6-intrinsic-lie",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 20,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/IntrinsicLieCoordinates.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.intrinsic_lie_eq_coordinate",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ScalarReparametrizedChartDerivative\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartCoefficientMetricPairing\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LeviCivitaComponentDerivative\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartScalarComponentExtensions\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateLieCovariant\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ReparametrizedActualChristoffel\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartOperatorSymmetry\nimport MorganTianLib.Ch03.RicciFlow.Soliton\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** intrinsic lie eq coordinate. -/\ntheorem intrinsic_lie_eq_coordinate {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) (W : E3 → E3) (U : Set E3) (hU : IsOpen U) (hxU : x ∈ U)\n    (hW : ContDiffOn ℝ ∞ W U) (V : Riemannian.SmoothVectorField (𝓡 3) M)\n    (hV : ∀ᶠ q : M in 𝓝 ((extChartAt (𝓡 3) a).symm (B x)),\n      V q = ∑ k : Fin 3, W (B.symm (extChartAt (𝓡 3) a q)) k •\n        Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) q) (i j : Fin 3) :\n    let p := (extChartAt (𝓡 3) a).symm (B x);\n    let G : E3 → (E3 →L[ℝ] E3) := fun z =>\n      chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm (B z)) e;\n    MorganTianLib.metricLieDerivativeAt g V p\n      (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) p)\n      (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e j) p) =\n      coordinateLieMetricExpr G W x i j :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "f6-scalar-chart-derivative",
+      "f6-chart-metric-pairing",
+      "f6-covariant-components",
+      "f6-scalar-component-extensions",
+      "e6-lie-covariant",
+      "l6-reparametrized-actual-christoffel",
+      "c6-chart-symmetry"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Choose global smooth scalar component extensions. Pull their eventual equalities back to the Euclidean chart and use scalar_reparametrized_chart_derivative to identify derivatives of W. Use levi_civita_component_derivative twice and chart_coefficient_metric_pairing, then coordinate_lie_metric_covariant and reparametrized_actual_christoffel. Establish G differentiability, symmetry and coercivity from actual chart data, not new assumptions. Keep all statements and imports frozen; edit only the marked proof. No extra assumptions, axioms, sorry, option/resource overrides, other-attempt reads or extra agents. Compile with swarm-check.sh. These are local geometric prerequisites, not a global gauge or PDE existence theorem."
+  },
+  {
+    "id": "f6-gauge-smooth-on",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 20,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualGaugeSmoothOn.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.actual_gauge_contDiffOn",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckGaugeSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** actual gauge contDiffOn. -/\ntheorem actual_gauge_contDiffOn (G : E3 → (E3 →L[ℝ] E3)) (s : Set E3) (hs : IsOpen s)\n    (hG : ContDiffOn ℝ ∞ G s)\n    (hpos : ∀ x ∈ s, ∃ c : ℝ, 0 < c ∧ ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v) :\n    ContDiffOn ℝ ∞ (fun y : E3 => (WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y) (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1)) k) : E3)) s :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "gauge-coefficients-smooth"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "On the open set, differentiate the smooth operator field to get its smooth first-jet field, then compose the joint-input map with coordinate_deturck_gauge_smooth locally. The result is ContDiffOn infinity on s, not existence of one smooth neighborhood deduced from only ContDiffAt infinity at a single point. Keep all statements and imports frozen; edit only the marked proof. No extra assumptions, axioms, sorry, option/resource overrides, other-attempt reads or extra agents. Compile with swarm-check.sh. These are local geometric prerequisites, not a global gauge or PDE existence theorem."
+  },
+  {
+    "id": "f6-gauge-realization",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 20,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalIntrinsicGaugeRealization.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.local_intrinsic_gauge_realization",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualGaugeSmoothOn\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartVectorFieldExtension\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.IntrinsicLieCoordinates\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartOperatorEuclideanSmooth\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** local intrinsic gauge realization. -/\ntheorem local_intrinsic_gauge_realization {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) :\n    let p := (extChartAt (𝓡 3) a).symm (B x);\n    let G : E3 → (E3 →L[ℝ] E3) := fun z =>\n      chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm (B z)) e;\n    let W : E3 → E3 := fun y => WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y) (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1)) k);\n    ∃ V : Riemannian.SmoothVectorField (𝓡 3) M,\n      (∀ᶠ q : M in 𝓝 p, V q = ∑ k : Fin 3,\n        W (B.symm (extChartAt (𝓡 3) a q)) k •\n          Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) q) ∧ ∀ i j : Fin 3,\n        MorganTianLib.metricLieDerivativeAt g V p\n          (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) p)\n          (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e j) p) =\n          coordinateLieMetricExpr G W x i j :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "f6-gauge-smooth-on",
+      "f6-vector-field-extension",
+      "f6-intrinsic-lie",
+      "l6-chart-operator-smooth-onE"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use the open set S=B preimage of chart target. Prove ContDiffOn infinity of G there by chart_operator_contDiffAt at every point, and positivity at each point by chart_coefficient_coercivity. Then actual_gauge_contDiffOn and chart_vector_field_extension yield V. Apply intrinsic_lie_eq_coordinate. The chosen global extension is only required to agree locally; it is not a global DeTurck gauge. Keep all statements and imports frozen; edit only the marked proof. No extra assumptions, axioms, sorry, option/resource overrides, other-attempt reads or extra agents. Compile with swarm-check.sh. These are local geometric prerequisites, not a global gauge or PDE existence theorem."
+  },
+  {
+    "id": "f6-intrinsic-local-equation",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 20,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/IntrinsicLocalDeTurckEquation.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.intrinsic_local_deturck_equation",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LocalIntrinsicGaugeRealization\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LocalChartDeTurckSplit\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** intrinsic local deturck equation. -/\ntheorem intrinsic_local_deturck_equation {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M) (a : M)\n    (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (B : E3 ≃L[ℝ] E3)\n    (hB : ∀ r : Fin 3, B (EuclideanSpace.single r 1) = Module.finBasis ℝ E3 (e r))\n    (x : E3) (hx : B x ∈ (extChartAt (𝓡 3) a).target) :\n    let p := (extChartAt (𝓡 3) a).symm (B x);\n    let G : E3 → (E3 →L[ℝ] E3) := fun z =>\n      chartCoefficientOperator g a ((extChartAt (𝓡 3) a).symm (B z)) e;\n    let W : E3 → E3 := fun y => WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y) (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1)) k);\n    let P := fun r : Fin 3 => fderiv ℝ G x (EuclideanSpace.single r 1);\n    ∃ V : Riemannian.SmoothVectorField (𝓡 3) M,\n      (∀ᶠ q : M in 𝓝 p, V q = ∑ k : Fin 3,\n        W (B.symm (extChartAt (𝓡 3) a q)) k •\n          Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) q) ∧ ∀ i j : Fin 3,\n      -2*MorganTianLib.ricciTensorAt g p\n        (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e j) p)\n        (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) p) +\n      MorganTianLib.metricLieDerivativeAt g V p\n        (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e i) p)\n        (Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e j) p) =\n      (∑ r : Fin 3, ∑ s : Fin 3, ((G x).inverse (EuclideanSpace.single s 1)) r *\n        (fderiv ℝ (fun y : E3 => fderiv ℝ G y (EuclideanSpace.single s 1)) x\n          (EuclideanSpace.single r 1) (EuclideanSpace.single j 1)) i) +\n      (-2*ricciLowerOrder (G x) P i j + deturckLieLowerOrder (G x) P i j) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "f6-gauge-realization",
+      "e6-chart-local-equation"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Combine the actual local gauge realization and the exact local_chart_ricci_deturck_split. Preserve the Ricci j,i order and Lie i,j order. This identifies a local operator; no time-dependent solution is constructed. Keep all statements and imports frozen; edit only the marked proof. No extra assumptions, axioms, sorry, option/resource overrides, other-attempt reads or extra agents. Compile with swarm-check.sh. These are local geometric prerequisites, not a global gauge or PDE existence theorem."
+  }
+]

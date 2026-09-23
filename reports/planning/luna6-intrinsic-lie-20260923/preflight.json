@@ -1,0 +1,16 @@
+{
+  "purpose": "syntax check only; not proof evidence",
+  "passed": [
+    "f6-scalar-chart-derivative",
+    "f6-chart-metric-pairing",
+    "f6-scalar-component-extensions",
+    "f6-covariant-components",
+    "f6-gauge-smooth-on",
+    "f6-vector-field-extension",
+    "f6-intrinsic-lie",
+    "f6-gauge-realization",
+    "f6-intrinsic-local-equation"
+  ],
+  "failed": [],
+  "blocked": []
+}
