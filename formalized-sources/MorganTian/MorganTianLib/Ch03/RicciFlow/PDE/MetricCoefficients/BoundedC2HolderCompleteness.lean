@@ -8,6 +8,32 @@ open Set Function Filter MeasureTheory
 open scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction
 local notation "E3" => EuclideanSpace ℝ (Fin 3)
 local notation "Ω" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)
+
+-- Make the nested operator and bounded-continuous-function metric instances
+-- available while Lean elaborates the theorem statement itself.
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    NormedAddCommGroup (E3 →L[ℝ] V) := inferInstance
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    NormedSpace ℝ (E3 →L[ℝ] V) := inferInstance
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    CompleteSpace (E3 →L[ℝ] V) := inferInstance
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    NormedAddCommGroup (E3 →L[ℝ] E3 →L[ℝ] V) := inferInstance
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    NormedSpace ℝ (E3 →L[ℝ] E3 →L[ℝ] V) := inferInstance
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    CompleteSpace (E3 →L[ℝ] E3 →L[ℝ] V) := inferInstance
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    MetricSpace (E3 →ᵇ V) := inferInstance
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    MetricSpace (E3 →ᵇ (E3 →L[ℝ] V)) := inferInstance
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    MetricSpace (E3 →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)) := inferInstance
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    MetricSpace (Ω →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)) := inferInstance
+local instance (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] :
+    MetricSpace ((E3 →ᵇ V) × ((E3 →ᵇ (E3 →L[ℝ] V)) ×
+      (E3 →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)))) := inferInstance
 def boundedC2HolderJetSet (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V]
     (alpha : ℝ) : Set ((E3 →ᵇ V) × ((E3 →ᵇ (E3 →L[ℝ] V)) ×
       ((E3 →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)) × (Ω →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V))))) :=
@@ -22,20 +48,8 @@ theorem bounded_C2_holder_completeness
         ‖z.2.2.1 x-z.2.2.1 y‖ ≤ ‖z.2.2.2‖*‖x-y‖^alpha :=
 /- SWARM_PROOF_BEGIN -/
 by
-  letI : NormedAddCommGroup (E3 →L[ℝ] V) := inferInstance
-  letI : NormedSpace ℝ (E3 →L[ℝ] V) := inferInstance
-  letI : CompleteSpace (E3 →L[ℝ] V) := inferInstance
-  letI : NormedAddCommGroup (E3 →L[ℝ] E3 →L[ℝ] V) := inferInstance
-  letI : NormedSpace ℝ (E3 →L[ℝ] E3 →L[ℝ] V) := inferInstance
-  letI : CompleteSpace (E3 →L[ℝ] E3 →L[ℝ] V) := inferInstance
-  letI : MetricSpace (E3 →ᵇ V) := inferInstance
-  letI : MetricSpace (E3 →ᵇ (E3 →L[ℝ] V)) := inferInstance
-  letI : MetricSpace (E3 →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)) := inferInstance
-  letI : MetricSpace (Ω →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)) := inferInstance
-  letI : FirstCountableTopology
-      ((E3 →ᵇ V) × ((E3 →ᵇ (E3 →L[ℝ] V)) ×
-        ((E3 →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)) ×
-          (Ω →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V))))) := inferInstance
+  letI : T0Space ((E3 →ᵇ V) × ((E3 →ᵇ (E3 →L[ℝ] V)) ×
+      (E3 →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)))) := MetricSpace.instT0Space
   have hjetclosed : IsClosed (boundedC2JetSet V) :=
     (bounded_C2_jet_completeness V).1.isClosed
   have hholderclosed : IsClosed
