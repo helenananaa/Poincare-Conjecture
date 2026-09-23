@@ -1,0 +1,7 @@
+{
+  "cards": [
+    "g6-background-derivative",
+    "g6-background-lie-correction"
+  ],
+  "reason": "Explicit parentheses keep both product-rule summands inside finite sums; no root card modified or new assumptions"
+}

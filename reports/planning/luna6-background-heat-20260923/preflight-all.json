@@ -1,0 +1,25 @@
+{
+  "purpose": "syntax check only; not proof evidence",
+  "passed": [
+    "g6-connection-difference-linear",
+    "g6-metric-trace-change-basis",
+    "g6-background-contraction-smooth",
+    "g6-lie-subtraction",
+    "g6-linear-second-derivative",
+    "g6-linear-hessian-contraction",
+    "g6-positive-diffusion-factor",
+    "g6-bounded-pullback",
+    "g6-positive-metric-extension",
+    "g6-connection-difference-locality",
+    "g6-background-derivative",
+    "g6-anisotropic-laplacian",
+    "g6-connection-difference-fiber",
+    "g6-background-lie-correction",
+    "g6-constant-diffusion-ivp",
+    "g6-global-background-gauge",
+    "g6-background-equation",
+    "g6-positive-diffusion-ivp"
+  ],
+  "failed": [],
+  "blocked": []
+}

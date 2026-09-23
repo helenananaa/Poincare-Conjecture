@@ -1,0 +1,245 @@
+[
+  {
+    "id": "g6-connection-difference-linear",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionDifferenceField.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.connection_difference_field_linear",
+    "source": "import DoCarmoLib.Riemannian.Manifold.DoCarmoCh6Locality\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\ndef connectionDifferenceField {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M]\n    [IsManifold (𝓡 3) ∞ M] (nabla nabla0 : Riemannian.AffineConnection (𝓡 3) M)\n    (X Y : Riemannian.SmoothVectorField (𝓡 3) M) : Riemannian.SmoothVectorField (𝓡 3) M :=\n  nabla.cov X Y - nabla0.cov X Y\n\n/-- **Math.** connection difference field linear. -/\ntheorem connection_difference_field_linear {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (nabla nabla0 : Riemannian.AffineConnection (𝓡 3) M) :\n    (∀ X Y Z, connectionDifferenceField nabla nabla0 (X+Y) Z =\n      connectionDifferenceField nabla nabla0 X Z + connectionDifferenceField nabla nabla0 Y Z) ∧\n    (∀ X Y Z, connectionDifferenceField nabla nabla0 X (Y+Z) =\n      connectionDifferenceField nabla nabla0 X Y + connectionDifferenceField nabla nabla0 X Z) ∧\n    (∀ (f : M → ℝ) (hf : ContMDiff (𝓡 3) 𝓘(ℝ) ∞ f) X Y,\n      connectionDifferenceField nabla nabla0 (Riemannian.SmoothVectorField.smul f hf X) Y =\n        Riemannian.SmoothVectorField.smul f hf (connectionDifferenceField nabla nabla0 X Y)) ∧\n    (∀ (f : M → ℝ) (hf : ContMDiff (𝓡 3) 𝓘(ℝ) ∞ f) X Y,\n      connectionDifferenceField nabla nabla0 X (Riemannian.SmoothVectorField.smul f hf Y) =\n        Riemannian.SmoothVectorField.smul f hf (connectionDifferenceField nabla nabla0 X Y)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "The derivative-of-f term cancels between connections in the second slot. Use add_left/add_right/smul_left/leibniz and field extensionality. This tensorial cancellation is needed to define a global background gauge. Keep the exact statement and every definition. Only edit the marked proof body; no new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh and only the provided workspace. This is a prerequisite, not a proof of global Ricci-flow existence or Poincare."
+  },
+  {
+    "id": "g6-metric-trace-change-basis",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/MetricTraceChangeBasis.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.metric_trace_change_basis",
+    "source": "import MorganTianLib.Ch01.InvGramTrace\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoerciveInverse\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** metric trace change basis. -/\ntheorem metric_trace_change_basis (A : E3 →L[ℝ] E3) (c : ℝ) (hc : 0 < c)\n    (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (hsym : ∀ v w : E3, inner ℝ (A v) w = inner ℝ v (A w))\n    (B : E3 ≃L[ℝ] E3) (D : E3 →L[ℝ] E3 →L[ℝ] E3) :\n    let e := fun i : Fin 3 => EuclideanSpace.single i (1 : ℝ);\n    let C := B.toContinuousLinearMap.adjoint.comp (A.comp B.toContinuousLinearMap);\n    (∑ i : Fin 3, ∑ j : Fin 3, (A.inverse (e j)) i • D (e i) (e j)) =\n      ∑ i : Fin 3, ∑ j : Fin 3, (C.inverse (e j)) i • D (B (e i)) (B (e j)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Prove invariance of contraction of a (1,2) tensor with the inverse metric under arbitrary constant frame change. Use inverse-of-composition identities and basis expansion, or InvGramTrace with the inner product defined by A. B is not assumed orthogonal. Do not identify A inverse with C inverse. Keep the exact statement and every definition. Only edit the marked proof body; no new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh and only the provided workspace. This is a prerequisite, not a proof of global Ricci-flow existence or Poincare."
+  },
+  {
+    "id": "g6-background-contraction-smooth",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundConnectionContraction.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.background_connection_contraction_smooth",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseDifferential\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\ndef backgroundConnectionContraction (A : E3 →L[ℝ] E3) (T : T3) : E3 :=\n  WithLp.toLp 2 (fun k : Fin 3 => ∑ i : Fin 3, ∑ j : Fin 3,\n    (A.inverse (EuclideanSpace.single j 1)) i * T k i j)\n\n/-- **Math.** background connection contraction smooth. -/\ntheorem background_connection_contraction_smooth (A : E3 →L[ℝ] E3) (T : T3) (c : ℝ) (hc : 0 < c)\n    (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v) :\n    ContDiffAt ℝ ∞ (fun z : (E3 →L[ℝ] E3) × T3 =>\n      backgroundConnectionContraction z.1 z.2) (A,T) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Compose the smooth coercive inverse with continuous coordinate evaluation and finite sums/products, then contDiffAt_euclidean. T represents a fixed background connection, not another copy of the unknown metric. Keep the exact statement and every definition. Only edit the marked proof body; no new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh and only the provided workspace. This is a prerequisite, not a proof of global Ricci-flow existence or Poincare."
+  },
+  {
+    "id": "g6-lie-subtraction",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoordinateLieSubtraction.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.coordinate_lie_subtraction",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateLieMetricLowering\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** coordinate lie subtraction. -/\ntheorem coordinate_lie_subtraction (G : E3 → (E3 →L[ℝ] E3)) (W Z : E3 → E3) (x : E3)\n    (hW : DifferentiableAt ℝ W x) (hZ : DifferentiableAt ℝ Z x) (i j : Fin 3) :\n    coordinateLieMetricExpr G (fun y => W y-Z y) x i j =\n      coordinateLieMetricExpr G W x i j - coordinateLieMetricExpr G Z x i j :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "gauge-lie-metric-lowering"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use fderiv_sub for the vector fields, linearity of fderiv G x in its direction, and finite sums. No differentiability of G is needed for this algebraic identity. Keep the exact statement and every definition. Only edit the marked proof body; no new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh and only the provided workspace. This is a prerequisite, not a proof of global Ricci-flow existence or Poincare."
+  },
+  {
+    "id": "g6-linear-second-derivative",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LinearPullbackSecondDerivative.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.linear_pullback_second_derivative",
+    "source": "import Mathlib\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** linear pullback second derivative. -/\ntheorem linear_pullback_second_derivative (f : E3 → ℝ) (B : E3 →L[ℝ] E3) (x v w : E3)\n    (hf : ContDiffAt ℝ 2 f (B x)) :\n    fderiv ℝ (fun y : E3 => fderiv ℝ (fun z : E3 => f (B z)) y v) x w =\n      fderiv ℝ (fun y : E3 => fderiv ℝ f y (B v)) (B x) (B w) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Prove first derivative chain equality in an open neighborhood of x, then differentiate the eventual equality. Local C2 suffices; use ContDiffAt.eventually or obtain a local C2 domain. Respect order of the two directions. Keep the exact statement and every definition. Only edit the marked proof body; no new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh and only the provided workspace. This is a prerequisite, not a proof of global Ricci-flow existence or Poincare."
+  },
+  {
+    "id": "g6-linear-hessian-contraction",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LinearHessianContraction.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.linear_hessian_contraction",
+    "source": "import Mathlib\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** linear hessian contraction. -/\ntheorem linear_hessian_contraction (B : E3 →L[ℝ] E3) (H : E3 →L[ℝ] E3 →L[ℝ] ℝ) :\n    let e := fun i : Fin 3 => EuclideanSpace.single i (1 : ℝ);\n    (∑ k : Fin 3, H (B (e k)) (B (e k))) =\n      ∑ i : Fin 3, ∑ j : Fin 3,\n        (∑ k : Fin 3, (B (e k)) i * (B (e k)) j) * H (e i) (e j) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Expand B e_k in the standard Euclidean basis, use bilinearity, reorder finite sums. This is the diffusion tensor obtained by conjugating the Laplacian, not an ellipticity assumption. Keep the exact statement and every definition. Only edit the marked proof body; no new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh and only the provided workspace. This is a prerequisite, not a proof of global Ricci-flow existence or Poincare."
+  },
+  {
+    "id": "g6-positive-diffusion-factor",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/PositiveDiffusionFactor.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.positive_diffusion_factor",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoerciveInverse\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** positive diffusion factor. -/\ntheorem positive_diffusion_factor (A : E3 →L[ℝ] E3) (c : ℝ) (hc : 0 < c)\n    (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (hsym : ∀ v w : E3, inner ℝ (A v) w = inner ℝ v (A w)) :\n    ∃ B : E3 ≃L[ℝ] E3,\n      A = B.toContinuousLinearMap.comp B.toContinuousLinearMap.adjoint :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use finite-dimensional positive self-adjoint spectral theory or a positive matrix square root, and strict positivity for invertibility. Search the installed Mathlib. The result must produce B; do not assume its existence. Matrix-to-EuclideanCLM preserves multiplication and star. Keep the exact statement and every definition. Only edit the marked proof body; no new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh and only the provided workspace. This is a prerequisite, not a proof of global Ricci-flow existence or Poincare."
+  },
+  {
+    "id": "g6-bounded-pullback",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedLinearPullback.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.bounded_linear_pullback",
+    "source": "import Mathlib\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** bounded linear pullback. -/\ntheorem bounded_linear_pullback (B : E3 ≃L[ℝ] E3) :\n    ∃ P : (E3 →ᵇ ℝ) →L[ℝ] (E3 →ᵇ ℝ),\n      (∀ (f : E3 →ᵇ ℝ) (x : E3), P f x = f (B x)) ∧\n      (∀ f : E3 →ᵇ ℝ, ‖P f‖ = ‖f‖) ∧ Function.Bijective P :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Supremum norm is preserved by precomposition with a surjective homeomorphism even when B is not a Euclidean isometry. Build with BoundedContinuousFunction composition and inverse B.symm; package linearity and operator bound. Keep the exact statement and every definition. Only edit the marked proof body; no new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh and only the provided workspace. This is a prerequisite, not a proof of global Ricci-flow existence or Poincare."
+  },
+  {
+    "id": "g6-positive-metric-extension",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/PositiveMetricExtension.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.positive_metric_extension",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.PositivePerturbation\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** positive metric extension. -/\ntheorem positive_metric_extension (G : E3 → (E3 →L[ℝ] E3)) (x : E3) (hG : ContDiffAt ℝ 2 G x)\n    (hsym : ∀ᶠ y : E3 in 𝓝 x, ∀ v w : E3, inner ℝ (G y v) w = inner ℝ v (G y w))\n    (c : ℝ) (hc : 0 < c) (hpos : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v) :\n    ∃ H : E3 → (E3 →L[ℝ] E3), ContDiff ℝ 2 H ∧\n      (∀ y v w : E3, inner ℝ (H y v) w = inner ℝ v (H y w)) ∧\n      (∀ y v : E3, (c/2)*‖v‖^2 ≤ inner ℝ (H y v) v) ∧\n      H =ᶠ[𝓝 x] G ∧ HasCompactSupport (fun y => H y-G x) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use H(y)=G(x)+chi(y)*(G(y)-G(x)), not chi*G. Choose the bump support where G is C2, symmetric and norm-close to G(x). The convex interpolation preserves coercivity everywhere; the constant background outside support is essential. No global positivity is assumed on G. Keep the exact statement and every definition. Only edit the marked proof body; no new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh and only the provided workspace. This is a prerequisite, not a proof of global Ricci-flow existence or Poincare."
+  },
+  {
+    "id": "g6-connection-difference-locality",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionDifferenceLocality.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.connection_difference_pointwise",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ConnectionDifferenceField\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** connection difference pointwise. -/\ntheorem connection_difference_pointwise {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (nabla nabla0 : Riemannian.AffineConnection (𝓡 3) M)\n    (X X1 Y Y1 : Riemannian.SmoothVectorField (𝓡 3) M) (p : M)\n    (hX : X p=X1 p) (hY : Y p=Y1 p) :\n    connectionDifferenceField nabla nabla0 X Y p = connectionDifferenceField nabla nabla0 X1 Y1 p :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-connection-difference-linear"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "The difference is C-infinity-linear in both slots, unlike either connection alone. First slot uses cov_congr_apply_left. For the second use exists_decomposition_of_apply_eq_zero and the cancellation lemma, including the neighborhood-zero remainder. Do not replace pointwise hY by eventual equality. Preserve exact statement and definitions; only edit the marked proof body. No new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh. Do not read other workers. No new fixed-point hypothesis can stand in for an actual solver."
+  },
+  {
+    "id": "g6-connection-difference-fiber",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionDifferenceFiber.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.connection_difference_fiber_bilinear",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ConnectionDifferenceLocality\nimport MorganTianLib.Ch01.PointwiseCurvature\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** connection difference fiber bilinear. -/\ntheorem connection_difference_fiber_bilinear {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (nabla nabla0 : Riemannian.AffineConnection (𝓡 3) M) (p : M) :\n    ∃ D : TangentSpace (𝓡 3) p →ₗ[ℝ] TangentSpace (𝓡 3) p →ₗ[ℝ] TangentSpace (𝓡 3) p,\n      ∀ X Y : Riemannian.SmoothVectorField (𝓡 3) M,\n        D (X p) (Y p) = connectionDifferenceField nabla nabla0 X Y p :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-connection-difference-locality"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Define the fiber value with extendVector in both slots, then use connection_difference_pointwise to prove map_add/map_smul regardless of the chosen extensions. Package with LinearMap.mk2 or nested LinearMap structures. Preserve exact statement and definitions; only edit the marked proof body. No new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh. Do not read other workers. No new fixed-point hypothesis can stand in for an actual solver."
+  },
+  {
+    "id": "g6-global-background-gauge",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GlobalBackgroundGauge.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.exists_global_connection_difference_trace",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ConnectionDifferenceFiber\nimport MorganTianLib.Ch01.InvGramTrace\nimport MorganTianLib.Ch01.RicciFrame\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** exists global connection difference trace. -/\ntheorem exists_global_connection_difference_trace {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M]\n    (g : Riemannian.RiemannianMetric (𝓡 3) M)\n    (nabla nabla0 : Riemannian.AffineConnection (𝓡 3) M) :\n    letI : Bundle.RiemannianBundle (TangentSpace (𝓡 3) : M → Type _) := ⟨g.toRiemannianMetric⟩;\n    ∃ W : Riemannian.SmoothVectorField (𝓡 3) M, ∀ p : M,\n      let e := stdOrthonormalBasis ℝ (TangentSpace (𝓡 3) p);\n      W p = ∑ i, connectionDifferenceField nabla nabla0\n        (MorganTianLib.extendVector p (e i)) (MorganTianLib.extendVector p (e i)) p :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-connection-difference-fiber"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Construct the actual global traced difference field, not separate chart-local choices. The fiber bilinear map makes the diagonal trace basis-independent (InvGramTrace). Near any p use the existing smooth orthonormal frame fields and their orthoFrameBasis/orthoFrameSet APIs: the trace becomes a finite sum of smooth connectionDifferenceFields. Prove smoothness by local equality of sections. This gives a global vector field, not a Ricci-flow solution. Preserve exact statement and definitions; only edit the marked proof body. No new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh. Do not read other workers. No new fixed-point hypothesis can stand in for an actual solver."
+  },
+  {
+    "id": "g6-background-derivative",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundContractionDerivative.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.background_contraction_derivative",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BackgroundConnectionContraction\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** background contraction derivative. -/\ntheorem background_contraction_derivative (G : E3 → (E3 →L[ℝ] E3)) (T : E3 → T3) (x v : E3)\n    (hG : DifferentiableAt ℝ G x) (hT : DifferentiableAt ℝ T x)\n    (c : ℝ) (hc : 0<c) (hpos : ∀ w : E3, c*‖w‖^2 ≤ inner ℝ (G x w) w) (k : Fin 3) :\n    (fderiv ℝ (fun y => backgroundConnectionContraction (G y) (T y)) x v) k =\n      ∑ i : Fin 3, ∑ j : Fin 3, (\n        ((-((G x).inverse.comp ((fderiv ℝ G x v).comp (G x).inverse)))\n          (EuclideanSpace.single j 1)) i * T x k i j +\n        ((G x).inverse (EuclideanSpace.single j 1)) i *\n          fderiv ℝ (fun y => T y k i j) x v) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-background-contraction-smooth"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Differentiate the actual background contraction. Use coercive_inverse_differential and the chain rule, finite sum/product rules and coordinate evaluation. No second derivative of G occurs. Preserve exact statement and definitions; only edit the marked proof body. No new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh. Do not read other workers. No new fixed-point hypothesis can stand in for an actual solver."
+  },
+  {
+    "id": "g6-background-lie-correction",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundLieCorrection.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.background_lie_first_order",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BackgroundContractionDerivative\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateLieMetricLowering\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\ndef backgroundContractionJet (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3)\n    (T : T3) (R : Fin 3 → T3) (r k : Fin 3) : ℝ :=\n  ∑ a : Fin 3, ∑ b : Fin 3, (\n    ((-(A.inverse.comp ((P r).comp A.inverse))) (EuclideanSpace.single b 1)) a * T k a b +\n      (A.inverse (EuclideanSpace.single b 1)) a * R r k a b)\n\ndef backgroundLieCorrection (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3)\n    (T : T3) (R : Fin 3 → T3) (i j : Fin 3) : ℝ :=\n  (∑ k : Fin 3, (backgroundConnectionContraction A T) k * (P k (EuclideanSpace.single j 1)) i) +\n    ∑ k : Fin 3, ((A (EuclideanSpace.single k 1)) j * backgroundContractionJet A P T R i k +\n      (A (EuclideanSpace.single k 1)) i * backgroundContractionJet A P T R j k)\n\n/-- **Math.** background lie first order. -/\ntheorem background_lie_first_order (G : E3 → (E3 →L[ℝ] E3)) (T : E3 → T3) (x : E3)\n    (hG : DifferentiableAt ℝ G x) (hT : DifferentiableAt ℝ T x)\n    (c : ℝ) (hc : 0<c) (hpos : ∀ w : E3, c*‖w‖^2 ≤ inner ℝ (G x w) w) (i j : Fin 3) :\n    let P := fun r : Fin 3 => fderiv ℝ G x (EuclideanSpace.single r 1);\n    let R := fun r k a b : Fin 3 => fderiv ℝ (fun y => T y k a b) x (EuclideanSpace.single r 1);\n    coordinateLieMetricExpr G (fun y => backgroundConnectionContraction (G y) (T y)) x i j =\n      backgroundLieCorrection (G x) P (T x) R i j :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-background-derivative",
+      "gauge-lie-metric-lowering"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Expand the direction W in the first fderiv G term in the Euclidean basis. Substitute background_contraction_derivative in the other two terms. This exact correction depends on A and first jets, never on the unknown Hessian. Preserve exact statement and definitions; only edit the marked proof body. No new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh. Do not read other workers. No new fixed-point hypothesis can stand in for an actual solver."
+  },
+  {
+    "id": "g6-background-equation",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundDeTurckEquation.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.background_deturck_equation_split",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BackgroundLieCorrection\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.CoordinateLieSubtraction\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualDeTurckEquationSplit\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ActualGaugeDifferentiable\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** background deturck equation split. -/\ntheorem background_deturck_equation_split (G : E3 → (E3 →L[ℝ] E3)) (T : E3 → T3) (hG : ContDiff ℝ 2 G)\n    (hsym : ∀ y v w : E3, inner ℝ (G y v) w=inner ℝ v (G y w))\n    (x : E3) (hT : DifferentiableAt ℝ T x) (c : ℝ) (hc : 0<c)\n    (hpos : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (G x v) v) (i j : Fin 3) :\n    let P := fun r : Fin 3 => fderiv ℝ G x (EuclideanSpace.single r 1);\n    let R := fun r k a b : Fin 3 => fderiv ℝ (fun y => T y k a b) x (EuclideanSpace.single r 1);\n    let W : E3 → E3 := fun y => WithLp.toLp 2 (fun k : Fin 3 =>\n      coordinateDeTurckGauge (G y) (fun r : Fin 3 => fderiv ℝ G y (EuclideanSpace.single r 1)) k);\n    -2*actualCoordinateRicci G x i j +\n      coordinateLieMetricExpr G (fun y => W y-backgroundConnectionContraction (G y) (T y)) x i j =\n      (∑ p : Fin 3, ∑ q : Fin 3, ((G x).inverse (EuclideanSpace.single q 1)) p *\n        (fderiv ℝ (fun y => fderiv ℝ G y (EuclideanSpace.single q 1)) x\n          (EuclideanSpace.single p 1) (EuclideanSpace.single j 1)) i) +\n      (-2*ricciLowerOrder (G x) P i j + deturckLieLowerOrder (G x) P i j -\n        backgroundLieCorrection (G x) P (T x) R i j) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-background-lie-correction",
+      "g6-lie-subtraction",
+      "c6-exact-nonlinearity",
+      "l6-gauge-field-differentiable"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Subtract the actual background connection contraction from the flat gauge. Establish differentiability of both fields from the accepted lemmas; use coordinate_lie_subtraction, background_lie_first_order and the exact flat-background split. The elliptic second-order principal part is unchanged. No choice of T can depend on second derivatives of the unknown metric. Preserve exact statement and definitions; only edit the marked proof body. No new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh. Do not read other workers. No new fixed-point hypothesis can stand in for an actual solver."
+  },
+  {
+    "id": "g6-anisotropic-laplacian",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LinearPullbackLaplacian.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.linear_pullback_laplacian",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LinearPullbackSecondDerivative\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LinearHessianContraction\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** linear pullback laplacian. -/\ntheorem linear_pullback_laplacian (f : E3 → ℝ) (B : E3 →L[ℝ] E3) (x : E3) (hf : ContDiffAt ℝ 2 f (B x)) :\n    let e := fun i : Fin 3 => EuclideanSpace.single i (1 : ℝ);\n    (∑ k : Fin 3, fderiv ℝ (fun y => fderiv ℝ (fun z => f (B z)) y (e k)) x (e k)) =\n      ∑ i : Fin 3, ∑ j : Fin 3, (∑ k : Fin 3, (B (e k)) i*(B (e k)) j) *\n        fderiv ℝ (fun y => fderiv ℝ f y (e j)) (B x) (e i) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-linear-second-derivative",
+      "g6-linear-hessian-contraction"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use the linear second-derivative rule, express directional second derivatives as application of fderiv(fderiv f), and apply the algebraic Hessian contraction. Keep the outer direction i and inner direction j consistent; no unjustified interchange is needed. Preserve exact statement and definitions; only edit the marked proof body. No new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh. Do not read other workers. No new fixed-point hypothesis can stand in for an actual solver."
+  },
+  {
+    "id": "g6-constant-diffusion-ivp",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConstantDiffusionIVP.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.constant_diffusion_local_classical_ivp",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BoundedLinearPullback\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LinearPullbackLaplacian\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.SemilinearLocalClassicalIVP\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** constant diffusion local classical ivp. -/\ntheorem constant_diffusion_local_classical_ivp (B : E3 ≃L[ℝ] E3) (f : E3 →ᵇ ℝ) (hf : UniformContinuous f) :\n    ∃ T : ℝ, 0<T ∧ ∃ u : (ℝ × E3) →ᵇ ℝ,\n      (∀ x : E3, u (0,x)=f x) ∧ TendstoUniformly (fun t x => u (t,x)) f (𝓝[>] (0:ℝ)) ∧\n      ∀ t ∈ Ioo (0:ℝ) T, ContDiff ℝ 2 (fun x : E3 => u (t,x)) ∧ ∀ x : E3,\n        HasDerivAt (fun s : ℝ => u (s,x))\n          (∑ i : Fin 3, ∑ j : Fin 3,\n            (∑ k : Fin 3, B (EuclideanSpace.single k 1) i * B (EuclideanSpace.single k 1) j) *\n            fderiv ℝ (fun z : E3 => fderiv ℝ (fun w : E3 => u (t,w)) z\n              (EuclideanSpace.single j 1)) x (EuclideanSpace.single i 1)) t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-bounded-pullback",
+      "g6-anisotropic-laplacian"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Apply the accepted semilinear heat existence theorem with N=0 to the initial data f composed with B. Define u(t,x)=v(t,B.symm x). Construct the bounded continuous spacetime pullback, transport the uniform initial limit, and use linear_pullback_laplacian to transform the equation. This constructs a real constant-coefficient solution; do not assume one. The parameter B is constant in time and space. Preserve exact statement and definitions; only edit the marked proof body. No new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh. Do not read other workers. No new fixed-point hypothesis can stand in for an actual solver."
+  },
+  {
+    "id": "g6-positive-diffusion-ivp",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 23,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/PositiveDiffusionIVP.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.positive_diffusion_local_classical_ivp",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.PositiveDiffusionFactor\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ConstantDiffusionIVP\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** positive diffusion local classical ivp. -/\ntheorem positive_diffusion_local_classical_ivp (A : E3 →L[ℝ] E3) (c : ℝ) (hc : 0<c)\n    (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v)\n    (hsym : ∀ v w : E3, inner ℝ (A v) w=inner ℝ v (A w))\n    (f : E3 →ᵇ ℝ) (hf : UniformContinuous f) :\n    ∃ T : ℝ, 0<T ∧ ∃ u : (ℝ × E3) →ᵇ ℝ,\n      (∀ x : E3, u (0,x)=f x) ∧ TendstoUniformly (fun t x => u (t,x)) f (𝓝[>] (0:ℝ)) ∧\n      ∀ t ∈ Ioo (0:ℝ) T, ContDiff ℝ 2 (fun x : E3 => u (t,x)) ∧ ∀ x : E3,\n        HasDerivAt (fun s : ℝ => u (s,x))\n          (∑ i : Fin 3, ∑ j : Fin 3, A (EuclideanSpace.single j 1) i *\n            fderiv ℝ (fun z : E3 => fderiv ℝ (fun w : E3 => u (t,w)) z\n              (EuclideanSpace.single j 1)) x (EuclideanSpace.single i 1)) t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-positive-diffusion-factor",
+      "g6-constant-diffusion-ivp"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Produce B from positive_diffusion_factor, consume the constructed constant-diffusion solution, and prove the matrix coefficient identity for B composed with its adjoint by basis expansion. A is a supplied constant positive operator, NOT the variable coefficient G(x) inverse. No quasilinear existence claim. Preserve exact statement and definitions; only edit the marked proof body. No new hypotheses, axioms, admits, global options or extra agents. Use swarm-check.sh. Do not read other workers. No new fixed-point hypothesis can stand in for an actual solver."
+  }
+]
