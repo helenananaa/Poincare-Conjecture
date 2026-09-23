@@ -1,0 +1,879 @@
+{
+  "proof_head": "6cd4586456feae076ef8afd06ce88e1b88354c5c",
+  "compared_to": "feac0d9c4cb08573da24d24e6e7149421f5e01f0",
+  "changed_files_before_closeout": 223,
+  "lean_files": 173,
+  "sources": [
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BarycentricLinkCoordinates.lean",
+      "sha256": "8502af407ae24a57a7ff1a7fa675b460145412fdbf29aacef026b1c0f0c2e597",
+      "bytes": 4242
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BarycentricLinkReconstruction.lean",
+      "sha256": "3af617319d4fedd032536b64a039b187c51b211d8e018138ddb75a3abdc6b4a5",
+      "bytes": 3372
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BarycentricMembership.lean",
+      "sha256": "68eaa68b0e89601c4c0f17ba29a6ebe574e12505de218859246d904830d426eb",
+      "bytes": 4552
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BarycentricOpenCover.lean",
+      "sha256": "986035dc747f106c43e7f2d29210257e2a6145f1431f3c776cd5609fc79da1b8",
+      "bytes": 1456
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BarycentricStarContractible.lean",
+      "sha256": "9a8f01259eb5cedfc3b90afb2559c32dd517669272516758d80a9711bb80f9c4",
+      "bytes": 4528
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BilinearDerivativeLift.lean",
+      "sha256": "0c7aca6c5b089c5691d8369cb1877d625b24d8ab4a7d714c33caa83d9a9e2cd7",
+      "bytes": 2297
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CoerciveInverseBound.lean",
+      "sha256": "8892a5151e92cc1fe4f83698f9a33dc1d58d026a79b625b8208f7b1721104b9c",
+      "bytes": 1839
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CoerciveInverseDifference.lean",
+      "sha256": "c099f9c03a39a1d55e2188762261cb8df0faa30916bf164dee34ec5f62fc9088",
+      "bytes": 3967
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CoerciveInverseEntries.lean",
+      "sha256": "7fc4cf5f118561e92233dab6cbff5b34358f14aef3715179f750c59ef267a1cb",
+      "bytes": 1356
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CompactCurvatureBound.lean",
+      "sha256": "b23a02f9f5f137a733e7b1265dccefb448ecb021492134f84b6a7ae2a6e9fc27",
+      "bytes": 10637
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CompactCurvatureNormalization.lean",
+      "sha256": "2c5e001f5e7c4bae26c3da8c70f837604ad86c6a6d03cb2c16fcb5ac1ff1880e",
+      "bytes": 3321
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CompactCurvatureOperatorBound.lean",
+      "sha256": "819d6c17a63607554d6b6ba3c75319f2c8e3aa896310c2a0de9d0695b0c63738",
+      "bytes": 2411
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ConformalConnection.lean",
+      "sha256": "36e54f462fd0be308f955588b553208676ee132507a17160937570970f975a9c",
+      "bytes": 13879
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ConformalCorrectionDerivative.lean",
+      "sha256": "71070b2b09cc085c55b4853d243f38e1e5a5eee0071cbfb51dabe135cec261a8",
+      "bytes": 2814
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ConformalCurvatureExpansion.lean",
+      "sha256": "63f9c7e0129ccbf421903421d4a79d35343a0a077bc87451d6c3ee7c6b0959d4",
+      "bytes": 3237
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ConformalGradient.lean",
+      "sha256": "f8cf4b3f572447af7283c8bb18bd2d408f91d035beb37870c657f2f709f04e5a",
+      "bytes": 2796
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ConformalHessian.lean",
+      "sha256": "d9f451b81dff42666e35db790b8836780fc210ce05c260d547032194e36339d4",
+      "bytes": 1803
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ConformalMetricBasis.lean",
+      "sha256": "b5a40466e9a601dc4868bf556e52fbd8d7dc71b4654f6ad8e6b8f9c2d9e75724",
+      "bytes": 2579
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ConformalPointHessian.lean",
+      "sha256": "da013684465a739c49af9fbc0ca32ea93cc19d9b0a639262ae5aed1932c7e5de",
+      "bytes": 1802
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ConformalQuadraticContraction.lean",
+      "sha256": "6a18bbce8c6b6d35707329f8664471f8de116f635e56fe39597d2273c39797f7",
+      "bytes": 4790
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ExteriorCurvatureBound.lean",
+      "sha256": "5687cbd2fbca426b34be3df9bae86cce7f421fa9297083a74407c1142b56bae1",
+      "bytes": 5710
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FiniteCutPathChains.lean",
+      "sha256": "2863d637706159b4d7ebe40cfcf738e7e078e0982a78e7986768343f644e2d67",
+      "bytes": 5656
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FinitePLRealization.lean",
+      "sha256": "04030be0c9a5d5e9e0125715cbcaa87d0f5d43d47af83620888315c8aae9cdf4",
+      "bytes": 6771
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/MatrixComponentBound.lean",
+      "sha256": "3ec707aa6675e91c536b44439534653bf4442afcaed52f13117b75e4dff0b750",
+      "bytes": 2362
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/MatrixRayleighBound.lean",
+      "sha256": "559d8393f7fb6488cae087cf34d93b82c2b4df7731810dddc5d449142fa063fc",
+      "bytes": 1412
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/MetricCoefficientDerivative.lean",
+      "sha256": "4b56038eece996d121d8d3e0aa3dc814c46e1379508880ef96c5ff8fb99fb4ef",
+      "bytes": 2673
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/MetricGradientContraction.lean",
+      "sha256": "2a24e889527320db229c331454802ed0dd4df9564e8315fb8f9ba3c76a7fd529",
+      "bytes": 4758
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/MetricTraceBasis.lean",
+      "sha256": "22ef3d2eb80cfae21d51701c49eac93fe1d9f56378cded05d2bd6a2b8243ce12",
+      "bytes": 1381
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/MovingMetricPairing.lean",
+      "sha256": "bdabb2deaea7a556ba228685d555cbb47ad20bfe588a6605ad9d42bf82243cc5",
+      "bytes": 9343
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/NeckC2Control.lean",
+      "sha256": "6f38052df05c899c87f3fa1dbf9c120cadb34035f845cf72160b4dc7738277b1",
+      "bytes": 18483
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/OrthonormalRayleighBound.lean",
+      "sha256": "cd1f759b52c1b36e5e2e3a228b5506f2595b9399280ac35051af74e9863621dd",
+      "bytes": 1786
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/PuncturedStarHomeomorph.lean",
+      "sha256": "0208795fc3cbd5f27bc664af9951eba6b75cceb1f58e10ed543c81affdaf1f33",
+      "bytes": 4615
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/RicciMovingPairing.lean",
+      "sha256": "655f75c11981e90310d7f6899af16d7d1eab684a0a5583b635cf896139a9a373",
+      "bytes": 1896
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ScalarSectionalTrace.lean",
+      "sha256": "e4980dbea206d8c2f963c29176001c6690cfe19c8a857f9a1d2a8e22cf5b4f14",
+      "bytes": 3145
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/TemporalHessianCoarse.lean",
+      "sha256": "5b416383a6d6169360f1cd4159a8ce3e20514fd592e873d1868efb81317f5d50",
+      "bytes": 4854
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/TemporalHessianConvolution.lean",
+      "sha256": "d90fd47c8fbd6ca1c3936c1465c8d2299c748330371e88a65d43228f01927892",
+      "bytes": 5568
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/TemporalHessianL1Modulus.lean",
+      "sha256": "7f90d6533a1b6b84c858939b35e477a0979d8bdf4357bb4bee8dc5e20800b071",
+      "bytes": 3873
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/TemporalHessianPointwise.lean",
+      "sha256": "2cb227906aabe8e016deb3e9a065905ced78f5682ccaebac74a6ed9e508282e8",
+      "bytes": 2836
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/TemporalHessianSmallL1.lean",
+      "sha256": "925561ab140d785abb59306cabe92f46b6a38552889bd8ad68d3cd0a5db41fe5",
+      "bytes": 2157
+    },
+    {
+      "path": "PoincareConjecture/PoincareConjecture/ParallelMath/ExtinctionArea/QuadraticAreaDistortion.lean",
+      "sha256": "9cb9d8c47420fb2dd03e6d4f2312b8a42236a21ef42a73265a24bc0c9a25a923",
+      "bytes": 7051
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualChartCurvature.lean",
+      "sha256": "0e59958c3cedd730524ff3861414f4fb6336b07cb6ad7119d1cf0d724c109bef",
+      "bytes": 3463
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualChartRicci.lean",
+      "sha256": "394651729e00d3826f860dc9f63764f6a46e4ae435e57269f0d34a91dcd246f8",
+      "bytes": 4099
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualConnectionGeometricFrame.lean",
+      "sha256": "e6b00b53272f75e731fa93f97b806442939feaa9e69a8644f54d6a52704ddb0d",
+      "bytes": 7096
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualDeTurckEquationSplit.lean",
+      "sha256": "0e6397b61e040386cf8ae153b2fd6c44ceb75ebd197d606a69bbaf0262e79c5c",
+      "bytes": 1797
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualDeTurckLiePrincipal.lean",
+      "sha256": "a4948c54b3a3198d535ed8660c26e4db8794d098c112cdfa666a1d571c50b31b",
+      "bytes": 6944
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualDeTurckResidual.lean",
+      "sha256": "dfe30cb335d0bb99a8b91e7054b1333d95d8fe4ba482e00a2c0be2f3b553d20c",
+      "bytes": 4585
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualDuhamelSpatialSchauder.lean",
+      "sha256": "0b93762a250ade7e26f3ee71cf26167c975e26a0f072a5c1148033a00d128bd2",
+      "bytes": 3503
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualGaugeDifferentiable.lean",
+      "sha256": "f869e65808f115a852111f3ebc14e1bffe37a7a856c6bceb0108829ec435a509",
+      "bytes": 2008
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualGaugeLieGerm.lean",
+      "sha256": "cb368823a40c4d9a4d6aec992c98f91532f252341a3250d9e5e6a9bd977f0c84",
+      "bytes": 2468
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualGaugeLoweringNeighborhood.lean",
+      "sha256": "a15635624cae6c385d729a09e60ef7698ffbaf5e19d6e6250987e207daec0379",
+      "bytes": 2936
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualGaugeSmoothOn.lean",
+      "sha256": "5b645f44809bd31528a238fe475f0b4713a17918971ac068c87e2f85b2a354b7",
+      "bytes": 2169
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualIntrinsicRicci.lean",
+      "sha256": "13d2a998b20638fbc9abcc21241b7cb05e3025fd8c7b17e9253f5ecbb36ac446",
+      "bytes": 2695
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualRicciCurvatureTrace.lean",
+      "sha256": "f1795031bcc0b60aef90949696f3e2a4cf55e530646ea65d3b9c58779daff019",
+      "bytes": 8511
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ActualRicciGerm.lean",
+      "sha256": "8adf1868fddf997cf90c33aea9a20ba1d1b9d638e6784f5bf8a10a2acf9f93a5",
+      "bytes": 3647
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicConvolutionPullback.lean",
+      "sha256": "c9104fde04063baa88777d04458babfcbdb540d4bd4c816fb8bf9c3347234be0",
+      "bytes": 3980
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicDuhamelSpatialSchauder.lean",
+      "sha256": "6f864cefcf205a4fdbd5035fe3cc43aaa528189b39351a945b9af592a1d97a48",
+      "bytes": 12284
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicFractionalMoment.lean",
+      "sha256": "31dec41ef71a4c0a2c062c1d4eae15e82c6fe60dcdd440b03b98bfa4e636d991",
+      "bytes": 7830
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHeatKernel.lean",
+      "sha256": "2016cffaba9039e5d64ed20acbaddfd8db7404dbdae5b8229d90bb93a4660ae4",
+      "bytes": 4577
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHessianCancellation.lean",
+      "sha256": "d56a28181af06585ea6ece4cca65231b49c2caa0d409a7f616f2240009a3b62a",
+      "bytes": 8115
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHessianFormula.lean",
+      "sha256": "c83bb197fcec125f6508e391c71b0f4529500a9ed053eb09423301233ed0e912",
+      "bytes": 3134
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHessianIdentification.lean",
+      "sha256": "678a03e404ea36ce715b8c0fd9b3f4129d00e94ce24eb46ae87f2ae90039ebc5",
+      "bytes": 12884
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHolderHessian.lean",
+      "sha256": "f1b665801eea614cd56d631f24f21369ddec30e4ff1834782c883208aaee74d6",
+      "bytes": 4307
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHolderOperator.lean",
+      "sha256": "6c14b13510f0843b716e1dcadb628cec7658903c9a088a1845387be0e77badfc",
+      "bytes": 3367
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicKernelSemigroup.lean",
+      "sha256": "69bc0519007b4b819a44b7ad602bfbbf4173f370e6d2dec79b4567fc74507db6",
+      "bytes": 4559
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicLowerHolderTrace.lean",
+      "sha256": "38b75f35ccd0a505b12dc8e4f14427253cbddb27a435cfebdc31ccf9ec9e6b34",
+      "bytes": 4806
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicTraceRate.lean",
+      "sha256": "329c6698f519de41031c856f493cf4b934e533d61a808526bed234a701241e35",
+      "bytes": 3391
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicWeightedHessian.lean",
+      "sha256": "1670da051c8f3f60681ce71cbc1d06da9c71d88d137760a79ea2d0556c7f52be",
+      "bytes": 16635
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundConnectionContraction.lean",
+      "sha256": "453df589a09cf497775a7ee1afa570fe4deb338f185e9dc5ea41cb92ffd6f1a1",
+      "bytes": 2742
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundContractionDerivative.lean",
+      "sha256": "44ea07b18b6aafcc7fbaa8076f8466abc46293e57726632086ab0ef792ef5b91",
+      "bytes": 7132
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundDeTurckEquation.lean",
+      "sha256": "2230e0d0230e33cd61119a00bc00934832c0cdc59c3a84bfd16c115a55cd04f5",
+      "bytes": 4670
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundHolderControl.lean",
+      "sha256": "f58cbb11fe13fca3d0d154936a30a64d73d94966286d6ab2f0ccc019d444d4ac",
+      "bytes": 3681
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundJetSmooth.lean",
+      "sha256": "e05567288aa0d66a0c9b4ff3faa09222cbddfd27a34d6bb554c3609ff63bd6cf",
+      "bytes": 4214
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundLieCorrection.lean",
+      "sha256": "96f8bed8bf1237f11b38f93f25b4f76c0f3e4bdcae56b50b2bee14973cfc5c6f",
+      "bytes": 3469
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BilinearEvaluationDerivative.lean",
+      "sha256": "24466722b5e6310b3c3c4abd02aefdc7b3d4f49f14404baa6803b4343bc47063",
+      "bytes": 947
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedC2HolderCompleteness.lean",
+      "sha256": "76c7e9f42ffc41d042c51ff84bbe32270fd9ac04bb9198f34ed2f6e62df3b94a",
+      "bytes": 6836
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedC2JetCompleteness.lean",
+      "sha256": "7dbf5c833c7897d3803dc9de420f0af595bc0a3644f2f58ede78cc8bee68894f",
+      "bytes": 4157
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedDerivativeGraph.lean",
+      "sha256": "7c06665c5fafa808b713fc0c64a8d930c0c0e7b58e3b149504dba27e2a0b4929",
+      "bytes": 2202
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedHolderCompleteness.lean",
+      "sha256": "2d47d8313c85f78d973729fee14e12ac76515b2f25454a384fc3d515dbeebd7e",
+      "bytes": 1675
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedHolderGraph.lean",
+      "sha256": "e9fe598d7472cd8505565a189fefc8930cb363b0c226176018fbe6eae79e7ecf",
+      "bytes": 2161
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedHolderGraphNorm.lean",
+      "sha256": "4198c515c7659128b95689881237ecd9624b5c0de597622f0cfc23c5cb1bf5e5",
+      "bytes": 3165
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedHolderIncrement.lean",
+      "sha256": "e11fc404cf39504da7f2854cd85308121c5f2ddfbb2929b9cc1298ea4f50b13f",
+      "bytes": 2845
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedLinearPullback.lean",
+      "sha256": "59659b4cb613b21cc0d6406d3022a926b5819b7e4ff812b3c2336e7b8d1f4fe5",
+      "bytes": 2621
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartCoefficientMetricPairing.lean",
+      "sha256": "1cee7363464b06298743a979c631e925cce431c6f816d040e69c90eda31f89cc",
+      "bytes": 4285
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartConnectionGerm.lean",
+      "sha256": "a8886eada642b437d48f27f13cff56585757615bd09f863d0ad58c313286c33d",
+      "bytes": 1759
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartCurvatureCoefficientSign.lean",
+      "sha256": "3d60100e419f4db1e31d8bd9413e9672d34ea6aff993a051d67ae78669bdadaf",
+      "bytes": 7213
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartMetricTrace.lean",
+      "sha256": "18e21c6e7e3c3e399cb585f225b62991f46bfe3c4b44f0b921b0d014308be5d9",
+      "bytes": 6821
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartOperatorEuclideanSmooth.lean",
+      "sha256": "911d3b5a7a253a3430a362fabfef71a8fac7fadb57624550a437d3bbbe8f0a86",
+      "bytes": 2498
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartOperatorSymmetry.lean",
+      "sha256": "161b9ebc5d39a18459f2d590d0f17be0033e9811e00eabab4ca09c5414dfd3a0",
+      "bytes": 1940
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartPartialActualDerivative.lean",
+      "sha256": "eeca9d57adde0db8958c6097d5bb76d24bdd3b96bd884fccf3d9a9291b111ef9",
+      "bytes": 3496
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartScalarComponentExtensions.lean",
+      "sha256": "2a69db959072bb15186ced140e9e119abcaa80513b8c7da1f75eabe7df6eca01",
+      "bytes": 3568
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartTraceIntrinsicRicci.lean",
+      "sha256": "107728b878ecbf0af692feb3f03b24d5786b816fe6606cc5435ca53b70db327b",
+      "bytes": 2985
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartVectorFieldExtension.lean",
+      "sha256": "72e8d50ebe501432ca6e4f1a2d56df4aa61ea20128249c66589ad9f637b5c293",
+      "bytes": 3829
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoefficientConnectionBilin.lean",
+      "sha256": "8cb2770f294ad8ad75a04863f3ba26831303a927b0980186dfed58bd7d2291d6",
+      "bytes": 1233
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoefficientConnectionDifferentiable.lean",
+      "sha256": "73ff5b67e56f6197722a533d6e002d612afcbff4d4d2890c79784f44d1715acc",
+      "bytes": 4734
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CompactInitialMetric.lean",
+      "sha256": "570a8db8dbe5c40248768c1304b8587fb0394a780f32f5da0fac225e413120d3",
+      "bytes": 13293
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionBasisExpansion.lean",
+      "sha256": "4bcaa1f2fab1866affd79d32f44a445cbb5765ab4b50422692d4677625378277",
+      "bytes": 880
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionDifferenceChart.lean",
+      "sha256": "29f0636cc31fc09e6d0cf8f6ccaa3b1b1599f55b168dfbd1f2a0e06eeaa87066",
+      "bytes": 6079
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionDifferenceFiber.lean",
+      "sha256": "311a6c3b44c29cffde11f4df4ee5d20fa89a0d325ee45e24d78c36e2a64c28f4",
+      "bytes": 4832
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionDifferenceField.lean",
+      "sha256": "7f238466c8c661b333f21424d7eeda3c77708632b36228a5b6c9c514d332bcd5",
+      "bytes": 2933
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionDifferenceLocality.lean",
+      "sha256": "af7e14be26de7a6efc7431f71d85759fc580a3fb769bb7b6676e8cb5ed4915b5",
+      "bytes": 5394
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionMetricBasis.lean",
+      "sha256": "1abc6eeaa7b3f8ec95240cb932f0c1b10d89d8a99d77821f63787b2cfbe4ef33",
+      "bytes": 3544
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionMetricTrilinear.lean",
+      "sha256": "d6fe7e1d38c505f227b212fe379ad856a53d169270dd8791fcb73cefd4d3a086",
+      "bytes": 1776
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConstantDiffusionIVP.lean",
+      "sha256": "f9685eb8d19aafed34ce976f11c9ed2d06af07cae434143106a6949e58334092",
+      "bytes": 5126
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoordinateCovariantMetricRule.lean",
+      "sha256": "0f8d293b260da1e81ffa34f19a22c50e92a0fa3b47d380d10563eb8eb46fe5e1",
+      "bytes": 4358
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoordinateLieCovariant.lean",
+      "sha256": "c517215852eda145e977d6d7dbd30cd9dc1540409186aba2a1185056da768d72",
+      "bytes": 7645
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CoordinateLieSubtraction.lean",
+      "sha256": "a870ff36ebe09914d9bc0e72d212e731562b5f5e02dfbd4a5000894b1d71db34",
+      "bytes": 1839
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CurvatureCoordinateComponents.lean",
+      "sha256": "c5ba9fc1bcca81065653fde934cc23883db93395266217d531498b5bf3dadc29",
+      "bytes": 4116
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/CurvatureLinearNaturality.lean",
+      "sha256": "d2c9993e2c7a70aa23bcf4de265a17c30af1a3eb1cf3709482299d50f92e9c81",
+      "bytes": 4824
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DeTurckHolderLocalControl.lean",
+      "sha256": "3d082b50a50124c1906a0d59e305cccd9fefb3235014c338085f5d3ce17fd36d",
+      "bytes": 3366
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DeTurckLieLowerSmooth.lean",
+      "sha256": "d7553a6d84346916eb7408018bad3a36f28a0d9f001a7c112ff9387a1f396bef",
+      "bytes": 3189
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DeTurckNonlinearityLocalControl.lean",
+      "sha256": "51ba70bf1cb1d963aaf4f79f6dab4b1e72b0645059c6148ff47267c14d005546",
+      "bytes": 2789
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DeTurckPrincipalContraction.lean",
+      "sha256": "00fdf8769e9738419304d77a7079e7f1d56293c67b195241fc0313f56c6871de",
+      "bytes": 1872
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DiffusionCutoffCommutator.lean",
+      "sha256": "586b532478487a8767bb14cf14c590586d41698f2dbac34ccef93ebd832be6ee",
+      "bytes": 7370
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/DuhamelHessianSpatialHolder.lean",
+      "sha256": "2ad0d87f23d40270097b6f2cff1225b8400043dc00e24b6c5c0fd7db14afd03a",
+      "bytes": 5978
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/FrameInverseCoordinate.lean",
+      "sha256": "606300a023ecdd92688b79756e31222884026e6088f9b27de326a775cb2f4af5",
+      "bytes": 1966
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/FrozenPrincipalDifference.lean",
+      "sha256": "519d31ceedb489049c992adef94b849c9554bf708c6180bf1bb72efa17a9deb7",
+      "bytes": 7961
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/FullBackgroundNonlinearity.lean",
+      "sha256": "b58bc3da21fff79a62eff3a3ba20cab8e23bed76bcf8bbc640c7ec2ccd0cc552",
+      "bytes": 5683
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/FullDeTurckNonlinearity.lean",
+      "sha256": "2e065f17401b703e52044587286bf5ca20d209ae4e09fc01504c7f01bfcf2990",
+      "bytes": 1496
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianComparableTimes.lean",
+      "sha256": "982798306f53279f6f6ed8c344d4c03a29afa7f0fcd1036726e61f9162bff90e",
+      "bytes": 3437
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianHessianTimeDerivative.lean",
+      "sha256": "a6a88226a042c6120af188abcecb87f6eaa4e30bf030f3022e3b17c32bd10286",
+      "bytes": 3030
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianHessianTranslation.lean",
+      "sha256": "05f2248b32488c8047d74d7c21fc6a1fd1bdffd811a550fc0f71b5b1bf873493",
+      "bytes": 3523
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianParabolicShift.lean",
+      "sha256": "2890d25d51220994be2ad84b854131a573d32576b63c48f6bd38f1fe96b7ad7d",
+      "bytes": 4528
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianShiftPolynomial.lean",
+      "sha256": "310d5e520dbc8d73a9482428c24892b26f6caf89850d53012f13d33b8b0a0c74",
+      "bytes": 2084
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianShiftedThirdMajorant.lean",
+      "sha256": "88530d34368e4e34b8a05b7fbcf2e2a8f8b566c59da552642a27d844f7354ecf",
+      "bytes": 10579
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianTemporalDerivativeBound.lean",
+      "sha256": "e14c4de34de77246ded6e2c327231c03fc623cc5794fc9114e9ba9fafa1a2549",
+      "bytes": 9447
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianThirdDerivative.lean",
+      "sha256": "6bfe0da1ffba45862b8362827bccc54672708a2b93fbc677c0b94ec0340d6df8",
+      "bytes": 2925
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianThirdDirectionalBound.lean",
+      "sha256": "fe1fd0433450541f1b086d766f698761f107856f5eb75c5306ed420813e1f3a0",
+      "bytes": 7487
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GlobalBackgroundGauge.lean",
+      "sha256": "89d6da5ac5e3ea3226405ab1d46bdf737e69a2e2f2b38b98718819c34f67558b",
+      "bytes": 7547
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GlobalGaugeCoordinates.lean",
+      "sha256": "1333fa501915ff9d6fe10ce796c1a1e5551c1612be22453b4b9bdb35a22f7530",
+      "bytes": 9915
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HeatHessianSchauderModulus.lean",
+      "sha256": "0b132e39102ee7ce78f169459a92c323e4054c9b65cf8e15adc8b9a5be6c7f98",
+      "bytes": 4122
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HeatHessianSmallShift.lean",
+      "sha256": "630abd7c24c128f29fb075b06ad9c0b17c0596438b5b919d7ac19d1b039c6190",
+      "bytes": 7345
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HolderGraphHeatContraction.lean",
+      "sha256": "14e884a6f312a3c81ed7afe98d5e681cd696f6f00f38bef8c02f860949d1a76d",
+      "bytes": 5167
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HolderNonlinearityDifference.lean",
+      "sha256": "a5619e6a7e5aa23236613a1b6aaa8cc8bb68bac693f04768442f1a88f3886b0b",
+      "bytes": 3371
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HolderProductEstimate.lean",
+      "sha256": "286d39fbb25787454ac42f9ef52662b6fb80d66f87f22a68dddd3076e529360d",
+      "bytes": 2133
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/HolderScaleInterpolation.lean",
+      "sha256": "18900f5170b07e82771e349ed9c2a7c734532f79f8b1b3b95d3509875d0cf10f",
+      "bytes": 3643
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/IntegratedSchauderModulus.lean",
+      "sha256": "13fde5aafce8562dd518166d1b60899c857874ccad72e4de4790e26edb247629",
+      "bytes": 3224
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/IntrinsicLieCoordinates.lean",
+      "sha256": "9da042bec8d741e71457269308e18096d07f0632846eaa097ff2e8ccbd968dd4",
+      "bytes": 13135
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/IntrinsicLocalDeTurckEquation.lean",
+      "sha256": "c0f857bbf9097b9f398035db2e36e3b368eb13e9938b1fa4ff340927ea4799cc",
+      "bytes": 2669
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/InverseCoefficientHolder.lean",
+      "sha256": "44a3195991d309c36b03be7fcde81b715295ab15065d3f21af9143ca9b480f03",
+      "bytes": 2398
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/InverseMetricHeatCommutator.lean",
+      "sha256": "fc4becd97d749583258ab367abf8d1695287450e6412827985e1240cf2a96b76",
+      "bytes": 3912
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/InverseMetricIntegratedError.lean",
+      "sha256": "e5896e830c45cda5b3f6618fd1a2606127ebff3fcdafbc254fdd53b4dc22dcf0",
+      "bytes": 4074
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LeviCivitaComponentDerivative.lean",
+      "sha256": "340a2fe68ceadd04544db5891dc16712b467e7f91544c4c3098ea99536d612c7",
+      "bytes": 7922
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LinearHessianContraction.lean",
+      "sha256": "8971b4629c730051384de445dda3474ba8562a0f364524e1a63254a15f733f96",
+      "bytes": 2347
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LinearHessianHolderTransport.lean",
+      "sha256": "9b71d54569f9674888fe0062178f4d79d605f1fd9bc2ff76b6bd5f25fd8cb4c6",
+      "bytes": 8442
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LinearPullbackLaplacian.lean",
+      "sha256": "3fe3b5aba5aa645900b83d999e6e8afd061f952e722b1d3d4bae8d72697ecd73",
+      "bytes": 2865
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LinearPullbackSecondDerivative.lean",
+      "sha256": "cb067ae00500b7c596983af427ac6d6846d5bdf558d32945eef3ceff663e54ef",
+      "bytes": 2052
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalC2DerivativeControl.lean",
+      "sha256": "1441948a109defa4f129839668edbf6943e89d5241a72e267588f81d7ed02ddd",
+      "bytes": 3127
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalChartDeTurckSplit.lean",
+      "sha256": "86f6f1c8f4cce93cf2a52ae17f3598d5ed7dcd79361586c41d832bae4000321a",
+      "bytes": 4302
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalDeTurckEquationSplit.lean",
+      "sha256": "7e2a5122c57842e267f865a63c12c8b3041b0d6e6709f447f14bd14a08e2db25",
+      "bytes": 4260
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalIntrinsicGaugeRealization.lean",
+      "sha256": "53d149afa2a5903fae3cbd6a2e0916f05fd3b2c93bd81ded833b526f2c1502ad",
+      "bytes": 3948
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalMetricCoercivity.lean",
+      "sha256": "54233f6353b07582eede451cd31bf6b4246b99c1eddf565adb2bb6f196785b81",
+      "bytes": 1312
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LocalSelfadjointExtension.lean",
+      "sha256": "e0b6d69e1157439c57c9e7fe2da55222ad0e45b3e52efe6b23e836396815d628",
+      "bytes": 3275
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/LoweredGaugeJetSmooth.lean",
+      "sha256": "68e931f8c40c9ea7d18bfc07d7fbd922eb656190340cdae27af7ead73d38801b",
+      "bytes": 3750
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/MatrixOperatorDerivative.lean",
+      "sha256": "907b785a9287b509fdde26502ec6ce6b8e7ab240def6d770669000274434b86d",
+      "bytes": 3029
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/MetricGermJets.lean",
+      "sha256": "6fce45e74c5304df0524d91f32624ec0db584cacdc080ca76407025c49f9f450",
+      "bytes": 1136
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/MetricJetGermSymmetry.lean",
+      "sha256": "6ec38c612f0d891d36e72b18726268db92b6a2110da003544dae4bdb5afe282e",
+      "bytes": 2274
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/MetricTraceChangeBasis.lean",
+      "sha256": "1346e6153e48c57f42055fa3b009b537e57427b4c71e13eedb13be04b299e1b8",
+      "bytes": 12301
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/MetricTrilinearExtension.lean",
+      "sha256": "5f639ee6147ca9e40c66608e0335a1dd6b8de711742ba5285df0eb7660b952d6",
+      "bytes": 3117
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/NonlinearFourPointEstimate.lean",
+      "sha256": "1e85b6d53d2e8606f5bc27db030a5040f5fd18ddcdce480c11f8a0ad2b115b38",
+      "bytes": 6406
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/PositiveDiffusionFactor.lean",
+      "sha256": "0c3885570760c4ece5883fd549599cf6863ac8171b8b5e6aadbe0f7f9184632a",
+      "bytes": 4076
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/PositiveDiffusionIVP.lean",
+      "sha256": "00c9d274306df66476d3e0a82d94c80e446784e45cb1d41d79151b8954731c3d",
+      "bytes": 4347
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/PositiveMetricExtension.lean",
+      "sha256": "1b039f7e1b0b69456a2c3d9e2533652b5ea45089deb8831ee5594c2b804033d2",
+      "bytes": 8255
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ProbabilityConvolutionHolder.lean",
+      "sha256": "452f2bac6d2c744131438ff675af43f628fb1be0269c8b12338b3dafa9bc08de",
+      "bytes": 3504
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ProbabilityConvolutionLinear.lean",
+      "sha256": "38ae0d4111b1413becae2dbefccd28b53db2faf677f9bd4557061fdbf24641f7",
+      "bytes": 5021
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ProbabilityConvolutionTrace.lean",
+      "sha256": "a9ed37444df9dc6d917b698bd6535a2481a37a6cc1237674b340b470635b7fc3",
+      "bytes": 2616
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ReparametrizedActualChristoffel.lean",
+      "sha256": "b11f95778b49151497485f1f3cedc611658c8c4b616691e90f199efd13843f40",
+      "bytes": 2983
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ScalarReparametrizedChartDerivative.lean",
+      "sha256": "1fabb86848f7233280622d989da3e442394497e7e40b477adde1f84476832a9a",
+      "bytes": 3452
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ScaledGaussianMoment.lean",
+      "sha256": "6678e65193be198c6162515484d00dae9bcdfa12d707f110e01302e9c378aeaa",
+      "bytes": 3451
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/SchauderTimeSplit.lean",
+      "sha256": "cf7d0473ecbe9b4db59ba522ca195dcd137db8eea4a46d1ad80ebe1e736099a9",
+      "bytes": 9222
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/TemporalGaussianEnvelope.lean",
+      "sha256": "c343d5d7bd293346b7cf3180338d3b33f8432fc899307d8a0fb9a0a62481253e",
+      "bytes": 8648
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/TemporalSchauderIntegral.lean",
+      "sha256": "84634ea9db2b7f81dd71bf078ddfb7e333716e7a4cd76b8f4b4cde5d47eb3304",
+      "bytes": 8295
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/UniformInverseEllipticity.lean",
+      "sha256": "c606931312506d9302db11c27fc9299ae43eaea7518da63e7525db35f10e9137",
+      "bytes": 2765
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/WeightedTranslationControl.lean",
+      "sha256": "dda93c188e7a113bbcaa2749aafc84c4d9810f03febd5872d596bacc10fc264a",
+      "bytes": 4648
+    }
+  ],
+  "static_scan": {
+    "explicit_holes_or_bypasses": [],
+    "common_secret_pattern_files": [],
+    "note": "Static token/pattern scan is not a substitute for kernel verification or a comprehensive secret audit."
+  },
+  "verification_scope": "Fresh V1 --lean audit uses pinned existing dependency cache; previously integrated leaf checks were not all rebuilt during closeout. No full dependency rebuild."
+}

@@ -1,0 +1,371 @@
+{
+  "recorded_at_utc": "2026-09-23T14:30:46.357156+00:00",
+  "date_timezone": "Asia/Seoul",
+  "proof_head": "6cd4586456feae076ef8afd06ce88e1b88354c5c",
+  "pre_push_origin_integration": "feac0d9c4cb08573da24d24e6e7149421f5e01f0",
+  "pre_closeout_unpushed_commits": 197,
+  "scope": "Final three batches only; task counts are not overall Poincare completion percentages.",
+  "new_proof_tasks_started_during_closeout": 0,
+  "dispatch_paused": true,
+  "all_registry_active_tasks": [],
+  "counts_by_project": {
+    "poincare-trace-frontier-20260923": {
+      "INTEGRATED": 9,
+      "TIMEOUT": 2
+    },
+    "poincare-temporal-schauder-20260923": {
+      "QUEUED": 2,
+      "INTEGRATED": 5,
+      "TIMEOUT": 1
+    },
+    "poincare-scalar-star-20260923": {
+      "INTEGRATED": 1,
+      "TIMEOUT": 1
+    }
+  },
+  "recent_tasks": [
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-conformal-basis",
+      "status": "INTEGRATED",
+      "integrated_commit": "5885c604d33cda376dbac8ce359e2010ab86d44b",
+      "target": "PoincareConjecture.ParallelImplementation.ConformalMetricBasis.exists_conformal_metric_basis",
+      "depends_on": [],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-correction-derivative",
+      "status": "INTEGRATED",
+      "integrated_commit": "9baece03481fc7ae048d0593fa140365ae2ceb54",
+      "target": "PoincareConjecture.ParallelImplementation.ConformalCorrectionDerivative.cov_conformalCorrection",
+      "depends_on": [],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-curvature-normalization",
+      "status": "INTEGRATED",
+      "integrated_commit": "3e9a5d7b3aec5e0699255c1acd1c71e75f8238a8",
+      "target": "PoincareConjecture.ParallelImplementation.CompactCurvatureNormalization.exists_rescaling_curvature_bound_one",
+      "depends_on": [],
+      "effort": "max",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-gradient-contraction",
+      "status": "INTEGRATED",
+      "integrated_commit": "905f925861a4b1615f69b3600c0641cfcd3c55a1",
+      "target": "PoincareConjecture.ParallelImplementation.MetricGradientContraction.sum_metric_basis_derivatives_eq_gradient_pairing",
+      "depends_on": [],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-laplacian-recovered",
+      "status": "TIMEOUT",
+      "integrated_commit": null,
+      "target": "PoincareConjecture.ParallelImplementation.ConformalLaplacianRecovered.laplacianAt_conformalMetric",
+      "depends_on": [
+        "r6-trace-basis",
+        "r6-point-hessian",
+        "r6-conformal-basis",
+        "r6-gradient-contraction"
+      ],
+      "effort": "max",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-link-reconstruction",
+      "status": "INTEGRATED",
+      "integrated_commit": "eddcc2beaa8ae9502eac5be182111ee7aac8a08e",
+      "target": "PoincareConjecture.ParallelImplementation.BarycentricLinkReconstruction.reconstruct_from_link_coordinates",
+      "depends_on": [],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-point-hessian",
+      "status": "INTEGRATED",
+      "integrated_commit": "9ee9ae233d413ea450fa4d67674694dcd2ae9927",
+      "target": "PoincareConjecture.ParallelImplementation.ConformalPointHessian.hessianAt_conformalMetric",
+      "depends_on": [],
+      "effort": "high",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-punctured-star",
+      "status": "INTEGRATED",
+      "integrated_commit": "e4081265e373bd60c930e5d160df131f2d0f9ae6",
+      "target": "PoincareConjecture.ParallelImplementation.PuncturedStarHomeomorph.exists_punctured_star_homeomorph",
+      "depends_on": [
+        "r6-link-reconstruction"
+      ],
+      "effort": "max",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-quadratic-contraction",
+      "status": "INTEGRATED",
+      "integrated_commit": "32b6a037e30c5666ecc4b26dcd869fcc1c65052d",
+      "target": "PoincareConjecture.ParallelImplementation.ConformalQuadraticContraction.quadratic_conformal_correction",
+      "depends_on": [],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-sectional-recovered",
+      "status": "TIMEOUT",
+      "integrated_commit": null,
+      "target": "PoincareConjecture.ParallelImplementation.ConformalSectionalRecovered.sectionalCurvatureAt_conformalMetric",
+      "depends_on": [
+        "r6-correction-derivative",
+        "r6-quadratic-contraction"
+      ],
+      "effort": "max",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-trace-frontier-20260923",
+      "task": "r6-trace-basis",
+      "status": "INTEGRATED",
+      "integrated_commit": "8f715ad5576c66aa95a6dd288ba83381ce916e65",
+      "target": "PoincareConjecture.ParallelImplementation.MetricTraceBasis.laplacianAt_eq_sum_of_metric_basis",
+      "depends_on": [],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-temporal-schauder-20260923",
+      "task": "s6-actual-time-schauder",
+      "status": "QUEUED",
+      "integrated_commit": null,
+      "target": "PoincareConjecture.ParallelImplementation.ActualDuhamelTemporalSchauder.actual_duhamel_temporal_schauder",
+      "depends_on": [
+        "s6-duhamel-time-holder"
+      ],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-temporal-schauder-20260923",
+      "task": "s6-duhamel-time-holder",
+      "status": "QUEUED",
+      "integrated_commit": null,
+      "target": "PoincareConjecture.ParallelImplementation.DuhamelHessianTemporalHolder.duhamel_hessian_temporal_holder",
+      "depends_on": [
+        "s6-time-convolution",
+        "s6-time-split"
+      ],
+      "effort": "max",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-temporal-schauder-20260923",
+      "task": "s6-time-L1-modulus",
+      "status": "INTEGRATED",
+      "integrated_commit": "1670e7642884108c2113f034a114d642ccb8aec6",
+      "target": "PoincareConjecture.ParallelImplementation.TemporalHessianL1Modulus.heatHessian_time_difference_L1_modulus",
+      "depends_on": [
+        "s6-time-coarse",
+        "s6-time-small-L1"
+      ],
+      "effort": "high",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-temporal-schauder-20260923",
+      "task": "s6-time-coarse",
+      "status": "INTEGRATED",
+      "integrated_commit": "237ff92fcc02fc7d51c98850ac2540840c47caf2",
+      "target": "PoincareConjecture.ParallelImplementation.TemporalHessianCoarse.heatHessian_time_difference_coarse",
+      "depends_on": [],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-temporal-schauder-20260923",
+      "task": "s6-time-convolution",
+      "status": "INTEGRATED",
+      "integrated_commit": "6cd4586456feae076ef8afd06ce88e1b88354c5c",
+      "target": "PoincareConjecture.ParallelImplementation.TemporalHessianConvolution.heatHessian_convolution_time_modulus",
+      "depends_on": [
+        "s6-time-L1-modulus"
+      ],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-temporal-schauder-20260923",
+      "task": "s6-time-pointwise",
+      "status": "INTEGRATED",
+      "integrated_commit": "f50be39f1e9109331f984207a28d1edadfa78992",
+      "target": "PoincareConjecture.ParallelImplementation.TemporalHessianPointwise.heatHessian_time_difference_pointwise",
+      "depends_on": [],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-temporal-schauder-20260923",
+      "task": "s6-time-small-L1",
+      "status": "INTEGRATED",
+      "integrated_commit": "d4ef1183ffa441e0c7248d9c2d9d68d0a4bc8db1",
+      "target": "PoincareConjecture.ParallelImplementation.TemporalHessianSmallL1.heatHessian_time_difference_small_L1",
+      "depends_on": [
+        "s6-time-pointwise",
+        "s6-time-coarse"
+      ],
+      "effort": "high",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-temporal-schauder-20260923",
+      "task": "s6-time-split",
+      "status": "TIMEOUT",
+      "integrated_commit": null,
+      "target": "PoincareConjecture.ParallelImplementation.TemporalDuhamelSplit.duhamel_hessian_time_split",
+      "depends_on": [],
+      "effort": "max",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-scalar-star-20260923",
+      "task": "s6-scalar-sectional-trace",
+      "status": "INTEGRATED",
+      "integrated_commit": "bc0f97ad72bfca0a4b68d6b556e7027625946696",
+      "target": "PoincareConjecture.ParallelImplementation.ScalarSectionalTrace.scalarCurvatureAt_eq_sum_sectional",
+      "depends_on": [],
+      "effort": "xhigh",
+      "model": "gpt-6-luna"
+    },
+    {
+      "project": "poincare-scalar-star-20260923",
+      "task": "s6-vertex-star-chart",
+      "status": "TIMEOUT",
+      "integrated_commit": null,
+      "target": "PoincareConjecture.ParallelImplementation.VertexStarBallChart.vertex_star_homeomorph_ball_of_spherical_link",
+      "depends_on": [],
+      "effort": "max",
+      "model": "gpt-6-luna"
+    }
+  ],
+  "local_checkpoint_summary": [
+    {
+      "task": "r6-laplacian-recovered",
+      "attempt": "b625166c-3f96-4424-92c2-e3f9b58c24d6",
+      "accepted_proof": false,
+      "files": [
+        {
+          "file": "frozen.lean",
+          "bytes": 6431,
+          "sha256": "bee135b41413d058cd0f9758abff800546655ae04c2d53a2c88b892165fa3d25"
+        },
+        {
+          "file": "frozen.json",
+          "bytes": 183,
+          "sha256": "35191e2f05e031bfe3df9891ab36d182ff0c0f8fb77c18fb1979d1de794a1e48"
+        },
+        {
+          "file": "result.json",
+          "bytes": 3037,
+          "sha256": "38af303da447728f7b3645a0ea12197eea407d10b865eb35ad6b0b96fad48747"
+        },
+        {
+          "file": "timing.json",
+          "bytes": 357,
+          "sha256": "6dda3f809608995b284fdc42e061bc4dc7dcd412623ac66977bdcfa9f219f452"
+        }
+      ]
+    },
+    {
+      "task": "r6-sectional-recovered",
+      "attempt": "c0292dc2-4d34-4e22-9590-0148249900d5",
+      "accepted_proof": false,
+      "files": [
+        {
+          "file": "frozen.lean",
+          "bytes": 8166,
+          "sha256": "f979e55e7383726212c5d72318608390d9211503563b0244e2914a718763c71b"
+        },
+        {
+          "file": "frozen.json",
+          "bytes": 183,
+          "sha256": "abe576c5580082b7b237873ce06663e4645008402506ab48e580a9a0c429c3d3"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2144,
+          "sha256": "fa467ac3e11398c4b2418f6f15cf47155a0405ab0aea1ca1c771149e1a22d8af"
+        },
+        {
+          "file": "timing.json",
+          "bytes": 356,
+          "sha256": "43be8ff6b2425de71d51649756285f988cba3085e48fa3fa8d5454481e44da90"
+        }
+      ]
+    },
+    {
+      "task": "s6-time-split",
+      "attempt": "3185b142-1cd3-4f48-bc47-91e5c705830e",
+      "accepted_proof": false,
+      "files": [
+        {
+          "file": "frozen.lean",
+          "bytes": 1432,
+          "sha256": "b2759855b99a199516497c1bf13a87bf61e8169bb0b71f74580cbb1b01c256c9"
+        },
+        {
+          "file": "frozen.json",
+          "bytes": 183,
+          "sha256": "8fdb819ea88d1d2feb5d73a363fe6a0e949b05c7285ea0e2e44948995b8a12d6"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1240,
+          "sha256": "5ef9027a2bc21b65f5c2ce44625368df2d2c2bd2344e0259fa1dda56ef26796f"
+        },
+        {
+          "file": "timing.json",
+          "bytes": 358,
+          "sha256": "c2c717f234a98435fbdff9d1e482e9e613d329c48b807fac97c6dcbfdd27e4c4"
+        }
+      ]
+    },
+    {
+      "task": "s6-vertex-star-chart",
+      "attempt": "10aab1ab-14e6-478d-ba90-b243a61359a5",
+      "accepted_proof": false,
+      "files": [
+        {
+          "file": "frozen.lean",
+          "bytes": 19413,
+          "sha256": "39152ba962d02fdb7ab9bbf2b69d169a602db7a46fca0a50b386abbb56d9fa55"
+        },
+        {
+          "file": "frozen.json",
+          "bytes": 183,
+          "sha256": "db9b663019d0fb66284f2f22379a3ecc00075526d6d70e78948ec35acb733f65"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1249,
+          "sha256": "ab192aa726ba8e2c4eb75f1f8ea194554ab9c10860bacdc79f42b74684cf800a"
+        },
+        {
+          "file": "timing.json",
+          "bytes": 359,
+          "sha256": "4d6b04c6f9594634a5e6e1b633792d9c10d75f511d99138457faa91222b6e9d3"
+        }
+      ]
+    }
+  ]
+}
