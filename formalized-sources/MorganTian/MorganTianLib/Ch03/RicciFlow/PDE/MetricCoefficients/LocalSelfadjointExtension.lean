@@ -49,7 +49,10 @@ by
       have hχzero : χ =ᶠ[𝓝 y] (fun _ => (0 : ℝ)) :=
         (notMem_tsupport_iff_eventuallyEq).mp hyts
       have hHzero : H =ᶠ[𝓝 y] (fun _ => (0 : E3 →L[ℝ] E3)) :=
-        hχzero.mono fun z hz => by simp [H, hz]
+        hχzero.mono fun z hz => by
+          change χ z • G z = 0
+          rw [hz]
+          exact zero_smul ℝ (G z)
       exact contDiff_const.contDiffAt.congr_of_eventuallyEq hHzero
   refine ⟨H, hHcont, ?_, ?_⟩
   · intro y v w
