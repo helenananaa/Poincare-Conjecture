@@ -19,6 +19,15 @@ theorem bounded_C2_jet_completeness
       ContDiff ℝ 2 (fun x : E3 => z.1 x) :=
 /- SWARM_PROOF_BEGIN -/
 by
+  letI : NormedAddCommGroup (E3 →L[ℝ] V) := inferInstance
+  letI : NormedSpace ℝ (E3 →L[ℝ] V) := inferInstance
+  letI : CompleteSpace (E3 →L[ℝ] V) := inferInstance
+  letI : NormedAddCommGroup (E3 →L[ℝ] E3 →L[ℝ] V) := inferInstance
+  letI : CompleteSpace (E3 →L[ℝ] E3 →L[ℝ] V) := inferInstance
+  letI : MetricSpace (E3 →ᵇ V) := inferInstance
+  letI : MetricSpace (E3 →ᵇ (E3 →L[ℝ] V)) := inferInstance
+  letI : MetricSpace (E3 →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V)) := inferInstance
+  letI : FirstCountableTopology ((E3 →ᵇ V) × (E3 →ᵇ (E3 →L[ℝ] V)) × (E3 →ᵇ (E3 →L[ℝ] E3 →L[ℝ] V))) := inferInstance
   have hclosed : IsClosed (boundedC2JetSet V) := by
     apply IsSeqClosed.isClosed
     intro seq q hz hlim
