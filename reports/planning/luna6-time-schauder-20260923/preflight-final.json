@@ -1,0 +1,12 @@
+{
+  "purpose": "syntax check only; not proof evidence",
+  "passed": [
+    "m6-hessian-time-formula",
+    "m6-gaussian-time-comparison",
+    "m6-time-envelope-integral",
+    "m6-temporal-integral-split",
+    "m6-time-derivative-envelope"
+  ],
+  "failed": [],
+  "blocked": []
+}

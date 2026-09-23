@@ -1,0 +1,68 @@
+[
+  {
+    "id": "m6-hessian-time-formula",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 26,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianHessianTimeDerivative.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.gaussian_hessian_time_derivative",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.GaussianThirdDerivative\nimport MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.ActualHeatTimeFormula\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** gaussian hessian time derivative. -/\ntheorem gaussian_hessian_time_derivative \n    (t : ℝ) (ht : 0 < t) (y : E3) (i j : Fin 3) :\n    HasDerivAt (fun r : ℝ => heatHessian3 r i j y)\n      ((-(y i*y j)/(2*t^3) + (if i=j then 1/(2*t^2) else 0) +\n        (y i*y j/(4*t^2)-(if i=j then 1/(2*t) else 0)) *\n          (‖y‖^2/(4*t^2)-3/(2*t))) *\n        MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 t y) t :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "j6-third-kernel-formula"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Differentiate the accepted positive-time Hessian polynomial times the actual Gaussian. Use euclideanHeatKernel_three_time_formula and eventual positivity near t. HasDerivAt congruence transports the formula; no unproved mixed-derivative interchange is needed. Split only i=j and simplify rational coefficients. Preserve exact imports, definitions and theorem statement. Edit only marked proof. No sorry/admit, new axioms, native_decide, option overrides, extra agents, other-worker reads or network. Use swarm-check.sh. Time Holder regularity of the Hessian is NOT full time Holder regularity of the PDE forcing or a quasilinear existence proof."
+  },
+  {
+    "id": "m6-gaussian-time-comparison",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 26,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianComparableTimes.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.gaussian_comparable_times",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.GaussianNormForm\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** gaussian comparable times. -/\ntheorem gaussian_comparable_times \n    (t r : ℝ) (ht : 0 < t) (htr : t ≤ r) (hrt : r ≤ 2*t) (y : E3) :\n    MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 r y ≤\n      8*MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 (2*t) y :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use the radial Gaussian formula. The exponential at r<=2*t is at most the exponential at 2*t. The reciprocal sqrt normalization ratio has cube at most 8 from t<=r. The constant is independent of t,r,y; no separately chosen time-dependent bound suffices. Preserve exact imports, definitions and theorem statement. Edit only marked proof. No sorry/admit, new axioms, native_decide, option overrides, extra agents, other-worker reads or network. Use swarm-check.sh. Time Holder regularity of the Hessian is NOT full time Holder regularity of the PDE forcing or a quasilinear existence proof."
+  },
+  {
+    "id": "m6-time-envelope-integral",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 26,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/TemporalGaussianEnvelope.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.temporal_gaussian_envelope_integral",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.RecursivePolynomialMoment\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\ndef temporalGaussianEnvelope (alpha t : ℝ) (y : E3) : ℝ :=\n  64*MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 (2*t) y *\n    (‖y‖^alpha/t^2+‖y‖^(alpha+2)/t^3+‖y‖^(alpha+4)/t^4)\n\n/-- **Math.** temporal gaussian envelope integral. -/\ntheorem temporal_gaussian_envelope_integral \n    (alpha : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) :\n    ∃ C : ℝ, 0 < C ∧ ∀ t : ℝ, 0 < t →\n      Integrable (temporalGaussianEnvelope alpha t) volume ∧\n      (∀ y : E3, 0 ≤ temporalGaussianEnvelope alpha t y) ∧\n      (∫ y : E3, temporalGaussianEnvelope alpha t y) ≤ C*t^(alpha/2-2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Integrate three actual nonnegative Gaussian moments of orders alpha, alpha+2, alpha+4 at time 2*t, divided by t^2,t^3,t^4. Each term scales as t^(alpha/2-2). Keep the explicit constant 64 in the definition; C may depend only on alpha. This is independent of any derivative proof. Preserve exact imports, definitions and theorem statement. Edit only marked proof. No sorry/admit, new axioms, native_decide, option overrides, extra agents, other-worker reads or network. Use swarm-check.sh. Time Holder regularity of the Hessian is NOT full time Holder regularity of the PDE forcing or a quasilinear existence proof."
+  },
+  {
+    "id": "m6-temporal-integral-split",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 26,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/TemporalSchauderIntegral.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.temporal_schauder_integral",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** temporal schauder integral. -/\ntheorem temporal_schauder_integral \n    (alpha h T : ℝ) (ha : 0 < alpha) (ha1 : alpha < 1) (hh : 0 < h) (hT : 0 ≤ T) :\n    IntervalIntegrable (fun r : ℝ => min (r^(alpha/2-1)) (h*r^(alpha/2-2))) volume 0 T ∧\n      (∫ r in (0:ℝ)..T, min (r^(alpha/2-1)) (h*r^(alpha/2-2))) ≤\n        (2/alpha+2/(2-alpha))*h^(alpha/2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Split at r=h, not sqrt(h). The near-zero integral is h^(alpha/2)/(alpha/2); the far integral is bounded by h^(alpha/2)/(1-alpha/2). Compare T with h and use integral_rpow on finite intervals; endpoint r=0 is measure zero. This is the temporal analogue of SchauderTimeSplit, whose exponents are different. Preserve exact imports, definitions and theorem statement. Edit only marked proof. No sorry/admit, new axioms, native_decide, option overrides, extra agents, other-worker reads or network. Use swarm-check.sh. Time Holder regularity of the Hessian is NOT full time Holder regularity of the PDE forcing or a quasilinear existence proof."
+  },
+  {
+    "id": "m6-time-derivative-envelope",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 26,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GaussianTemporalDerivativeBound.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.gaussian_temporal_derivative_bound",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.GaussianHessianTimeDerivative\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.GaussianComparableTimes\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.TemporalGaussianEnvelope\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\n\n/-- **Math.** gaussian temporal derivative bound. -/\ntheorem gaussian_temporal_derivative_bound \n    (alpha t r : ℝ) (ha : 0 < alpha) (ht : 0 < t) (htr : t ≤ r) (hrt : r ≤ 2*t)\n    (y : E3) (i j : Fin 3) :\n    |deriv (fun s : ℝ => heatHessian3 s i j y) r| * ‖y‖^alpha ≤\n      temporalGaussianEnvelope alpha t y :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "m6-hessian-time-formula",
+      "m6-gaussian-time-comparison",
+      "m6-time-envelope-integral"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use the exact time derivative formula. With q=norm(y)^2, bound the absolute polynomial by q^2/(16*r^4)+q/r^3+5/(4*r^2), then r>=t reduces denominator bounds. gaussian_comparable_times contributes factor 8. The explicit envelope constant 64 dominates coefficients 1/2,8,10. Handle y=0 before fractional-power multiplication; the desired estimate is pointwise, not a time integral or an assumed majorant. Preserve exact imports, definitions and theorem statement. Edit only marked proof. No sorry/admit, new axioms, native_decide, option overrides, extra agents, other-worker reads or network. Use swarm-check.sh. Time Holder regularity of the Hessian is NOT full time Holder regularity of the PDE forcing or a quasilinear existence proof."
+  }
+]
