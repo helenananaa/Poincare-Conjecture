@@ -1,0 +1,9 @@
+{
+  "j6-third-shift-majorant": "k6-third-shift-majorant",
+  "j6-weighted-hessian-translation": "k6-weighted-hessian-translation",
+  "j6-hessian-small-shift": "k6-hessian-small-shift",
+  "j6-hessian-modulus": "k6-hessian-modulus",
+  "j6-duhamel-hessian-holder": "k6-duhamel-hessian-holder",
+  "j6-actual-duhamel-schauder": "k6-actual-duhamel-schauder",
+  "j6-anisotropic-duhamel-schauder": "k6-anisotropic-duhamel-schauder"
+}

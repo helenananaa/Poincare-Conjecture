@@ -1,0 +1,18 @@
+{
+  "purpose": "syntax check only; not proof evidence",
+  "passed": [
+    "k6-third-direction-bound",
+    "k6-scaled-moment",
+    "k6-shift-polynomial",
+    "k6-integrated-min-modulus",
+    "k6-third-shift-majorant",
+    "k6-weighted-hessian-translation",
+    "k6-hessian-small-shift",
+    "k6-hessian-modulus",
+    "k6-duhamel-hessian-holder",
+    "k6-actual-duhamel-schauder",
+    "k6-anisotropic-duhamel-schauder"
+  ],
+  "failed": [],
+  "blocked": []
+}

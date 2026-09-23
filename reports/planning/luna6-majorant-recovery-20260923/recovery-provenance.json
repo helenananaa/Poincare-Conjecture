@@ -1,0 +1,58 @@
+[
+  {
+    "old": "j6-third-shift-majorant",
+    "new": "k6-third-shift-majorant",
+    "old_status": "TIMEOUT",
+    "old_attempt": "495df961-528a-4dde-b8cd-2bfc9052ba15",
+    "original_source_sha256": "566088e43ec2ee6acacafdb0ebf8d89e8952810b9ef62ab6eee434a4f631df67",
+    "exact_declarations_preserved": true
+  },
+  {
+    "old": "j6-weighted-hessian-translation",
+    "new": "k6-weighted-hessian-translation",
+    "old_status": "QUEUED",
+    "old_attempt": null,
+    "original_source_sha256": "e7902f4231af9f48c0db9d072f1b1f01557a9d629d7db31e364399cd38f8be17",
+    "exact_declarations_preserved": true
+  },
+  {
+    "old": "j6-hessian-small-shift",
+    "new": "k6-hessian-small-shift",
+    "old_status": "QUEUED",
+    "old_attempt": null,
+    "original_source_sha256": "213acad4b829327ecce8e82e1504a5b3a9da42acd5b15628fc4ed7016472c77c",
+    "exact_declarations_preserved": true
+  },
+  {
+    "old": "j6-hessian-modulus",
+    "new": "k6-hessian-modulus",
+    "old_status": "QUEUED",
+    "old_attempt": null,
+    "original_source_sha256": "e355e73f6355d903529da9660c70778ce5214b7cc74607f7960a316bb1922da6",
+    "exact_declarations_preserved": true
+  },
+  {
+    "old": "j6-duhamel-hessian-holder",
+    "new": "k6-duhamel-hessian-holder",
+    "old_status": "QUEUED",
+    "old_attempt": null,
+    "original_source_sha256": "425a0b714d94ac78aa79027b8ed3b05839219eb883e3920a8693e9e486fe3f32",
+    "exact_declarations_preserved": true
+  },
+  {
+    "old": "j6-actual-duhamel-schauder",
+    "new": "k6-actual-duhamel-schauder",
+    "old_status": "QUEUED",
+    "old_attempt": null,
+    "original_source_sha256": "d0ccad2d51f82444cf386d3c98aa34f6e898a159e54b37793c82049d917fe93b",
+    "exact_declarations_preserved": true
+  },
+  {
+    "old": "j6-anisotropic-duhamel-schauder",
+    "new": "k6-anisotropic-duhamel-schauder",
+    "old_status": "QUEUED",
+    "old_attempt": null,
+    "original_source_sha256": "a7bd74e54595b0b2539e22ea26399324d8101a964aa14f3f5f3fb19251371a54",
+    "exact_declarations_preserved": true
+  }
+]
