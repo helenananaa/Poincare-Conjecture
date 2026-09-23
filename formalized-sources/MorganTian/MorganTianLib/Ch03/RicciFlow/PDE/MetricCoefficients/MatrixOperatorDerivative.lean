@@ -16,6 +16,10 @@ by
   letI : TopologicalSpace (Matrix (Fin 3) (Fin 3) ℝ) := Pi.topologicalSpace
   letI : NormedAddCommGroup (Matrix (Fin 3) (Fin 3) ℝ) := Pi.normedAddCommGroup
   letI : NormedSpace ℝ (Matrix (Fin 3) (Fin 3) ℝ) := Pi.normedSpace
+  letI : IsTopologicalAddGroup (Matrix (Fin 3) (Fin 3) ℝ) :=
+    inferInstanceAs (IsTopologicalAddGroup (Fin 3 → Fin 3 → ℝ))
+  letI : ContinuousSMul ℝ (Matrix (Fin 3) (Fin 3) ℝ) :=
+    inferInstanceAs (ContinuousSMul ℝ (Fin 3 → Fin 3 → ℝ))
   let L : Matrix (Fin 3) (Fin 3) ℝ →L[ℝ] (E3 →L[ℝ] E3) :=
     LinearMap.toContinuousLinearMap
       (Matrix.toEuclideanCLM (n := Fin 3) (𝕜 := ℝ)).toAlgEquiv.toLinearEquiv.toLinearMap
@@ -45,6 +49,6 @@ by
           have hvi := congrArg (fun g : E3 →L[ℝ] (Fin 3 → ℝ) => g v) (hrow i)
           have hvij := congrArg (fun m : Matrix (Fin 3) (Fin 3) ℝ => m i j) hv
           have hrij := congrArg (fun r : Fin 3 → ℝ => r j) hvi
-          simpa using hvij.trans hrij
+          convert hvij.trans hrij using 1 <;> rfl
 /- SWARM_PROOF_END -/
 end MorganTianLib.MetricCoefficient
