@@ -1,0 +1,199 @@
+[
+  {
+    "id": "h6-holder-graph-closed",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedHolderGraph.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.bounded_holder_graph_closed",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\ndef boundedHolderGraph (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V]\n    (alpha : ℝ) : Set ((E3 →ᵇ V) × (Ω →ᵇ V)) :=\n  {z | ∀ p : Ω, z.2 p = (‖p.1.1-p.1.2‖^alpha)⁻¹ • (z.1 p.1.1-z.1 p.1.2)}\n\n/-- **Math.** bounded holder graph closed. -/\ntheorem bounded_holder_graph_closed (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] (alpha : ℝ) :\n    IsClosed (boundedHolderGraph V alpha) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Express the graph as an intersection of equality sets for continuous evaluation maps. alpha is fixed and each off-diagonal denominator is nonzero. No need to construct the Holder norm via an infimum. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-holder-increment-lift",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedHolderIncrement.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.bounded_holder_increment",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** bounded holder increment. -/\ntheorem bounded_holder_increment {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V]\n    (alpha H : ℝ) (hH : 0 ≤ H) (f : E3 →ᵇ V)\n    (hf : ∀ x y : E3, ‖f x-f y‖ ≤ H*‖x-y‖^alpha) :\n    ∃ Q : Ω →ᵇ V, ‖Q‖ ≤ H ∧ ∀ p : Ω,\n      Q p = (‖p.1.1-p.1.2‖^alpha)⁻¹ • (f p.1.1-f p.1.2) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Build a BoundedContinuousFunction for the normalized increment. Off-diagonal distances are positive, so real rpow and inverse are continuous. Use norm_smul, rpow_pos_of_pos and divide the supplied Holder inequality; arbitrary real alpha is valid off the diagonal. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-holder-graph-complete",
+    "model": "luna",
+    "reasoning_effort": "high",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedHolderCompleteness.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.bounded_holder_graph_complete",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BoundedHolderGraph\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BoundedHolderIncrement\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** bounded holder graph complete. -/\ntheorem bounded_holder_graph_complete (V : Type*) [NormedAddCommGroup V] [NormedSpace ℝ V] [CompleteSpace V] (alpha : ℝ) :\n    IsComplete (boundedHolderGraph V alpha) ∧\n      ∀ (H : ℝ), 0 ≤ H → ∀ f : E3 →ᵇ V,\n        (∀ x y : E3, ‖f x-f y‖ ≤ H*‖x-y‖^alpha) →\n        ∃ Q : Ω →ᵇ V, (f,Q) ∈ boundedHolderGraph V alpha ∧ ‖Q‖ ≤ H :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "h6-holder-graph-closed",
+      "h6-holder-increment-lift"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "The product of the two bounded-continuous-function spaces is complete. Apply the closed-graph theorem then the increment lift. This is completeness in the graph norm, not in the uniform norm alone. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-holder-graph-norm",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BoundedHolderGraphNorm.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.bounded_holder_graph_norm",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BoundedHolderGraph\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** bounded holder graph norm. -/\ntheorem bounded_holder_graph_norm {V : Type*} [NormedAddCommGroup V] [NormedSpace ℝ V] (alpha : ℝ)\n    (z : (E3 →ᵇ V) × (Ω →ᵇ V)) (hz : z ∈ boundedHolderGraph V alpha) :\n    (∀ x y : E3, ‖z.1 x-z.1 y‖ ≤ ‖z.2‖*‖x-y‖^alpha) ∧\n      ∀ H : ℝ, 0 ≤ H → (∀ x y : E3, ‖z.1 x-z.1 y‖ ≤ H*‖x-y‖^alpha) → ‖z.2‖ ≤ H :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "h6-holder-graph-closed"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Separate x=y from x≠y. In the second case use the graph equality and the strictly positive denominator. This identifies the graph second norm with the least actual Holder constant. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-probability-convolution-holder",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ProbabilityConvolutionHolder.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.probability_convolution_holder",
+    "source": "import Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** probability convolution holder. -/\ntheorem probability_convolution_holder (K : E3 → ℝ) (hK : Integrable K volume) (hKpos : ∀ x, 0 ≤ K x)\n    (hMass : (∫ x : E3, K x) = 1) (f : E3 →ᵇ ℝ) (alpha H : ℝ) (hH : 0 ≤ H)\n    (hf : ∀ x y : E3, |f x-f y| ≤ H*‖x-y‖^alpha) :\n    (∀ x : E3, Integrable (fun y : E3 => K y*f (x-y)) volume) ∧\n      (∀ x : E3, |∫ y : E3, K y*f (x-y)| ≤ ‖f‖) ∧\n      ∀ x z : E3, |(∫ y : E3, K y*f (x-y))-(∫ y : E3, K y*f (z-y))| ≤ H*‖x-z‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Bound integrands by K times the uniform norm, use nonnegativity and unit mass. For the difference, subtract integrals using actual integrability and apply the Holder bound to x-y,z-y; their difference is x-z. No regularity of K beyond L1 is needed. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-anisotropic-kernel-mass",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHeatKernel.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_heat_kernel_mass",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.HeatKernel.EuclideanSemigroup\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\ndef anisotropicHeatKernel (B : E3 ≃L[ℝ] E3) (t : ℝ) (x : E3) : ℝ :=\n  |LinearMap.det B.toLinearEquiv.toLinearMap|⁻¹ *\n    MorganTianLib.ParabolicPDE.euclideanHeatKernel 3 t (B.symm x)\n\n/-- **Math.** anisotropic heat kernel mass. -/\ntheorem anisotropic_heat_kernel_mass (B : E3 ≃L[ℝ] E3) (t : ℝ) (ht : 0 < t) :\n    Integrable (anisotropicHeatKernel B t) volume ∧\n      (∫ x : E3, anisotropicHeatKernel B t x) = 1 ∧ ∀ x : E3, 0 ≤ anisotropicHeatKernel B t x :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Apply the finite-dimensional linear change-of-variables formula for Haar volume to B.symm. Det B is nonzero. The absolute determinant normalization must be retained; use the accepted Euclidean heat-kernel mass theorem. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-anisotropic-kernel-semigroup",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicKernelSemigroup.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_heat_kernel_semigroup",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHeatKernel\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** anisotropic heat kernel semigroup. -/\ntheorem anisotropic_heat_kernel_semigroup (B : E3 ≃L[ℝ] E3) (t s : ℝ) (ht : 0 < t) (hs : 0 < s) (x : E3) :\n    Integrable (fun y : E3 => anisotropicHeatKernel B t (x-y)*anisotropicHeatKernel B s y) volume ∧\n      (∫ y : E3, anisotropicHeatKernel B t (x-y)*anisotropicHeatKernel B s y) =\n        anisotropicHeatKernel B (t+s) x :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "h6-anisotropic-kernel-mass"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use y=B z, B.symm(x-B z)=B.symm x-z. The two kernel determinant factors and one Jacobian leave exactly one determinant factor. Consume the actual Euclidean convolution identity; do not assume semigroup structure. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-anisotropic-holder-operator",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/AnisotropicHolderOperator.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.anisotropic_holder_operator",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.AnisotropicHeatKernel\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ProbabilityConvolutionHolder\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** anisotropic holder operator. -/\ntheorem anisotropic_holder_operator (B : E3 ≃L[ℝ] E3) (t : ℝ) (ht : 0 < t)\n    (alpha H : ℝ) (hH : 0 ≤ H) (f : E3 →ᵇ ℝ)\n    (hf : ∀ x y : E3, |f x-f y| ≤ H*‖x-y‖^alpha) :\n    ∃ S : E3 →ᵇ ℝ, (∀ x, S x = ∫ y : E3, anisotropicHeatKernel B t y*f (x-y)) ∧\n      ‖S‖ ≤ ‖f‖ ∧ ∀ x y, |S x-S y| ≤ H*‖x-y‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "h6-anisotropic-kernel-mass",
+      "h6-probability-convolution-holder"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "The prior lemma supplies boundedness and Holder control. Prove continuity by dominated convergence for the L1 kernel times translated bounded continuous f; do not infer continuity from Holder if alpha is nonpositive. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-connection-difference-chart",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ConnectionDifferenceChart.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.connection_difference_chart",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ConnectionDifferenceLocality\nimport MorganTianLib.Ch01.PointwiseCurvature\nimport DoCarmoLib.Riemannian.Connection.ChartCurvatureMovingPoint\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** connection difference chart. -/\ntheorem connection_difference_chart {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M] (g g0 : Riemannian.RiemannianMetric (𝓡 3) M) (a p : M)\n    (hp : p ∈ (chartAt E3 a).source) (e : Fin 3 ≃ Fin (Module.finrank ℝ E3)) (i j : Fin 3) :\n    let v := fun k : Fin 3 => Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) p;\n    connectionDifferenceField g.leviCivitaConnection g0.leviCivitaConnection\n      (MorganTianLib.extendVector p (v i)) (MorganTianLib.extendVector p (v j)) p =\n      ∑ k : Fin 3, (Riemannian.chartChristoffel g a (e i) (e j) (e k) (extChartAt (𝓡 3) a p)-\n        Riemannian.chartChristoffel g0 a (e i) (e j) (e k) (extChartAt (𝓡 3) a p)) • v k :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-connection-difference-locality"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Choose smooth frame fields agreeing with the chart frame near p. Pointwise locality of the DIFFERENCE allows replacement of both extendVector fields. Apply leviCivita_cov_frame_expansion separately for g and g0; reindex the finite sums using e. A connection alone is not pointwise local in its differentiated argument. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-chart-metric-trace",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/ChartMetricTrace.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.chart_metric_trace",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartCoefficientOperator\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.OperatorMatrixInverse\nimport MorganTianLib.Ch01.InvGramTrace\nimport MorganTianLib.Ch01.PointwiseCurvature\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** chart metric trace. -/\ntheorem chart_metric_trace {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M] (g : Riemannian.RiemannianMetric (𝓡 3) M) (a p : M)\n    (hp : p ∈ (chartAt E3 a).source) (e : Fin 3 ≃ Fin (Module.finrank ℝ E3))\n    (D : TangentSpace (𝓡 3) p →ₗ[ℝ] TangentSpace (𝓡 3) p →ₗ[ℝ] TangentSpace (𝓡 3) p) :\n    letI : Bundle.RiemannianBundle (TangentSpace (𝓡 3) : M → Type _) := ⟨g.toRiemannianMetric⟩;\n    let b := stdOrthonormalBasis ℝ (TangentSpace (𝓡 3) p);\n    let A := chartCoefficientOperator g a p e;\n    let v := fun k : Fin 3 => Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) p;\n    (∑ i, D (b i) (b i)) = ∑ i : Fin 3, ∑ j : Fin 3,\n      (A.inverse (EuclideanSpace.single j 1)) i • D (v i) (v j) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [],
+    "timeout_seconds": 1800,
+    "hint": "Use sum_orthonormalBasis_diagonal_eq_invGram with the genuine reindexed chartBasisFamily. Use chartGramMatrix_apply and operator_matrix_inverse to identify coefficients. Reindex the standard orthonormal basis if necessary; do not assume the chart basis is orthonormal. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-global-gauge-coordinates",
+    "model": "luna",
+    "reasoning_effort": "max",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/GlobalGaugeCoordinates.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.exists_global_gauge_coordinates",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.GlobalBackgroundGauge\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ConnectionDifferenceChart\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartMetricTrace\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.ChartChristoffelIdentification\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BackgroundConnectionContraction\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.DeTurckGaugeVector\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** exists global gauge coordinates. -/\ntheorem exists_global_gauge_coordinates {M : Type*} [TopologicalSpace M] [ChartedSpace E3 M] [IsManifold (𝓡 3) ∞ M]\n    [SigmaCompactSpace M] [T2Space M] (g g0 : Riemannian.RiemannianMetric (𝓡 3) M) :\n    ∃ W : Riemannian.SmoothVectorField (𝓡 3) M, ∀ a p : M,\n      p ∈ (chartAt E3 a).source → ∀ e : Fin 3 ≃ Fin (Module.finrank ℝ E3),\n      let A := chartCoefficientOperator g a p e;\n      let P := chartCoefficientPartial g a (extChartAt (𝓡 3) a p) e;\n      let T := fun k i j : Fin 3 => Riemannian.chartChristoffel g0 a (e i) (e j) (e k) (extChartAt (𝓡 3) a p);\n      W p = ∑ k : Fin 3, (coordinateDeTurckGauge A P k-backgroundConnectionContraction A T k) •\n        Riemannian.Tensor.chartBasisVecFiber (I := 𝓡 3) a (e k) p :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-global-background-gauge",
+      "g6-connection-difference-fiber",
+      "h6-connection-difference-chart",
+      "h6-chart-metric-trace",
+      "g6-background-contraction-smooth",
+      "gauge-vector-bound"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use the EXISTING global smooth connection-difference trace for both canonical Levi-Civita connections. Identify its arbitrary-chart trace using the two new exact lemmas and the already identified Christoffel coefficients. W is one globally defined field for all a,p, not a chart-dependent choice. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-background-jet-smooth",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundJetSmooth.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.background_jet_smooth",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BackgroundLieCorrection\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.InverseDifferential\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** background jet smooth. -/\ntheorem background_jet_smooth (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3) (T : T3) (R : Fin 3 → T3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v) (r k : Fin 3) :\n    ContDiffAt ℝ ∞ (fun q : JBg => backgroundContractionJet q.1.1 q.1.2 q.2.1 q.2.2 r k) ((A,P),(T,R)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "g6-background-lie-correction"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use smooth inversion on coercive operators plus continuous-linear composition, coordinate projection and finite sums/products. All four inputs vary; R is the prescribed background first jet, not a Hessian of the unknown. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-background-nonlinearity-smooth",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/FullBackgroundNonlinearity.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.full_background_nonlinearity_smooth",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BackgroundJetSmooth\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.FullDeTurckNonlinearity\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.BackgroundConnectionContraction\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\ndef fullBackgroundNonlinearity (q : JBg) : E9 :=\n  WithLp.toLp 2 (fun ij : Fin 3 × Fin 3 =>\n    fullDeTurckNonlinearity q.1 ij - backgroundLieCorrection q.1.1 q.1.2 q.2.1 q.2.2 ij.1 ij.2)\n\n/-- **Math.** full background nonlinearity smooth. -/\ntheorem full_background_nonlinearity_smooth (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3) (T : T3) (R : Fin 3 → T3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ v : E3, c*‖v‖^2 ≤ inner ℝ (A v) v) :\n    ContDiffAt ℝ ∞ fullBackgroundNonlinearity ((A,P),(T,R)) :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "h6-background-jet-smooth",
+      "e6-nonlinearity-smooth",
+      "g6-background-contraction-smooth"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Combine the joint smooth background jet and background contraction with fullDeTurckNonlinearity. Prove all nine actual components using contDiffAt_euclidean; the fixed background variables are explicit. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  },
+  {
+    "id": "h6-background-holder-control",
+    "model": "luna",
+    "reasoning_effort": "xhigh",
+    "priority": 24,
+    "target_path": "MorganTianLib/Ch03/RicciFlow/PDE/MetricCoefficients/BackgroundHolderControl.lean",
+    "target_name": "MorganTianLib.MetricCoefficient.background_holder_control",
+    "source": "import MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.FullBackgroundNonlinearity\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.LocalC2DerivativeControl\nimport MorganTianLib.Ch03.RicciFlow.PDE.MetricCoefficients.HolderNonlinearityDifference\nimport Mathlib\nset_option autoImplicit false\nnoncomputable section\nnamespace MorganTianLib.MetricCoefficient\nopen Set Function Filter MeasureTheory\nopen scoped Topology ContDiff BigOperators RealInnerProductSpace Manifold Bundle Matrix BoundedContinuousFunction\nlocal notation \"E3\" => EuclideanSpace ℝ (Fin 3)\nlocal notation \"Ω\" => Subtype (fun p : E3 × E3 => Prod.fst p ≠ Prod.snd p)\nlocal notation \"T3\" => Fin 3 → Fin 3 → Fin 3 → ℝ\nlocal notation \"J3\" => (E3 →L[ℝ] E3) × (Fin 3 → E3 →L[ℝ] E3)\nlocal notation \"JBg\" => J3 × (T3 × (Fin 3 → T3))\nlocal notation \"E9\" => EuclideanSpace ℝ (Fin 3 × Fin 3)\nlocal instance : NeZero (Module.finrank ℝ E3) := ⟨by simp⟩\n\n/-- **Math.** background holder control. -/\ntheorem background_holder_control (A : E3 →L[ℝ] E3) (P : Fin 3 → E3 →L[ℝ] E3) (T : T3) (R : Fin 3 → T3)\n    (c : ℝ) (hc : 0 < c) (hA : ∀ w : E3, c*‖w‖^2 ≤ inner ℝ (A w) w) :\n    ∃ r K : ℝ, 0 < r ∧ 0 < K ∧ ∀ (u v : E3 → JBg),\n      (∀ x, u x ∈ Metric.ball ((A,P),(T,R)) r) → (∀ x, v x ∈ Metric.ball ((A,P),(T,R)) r) →\n      ∀ (alpha H D delta : ℝ), 0 ≤ H → 0 ≤ D → 0 ≤ delta →\n      (∀ x, ‖u x-v x‖ ≤ delta) →\n      (∀ x y, ‖u x-u y‖ ≤ H*‖x-y‖^alpha) → (∀ x y, ‖v x-v y‖ ≤ H*‖x-y‖^alpha) →\n      (∀ x y, ‖(u x-v x)-(u y-v y)‖ ≤ D*‖x-y‖^alpha) →\n      ∀ x y, ‖(fullBackgroundNonlinearity (u x)-fullBackgroundNonlinearity (v x))-\n        (fullBackgroundNonlinearity (u y)-fullBackgroundNonlinearity (v y))‖ ≤ K*(D+H*delta)*‖x-y‖^alpha :=\n/- SWARM_PROOF_BEGIN -/\nby\n  sorry\n/- SWARM_PROOF_END -/\nend MorganTianLib.MetricCoefficient\n",
+    "depends_on": [
+      "h6-background-nonlinearity-smooth",
+      "e6-C2-derivative-bounds",
+      "e6-holder-composition"
+    ],
+    "timeout_seconds": 1800,
+    "hint": "Use actual smoothness to obtain a convex ball with bounded derivative and Lipschitz derivative, then apply holder_nonlinearity_difference. Allow spatially varying prescribed background values, rather than treating them as constant scalars. Preserve the exact statement and definitions; only edit the marked proof body. No extra hypotheses, new axioms, admits, native_decide, option overrides or extra agents. Use swarm-check.sh and shared compiler slots. Do not read other workers. A local coefficient result is not a PDE existence proof."
+  }
+]

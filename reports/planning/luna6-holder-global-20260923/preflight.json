@@ -1,0 +1,21 @@
+{
+  "purpose": "syntax check only; not proof evidence",
+  "passed": [
+    "h6-holder-graph-closed",
+    "h6-holder-increment-lift",
+    "h6-probability-convolution-holder",
+    "h6-anisotropic-kernel-mass",
+    "h6-connection-difference-chart",
+    "h6-chart-metric-trace",
+    "h6-background-jet-smooth",
+    "h6-holder-graph-complete",
+    "h6-holder-graph-norm",
+    "h6-anisotropic-kernel-semigroup",
+    "h6-anisotropic-holder-operator",
+    "h6-global-gauge-coordinates",
+    "h6-background-nonlinearity-smooth",
+    "h6-background-holder-control"
+  ],
+  "failed": [],
+  "blocked": []
+}
