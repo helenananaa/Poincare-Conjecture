@@ -16,6 +16,10 @@ theorem bounded_derivative_graph_closed
     IsClosed (boundedDerivativeGraph V) :=
 /- SWARM_PROOF_BEGIN -/
 by
+  letI : NormedAddCommGroup (E3 →L[ℝ] V) := inferInstance
+  letI : MetricSpace (E3 →ᵇ V) := inferInstance
+  letI : MetricSpace (E3 →ᵇ (E3 →L[ℝ] V)) := inferInstance
+  letI : FirstCountableTopology ((E3 →ᵇ V) × (E3 →ᵇ (E3 →L[ℝ] V))) := inferInstance
   apply IsSeqClosed.isClosed
   intro seq q hz hlim
   have hfun_tendsto : Tendsto (fun n => (seq n).1) atTop (𝓝 q.1) := by
