@@ -16,6 +16,10 @@ theorem coefficient_connection_differentiable (G : E3 → (E3 →L[ℝ] E3)) (x 
 /- SWARM_PROOF_BEGIN -/
 by
   classical
+  letI : NormedAddCommGroup (E3 →L[ℝ] E3) := inferInstance
+  letI : NormedSpace ℝ (E3 →L[ℝ] E3) := inferInstance
+  letI : NormedAddCommGroup (E3 →L[ℝ] E3 →L[ℝ] E3) := inferInstance
+  letI : NormedSpace ℝ (E3 →L[ℝ] E3 →L[ℝ] E3) := inferInstance
   have hGdiff : DifferentiableAt ℝ G x := hG.differentiableAt (by norm_num)
   have hDf : DifferentiableAt ℝ (fderiv ℝ G) x := by
     have hDf' : ContDiffAt ℝ 1 (fderiv ℝ G) x :=
