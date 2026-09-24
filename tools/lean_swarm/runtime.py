@@ -153,8 +153,8 @@ def validate_task(task: dict) -> None:
     if 'theorem ' not in before and 'lemma ' not in before:
         raise ValueError('template must contain a theorem or lemma')
     limit = task.get('timeout_seconds', 420)
-    if isinstance(limit, bool) or not isinstance(limit, int) or not 5 <= limit <= 3600:
-        raise ValueError('timeout_seconds must be an integer in [5,3600]')
+    if isinstance(limit, bool) or not isinstance(limit, int) or not 5 <= limit <= 43200:
+        raise ValueError('timeout_seconds must be an integer in [5,43200]')
 
 
 def lean_code_without_comments(text: str) -> str:
@@ -274,6 +274,11 @@ class Controller:
         self.lean_options = validate_lean_options(self.cfg.get('lean_options'))
         self.compiler_slots = _resource_limit(self.cfg, 'compiler_slots', 6)
         self.verifier_slots = _resource_limit(self.cfg, 'verifier_slots', 2)
+        self.compile_timeout_seconds = self.cfg.get('compile_timeout_seconds', 180)
+        if (isinstance(self.compile_timeout_seconds, bool) or
+                not isinstance(self.compile_timeout_seconds, int) or
+                not 5 <= self.compile_timeout_seconds <= 43200):
+            raise ValueError('compile_timeout_seconds must be an integer in [5,43200]')
         self.stop = threading.Event()
         self.owner = f'{socket.gethostname()}:{os.getpid()}:{process_identity(os.getpid())}'
         self.gitlock = self.root / 'locks' / (hashlib.sha256(str(self.repo).encode()).hexdigest()+'.lock')
@@ -468,21 +473,21 @@ class Controller:
         else:
             result['cache_hit'] = False
             compiler_started = time.monotonic()
-            with _resources.slot(self.root, 'compiler', self.compiler_slots, timeout=180) as lease:
+            with _resources.slot(self.root, 'compiler', self.compiler_slots, timeout=self.compile_timeout_seconds) as lease:
                 result['compiler_wait_seconds'] = round(lease.waited_seconds, 6)
                 cmd = [str(Path(self.cfg['lean_bin']) / 'lean'), *self.lean_options,
                        '-o', str(module), str(source)]
-                output = checked(cmd, cwd=source.parent, env=self._environment(artifacts), timeout=180)
+                output = checked(cmd, cwd=source.parent, env=self._environment(artifacts), timeout=self.compile_timeout_seconds)
             result['compile_seconds'] = round(time.monotonic() - compiler_started, 6)
             result['axioms'] = []
             if target:
                 audit = artifacts / ('Audit_'+uuid.uuid4().hex+'.lean')
                 audit.write_text(source.read_text()+'\n#print axioms '+target+'\n')
-                with _resources.slot(self.root, 'compiler', self.compiler_slots, timeout=180) as lease:
+                with _resources.slot(self.root, 'compiler', self.compiler_slots, timeout=self.compile_timeout_seconds) as lease:
                     result['audit_wait_seconds'] = round(lease.waited_seconds, 6)
                     audit_output = checked(
                         [str(Path(self.cfg['lean_bin']) / 'lean'), *self.lean_options, str(audit)],
-                        cwd=source.parent, env=self._environment(artifacts), timeout=180)
+                        cwd=source.parent, env=self._environment(artifacts), timeout=self.compile_timeout_seconds)
                 result['axioms'] = parse_axioms(audit_output, target)
                 output += audit_output
             if cache_allowed and module.is_file() and not module.is_symlink() and target:
