@@ -1,0 +1,242 @@
+[
+  {
+    "id": "am24-gradient-heat",
+    "commit": "17956b66bde8968febbd926f0af9d6a370639b2b",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/QuadraticGradientHeatSolution.lean",
+    "sha256": "a4d96e819b6b72cf4c499287bb8ae1d4cbe2d6a619aae0991aa89ad951056952",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "am24-mixed-heat",
+    "commit": "9a67820741ad3f5d9193cde297711029e17a86d3",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/MixedValueGradientHeatSolution.lean",
+    "sha256": "7d736cc64b0a4abc59da3ba6dd8476f2272ca6c4fba5dcd6f41434dbae27ae29",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "am24-small-coefficient-solver",
+    "commit": "a8bd1f99c42b785b2381b933c352f5dcc995016b",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmallCoefficientParabolicSolver.lean",
+    "sha256": "eaf779eff95683cc1fc1af9af2b0da682f15e69753257a117dc94b13c819e3e8",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "an24-forcing-linear",
+    "commit": "7b0c9cad5e9d2333e1644d831f94e53caa6204d7",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ForcingGraphLinearLift.lean",
+    "sha256": "cdb62ebbf2a6adf7f8d33cdd78c833abcea02f72da990acd55c36bc2fed01281",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "an24-inverse-ball",
+    "commit": "bfe09c17fc1b66c299a1d9cde10309daba14bffc",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ProjectedInverseCorrectionBall.lean",
+    "sha256": "b2bb72143596b26a32df815e08f6aba20e3f8ffed97e043f14b19b60b9b0277b",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "an24-inverse-hessian",
+    "commit": "17f66aa75705c3e249ca3058c90181caf2126f32",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/InverseMetricHessianNonlinearity.lean",
+    "sha256": "7138e1321642a22f795d87c008413d5d0973c9aa2978317c03272ef8a4c7d298",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "an24-inverse-metric-heat",
+    "commit": "b4f2dce807e36e145406f1c232f927cfd9c7604d",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/InverseMetricGradientHeatSolution.lean",
+    "sha256": "65f82a8dc7bdf44230bae3f8e148a2e584fd33b30b3298e7aec1590a89b44faa",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "an24-nonlinear-product",
+    "commit": "50e7611be3c2c075f0efa9e031199e28f9021985",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/NonlinearForcingHessianProduct.lean",
+    "sha256": "f2f081e450ce4d743f2ef3f61d8857d78e05ee1f157dcae4572db05cbd1f6308",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "an24-small-time",
+    "commit": "11d8dfe9f80d75c6b1f98037e1caac1a9849801a",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/InverseMetricSmallTimeConstants.lean",
+    "sha256": "e184d054774b99b9152a818a9b819e4054345459d38735b9264f1639595c5b48",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "an24-trace-contraction",
+    "commit": "e0f251c9a93bf7648cf83f72895d2e2793d8979a",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/OperatorHessianContraction.lean",
+    "sha256": "047464b96929607d04399913e9ad23bd2f37f2acc1216ac5076c9b249bc41460",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "an24-value-operator",
+    "commit": "cbf1b081118df8447ef04f2802fc7ab563a21c31",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ZeroTraceOperatorValueProjection.lean",
+    "sha256": "f57c92c4d8b67d3a5be7b9c9192ded61d97c5e8578158079695597d23292f948",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "ao24-christoffel",
+    "commit": "c6b534425b56aa2141ee848e61b45243700f0910",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CoordinateChristoffelBilinear.lean",
+    "sha256": "1c651a459851673e3692526dcb5f2db0359795ad511957c020222a72e9ce9aa5",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "ao24-fourlinear-estimate",
+    "commit": "6b0033385d6893b3134e808f52595931bae50982",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/QuadrilinearCoefficientGradientEstimate.lean",
+    "sha256": "c52587162caaff0e8e9e80e1d7b7ae8d0a9871afe7faeae7b42ae8b13a63c669",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "ao24-fourlinear-forcing",
+    "commit": "bdcd5c7f2755670c7cb7703e11d03cd825ff8dcd",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ForcingGraphQuadrilinearLift.lean",
+    "sha256": "478af510a2ecff5e8aed55f54cd849e853acec12b1111b10a62a3c3460fb7485",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "ao24-full-inverse-ball",
+    "commit": "b410594e102363b88498132e38d47a0833b82c6c",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ProjectedFullInverseBall.lean",
+    "sha256": "05a76320193fe299a866a5a7d5b7c588a6af1f5a8f024a9717f1cd318fc2d049",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "ao24-rational-gradient",
+    "commit": "f7cb02a3e0498b8fa826c505ee45be60180214ff",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/InverseMetricQuadraticGradient.lean",
+    "sha256": "32d665ebab4ee189a28857266138eb554872a5895acd55b4e6f3bf777d108170",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "ap24-lie-principal",
+    "commit": "03414ea09c2f4fbdda9568e3515bb402037ccf69",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CoordinateDeTurckPrincipal.lean",
+    "sha256": "93c84cd26c52f3140b598c13340b6f3ce5395d2ce473c87a7d0136b43e5599bf",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "ap24-lie-quadratic",
+    "commit": "931752585958c5b0672c6c167dd7298fc6b1a187",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CoordinateDeTurckQuadratic.lean",
+    "sha256": "fcf945fdba1b02a84a158d0db66fb94c0dfd697f45e56b550b7a59fcafb8f957",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "ap24-metric-compatibility",
+    "commit": "f0b4a2fe4bd50ee18e25bf057e26f33961fa0fef",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CoordinateMetricCompatibility.lean",
+    "sha256": "98268ab616d4c9042c1c371db73a707b911371f6fa93cf68967eb22e4e297e7a",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  },
+  {
+    "id": "ap24-ricci-principal",
+    "commit": "a40097811cafd4a707a32ddd7502b131c53b82e4",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CoordinateRicciPrincipal.lean",
+    "sha256": "21e8588ecb7c79c2ea23c20bd5660b237fe3f1cd136e5006ee7bf5ae4672d4b7",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "frozen_source_preserved": true
+  }
+]

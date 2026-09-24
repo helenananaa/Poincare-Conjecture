@@ -1,0 +1,87 @@
+{
+  "freeze_check": "PASS",
+  "baseline_mode": "trusted",
+  "frozen_files": 13,
+  "goal_nodes": 6,
+  "unbound_goals": [
+    "smoothing",
+    "geometric_trace"
+  ],
+  "bound_but_not_yet_checked": [],
+  "complete": false,
+  "assembly_is_conditional": true,
+  "verified_bindings": [
+    "cover",
+    "handle",
+    "sum_factors",
+    "sum_sphere"
+  ],
+  "axioms": {
+    "public_target_unbundled": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "standardSphere_trace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.V1.TopologicalStep.reconstruct": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.V1.FiniteExtinctionTrace.decomposes": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.V1.recognize_standard_decomposition": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.V1.smooth_topological_of_trace": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.V1.topological_of_smoothing_and_smooth_topological": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.V1.smooth_topological_of_smooth": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.V1.topological_of_contracts": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "ProofContractBindingAudit.bound_cover": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "ProofContractBindingAudit.bound_handle": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "ProofContractBindingAudit.bound_sum_factors": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "ProofContractBindingAudit.bound_sum_sphere": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "scope": "own source targets and existing pinned dependency cache; no full dependency rebuild"
+}
