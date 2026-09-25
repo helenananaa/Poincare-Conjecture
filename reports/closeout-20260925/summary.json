@@ -1,0 +1,25 @@
+{
+  "date": "2026-09-25",
+  "timezone": "Asia/Shanghai",
+  "proof_head": "8ac3066e61a51f80db19225862e4a376b5c26b29",
+  "previous_remote_head": "d575e0614e8b752669149faf54632e10824dfe9b",
+  "accepted_proof_targets": 103,
+  "new_lean_files": 104,
+  "new_definition_files": 1,
+  "source_commits_before_closeout": 104,
+  "dispatch_paused": true,
+  "active_workers": 0,
+  "active_dispatchers": 0,
+  "current_effective_unfinished_tasks": 0,
+  "historical_failure_preserved": true,
+  "root_check": "PASS",
+  "unbound_goals": [
+    "smoothing",
+    "geometric_trace"
+  ],
+  "complete": false,
+  "assembly_is_conditional": true,
+  "destination": "helenananaa/Poincare-Conjecture",
+  "branch": "integration",
+  "full_dependency_rebuild": false
+}
