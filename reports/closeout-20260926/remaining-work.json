@@ -1,0 +1,24 @@
+{
+  "complete": false,
+  "models_paused": [
+    "luna",
+    "grok"
+  ],
+  "active_proof_workers": 0,
+  "unresolved_roots": [
+    "smoothing",
+    "geometric_trace"
+  ],
+  "queued_effective_task": "br26-actual-cap-coordinate-ball",
+  "queued_superseded_task": "bj26-coupled-affine-solution-stability",
+  "unaccepted_candidate": {
+    "task": "bq26-compact-smooth-translation-bcf",
+    "status": "FAILED",
+    "reason": "Independent verification reached the configured 8000000-heartbeat limit.",
+    "source_preserved_locally": true,
+    "proof_claimed": false
+  },
+  "resume_requires_user_instruction": true,
+  "smoothing_gap": "Compatible triangulation of arbitrary closed topological 3-manifolds and genuine PL-to-smooth construction remain.",
+  "geometric_trace_gap": "Global compatible PDE, sufficient smooth regularity, intrinsic gauge transfer, controlled long-time surgery/extinction, and correspondence to exact finite topological rewrites remain."
+}

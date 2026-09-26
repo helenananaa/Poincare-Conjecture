@@ -1,0 +1,1142 @@
+[
+  {
+    "task": "bg26-smooth-radius-extension",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "c493c65799add6d871b29d560b439d0dcdc203cf",
+    "target": "PoincareConjecture.ParallelImplementation.SmoothRadiusControlledExtension.exists_smooth_radius_controlled_extension",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmoothRadiusControlledExtension.lean",
+    "source_sha256": "6c0e8e4372fa9fa30aabe2acdd741335f57d74b808a2c99352f5407ea8bb1423",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 114,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-spacetime-deturck",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "3147a73b17c9e019df1c3435a18ed6bde497f2a5",
+    "target": "PoincareConjecture.ParallelImplementation.SpaceTimeDeTurckRegularity.contDiff_spacetime_deturck",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SpaceTimeDeTurckRegularity.lean",
+    "source_sha256": "5b03f249c5a556d6cad5cbde1ccc72a9904b5d55f2c2a1c51d4b21033fee057a",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 121,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-background-tensor-cutoff",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "76276135426bbd8564cc7115df08286e5d3a20d2",
+    "target": "PoincareConjecture.ParallelImplementation.BackgroundTensorCutoff.roughLaplacian_cutoff_product",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BackgroundTensorCutoff.lean",
+    "source_sha256": "0aa91e7421719910b6dcd4e981ae3f7d07568873c76e55589194ca4f47d68a5c",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 167,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-smooth-contraction-fixed-point",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "798e52b0fce8f1de87e0ffef7f713957e73ec20c",
+    "target": "PoincareConjecture.ParallelImplementation.SmoothContractionFixedPoint.contDiff_fixedPoint",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmoothContractionFixedPoint.lean",
+    "source_sha256": "545c82a686a312d52f6e7f8f37e5fa99da1b5e901b35a29465638c7b02444010",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 79,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-rational-spatial-difference",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "995340c702a14435300157bd903cdc2a47a6d200",
+    "target": "PoincareConjecture.ParallelImplementation.RationalSpatialDifferenceQuotient.rational_spatial_difference_quotient_equation",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/RationalSpatialDifferenceQuotient.lean",
+    "source_sha256": "b1986cc8b047c82c3bb02f8332966555c1e38c57a531fa0d3c3176bc63bf9553",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 253,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-smooth-path-superposition",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "af9c13cb88025a737fa2b66100060c0eb1d0ee01",
+    "target": "PoincareConjecture.ParallelImplementation.SmoothPathSuperposition.contDiff_superposition",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmoothPathSuperposition.lean",
+    "source_sha256": "679e4f192907b323cb358b25129eb9ec45da197b26250e63436a45d38378c9c4",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 196,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-finite-realization-coordinates",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "ba0c2e0ac8bcc86cda459398fad773495c8bb6b0",
+    "target": "PoincareConjecture.ParallelImplementation.FiniteRealizationCoordinates.mem_realization_iff_coordinates",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FiniteRealizationCoordinates.lean",
+    "source_sha256": "ba3cf09316491693663ca3108d76c9a6feb7d007af06e3d91f9e3c4e7a5b7a3e",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 107,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-barycentric-chain-injectivity",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "318483c6c23a91fa04802bebc495986a80d64843",
+    "target": "PoincareConjecture.ParallelImplementation.BarycentricChainInjectivity.chain_weights_eq_of_barycenter_eq",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BarycentricChainInjectivity.lean",
+    "source_sha256": "eab770aaae58442ab0043a9f3eb950730910210557bab132a7cd75a1faf05f38",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 387,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-smooth-picard-operator",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "ee320bd3a0ac16a34a187fbd9fd13d8324b99174",
+    "target": "PoincareConjecture.ParallelImplementation.SmoothPicardOperator.contDiff_picardOperator",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmoothPicardOperator.lean",
+    "source_sha256": "7f5b877fbdf41eaa12aba90140c17bf31baef51d6725cdd5f42c3b5d7f63d120",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 70,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-finite-barycentric-layer-cake",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "7828a4ac983cc48b41bddf43104f31c0bbfb2890",
+    "target": "PoincareConjecture.ParallelImplementation.FiniteBarycentricInverse.finite_layer_cake",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FiniteBarycentricInverse.lean",
+    "source_sha256": "533113d02c5f032a802d4634f60b092aeb9cb6129bb9ab68fda4465f9baadffc",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 402,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-initial-trace-removal",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "a9f301e425376415dbc972506c1bea1903d7c88b",
+    "target": "PoincareConjecture.ParallelImplementation.InitialTraceRemoval.remove_initial_trace_correction",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/InitialTraceRemoval.lean",
+    "source_sha256": "2beaf39048c5bc603f5ba206e8ba9ee01a845ca0b15b111d326084d978b234ff",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 92,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-bounded-classical-heat-uniqueness",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "249de37ff55a28fe31320672300ebd8bbeb00be5",
+    "target": "PoincareConjecture.ParallelImplementation.BoundedClassicalHeatUniqueness.zero_initial_heat_jet_eq_zero",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BoundedClassicalHeatUniqueness.lean",
+    "source_sha256": "89c4a1e3918a7d5c3860eebcbfd4b600699d7c0a090959f6f383a9ba62585087",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 778,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-centered-smooth-picard-solution",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "50d7318ff288f5a71b41e1a489979bb7d54fb3f1",
+    "target": "PoincareConjecture.ParallelImplementation.CenteredSmoothPicardSolution.exists_centered_smooth_solution",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CenteredSmoothPicardSolution.lean",
+    "source_sha256": "4529a727eeae8bb92a97fc7bf1aa2428b1054104a28d56dba251f823a2ffa1e1",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 228,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-barycentric-homeomorph-assembly",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "4e4ac21c2c7ba87bcdc69d3f89f82d7dbcf35d9d",
+    "target": "PoincareConjecture.ParallelImplementation.BarycentricSubdivisionRealization.barycentric_subdivision_realization_homeomorph",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BarycentricSubdivisionRealization.lean",
+    "source_sha256": "eb8bfb26981a68df66fe09de9344e09a4aaabff9e5923918d731b95f76a0a45a",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 481,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-uniform-initial-difference-jets",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "f8a49815c50333f3798118dc532cbeeef2f5b9be",
+    "target": "PoincareConjecture.ParallelImplementation.UniformInitialDifferenceQuotient.exists_uniform_initial_difference_jets",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/UniformInitialDifferenceQuotient.lean",
+    "source_sha256": "26d349496e7d96201c66a10a0d123604e9518f18f05af008c54279140c814b76",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 198,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-finite-spatial-difference-full-jet",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "478423b2fc14c669b1a40853563eaa6b6c263de9",
+    "target": "PoincareConjecture.ParallelImplementation.FiniteSpatialDifferenceJet.finite_spatial_difference_full_jet",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FiniteSpatialDifferenceJet.lean",
+    "source_sha256": "c57d6aaff161dae263764934506ab86ad6e1ef83235ec3f5de6de80cc3b37573",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 474,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-parabolic-heat-isomorphism",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "7323981b37a21f68df72ef3d2eec2fb02c2425f3",
+    "target": "PoincareConjecture.ParallelImplementation.ParabolicHeatIsomorphism.exists_parabolic_heat_isomorphism",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ParabolicHeatIsomorphism.lean",
+    "source_sha256": "5735513779897a981250e6248d06732e31342a229bb3ad66c58c82af48acd513",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 84,
+    "compile_passed": true
+  },
+  {
+    "task": "bh26-smooth-normalized-six-coordinates",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "41ca78727bfd6375641a16730a0a1e60e3180207",
+    "target": "PoincareConjecture.ParallelImplementation.SmoothNormalizedSixMetricCoordinates.exists_smooth_normalized_six_metric_coordinates",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmoothNormalizedSixMetricCoordinates.lean",
+    "source_sha256": "2b55409a91a521e12175cbf9e9db0a9080cecef217ce8bc3242b2ac3474ef5c5",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 86,
+    "compile_passed": true
+  },
+  {
+    "task": "bh26-forcing-spatial-translation",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "9082e62f55bfeb9050d8736c53e2f62441723445",
+    "target": "PoincareConjecture.ParallelImplementation.ForcingSpatialTranslation.forcing_translation_properties",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ForcingSpatialTranslation.lean",
+    "source_sha256": "20badb8b65857c0f3578f3b31693bc32d440d57a6770f2260cb7eec6891ffe20",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 106,
+    "compile_passed": true
+  },
+  {
+    "task": "bh26-smooth-radius-classical-deturck",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "4b27e2015652f54a73e58cfd836278602df67efe",
+    "target": "PoincareConjecture.ParallelImplementation.SmoothRadiusControlledClassicalDeTurck.exists_smooth_radius_controlled_classical_deturck",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmoothRadiusControlledClassicalDeTurck.lean",
+    "source_sha256": "1286f6ea9763e690f55a376a799107d45d7315f970c4b622cf3401c040241c5e",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 65,
+    "compile_passed": true
+  },
+  {
+    "task": "bh26-full-jet-spatial-translation",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "6a9d42fbec590c28e231df6dc3ffb2efac8cb57e",
+    "target": "PoincareConjecture.ParallelImplementation.FullJetSpatialTranslation.full_jet_translation_properties",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FullJetSpatialTranslation.lean",
+    "source_sha256": "141b9f609b9654f84ddc0aad2310a12f6f13161320e400a0bfc5298b80924efd",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 249,
+    "compile_passed": true
+  },
+  {
+    "task": "bh26-smooth-manifold-chart-initial-solution",
+    "project": "poincare-smooth-chart-consumers-20260926-1417",
+    "commit": "70060590135268ce8833ac7933384bba929eb486",
+    "target": "PoincareConjecture.ParallelImplementation.SmoothManifoldChartClassicalInitialSolution.exists_manifold_chart_smooth_initial_solution",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmoothManifoldChartClassicalInitialSolution.lean",
+    "source_sha256": "204b8537e53b0cf53ffe0e933d9b2d0f6c12582f9c8b507fdb25ffb40d3db723",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 133,
+    "compile_passed": true
+  },
+  {
+    "task": "bg26-time-dependent-flow-joint-smooth-short-window",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "3640d3d0960e1c90ec6e542b10bc457c1c1cee5a",
+    "target": "PoincareConjecture.ParallelImplementation.TimeDependentFlowJointSmooth.exists_short_joint_smooth_spatialFlow",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/TimeDependentFlowJointSmooth.lean",
+    "source_sha256": "92368c3fc46285665b7581eebbd67f660d69d6a9e8805433de406385cc47d055",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 444,
+    "compile_passed": true
+  },
+  {
+    "task": "bi26-same-witness-heat-translation",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "8fc5b1371e2ed29eb080f491624b0dd846d1cba7",
+    "target": "PoincareConjecture.ParallelImplementation.SameWitnessHeatTranslation.same_witness_heat_inverse_translation",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SameWitnessHeatTranslation.lean",
+    "source_sha256": "a1b1fc1ac5e6590be2fc0478acf1d94bbb4a2e068c2a45fac4bf30283fd59d3b",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 163,
+    "compile_passed": true
+  },
+  {
+    "task": "bi26-uniform-stationary-background-difference",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "171eeed46866470408f46234b4db3d94caae40ed",
+    "target": "PoincareConjecture.ParallelImplementation.UniformStationaryBackgroundDifference.uniform_stationary_background_differences",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/UniformStationaryBackgroundDifference.lean",
+    "source_sha256": "74eb55f712b9cef669f37ebe805953e5944b0910aece63fbcd8d55cca20c0b62",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 266,
+    "compile_passed": true
+  },
+  {
+    "task": "bj26-uniform-stationary-full-jet",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "25fb29dd7b048c603033859303034513c35ab9e7",
+    "target": "PoincareConjecture.ParallelImplementation.UniformStationaryFullJetDifference.uniform_stationary_full_jet_differences",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/UniformStationaryFullJetDifference.lean",
+    "source_sha256": "a0239c226b6e4d0d581f9041cdd92cd5ff40155dd8fa4bc9aba25ecf3d99aa36",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 228,
+    "compile_passed": true
+  },
+  {
+    "task": "bj26-affine-rational-solution-translation",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "af5a274b68717f58d8c01beb9c8029b53635ae52",
+    "target": "PoincareConjecture.ParallelImplementation.AffineRationalSolutionTranslation.translate_affine_rational_solution",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/AffineRationalSolutionTranslation.lean",
+    "source_sha256": "1dc1fce6bd742b507bceba587b83be2a5df0f738ee1f611c82588420f56d5131",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 199,
+    "compile_passed": true
+  },
+  {
+    "task": "bj26-compact-smooth-family-local-diffeomorph",
+    "project": "poincare-local-inverse-20260926-1456",
+    "commit": "27fd55a6a66ace5a49acb616486b974b6d4f6f4d",
+    "target": "PoincareConjecture.ParallelImplementation.CompactSmoothFamilyLocalDiffeomorph.exists_uniform_local_diffeomorph_window",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CompactSmoothFamilyLocalDiffeomorph.lean",
+    "source_sha256": "3d6e260af2cbfc095be66caa4e85761fc988657736a8a82b581d331c24f88716",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 323,
+    "compile_passed": true
+  },
+  {
+    "task": "bj26-joint-background-checkpoint-recovery",
+    "project": "poincare-joint-recovery-20260926-1456",
+    "commit": "6accd773d1953c4db31d503ef30706915e17580b",
+    "target": "PoincareConjecture.ParallelImplementation.JointAffineBackgroundLipschitz.exists_joint_background_coupled_lipschitz",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/JointAffineBackgroundLipschitz.lean",
+    "source_sha256": "e4b30496712ce10629ba82d3f83615bcb543b69f0632488f4f7bb88aff00bb7d",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 945,
+    "compile_passed": true
+  },
+  {
+    "task": "bk26-time-dependent-diffeomorph-closure",
+    "project": "poincare-diffeomorph-closure-20260926-1613",
+    "commit": "5aaac11447b642dcff911b9cd137b7752fba220d",
+    "target": "PoincareConjecture.ParallelImplementation.CompactTimeDependentDiffeomorphClosure.exists_time_dependent_diffeomorph_flow",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CompactTimeDependentDiffeomorphClosure.lean",
+    "source_sha256": "862518117d383e619ee66a69276613789aa7e97e0042761deee331beb7810991",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 213,
+    "compile_passed": true
+  },
+  {
+    "task": "bk26-encoded-stationary-difference",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "ed1e6cfc60255fdb3fece211b1fcb3d9e94e8fe0",
+    "target": "PoincareConjecture.ParallelImplementation.EncodedStationaryDifference.uniform_encoded_stationary_differences",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/EncodedStationaryDifference.lean",
+    "source_sha256": "cda5810a265dfd347f05c3c83cb93fb782a07ea580ecd21a15c780d76b43babf",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 196,
+    "compile_passed": true
+  },
+  {
+    "task": "bk26-c2-holder-pointwise-limit",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "55e355dbfc0c898c7bef396a423a19de34f6afea",
+    "target": "PoincareConjecture.ParallelImplementation.C2HolderPointwiseLimit.contDiff_two_of_uniform_holder_pointwise_limit",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/C2HolderPointwiseLimit.lean",
+    "source_sha256": "395ec0de02ad30ef245096bf15faf6a36b8b7448aa1ae162c685e022476417a3",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 348,
+    "compile_passed": true
+  },
+  {
+    "task": "bj26-coupled-affine-stability-after-recovery",
+    "project": "poincare-joint-recovery-20260926-1456",
+    "commit": "9b963c90c90968c91b4434bf3cb240a9eb6a525d",
+    "target": "PoincareConjecture.ParallelImplementation.CoupledAffineSolutionStability.coupled_affine_solution_stability",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CoupledAffineSolutionStability.lean",
+    "source_sha256": "d51c8d9e02e8b67b5ec10ca382b459d18ef236276488439bc07a35df5fd11256",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 248,
+    "compile_passed": true
+  },
+  {
+    "task": "bl26-spatial-difference-c3-bootstrap",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "7f5980cad148c522942bfce41fed270706adbef9",
+    "target": "PoincareConjecture.ParallelImplementation.SpatialDifferenceBootstrap.contDiff_three_of_uniform_spatial_differences",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SpatialDifferenceBootstrap.lean",
+    "source_sha256": "90dcff2644b984542d6beb4dcca3cdca48fe476659444779366ce6956452432a",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 94,
+    "compile_passed": true
+  },
+  {
+    "task": "bl26-time-dependent-flow-jacobian",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "ad9730d5d1a52bfc87e9614b168a6b8da0f62533",
+    "target": "PoincareConjecture.ParallelImplementation.TimeDependentFlowJacobian.hasDerivAt_spatial_jacobian_of_flow_ode",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/TimeDependentFlowJacobian.lean",
+    "source_sha256": "f6621ece3291910c5b0def9e1b555eb80c8badda42ca77f3971f3be83b0b0cff",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 142,
+    "compile_passed": true
+  },
+  {
+    "task": "bm26-open-collar-circle-map",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "773bd3e902e3b38fa2b873f449854bfc4037b466",
+    "target": "PoincareConjecture.ParallelImplementation.OpenCollarCircleMap.exists_collar_circle_map",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/OpenCollarCircleMap.lean",
+    "source_sha256": "6bdf4123c587893d37d8140ec1a3b5d3e0c46a32d3c9d66e1d2856fb7ebdf5cd",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 162,
+    "compile_passed": true
+  },
+  {
+    "task": "bm26-full-jet-joint-c1",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "8c1731b3c0b0e3a91c11b4e9e0d6863bd8768031",
+    "target": "PoincareConjecture.ParallelImplementation.FullJetJointC1.contDiffOn_one_of_actual_full_jet",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FullJetJointC1.lean",
+    "source_sha256": "21e875f5085ba5247ae3628f41c2ce296491aefca82af5ca5683017a238ba500",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 131,
+    "compile_passed": true
+  },
+  {
+    "task": "bl26-uniform-evolved-affine-difference",
+    "project": "poincare-uniform-evolved-20260926-1721",
+    "commit": "474ca0c99d20c06e9ddc3b2b0a8fba6e9c5eee71",
+    "target": "PoincareConjecture.ParallelImplementation.UniformAffineRationalDifference.uniform_affine_rational_difference_bounds",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/UniformAffineRationalDifference.lean",
+    "source_sha256": "89967a0af67ab245052797343560ea2126eee9d4345f5d84a84bd9ae7955c357",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 366,
+    "compile_passed": true
+  },
+  {
+    "task": "bl26-full-jet-spatial-c3-slices",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "c582cb73ff81a980b65b9633c451c8834fcff736",
+    "target": "PoincareConjecture.ParallelImplementation.FullJetSpatialC3Slices.spatial_slices_contDiff_three_of_full_jet_differences",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FullJetSpatialC3Slices.lean",
+    "source_sha256": "34190bb00545d222476b646ccc28326aca560c426a459120f0d69f53aceabe2f",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 173,
+    "compile_passed": true
+  },
+  {
+    "task": "bm26-open-collar-exterior-retraction",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "e0429fd653ed6515b7696f5fd8bde07a24d84a09",
+    "target": "PoincareConjecture.ParallelImplementation.OpenCollarExteriorRetraction.exists_collar_exterior_retraction",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/OpenCollarExteriorRetraction.lean",
+    "source_sha256": "576eb4a6138c93d7db245b20eebca845f1cedfb1275703808b57c93c6ea127ca",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 354,
+    "compile_passed": true
+  },
+  {
+    "task": "bl26-flow-pullback-coefficient-derivative",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "6db625ed8b1d2d2677a76b6fcaea0359c5e1e291",
+    "target": "PoincareConjecture.ParallelImplementation.FlowPullbackCoefficientDerivative.hasDerivAt_pullback_bilinear_coefficients",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FlowPullbackCoefficientDerivative.lean",
+    "source_sha256": "9c98a9e8d59f16c3be87d73a1fe992e92426b068ec63d80f82dcb177d658c2b6",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 72,
+    "compile_passed": true
+  },
+  {
+    "task": "bl26-open-collar-complement-components",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "069057300fe3c0914fec5387fbcd7f3798e0d28b",
+    "target": "PoincareConjecture.ParallelImplementation.OpenCollarComplementComponents.complement_joined_to_one_of_two_collar_sides",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/OpenCollarComplementComponents.lean",
+    "source_sha256": "21bcf5fba7cc9de70e0bc39649b63e099bbaacb899376f99cf4cf31ab975b664",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 196,
+    "compile_passed": true
+  },
+  {
+    "task": "bn26-circle-lift-obstruction",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "89481c40b90ec389362fd2746b547e5072bd7f03",
+    "target": "PoincareConjecture.ParallelImplementation.CircleLiftObstruction.not_simplyConnected_of_circle_crossing",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CircleLiftObstruction.lean",
+    "source_sha256": "4e6c1f48f221c82036a3d8d7814a5d2adac4691f3872f957de7936d11c86da7f",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 47,
+    "compile_passed": true
+  },
+  {
+    "task": "bn26-open-collar-side-separation",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "744b6f252d18935adf0d943b102ddef32c19d9f9",
+    "target": "PoincareConjecture.ParallelImplementation.OpenCollarSideSeparation.collar_sides_not_joined_in_complement",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/OpenCollarSideSeparation.lean",
+    "source_sha256": "571620ed3c2d5f17827b3bba594f3e7053f1972514fbc13ecdaca0a392401fc5",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 115,
+    "compile_passed": true
+  },
+  {
+    "task": "bn26-barycentric-link-join",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "040d195ef1563230aba750efa0147ab1b0075cf6",
+    "target": "PoincareConjecture.ParallelImplementation.BarycentricLinkJoin.barycentric_link_join_equivalence",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BarycentricLinkJoin.lean",
+    "source_sha256": "6417462a3d28f5cbf60dfa7bf1320dfbb7e96f21796f531bec74a07cf075ffe2",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 315,
+    "compile_passed": true
+  },
+  {
+    "task": "bn26-open-collar-component-frontiers",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "46dea0efb53f519b37e8e7ea8eee62ac8f886e41",
+    "target": "PoincareConjecture.ParallelImplementation.OpenCollarComponentFrontiers.collar_component_frontiers",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/OpenCollarComponentFrontiers.lean",
+    "source_sha256": "ee90d718ebb783244cefdbffb750eeacd3e6f23dd5d7791280e73a8071f155d4",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 170,
+    "compile_passed": true
+  },
+  {
+    "task": "bn26-manifold-invariance-of-domain",
+    "project": "poincare-collar-open-image-20260926-1857",
+    "commit": "b1d1fc05dce91ceb04b519d5ed9701f591697519",
+    "target": "PoincareConjecture.ParallelImplementation.ManifoldInvarianceOfDomain.isOpenEmbedding_of_continuous_injective",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ManifoldInvarianceOfDomain.lean",
+    "source_sha256": "6d5e454d25612ed3c23b2109689fef8bc05130994c2b7c7a7ff385cb9ded24ab",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 105,
+    "compile_passed": true
+  },
+  {
+    "task": "bm26-small-smooth-unforced-uniform-producer",
+    "project": "poincare-uniform-evolved-20260926-1721",
+    "commit": "d3285c2d5c02ce3bbabb99ef8865ab1ad077b751",
+    "target": "PoincareConjecture.ParallelImplementation.SmallSmoothUniformHeatSolution.exists_small_smooth_unforced_uniform_heat_solution",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmallSmoothUniformHeatSolution.lean",
+    "source_sha256": "1b291b3b88595c95a2258c782487147cf5004f28e708bcf4521dcb0da8186471",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 576,
+    "compile_passed": true
+  },
+  {
+    "task": "bo26-open-collar-cut-data-restored",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "405b4c28f3a59913856e83a8ca813c852dc3ede8",
+    "target": "PoincareConjecture.ParallelImplementation.OpenCollarCutData.simplyConnected_open_collar_cut_data",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/OpenCollarCutData.lean",
+    "source_sha256": "335f92c36e4e1f9febe41f9ec3bd178847241ecc0fc324109b5afa5761fe4d88",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 244,
+    "compile_passed": true
+  },
+  {
+    "task": "bn26-barycentric-geometric-subdivision",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "8650e131e8755142d674b8fe77b22d13f6917892",
+    "target": "PoincareConjecture.ParallelImplementation.BarycentricGeometricSubdivision.barycentric_geometric_subdivision",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BarycentricGeometricSubdivision.lean",
+    "source_sha256": "b2b87e67cd7adbc809df000f0caf66388faea2db433e8ba738d66e0b6b679e3a",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 454,
+    "compile_passed": true
+  },
+  {
+    "task": "bn26-finite-halfspace-clip",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "f7584174779f5298699ff4af729714f6d9dbbe69",
+    "target": "PoincareConjecture.ParallelImplementation.FinitePolytopeHalfspaceClip.convexHull_inter_halfspace_eq_clipped",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FinitePolytopeHalfspaceClip.lean",
+    "source_sha256": "6c56de398ba1250352a623605244620f4092c8949719fd9e41fa0dc2106fcc27",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 556,
+    "compile_passed": true
+  },
+  {
+    "task": "bo26-closed-sphere-collar-open",
+    "project": "poincare-closed-collar-20260926-2000",
+    "commit": "6bf4e9a7d28fd96a0e9d8e44c244d1727b222b84",
+    "target": "PoincareConjecture.ParallelImplementation.ClosedSphereCollarOpen.closed_sphere_collar_interior_isOpenEmbedding",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ClosedSphereCollarOpen.lean",
+    "source_sha256": "60d65281c27c6c65083ea34c90ea58f0aa59f28e3b8c04127898e9739a6e68b0",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 58,
+    "compile_passed": true
+  },
+  {
+    "task": "bo26-simplex-finite-halfspaces",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "4fd2cfb8d84e81be777004f70e82aa5a33d853b5",
+    "target": "PoincareConjecture.ParallelImplementation.SimplexFiniteHalfspaces.simplex_eq_finite_halfspaces",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SimplexFiniteHalfspaces.lean",
+    "source_sha256": "5fedf2c28137ed31f5e19be2f82c39724ca2bc6ce28d5efe54d5e7842e3a27fb",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 188,
+    "compile_passed": true
+  },
+  {
+    "task": "bo26-exposed-face-chain-barycenters",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "b56ae6ba82ebe355e41ceedf755825562b7c4341",
+    "target": "PoincareConjecture.ParallelImplementation.ExposedFaceChainBarycenters.affineIndependent_exposed_face_chain_barycenters",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ExposedFaceChainBarycenters.lean",
+    "source_sha256": "2c14e58c91d96e2a98c8cff5f4b7ae117fe368d8b83dd2ee14715320abb9ccfb",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 159,
+    "compile_passed": true
+  },
+  {
+    "task": "bo26-closed-embedded-sphere-cut",
+    "project": "poincare-closed-cut-20260926-2000",
+    "commit": "16f1413b4eea933bdbe3a72e47abebd59c57ee50",
+    "target": "PoincareConjecture.ParallelImplementation.ClosedSphereCutData.closed_embedded_sphere_cut_sides",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ClosedSphereCutData.lean",
+    "source_sha256": "8ede025e275240f21324e94440d65b19e3cb4e5673f08fef7a018bd530e96a64",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 153,
+    "compile_passed": true
+  },
+  {
+    "task": "bo26-smooth-c3-classical-deturck",
+    "project": "poincare-c3-geometric-solution-20260926-2000",
+    "commit": "069b26a963fb21607f8846b0c30e6f0c3a95cd46",
+    "target": "PoincareConjecture.ParallelImplementation.SmallSmoothC3ClassicalDeTurck.exists_small_smooth_c3_classical_deturck_solution",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmallSmoothC3ClassicalDeTurck.lean",
+    "source_sha256": "50b0d7c2e80f3eef8dd421931152978e83cfafd92bd636f2f1aea8165e6a823f",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 311,
+    "compile_passed": true
+  },
+  {
+    "task": "bo26-finite-simplex-intersection",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "1ed7785ad6ba7933a7ead15d3009314a86b700db",
+    "target": "PoincareConjecture.ParallelImplementation.FiniteSimplexIntersection.exists_finite_vertices_convexHull_inter_simplex",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FiniteSimplexIntersection.lean",
+    "source_sha256": "723aba9e099a808454286f120a7d3a512e44e49c297842b417b22c96c843dff0",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 69,
+    "compile_passed": true
+  },
+  {
+    "task": "bo26-finite-polytope-exposed-faces",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "2df1c16d12fabef2d32caf9ca2870f2c9e36d11f",
+    "target": "PoincareConjecture.ParallelImplementation.FinitePolytopeExposedFaces.exposed_faces_are_finitely_generated",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FinitePolytopeExposedFaces.lean",
+    "source_sha256": "6172c8857d708cafea9345a7c2c886abc80967889ed9dae77cb03b54985e1a2b",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 103,
+    "compile_passed": true
+  },
+  {
+    "task": "bn26-full-jet-spatial-derivative",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "af79fb315baa34d2565a8c3d0034f1279733f250",
+    "target": "PoincareConjecture.ParallelImplementation.FullJetSpatialDerivative.exists_actual_spatial_derivative_jet",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FullJetSpatialDerivative.lean",
+    "source_sha256": "073147ce5b86f349fc575730dd4062bb70f56f56e2d3063f9374bae855c49745",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 757,
+    "compile_passed": true
+  },
+  {
+    "task": "bp26-simplex-exposed-subfaces",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "19b927d3c5aa8fca7e008149ef6654c857547691",
+    "target": "PoincareConjecture.ParallelImplementation.SimplexExposedSubfaces.simplex_vertex_subface_isExposed",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SimplexExposedSubfaces.lean",
+    "source_sha256": "213819b459f9ef39766a5d4a2cb1c7371479260ec903c6e27c8973bf64b993dd",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 257,
+    "compile_passed": true
+  },
+  {
+    "task": "bp26-nonzero-full-jet-spatial-derivative",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "a951d5254cc5e77dd4219bac38f75970078984dc",
+    "target": "PoincareConjecture.ParallelImplementation.NonzeroFullJetSpatialDerivative.exists_actual_nonzero_spatial_derivative_jet",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/NonzeroFullJetSpatialDerivative.lean",
+    "source_sha256": "edd11b11aa37cbd6ac954ee9a0f9f9531dedc1d5eb7979043d36519a73670741",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 739,
+    "compile_passed": true
+  },
+  {
+    "task": "bp26-actual-closed-cut-reconstruction",
+    "project": "poincare-cut-reconstruction-20260926-2058",
+    "commit": "dcb85f31395d662fd96a67dd135daf96a4e5fee4",
+    "target": "PoincareConjecture.ParallelImplementation.ClosedCutReconstruction.actual_closed_cut_reconstruction",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ClosedCutReconstruction.lean",
+    "source_sha256": "ef32a0bfbff2fe7bb47923a56f7dcd3a2ac08c83b908cb95579d66fd14252cba",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 162,
+    "compile_passed": true
+  },
+  {
+    "task": "bp26-capped-space-topology",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "246d8ef9cc744ffa6f1e55b38d0aeb2e07906bef",
+    "target": "PoincareConjecture.ParallelImplementation.CappedSpaceTopology.actual_cap_quotient_topology",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CappedSpaceTopology.lean",
+    "source_sha256": "5c2030035010a959df0aefd73274deb2f63785f7f96b5c96dc8e5c6176f9e707",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 364,
+    "compile_passed": true
+  },
+  {
+    "task": "bp26-simplicial-intersection-faces",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "92c834be99c7029c2f1c76c86c730a3433d4ea93",
+    "target": "PoincareConjecture.ParallelImplementation.SimplicialIntersectionFaces.intersection_cells_have_exposed_intersections",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SimplicialIntersectionFaces.lean",
+    "source_sha256": "02029735567855709e9d61a55aa85c5655ec271a107d3e7d360f614319e6cf01",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 123,
+    "compile_passed": true
+  },
+  {
+    "task": "bp26-smooth-fixed-point-dependence",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "af544eecdd8e4bdd0b353d19e58df4958197b54a",
+    "target": "PoincareConjecture.ParallelImplementation.SmoothFixedPointDependence.contDiffAt_of_small_state_derivative",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SmoothFixedPointDependence.lean",
+    "source_sha256": "c16ba2805b6d32b03934ef7276bcf82ce273d1651e321c0651ae3cd281dd20c6",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 171,
+    "compile_passed": true
+  },
+  {
+    "task": "bo26-finite-polytope-cone-cover",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "d3afc3cd83f6921500a973972f54dc18bec430aa",
+    "target": "PoincareConjecture.ParallelImplementation.FinitePolytopeConeCover.convexHull_covered_by_centroid_face_cones",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FinitePolytopeConeCover.lean",
+    "source_sha256": "17565dd10425ae11916bc8638e23dbbdba394eb0ac138ddb1afb6d5662feea0b",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 466,
+    "compile_passed": true
+  },
+  {
+    "task": "bp26-actual-gradient-joint-c1",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "8ec88c3692f5c3564ef6d5d809d76189bdef65a7",
+    "target": "PoincareConjecture.ParallelImplementation.ActualGradientJointC1.actual_spatial_derivatives_joint_c1",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ActualGradientJointC1.lean",
+    "source_sha256": "85f04b8c5ddc64d76ae4d451cf611df3fc91250aea2eb5dd87beb564f0329af4",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 86,
+    "compile_passed": true
+  },
+  {
+    "task": "bq26-bilinear-resolvent-smooth",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "168b02a63cae6696778382dc5848fbd643a6258c",
+    "target": "PoincareConjecture.ParallelImplementation.BilinearResolventSmooth.exists_smooth_bilinear_resolvent",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/BilinearResolventSmooth.lean",
+    "source_sha256": "7462ccd8f23db10d979b5e9092874e8215da30bbd7fade541e4a4a26e6f25d19",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 74,
+    "compile_passed": true
+  },
+  {
+    "task": "bq26-actual-closed-side-half-collar",
+    "project": "poincare-half-collar-20260926-2132",
+    "commit": "98b407a9f37c820f55558f6d9c2804bc64ac8a75",
+    "target": "PoincareConjecture.ParallelImplementation.ClosedSideHalfCollar.exists_actual_closed_side_half_collar",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ClosedSideHalfCollar.lean",
+    "source_sha256": "c3d1cb74e19db0feb2060bbac2cf62b60d0d0590a6c7e3539da8c83bb407c429",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 135,
+    "compile_passed": true
+  },
+  {
+    "task": "bq26-polytope-cone-intersection",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "ad7b7f30d6e6cbba0896ac19f824dd9a8d7044bd",
+    "target": "PoincareConjecture.ParallelImplementation.PolytopeConeIntersection.centroid_cone_intersection",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/PolytopeConeIntersection.lean",
+    "source_sha256": "9a8d1b5e42d0c3dc9d21a8de509da0b98ddaa06d865c23b799c680eafbe37d3e",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 226,
+    "compile_passed": true
+  },
+  {
+    "task": "br26-polytope-exposed-transitivity",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "1ff0f7b861b5e5c8041e1244a8d37a49fb61990e",
+    "target": "PoincareConjecture.ParallelImplementation.FinitePolytopeExposedTransitivity.exposed_face_transitive_of_finite_hull",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FinitePolytopeExposedTransitivity.lean",
+    "source_sha256": "c614e930a58e8bfb5c72dea1e33467881bdda8bcf303f17d76a11c253d55f520",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 261,
+    "compile_passed": true
+  },
+  {
+    "task": "br26-common-finite-polytopal-refinement",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "1b51503711d2b11ef3d8436e9fcd4ff31f76b9e2",
+    "target": "PoincareConjecture.ParallelImplementation.CommonFinitePolytopalRefinement.actual_finite_common_polytopal_refinement",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CommonFinitePolytopalRefinement.lean",
+    "source_sha256": "cfb587573e2bcbd4c1f7423296201d1f8fa782daca3537563585ad9e14b6c581",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 212,
+    "compile_passed": true
+  },
+  {
+    "task": "br26-finite-polytope-face-chain-cover",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "8aa9e7bd02ecc8f0a02e07d08633aaffe2d51c8c",
+    "target": "PoincareConjecture.ParallelImplementation.FinitePolytopeFaceChainCover.finite_hull_covered_by_saturated_face_chains",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/FinitePolytopeFaceChainCover.lean",
+    "source_sha256": "e12cafb0403da0f0d70de5a15762228f6958db0570b31df5508a42688157d112",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 202,
+    "compile_passed": true
+  },
+  {
+    "task": "bq26-cap-seam-open-collar",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "2bbfcd7814013ea3301cfc5ba608456841686bc0",
+    "target": "PoincareConjecture.ParallelImplementation.CapSeamOpenCollar.exists_open_collar_across_actual_cap_seam",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/CapSeamOpenCollar.lean",
+    "source_sha256": "a8b7dbd8d557cab2901a5b07c31966aea6271b515a2696d4c46d604aead9a0f8",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 657,
+    "compile_passed": true
+  },
+  {
+    "task": "bq26-forcing-graph-local-inverse-smooth",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "e55e13d96080ebb5fee5b0e743a830690e1ce929",
+    "target": "PoincareConjecture.ParallelImplementation.ForcingGraphLocalInverseSmooth.exists_smooth_local_forcing_inverse",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/ForcingGraphLocalInverseSmooth.lean",
+    "source_sha256": "65377e726ed8e1a8573ed22105c2f8ed45b4b27a42ec4cde47bbb3d61d039196",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 306,
+    "compile_passed": true
+  },
+  {
+    "task": "br26-saturated-face-chain-intersection",
+    "project": "poincare-goal-resume-20260926",
+    "commit": "2ff5aefcf526c607bde631f19ed7fa2c153cafa3",
+    "target": "PoincareConjecture.ParallelImplementation.SaturatedFaceChainIntersection.saturated_face_chain_simplex_intersection",
+    "path": "PoincareConjecture/PoincareConjecture/ParallelImplementation/SaturatedFaceChainIntersection.lean",
+    "source_sha256": "fed4daf524e4a75764db35ecb2f2170c5e57d01745cc3dd692e2b9d22ea6f681",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "lines": 752,
+    "compile_passed": true
+  }
+]
