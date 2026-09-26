@@ -8,6 +8,7 @@ import contextlib, fcntl, hashlib, json, math, os, re, shutil
 from pathlib import Path, PurePosixPath
 import socket, subprocess, sys, threading, time, uuid
 from state import Store
+from compiled_audit import prepare_compiled_audit
 
 try:
     import resources as _resources
@@ -481,13 +482,17 @@ class Controller:
             result['compile_seconds'] = round(time.monotonic() - compiler_started, 6)
             result['axioms'] = []
             if target:
-                audit = artifacts / ('Audit_'+uuid.uuid4().hex+'.lean')
-                audit.write_text(source.read_text()+'\n#print axioms '+target+'\n')
+                binding = prepare_compiled_audit(
+                    source, artifacts, relative, target, key_payload['source_sha256'])
+                audit = binding.audit
                 with _resources.slot(self.root, 'compiler', self.compiler_slots, timeout=self.compile_timeout_seconds) as lease:
                     result['audit_wait_seconds'] = round(lease.waited_seconds, 6)
                     audit_output = checked(
                         [str(Path(self.cfg['lean_bin']) / 'lean'), *self.lean_options, str(audit)],
                         cwd=source.parent, env=self._environment(artifacts), timeout=self.compile_timeout_seconds)
+                binding.verify()
+                result['audit_mode'] = 'import_exact_compiled_object_v1'
+                result['compiled_bundle_sha256'] = binding.bundle
                 result['axioms'] = parse_axioms(audit_output, target)
                 output += audit_output
             if cache_allowed and module.is_file() and not module.is_symlink() and target:
