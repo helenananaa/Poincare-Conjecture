@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "source_sha256": "2231d0b755e473abbcc5f2132772c6adae032a4a6ec21b8780212756207bcde9",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/objects/PoincareConjecture/ProofContract/Refinement20260927/LocationRegression.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/sources/PoincareConjecture/ProofContract/Refinement20260927/LocationRegression.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.locatedCut_has_expected_subsets",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.locatedCuts_ne_of_negative_regions_ne",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.locatedCut_has_expected_subsets' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.locatedCuts_ne_of_negative_regions_ne' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New source; pinned and previously checked dependencies reused"
+}

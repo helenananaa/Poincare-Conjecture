@@ -1,0 +1,33 @@
+{
+  "exit_code": 0,
+  "source_sha256": "5f57a17e928dfe7f17bf6d719e3d90914078426a1177b084019ec19ab4310942",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round11/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round11/objects/PoincareConjecture/ProofContract/Refinement20260927/ExtinctionBarrier.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round11/sources/PoincareConjecture/ProofContract/Refinement20260927/ExtinctionBarrier.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.widthPotential_mono",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.extinctionProfile_terminal_bound",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.extinctionProfile_impossible",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.widthPotential_mono' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.extinctionProfile_terminal_bound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.extinctionProfile_impossible' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New source; pinned and previously checked dependencies reused"
+}

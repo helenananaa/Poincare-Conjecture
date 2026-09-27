@@ -1,0 +1,33 @@
+{
+  "exit_code": 0,
+  "source_sha256": "a3fec9d7e7ec19cc2d393e63de34bd0fc44e0c2a93bf1beb619e0ddea85e2bea",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/objects/PoincareConjecture/ProofContract/Refinement20260927/GeometricNeck.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/sources/PoincareConjecture/ProofContract/Refinement20260927/GeometricNeck.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.AmbientMetricNeck.central_formula",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.metricNeckCut",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.metricNeck_connectedSum",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.AmbientMetricNeck.central_formula' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.metricNeckCut' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.metricNeck_connectedSum' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New source; pinned and previously checked dependencies reused"
+}

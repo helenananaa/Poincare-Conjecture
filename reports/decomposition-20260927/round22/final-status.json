@@ -1,0 +1,60 @@
+{
+  "observed_utc": "2026-09-27T10:49:52.682481+00:00",
+  "accepted_this_layer": 1,
+  "accepted_worker_leaves": 30,
+  "round20_three_leaves_all_independently_accepted": true,
+  "round21_new_workers_launched": 4,
+  "round22_new_workers_launched": 0,
+  "queues": {
+    "poincare-refinement-round20-20260927": {
+      "states": {
+        "VERIFIED": 3
+      },
+      "ready": [],
+      "blocked": []
+    },
+    "poincare-refinement-round21-20260927": {
+      "states": {
+        "RUNNING": 1,
+        "VERIFIED": 3
+      },
+      "ready": [],
+      "blocked": []
+    }
+  },
+  "active_attempts": [
+    {
+      "project": "poincare-refinement-round21-20260927",
+      "task": "d27r21-embedded-normal-frames",
+      "reserved_seconds": 1857.4,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-90f75dffe6854f769796dae08c1ef469.service"
+    }
+  ],
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_after_thirty",
+  "new_parent_declarations_this_layer": 4,
+  "frontier_hash_check": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "commit_or_push_performed": false,
+  "full_rebuild_performed": false,
+  "freeze_restored_on_continuation": true
+}

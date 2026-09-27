@@ -1,0 +1,28 @@
+{
+  "exit_code": 0,
+  "source_sha256": "2a0c89e2add04fa24f58071022565240991f9bf940ca850664f07a138408562b",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/objects/PoincareConjecture/ProofContract/Refinement20260927/CutInvariant.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ProofContract/Refinement20260927/CutInvariant.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_cut_preserves_simplyConnected",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_neck_preserves_simplyConnected",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.checked_cut_preserves_simplyConnected' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.checked_neck_preserves_simplyConnected' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n"
+}

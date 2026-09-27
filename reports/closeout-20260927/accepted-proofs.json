@@ -1,0 +1,542 @@
+[
+  {
+    "task": "d27r10-local-patch-density",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedLocalPatchDensity.local_patch_density",
+    "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedLocalPatchDensity.lean",
+    "source_sha256": "7a26595f91677407fd70d8e13636988f96ac9693f8a6206582928b3bfb08860d",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r10-open-patch-assembly",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedOpenPatchAssembly.open_patch_assembly",
+    "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedOpenPatchAssembly.lean",
+    "source_sha256": "37117476510ec76d5ed793824020f4fd7007de376f3fce6250448783178d16be",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r11-width-dini-comparison",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedWidthDiniComparison.width_dini_comparison",
+    "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedWidthDiniComparison.lean",
+    "source_sha256": "642ada0d548bde2377b86d856a41d59d6992883a07ac8722da6f55ddc9e7144d",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r11-width-finite-horizon",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedWidthFiniteHorizon.width_finite_horizon",
+    "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedWidthFiniteHorizon.lean",
+    "source_sha256": "b93fa4db0717159d4e29b89b4cf96d71dda4cdf976f1dfc485c5c027b15110b7",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r13-compact-time-variation",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCompactMetricTimeVariation.compact_metric_time_variation",
+    "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedCompactMetricTimeVariation.lean",
+    "source_sha256": "f6021513210e33330914ac53ebecdb21a572bcd957a695c0ce6573d6c7eeee34",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r13-compact-quadratic-lower",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCompactQuadraticLower.compact_quadratic_lower",
+    "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedCompactQuadraticLower.lean",
+    "source_sha256": "b7a11cd26d122fa57669e03b723a13d046c31efef294d34bf1e573e7bf230383",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r12-minimax-dini-limit",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedMinimaxDiniLimit.minimax_dini_limit",
+    "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedMinimaxDiniLimit.lean",
+    "source_sha256": "eb5d8120392cc047a927603d1ee1e0344ceed572f7b3c0105809473e707e1a1c",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r12-uniform-near-max",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedUniformNearMaxTaylor.uniform_near_max_taylor",
+    "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedUniformNearMaxTaylor.lean",
+    "source_sha256": "a060934395a9155258f2f5eaf2f3ba02517eb6e7b5c7a44025374e0f7a71693a",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r14-sphere-energy-continuity",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedSphereEnergyContinuity.sphere_energy_continuity",
+    "path": "reports/decomposition-20260927/round16/sources/PoincareConjecture/ParallelImplementation/RefinedSphereEnergyContinuity.lean",
+    "source_sha256": "f135c2697d9ca5ab3ac2e152cafd73e184decf7ec702a434196995929423846e",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r14-intrinsic-metric-comparison",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedIntrinsicMetricComparison.intrinsic_metric_comparison",
+    "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ParallelImplementation/RefinedIntrinsicMetricComparison.lean",
+    "source_sha256": "106c24bee1d69cd0674d535d51910afc50dc9991929b5cff549ac5659d6a0203",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r16-relative-retraction-homotopy",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedRelativeRetractionHomotopy.relative_retraction_homotopy",
+    "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ParallelImplementation/RefinedRelativeRetractionHomotopy.lean",
+    "source_sha256": "dec4eef2d66193a9efaea2c9a8ac581ed7099db1a2e03b89f0affa64a68fa42d",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r16-sphere-energy-approximation",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedSphereEnergyApproximation.sphere_energy_approximation",
+    "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ParallelImplementation/RefinedSphereEnergyApproximation.lean",
+    "source_sha256": "c70c30b9073292745371cf1cc4f10c4fae67483a8f4fc04b7f69a915924a7521",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r17-smooth-retraction-form",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedSmoothRetractionForm.smooth_retraction_form",
+    "path": "reports/decomposition-20260927/round20/sources/PoincareConjecture/ParallelImplementation/RefinedSmoothRetractionForm.lean",
+    "source_sha256": "687ff25135b46da6557135c95ab4e29d70bc5b40068de93e580d1468ba8f9c0b",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r19-tubular-inverse-assembly",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedTubularInverseAssembly.tubular_inverse_assembly",
+    "path": "reports/decomposition-20260927/round20/sources/PoincareConjecture/ParallelImplementation/RefinedTubularInverseAssembly.lean",
+    "source_sha256": "9d71c49408389a1e6e4bd9e70f3850a88d3e08d55598ff51755e7d4c0892ca5c",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r20-normal-endpoint-jet",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedNormalEndpointJet.normal_endpoint_jet",
+    "path": "reports/decomposition-20260927/round21/sources/PoincareConjecture/ParallelImplementation/RefinedNormalEndpointJet.lean",
+    "source_sha256": "592b44265057c6b6ecf8458e07d2616eadd64de2277a80abdff98d5bf8cfd612",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r20-normal-linear-equiv",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedNormalLinearEquiv.normal_linear_equiv",
+    "path": "reports/decomposition-20260927/round21/sources/PoincareConjecture/ParallelImplementation/RefinedNormalLinearEquiv.lean",
+    "source_sha256": "9ae497e83dc8ddd8f5cc5818f08444389e1d2bb8cab36dc919044286ab1f018f",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r20-tubular-chart-inverse",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedTubularChartInverse.tubular_chart_inverse",
+    "path": "reports/decomposition-20260927/round22/sources/PoincareConjecture/ParallelImplementation/RefinedTubularChartInverse.lean",
+    "source_sha256": "af3bcd99665955ca91ba928ec52e37024d45798838a1b7380e0575a5bff6997b",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r21-normal-bundle-parametrization",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedNormalBundleParametrization.normal_bundle_parametrization",
+    "path": "reports/decomposition-20260927/round23/sources/PoincareConjecture/ParallelImplementation/RefinedNormalBundleParametrization.lean",
+    "source_sha256": "d19aea2a8df2b976853209744bc13e6830146f99916abafac8f2e78720a789b9",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r21-normal-frame-transport",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedNormalFrameTransport.normal_frame_transport",
+    "path": "reports/decomposition-20260927/round23/sources/PoincareConjecture/ParallelImplementation/RefinedNormalFrameTransport.lean",
+    "source_sha256": "371dacd9aaa3d4d15ecdb56a97d0bdcb9616706a62cd4ded78151886ba9a68ff",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r21-normal-parametrization-regularity",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedNormalParametrizationRegularity.normal_parametrization_regularity",
+    "path": "reports/decomposition-20260927/round23/sources/PoincareConjecture/ParallelImplementation/RefinedNormalParametrizationRegularity.lean",
+    "source_sha256": "bb9ebc958fd51a580b88536e0508e98e6e1c4807806da1ec456085259c0a02f1",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r23-ambient-sweepout-confinement",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedAmbientSweepoutConfinement.ambient_sweepout_confinement",
+    "path": "reports/decomposition-20260927/round24/sources/PoincareConjecture/ParallelImplementation/RefinedAmbientSweepoutConfinement.lean",
+    "source_sha256": "419e3c4ef0c0179e7045c45e57745199d2d2483b8bb13948d57e44776bda4d12",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r23-compact-retraction-control",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCompactRetractionControl.compact_retraction_control",
+    "path": "reports/decomposition-20260927/round24/sources/PoincareConjecture/ParallelImplementation/RefinedCompactRetractionControl.lean",
+    "source_sha256": "f64815ceaff6d1f159d61bacc7bdd8f36ff9650d8d374921cf773e4789ac677e",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r23-sphere-composition-estimate",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedSphereCompositionEstimate.sphere_composition_estimate",
+    "path": "reports/decomposition-20260927/round24/sources/PoincareConjecture/ParallelImplementation/RefinedSphereCompositionEstimate.lean",
+    "source_sha256": "723d5d60efac271284abaff4c1de4041a8ec8813071ced2a9961bd0e98c5d818",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r23-ambient-endpoint-correction",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedAmbientEndpointCorrection.ambient_endpoint_correction",
+    "path": "reports/decomposition-20260927/round25/sources/PoincareConjecture/ParallelImplementation/RefinedAmbientEndpointCorrection.lean",
+    "source_sha256": "08ca85a44f8001b9e3321182180ad44ecdbe559280dc791376d6f2c0172cf7c3",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r21-embedded-normal-frames",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedEmbeddedNormalFrames.embedded_normal_frames",
+    "path": "reports/decomposition-20260927/round25/sources/PoincareConjecture/ParallelImplementation/RefinedEmbeddedNormalFrames.lean",
+    "source_sha256": "2910345b311906f85b6a45061c750ad57c151fa6d6334b40018d1af1570eff87",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r25-uniform-mollification",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedUniformMollification.uniform_mollification",
+    "path": "reports/decomposition-20260927/round26/sources/PoincareConjecture/ParallelImplementation/RefinedUniformMollification.lean",
+    "source_sha256": "7448fa5bd40d1b93a6d0df511b592eb8b5a5b7948e0e5fdcab572fe0292d8392",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r26-c1-ambient-frame-bound",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedC1AmbientFrameBound.c1_ambient_frame_bound",
+    "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ParallelImplementation/RefinedC1AmbientFrameBound.lean",
+    "source_sha256": "18d0515edd2e17a56d52c1ab8da3abe99731fe454ee5e0e1bb4ef226903c515d",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r26-c1-density-continuity",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedC1SphereEnergyContinuity.c1_sphere_energy_continuity",
+    "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ParallelImplementation/RefinedC1SphereEnergyContinuity.lean",
+    "source_sha256": "f6a4e27f350080c780f75dcfe8a7bdb472d2e3eb5715ee55fcd178eea5cbd05b",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r25-cylinder-restriction-estimate",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCylinderRestrictionEstimate.cylinder_restriction_estimate",
+    "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ParallelImplementation/RefinedCylinderRestrictionEstimate.lean",
+    "source_sha256": "e85179cce630bcb5f1d69150e0ddd54447ff88ccbd636276a90faa766991f2bd",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r28-cylinder-cutoff-glue",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCylinderCutoffGlue.cylinder_cutoff_glue",
+    "path": "reports/decomposition-20260927/round29/sources/PoincareConjecture/ParallelImplementation/RefinedCylinderCutoffGlue.lean",
+    "source_sha256": "8d0d052b2c9df293003a201e35ce0b5a316ae3cc5add3a9624d1f4a04c2c34a3",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r28-cylinder-cutoff-support",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCylinderCutoffSupport.cylinder_cutoff_support",
+    "path": "reports/decomposition-20260927/round29/sources/PoincareConjecture/ParallelImplementation/RefinedCylinderCutoffSupport.lean",
+    "source_sha256": "8deb293fbf11bbaa5a949b92fb450de4a85aed58dba1d8d75d3e530c56093dfd",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r28-radial-local-smooth",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedRadialLocalSmooth.radial_local_smooth",
+    "path": "reports/decomposition-20260927/round29/sources/PoincareConjecture/ParallelImplementation/RefinedRadialLocalSmooth.lean",
+    "source_sha256": "a75905c8939abd1791cf0352cd30767e2348100dcf5b788b60fc3f9a60aa35dc",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27-cap-chart",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCapChart.cap_chart",
+    "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapChart.lean",
+    "source_sha256": "e01b991337cbd27c51a7b3b31a7eb998d5e831c91238a7a1b1d402c1244ade75",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27-cap-complement",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCapComplement.cap_complement",
+    "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapComplement.lean",
+    "source_sha256": "773e2a81162b00e2af90588b07bf0c2e384c15ad00d398184805b5c9bf661010",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r2-cap-interior-open",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCapInteriorOpen.cap_interior_open",
+    "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapInteriorOpen.lean",
+    "source_sha256": "c87e91265d4a4ef62d40a08db0f7f957a3785bcc3923df2364f7de881aaebe03",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r2-closed-cover-gluing",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedClosedCoverGluing.closed_cover_gluing",
+    "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedClosedCoverGluing.lean",
+    "source_sha256": "fb2b0fef6237c33cc8f4ac98d90a7b37330e016d1933ab836d5a609ef7b963b3",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27-marked-raw-gluing",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedMarkedGluing.marked_gluing",
+    "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedMarkedGluing.lean",
+    "source_sha256": "a26cb1ea496c8d3a3defef4a6a77e77e5148f26e2b9f1444514cfe3c40ad2aec",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r4-cap-relabeling",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCapRelabeling.cap_relabeling",
+    "path": "reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedCapRelabeling.lean",
+    "source_sha256": "b34da87d739d37ac3d50689dd1f5b6593b2e55c2191061bfd799c9357f81935a",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r4-finite-timeline",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedFiniteTimeline.finite_timeline",
+    "path": "reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedFiniteTimeline.lean",
+    "source_sha256": "72b11e98a1ed065f6c2febd363f90f44d9928785a5b6f1f40d1fce3336fda60b",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r3-negative-half-collar",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedNegativeHalfCollar.negative_half_collar",
+    "path": "reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedNegativeHalfCollar.lean",
+    "source_sha256": "6a7dd51e1eeaa972f1e5432e8904ac25e1c20630b2fb2d47d8820fc05d2d696a",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r3-side-interior-atlas",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedSideInteriorAtlas.side_interior_atlas",
+    "path": "reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedSideInteriorAtlas.lean",
+    "source_sha256": "e529af9348e3600c23771c6ed52c889ef53d9d47ce35585b8ee8b501b1df80bd",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r6-closed-scalar-propagation",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedClosedScalarPropagation.closed_scalar_propagation",
+    "path": "reports/decomposition-20260927/round7/sources/PoincareConjecture/ParallelImplementation/RefinedClosedScalarPropagation.lean",
+    "source_sha256": "432b950fe808d05a30a5da426931811164eae6a7cdd32da9accdae258ccdf698",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r7-finite-cap-scaling",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedFiniteCapScaling.finite_cap_scaling",
+    "path": "reports/decomposition-20260927/round8/sources/PoincareConjecture/ParallelImplementation/RefinedFiniteCapScaling.lean",
+    "source_sha256": "64e1f2e8446a2f98be6ab260d39985003dd4602428ef4d4c6dafd4af6680cc11",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r7-uniform-neck-allowance",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedUniformNeckAllowance.uniform_neck_allowance",
+    "path": "reports/decomposition-20260927/round8/sources/PoincareConjecture/ParallelImplementation/RefinedUniformNeckAllowance.lean",
+    "source_sha256": "0820c067410bc6ae0a94d3f9ac1d9947ec1dd33d4be977e8c399497b898301ca",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  },
+  {
+    "task": "d27r8-epsilon-neck-embedding",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedEpsilonNeckEmbedding.epsilon_neck_embedding",
+    "path": "reports/decomposition-20260927/round9/sources/PoincareConjecture/ParallelImplementation/RefinedEpsilonNeckEmbedding.lean",
+    "source_sha256": "79b7c673ce0681dc8ff7f8d813bccc069ee2ea28f7d7cd0c892f99d30b925295",
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "scope": "accepted source snapshot; checked conditional parents; not a V1 root binding"
+  }
+]

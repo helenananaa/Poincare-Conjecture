@@ -1,0 +1,25 @@
+{
+  "exit_code": 0,
+  "source_sha256": "e04bb4d215af70954fb3047c332e4fbc16d19f7a0741a42157fe9fa77b38e5ee",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round23/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round23/objects/PoincareConjecture/ProofContract/Refinement20260927/AmbientApproximationConstruction.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round23/sources/PoincareConjecture/ProofContract/Refinement20260927/AmbientApproximationConstruction.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.AmbientApproximationData.toEmbedding",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.AmbientApproximationData.toEmbedding' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

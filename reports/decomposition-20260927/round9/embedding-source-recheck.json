@@ -1,0 +1,18 @@
+[
+  {
+    "task": "d27r8-epsilon-neck-embedding",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/sources/PoincareConjecture/ParallelImplementation/RefinedEpsilonNeckEmbedding.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedEpsilonNeckEmbedding.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedEpsilonNeckEmbedding.epsilon_neck_embedding",
+    "sha256": "79b7c673ce0681dc8ff7f8d813bccc069ee2ea28f7d7cd0c892f99d30b925295",
+    "attempt": "418281de-e792-4c17-a6b5-02dc78163f44",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "c3deb9315dcd4ceff72af6df5386c157ed22e6ea395be1e5687bce2d2ceade9e"
+  }
+]

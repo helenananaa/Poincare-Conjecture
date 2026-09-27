@@ -1,0 +1,45 @@
+{
+  "exit_code": 0,
+  "source_sha256": "24b5dbb0f88695663fe30232ee2f4f62a2d6660440657981cf62fa71291ef6ef",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedSeventeen.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedSeventeen.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_local_patch_density",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_open_patch_assembly",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_width_comparison",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_width_horizon",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_empty_end",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.public_after_seventeen",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.checked_local_patch_density' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.checked_open_patch_assembly' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.checked_width_comparison' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.checked_width_horizon' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.checked_empty_end' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.public_after_seventeen' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New source; pinned and previously checked dependencies reused"
+}

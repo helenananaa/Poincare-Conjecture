@@ -1,0 +1,37 @@
+{
+  "exit_code": 0,
+  "source_sha256": "494a0a5a0b3a4150ad6ae3c41510de68979711870e4d31e2de1b0943e0343763",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/objects/PoincareConjecture/ProofContract/Refinement20260927/NeckLossBudget.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/sources/PoincareConjecture/ProofContract/Refinement20260927/NeckLossBudget.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.NeckControlledHistory.toRicci",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.anchored_neck_to_ricci",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.ricci_producer_of_neck_loss",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.public_of_neck_loss_frontier",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.NeckControlledHistory.toRicci' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.anchored_neck_to_ricci' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.ricci_producer_of_neck_loss' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.public_of_neck_loss_frontier' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New source; pinned and previously checked dependencies reused"
+}

@@ -1,0 +1,51 @@
+{
+  "observed_utc": "2026-09-27T09:22:58.452014+00:00",
+  "queues": {
+    "17": [
+      {
+        "id": "d27r17-smooth-retraction-form",
+        "status": "RUNNING",
+        "model": "luna",
+        "integrated_commit": null,
+        "attempt_id": "9dd04c21-ea69-4561-9937-a30eb8d012d3"
+      }
+    ],
+    "19": [
+      {
+        "id": "d27r19-tubular-inverse-assembly",
+        "status": "RUNNING",
+        "model": "luna",
+        "integrated_commit": null,
+        "attempt_id": "a315ccee-4817-45e4-a0c8-91f788107ba9"
+      }
+    ]
+  },
+  "new_workers_launched": 1,
+  "new_worker_model": "gpt-6-luna",
+  "new_worker_effort": "xhigh",
+  "new_checked_declarations": 10,
+  "newly_accepted_worker_leaves": 0,
+  "prior_accepted_worker_leaves": 25,
+  "frozen_source_and_object_hashes": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "local_normal_coordinate_existence_proved": false,
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

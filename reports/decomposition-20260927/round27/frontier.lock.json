@@ -1,0 +1,299 @@
+{
+  "version": 27,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_after_forty_two",
+  "analytic_parent": "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.approximate_after_bounds",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedForty.lean",
+      "sha256": "81a57bb920aa718ffeebb6a8196990aefa2ef95059ff9c96c4981e12d1b274a8",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_c1_density_continuity",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.c1_sphere_density_integrable",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.c1_sphere_energy_parameter_continuous",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.approximate_after_density",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ],
+      "kind": "coordinator_checked_module"
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/C1GeometryRoot.lean",
+      "sha256": "a2a2843f4be0cbac12575d8e174a7a4cd423322f3af614f44d8e37f01116b555",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.c1ClassTransfer_to_ambient",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.C1IntrinsicProfile.toAmbient",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.AmbientIntrinsicProfile.toC1",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.ambient_producer_of_c1",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_c1_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ],
+      "kind": "coordinator_checked_module"
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/C1MetricMaps.lean",
+      "sha256": "eaec8fd57a7f19a825179df79f202a849fedce067f83d72ad80d5bf7fca18fe6",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.C1ClassMap.send",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SmoothClassMap.toC1",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.c1_sphere_density_postcompose_le",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.c1_sphere_energy_postcompose_le",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.C1ClassMap.toClassTransfer",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.C1ClassMap.width_le",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ],
+      "kind": "coordinator_checked_module"
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedFortyOne.lean",
+      "sha256": "b603a0fe7e4a63c4502219e1df3d21519f64df02bc85bf55d08ec8f054989d6c",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_restriction",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.cylinder_c1_after_restriction",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_after_forty_one",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ],
+      "kind": "coordinator_checked_module"
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedFortyTwo.lean",
+      "sha256": "2dcd50330b313149bf20c1e8fae8ec08d8e92b0e06eb09521de1a82f61eddbde",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.C1ClassMap.width_after_bounds",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_c1_ambient_frame_bound",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.approximate_after_bounds",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_after_forty_two",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ],
+      "kind": "coordinator_checked_module"
+    },
+    {
+      "file": "sources/PoincareConjecture/ParallelImplementation/RefinedC1SphereEnergyContinuity.lean",
+      "sha256": "f6a4e27f350080c780f75dcfe8a7bdb472d2e3eb5715ee55fcd178eea5cbd05b",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedC1SphereEnergyContinuity.c1_sphere_energy_continuity",
+      "task": "d27r26-c1-density-continuity",
+      "coordinator_repaired": false
+    },
+    {
+      "file": "sources/PoincareConjecture/ParallelImplementation/RefinedCylinderRestrictionEstimate.lean",
+      "sha256": "e85179cce630bcb5f1d69150e0ddd54447ff88ccbd636276a90faa766991f2bd",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedCylinderRestrictionEstimate.cylinder_restriction_estimate",
+      "task": "d27r25-cylinder-restriction-estimate",
+      "coordinator_repaired": true
+    },
+    {
+      "file": "sources/PoincareConjecture/ParallelImplementation/RefinedC1AmbientFrameBound.lean",
+      "sha256": "18d0515edd2e17a56d52c1ab8da3abe99731fe454ee5e0e1bb4ef226903c515d",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedC1AmbientFrameBound.c1_ambient_frame_bound",
+      "task": "d27r26-c1-ambient-frame-bound",
+      "coordinator_repaired": true
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedForty.olean",
+      "sha256": "27efe507a56951ac905b692c67fbe4f8f5cc8822ac968a2877b0dc2256bfe81a"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/C1GeometryRoot.olean",
+      "sha256": "d23e6ab888ce7fe6009c6f1a894b27e74e8075438bb0bb680699e2a28752fda9"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/C1MetricMaps.olean",
+      "sha256": "0ad0b78fc1416349d2985661ea17f201d1a3c31abc5cbe3cf4b34c425c624df5"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedFortyOne.olean",
+      "sha256": "8a421478ab872fe6dc5fe60d0f02eb8c46b84b4f8fb289d577719d6d25ee1da8"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedFortyTwo.olean",
+      "sha256": "cc66673a9c72917ff50d0258dfdb65851c5e4bdd3420f9030a117209db56069d"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedC1SphereEnergyContinuity.olean",
+      "sha256": "8d2c9fe4d2e00ea3f840280787a3c187ab7d8e106974b01f086197dfdbd22b4d"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedCylinderRestrictionEstimate.olean",
+      "sha256": "0a521ba0d5bf568fa876490f9185c3f12ecb98e72d2e7a94f74a4080d6745983"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedC1AmbientFrameBound.olean",
+      "sha256": "29d9e7959eef19d8a5d620a736c0eec8cf5abaa1eda66a8f0843c5090b570d68"
+    }
+  ],
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/frontier.lock.json",
+      "sha256": "c4b4334f1c34903b5e095c48164045d10c158d9e0442de662ec4cdce010a559a"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/frontier.lock.json",
+      "sha256": "b1e32685916333c6cf47707f48fcf2ea7a8d726684ba58a23d3584e073fc9679"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/frontier.lock.json",
+      "sha256": "343fa87a6cda1536fb9252d158e6330e2923f8190b7919f2c274249fc1b9a9ba"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round11/frontier.lock.json",
+      "sha256": "22a7dd4e971210788136a35c6684ba6bb169c31bf6932ac020c63a4907107adf"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/frontier.lock.json",
+      "sha256": "af113a8a9c19fbd645a5595428de27500f6a70393dd5246a9b6dcba7104129df"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round13/frontier.lock.json",
+      "sha256": "aa36df81cb29dfe20354dc466cb63360f018537b4782fd9f4f127d40ca8ed2e2"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/frontier.lock.json",
+      "sha256": "5a3abf7f97be8754425efe60198003269c20837e1b47832c5a8659592fbcb4ee"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round15/frontier.lock.json",
+      "sha256": "84770cc13256bf0c554f90be648d14110f1d9f7c50b67ab776e6da624239974d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round16/frontier.lock.json",
+      "sha256": "b1468525696a72957ca161aa2b769ccf28e4646b0316eae8a4d8b0ab85e8a4ca"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round17/frontier.lock.json",
+      "sha256": "aaafad3283d9c0c26ecfc260f0e0ff9e206f43a60a7f25daed342cf9dc45bf28"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round19/frontier.lock.json",
+      "sha256": "a14cef8e1584492e1268ec7dc419f15215c0d2cce9cb6df04b13c308319792a8"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round20/frontier.lock.json",
+      "sha256": "ad378d888d86356179466d284d995d3dc91f6b5882e48a97afa02057334b7aa4"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/frontier.lock.json",
+      "sha256": "19025acb5e583941eadaadace5828867ecb45cef6c8de357789b74abd1566461"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round22/frontier.lock.json",
+      "sha256": "9dfcbdf3697267108d5297f15fc527f07fe6606afd388630dcdc40bae66f280b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round23/frontier.lock.json",
+      "sha256": "433ea00fc6fcf84f6e64b381ad4f178f1078ed6ae6d8ab08d6de5b372d958be9"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round24/frontier.lock.json",
+      "sha256": "7624afc34220f461fb4a36aaf2887806884cafc55c67ae0adf73edf0bac42082"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round25/frontier.lock.json",
+      "sha256": "ffbf18980e0a142182ae1e9d0ad6f4ae8c51bd526df0a7a0f1bd7a64f9187726"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/frontier.lock.json",
+      "sha256": "efc7611eeb82b89ef33fac73312bc232bdbb4ecef46594889a276644f19dcfa9"
+    }
+  ],
+  "graph_sha256": "5fae48f351c2f28c0e632fbb4dae3cbd350a7df634b55d7f1091b1972ea51f8c",
+  "final_import_audit_sha256": "5ad1c7d35c76a07c398313a5df1eca5b5fd884ba9b27acd8335d18214f6ed061",
+  "accepted_worker_total": 42,
+  "new_fixed_leaf_acceptances": 3,
+  "original_worker_proofs": 1,
+  "coordinator_repairs": 2,
+  "new_worker_dispatch": 0,
+  "global_c1_root_connection_checked": true,
+  "complete": false,
+  "conditional": true,
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "created_utc": "2026-09-27T13:02:29.670164+00:00"
+}

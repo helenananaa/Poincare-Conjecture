@@ -1,0 +1,9 @@
+{
+  "archive_sha256": "58a9e612688ab94e28867787ce64d799b30119fe1a541b70db4a17bf2163c344",
+  "original_sha256": "16ed6c0884424387973bf325f1313f20943f0237aa18a8a1db11178db76d2216",
+  "candidate_sha256": "49a5bce99bed4ac0550c485028ae80184beabddba2913f1581e090cb1804702d",
+  "git_apply_check": 0,
+  "git_apply": 0,
+  "applied_matches_candidate": true,
+  "application_scope": "isolated mirror; round18 historical failure retained"
+}

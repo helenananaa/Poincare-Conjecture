@@ -1,0 +1,18 @@
+[
+  {
+    "task": "d27r26-c1-density-continuity",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round27/sources/PoincareConjecture/ParallelImplementation/RefinedC1SphereEnergyContinuity.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedC1SphereEnergyContinuity.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedC1SphereEnergyContinuity.c1_sphere_energy_continuity",
+    "sha256": "f6a4e27f350080c780f75dcfe8a7bdb472d2e3eb5715ee55fcd178eea5cbd05b",
+    "attempt": "e6f677b3-aa04-4df8-81ea-7f0d0dd5fe96",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "8d2c9fe4d2e00ea3f840280787a3c187ab7d8e106974b01f086197dfdbd22b4d"
+  }
+]

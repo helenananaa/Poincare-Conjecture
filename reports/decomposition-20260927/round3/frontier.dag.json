@@ -1,0 +1,228 @@
+{
+  "root": "public_root",
+  "nodes": [
+    {
+      "id": "triangulate",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "smooth_pl",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.PLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "cap_chart",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CapChartStatement",
+      "status": "PROVED_ISOLATED",
+      "depends_on": [],
+      "binding": "PoincareConjecture.ProofContract.Refinement20260927.checked_cap_chart"
+    },
+    {
+      "id": "cap_complement",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CapComplementStatement",
+      "status": "PROVED_ISOLATED",
+      "depends_on": [],
+      "binding": "PoincareConjecture.ProofContract.Refinement20260927.checked_cap_complement"
+    },
+    {
+      "id": "marked_gluing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MarkedGluingStatement",
+      "status": "PROVED_ISOLATED",
+      "depends_on": [],
+      "binding": "PoincareConjecture.ProofContract.Refinement20260927.checked_marked_glue"
+    },
+    {
+      "id": "raw_geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.raw_geometry_of_collared_producer",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "collared_geometry",
+        "closed_cut_raw"
+      ]
+    },
+    {
+      "id": "cap_marked",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.cappedPiece_marked_complement",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_chart",
+        "cap_complement"
+      ]
+    },
+    {
+      "id": "raw_cut",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.rawCut_connectedSum",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_marked",
+        "marked_gluing"
+      ]
+    },
+    {
+      "id": "raw_standard",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.rawDecomposition_to_standard",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "raw_cut"
+      ]
+    },
+    {
+      "id": "standard_trace",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.standard_eliminates_context",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "smoothing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.smoothing_of_finitePL_producers",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulate",
+        "smooth_pl"
+      ]
+    },
+    {
+      "id": "geometric",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.geometric_of_raw_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "raw_geometry",
+        "raw_standard",
+        "standard_trace"
+      ]
+    },
+    {
+      "id": "public_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_neck_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "smoothing",
+        "geometric",
+        "bound_topology"
+      ]
+    },
+    {
+      "id": "bound_topology",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.topological_of_two_contracts",
+      "status": "EXISTING_CHECKED_CONDITIONAL",
+      "depends_on": []
+    },
+    {
+      "id": "cap_connected",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.actual_cap_connected",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "cap_interior_open",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CapInteriorOpenStatement",
+      "status": "PROVED_ISOLATED",
+      "depends_on": [],
+      "binding": "PoincareConjecture.ProofContract.Refinement20260927.checked_interior_open"
+    },
+    {
+      "id": "cap_atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.actual_cap_atlas",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_chart",
+        "cap_interior_open"
+      ]
+    },
+    {
+      "id": "cap_manifold",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.cappedManifold",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_atlas",
+        "cap_connected"
+      ]
+    },
+    {
+      "id": "closed_cover_gluing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.ClosedCoverGluingStatement",
+      "status": "PROVED_ISOLATED",
+      "depends_on": [],
+      "binding": "PoincareConjecture.ProofContract.Refinement20260927.checked_closed_glue"
+    },
+    {
+      "id": "closed_cut_raw",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.rawCut_of_closedCut",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_manifold",
+        "closed_cover_gluing"
+      ]
+    },
+    {
+      "id": "collared_geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.collared_geometry_of_necks",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "neck_geometry",
+        "neck_closed_cut"
+      ]
+    },
+    {
+      "id": "side_interior_atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.SideInteriorAtlasStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "negative_half_collar",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NegativeHalfCollarStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "neck_geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NeckGeometricProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "closure_incidence",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.closure_cut_incidence",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "existing_sphere_sides",
+      "declaration": "PoincareConjecture.ParallelImplementation.ClosedSphereCutData.closed_embedded_sphere_cut_sides",
+      "status": "EXISTING_CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "existing_positive_collar",
+      "declaration": "PoincareConjecture.ParallelImplementation.ClosedSideHalfCollar.exists_actual_closed_side_half_collar",
+      "status": "EXISTING_CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "neck_closed_cut",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.closedCut_of_neck",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "side_interior_atlas",
+        "negative_half_collar",
+        "closure_incidence",
+        "existing_sphere_sides",
+        "existing_positive_collar"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulate",
+    "smooth_pl",
+    "side_interior_atlas",
+    "negative_half_collar",
+    "neck_geometry"
+  ],
+  "all_frontier_leaves_are_small": false,
+  "complete": false,
+  "previous_worker_states": "FIVE_SOURCE_RECHECKED_AND_PARENT_CONSUMED; NOT_GIT_INTEGRATED"
+}

@@ -1,0 +1,55 @@
+{
+  "observed_utc": "2026-09-27T13:02:29.670164+00:00",
+  "accepted_fixed_leaf_total": 42,
+  "accepted_worker_leaves": 42,
+  "new_fixed_leaves_accepted": 3,
+  "original_worker_proofs": 1,
+  "coordinator_repairs": 2,
+  "new_checked_coordinator_declarations": 22,
+  "final_import_audited_targets": 25,
+  "new_workers_launched": 0,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_after_forty_two",
+  "global_c1_root_connection_checked": true,
+  "remaining_c1_analytic_leaf_count": 1,
+  "remaining_c1_analytic_leaf": "CylinderCompactExtensionStatement",
+  "extension_scratch_accepted": false,
+  "live_worker_state_refreshed_at_close": false,
+  "blocked_actions_not_retried": [
+    "combined worker process and final-result status query"
+  ],
+  "restriction_worker_last_service_observation": {
+    "task": "d27r25-cylinder-restriction-estimate",
+    "reason": "Same fixed theorem independently proved and consumed by public_after_forty_one",
+    "replacement_sha256": "e85179cce630bcb5f1d69150e0ddd54447ff88ccbd636276a90faa766991f2bd",
+    "original_latest_checkpoint_sha256": "19465da1dfbbd78a08c8e7942ed29df8b9fdeb4e4fc0dd1311ce0b2176cb5a90",
+    "before": "ActiveState=inactive\nSubState=dead\n",
+    "original_queue_state_manually_changed": false,
+    "time_utc": "2026-09-27T12:49:19.365755+00:00",
+    "stop_needed": false,
+    "after": "ActiveState=inactive\nSubState=dead\n"
+  },
+  "original_queue_state_manually_changed": false,
+  "frontier_hash_check": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "commit_or_push_performed": false,
+  "full_rebuild_performed": false
+}

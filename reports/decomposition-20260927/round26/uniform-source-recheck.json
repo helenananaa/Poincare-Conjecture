@@ -1,0 +1,18 @@
+[
+  {
+    "task": "d27r25-uniform-mollification",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/sources/PoincareConjecture/ParallelImplementation/RefinedUniformMollification.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedUniformMollification.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedUniformMollification.uniform_mollification",
+    "sha256": "7448fa5bd40d1b93a6d0df511b592eb8b5a5b7948e0e5fdcab572fe0292d8392",
+    "attempt": "205827db-1a5e-48b3-87ea-5a5ac01f2b69",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "5d2fa9f4388b2137017cacd346707e384b976b99c7f7b6c328a7b2e783fb5c73"
+  }
+]

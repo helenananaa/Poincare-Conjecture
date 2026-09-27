@@ -1,0 +1,95 @@
+{
+  "observed_utc": "2026-09-27T12:04:09.094322+00:00",
+  "accepted_worker_leaves": 38,
+  "newly_rechecked_and_parent_bound": 2,
+  "embedded_local_retraction_no_open_proof_inputs": true,
+  "new_checked_declarations": 17,
+  "new_workers_launched": 3,
+  "worker_model": "gpt-6-luna",
+  "worker_efforts": {
+    "d27r25-uniform-mollification": "xhigh",
+    "d27r25-cylinder-restriction-estimate": "xhigh",
+    "d27r25-cylinder-compact-extension": "max"
+  },
+  "queues": {
+    "poincare-refinement-round21-20260927": {
+      "states": {
+        "VERIFIED": 4
+      },
+      "ready": [],
+      "blocked": []
+    },
+    "poincare-refinement-round23-20260927": {
+      "states": {
+        "VERIFIED": 3,
+        "FAILED": 1
+      },
+      "ready": [],
+      "blocked": []
+    },
+    "poincare-refinement-round25-20260927": {
+      "states": {
+        "RUNNING": 3
+      },
+      "ready": [],
+      "blocked": []
+    }
+  },
+  "actual_worker_processes": [
+    {
+      "task": "d27r25-cylinder-compact-extension",
+      "confirmed": true,
+      "pids": [
+        125826,
+        125839
+      ]
+    },
+    {
+      "task": "d27r25-cylinder-restriction-estimate",
+      "confirmed": true,
+      "pids": [
+        125996,
+        126003
+      ]
+    },
+    {
+      "task": "d27r25-uniform-mollification",
+      "confirmed": true,
+      "pids": [
+        125714,
+        125721
+      ]
+    }
+  ],
+  "active_confirmed_luna_workers": 3,
+  "analytic_three_leaf_parent_checked": true,
+  "joint_c1_data_conversion_checked": true,
+  "joint_c1_global_geometry_producer_wrapper_created": false,
+  "blocked_actions_not_retried": [
+    "one source-search command",
+    "JointC1Root.lean generation command"
+  ],
+  "frontier_hash_check": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "commit_or_push_performed": false,
+  "full_rebuild_performed": false
+}

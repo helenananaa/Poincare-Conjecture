@@ -1,0 +1,160 @@
+{
+  "version": 10,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_metric_patch_frontier",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/MetricPatchTransport.lean",
+      "sha256": "03bbcee0a73e1419af3357ebd18ae6f23b480e5af36ae21043378c0438346a45",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.metric_patch_image",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.metric_patch_preserves_restrict",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/RecordedMetricPatch.lean",
+      "sha256": "28f15d33774a28efb17b0f37bc884bda332ade217d019c0a4064c46aeb01712d",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MetricSlicePresentation.preserves_image",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.RecordedIsometricPatch.preserves",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/MetricPatchReplacement.lean",
+      "sha256": "a328ff3df42d0c1e64210b0c656580e9d9270559eda9a5244b62e2d7aacf282f",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.neck_removed_measurable",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MetricPatchReplacement.toModel",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MetricPatchReplacement.toModel_identity",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MetricCore.nonincrease",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MetricReplacementPartition.toMeasured",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/PatchGeometryBudget.lean",
+      "sha256": "7e0fac4d3e0b9b79f38bbd1816505ff48fbc1b9efbdc86595edaf9675f9528b2",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.PatchNeckHistory.toMatched",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.patch_budget_to_matched",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.patch_producer_to_matched",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_metric_patch_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/MetricPatchTransport.olean",
+      "sha256": "6d4cb9a7573ecf1d0e3edc665dea028faa0dec86ef6df92bd8d0cfb1532344b8"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/RecordedMetricPatch.olean",
+      "sha256": "1b287c3fae831aa729c1bb6e19969c88ce5fcb33ec2934d67b6b681cfe7ee3ad"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/MetricPatchReplacement.olean",
+      "sha256": "1eb2b3d19535519195e3492ea2e11b1df0ae536205404693cc6cb68f46a9d299"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/PatchGeometryBudget.olean",
+      "sha256": "0f8c0891cedad1d660ccb1bc0ce2229fcf2dd9ac315e5b8d922e357526a0de87"
+    },
+    {
+      "file": "objects/MorganTianLib/Ch02/NeckVolume/PullbackMeasure.olean",
+      "sha256": "a2cbd2b45c4ded507a37df05a4100fce5bb4c8dac4b9f053977c107faefcc85d"
+    }
+  ],
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/frontier.lock.json",
+      "sha256": "c4b4334f1c34903b5e095c48164045d10c158d9e0442de662ec4cdce010a559a"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/frontier.lock.json",
+      "sha256": "b1e32685916333c6cf47707f48fcf2ea7a8d726684ba58a23d3584e073fc9679"
+    }
+  ],
+  "recompiled_dependency": {
+    "source": "/home/helenanana/projects/poincare-parallel/formalized-sources/MorganTian/MorganTianLib/Ch02/NeckVolume/PullbackMeasure.lean",
+    "sha256": "3f437ec06a1477eb3c3edaf470da111595941cd9963179bd9991af278c4d2f15",
+    "compile_exit": 0,
+    "scope": "Direct source rebuilt; fixed transitive dependencies reused",
+    "audit_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "graph_sha256": "7d832b8fbce5ca8f8ff96651940a5e4ffe2923332e8305a2e47f36abde685f9b",
+  "cards_sha256": "49facc090111f67994caff1f14872700b7a1e938441d8da3daae7677cdb7f9d3",
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T05:18:47.119543+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

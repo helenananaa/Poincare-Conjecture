@@ -1,0 +1,185 @@
+{
+  "version": 4,
+  "root": "public_root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "pl_smoothing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.PLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "projected_geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RelabeledProjectionProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "side_atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.SideInteriorAtlasStatement",
+      "status": "VERIFIED_UNREVIEWED_THIS_TURN",
+      "depends_on": []
+    },
+    {
+      "id": "negative_collar",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NegativeHalfCollarStatement",
+      "status": "VERIFIED_UNREVIEWED_THIS_TURN",
+      "depends_on": []
+    },
+    {
+      "id": "finite_timeline",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FiniteTimelineStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "cap_relabeling",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CapRelabelingStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "accepted_caps",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_closedCut_connectedSum",
+      "status": "PREVIOUSLY_ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "closed_neck_cut",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.closedCut_of_neck",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "side_atlas",
+        "negative_collar"
+      ]
+    },
+    {
+      "id": "transport",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.standardDecomposition_homeomorph",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "step",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.projected_step_reconstruct",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "transport",
+        "closed_neck_cut",
+        "accepted_caps"
+      ]
+    },
+    {
+      "id": "block",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.projected_block_reconstruct",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "step"
+      ]
+    },
+    {
+      "id": "relabel_cap",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.relabeled_cap_identifies",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_relabeling"
+      ]
+    },
+    {
+      "id": "relabel_projection",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RelabeledProjection.toProjection",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "relabel_cap",
+        "closed_neck_cut"
+      ]
+    },
+    {
+      "id": "projection_producer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.projection_producer_of_relabeling",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "projected_geometry",
+        "relabel_projection"
+      ]
+    },
+    {
+      "id": "finite_events",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.projection_events_finite",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "projection_producer"
+      ]
+    },
+    {
+      "id": "standard_trace",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.standard_eliminates_context",
+      "status": "PREVIOUSLY_CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "timeline_trace",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.projection_trace",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "finite_timeline",
+        "finite_events",
+        "block",
+        "standard_trace"
+      ]
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.geometric_of_projection_producer",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "timeline_trace",
+        "projection_producer"
+      ]
+    },
+    {
+      "id": "smoothing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.smoothing_of_finitePL_producers",
+      "status": "PREVIOUSLY_CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "pl_smoothing"
+      ]
+    },
+    {
+      "id": "root_assembly",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.topological_of_two_contracts",
+      "status": "PREVIOUSLY_CHECKED_CONDITIONAL",
+      "depends_on": []
+    },
+    {
+      "id": "public_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_relabeled_projection",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "smoothing",
+        "geometry",
+        "root_assembly"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulation",
+    "pl_smoothing",
+    "side_atlas",
+    "negative_collar",
+    "finite_timeline",
+    "cap_relabeling",
+    "projected_geometry"
+  ],
+  "alternative_adapter_to_original_V1": true,
+  "previous_versions_unchanged": true,
+  "complete": false,
+  "all_leaves_small": false
+}

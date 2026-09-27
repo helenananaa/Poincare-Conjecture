@@ -1,0 +1,14 @@
+{
+  "status": "EXTENSION_DECOMPOSITION_PARENT_CHECKED",
+  "accepted_fixed_leaf_total": 42,
+  "new_accepted_leaf_count": 0,
+  "new_ready_independent_count": 3,
+  "notes": [
+    "Explicit radialCylinderExtension is fixed before splitting.",
+    "Zero value is arbitrary but multiplied by a cutoff vanishing on an open neighborhood.",
+    "Local radial witness is C-infinity, not analytic; no global radial retraction is asserted.",
+    "Parent consumes all three exact statements and returns the original extension obligation and V1 target.",
+    "The old whole-task candidate and original worker are untouched. No candidate is counted as a proof.",
+    "Observed service state conflicts with actual processes; live counts must use validated process identities."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "freeze_check": "PASS",
+  "baseline_mode": "trusted",
+  "frozen_files": 13,
+  "goal_nodes": 6,
+  "unbound_goals": [
+    "smoothing",
+    "geometric_trace"
+  ],
+  "bound_but_not_yet_checked": [
+    "cover",
+    "handle",
+    "sum_factors",
+    "sum_sphere"
+  ],
+  "complete": false,
+  "assembly_is_conditional": true
+}

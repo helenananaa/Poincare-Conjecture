@@ -1,0 +1,33 @@
+{
+  "exit_code": 0,
+  "source_sha256": "8b9469bbd70d7cd0f292889a730016963fb6cd9a94e71b0b474ef26ae9895d18",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentyNine.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentyNine.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_normal_linear_equiv",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_normal_endpoint_jet",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.public_after_twenty_nine",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.checked_normal_linear_equiv' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.checked_normal_endpoint_jet' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.public_after_twenty_nine' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

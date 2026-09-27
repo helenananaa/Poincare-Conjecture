@@ -1,0 +1,145 @@
+{
+  "version": 7,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_neck_loss_frontier",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTen.lean",
+      "sha256": "7ca3f75fa9426450c420ed2c1a428facb4a91a581cd4b8019de95c31fe4aa8bf",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_closed_scalar",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_ricci_interval_growth",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_after_ten",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/NeckLoss.lean",
+      "sha256": "5a5b1dbc3125f4073e2cb1ca81ecb458fca9ff3b765f71a8f491f8a75f738827",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.neckReplacement_recorded_masses",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.neckReplacement_local_loss",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/NeckLossBudget.lean",
+      "sha256": "494a0a5a0b3a4150ad6ae3c41510de68979711870e4d31e2de1b0943e0343763",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.NeckControlledHistory.toRicci",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.anchored_neck_to_ricci",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.ricci_producer_of_neck_loss",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_neck_loss_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTen.olean",
+      "sha256": "ef3b65183c08a8fc750d30ddef4206530ca6bcbb2534afc1cc39db62b01d023e"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/NeckLoss.olean",
+      "sha256": "cb81750a319637c560d90e8ea0911ecec634f9e4f08224d894bc88a3d13bf288"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/NeckLossBudget.olean",
+      "sha256": "72ba456022d74ea94207a192e56d98b6e0ecc39f30cd08a797181224a62da2e1"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedClosedScalarPropagation.olean",
+      "sha256": "92117c0be99bc659703de0c4c6246647366c078fb4d76549576fabcc24022e18"
+    },
+    {
+      "file": "objects/MorganTianLib/Ch02/NeckVolume/CompactCapGap.olean",
+      "sha256": "99588e6578baa00053ffb278165e4dadd7e3a2339af99c40fb3b05ed664ea8c6"
+    }
+  ],
+  "newly_accepted": [
+    {
+      "task": "d27r6-closed-scalar-propagation",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/sources/PoincareConjecture/ParallelImplementation/RefinedClosedScalarPropagation.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedClosedScalarPropagation.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedClosedScalarPropagation.closed_scalar_propagation",
+      "sha256": "432b950fe808d05a30a5da426931811164eae6a7cdd32da9accdae258ccdf698",
+      "attempt": "23e3fe90-7d37-4155-80e0-ade29e4d637b",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "92117c0be99bc659703de0c4c6246647366c078fb4d76549576fabcc24022e18",
+      "review": "Full 69-line source read. Restricts the SAME Icc Ricci flow to Ico, propagates the true scalar minimum, and uses continuity on its closure to include T. Exact frozen statement and hashes checked; no extra assumptions or new axioms."
+    }
+  ],
+  "recompiled_dependency": {
+    "source": "/home/helenanana/projects/poincare-parallel/formalized-sources/MorganTian/MorganTianLib/Ch02/NeckVolume/CompactCapGap.lean",
+    "sha256": "e89afa96c766444a29e808852c24da3d503767c360129f32a0af7043af6f86dd",
+    "compile_exit": 0,
+    "scope": "Direct source rebuilt; fixed transitive dependencies reused",
+    "audit_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    }
+  ],
+  "cards_sha256": "16bd41f2c668e224994364358e94a08833cc7db0c0a2052d8ca0623be9ef771d",
+  "graph_sha256": "99b8872f7483a7e8f2e110aed1a272caa58325abe2ebd5838d017b8b5364977e",
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T03:33:53.055434+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

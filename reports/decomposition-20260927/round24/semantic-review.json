@@ -1,0 +1,16 @@
+{
+  "status": "THREE_FIXED_LEAVES_ACCEPTED_AND_PARENT_BOUND",
+  "prior_total": 33,
+  "accepted_total": 36,
+  "unmodified_worker_sources": 2,
+  "coordinator_repaired_worker_sources": 1,
+  "original_failed_attempt_preserved": true,
+  "new_dispatch": 0,
+  "notes": [
+    "Read full compact control and confinement proofs; exact compact neighborhood, tolerance quantifiers and fixed closed strip preserved.",
+    "Repaired only the proof body of the original composition statement: canonical Euclidean instances and explicit definitional tangent identifications.",
+    "Both unmodified worker sources and the repaired candidate independently rebuilt, then exact imported-target axiom audited.",
+    "Original queue failure is not rewritten; the accepted repaired source and hash are separate.",
+    "Three C1 candidate contracts have not been dispatched: their parent-file creation was blocked. The previous root is preserved."
+  ]
+}

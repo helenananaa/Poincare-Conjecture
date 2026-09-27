@@ -1,0 +1,68 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.C1GeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "radial",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RadialLocalSmoothStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "glue",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CylinderCutoffGlueStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "support",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CylinderCutoffSupportStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "extension",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.cylinder_extension_of_radial_leaves",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "radial",
+        "glue",
+        "support"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_radial_extension_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "atlas",
+        "geometry",
+        "extension"
+      ]
+    }
+  ],
+  "complete": false,
+  "conditional": true,
+  "new_ready_independent_count": 3,
+  "accepted_fixed_leaf_total": 42,
+  "same_explicit_extension": true,
+  "old_root_preserved": true
+}

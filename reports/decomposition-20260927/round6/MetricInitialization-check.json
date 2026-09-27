@@ -1,0 +1,33 @@
+{
+  "exit_code": 0,
+  "source_sha256": "6cfb984c85d77ba3b0be9449cbc5b7b0a473cf0264aae297644d7d274f5d4c36",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/objects/PoincareConjecture/ProofContract/Refinement20260927/MetricInitialization.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/sources/PoincareConjecture/ProofContract/Refinement20260927/MetricInitialization.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.global_initial_metric",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.global_initial_scalar_bound",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.metric_initialData_exists",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/sources/PoincareConjecture/ProofContract/Refinement20260927/MetricInitialization.lean:11:0: warning: docstring should start with **Math.**, **Eng.**, or **Mixed.** (got: \"Reuses the actual partition-of-unity con\u2026\")\n\nNote: This linter can be disabled with `set_option linter.shared.mathTag false`\n/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/sources/PoincareConjecture/ProofContract/Refinement20260927/MetricInitialization.lean:14:0: warning: docstring should start with **Math.**, **Eng.**, or **Mixed.** (got: \"A genuine scalar lower bound for one glo\u2026\")\n\nNote: This linter can be disabled with `set_option linter.shared.mathTag false`\n/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/sources/PoincareConjecture/ProofContract/Refinement20260927/MetricInitialization.lean:25:0: warning: docstring should start with **Math.**, **Eng.**, or **Mixed.** (got: \"Complete actual input data for scalar/vo\u2026\")\n\nNote: This linter can be disabled with `set_option linter.shared.mathTag false`\n'PoincareConjecture.ProofContract.Refinement20260927.global_initial_metric' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.global_initial_scalar_bound' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.metric_initialData_exists' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New source; pinned and previously checked dependencies reused"
+}

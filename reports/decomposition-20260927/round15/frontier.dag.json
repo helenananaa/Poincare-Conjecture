@@ -1,0 +1,99 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.ApproximateIntrinsicGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "energy_continuity",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.SphereEnergyContinuityStatement",
+      "status": "OPEN_PRIOR_WORKER",
+      "depends_on": []
+    },
+    {
+      "id": "metric_comparison",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.IntrinsicMetricTimeComparisonStatement",
+      "status": "OPEN_PRIOR_WORKER",
+      "depends_on": []
+    },
+    {
+      "id": "width_jump",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.approximateTransfer_width_le",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "width_continuity",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.intrinsic_width_continuous",
+      "status": "PRIOR_CHECKED_CONDITIONAL",
+      "depends_on": [
+        "energy_continuity",
+        "metric_comparison"
+      ]
+    },
+    {
+      "id": "extinction_profile",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.ApproximateIntrinsicProfile.toExtinction",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "geometry",
+        "width_jump",
+        "width_continuity"
+      ]
+    },
+    {
+      "id": "width_producer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.width_producer_of_approximate",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "extinction_profile"
+      ]
+    },
+    {
+      "id": "public_assembly",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_seventeen",
+      "status": "PRIOR_CHECKED_CONDITIONAL",
+      "depends_on": []
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_approximate_transfer_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "atlas",
+        "width_producer",
+        "public_assembly"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulation",
+    "atlas",
+    "geometry",
+    "energy_continuity",
+    "metric_comparison"
+  ],
+  "optional_constructive_entrypoints": [
+    "SmoothClassMap.toTransfer",
+    "almostContracting_to_approximate"
+  ],
+  "backwards_adapter": "approximate_producer_of_exact",
+  "complete": false,
+  "kind": "Dependency summary; exact sufficiency is checked by Lean root"
+}

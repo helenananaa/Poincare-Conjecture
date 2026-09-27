@@ -1,0 +1,175 @@
+{
+  "root": "public_root",
+  "nodes": [
+    {
+      "id": "triangulate",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "smooth_pl",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.PLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "cap_chart",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CapChartStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "cap_complement",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CapComplementStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "marked_gluing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MarkedGluingStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "raw_geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.raw_geometry_of_collared_producer",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "collared_geometry",
+        "closed_cut_raw"
+      ]
+    },
+    {
+      "id": "cap_marked",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.cappedPiece_marked_complement",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_chart",
+        "cap_complement"
+      ]
+    },
+    {
+      "id": "raw_cut",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.rawCut_connectedSum",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_marked",
+        "marked_gluing"
+      ]
+    },
+    {
+      "id": "raw_standard",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.rawDecomposition_to_standard",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "raw_cut"
+      ]
+    },
+    {
+      "id": "standard_trace",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.standard_eliminates_context",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "smoothing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.smoothing_of_finitePL_producers",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulate",
+        "smooth_pl"
+      ]
+    },
+    {
+      "id": "geometric",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.geometric_of_raw_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "raw_geometry",
+        "raw_standard",
+        "standard_trace"
+      ]
+    },
+    {
+      "id": "public_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.refined_frontier_implies_public",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "smoothing",
+        "geometric",
+        "bound_topology"
+      ]
+    },
+    {
+      "id": "bound_topology",
+      "declaration": "PoincareConjecture.ProofContract.Proofs.topological_of_two_contracts",
+      "status": "EXISTING_CHECKED_CONDITIONAL",
+      "depends_on": []
+    },
+    {
+      "id": "cap_connected",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.actual_cap_connected",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "cap_interior_open",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CapInteriorOpenStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "cap_atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.actual_cap_atlas",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_chart",
+        "cap_interior_open"
+      ]
+    },
+    {
+      "id": "cap_manifold",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.cappedManifold",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_atlas",
+        "cap_connected"
+      ]
+    },
+    {
+      "id": "closed_cover_gluing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.ClosedCoverGluingStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "closed_cut_raw",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.rawCut_of_closedCut",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "cap_manifold",
+        "closed_cover_gluing"
+      ]
+    },
+    {
+      "id": "collared_geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CollaredGeometricProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    }
+  ],
+  "open_leaf_order": [
+    "triangulate",
+    "smooth_pl",
+    "cap_chart",
+    "cap_complement",
+    "marked_gluing",
+    "cap_interior_open",
+    "closed_cover_gluing",
+    "collared_geometry"
+  ],
+  "all_frontier_leaves_are_small": false,
+  "complete": false,
+  "previous_worker_states": "NOT_REFRESHED_THIS_ROUND"
+}

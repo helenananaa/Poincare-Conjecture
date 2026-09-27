@@ -1,0 +1,42 @@
+{
+  "status": "ACCEPTED_ISOLATED_NOT_INTEGRATED",
+  "newly_accepted": [
+    {
+      "task": "d27r7-finite-cap-scaling",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/sources/PoincareConjecture/ParallelImplementation/RefinedFiniteCapScaling.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedFiniteCapScaling.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedFiniteCapScaling.finite_cap_scaling",
+      "sha256": "64e1f2e8446a2f98be6ab260d39985003dd4602428ef4d4c6dafd4af6680cc11",
+      "attempt": "51dafc17-d9f5-47e9-a9aa-3ac2bb086e17",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "aa2570bb4512b9b97d4a2fdc9ae8be5dd5d1f554405e364fee261085cf7a94fa",
+      "review": "Full source read: rescaledMetric measure law, compact-region finiteness, finite sum with nonnegative terms; all caps and empty family included."
+    },
+    {
+      "task": "d27r7-uniform-neck-allowance",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/sources/PoincareConjecture/ParallelImplementation/RefinedUniformNeckAllowance.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedUniformNeckAllowance.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedUniformNeckAllowance.uniform_neck_allowance",
+      "sha256": "0820c067410bc6ae0a94d3f9ac1d9947ec1dd33d4be977e8c399497b898301ca",
+      "attempt": "457f47bf-3d9e-453d-810d-a925fc3f6a2f",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "459faddfb601fe4d9a2460d6b3dce06d42ad4b357d70ebcc4edaf529f241204d",
+      "review": "Full source read: same actual epsilon-neck/reference, positive round-cylinder constant, threshold chosen from total B; does not assume neck existence."
+    }
+  ],
+  "total_local_leaves": 12,
+  "new_declaration_count": 21,
+  "complete": false
+}

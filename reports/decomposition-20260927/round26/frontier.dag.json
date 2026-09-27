@@ -1,0 +1,131 @@
+{
+  "roots": [
+    "public",
+    "width"
+  ],
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.AmbientGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "public",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_thirty_eight",
+      "status": "PREVIOUS_CONDITIONAL_ROOT",
+      "depends_on": [
+        "triangulation",
+        "atlas",
+        "geometry"
+      ]
+    },
+    {
+      "id": "uniform",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_uniform_mollification",
+      "status": "ACCEPTED_WORKER_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "restriction",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CylinderRestrictionEstimateStatement",
+      "status": "EXISTING_WORKER_PENDING",
+      "depends_on": []
+    },
+    {
+      "id": "extension",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CylinderCompactExtensionStatement",
+      "status": "EXISTING_WORKER_PENDING",
+      "depends_on": []
+    },
+    {
+      "id": "c1",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.cylinder_c1_after_uniform",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "uniform",
+        "restriction",
+        "extension"
+      ]
+    },
+    {
+      "id": "density",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.C1SphereEnergyContinuityStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "bound",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.C1AmbientFrameBoundStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "joint",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.toJoint",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "density",
+        "bound"
+      ]
+    },
+    {
+      "id": "embedding",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.toEmbedding",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "joint",
+        "c1"
+      ]
+    },
+    {
+      "id": "regularization",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.toRegularization",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "embedding"
+      ]
+    },
+    {
+      "id": "approximation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.approximate",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "regularization"
+      ]
+    },
+    {
+      "id": "transfer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.c1ClassTransfer_to_additive",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "approximation"
+      ]
+    },
+    {
+      "id": "width",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.c1ClassTransfer_width_le",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "transfer"
+      ]
+    }
+  ],
+  "complete": false,
+  "conditional": true,
+  "new_ready_independent_count": 2,
+  "accepted_worker_total": 39,
+  "global_geometry_producer_created": false
+}

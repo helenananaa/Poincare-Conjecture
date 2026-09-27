@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "source_sha256": "a0aacac79e56d718d7008c4208fcdaf08071720a6147f88414b86a493e301e62",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round28/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round28/objects/PoincareConjecture/ProofContract/Refinement20260927/RadialExtensionConstruction.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round28/sources/PoincareConjecture/ProofContract/Refinement20260927/RadialExtensionConstruction.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.cylinder_extension_of_radial_leaves",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.public_of_radial_extension_frontier",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.cylinder_extension_of_radial_leaves' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.public_of_radial_extension_frontier' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

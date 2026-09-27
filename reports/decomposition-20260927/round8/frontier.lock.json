@@ -1,0 +1,186 @@
+{
+  "version": 8,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_counted_frontier",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwelve.lean",
+      "sha256": "f3178493889997e7ac86414fcea1cc7b009a00e9ca09fd29955aaf24f4ee5395",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_finite_cap_scaling",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_uniform_neck_allowance",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_neck_local_loss",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_after_twelve",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/GeometricNeck.lean",
+      "sha256": "a3fec9d7e7ec19cc2d393e63de34bd0fc44e0c2a93bf1beb619e0ddea85e2bea",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.AmbientMetricNeck.central_formula",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.metricNeckCut",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.metricNeck_connectedSum",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/CountedSurgery.lean",
+      "sha256": "0cd607672675ee697d707216fe8f1f8e5dc223b7b8afd1c6cb79c635b65963bd",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.representative_length",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.representative_chain_length",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MetricSurgeryMove.balance",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MetricSurgeryChain.balance",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MetricSurgeryMove.toRelabeled",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MetricSurgeryChain.toRelabeled",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.ActiveMetricEvent.balance",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.ActiveMetricEvent.active",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.representative_to_relabeled",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.ActiveMetricEvent.toRelabeled",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/SynchronizedBudget.lean",
+      "sha256": "75832185cbde0b020672589c280c3f40f8c84b9aee6c6c2c1bc84f1c4906d249",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.CountedNeckHistory.toControlled",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.counted_budget_to_anchored",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.neck_loss_producer_of_counted",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_counted_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ParallelImplementation/RefinedFiniteCapScaling.lean",
+      "sha256": "64e1f2e8446a2f98be6ab260d39985003dd4602428ef4d4c6dafd4af6680cc11",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedFiniteCapScaling.finite_cap_scaling"
+    },
+    {
+      "file": "sources/PoincareConjecture/ParallelImplementation/RefinedUniformNeckAllowance.lean",
+      "sha256": "0820c067410bc6ae0a94d3f9ac1d9947ec1dd33d4be977e8c399497b898301ca",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedUniformNeckAllowance.uniform_neck_allowance"
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwelve.olean",
+      "sha256": "0dcd963004b26874fb90a109620dc42bac671752d3d3d53f96c9b8a8a372a486"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/GeometricNeck.olean",
+      "sha256": "4f008e67dae8d9a892caa7bd44db13657670c26980c2dd201bb2769a33a6ba68"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/CountedSurgery.olean",
+      "sha256": "43d47a7e5f1d73ee2c7e6bc2120f6ea3a1be869617364c4663bfb80df9d41649"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/SynchronizedBudget.olean",
+      "sha256": "127dad6ac832bbcf903738e4f84fb158d61ae68a657e718d6750d03e42984286"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedFiniteCapScaling.olean",
+      "sha256": "aa2570bb4512b9b97d4a2fdc9ae8be5dd5d1f554405e364fee261085cf7a94fa"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedUniformNeckAllowance.olean",
+      "sha256": "459faddfb601fe4d9a2460d6b3dce06d42ad4b357d70ebcc4edaf529f241204d"
+    }
+  ],
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    }
+  ],
+  "cards_sha256": "c29c137a3f697ef2315b5da4e43e3bf3c30a1d67cbadad14ee491959517f2cde",
+  "graph_sha256": "2cfb99eae91f3aef1bf387ebed02a943373eac4ad81fc0932d665c2227bad5c0",
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T04:39:53.601962+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

@@ -1,0 +1,112 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulate",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry_models",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NeckLossGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "neck_allowance",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.UniformNeckAllowanceStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "cap_scaling",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FiniteCapScalingStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "closed_scalar",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_closed_scalar",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "recorded_measures",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.neckReplacement_recorded_masses",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "local_loss",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.neckReplacement_local_loss",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "neck_allowance",
+        "cap_scaling",
+        "recorded_measures"
+      ]
+    },
+    {
+      "id": "ricci_history",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NeckControlledHistory.toRicci",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "local_loss"
+      ]
+    },
+    {
+      "id": "budget",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.anchored_neck_to_ricci",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "ricci_history",
+        "geometry_models"
+      ]
+    },
+    {
+      "id": "geometry_adapter",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.ricci_producer_of_neck_loss",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "budget",
+        "neck_allowance"
+      ]
+    },
+    {
+      "id": "root_after_ten",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_ten",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "closed_scalar",
+        "triangulate",
+        "atlas",
+        "geometry_adapter"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_neck_loss_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "root_after_ten"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulate",
+    "atlas",
+    "neck_allowance",
+    "cap_scaling",
+    "geometry_models"
+  ],
+  "complete": false,
+  "same_public_V1_target": true,
+  "all_research_producers_constructed": false
+}

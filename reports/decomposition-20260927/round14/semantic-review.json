@@ -1,0 +1,75 @@
+{
+  "status": "ACCEPTED_ISOLATED_NOT_INTEGRATED",
+  "newly_accepted": [
+    {
+      "task": "d27r12-minimax-dini-limit",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedMinimaxDiniLimit.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedMinimaxDiniLimit.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedMinimaxDiniLimit.minimax_dini_limit",
+      "sha256": "eb5d8120392cc047a927603d1ee1e0344ceed572f7b3c0105809473e707e1a1c",
+      "attempt": "d72b31af-b354-4ee5-aacf-85f268fc2c36",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "1168ca82eb5489d2b828248895db169b5b885068c410c4e499d53fa76c06341f",
+      "semantic_review": "Full 80-line source reviewed: fixed positive h first, sequence limit, then controlled slope; same w,m and constants."
+    },
+    {
+      "task": "d27r12-uniform-near-max",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedUniformNearMaxTaylor.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedUniformNearMaxTaylor.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedUniformNearMaxTaylor.uniform_near_max_taylor",
+      "sha256": "a060934395a9155258f2f5eaf2f3ba02517eb6e7b5c7a44025374e0f7a71693a",
+      "attempt": "11663f13-715b-4cb8-8863-d5d844d2e784",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "e4930ff484ff556aff13ef5361abec8783ddf64c129444ec682e7c29f2351952",
+      "semantic_review": "Full 54-line source reviewed: uniform radius min(H,delta/(L+Q+1)), high/low energy cases, no minimizer assumption."
+    },
+    {
+      "task": "d27r13-compact-quadratic-lower",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedCompactQuadraticLower.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedCompactQuadraticLower.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedCompactQuadraticLower.compact_quadratic_lower",
+      "sha256": "b7a11cd26d122fa57669e03b723a13d046c31efef294d34bf1e573e7bf230383",
+      "attempt": "90de7556-6d15-4108-8a9a-56f924b3e6ae",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "1d6fcc9a232a506af1e8e3abe5a62fcdefa4c5a42968a7a9c436bad30cd645de",
+      "semantic_review": "Full 76-line source reviewed: compact X times unit sphere, minimum positivity, homogeneous scaling, zero vector treated."
+    },
+    {
+      "task": "d27r13-compact-time-variation",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedCompactMetricTimeVariation.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedCompactMetricTimeVariation.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedCompactMetricTimeVariation.compact_metric_time_variation",
+      "sha256": "f6021513210e33330914ac53ebecdb21a572bcd957a695c0ce6573d6c7eeee34",
+      "attempt": "74212fc6-1453-4868-80c6-0829d4d9c69a",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "997fe24a37410879b8034b5ef1756baf0cb9122deaa846724bce7b73dfbb9996",
+      "semantic_review": "Full 23-line source reviewed: uniform continuity on the actual compact slab; endpoints and singleton interval allowed."
+    }
+  ],
+  "accepted_local_leaves_total": 21,
+  "previous_17_recompiled_this_turn": false
+}

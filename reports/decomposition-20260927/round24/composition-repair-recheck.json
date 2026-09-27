@@ -1,0 +1,19 @@
+[
+  {
+    "task": "d27r23-sphere-composition-estimate-repaired",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round24/sources/PoincareConjecture/ParallelImplementation/RefinedSphereCompositionEstimate.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedSphereCompositionEstimate.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedSphereCompositionEstimate.sphere_composition_estimate",
+    "sha256": "723d5d60efac271284abaff4c1de4041a8ec8813071ced2a9961bd0e98c5d818",
+    "attempt": "9619da87-5f9d-4b3e-b6d1-58b7c3fd9806",
+    "repair_kind": "canonical Euclidean normed-space instances; exact original signature",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "668ea81acea66ce662d4711de7535f78d29af5a6ccc7196a4a5c5ef99c33bc65"
+  }
+]

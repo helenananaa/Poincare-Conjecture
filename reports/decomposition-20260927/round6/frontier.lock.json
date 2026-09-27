@@ -1,0 +1,112 @@
+{
+  "version": 6,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_ricci_budget_frontier",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/MetricInitialization.lean",
+      "sha256": "6cfb984c85d77ba3b0be9449cbc5b7b0a473cf0264aae297644d7d274f5d4c36",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.global_initial_metric",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.global_initial_scalar_bound",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.metric_initialData_exists",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/RicciVolumeBudget.lean",
+      "sha256": "057fb09186e74ce7e4446175079624be251d269634f3ddada209a6e2ed5e30ac",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.ricci_interval_volume_growth",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.RicciMeasuredHistory.toMeasured",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.sampled_times_card_le",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.initialMetricSlice",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.anchored_budget_to_uniform",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.geometric_of_ricci_budget_producer",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_ricci_budget_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/MetricInitialization.olean",
+      "sha256": "11695718de7fad8c3fe871d51d59362c6fb66c681775500fd5490ca453883132"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/RicciVolumeBudget.olean",
+      "sha256": "937c721a077eecdc48cb1987661c345a8c740ca582338a4219a9aecf55f07d93"
+    },
+    {
+      "file": "objects/DoCarmoLib/Riemannian/Manifold/DoCarmoCh1.olean",
+      "sha256": "84d7114e9b3cfa6235a1869a5fcf8aa9e521504f6d6fc8ed29eb1bf1e84122c3"
+    }
+  ],
+  "recompiled_dependency": {
+    "source": "/home/helenanana/projects/poincare-parallel/formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh1.lean",
+    "sha256": "d74867bd5bb7472f3ef570038796e929faf179f29340b4ab2cb236961c82ef0d",
+    "compile_exit": 0,
+    "scope": "Direct source rebuilt; fixed transitive dependencies reused",
+    "audit_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    }
+  ],
+  "cards_sha256": "988ac9e4e420906e1b8632c8d75b560f399e924fd84c548f206eea24990107b2",
+  "graph_sha256": "9a12c412e28f7ceb25d4647e6ec0d269a407efa27413a4ecc24fd2860fa71593",
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T03:07:06.973643+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

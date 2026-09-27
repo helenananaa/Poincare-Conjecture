@@ -1,0 +1,82 @@
+[
+  {
+    "task": "d27-cap-chart",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapChart.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedCapChart.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCapChart.cap_chart",
+    "sha256": "e01b991337cbd27c51a7b3b31a7eb998d5e831c91238a7a1b1d402c1244ade75",
+    "attempt": "3f03338e-54c7-49e8-95e0-b7fb9b3bac5b",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "c296153d43992ecef366e53eaf637798d514871d091a23ff50a621c9af7d9e49"
+  },
+  {
+    "task": "d27-cap-complement",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapComplement.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedCapComplement.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCapComplement.cap_complement",
+    "sha256": "773e2a81162b00e2af90588b07bf0c2e384c15ad00d398184805b5c9bf661010",
+    "attempt": "18d20db8-dda5-4fac-8449-bfed0badf6a9",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "e35f860aed7f93475cf5505aa889927e8aaa2e2c097aa466806fcc2a027a8155"
+  },
+  {
+    "task": "d27-marked-raw-gluing",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedMarkedGluing.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedMarkedGluing.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedMarkedGluing.marked_gluing",
+    "sha256": "a26cb1ea496c8d3a3defef4a6a77e77e5148f26e2b9f1444514cfe3c40ad2aec",
+    "attempt": "b6a16cd6-8d41-4279-82e9-5993996f1125",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "a2d6a49cf42634b59c4fd17e520173f15096c821bddb3e4736109112c190dce1"
+  },
+  {
+    "task": "d27r2-cap-interior-open",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapInteriorOpen.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedCapInteriorOpen.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCapInteriorOpen.cap_interior_open",
+    "sha256": "c87e91265d4a4ef62d40a08db0f7f957a3785bcc3923df2364f7de881aaebe03",
+    "attempt": "c27150ed-4ab4-45e2-a192-5d4afce45093",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "e74cedac2e6dd5b719f7a0aa09fe0bb48521dfe741acac16349513408679b56d"
+  },
+  {
+    "task": "d27r2-closed-cover-gluing",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedClosedCoverGluing.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedClosedCoverGluing.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedClosedCoverGluing.closed_cover_gluing",
+    "sha256": "fb2b0fef6237c33cc8f4ac98d90a7b37330e016d1933ab836d5a609ef7b963b3",
+    "attempt": "a59be193-c03d-4f6b-afb4-a75f15331c7b",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "4612fcfbd6f73f013af4a2758241e1e6653c10e7a5120366bb3e3e3a166d1f6b"
+  }
+]

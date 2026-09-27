@@ -1,0 +1,25 @@
+{
+  "exit_code": 0,
+  "source_sha256": "b19db15ac0e68ab29fee943378c53c78c7a4bde11d364f383d953b54f7a27c95",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round25/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round25/objects/PoincareConjecture/ProofContract/Refinement20260927/CylinderC1Approximation.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round25/sources/PoincareConjecture/ProofContract/Refinement20260927/CylinderC1Approximation.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.cylinder_c1_approximation_of_leaves",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.cylinder_c1_approximation_of_leaves' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

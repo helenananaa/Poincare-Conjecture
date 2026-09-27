@@ -1,0 +1,63 @@
+{
+  "exit_code": 0,
+  "targets": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_radial_local_smooth",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_cutoff_glue",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_cutoff_support",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_compact_extension",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_c1_approximation",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.approximate_checked",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.c1ClassTransfer_width_checked",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.C1ClassMap.width_checked",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.public_after_forty_five",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.C1ClassMap.width_mul_checked",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.almostContractingC1_width_le",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ParallelImplementation.RefinedCylinderCutoffGlue.cylinder_cutoff_glue",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ParallelImplementation.RefinedCylinderCutoffSupport.cylinder_cutoff_support",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ParallelImplementation.RefinedRadialLocalSmooth.radial_local_smooth",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "all_analytic_proof_inputs_discharged": true,
+  "poincare_complete": false
+}

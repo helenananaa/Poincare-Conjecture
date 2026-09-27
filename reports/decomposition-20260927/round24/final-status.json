@@ -1,0 +1,72 @@
+{
+  "observed_utc": "2026-09-27T11:24:37.942111+00:00",
+  "accepted_worker_leaves": 36,
+  "new_fixed_leaves_accepted": 3,
+  "unmodified_worker_sources": 2,
+  "coordinator_repaired_sources": 1,
+  "new_parent_declarations": 5,
+  "new_workers_launched": 0,
+  "queues": {
+    "poincare-refinement-round21-20260927": {
+      "states": {
+        "RUNNING": 1,
+        "VERIFIED": 3
+      },
+      "ready": [],
+      "blocked": []
+    },
+    "poincare-refinement-round23-20260927": {
+      "states": {
+        "RUNNING": 1,
+        "VERIFIED": 2,
+        "FAILED": 1
+      },
+      "ready": [],
+      "blocked": []
+    }
+  },
+  "active_worker_processes": [
+    {
+      "task": "d27r21-embedded-normal-frames",
+      "confirmed": true,
+      "pids": [
+        93547,
+        93567
+      ]
+    },
+    {
+      "task": "d27r23-ambient-endpoint-correction",
+      "confirmed": true,
+      "pids": [
+        108329,
+        108337
+      ]
+    }
+  ],
+  "frontier_hash_check": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "blocked_action": "CylinderC1Approximation.lean creation; not retried",
+  "C1_candidate_contracts": 3,
+  "C1_candidate_dispatched": false,
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "commit_or_push_performed": false,
+  "full_rebuild_performed": false
+}

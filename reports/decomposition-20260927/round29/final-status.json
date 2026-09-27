@@ -1,0 +1,76 @@
+{
+  "observed_utc": "2026-09-27T13:58:22.642199+00:00",
+  "accepted_fixed_leaf_total": 45,
+  "new_accepted_fixed_leaves": 3,
+  "new_workers_launched": 0,
+  "derived_extension_not_double_counted": true,
+  "new_checked_coordinator_declarations": 11,
+  "final_import_audited_targets": 14,
+  "remaining_c1_analytic_leaves": 0,
+  "c1_relative_class_energy_approximation_closed": true,
+  "almost_contracting_c1_width_comparison_proved": true,
+  "actual_geometric_class_maps_produced": false,
+  "actual_controlled_flow_produced": false,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_after_forty_five",
+  "open_root_inputs": [
+    "TriangulationProducerStatement",
+    "FinitePLAtlasProducerStatement",
+    "C1GeometryProducerStatement"
+  ],
+  "queues": {
+    "poincare-refinement-round25-20260927": {
+      "states": {
+        "VERIFIED": 3
+      },
+      "ready": [],
+      "blocked": []
+    },
+    "poincare-refinement-round26-20260927": {
+      "states": {
+        "VERIFIED": 2
+      },
+      "ready": [],
+      "blocked": []
+    },
+    "poincare-refinement-round28-20260927": {
+      "states": {
+        "VERIFIED": 3
+      },
+      "ready": [],
+      "blocked": []
+    }
+  },
+  "actual_worker_processes": [],
+  "active_confirmed_workers_in_checked_batches": 0,
+  "superseded_original": {
+    "observed_utc": "2026-09-27T13:57:15.599279+00:00",
+    "before_processes": [],
+    "manual_queue_change": false,
+    "proved_replacement": "checked_cylinder_compact_extension",
+    "after_processes": [],
+    "system_status": "MainPID=0\nActiveState=inactive\nSubState=dead\n"
+  },
+  "frontier_hash_check": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "commit_or_push_performed": false,
+  "full_rebuild_performed": false
+}

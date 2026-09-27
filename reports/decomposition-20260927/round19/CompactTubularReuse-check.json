@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "source_sha256": "1c8b2ffa01c0bab79ae8abb9f22956eafa09ff1bfe9c3536286ae93364801fc4",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round19/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round19/objects/PoincareConjecture/ProofContract/Refinement20260927/CompactTubularReuse.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round19/sources/PoincareConjecture/ProofContract/Refinement20260927/CompactTubularReuse.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_compact_injective_neighborhood",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.local_tubes_retraction_of_assembly",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.checked_compact_injective_neighborhood' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.local_tubes_retraction_of_assembly' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

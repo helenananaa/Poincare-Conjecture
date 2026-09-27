@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "source_sha256": "bd42419ee6ac8fb35a88150993ef9215622ec0670ad9eecd941104ed4957ef52",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round29/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round29/objects/PoincareConjecture/ProofContract/Refinement20260927/C1AlmostContractions.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round29/sources/PoincareConjecture/ProofContract/Refinement20260927/C1AlmostContractions.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.C1ClassMap.width_mul_checked",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.almostContractingC1_width_le",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.C1ClassMap.width_mul_checked' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.almostContractingC1_width_le' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

@@ -1,0 +1,722 @@
+{
+  "schema": 1,
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "day_source_count": 140,
+  "sources": [
+    {
+      "path": "formalized-sources/DoCarmo/DoCarmoLib/Riemannian/Manifold/DoCarmoCh1.lean",
+      "sha256": "d74867bd5bb7472f3ef570038796e929faf179f29340b4ab2cb236961c82ef0d",
+      "kind": "existing_tracked_dependency"
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/NeckVolume/CompactCapGap.lean",
+      "sha256": "e89afa96c766444a29e808852c24da3d503767c360129f32a0af7043af6f86dd",
+      "kind": "existing_tracked_dependency"
+    },
+    {
+      "path": "formalized-sources/MorganTian/MorganTianLib/Ch02/NeckVolume/PullbackMeasure.lean",
+      "sha256": "3f437ec06a1477eb3c3edaf470da111595941cd9963179bd9991af278c4d2f15",
+      "kind": "existing_tracked_dependency"
+    },
+    {
+      "path": "reports/decomposition-20260927/round10/sources/PoincareConjecture/ProofContract/Refinement20260927/MetricPatchReplacement.lean",
+      "sha256": "a328ff3df42d0c1e64210b0c656580e9d9270559eda9a5244b62e2d7aacf282f",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round10/sources/PoincareConjecture/ProofContract/Refinement20260927/MetricPatchTransport.lean",
+      "sha256": "03bbcee0a73e1419af3357ebd18ae6f23b480e5af36ae21043378c0438346a45",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round10/sources/PoincareConjecture/ProofContract/Refinement20260927/PatchGeometryBudget.lean",
+      "sha256": "7e0fac4d3e0b9b79f38bbd1816505ff48fbc1b9efbdc86595edaf9675f9528b2",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round10/sources/PoincareConjecture/ProofContract/Refinement20260927/RecordedMetricPatch.lean",
+      "sha256": "28f15d33774a28efb17b0f37bc884bda332ade217d019c0a4064c46aeb01712d",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round11/sources/PoincareConjecture/ProofContract/Refinement20260927/ExtinctionBarrier.lean",
+      "sha256": "5f57a17e928dfe7f17bf6d719e3d90914078426a1177b084019ec19ab4310942",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round11/sources/PoincareConjecture/ProofContract/Refinement20260927/WidthExtinctionRoot.lean",
+      "sha256": "64739d75848b54f7116e1bb465b960cd2c900836689652e66441c96d89ff057a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedLocalPatchDensity.lean",
+      "sha256": "7a26595f91677407fd70d8e13636988f96ac9693f8a6206582928b3bfb08860d",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedOpenPatchAssembly.lean",
+      "sha256": "37117476510ec76d5ed793824020f4fd7007de376f3fce6250448783178d16be",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedWidthDiniComparison.lean",
+      "sha256": "642ada0d548bde2377b86d856a41d59d6992883a07ac8722da6f55ddc9e7144d",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedWidthFiniteHorizon.lean",
+      "sha256": "b93fa4db0717159d4e29b89b4cf96d71dda4cdf976f1dfc485c5c027b15110b7",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedSeventeen.lean",
+      "sha256": "24b5dbb0f88695663fe30232ee2f4f62a2d6660440657981cf62fa71291ef6ef",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ProofContract/Refinement20260927/MinimaxComparison.lean",
+      "sha256": "1e1b57720fa96d73f0ab569e932e6aa91f0cb8558c61c939306cc1be20b905f7",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ProofContract/Refinement20260927/MinimaxSweepout.lean",
+      "sha256": "a67fd3432cc0543836442e998fd0e73935d94d81b471d8030dddfdab3be84e2b",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round12/sources/PoincareConjecture/ProofContract/Refinement20260927/SweepoutExtinctionRoot.lean",
+      "sha256": "f0b36fe9526f7970554415bd9c84c76896cf0fcb6e7cc954040bbf8bee26eeae",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round13/sources/PoincareConjecture/ProofContract/Refinement20260927/CompactMetricComparison.lean",
+      "sha256": "8b0a0297e99dc24ed7109cee4e93372757531738890c0e897e7c6aa317d36962",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round13/sources/PoincareConjecture/ProofContract/Refinement20260927/EnergyContinuityRoot.lean",
+      "sha256": "2c04d1d411d784f90795f9b645d2cb6ee0a41883c74ab2d05e9b9fb4572b87d3",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round13/sources/PoincareConjecture/ProofContract/Refinement20260927/EnergyWidthContinuity.lean",
+      "sha256": "a7f61fcee233dd20515e5bfb4c9e0f30db13d7c2a75215766a6f44d6777bf7b3",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedCompactMetricTimeVariation.lean",
+      "sha256": "f6021513210e33330914ac53ebecdb21a572bcd957a695c0ce6573d6c7eeee34",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedCompactQuadraticLower.lean",
+      "sha256": "b7a11cd26d122fa57669e03b723a13d046c31efef294d34bf1e573e7bf230383",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedMinimaxDiniLimit.lean",
+      "sha256": "eb5d8120392cc047a927603d1ee1e0344ceed572f7b3c0105809473e707e1a1c",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedUniformNearMaxTaylor.lean",
+      "sha256": "a060934395a9155258f2f5eaf2f3ba02517eb6e7b5c7a44025374e0f7a71693a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentyOne.lean",
+      "sha256": "556662500ec006374174be5f81044b427a508abfa6cc8dcec50791b93d1c6b1a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicEnergyRoot.lean",
+      "sha256": "6acda3060db37d9c9b9b31ae2be921519a118a77d0257b5a2c7544a93c01c114",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicSphereEnergy.lean",
+      "sha256": "613a5c54fc37161b5010a7ed0bba8cdc31b3a01eb88fa1fcdc28597526f10b7c",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round14/sources/PoincareConjecture/ProofContract/Refinement20260927/SphereEnergySpectrum.lean",
+      "sha256": "1733794e22ceeb6d332c0ea5ae8fb3ad668f9c0327728157754240dea381bc5a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round15/sources/PoincareConjecture/ProofContract/Refinement20260927/ApproximateSweepoutTransfer.lean",
+      "sha256": "c8c89ef2d91953f9b5911efa987be1d6394c9c4a4f0a509a7b47089257bf294f",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round15/sources/PoincareConjecture/ProofContract/Refinement20260927/ApproximateTransferRoot.lean",
+      "sha256": "c618ee74e065c511165f03910077b9efe456c2f9f635c3c805c58ddbfd2dd9c3",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round15/sources/PoincareConjecture/ProofContract/Refinement20260927/ClassTransferRegression.lean",
+      "sha256": "b0385a8b7cbc871cc53444157ff9abb30b0c3570d0da3c8ddc252b018040a39b",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round15/sources/PoincareConjecture/ProofContract/Refinement20260927/SweepoutPostcomposition.lean",
+      "sha256": "c1be72241ab0b7dc18e4f3463b99a0b11d71688c15f44598663cf9b6a4e6278f",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round16/sources/PoincareConjecture/ParallelImplementation/RefinedSphereEnergyContinuity.lean",
+      "sha256": "f135c2697d9ca5ab3ac2e152cafd73e184decf7ec702a434196995929423846e",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round16/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentyTwo.lean",
+      "sha256": "c2f0cf51bfa1bac201ff8d585254dce389ec5dea6b3606fa99f9d3211e90fe04",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round16/sources/PoincareConjecture/ProofContract/Refinement20260927/RegularizedRepresentatives.lean",
+      "sha256": "5d2fd8e93024bdf3c04669bf6058ed756c6239b10ce12906a6ba3815b80bd85f",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round16/sources/PoincareConjecture/ProofContract/Refinement20260927/RegularizedTransferRoot.lean",
+      "sha256": "68c367184b90cfa036015411c6b17f3fe97fa3af6928eaf327f7104a66ac94c0",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round16/sources/PoincareConjecture/ProofContract/Refinement20260927/RelativeApproximation.lean",
+      "sha256": "db060a888fc023ce0600c8076c35c9bb79d42b61fac70a7e85b11c61043fa149",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ParallelImplementation/RefinedIntrinsicMetricComparison.lean",
+      "sha256": "106c24bee1d69cd0674d535d51910afc50dc9991929b5cff549ac5659d6a0203",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ParallelImplementation/RefinedRelativeRetractionHomotopy.lean",
+      "sha256": "dec4eef2d66193a9efaea2c9a8ac581ed7099db1a2e03b89f0affa64a68fa42d",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ParallelImplementation/RefinedSphereEnergyApproximation.lean",
+      "sha256": "c70c30b9073292745371cf1cc4f10c4fae67483a8f4fc04b7f69a915924a7521",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentyFive.lean",
+      "sha256": "06b4cbf17d5abedae0357fc90dcccbc56cb2b93ced04949e587483d117b14d4a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentyFour.lean",
+      "sha256": "7ba33eb96f8eb5d1f83fd9274dc1150d78095f3eb7d6f31e69668bda03d7b147",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ProofContract/Refinement20260927/RetractionApproximationData.lean",
+      "sha256": "03b101b09067897ccdf686ffb26e122c612787a3e89286c66e812bad79cd1ace",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ProofContract/Refinement20260927/RetractionModelRoot.lean",
+      "sha256": "1de05ede1037169bf1c302be2ba212173a2ec4d59d399ef77543f9910c42e716",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round17/sources/PoincareConjecture/ProofContract/Refinement20260927/SmoothRetractionModel.lean",
+      "sha256": "694d6b7738fdd27bd851edda72ec1ea31b3425a65ff9e859dd8ebb53c88f9282",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round19/sources/PoincareConjecture/ProofContract/Refinement20260927/CompactTubularData.lean",
+      "sha256": "69b0e3c91fd45f1fc7230e4bd41b774215b59f473643cc37e0b9591c0ad55a8d",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round19/sources/PoincareConjecture/ProofContract/Refinement20260927/CompactTubularReuse.lean",
+      "sha256": "1c8b2ffa01c0bab79ae8abb9f22956eafa09ff1bfe9c3536286ae93364801fc4",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round19/sources/PoincareConjecture/ProofContract/Refinement20260927/TubularApproximation.lean",
+      "sha256": "0b400586ec0f9798cc51d5f40f54712ac8dff511aaf097d7ed8d2c6a6ae9077a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round19/sources/PoincareConjecture/ProofContract/Refinement20260927/TubularRoot.lean",
+      "sha256": "08d8b5c50dd0f16d73e8c4e3e904b5adc2bcd2b860725a2c8d457bc72d529c60",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round20/sources/PoincareConjecture/ParallelImplementation/RefinedSmoothRetractionForm.lean",
+      "sha256": "687ff25135b46da6557135c95ab4e29d70bc5b40068de93e580d1468ba8f9c0b",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round20/sources/PoincareConjecture/ParallelImplementation/RefinedTubularInverseAssembly.lean",
+      "sha256": "9d71c49408389a1e6e4bd9e70f3850a88d3e08d55598ff51755e7d4c0892ca5c",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round20/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentySeven.lean",
+      "sha256": "a1eac694fd8f4f6baa10fb7ef41a01f86cc81b6f69e2e1e8c41641e211cd8b67",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round20/sources/PoincareConjecture/ProofContract/Refinement20260927/NormalApproximation.lean",
+      "sha256": "a54a21425db6531d547aef8725fc27e3709f648b3a955f7aa3de8e191d578a7b",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round20/sources/PoincareConjecture/ProofContract/Refinement20260927/NormalCoordinateTube.lean",
+      "sha256": "92b8d4849e4dc4b0746e353de4969620ab7f9d03fd0f94599be9443386d24bb3",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round20/sources/PoincareConjecture/ProofContract/Refinement20260927/NormalTubeLeaves.lean",
+      "sha256": "bc7ae0994b151a11aa31785ef8530da283db1b1081ecb9fa66c8c747a1ffb3bc",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round20/sources/PoincareConjecture/ProofContract/Refinement20260927/NormalTubeRoot.lean",
+      "sha256": "22ff0b3411171b2f491f50ffdf5abbb12267d4b4e02be0b71f6572ca0d491da3",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round21/sources/PoincareConjecture/ParallelImplementation/RefinedNormalEndpointJet.lean",
+      "sha256": "592b44265057c6b6ecf8458e07d2616eadd64de2277a80abdff98d5bf8cfd612",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round21/sources/PoincareConjecture/ParallelImplementation/RefinedNormalLinearEquiv.lean",
+      "sha256": "9ae497e83dc8ddd8f5cc5818f08444389e1d2bb8cab36dc919044286ab1f018f",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round21/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentyNine.lean",
+      "sha256": "8b9469bbd70d7cd0f292889a730016963fb6cd9a94e71b0b474ef26ae9895d18",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round21/sources/PoincareConjecture/ProofContract/Refinement20260927/EmbeddedApproximation.lean",
+      "sha256": "302034af1587d36fabd8ec98e699f500902027d0b64a79cfbfb217720ce1dd9d",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round21/sources/PoincareConjecture/ProofContract/Refinement20260927/EmbeddedNormalConstruction.lean",
+      "sha256": "140587f5a31d4c42ccf19267d8e4db92176d3fff62c9cf8e16bed1256f935921",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round21/sources/PoincareConjecture/ProofContract/Refinement20260927/EmbeddedNormalFrames.lean",
+      "sha256": "f6a7c923bcbfc88f51c7458bed42a08435ccb1b2c406f00973a56a8eda504500",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round21/sources/PoincareConjecture/ProofContract/Refinement20260927/EmbeddedRoot.lean",
+      "sha256": "049aca8902ade17a82d9c0a5dbf9a9aba8bcf9b361aa85d2bcfb924064f6a869",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round22/sources/PoincareConjecture/ParallelImplementation/RefinedTubularChartInverse.lean",
+      "sha256": "af3bcd99665955ca91ba928ec52e37024d45798838a1b7380e0575a5bff6997b",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round22/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirty.lean",
+      "sha256": "121252ad5b89c92249c974443052192d498e65c0fcd82c78c36a60ca10d1bb88",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round23/sources/PoincareConjecture/ParallelImplementation/RefinedNormalBundleParametrization.lean",
+      "sha256": "d19aea2a8df2b976853209744bc13e6830146f99916abafac8f2e78720a789b9",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round23/sources/PoincareConjecture/ParallelImplementation/RefinedNormalFrameTransport.lean",
+      "sha256": "371dacd9aaa3d4d15ecdb56a97d0bdcb9616706a62cd4ded78151886ba9a68ff",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round23/sources/PoincareConjecture/ParallelImplementation/RefinedNormalParametrizationRegularity.lean",
+      "sha256": "bb9ebc958fd51a580b88536e0508e98e6e1c4807806da1ec456085259c0a02f1",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round23/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirtyThree.lean",
+      "sha256": "91e780bc976b617a9055312cbaf3359db9756bc3ccda55f888e412a395a8be12",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round23/sources/PoincareConjecture/ProofContract/Refinement20260927/AmbientApproximationConstruction.lean",
+      "sha256": "e04bb4d215af70954fb3047c332e4fbc16d19f7a0741a42157fe9fa77b38e5ee",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round23/sources/PoincareConjecture/ProofContract/Refinement20260927/AmbientApproximationLeaves.lean",
+      "sha256": "3f07c55783aa43974b6eae775c98ece764dd86fbc064f52fbfabe52419219b02",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round23/sources/PoincareConjecture/ProofContract/Refinement20260927/AmbientApproximationRoot.lean",
+      "sha256": "66a31fbc04390b94ecc630f7a052855ba2ab299b065b339367515b0a052c1a47",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round24/sources/PoincareConjecture/ParallelImplementation/RefinedAmbientSweepoutConfinement.lean",
+      "sha256": "419e3c4ef0c0179e7045c45e57745199d2d2483b8bb13948d57e44776bda4d12",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round24/sources/PoincareConjecture/ParallelImplementation/RefinedCompactRetractionControl.lean",
+      "sha256": "f64815ceaff6d1f159d61bacc7bdd8f36ff9650d8d374921cf773e4789ac677e",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round24/sources/PoincareConjecture/ParallelImplementation/RefinedSphereCompositionEstimate.lean",
+      "sha256": "723d5d60efac271284abaff4c1de4041a8ec8813071ced2a9961bd0e98c5d818",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round24/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirtySix.lean",
+      "sha256": "3e107d3fcc2f6eebf51208f6cebe7545fcf8f3badcb1157a00337323329db159",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round25/sources/PoincareConjecture/ParallelImplementation/RefinedAmbientEndpointCorrection.lean",
+      "sha256": "08ca85a44f8001b9e3321182180ad44ecdbe559280dc791376d6f2c0172cf7c3",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round25/sources/PoincareConjecture/ParallelImplementation/RefinedEmbeddedNormalFrames.lean",
+      "sha256": "2910345b311906f85b6a45061c750ad57c151fa6d6334b40018d1af1570eff87",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round25/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirtyEight.lean",
+      "sha256": "efb0bc07e51c94f70d4fd8dee258bca9bdc7a91c87bbba4f1feb3f3983a1b1ba",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round25/sources/PoincareConjecture/ProofContract/Refinement20260927/CylinderC1Approximation.lean",
+      "sha256": "b19db15ac0e68ab29fee943378c53c78c7a4bde11d364f383d953b54f7a27c95",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round25/sources/PoincareConjecture/ProofContract/Refinement20260927/CylinderMollificationLeaves.lean",
+      "sha256": "aade972dc5e3d53f14e2653499cd2edaee81b87f2bea68c44f071c0684d9d704",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round25/sources/PoincareConjecture/ProofContract/Refinement20260927/EuclideanMollifierReuse.lean",
+      "sha256": "e3636fc2fcf19c9a7e1b146cbad6f81b2d5d70a91fc775c023733b31259a6a60",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round25/sources/PoincareConjecture/ProofContract/Refinement20260927/JointC1Approximation.lean",
+      "sha256": "e7878755623de42636943f87f0965a88db66b17883b24ad5e51a1e8f2c13fc03",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round26/sources/PoincareConjecture/ParallelImplementation/RefinedUniformMollification.lean",
+      "sha256": "7448fa5bd40d1b93a6d0df511b592eb8b5a5b7948e0e5fdcab572fe0292d8392",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round26/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirtyNine.lean",
+      "sha256": "c6bf4cbaf1a96ecb83f9a835464986a49439fe8c7e3bce46e5298e0d1f32d4a9",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round26/sources/PoincareConjecture/ProofContract/Refinement20260927/C1EnergyApproximation.lean",
+      "sha256": "98d089db8c6245b247397371e99c365937e33ddff80ef548bed33ab421c8b917",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round26/sources/PoincareConjecture/ProofContract/Refinement20260927/C1ReferenceConstruction.lean",
+      "sha256": "3fc3136931cd107967d41047a261a98c1e1a2e8ac4518af7e3e7862654e8677f",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round26/sources/PoincareConjecture/ProofContract/Refinement20260927/C1ReferenceLeaves.lean",
+      "sha256": "2a2ba868d27d22ef9a6732b7de501f63c5867fda250dbe69e836b1c0e443ff18",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ParallelImplementation/RefinedC1AmbientFrameBound.lean",
+      "sha256": "18d0515edd2e17a56d52c1ab8da3abe99731fe454ee5e0e1bb4ef226903c515d",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ParallelImplementation/RefinedC1SphereEnergyContinuity.lean",
+      "sha256": "f6a4e27f350080c780f75dcfe8a7bdb472d2e3eb5715ee55fcd178eea5cbd05b",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ParallelImplementation/RefinedCylinderRestrictionEstimate.lean",
+      "sha256": "e85179cce630bcb5f1d69150e0ddd54447ff88ccbd636276a90faa766991f2bd",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedForty.lean",
+      "sha256": "81a57bb920aa718ffeebb6a8196990aefa2ef95059ff9c96c4981e12d1b274a8",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedFortyOne.lean",
+      "sha256": "b603a0fe7e4a63c4502219e1df3d21519f64df02bc85bf55d08ec8f054989d6c",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedFortyTwo.lean",
+      "sha256": "2dcd50330b313149bf20c1e8fae8ec08d8e92b0e06eb09521de1a82f61eddbde",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ProofContract/Refinement20260927/C1GeometryRoot.lean",
+      "sha256": "a2a2843f4be0cbac12575d8e174a7a4cd423322f3af614f44d8e37f01116b555",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round27/sources/PoincareConjecture/ProofContract/Refinement20260927/C1MetricMaps.lean",
+      "sha256": "eaec8fd57a7f19a825179df79f202a849fedce067f83d72ad80d5bf7fca18fe6",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round28/sources/PoincareConjecture/ProofContract/Refinement20260927/RadialExtensionConstruction.lean",
+      "sha256": "a0aacac79e56d718d7008c4208fcdaf08071720a6147f88414b86a493e301e62",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round28/sources/PoincareConjecture/ProofContract/Refinement20260927/RadialExtensionLeaves.lean",
+      "sha256": "de89d99c28e6f8a9fa97899791336cd079017533ca682169c47bb869394777a8",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round29/sources/PoincareConjecture/ParallelImplementation/RefinedCylinderCutoffGlue.lean",
+      "sha256": "8d0d052b2c9df293003a201e35ce0b5a316ae3cc5add3a9624d1f4a04c2c34a3",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round29/sources/PoincareConjecture/ParallelImplementation/RefinedCylinderCutoffSupport.lean",
+      "sha256": "8deb293fbf11bbaa5a949b92fb450de4a85aed58dba1d8d75d3e530c56093dfd",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round29/sources/PoincareConjecture/ParallelImplementation/RefinedRadialLocalSmooth.lean",
+      "sha256": "a75905c8939abd1791cf0352cd30767e2348100dcf5b788b60fc3f9a60aa35dc",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round29/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedFortyFive.lean",
+      "sha256": "8ea6b9a6c9e87acbdd11a2996574b6eda34874fb7f12872bbcadf81a41528dcc",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round29/sources/PoincareConjecture/ProofContract/Refinement20260927/C1AlmostContractions.lean",
+      "sha256": "bd42419ee6ac8fb35a88150993ef9215622ec0670ad9eecd941104ed4957ef52",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapChart.lean",
+      "sha256": "e01b991337cbd27c51a7b3b31a7eb998d5e831c91238a7a1b1d402c1244ade75",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapComplement.lean",
+      "sha256": "773e2a81162b00e2af90588b07bf0c2e384c15ad00d398184805b5c9bf661010",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapInteriorOpen.lean",
+      "sha256": "c87e91265d4a4ef62d40a08db0f7f957a3785bcc3923df2364f7de881aaebe03",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedClosedCoverGluing.lean",
+      "sha256": "fb2b0fef6237c33cc8f4ac98d90a7b37330e016d1933ab836d5a609ef7b963b3",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedMarkedGluing.lean",
+      "sha256": "a26cb1ea496c8d3a3defef4a6a77e77e5148f26e2b9f1444514cfe3c40ad2aec",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedFive.lean",
+      "sha256": "7fe38821122f746a6000b9b8c6cb1bb202cd58fc12d5a7b0a37c96b3de13180a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ProofContract/Refinement20260927/Neck.lean",
+      "sha256": "5359fd94e86c8ea9084d3e9cde229a12473199877074c5c97da9cdab02fefb24",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round3/sources/PoincareConjecture/ProofContract/Refinement20260927/NeckRoot.lean",
+      "sha256": "9011ba4865a63522932ce592b1da0f3374b3258a7dcca0e59c306a9bdfcb0c18",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round4/sources/PoincareConjecture/ProofContract/Refinement20260927/CapRelabeling.lean",
+      "sha256": "97264d3a51c2c4614cf7242fd4d921a730790811be844ec89f5020932e3d55b7",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round4/sources/PoincareConjecture/ProofContract/Refinement20260927/SurgeryProjection.lean",
+      "sha256": "c5471d2abca5459d2393138c40534df18106f776be5b86946229dbcf5467c942",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedCapRelabeling.lean",
+      "sha256": "b34da87d739d37ac3d50689dd1f5b6593b2e55c2191061bfd799c9357f81935a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedFiniteTimeline.lean",
+      "sha256": "72b11e98a1ed065f6c2febd363f90f44d9928785a5b6f1f40d1fce3336fda60b",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedNegativeHalfCollar.lean",
+      "sha256": "6a7dd51e1eeaa972f1e5432e8904ac25e1c20630b2fb2d47d8820fc05d2d696a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedSideInteriorAtlas.lean",
+      "sha256": "e529af9348e3600c23771c6ed52c889ef53d9d47ce35585b8ee8b501b1df80bd",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round5/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedNine.lean",
+      "sha256": "9f1b865f3cce4d7df8a759699579a03d98ceb365a3f901f22bfea2cad24f170a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round5/sources/PoincareConjecture/ProofContract/Refinement20260927/FiniteSmoothingAtlas.lean",
+      "sha256": "be5f834e18f42d84ea2232e25de7ccca436926f9368075c49e97d2fa6b125bc1",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round6/sources/PoincareConjecture/ProofContract/Refinement20260927/MetricInitialization.lean",
+      "sha256": "6cfb984c85d77ba3b0be9449cbc5b7b0a473cf0264aae297644d7d274f5d4c36",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round6/sources/PoincareConjecture/ProofContract/Refinement20260927/RicciVolumeBudget.lean",
+      "sha256": "057fb09186e74ce7e4446175079624be251d269634f3ddada209a6e2ed5e30ac",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round7/sources/PoincareConjecture/ParallelImplementation/RefinedClosedScalarPropagation.lean",
+      "sha256": "432b950fe808d05a30a5da426931811164eae6a7cdd32da9accdae258ccdf698",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round7/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTen.lean",
+      "sha256": "7ca3f75fa9426450c420ed2c1a428facb4a91a581cd4b8019de95c31fe4aa8bf",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round7/sources/PoincareConjecture/ProofContract/Refinement20260927/NeckLoss.lean",
+      "sha256": "5a5b1dbc3125f4073e2cb1ca81ecb458fca9ff3b765f71a8f491f8a75f738827",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round7/sources/PoincareConjecture/ProofContract/Refinement20260927/NeckLossBudget.lean",
+      "sha256": "494a0a5a0b3a4150ad6ae3c41510de68979711870e4d31e2de1b0943e0343763",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round8/sources/PoincareConjecture/ParallelImplementation/RefinedFiniteCapScaling.lean",
+      "sha256": "64e1f2e8446a2f98be6ab260d39985003dd4602428ef4d4c6dafd4af6680cc11",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round8/sources/PoincareConjecture/ParallelImplementation/RefinedUniformNeckAllowance.lean",
+      "sha256": "0820c067410bc6ae0a94d3f9ac1d9947ec1dd33d4be977e8c399497b898301ca",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round8/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwelve.lean",
+      "sha256": "f3178493889997e7ac86414fcea1cc7b009a00e9ca09fd29955aaf24f4ee5395",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round8/sources/PoincareConjecture/ProofContract/Refinement20260927/CountedSurgery.lean",
+      "sha256": "0cd607672675ee697d707216fe8f1f8e5dc223b7b8afd1c6cb79c635b65963bd",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round8/sources/PoincareConjecture/ProofContract/Refinement20260927/GeometricNeck.lean",
+      "sha256": "a3fec9d7e7ec19cc2d393e63de34bd0fc44e0c2a93bf1beb619e0ddea85e2bea",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round8/sources/PoincareConjecture/ProofContract/Refinement20260927/SynchronizedBudget.lean",
+      "sha256": "75832185cbde0b020672589c280c3f40f8c84b9aee6c6c2c1bc84f1c4906d249",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round9/sources/PoincareConjecture/ParallelImplementation/RefinedEpsilonNeckEmbedding.lean",
+      "sha256": "79b7c673ce0681dc8ff7f8d813bccc069ee2ea28f7d7cd0c892f99d30b925295",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round9/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirteen.lean",
+      "sha256": "ee61f64f034166cf578df59d8f81e8f2747259a65667ec6d6706ffb82f29885d",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round9/sources/PoincareConjecture/ProofContract/Refinement20260927/CutChoiceAudit.lean",
+      "sha256": "7cc0fe58fb76d2854f7f8f7953d65ebc7c39e97db581080dd6a409cc69320083",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round9/sources/PoincareConjecture/ProofContract/Refinement20260927/LocatedCut.lean",
+      "sha256": "c7ff3a0a4aeba9219f61ee227042934af3bcc823a36faee22ec20ab63c0299f0",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round9/sources/PoincareConjecture/ProofContract/Refinement20260927/LocatedEvents.lean",
+      "sha256": "f8e9798ad82a5d29d4ce306678590620ee5c1df1d75dbf8add8cba3252d60d1f",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round9/sources/PoincareConjecture/ProofContract/Refinement20260927/LocationRegression.lean",
+      "sha256": "2231d0b755e473abbcc5f2132772c6adae032a4a6ec21b8780212756207bcde9",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/round9/sources/PoincareConjecture/ProofContract/Refinement20260927/MatchedBudget.lean",
+      "sha256": "56f11677c5a43365fbd5de32b85f02cb1b5069e5966d27027b4283f43281cc1a",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/sources/PoincareConjecture/ProofContract/Refinement20260927/Cap.lean",
+      "sha256": "0110877fe2c36dddaedf977632184d06383f5874e385b60f1ca73ca39b6828a0",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/sources/PoincareConjecture/ProofContract/Refinement20260927/CapManifold.lean",
+      "sha256": "d7cccd9c10c5ca71b1ecadb8bd153432f5ab10e4a0eb1fbdfa6a1c7974bae597",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/sources/PoincareConjecture/ProofContract/Refinement20260927/ClosedCut.lean",
+      "sha256": "0214d950e18c5bee145d37fe80f128c085c78ca3c6ab299b51e74f0e21d4b312",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/sources/PoincareConjecture/ProofContract/Refinement20260927/Root.lean",
+      "sha256": "3b2bbd8021353a09813a2e9858de6fe4c3e3ac4ea872b6be584547ffa08d9bb2",
+      "kind": "accepted_day_source"
+    },
+    {
+      "path": "reports/decomposition-20260927/sources/PoincareConjecture/ProofContract/Refinement20260927/Smoothing.lean",
+      "sha256": "88eae0653503a160202a8aa9be5e488a8f109f0d4eee8bfeef0430d9a5d2a70d",
+      "kind": "accepted_day_source"
+    }
+  ]
+}

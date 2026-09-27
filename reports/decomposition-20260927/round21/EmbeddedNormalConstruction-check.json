@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "source_sha256": "140587f5a31d4c42ccf19267d8e4db92176d3fff62c9cf8e16bed1256f935921",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/objects/PoincareConjecture/ProofContract/Refinement20260927/EmbeddedNormalConstruction.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/sources/PoincareConjecture/ProofContract/Refinement20260927/EmbeddedNormalConstruction.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.embedded_normal_coordinates_of_leaves",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.embedded_retraction_of_frame_leaves",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.embedded_normal_coordinates_of_leaves' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.embedded_retraction_of_frame_leaves' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

@@ -1,0 +1,278 @@
+{
+  "status": "PASS",
+  "target_count": 54,
+  "mode": "fresh import audit against frozen compiled artifacts; no full dependency rebuild",
+  "axioms": {
+    "PoincareConjecture.ParallelImplementation.RefinedLocalPatchDensity.local_patch_density": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedOpenPatchAssembly.open_patch_assembly": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedWidthDiniComparison.width_dini_comparison": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedWidthFiniteHorizon.width_finite_horizon": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedCompactMetricTimeVariation.compact_metric_time_variation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedCompactQuadraticLower.compact_quadratic_lower": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedMinimaxDiniLimit.minimax_dini_limit": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedUniformNearMaxTaylor.uniform_near_max_taylor": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedSphereEnergyContinuity.sphere_energy_continuity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedIntrinsicMetricComparison.intrinsic_metric_comparison": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedRelativeRetractionHomotopy.relative_retraction_homotopy": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedSphereEnergyApproximation.sphere_energy_approximation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedSmoothRetractionForm.smooth_retraction_form": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedTubularInverseAssembly.tubular_inverse_assembly": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedNormalEndpointJet.normal_endpoint_jet": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedNormalLinearEquiv.normal_linear_equiv": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedTubularChartInverse.tubular_chart_inverse": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedNormalBundleParametrization.normal_bundle_parametrization": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedNormalFrameTransport.normal_frame_transport": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedNormalParametrizationRegularity.normal_parametrization_regularity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedAmbientSweepoutConfinement.ambient_sweepout_confinement": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedCompactRetractionControl.compact_retraction_control": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedSphereCompositionEstimate.sphere_composition_estimate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedAmbientEndpointCorrection.ambient_endpoint_correction": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedEmbeddedNormalFrames.embedded_normal_frames": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedUniformMollification.uniform_mollification": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedC1AmbientFrameBound.c1_ambient_frame_bound": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedC1SphereEnergyContinuity.c1_sphere_energy_continuity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedCylinderRestrictionEstimate.cylinder_restriction_estimate": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedCylinderCutoffGlue.cylinder_cutoff_glue": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedCylinderCutoffSupport.cylinder_cutoff_support": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedRadialLocalSmooth.radial_local_smooth": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedCapChart.cap_chart": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedCapComplement.cap_complement": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedCapInteriorOpen.cap_interior_open": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedClosedCoverGluing.closed_cover_gluing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedMarkedGluing.marked_gluing": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedCapRelabeling.cap_relabeling": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedFiniteTimeline.finite_timeline": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedNegativeHalfCollar.negative_half_collar": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedSideInteriorAtlas.side_interior_atlas": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedClosedScalarPropagation.closed_scalar_propagation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedFiniteCapScaling.finite_cap_scaling": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedUniformNeckAllowance.uniform_neck_allowance": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ParallelImplementation.RefinedEpsilonNeckEmbedding.epsilon_neck_embedding": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Refinement20260927.compact_smooth_local_retraction_exists": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_compact_extension": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_c1_approximation": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.approximate_checked": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Refinement20260927.c1ClassTransfer_width_checked": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Refinement20260927.C1ClassMap.width_checked": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Refinement20260927.C1ClassMap.width_mul_checked": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Refinement20260927.almostContractingC1_width_le": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "PoincareConjecture.ProofContract.Refinement20260927.public_after_forty_five": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ]
+  },
+  "poincare_complete": false
+}

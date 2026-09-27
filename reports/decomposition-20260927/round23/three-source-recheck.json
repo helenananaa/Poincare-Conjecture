@@ -1,0 +1,50 @@
+[
+  {
+    "task": "d27r21-normal-bundle-parametrization",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round23/sources/PoincareConjecture/ParallelImplementation/RefinedNormalBundleParametrization.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedNormalBundleParametrization.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedNormalBundleParametrization.normal_bundle_parametrization",
+    "sha256": "d19aea2a8df2b976853209744bc13e6830146f99916abafac8f2e78720a789b9",
+    "attempt": "833fbe29-fbbc-4ef8-971b-10ca6ebfbfe2",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "e47abce93b20d6a928cada7d1dcc7a125246da2de4b25d56b934ee1888ae9f4c"
+  },
+  {
+    "task": "d27r21-normal-frame-transport",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round23/sources/PoincareConjecture/ParallelImplementation/RefinedNormalFrameTransport.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedNormalFrameTransport.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedNormalFrameTransport.normal_frame_transport",
+    "sha256": "371dacd9aaa3d4d15ecdb56a97d0bdcb9616706a62cd4ded78151886ba9a68ff",
+    "attempt": "1968c10f-0f14-464f-87cc-93f75f6ffedf",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "1389fcc50ab81962f6899445a24522c705ee0a47737bc2ebf534fe768945d3e0"
+  },
+  {
+    "task": "d27r21-normal-parametrization-regularity",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round23/sources/PoincareConjecture/ParallelImplementation/RefinedNormalParametrizationRegularity.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedNormalParametrizationRegularity.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedNormalParametrizationRegularity.normal_parametrization_regularity",
+    "sha256": "bb9ebc958fd51a580b88536e0508e98e6e1c4807806da1ec456085259c0a02f1",
+    "attempt": "5046f03e-2d02-4e6c-8947-d5a0d21356cb",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "1a858ec91be38eeea4db713bdb78daf44136b50f26ffa824715107a8fa9c9ee3"
+  }
+]

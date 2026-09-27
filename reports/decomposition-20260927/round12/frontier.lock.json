@@ -1,0 +1,246 @@
+{
+  "version": 12,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_sweepout_frontier",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedSeventeen.lean",
+      "sha256": "24b5dbb0f88695663fe30232ee2f4f62a2d6660440657981cf62fa71291ef6ef",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_local_patch_density",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_open_patch_assembly",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_width_comparison",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_width_horizon",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_empty_end",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_after_seventeen",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/MinimaxSweepout.lean",
+      "sha256": "a67fd3432cc0543836442e998fd0e73935d94d81b471d8030dddfdab3be84e2b",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SweepoutSpectrum.energy_le_peak",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SweepoutSpectrum.peak_nonneg",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SweepoutSpectrum.width_nonneg",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SweepoutSpectrum.width_le_peak",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SweepoutTransfer.width_le",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/MinimaxComparison.lean",
+      "sha256": "1e1b57720fa96d73f0ab569e932e6aa91f0cb8558c61c939306cc1be20b905f7",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.width_dini_of_good_sweepouts",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/SweepoutExtinctionRoot.lean",
+      "sha256": "f0b36fe9526f7970554415bd9c84c76896cf0fcb6e7cc954040bbf8bee26eeae",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MinimaxSurvivalProfile.toExtinction",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.width_producer_of_minimax",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_sweepout_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedSeventeen.olean",
+      "sha256": "d6168ca3e1a3eb14d057c29ab3d31136260548d3923f7b2773a15329ed291f57"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/MinimaxSweepout.olean",
+      "sha256": "143173d69fb0cac9354dfe94d3d00d2348e30dd62ae6112e8d93b4d34c337bae"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/MinimaxComparison.olean",
+      "sha256": "1dc759e98d7e5d8d05a2116ccfcb2cfcc3486df9071e49c69726cb0ff39a1fe8"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/SweepoutExtinctionRoot.olean",
+      "sha256": "e7cca4d70d4095fecbebd380dd7ccdd08e7302ae98c3ff6ee98854428c8b3fd7"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedLocalPatchDensity.olean",
+      "sha256": "9eac87c25adeb931f1f01083e066fad73b5e3c9a3903abf071ad8236a39c3ec9"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedOpenPatchAssembly.olean",
+      "sha256": "61ef315fe42007d2aa724b0c99e277c6ffb57db6dcdb22c597eaa992dc7c830b"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedWidthDiniComparison.olean",
+      "sha256": "dcfdb771d722342c5511c508baf2538fd32329892276fe06338df315188a16fa"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedWidthFiniteHorizon.olean",
+      "sha256": "6644ff545c7cce746129b54672ddbcc9aa903f410cd47ac6baca5fee6674271e"
+    }
+  ],
+  "accepted_sources": [
+    {
+      "task": "d27r10-local-patch-density",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedLocalPatchDensity.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedLocalPatchDensity.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedLocalPatchDensity.local_patch_density",
+      "sha256": "7a26595f91677407fd70d8e13636988f96ac9693f8a6206582928b3bfb08860d",
+      "attempt": "de3b81a7-4868-4683-8e94-adc460c7efca",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "9eac87c25adeb931f1f01083e066fad73b5e3c9a3903abf071ad8236a39c3ec9",
+      "semantic_review": "Full 220-line source inspected: same map mfderiv chain rule, Gram conjugation, determinant and positive-density square root; no global surjectivity assumption."
+    },
+    {
+      "task": "d27r10-open-patch-assembly",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedOpenPatchAssembly.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedOpenPatchAssembly.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedOpenPatchAssembly.open_patch_assembly",
+      "sha256": "37117476510ec76d5ed793824020f4fd7007de376f3fce6250448783178d16be",
+      "attempt": "bc678da5-cd4f-473a-91dc-d651bb853fa4",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "61ef315fe42007d2aa724b0c99e277c6ffb57db6dcdb22c597eaa992dc7c830b",
+      "semantic_review": "Full 247-line source inspected: countable source/target chart partitions, image measurability from open embedding, local change of variables and disjoint sums; exact map retained."
+    },
+    {
+      "task": "d27r11-width-dini-comparison",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedWidthDiniComparison.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedWidthDiniComparison.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedWidthDiniComparison.width_dini_comparison",
+      "sha256": "642ada0d548bde2377b86d856a41d59d6992883a07ac8722da6f55ddc9e7144d",
+      "attempt": "1097f3af-6b76-4b94-aecb-36cbc7b49336",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "dcfdb771d722342c5511c508baf2538fd32329892276fe06338df315188a16fa",
+      "semantic_review": "Full 97-line source inspected: smooth comparison barrier, exact one-sided difference comparison, initial matching and positive powers; width differentiability never assumed."
+    },
+    {
+      "task": "d27r11-width-finite-horizon",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/sources/PoincareConjecture/ParallelImplementation/RefinedWidthFiniteHorizon.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedWidthFiniteHorizon.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedWidthFiniteHorizon.width_finite_horizon",
+      "sha256": "b93fa4db0717159d4e29b89b4cf96d71dda4cdf976f1dfc485c5c027b15110b7",
+      "attempt": "ba115f38-98ee-4545-9f52-f73a1203b7df",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "6644ff545c7cce746129b54672ddbcc9aa903f410cd47ac6baca5fee6674271e",
+      "semantic_review": "Full 39-line source inspected: explicit q and T=q^4-c chosen after a,c,w0; real-power identities and strict inequality verified."
+    }
+  ],
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/frontier.lock.json",
+      "sha256": "c4b4334f1c34903b5e095c48164045d10c158d9e0442de662ec4cdce010a559a"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/frontier.lock.json",
+      "sha256": "b1e32685916333c6cf47707f48fcf2ea7a8d726684ba58a23d3584e073fc9679"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/frontier.lock.json",
+      "sha256": "343fa87a6cda1536fb9252d158e6330e2923f8190b7919f2c274249fc1b9a9ba"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round11/frontier.lock.json",
+      "sha256": "22a7dd4e971210788136a35c6684ba6bb169c31bf6932ac020c63a4907107adf"
+    }
+  ],
+  "cards_sha256": "db64d0ffbe826f01628ea9ff0379006f68cfe37536c108d59daf6a709b78f85f",
+  "graph_sha256": "3b953cb93816816b4ad4f3e6b5e09fe1881b02e52b0609344afaf5ebe7c84ab0",
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T06:05:33.945580+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

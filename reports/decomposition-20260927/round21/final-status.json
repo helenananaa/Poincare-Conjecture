@@ -1,0 +1,127 @@
+{
+  "observed_utc": "2026-09-27T10:20:36.191590+00:00",
+  "newly_accepted_worker_leaves": 2,
+  "prior_accepted_worker_leaves": 27,
+  "accepted_worker_leaves": 29,
+  "new_checked_declarations": 12,
+  "new_workers_launched": 4,
+  "worker_model": "gpt-6-luna",
+  "worker_efforts": {
+    "d27r21-embedded-normal-frames": "max",
+    "d27r21-normal-frame-transport": "xhigh",
+    "d27r21-normal-bundle-parametrization": "max",
+    "d27r21-normal-parametrization-regularity": "high"
+  },
+  "queues": {
+    "poincare-refinement-round20-20260927": {
+      "states": {
+        "VERIFIED": 3
+      },
+      "ready": [],
+      "blocked": []
+    },
+    "poincare-refinement-round21-20260927": {
+      "states": {
+        "RUNNING": 4
+      },
+      "ready": [],
+      "blocked": []
+    }
+  },
+  "active_attempts": [
+    {
+      "project": "poincare-refinement-round21-20260927",
+      "task": "d27r21-embedded-normal-frames",
+      "reserved_seconds": 100.9,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-90f75dffe6854f769796dae08c1ef469.service"
+    },
+    {
+      "project": "poincare-refinement-round21-20260927",
+      "task": "d27r21-normal-bundle-parametrization",
+      "reserved_seconds": 100.7,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-833fbe29fbbc4ef8971b10ca6ebfbfe2.service"
+    },
+    {
+      "project": "poincare-refinement-round21-20260927",
+      "task": "d27r21-normal-frame-transport",
+      "reserved_seconds": 100.6,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-1968c10f0f14464f87cc93f75f6ffedf.service"
+    },
+    {
+      "project": "poincare-refinement-round21-20260927",
+      "task": "d27r21-normal-parametrization-regularity",
+      "reserved_seconds": 100.5,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-5046f03e2d024e6c8947d5a0d21356cb.service"
+    }
+  ],
+  "actual_model_process_checks": [
+    {
+      "task": "d27r21-embedded-normal-frames",
+      "phase": "agent_or_capture",
+      "process_confirmed": true,
+      "pids": [
+        93547,
+        93567
+      ]
+    },
+    {
+      "task": "d27r21-normal-bundle-parametrization",
+      "phase": "agent_or_capture",
+      "process_confirmed": true,
+      "pids": [
+        93324,
+        93331
+      ]
+    },
+    {
+      "task": "d27r21-normal-frame-transport",
+      "phase": "agent_or_capture",
+      "process_confirmed": true,
+      "pids": [
+        93393,
+        93405
+      ]
+    },
+    {
+      "task": "d27r21-normal-parametrization-regularity",
+      "phase": "agent_or_capture",
+      "process_confirmed": true,
+      "pids": [
+        93824,
+        93832
+      ]
+    }
+  ],
+  "previous_worker_preserved": "d27r20-tubular-chart-inverse",
+  "frontier_hash_check": "PASS",
+  "supplemental_Lee_hash_check": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "normalTube_input_removed_from_new_approximation_data": true,
+  "four_leaf_existence_construction_compiled": true,
+  "normal_coordinate_existence_unconditionally_proved": false,
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "commit_or_push_performed": false,
+  "full_rebuild_performed": false
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "task": "d27r3-negative-half-collar",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedNegativeHalfCollar.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedNegativeHalfCollar.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedNegativeHalfCollar.negative_half_collar",
+    "sha256": "6a7dd51e1eeaa972f1e5432e8904ac25e1c20630b2fb2d47d8820fc05d2d696a",
+    "attempt": "ae8ee5e0-228f-4e0d-b02d-01fbfe2647c7",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "b1e63e444b5a335daa46e9285a4c53a3cab08cbef13a5a8ff011b0925724b554"
+  },
+  {
+    "task": "d27r3-side-interior-atlas",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedSideInteriorAtlas.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedSideInteriorAtlas.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedSideInteriorAtlas.side_interior_atlas",
+    "sha256": "e529af9348e3600c23771c6ed52c889ef53d9d47ce35585b8ee8b501b1df80bd",
+    "attempt": "ddc7db29-b4fb-412d-8e93-4d29cab9022f",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "375af78827e7b38cc1b0cfce9e4a9fec99c9447ba80ebf439b7f824ffe6b77d2"
+  },
+  {
+    "task": "d27r4-cap-relabeling",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedCapRelabeling.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedCapRelabeling.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCapRelabeling.cap_relabeling",
+    "sha256": "b34da87d739d37ac3d50689dd1f5b6593b2e55c2191061bfd799c9357f81935a",
+    "attempt": "5b66d677-04e6-4d43-95f8-025ad34b79b2",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "01740e4b66e6d47b064552e4a6cd6292f8d5819b9df5f201a5bd88b54b0029b8"
+  },
+  {
+    "task": "d27r4-finite-timeline",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedFiniteTimeline.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedFiniteTimeline.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedFiniteTimeline.finite_timeline",
+    "sha256": "72b11e98a1ed065f6c2febd363f90f44d9928785a5b6f1f40d1fce3336fda60b",
+    "attempt": "eaa0a704-7b17-4270-9cb1-ad24e1a01be5",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "fc93738142c500e8393a221a43502fe2a6c7fcc6b295d78ff018230b98a07878"
+  }
+]

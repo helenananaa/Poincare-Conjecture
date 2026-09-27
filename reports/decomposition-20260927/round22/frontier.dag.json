@@ -1,0 +1,155 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.EmbeddingGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "inverse",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_tubular_chart_inverse",
+      "status": "ACCEPTED_WORKER_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "frames",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.EmbeddedNormalFrameStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "transport",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NormalFrameTransportStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "parametrization",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NormalBundleParametrizationStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "regularity",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NormalParametrizationRegularityStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "coordinates",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.embedded_normal_coordinates_of_leaves",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "frames",
+        "transport",
+        "parametrization",
+        "regularity"
+      ]
+    },
+    {
+      "id": "approximation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.EmbeddingApproximationData.toNormal",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "coordinates"
+      ]
+    },
+    {
+      "id": "transfer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.embeddingTransfer_to_normal",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "approximation"
+      ]
+    },
+    {
+      "id": "profile",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.EmbeddingIntrinsicProfile.toNormal",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "transfer"
+      ]
+    },
+    {
+      "id": "producer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.normal_producer_of_embedding",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "geometry",
+        "profile"
+      ]
+    },
+    {
+      "id": "split",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_normal_linear_equiv",
+      "status": "ACCEPTED_WORKER_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "jet",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_normal_endpoint_jet",
+      "status": "ACCEPTED_WORKER_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "prior_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_twenty_nine",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "split",
+        "jet",
+        "inverse"
+      ]
+    },
+    {
+      "id": "round21_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_embedded_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "atlas",
+        "producer",
+        "prior_root"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_thirty",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "round21_root",
+        "inverse"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulation",
+    "atlas",
+    "geometry",
+    "frames",
+    "transport",
+    "parametrization",
+    "regularity"
+  ],
+  "complete": false,
+  "kind": "Reviewed summary; Lean parent proves actual construction and root sufficiency",
+  "old_route_preserved": true,
+  "ready_independent_count": 4,
+  "removed_geometric_input": "normalTube; new approximation data assumes only the original embedding and approximants",
+  "accepted_worker_total": 30,
+  "new_dispatch_in_this_layer": 0
+}

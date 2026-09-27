@@ -1,0 +1,129 @@
+{
+  "version": 5,
+  "root": "public_root",
+  "nodes": [
+    {
+      "id": "triangulate",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "finite_smoothing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH_EQUIVALENT_TO_PREVIOUS_PRODUCER",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RelabeledProjectionProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "d27-cap-chart",
+      "declaration": "PoincareConjecture.ParallelImplementation.RefinedCapChart.cap_chart",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "d27-cap-complement",
+      "declaration": "PoincareConjecture.ParallelImplementation.RefinedCapComplement.cap_complement",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "d27-marked-raw-gluing",
+      "declaration": "PoincareConjecture.ParallelImplementation.RefinedMarkedGluing.marked_gluing",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "d27r2-cap-interior-open",
+      "declaration": "PoincareConjecture.ParallelImplementation.RefinedCapInteriorOpen.cap_interior_open",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "d27r2-closed-cover-gluing",
+      "declaration": "PoincareConjecture.ParallelImplementation.RefinedClosedCoverGluing.closed_cover_gluing",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "d27r3-negative-half-collar",
+      "declaration": "PoincareConjecture.ParallelImplementation.RefinedNegativeHalfCollar.negative_half_collar",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "d27r3-side-interior-atlas",
+      "declaration": "PoincareConjecture.ParallelImplementation.RefinedSideInteriorAtlas.side_interior_atlas",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "d27r4-cap-relabeling",
+      "declaration": "PoincareConjecture.ParallelImplementation.RefinedCapRelabeling.cap_relabeling",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "d27r4-finite-timeline",
+      "declaration": "PoincareConjecture.ParallelImplementation.RefinedFiniteTimeline.finite_timeline",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "atlas_assembly",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.finiteAtlas_smoothing",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "finite_smoothing"
+      ]
+    },
+    {
+      "id": "smoothing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.smoothing_of_finitePL_producers",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulate",
+        "atlas_assembly"
+      ]
+    },
+    {
+      "id": "trace_assembly",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_projection_trace",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "d27-cap-chart",
+        "d27-cap-complement",
+        "d27-marked-raw-gluing",
+        "d27r2-cap-interior-open",
+        "d27r2-closed-cover-gluing",
+        "d27r3-negative-half-collar",
+        "d27r3-side-interior-atlas",
+        "d27r4-cap-relabeling",
+        "d27r4-finite-timeline",
+        "geometry"
+      ]
+    },
+    {
+      "id": "public_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_finite_atlas_producer",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "smoothing",
+        "trace_assembly"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulate",
+    "finite_smoothing",
+    "geometry"
+  ],
+  "complete": false,
+  "all_frontier_leaves_small": false,
+  "source_of_truth": "Compiled exact root theorem; graph is a dependency summary, not a substitute for Lean."
+}

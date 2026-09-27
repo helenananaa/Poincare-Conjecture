@@ -1,0 +1,171 @@
+{
+  "version": 24,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_after_thirty_six",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ParallelImplementation/RefinedCompactRetractionControl.lean",
+      "sha256": "f64815ceaff6d1f159d61bacc7bdd8f36ff9650d8d374921cf773e4789ac677e",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedCompactRetractionControl.compact_retraction_control",
+      "task": "d27r23-compact-retraction-control",
+      "coordinator_repaired": false
+    },
+    {
+      "file": "sources/PoincareConjecture/ParallelImplementation/RefinedAmbientSweepoutConfinement.lean",
+      "sha256": "419e3c4ef0c0179e7045c45e57745199d2d2483b8bb13948d57e44776bda4d12",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedAmbientSweepoutConfinement.ambient_sweepout_confinement",
+      "task": "d27r23-ambient-sweepout-confinement",
+      "coordinator_repaired": false
+    },
+    {
+      "file": "sources/PoincareConjecture/ParallelImplementation/RefinedSphereCompositionEstimate.lean",
+      "sha256": "723d5d60efac271284abaff4c1de4041a8ec8813071ced2a9961bd0e98c5d818",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedSphereCompositionEstimate.sphere_composition_estimate",
+      "task": "d27r23-sphere-composition-estimate",
+      "coordinator_repaired": true
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirtySix.lean",
+      "sha256": "3e107d3fcc2f6eebf51208f6cebe7545fcf8f3badcb1157a00337323329db159",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_compact_retraction_control",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_sphere_composition_estimate",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_ambient_sweepout_confinement",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.AmbientApproximationData.toEmbedding_after_controls",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_after_thirty_six",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedCompactRetractionControl.olean",
+      "sha256": "b230e034d8ab73890b47112bb6b1a58ea8b303bc57ee7c1ff5d6475be8832f4a"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedAmbientSweepoutConfinement.olean",
+      "sha256": "363a1183bcab7a70db8adc5ae1f717fa7dbf5570cc5194f0799ccd929218ec21"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedSphereCompositionEstimate.olean",
+      "sha256": "668ea81acea66ce662d4711de7535f78d29af5a6ccc7196a4a5c5ef99c33bc65"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirtySix.olean",
+      "sha256": "8338f31e0e293a4d8140323ea45a3272f8b890c13a55d6c5d1f1ed0f64a4fada"
+    }
+  ],
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/frontier.lock.json",
+      "sha256": "c4b4334f1c34903b5e095c48164045d10c158d9e0442de662ec4cdce010a559a"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/frontier.lock.json",
+      "sha256": "b1e32685916333c6cf47707f48fcf2ea7a8d726684ba58a23d3584e073fc9679"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/frontier.lock.json",
+      "sha256": "343fa87a6cda1536fb9252d158e6330e2923f8190b7919f2c274249fc1b9a9ba"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round11/frontier.lock.json",
+      "sha256": "22a7dd4e971210788136a35c6684ba6bb169c31bf6932ac020c63a4907107adf"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/frontier.lock.json",
+      "sha256": "af113a8a9c19fbd645a5595428de27500f6a70393dd5246a9b6dcba7104129df"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round13/frontier.lock.json",
+      "sha256": "aa36df81cb29dfe20354dc466cb63360f018537b4782fd9f4f127d40ca8ed2e2"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/frontier.lock.json",
+      "sha256": "5a3abf7f97be8754425efe60198003269c20837e1b47832c5a8659592fbcb4ee"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round15/frontier.lock.json",
+      "sha256": "84770cc13256bf0c554f90be648d14110f1d9f7c50b67ab776e6da624239974d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round16/frontier.lock.json",
+      "sha256": "b1468525696a72957ca161aa2b769ccf28e4646b0316eae8a4d8b0ab85e8a4ca"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round17/frontier.lock.json",
+      "sha256": "aaafad3283d9c0c26ecfc260f0e0ff9e206f43a60a7f25daed342cf9dc45bf28"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round19/frontier.lock.json",
+      "sha256": "a14cef8e1584492e1268ec7dc419f15215c0d2cce9cb6df04b13c308319792a8"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round20/frontier.lock.json",
+      "sha256": "ad378d888d86356179466d284d995d3dc91f6b5882e48a97afa02057334b7aa4"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/frontier.lock.json",
+      "sha256": "19025acb5e583941eadaadace5828867ecb45cef6c8de357789b74abd1566461"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round22/frontier.lock.json",
+      "sha256": "9dfcbdf3697267108d5297f15fc527f07fe6606afd388630dcdc40bae66f280b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round23/frontier.lock.json",
+      "sha256": "433ea00fc6fcf84f6e64b381ad4f178f1078ed6ae6d8ab08d6de5b372d958be9"
+    }
+  ],
+  "graph_sha256": "4fbc64b64494b56e7189210d2f785dcaa63a80db4be07cd76e4e7a670a823c5d",
+  "accepted_worker_total": 36,
+  "new_worker_leaves": 3,
+  "unmodified_worker_sources": 2,
+  "coordinator_repairs": 1,
+  "new_worker_dispatch": 0,
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T11:24:37.809455+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

@@ -1,0 +1,128 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NormalGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "split",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NormalLinearEquivStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "jet",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NormalEndpointJetStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "inverse",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TubularChartInverseStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "local_tube",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NormalCoordinateTube.toLocal",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "split",
+        "jet",
+        "inverse"
+      ]
+    },
+    {
+      "id": "approximation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NormalApproximationData.toTubular",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "local_tube"
+      ]
+    },
+    {
+      "id": "transfer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.normalTransfer_to_tubular",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "approximation"
+      ]
+    },
+    {
+      "id": "profile",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.NormalIntrinsicProfile.toTubular",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "transfer"
+      ]
+    },
+    {
+      "id": "producer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.tubular_producer_of_normal",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "geometry",
+        "profile"
+      ]
+    },
+    {
+      "id": "form",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_smooth_retraction_form",
+      "status": "ACCEPTED_WORKER_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "assembly",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_tubular_inverse_assembly",
+      "status": "ACCEPTED_WORKER_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "prior_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_twenty_seven",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "form",
+        "assembly"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_normal_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "atlas",
+        "producer",
+        "prior_root"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulation",
+    "atlas",
+    "geometry",
+    "split",
+    "jet",
+    "inverse"
+  ],
+  "complete": false,
+  "kind": "Reviewed dependency summary; Lean root proves sufficiency, not leaf existence",
+  "old_route_preserved": true,
+  "ready_independent_count": 3
+}

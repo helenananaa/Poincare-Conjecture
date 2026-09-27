@@ -1,0 +1,137 @@
+{
+  "observed_utc": "2026-09-27T13:35:03.715521+00:00",
+  "accepted_fixed_leaf_total": 42,
+  "new_accepted_fixed_leaves": 0,
+  "new_checked_declarations": 4,
+  "new_independent_tasks": 3,
+  "new_workers_launched": 3,
+  "worker_model": "gpt-6-luna",
+  "worker_efforts": {
+    "d27r28-radial-local-smooth": "max",
+    "d27r28-cylinder-cutoff-glue": "xhigh",
+    "d27r28-cylinder-cutoff-support": "high"
+  },
+  "queues": {
+    "poincare-refinement-round25-20260927": {
+      "states": {
+        "RUNNING": 1,
+        "VERIFIED": 2
+      },
+      "ready": [],
+      "blocked": []
+    },
+    "poincare-refinement-round26-20260927": {
+      "states": {
+        "VERIFIED": 2
+      },
+      "ready": [],
+      "blocked": []
+    },
+    "poincare-refinement-round28-20260927": {
+      "states": {
+        "RUNNING": 3
+      },
+      "ready": [],
+      "blocked": []
+    }
+  },
+  "actual_process_observations": [
+    {
+      "task": "d27r25-cylinder-compact-extension",
+      "project": "poincare-refinement-round25-20260927",
+      "process_confirmed": true,
+      "pids": [
+        125826,
+        125839
+      ],
+      "system_service_status": "MainPID=125791\nActiveState=active\nSubState=running\n",
+      "cgroups": {
+        "125826": "0::/system.slice/lean-swarm-1f6f4cfa9d13447392249c4fa658d0e8.service\n",
+        "125839": "0::/system.slice/lean-swarm-1f6f4cfa9d13447392249c4fa658d0e8.service\n"
+      }
+    },
+    {
+      "task": "d27r28-cylinder-cutoff-glue",
+      "project": "poincare-refinement-round28-20260927",
+      "process_confirmed": true,
+      "pids": [
+        159725,
+        159733
+      ],
+      "system_service_status": "MainPID=159724\nActiveState=active\nSubState=running\n",
+      "cgroups": {
+        "159725": "0::/system.slice/lean-swarm-c415b914912a4b798082fa3b243bd3bc.service\n",
+        "159733": "0::/system.slice/lean-swarm-c415b914912a4b798082fa3b243bd3bc.service\n"
+      }
+    },
+    {
+      "task": "d27r28-cylinder-cutoff-support",
+      "project": "poincare-refinement-round28-20260927",
+      "process_confirmed": true,
+      "pids": [
+        160000,
+        160017
+      ],
+      "system_service_status": "MainPID=159946\nActiveState=active\nSubState=running\n",
+      "cgroups": {
+        "160000": "0::/system.slice/lean-swarm-b6b6480769624f49bbf011ed35a3c881.service\n",
+        "160017": "0::/system.slice/lean-swarm-b6b6480769624f49bbf011ed35a3c881.service\n"
+      }
+    },
+    {
+      "task": "d27r28-radial-local-smooth",
+      "project": "poincare-refinement-round28-20260927",
+      "process_confirmed": true,
+      "pids": [
+        159869,
+        159876
+      ],
+      "system_service_status": "MainPID=159867\nActiveState=active\nSubState=running\n",
+      "cgroups": {
+        "159869": "0::/system.slice/lean-swarm-8a9a5d9f04f24a5c945b30d80ea82b3e.service\n",
+        "159876": "0::/system.slice/lean-swarm-8a9a5d9f04f24a5c945b30d80ea82b3e.service\n"
+      }
+    }
+  ],
+  "new_active_confirmed_workers": 3,
+  "all_active_confirmed_workers": 4,
+  "original_extension_worker_untouched": true,
+  "status_correction": "Use system systemd, not --user; validated with /proc cgroups.",
+  "dispatch_metadata_only_priority_correction": {
+    "reason": "Scheduler only permits priority -1000..1000. Mathematical freeze unchanged.",
+    "original_frozen_cards_sha256": "21814fef5bf208d75cbd488971e12ac41e7ea0b49fba369abf3ace62d4e9f8d7",
+    "dispatch_cards_sha256": "01cae09134b34ddda3c827d3fdcccfc6095478aa89eef69574ff3f62cb03ab88",
+    "only_allowed_change": {
+      "priority": {
+        "old": 1200,
+        "new": 1000
+      }
+    },
+    "new_proof_or_assumption_change": false
+  },
+  "frontier_hash_check": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "complete": false,
+  "extension_proved": false,
+  "mainline_changed": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "full_rebuild_performed": false,
+  "commit_or_push_performed": false
+}

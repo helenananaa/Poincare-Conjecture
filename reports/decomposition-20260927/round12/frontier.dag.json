@@ -1,0 +1,103 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulate",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometric_sweepouts",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MinimaxControlledGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "near_max",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.UniformNearMaxTaylorStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "limit",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MinimaxDiniLimitStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "spectrum_bounds",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.SweepoutSpectrum.width_nonneg",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "transfer_jump",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.SweepoutTransfer.width_le",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "width_dini",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.width_dini_of_good_sweepouts",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "near_max",
+        "limit",
+        "spectrum_bounds"
+      ]
+    },
+    {
+      "id": "profile",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MinimaxSurvivalProfile.toExtinction",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "width_dini",
+        "transfer_jump"
+      ]
+    },
+    {
+      "id": "geometry_adapter",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.width_producer_of_minimax",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "profile",
+        "geometric_sweepouts"
+      ]
+    },
+    {
+      "id": "prior_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_seventeen",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulate",
+        "atlas"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_sweepout_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "geometry_adapter",
+        "prior_root"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulate",
+    "atlas",
+    "near_max",
+    "limit",
+    "geometric_sweepouts"
+  ],
+  "complete": false,
+  "kind": "summary; sufficiency checked by Lean root",
+  "geometric_energy_realized": false
+}

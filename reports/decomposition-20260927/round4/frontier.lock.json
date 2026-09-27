@@ -1,0 +1,108 @@
+{
+  "version": 4,
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    }
+  ],
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/SurgeryProjection.lean",
+      "sha256": "c5471d2abca5459d2393138c40534df18106f776be5b86946229dbcf5467c942",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.standardDecomposition_homeomorph",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.representative_reconstruct",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.projected_step_reconstruct",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.projected_block_reconstruct",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.projection_events_finite",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.regular_block_to_projected",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.projection_trace",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.geometric_of_projection_producer",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_projection_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/CapRelabeling.lean",
+      "sha256": "97264d3a51c2c4614cf7242fd4d921a730790811be844ec89f5020932e3d55b7",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.relabeled_cap_identifies",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.relabeled_step_to_projected",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.relabeled_block_to_projected",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.RelabeledProjection.toProjection",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.projection_producer_of_relabeling",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_relabeled_projection",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/SurgeryProjection.olean",
+      "sha256": "3c767e72de2590fead5f30c6090f9263b62062b281c46821d7da98cd1d0056fe"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/CapRelabeling.olean",
+      "sha256": "f2686e8efdcef87f008dd3ba85eefffafd3a27008503d9ff5a8f9c00f9041576"
+    }
+  ],
+  "cards_sha256": "53fd5427d8d3a6a732a670204340c278a5ad09023ad701edac078f825482ed8b",
+  "graph_sha256": "616daabb405f356998e6d1baaf2961021617af9193bd4ded232a04ac460e3537",
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_relabeled_projection",
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T02:04:54.545014+00:00"
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "task": "d27r6-closed-scalar-propagation",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/sources/PoincareConjecture/ParallelImplementation/RefinedClosedScalarPropagation.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedClosedScalarPropagation.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedClosedScalarPropagation.closed_scalar_propagation",
+    "sha256": "432b950fe808d05a30a5da426931811164eae6a7cdd32da9accdae258ccdf698",
+    "attempt": "23e3fe90-7d37-4155-80e0-ade29e4d637b",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "92117c0be99bc659703de0c4c6246647366c078fb4d76549576fabcc24022e18"
+  }
+]

@@ -1,0 +1,145 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulate",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "width_geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.WidthControlledGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "local_density",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.LocalPatchDensityStatement",
+      "status": "VERIFIED_UNREVIEWED_THIS_TURN",
+      "depends_on": []
+    },
+    {
+      "id": "patch_assembly",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.OpenPatchAssemblyStatement",
+      "status": "VERIFIED_UNREVIEWED_THIS_TURN",
+      "depends_on": []
+    },
+    {
+      "id": "width_comparison",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.WidthIntervalComparisonStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "width_horizon",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.WidthHorizonStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "timeline",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_finite_timeline",
+      "status": "PREVIOUSLY_ACCEPTED",
+      "depends_on": []
+    },
+    {
+      "id": "width_jumps",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.widthPotential_mono",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "width_bound",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.extinctionProfile_terminal_bound",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "width_comparison",
+        "width_jumps",
+        "timeline"
+      ]
+    },
+    {
+      "id": "width_contradiction",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.extinctionProfile_impossible",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "width_bound"
+      ]
+    },
+    {
+      "id": "volume_event_finiteness",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.patch_budget_events_finite",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "local_density",
+        "patch_assembly",
+        "width_geometry"
+      ]
+    },
+    {
+      "id": "empty_end",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.empty_end_of_width_comparison",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "volume_event_finiteness",
+        "width_contradiction",
+        "width_horizon",
+        "width_geometry"
+      ]
+    },
+    {
+      "id": "existing_trace",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.locatedProjection_trace",
+      "status": "PREVIOUSLY_CHECKED_CONDITIONAL",
+      "depends_on": []
+    },
+    {
+      "id": "geometric_trace",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.geometric_of_width_control",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "empty_end",
+        "existing_trace"
+      ]
+    },
+    {
+      "id": "smoothing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.smoothing_of_finitePL_producers",
+      "status": "PREVIOUSLY_CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulate",
+        "atlas"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_width_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "geometric_trace",
+        "smoothing"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulate",
+    "atlas",
+    "local_density",
+    "patch_assembly",
+    "width_comparison",
+    "width_horizon",
+    "width_geometry"
+  ],
+  "complete": false,
+  "kind": "reviewed dependency summary; actual sufficiency checked in Lean",
+  "empty_end_is_assumed": false,
+  "geometric_width_constructed": false,
+  "all_producers_proved": false
+}

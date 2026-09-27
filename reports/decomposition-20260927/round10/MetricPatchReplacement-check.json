@@ -1,0 +1,41 @@
+{
+  "exit_code": 0,
+  "source_sha256": "a328ff3df42d0c1e64210b0c656580e9d9270559eda9a5244b62e2d7aacf282f",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/objects/PoincareConjecture/ProofContract/Refinement20260927/MetricPatchReplacement.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/sources/PoincareConjecture/ProofContract/Refinement20260927/MetricPatchReplacement.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.neck_removed_measurable",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.MetricPatchReplacement.toModel",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.MetricPatchReplacement.toModel_identity",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.MetricCore.nonincrease",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.MetricReplacementPartition.toMeasured",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/sources/PoincareConjecture/ProofContract/Refinement20260927/MetricPatchReplacement.lean:97:15: warning: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`\n'PoincareConjecture.ProofContract.Refinement20260927.neck_removed_measurable' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.MetricPatchReplacement.toModel' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.MetricPatchReplacement.toModel_identity' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.MetricCore.nonincrease' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.MetricReplacementPartition.toMeasured' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New source; pinned and previously checked dependencies reused"
+}

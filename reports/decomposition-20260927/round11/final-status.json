@@ -1,0 +1,34 @@
+{
+  "observed_utc": "2026-09-27T05:42:06.811006+00:00",
+  "new_tasks": [
+    {
+      "id": "d27r11-width-dini-comparison",
+      "status": "RUNNING",
+      "model": "luna",
+      "integrated_commit": null,
+      "attempt_id": "1097f3af-6b76-4b94-aecb-36cbc7b49336"
+    },
+    {
+      "id": "d27r11-width-finite-horizon",
+      "status": "RUNNING",
+      "model": "luna",
+      "integrated_commit": null,
+      "attempt_id": "ba115f38-98ee-4545-9f52-f73a1203b7df"
+    }
+  ],
+  "new_workers_launched": 2,
+  "new_checked_declarations": 7,
+  "newly_accepted_local_leaves": 0,
+  "accepted_local_leaves_total": 13,
+  "old_round10": "Both VERIFIED in initial queue; attempt metadata read blocked; not reaccepted",
+  "model": "gpt-6-luna",
+  "efforts": {
+    "d27r11-width-dini-comparison": "xhigh",
+    "d27r11-width-finite-horizon": "high"
+  },
+  "frozen_hashes": "PASS",
+  "public_freeze_check": "PASS 13 files; structural only",
+  "geometric_width_constructed": false,
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "task": "d27r16-sphere-energy-approximation",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round17/sources/PoincareConjecture/ParallelImplementation/RefinedSphereEnergyApproximation.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedSphereEnergyApproximation.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedSphereEnergyApproximation.sphere_energy_approximation",
+    "sha256": "c70c30b9073292745371cf1cc4f10c4fae67483a8f4fc04b7f69a915924a7521",
+    "attempt": "0d699962-a943-4b31-8fd8-ea37beeb19a6",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "835574dd8234367778f8c7a8964ceea93e2af8b07c67ed53401bd2d443d4a130"
+  }
+]

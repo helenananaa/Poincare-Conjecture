@@ -1,0 +1,135 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MatchedGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "embedding",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_epsilon_neck_embedding",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "located_cut",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.locatedMetricCut_checked",
+      "status": "CHECKED",
+      "depends_on": [
+        "embedding"
+      ]
+    },
+    {
+      "id": "prior_cap_proofs",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_closedCut_connectedSum",
+      "status": "PREVIOUSLY_ACCEPTED",
+      "depends_on": []
+    },
+    {
+      "id": "located_sum",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.locatedCut_connectedSum",
+      "status": "CHECKED",
+      "depends_on": [
+        "located_cut",
+        "prior_cap_proofs"
+      ]
+    },
+    {
+      "id": "event_reconstruction",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.LocatedChain.reconstruct",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "located_sum"
+      ]
+    },
+    {
+      "id": "matched_history",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MatchedNeckHistory.toControlled",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "geometry",
+        "event_reconstruction"
+      ]
+    },
+    {
+      "id": "anchored_budget",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.matched_budget_to_anchored",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "matched_history"
+      ]
+    },
+    {
+      "id": "prior_volume",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.anchored_neck_to_ricci",
+      "status": "PREVIOUSLY_CHECKED_CONDITIONAL",
+      "depends_on": []
+    },
+    {
+      "id": "uniform_budget",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.anchored_budget_to_uniform",
+      "status": "PREVIOUSLY_CHECKED_CONDITIONAL",
+      "depends_on": [
+        "anchored_budget",
+        "prior_volume"
+      ]
+    },
+    {
+      "id": "prior_timeline",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_finite_timeline",
+      "status": "PREVIOUSLY_ACCEPTED",
+      "depends_on": []
+    },
+    {
+      "id": "located_trace",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.locatedProjection_trace",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "event_reconstruction",
+        "uniform_budget",
+        "prior_timeline"
+      ]
+    },
+    {
+      "id": "smoothing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.smoothing_of_finitePL_producers",
+      "status": "PREVIOUSLY_CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "atlas"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_thirteen",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "located_trace",
+        "smoothing"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulation",
+    "atlas",
+    "geometry"
+  ],
+  "kind": "reviewed dependency summary; compiled Lean root supplies sufficiency",
+  "complete": false,
+  "full_local_map_compatibility_frozen": false,
+  "choice_issue_repaired": true
+}

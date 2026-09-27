@@ -1,0 +1,137 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "pl_smoothing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "intrinsic_geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.IntrinsicGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "sphere_continuity",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.SphereEnergyContinuityStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "tensor_time",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.IntrinsicMetricTimeComparisonStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "frame_invariance",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.sphereEnergyDensity_local_frame",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "integrability",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.sphere_density_integrable",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "sphere_continuity",
+        "frame_invariance"
+      ]
+    },
+    {
+      "id": "parameter_energy",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.sphere_energy_parameter_continuous",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "sphere_continuity"
+      ]
+    },
+    {
+      "id": "actual_spectrum",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.intrinsicSpectrum",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "parameter_energy"
+      ]
+    },
+    {
+      "id": "relative_energy",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.intrinsic_energy_relative",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "tensor_time",
+        "integrability",
+        "actual_spectrum"
+      ]
+    },
+    {
+      "id": "continuous_width",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.intrinsic_width_continuous",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "relative_energy"
+      ]
+    },
+    {
+      "id": "minimax_profile",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.IntrinsicSurvivalProfile.toMinimax",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "continuous_width",
+        "intrinsic_geometry"
+      ]
+    },
+    {
+      "id": "minimax_producer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.minimax_producer_of_intrinsic",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "minimax_profile"
+      ]
+    },
+    {
+      "id": "accepted_nearmax",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_near_max",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "accepted_limit",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_minimax_limit",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_intrinsic_sphere_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "pl_smoothing",
+        "minimax_producer",
+        "accepted_nearmax",
+        "accepted_limit"
+      ]
+    }
+  ],
+  "open_parameters": [
+    "triangulation",
+    "pl_smoothing",
+    "sphere_continuity",
+    "tensor_time",
+    "intrinsic_geometry"
+  ],
+  "complete": false,
+  "kind": "Reviewed summary; exact logical sufficiency is supplied by the compiled root theorem",
+  "energy_is_actual_sphere_differential_integral": true,
+  "nontrivial_class_existence_proved": false,
+  "global_surgery_constructed": false
+}

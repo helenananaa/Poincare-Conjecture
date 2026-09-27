@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "source_sha256": "c6bf4cbaf1a96ecb83f9a835464986a49439fe8c7e3bce46e5298e0d1f32d4a9",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirtyNine.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirtyNine.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.checked_uniform_mollification",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.cylinder_c1_after_uniform",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.checked_uniform_mollification' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.cylinder_c1_after_uniform' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

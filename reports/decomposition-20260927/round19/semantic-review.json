@@ -1,0 +1,23 @@
+{
+  "status": "CONDITIONAL_PARENT_ACCEPTED",
+  "new_worker_leaves_accepted": 0,
+  "prior_accepted_worker_total": 25,
+  "reused_source_files": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/formalized-sources/MorganTian/.lake/packages/mathlib/Mathlib/Topology/Separation/Hausdorff.lean",
+      "sha256": "6e914b44923f4bef81025c0e4da56a8ed076a0d841c9d30a3e9d225fac8d1882"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/formalized-sources/MorganTian/.lake/packages/mathlib/Mathlib/Geometry/Manifold/WhitneyEmbedding.lean",
+      "sha256": "fac1a4b9877f2999f109308e9ac297ce1dbc83017d111b0eb870d95a0496a645"
+    }
+  ],
+  "notes": [
+    "Corrected only the new round19 copy of the unfrozen round18 draft.",
+    "The exact compact injective neighborhood theorem already exists and is consumed directly.",
+    "Assembly returns the exact image domain and inverse/projection formula.",
+    "Parent preserves the original embedding in all derivative and approximation data.",
+    "Local normal coordinate existence and relative smooth approximation remain research.",
+    "Existing round17 form worker is not restarted; no commit or push."
+  ]
+}

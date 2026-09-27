@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "extends_sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/CapManifold.lean",
+      "sha256": "d7cccd9c10c5ca71b1ecadb8bd153432f5ab10e4a0eb1fbdfa6a1c7974bae597",
+      "targets": [
+        "PoincareConjecture.ProofContract.Refinement20260927.actual_cap_connected",
+        "PoincareConjecture.ProofContract.Refinement20260927.actual_cap_atlas",
+        "PoincareConjecture.ProofContract.Refinement20260927.cappedManifold",
+        "PoincareConjecture.ProofContract.Refinement20260927.cappedIdentification"
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/ClosedCut.lean",
+      "sha256": "0214d950e18c5bee145d37fe80f128c085c78ca3c6ab299b51e74f0e21d4b312",
+      "targets": [
+        "PoincareConjecture.ProofContract.Refinement20260927.rawCut_of_closedCut",
+        "PoincareConjecture.ProofContract.Refinement20260927.collared_to_raw",
+        "PoincareConjecture.ProofContract.Refinement20260927.raw_geometry_of_collared_producer",
+        "PoincareConjecture.ProofContract.Refinement20260927.refined_frontier_implies_public"
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/CapManifold.olean",
+      "sha256": "78b3c77439aed5bd7976fbb415573cf34301e43829d992e76780e5b6df7c52ca"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/ClosedCut.olean",
+      "sha256": "3cfe889ccc6716ba1ec696c6e8381c145196afa32546e1dad7b35931f98a0b14"
+    }
+  ],
+  "cards_sha256": "9d7976cc940a405035f2d5e4da4dd741166cccb3642d1c48979e6d4997a3f616",
+  "graph_sha256": "95df9908beb78b95fa1b791d2b58f87c28eee4c603ba61b98be6062f1dd06e13",
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.refined_frontier_implies_public",
+  "conditional": true,
+  "complete": false,
+  "created_utc": "2026-09-27T01:15:44.993254+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "observed_utc": "2026-09-27T04:41:26.036968+00:00",
+  "tasks": [
+    {
+      "id": "d27r8-epsilon-neck-embedding",
+      "status": "RUNNING",
+      "model": "luna",
+      "integrated_commit": null,
+      "attempt_id": "418281de-e792-4c17-a6b5-02dc78163f44"
+    }
+  ],
+  "newly_accepted_local_leaves": 2,
+  "accepted_local_leaves_total": 12,
+  "new_checked_declarations": 21,
+  "new_workers_launched": 1,
+  "model": "gpt-6-luna",
+  "reasoning_effort": "xhigh",
+  "frozen_hashes": "PASS",
+  "complete": false,
+  "full_local_geometry_correspondence_frozen": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

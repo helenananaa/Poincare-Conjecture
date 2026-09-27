@@ -1,0 +1,117 @@
+{
+  "records": [
+    {
+      "path": "reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    },
+    {
+      "path": "reports/decomposition-20260927/round8/frontier.lock.json",
+      "sha256": "c4b4334f1c34903b5e095c48164045d10c158d9e0442de662ec4cdce010a559a"
+    },
+    {
+      "path": "reports/decomposition-20260927/round9/frontier.lock.json",
+      "sha256": "b1e32685916333c6cf47707f48fcf2ea7a8d726684ba58a23d3584e073fc9679"
+    },
+    {
+      "path": "reports/decomposition-20260927/round10/frontier.lock.json",
+      "sha256": "343fa87a6cda1536fb9252d158e6330e2923f8190b7919f2c274249fc1b9a9ba"
+    },
+    {
+      "path": "reports/decomposition-20260927/round11/frontier.lock.json",
+      "sha256": "22a7dd4e971210788136a35c6684ba6bb169c31bf6932ac020c63a4907107adf"
+    },
+    {
+      "path": "reports/decomposition-20260927/round12/frontier.lock.json",
+      "sha256": "af113a8a9c19fbd645a5595428de27500f6a70393dd5246a9b6dcba7104129df"
+    },
+    {
+      "path": "reports/decomposition-20260927/round13/frontier.lock.json",
+      "sha256": "aa36df81cb29dfe20354dc466cb63360f018537b4782fd9f4f127d40ca8ed2e2"
+    },
+    {
+      "path": "reports/decomposition-20260927/round14/frontier.lock.json",
+      "sha256": "5a3abf7f97be8754425efe60198003269c20837e1b47832c5a8659592fbcb4ee"
+    },
+    {
+      "path": "reports/decomposition-20260927/round15/frontier.lock.json",
+      "sha256": "84770cc13256bf0c554f90be648d14110f1d9f7c50b67ab776e6da624239974d"
+    },
+    {
+      "path": "reports/decomposition-20260927/round16/frontier.lock.json",
+      "sha256": "b1468525696a72957ca161aa2b769ccf28e4646b0316eae8a4d8b0ab85e8a4ca"
+    },
+    {
+      "path": "reports/decomposition-20260927/round17/frontier.lock.json",
+      "sha256": "aaafad3283d9c0c26ecfc260f0e0ff9e206f43a60a7f25daed342cf9dc45bf28"
+    },
+    {
+      "path": "reports/decomposition-20260927/round19/frontier.lock.json",
+      "sha256": "a14cef8e1584492e1268ec7dc419f15215c0d2cce9cb6df04b13c308319792a8"
+    },
+    {
+      "path": "reports/decomposition-20260927/round20/frontier.lock.json",
+      "sha256": "ad378d888d86356179466d284d995d3dc91f6b5882e48a97afa02057334b7aa4"
+    },
+    {
+      "path": "reports/decomposition-20260927/round21/frontier.lock.json",
+      "sha256": "19025acb5e583941eadaadace5828867ecb45cef6c8de357789b74abd1566461"
+    },
+    {
+      "path": "reports/decomposition-20260927/round22/frontier.lock.json",
+      "sha256": "9dfcbdf3697267108d5297f15fc527f07fe6606afd388630dcdc40bae66f280b"
+    },
+    {
+      "path": "reports/decomposition-20260927/round23/frontier.lock.json",
+      "sha256": "433ea00fc6fcf84f6e64b381ad4f178f1078ed6ae6d8ab08d6de5b372d958be9"
+    },
+    {
+      "path": "reports/decomposition-20260927/round24/frontier.lock.json",
+      "sha256": "7624afc34220f461fb4a36aaf2887806884cafc55c67ae0adf73edf0bac42082"
+    },
+    {
+      "path": "reports/decomposition-20260927/round25/frontier.lock.json",
+      "sha256": "ffbf18980e0a142182ae1e9d0ad6f4ae8c51bd526df0a7a0f1bd7a64f9187726"
+    },
+    {
+      "path": "reports/decomposition-20260927/round26/frontier.lock.json",
+      "sha256": "efc7611eeb82b89ef33fac73312bc232bdbb4ecef46594889a276644f19dcfa9"
+    },
+    {
+      "path": "reports/decomposition-20260927/round27/frontier.lock.json",
+      "sha256": "8c47969a328d1d9c1695d175781cc7f39cbe9ee8155e45b5d2ac1787e735eee3"
+    },
+    {
+      "path": "reports/decomposition-20260927/round28/frontier.lock.json",
+      "sha256": "cc0c2c38f9c5be9da64c510663b2d0aeba6a1f8ad9069a69b4e38a5061af69af"
+    },
+    {
+      "path": "reports/decomposition-20260927/round29/frontier.lock.json",
+      "sha256": "d034742a912bc57ba23c878e42089aa0aebbd0228d445dfbfe067a0fe2b66b18"
+    }
+  ],
+  "note": "Original historical lock files are retained byte-for-byte. Absolute paths and object hashes describe the original local verification; compiled objects are not published."
+}

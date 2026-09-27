@@ -1,0 +1,27 @@
+{
+  "observed_utc": "2026-09-27T03:36:03.729109+00:00",
+  "tasks": [
+    {
+      "id": "d27r7-finite-cap-scaling",
+      "status": "RUNNING",
+      "model": "luna",
+      "integrated_commit": null,
+      "attempt_id": "51dafc17-d9f5-47e9-a9aa-3ac2bb086e17"
+    },
+    {
+      "id": "d27r7-uniform-neck-allowance",
+      "status": "RUNNING",
+      "model": "luna",
+      "integrated_commit": null,
+      "attempt_id": "457f47bf-3d9e-453d-810d-a925fc3f6a2f"
+    }
+  ],
+  "new_checked_declarations": 9,
+  "newly_accepted_local_leaves": 1,
+  "accepted_local_leaves_total": 10,
+  "recompiled_cap_gap_source": "PASS",
+  "complete": false,
+  "frozen_hashes": "PASS",
+  "new_workers_launched": 2,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

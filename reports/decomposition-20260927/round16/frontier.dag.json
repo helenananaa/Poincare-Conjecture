@@ -1,0 +1,112 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RegularizedIntrinsicGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "metric_comparison",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.IntrinsicMetricTimeComparisonStatement",
+      "status": "RUNNING_PREVIOUS_BATCH",
+      "depends_on": []
+    },
+    {
+      "id": "relative",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RelativeRetractionHomotopyStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "energy_estimate",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.SphereEnergyApproximationStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "energy_continuity",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_sphere_energy_continuity",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "density_identity",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.sphereDensity_ambient",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "representatives",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RegularizationData.approximate",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "relative",
+        "energy_estimate",
+        "energy_continuity",
+        "density_identity"
+      ]
+    },
+    {
+      "id": "additive_transfer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.regularizedClassTransfer_to_additive",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "representatives",
+        "geometry"
+      ]
+    },
+    {
+      "id": "width_jump",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.additiveTransfer_width_le",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "additive_transfer"
+      ]
+    },
+    {
+      "id": "extinction",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RegularizedIntrinsicProfile.toExtinction",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "width_jump",
+        "metric_comparison"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_regularization_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "extinction",
+        "triangulation",
+        "atlas"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulation",
+    "atlas",
+    "geometry",
+    "metric_comparison",
+    "relative",
+    "energy_estimate"
+  ],
+  "kind": "dependency summary; Lean root checks sufficiency",
+  "previous_transfer_routes_accepted": true,
+  "approximation_existence_proved": false,
+  "complete": false
+}

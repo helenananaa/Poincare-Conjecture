@@ -1,0 +1,173 @@
+{
+  "version": 15,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_approximate_transfer_frontier",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/SweepoutPostcomposition.lean",
+      "sha256": "c1be72241ab0b7dc18e4f3463b99a0b11d71688c15f44598663cf9b6a4e6278f",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SmoothClassMap.sendSweepout",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SmoothClassMap.send",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.sphere_density_postcompose_le",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.sphere_energy_postcompose_le",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SmoothClassMap.toTransfer",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/ApproximateSweepoutTransfer.lean",
+      "sha256": "c8c89ef2d91953f9b5911efa987be1d6394c9c4a4f0a509a7b47089257bf294f",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SweepoutTransfer.toApproximate",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.spectrum_transfer_mul_bound",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.approximateTransfer_width_le",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.almostContracting_to_approximate",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/ApproximateTransferRoot.lean",
+      "sha256": "c618ee74e065c511165f03910077b9efe456c2f9f635c3c805c58ddbfd2dd9c3",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.IntrinsicSurvivalProfile.toApproximate",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.ApproximateIntrinsicProfile.toExtinction",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.approximate_producer_of_exact",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.width_producer_of_approximate",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_approximate_transfer_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/ClassTransferRegression.lean",
+      "sha256": "b0385a8b7cbc871cc53444157ff9abb30b0c3570d0da3c8ddc252b018040a39b",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.SmoothClassMap.not_constant",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/SweepoutPostcomposition.olean",
+      "sha256": "2e1bdf51745e390097d271a83bc28c21b84feae6568ba9b570db4985a9602d2f"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/ApproximateSweepoutTransfer.olean",
+      "sha256": "646e7b0d201c0b04ed6304f33c6f266f46122abb3808dbac015234466e765bb4"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/ApproximateTransferRoot.olean",
+      "sha256": "bb50f1da2421ab33dc61fe1f5e1c5301af6e2baeed924b63857a62ff0d4b76af"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/ClassTransferRegression.olean",
+      "sha256": "e21d770b31463267385f243fa5c10d7bc9f6494899163e8bb93f83837c5f92d1"
+    }
+  ],
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/frontier.lock.json",
+      "sha256": "c4b4334f1c34903b5e095c48164045d10c158d9e0442de662ec4cdce010a559a"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/frontier.lock.json",
+      "sha256": "b1e32685916333c6cf47707f48fcf2ea7a8d726684ba58a23d3584e073fc9679"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/frontier.lock.json",
+      "sha256": "343fa87a6cda1536fb9252d158e6330e2923f8190b7919f2c274249fc1b9a9ba"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round11/frontier.lock.json",
+      "sha256": "22a7dd4e971210788136a35c6684ba6bb169c31bf6932ac020c63a4907107adf"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/frontier.lock.json",
+      "sha256": "af113a8a9c19fbd645a5595428de27500f6a70393dd5246a9b6dcba7104129df"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round13/frontier.lock.json",
+      "sha256": "aa36df81cb29dfe20354dc466cb63360f018537b4782fd9f4f127d40ca8ed2e2"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/frontier.lock.json",
+      "sha256": "5a3abf7f97be8754425efe60198003269c20837e1b47832c5a8659592fbcb4ee"
+    }
+  ],
+  "graph_sha256": "733067a5acae45ba75c5532e3ad25b720e4bf42b6f933642e86963e2a626e4d6",
+  "ready_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T08:05:16.739014+00:00",
+  "new_worker_acceptances": 0,
+  "new_workers_launched": 0
+}

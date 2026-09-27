@@ -1,0 +1,95 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RetractionGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "form",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.SmoothRetractionFormStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "energy_model",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.energyModel_of_smoothRetraction",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "form"
+      ]
+    },
+    {
+      "id": "uniform_coefficients",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.AmbientEnergyModel.uniform_form_control",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "regularization_data",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RetractionApproximationData.toRegularization",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "energy_model",
+        "uniform_coefficients",
+        "geometry"
+      ]
+    },
+    {
+      "id": "transfer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.retractionTransfer_to_regularized",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "regularization_data"
+      ]
+    },
+    {
+      "id": "profile",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RetractionIntrinsicProfile.toRegularized",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "transfer"
+      ]
+    },
+    {
+      "id": "old_regularity",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_twentyFive",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": []
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_smooth_retraction_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "atlas",
+        "profile",
+        "old_regularity"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulation",
+    "atlas",
+    "geometry",
+    "form"
+  ],
+  "complete": false,
+  "kind": "Reviewed dependency summary; sufficiency checked by Lean root",
+  "old_route_preserved": true
+}

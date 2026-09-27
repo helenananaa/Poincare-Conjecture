@@ -1,0 +1,50 @@
+[
+  {
+    "task": "d27r28-cylinder-cutoff-glue",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round29/sources/PoincareConjecture/ParallelImplementation/RefinedCylinderCutoffGlue.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedCylinderCutoffGlue.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCylinderCutoffGlue.cylinder_cutoff_glue",
+    "sha256": "8d0d052b2c9df293003a201e35ce0b5a316ae3cc5add3a9624d1f4a04c2c34a3",
+    "attempt": "c415b914-912a-4b79-8082-fa3b243bd3bc",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "40abc032d0ecc98ba960ec91d7add03e48310ec0567972772830a337a2d02597"
+  },
+  {
+    "task": "d27r28-cylinder-cutoff-support",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round29/sources/PoincareConjecture/ParallelImplementation/RefinedCylinderCutoffSupport.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedCylinderCutoffSupport.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCylinderCutoffSupport.cylinder_cutoff_support",
+    "sha256": "8deb293fbf11bbaa5a949b92fb450de4a85aed58dba1d8d75d3e530c56093dfd",
+    "attempt": "b6b64807-6962-4f49-bbf0-11ed35a3c881",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "290b1927e4776a4cfc00303bc29ecc522f3b1e8455b04c3e4a2957c0a5af38d7"
+  },
+  {
+    "task": "d27r28-radial-local-smooth",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round29/sources/PoincareConjecture/ParallelImplementation/RefinedRadialLocalSmooth.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedRadialLocalSmooth.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedRadialLocalSmooth.radial_local_smooth",
+    "sha256": "a75905c8939abd1791cf0352cd30767e2348100dcf5b788b60fc3f9a60aa35dc",
+    "attempt": "8a9a5d9f-04f2-4a5c-945b-30d80ea82b3e",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "5853a05492b716654022c501f011e19f42e3965f3ef4fe41890ce109a889396c"
+  }
+]

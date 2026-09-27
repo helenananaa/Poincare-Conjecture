@@ -1,0 +1,73 @@
+{
+  "observed_utc": "2026-09-27T10:02:27.819308+00:00",
+  "newly_accepted_worker_leaves": 2,
+  "prior_accepted_worker_leaves": 25,
+  "accepted_worker_leaves": 27,
+  "new_ready_fixed_tasks": 3,
+  "new_workers_launched": 3,
+  "worker_model": "gpt-6-luna",
+  "worker_efforts": {
+    "d27r20-normal-linear-equiv": "xhigh",
+    "d27r20-normal-endpoint-jet": "high",
+    "d27r20-tubular-chart-inverse": "max"
+  },
+  "queue": {
+    "poincare-refinement-round20-20260927": {
+      "states": {
+        "RUNNING": 3
+      },
+      "ready": [],
+      "blocked": []
+    }
+  },
+  "active_attempts": [
+    {
+      "project": "poincare-refinement-round20-20260927",
+      "task": "d27r20-normal-endpoint-jet",
+      "reserved_seconds": 440.2,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-105e318ce6064c6480060248d62247b1.service"
+    },
+    {
+      "project": "poincare-refinement-round20-20260927",
+      "task": "d27r20-normal-linear-equiv",
+      "reserved_seconds": 440.2,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-dd3380938230469282379a1d757cacc8.service"
+    },
+    {
+      "project": "poincare-refinement-round20-20260927",
+      "task": "d27r20-tubular-chart-inverse",
+      "reserved_seconds": 440.1,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-2a0d4b0a983540b49b927d09c276bcde.service"
+    }
+  ],
+  "new_checked_declarations": 12,
+  "reused_normal_bundle_modules_recompiled": 11,
+  "reused_normal_bundle_target_audits": 4,
+  "reused_normal_bundle_worker_increment": 0,
+  "frontier_hash_check": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "git_commit_or_push_performed": false,
+  "full_rebuild_performed": false
+}

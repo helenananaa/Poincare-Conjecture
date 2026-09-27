@@ -1,0 +1,47 @@
+{
+  "observed_utc": "2026-09-27T06:06:50.588447+00:00",
+  "new_tasks": [
+    {
+      "id": "d27r12-minimax-dini-limit",
+      "status": "RUNNING",
+      "model": "luna",
+      "integrated_commit": null,
+      "attempt_id": "d72b31af-b354-4ee5-aacf-85f268fc2c36"
+    },
+    {
+      "id": "d27r12-uniform-near-max",
+      "status": "RUNNING",
+      "model": "luna",
+      "integrated_commit": null,
+      "attempt_id": "11663f13-715b-4cb8-8863-d5d844d2e784"
+    }
+  ],
+  "model": "gpt-6-luna",
+  "reasoning_effort": "xhigh",
+  "new_workers_launched": 2,
+  "new_checked_declarations": 15,
+  "newly_accepted_local_leaves": 4,
+  "accepted_local_leaves_total": 17,
+  "frozen_hashes": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "geometric_energy_realized": false,
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

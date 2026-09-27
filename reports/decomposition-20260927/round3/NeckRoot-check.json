@@ -1,0 +1,32 @@
+{
+  "exit_code": 0,
+  "source_sha256": "9011ba4865a63522932ce592b1da0f3374b3258a7dcca0e59c306a9bdfcb0c18",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/objects/PoincareConjecture/ProofContract/Refinement20260927/NeckRoot.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ProofContract/Refinement20260927/NeckRoot.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.neck_to_collared",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.collared_geometry_of_necks",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.public_of_neck_frontier",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.neck_to_collared' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.collared_geometry_of_necks' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.public_of_neck_frontier' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n"
+}

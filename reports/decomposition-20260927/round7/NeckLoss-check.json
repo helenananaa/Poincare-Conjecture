@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "source_sha256": "5a5b1dbc3125f4073e2cb1ca81ecb458fca9ff3b765f71a8f491f8a75f738827",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/objects/PoincareConjecture/ProofContract/Refinement20260927/NeckLoss.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/sources/PoincareConjecture/ProofContract/Refinement20260927/NeckLoss.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.neckReplacement_recorded_masses",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.neckReplacement_local_loss",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.neckReplacement_recorded_masses' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.neckReplacement_local_loss' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New source; pinned and previously checked dependencies reused"
+}

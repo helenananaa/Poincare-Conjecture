@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "source_sha256": "3fc3136931cd107967d41047a261a98c1e1a2e8ac4518af7e3e7862654e8677f",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/objects/PoincareConjecture/ProofContract/Refinement20260927/C1ReferenceConstruction.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/sources/PoincareConjecture/ProofContract/Refinement20260927/C1ReferenceConstruction.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.toJoint",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.toEmbedding",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.toJoint' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.toEmbedding' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

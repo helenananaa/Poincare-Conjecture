@@ -1,0 +1,146 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulate",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "embed",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.EpsilonNeckEmbeddingStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CountedGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": [
+        "embed"
+      ]
+    },
+    {
+      "id": "accepted_caps",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_finite_cap_scaling",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "accepted_neck_volume",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_uniform_neck_allowance",
+      "status": "ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "central",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.AmbientMetricNeck.central_formula",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "neck_cut",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.metricNeckCut",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "embed",
+        "central"
+      ]
+    },
+    {
+      "id": "metric_move",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MetricSurgeryMove.toRelabeled",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "neck_cut"
+      ]
+    },
+    {
+      "id": "move_balance",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MetricSurgeryMove.balance",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "metric_move"
+      ]
+    },
+    {
+      "id": "event_balance",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.ActiveMetricEvent.balance",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "move_balance"
+      ]
+    },
+    {
+      "id": "event_active",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.ActiveMetricEvent.active",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "metric_move"
+      ]
+    },
+    {
+      "id": "controlled",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CountedNeckHistory.toControlled",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "geometry",
+        "event_balance",
+        "event_active"
+      ]
+    },
+    {
+      "id": "budget",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.counted_budget_to_anchored",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "controlled"
+      ]
+    },
+    {
+      "id": "old_producer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.neck_loss_producer_of_counted",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "budget"
+      ]
+    },
+    {
+      "id": "prior_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_twelve",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "accepted_caps",
+        "accepted_neck_volume",
+        "triangulate",
+        "atlas",
+        "old_producer"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_counted_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "prior_root"
+      ]
+    }
+  ],
+  "open_obligations": [
+    "triangulate",
+    "atlas",
+    "embed",
+    "geometry"
+  ],
+  "complete": false,
+  "geometry_depends_on_fixed_embedding_proof": true,
+  "same_public_V1_target": true,
+  "full_local_tensor_to_cut_correspondence_frozen": false
+}

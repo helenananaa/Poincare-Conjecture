@@ -1,0 +1,121 @@
+{
+  "observed_utc": "2026-09-27T12:23:24.480025+00:00",
+  "accepted_worker_leaves": 39,
+  "newly_rechecked_and_parent_bound": 1,
+  "new_checked_declarations": 9,
+  "new_workers_launched": 2,
+  "worker_model": "gpt-6-luna",
+  "worker_efforts": {
+    "d27r26-c1-density-continuity": "xhigh",
+    "d27r26-c1-ambient-frame-bound": "xhigh"
+  },
+  "queues": {
+    "poincare-refinement-round25-20260927": {
+      "states": {
+        "RUNNING": 2,
+        "VERIFIED": 1
+      },
+      "ready": [],
+      "blocked": []
+    },
+    "poincare-refinement-round26-20260927": {
+      "states": {
+        "RUNNING": 2
+      },
+      "ready": [],
+      "blocked": []
+    }
+  },
+  "active_attempts": [
+    {
+      "project": "poincare-refinement-round25-20260927",
+      "task": "d27r25-cylinder-compact-extension",
+      "reserved_seconds": 1210.9,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-1f6f4cfa9d13447392249c4fa658d0e8.service"
+    },
+    {
+      "project": "poincare-refinement-round25-20260927",
+      "task": "d27r25-cylinder-restriction-estimate",
+      "reserved_seconds": 1210.9,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-e90d7e40ad224d19ac9dda8c9f5c7adf.service"
+    },
+    {
+      "project": "poincare-refinement-round26-20260927",
+      "task": "d27r26-c1-ambient-frame-bound",
+      "reserved_seconds": 71.1,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-afc9fc23ae544d3c9e5d93e7ce8bca00.service"
+    },
+    {
+      "project": "poincare-refinement-round26-20260927",
+      "task": "d27r26-c1-density-continuity",
+      "reserved_seconds": 71.1,
+      "phase": "agent_or_capture",
+      "unit": "lean-swarm-e6f677b3aa044df881ea7f0d0dd5fe96.service"
+    }
+  ],
+  "actual_worker_processes": [
+    {
+      "task": "d27r25-cylinder-compact-extension",
+      "confirmed": true,
+      "pids": [
+        125826,
+        125839
+      ]
+    },
+    {
+      "task": "d27r25-cylinder-restriction-estimate",
+      "confirmed": true,
+      "pids": [
+        125996,
+        126003
+      ]
+    },
+    {
+      "task": "d27r26-c1-ambient-frame-bound",
+      "confirmed": true,
+      "pids": [
+        133783,
+        133790
+      ]
+    },
+    {
+      "task": "d27r26-c1-density-continuity",
+      "confirmed": true,
+      "pids": [
+        133924,
+        133931
+      ]
+    }
+  ],
+  "active_confirmed_luna_workers": 4,
+  "new_c1_reference_has_no_integrability_bound_embedding_or_approximant_fields": true,
+  "conditional_same_class_energy_approximation_checked": true,
+  "conditional_width_transfer_checked": true,
+  "global_geometry_producer_created": false,
+  "frontier_hash_check": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "commit_or_push_performed": false,
+  "full_rebuild_performed": false
+}

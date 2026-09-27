@@ -1,0 +1,18 @@
+[
+  {
+    "task": "d27r20-tubular-chart-inverse",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round22/sources/PoincareConjecture/ParallelImplementation/RefinedTubularChartInverse.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedTubularChartInverse.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedTubularChartInverse.tubular_chart_inverse",
+    "sha256": "af3bcd99665955ca91ba928ec52e37024d45798838a1b7380e0575a5bff6997b",
+    "attempt": "2a0d4b0a-9835-40b4-9b92-7d09c276bcde",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "fa878312c6e1323cb74e4f1c654a5a58d5ad3af3f70564e1cd03d0da0bdcc978"
+  }
+]

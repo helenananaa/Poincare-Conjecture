@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "source_sha256": "694d6b7738fdd27bd851edda72ec1ea31b3425a65ff9e859dd8ebb53c88f9282",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round17/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round17/objects/PoincareConjecture/ProofContract/Refinement20260927/SmoothRetractionModel.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round17/sources/PoincareConjecture/ProofContract/Refinement20260927/SmoothRetractionModel.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.energyModel_of_smoothRetraction",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.AmbientEnergyModel.uniform_form_control",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.energyModel_of_smoothRetraction' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.AmbientEnergyModel.uniform_form_control' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

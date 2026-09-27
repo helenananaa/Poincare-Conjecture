@@ -1,0 +1,163 @@
+{
+  "version": 5,
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    }
+  ],
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedNine.lean",
+      "sha256": "9f1b865f3cce4d7df8a759699579a03d98ceb365a3f901f22bfea2cad24f170a",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_side_atlas",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_negative_collar",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_finite_timeline",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_cap_relabeling",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_neck_cut",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_neck_connectedSum",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_neck_factors_simplyConnected",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_projection_trace",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_after_nine",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/FiniteSmoothingAtlas.lean",
+      "sha256": "be5f834e18f42d84ea2232e25de7ccca436926f9368075c49e97d2fa6b125bc1",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.finiteAtlas_smoothing",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.finiteAtlas_of_smoothing",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.smoothing_iff_finite_compatible_atlas",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.finitePLAtlasProducer_iff",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_finite_atlas_producer",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "accepted_sources": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapChart.lean",
+      "sha256": "e01b991337cbd27c51a7b3b31a7eb998d5e831c91238a7a1b1d402c1244ade75"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapComplement.lean",
+      "sha256": "773e2a81162b00e2af90588b07bf0c2e384c15ad00d398184805b5c9bf661010"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedMarkedGluing.lean",
+      "sha256": "a26cb1ea496c8d3a3defef4a6a77e77e5148f26e2b9f1444514cfe3c40ad2aec"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapInteriorOpen.lean",
+      "sha256": "c87e91265d4a4ef62d40a08db0f7f957a3785bcc3923df2364f7de881aaebe03"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedClosedCoverGluing.lean",
+      "sha256": "fb2b0fef6237c33cc8f4ac98d90a7b37330e016d1933ab836d5a609ef7b963b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedNegativeHalfCollar.lean",
+      "sha256": "6a7dd51e1eeaa972f1e5432e8904ac25e1c20630b2fb2d47d8820fc05d2d696a"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedSideInteriorAtlas.lean",
+      "sha256": "e529af9348e3600c23771c6ed52c889ef53d9d47ce35585b8ee8b501b1df80bd"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedCapRelabeling.lean",
+      "sha256": "b34da87d739d37ac3d50689dd1f5b6593b2e55c2191061bfd799c9357f81935a"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedFiniteTimeline.lean",
+      "sha256": "72b11e98a1ed065f6c2febd363f90f44d9928785a5b6f1f40d1fce3336fda60b"
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedNine.olean",
+      "sha256": "ddec82bf591a1a4d029a0737d82bd1828cb95f816937949073fb371f90a99587"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/FiniteSmoothingAtlas.olean",
+      "sha256": "d2939541de2a369774a6c510c0f0590e3794da0ff39972b6f40c48acd344ac5a"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedNegativeHalfCollar.olean",
+      "sha256": "b1e63e444b5a335daa46e9285a4c53a3cab08cbef13a5a8ff011b0925724b554"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedSideInteriorAtlas.olean",
+      "sha256": "375af78827e7b38cc1b0cfce9e4a9fec99c9447ba80ebf439b7f824ffe6b77d2"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedCapRelabeling.olean",
+      "sha256": "01740e4b66e6d47b064552e4a6cd6292f8d5819b9df5f201a5bd88b54b0029b8"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedFiniteTimeline.olean",
+      "sha256": "fc93738142c500e8393a221a43502fe2a6c7fcc6b295d78ff018230b98a07878"
+    }
+  ],
+  "graph_sha256": "04a92a89bcf4254d7db76e935f6103da16cebee308ff239d24e951605482a350",
+  "semantic_review_sha256": "6971d3df96511cd451cfffa8b0c0f7fc47de229bf0b15cf1d0a765df8d6591b3",
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_finite_atlas_producer",
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T02:24:57.480645+00:00",
+  "scope": "Four worker sources and two new parent modules rebuilt; existing pinned and previously verified dependencies reused."
+}

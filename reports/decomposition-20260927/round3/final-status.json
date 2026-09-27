@@ -1,0 +1,21 @@
+{
+  "observed_utc": "2026-09-27T01:40:00.611914+00:00",
+  "tasks": [
+    {
+      "id": "d27r3-negative-half-collar",
+      "status": "RUNNING",
+      "attempt_id": "ae8ee5e0-228f-4e0d-b02d-01fbfe2647c7",
+      "integrated_commit": null
+    },
+    {
+      "id": "d27r3-side-interior-atlas",
+      "status": "RUNNING",
+      "attempt_id": "ddc7db29-b4fb-412d-8e93-4d29cab9022f",
+      "integrated_commit": null
+    }
+  ],
+  "model": "gpt-6-luna",
+  "reasoning_effort": "xhigh",
+  "earlier_five": "ACCEPTED_ISOLATED_NOT_INTEGRATED",
+  "complete": false
+}

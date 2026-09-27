@@ -1,0 +1,43 @@
+{
+  "status": "ACCEPTED_ISOLATED_NOT_INTEGRATED",
+  "reviewer": "coordinator",
+  "tasks": [
+    {
+      "id": "d27-cap-chart",
+      "source_sha256": "e01b991337cbd27c51a7b3b31a7eb998d5e831c91238a7a1b1d402c1244ade75",
+      "fixed_statement_unchanged": true,
+      "source_fully_read": true,
+      "independent_source_recheck": true
+    },
+    {
+      "id": "d27-cap-complement",
+      "source_sha256": "773e2a81162b00e2af90588b07bf0c2e384c15ad00d398184805b5c9bf661010",
+      "fixed_statement_unchanged": true,
+      "source_fully_read": true,
+      "independent_source_recheck": true
+    },
+    {
+      "id": "d27-marked-raw-gluing",
+      "source_sha256": "a26cb1ea496c8d3a3defef4a6a77e77e5148f26e2b9f1444514cfe3c40ad2aec",
+      "fixed_statement_unchanged": true,
+      "source_fully_read": true,
+      "independent_source_recheck": true
+    },
+    {
+      "id": "d27r2-cap-interior-open",
+      "source_sha256": "c87e91265d4a4ef62d40a08db0f7f957a3785bcc3923df2364f7de881aaebe03",
+      "fixed_statement_unchanged": true,
+      "source_fully_read": true,
+      "independent_source_recheck": true
+    },
+    {
+      "id": "d27r2-closed-cover-gluing",
+      "source_sha256": "fb2b0fef6237c33cc8f4ac98d90a7b37330e016d1933ab836d5a609ef7b963b3",
+      "fixed_statement_unchanged": true,
+      "source_fully_read": true,
+      "independent_source_recheck": true
+    }
+  ],
+  "parent_consumption": "AcceptedFive.lean: checked_closedCut_connectedSum, public_after_five",
+  "scope": "Exact five leaf statements and their actual parent consumption. Not geometric flow existence or global Poincare completion."
+}

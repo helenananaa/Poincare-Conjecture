@@ -1,0 +1,270 @@
+{
+  "version": 14,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_intrinsic_sphere_frontier",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentyOne.lean",
+      "sha256": "556662500ec006374174be5f81044b427a508abfa6cc8dcec50791b93d1c6b1a",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_near_max",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_minimax_limit",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_compact_coercivity",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_compact_time_variation",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_after_twenty_one",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicSphereEnergy.lean",
+      "sha256": "613a5c54fc37161b5010a7ed0bba8cdc31b3a01eb88fa1fcdc28597526f10b7c",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.sphereEnergyDensity_nonneg",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.sphereDirichletEnergy_nonneg",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.sphereEnergyDensity_local_frame",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/SphereEnergySpectrum.lean",
+      "sha256": "1733794e22ceeb6d332c0ea5ae8fb3ad668f9c0327728157754240dea381bc5a",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.sphere_density_integrable",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.sphere_energy_parameter_continuous",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.intrinsicSpectrum",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.intrinsic_energy_relative",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.intrinsic_width_continuous",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicEnergyRoot.lean",
+      "sha256": "6acda3060db37d9c9b9b31ae2be921519a118a77d0257b5a2c7544a93c01c114",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.IntrinsicSurvivalProfile.toMinimax",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.minimax_producer_of_intrinsic",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_intrinsic_sphere_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentyOne.olean",
+      "sha256": "0f245a5421788a2407c0cd7ca447f182a58b26ac74674bffd183ced3fb90045f"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicSphereEnergy.olean",
+      "sha256": "c6bee36dd7db76f64abf14444bcb612ac048ef93f27d917a2fb51b99f9ed999f"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/SphereEnergySpectrum.olean",
+      "sha256": "bfaf95de6d3a3288c17e522338d6dabde0733234c7a3f703d3085947fbb0ac38"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicEnergyRoot.olean",
+      "sha256": "18c6659e90dd83bb88f42fb4423a34c913c0029c18738757102a1c35d774dfbd"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedMinimaxDiniLimit.olean",
+      "sha256": "1168ca82eb5489d2b828248895db169b5b885068c410c4e499d53fa76c06341f"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedUniformNearMaxTaylor.olean",
+      "sha256": "e4930ff484ff556aff13ef5361abec8783ddf64c129444ec682e7c29f2351952"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedCompactQuadraticLower.olean",
+      "sha256": "1d6fcc9a232a506af1e8e3abe5a62fcdefa4c5a42968a7a9c436bad30cd645de"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedCompactMetricTimeVariation.olean",
+      "sha256": "997fe24a37410879b8034b5ef1756baf0cb9122deaa846724bce7b73dfbb9996"
+    }
+  ],
+  "accepted_sources": [
+    {
+      "task": "d27r12-minimax-dini-limit",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedMinimaxDiniLimit.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedMinimaxDiniLimit.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedMinimaxDiniLimit.minimax_dini_limit",
+      "sha256": "eb5d8120392cc047a927603d1ee1e0344ceed572f7b3c0105809473e707e1a1c",
+      "attempt": "d72b31af-b354-4ee5-aacf-85f268fc2c36",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "1168ca82eb5489d2b828248895db169b5b885068c410c4e499d53fa76c06341f",
+      "semantic_review": "Full 80-line source reviewed: fixed positive h first, sequence limit, then controlled slope; same w,m and constants."
+    },
+    {
+      "task": "d27r12-uniform-near-max",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedUniformNearMaxTaylor.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedUniformNearMaxTaylor.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedUniformNearMaxTaylor.uniform_near_max_taylor",
+      "sha256": "a060934395a9155258f2f5eaf2f3ba02517eb6e7b5c7a44025374e0f7a71693a",
+      "attempt": "11663f13-715b-4cb8-8863-d5d844d2e784",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "e4930ff484ff556aff13ef5361abec8783ddf64c129444ec682e7c29f2351952",
+      "semantic_review": "Full 54-line source reviewed: uniform radius min(H,delta/(L+Q+1)), high/low energy cases, no minimizer assumption."
+    },
+    {
+      "task": "d27r13-compact-quadratic-lower",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedCompactQuadraticLower.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedCompactQuadraticLower.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedCompactQuadraticLower.compact_quadratic_lower",
+      "sha256": "b7a11cd26d122fa57669e03b723a13d046c31efef294d34bf1e573e7bf230383",
+      "attempt": "90de7556-6d15-4108-8a9a-56f924b3e6ae",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "1d6fcc9a232a506af1e8e3abe5a62fcdefa4c5a42968a7a9c436bad30cd645de",
+      "semantic_review": "Full 76-line source reviewed: compact X times unit sphere, minimum positivity, homogeneous scaling, zero vector treated."
+    },
+    {
+      "task": "d27r13-compact-time-variation",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ParallelImplementation/RefinedCompactMetricTimeVariation.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedCompactMetricTimeVariation.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedCompactMetricTimeVariation.compact_metric_time_variation",
+      "sha256": "f6021513210e33330914ac53ebecdb21a572bcd957a695c0ce6573d6c7eeee34",
+      "attempt": "74212fc6-1453-4868-80c6-0829d4d9c69a",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "997fe24a37410879b8034b5ef1756baf0cb9122deaa846724bce7b73dfbb9996",
+      "semantic_review": "Full 23-line source reviewed: uniform continuity on the actual compact slab; endpoints and singleton interval allowed."
+    }
+  ],
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/frontier.lock.json",
+      "sha256": "c4b4334f1c34903b5e095c48164045d10c158d9e0442de662ec4cdce010a559a"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/frontier.lock.json",
+      "sha256": "b1e32685916333c6cf47707f48fcf2ea7a8d726684ba58a23d3584e073fc9679"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/frontier.lock.json",
+      "sha256": "343fa87a6cda1536fb9252d158e6330e2923f8190b7919f2c274249fc1b9a9ba"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round11/frontier.lock.json",
+      "sha256": "22a7dd4e971210788136a35c6684ba6bb169c31bf6932ac020c63a4907107adf"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/frontier.lock.json",
+      "sha256": "af113a8a9c19fbd645a5595428de27500f6a70393dd5246a9b6dcba7104129df"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round13/frontier.lock.json",
+      "sha256": "aa36df81cb29dfe20354dc466cb63360f018537b4782fd9f4f127d40ca8ed2e2"
+    }
+  ],
+  "external_source_hashes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/formalized-sources/DoCarmo/DoCarmoLib/Riemannian/TensorBundle/SmoothOrthoFrame.lean",
+      "sha256": "6722c712d5e5595addd61018a19bc7fd792c17d30c68e3265bbcf0bcf6f08fb1",
+      "rebuilt_this_turn": false
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/formalized-sources/MorganTian/MorganTianLib/Ch01/OrthoFrame.lean",
+      "sha256": "1f91b3d1da0a88d282f065e64c9a0aaf49bb1afcbcc7d66b85e7fead93f9aeb7",
+      "rebuilt_this_turn": false
+    }
+  ],
+  "cards_sha256": "91cdd416d566477a0a079a9713490a148b32e048a97781b42127ea2cfd4d4e77",
+  "graph_sha256": "e97d4545f48a3d482bea5cdfc1af22f940587420f3906f454db8ad81109a20a8",
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T07:33:21.465807+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

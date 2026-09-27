@@ -1,0 +1,129 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.EnergyControlledGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "near_max",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.UniformNearMaxTaylorStatement",
+      "status": "PRIOR_TASK_NOT_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "dini_limit",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MinimaxDiniLimitStatement",
+      "status": "PRIOR_TASK_NOT_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "coercivity",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CompactQuadraticLowerStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "time_uniform",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CompactMetricTimeVariationStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "quadratic_error",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.quadratic_error",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "relative_metric",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.compact_metric_relative",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "coercivity",
+        "time_uniform",
+        "quadratic_error"
+      ]
+    },
+    {
+      "id": "relative_energy",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.energy_relative_comparison",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "relative_metric",
+        "geometry"
+      ]
+    },
+    {
+      "id": "width_order",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.width_sandwich",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "width_continuity",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.width_continuous_of_quadratic_energy",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "relative_energy",
+        "width_order"
+      ]
+    },
+    {
+      "id": "survival",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.EnergyMinimaxSurvivalProfile.toMinimax",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "width_continuity",
+        "geometry"
+      ]
+    },
+    {
+      "id": "minimax",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.minimax_producer_of_energy",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "survival"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_energy_continuity_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "atlas",
+        "near_max",
+        "dini_limit",
+        "minimax"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulation",
+    "atlas",
+    "near_max",
+    "dini_limit",
+    "coercivity",
+    "time_uniform",
+    "geometry"
+  ],
+  "complete": false,
+  "summary_only": true,
+  "sufficiency_evidence": "PoincareConjecture.ProofContract.Refinement20260927.public_of_energy_continuity_frontier",
+  "geometric_dirichlet_realization_complete": false
+}

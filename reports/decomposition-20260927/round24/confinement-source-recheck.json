@@ -1,0 +1,18 @@
+[
+  {
+    "task": "d27r23-ambient-sweepout-confinement",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round24/sources/PoincareConjecture/ParallelImplementation/RefinedAmbientSweepoutConfinement.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedAmbientSweepoutConfinement.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedAmbientSweepoutConfinement.ambient_sweepout_confinement",
+    "sha256": "419e3c4ef0c0179e7045c45e57745199d2d2483b8bb13948d57e44776bda4d12",
+    "attempt": "93b8041d-009f-4d46-99e2-c05f6b37e39d",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "363a1183bcab7a70db8adc5ae1f717fa7dbf5570cc5194f0799ccd929218ec21"
+  }
+]

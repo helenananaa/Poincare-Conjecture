@@ -1,0 +1,16 @@
+{
+  "status": "CONDITIONAL_CONSTRUCTION_PARENT_ACCEPTED",
+  "new_worker_leaves_accepted": 2,
+  "accepted_worker_total": 29,
+  "prior_accepted_worker_total": 27,
+  "new_ready_independent_tasks": 4,
+  "notes": [
+    "Reviewed exact orthogonal decomposition and derivative calculation; independently recompiled both fixed proofs.",
+    "Actual induced normal total space and literal finite-sum transport are fixed; no endpoint inverse or normal parametrization is assumed by the frame record.",
+    "Four parallel leaf statements genuinely construct NormalCoordinateTube from any supplied embedding.",
+    "EmbeddingApproximationData removes normalTube rather than renaming it; retains exact original embedding, reference and approximants.",
+    "Supplemental Lee namespace is separate from the immutable original baseline; no old cache identity or marker was edited.",
+    "Old inverse worker is preserved; no duplicate launch.",
+    "Three research producers remain open; no full-proof claim, commit, push or full rebuild."
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "roots": [
+    "public",
+    "width",
+    "almost"
+  ],
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.C1GeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "radial",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_radial_local_smooth",
+      "status": "ACCEPTED_SOURCE_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "glue",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_cutoff_glue",
+      "status": "ACCEPTED_SOURCE_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "support",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_cutoff_support",
+      "status": "ACCEPTED_SOURCE_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "extension",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_compact_extension",
+      "status": "CHECKED_NO_OPEN_ANALYTIC_PREMISES",
+      "depends_on": [
+        "radial",
+        "glue",
+        "support"
+      ]
+    },
+    {
+      "id": "c1",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_cylinder_c1_approximation",
+      "status": "CHECKED_NO_OPEN_ANALYTIC_PREMISES",
+      "depends_on": [
+        "extension"
+      ]
+    },
+    {
+      "id": "representative",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.approximate_checked",
+      "status": "CHECKED_FOR_GIVEN_C1_REPRESENTATIVE",
+      "depends_on": [
+        "c1"
+      ]
+    },
+    {
+      "id": "width",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.c1ClassTransfer_width_checked",
+      "status": "CHECKED_FOR_GIVEN_CLASS_TRANSFER",
+      "depends_on": [
+        "representative"
+      ]
+    },
+    {
+      "id": "almost",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.almostContractingC1_width_le",
+      "status": "CHECKED_FOR_GIVEN_ALMOST_CONTRACTING_MAPS",
+      "depends_on": [
+        "representative"
+      ]
+    },
+    {
+      "id": "public",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_forty_five",
+      "status": "CHECKED_CONDITIONAL_PUBLIC_ROOT",
+      "depends_on": [
+        "triangulation",
+        "atlas",
+        "geometry",
+        "extension"
+      ]
+    }
+  ],
+  "kind": "Reviewed sufficiency summary; prior accepted dependencies reused",
+  "accepted_fixed_leaf_total": 45,
+  "new_accepted_fixed_leaves": 3,
+  "remaining_c1_analytic_leaves": 0,
+  "new_tasks": 0,
+  "complete": false
+}

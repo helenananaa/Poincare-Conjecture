@@ -1,0 +1,204 @@
+{
+  "version": 9,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_after_thirteen",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/CutChoiceAudit.lean",
+      "sha256": "7cc0fe58fb76d2854f7f8f7953d65ebc7c39e97db581080dd6a409cc69320083",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.old_cut_choice_independent_of_collar",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/LocatedCut.lean",
+      "sha256": "c7ff3a0a4aeba9219f61ee227042934af3bcc823a36faee22ec20ab63c0299f0",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.locatedNeckCut",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.locatedCut_connectedSum",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/LocatedEvents.lean",
+      "sha256": "f8e9798ad82a5d29d4ce306678590620ee5c1df1d75dbf8add8cba3252d60d1f",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.LocatedMove.balance",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.LocatedChain.balance",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.LocatedMove.reconstruct",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.LocatedChain.reconstruct",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.LocatedEvent.active",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.locatedProjection_trace",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/MatchedBudget.lean",
+      "sha256": "56f11677c5a43365fbd5de32b85f02cb1b5069e5966d27027b4283f43281cc1a",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.MatchedNeckHistory.toControlled",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.matched_budget_to_anchored",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.geometric_of_matched_producer",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_matched_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/LocationRegression.lean",
+      "sha256": "2231d0b755e473abbcc5f2132772c6adae032a4a6ec21b8780212756207bcde9",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.locatedCut_has_expected_subsets",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.locatedCuts_ne_of_negative_regions_ne",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirteen.lean",
+      "sha256": "ee61f64f034166cf578df59d8f81e8f2747259a65667ec6d6706ffb82f29885d",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_epsilon_neck_embedding",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.locatedMetricCut_checked",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_after_thirteen",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/CutChoiceAudit.olean",
+      "sha256": "f2311cec6c56d39f2a4bfc8356b763cb695c253977061747fc16108b29ed18b4"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/LocatedCut.olean",
+      "sha256": "a131ae54da68ae4dfda1e9d841c2fb12a00fa601f123ff029faf6171c9d8bf9e"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/LocatedEvents.olean",
+      "sha256": "156164d34442a13a4552eb508d1bd19910855283270191025ddd4e723be4a58e"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/MatchedBudget.olean",
+      "sha256": "54e236694a1973754f7b7a372799f16f89cab83c07f15f995b04e29c715c64f2"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/LocationRegression.olean",
+      "sha256": "fc122aa301a76a0d8c420ec1d7970dac937ee3c928ee5457bb25e15cfc18c8c8"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedThirteen.olean",
+      "sha256": "3bc4b4116569b2d35297197e2dbb5d75c6119c3efba80003bd5c60718f7d7a53"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedEpsilonNeckEmbedding.olean",
+      "sha256": "c3deb9315dcd4ceff72af6df5386c157ed22e6ea395be1e5687bce2d2ceade9e"
+    }
+  ],
+  "accepted_sources": [
+    {
+      "task": "d27r8-epsilon-neck-embedding",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/sources/PoincareConjecture/ParallelImplementation/RefinedEpsilonNeckEmbedding.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedEpsilonNeckEmbedding.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedEpsilonNeckEmbedding.epsilon_neck_embedding",
+      "sha256": "79b7c673ce0681dc8ff7f8d813bccc069ee2ea28f7d7cd0c892f99d30b925295",
+      "attempt": "418281de-e792-4c17-a6b5-02dc78163f44",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "c3deb9315dcd4ceff72af6df5386c157ed22e6ea395be1e5687bce2d2ceade9e",
+      "semantic_review": "Read complete 55-line source: continuous injective exact closedParameter/collar; compact source to Hausdorff embedding. No use of the defective cut choice; unchanged target."
+    }
+  ],
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/frontier.lock.json",
+      "sha256": "c4b4334f1c34903b5e095c48164045d10c158d9e0442de662ec4cdce010a559a"
+    }
+  ],
+  "graph_sha256": "64fbdbbfc780e4a4e6e6257c715885298afd00971ef246f6cdbfe8300da5de95",
+  "ready_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "complete": false,
+  "conditional": true,
+  "semantic_issue": "CUT_CHOICE_LOCATION_ERASURE",
+  "created_utc": "2026-09-27T04:54:52.185503+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

@@ -1,0 +1,151 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulate",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.PatchGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "density",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.LocalPatchDensityStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "assembly",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.OpenPatchAssemblyStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "image",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.metric_patch_image",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "density",
+        "assembly"
+      ]
+    },
+    {
+      "id": "restrict",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.metric_patch_preserves_restrict",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "image"
+      ]
+    },
+    {
+      "id": "record",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MetricSlicePresentation.preserves_image",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "patch",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RecordedIsometricPatch.preserves",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "record",
+        "restrict"
+      ]
+    },
+    {
+      "id": "neck_measurable",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.neck_removed_measurable",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "loss_model",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MetricPatchReplacement.toModel",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "patch",
+        "neck_measurable"
+      ]
+    },
+    {
+      "id": "core",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MetricCore.nonincrease",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "patch"
+      ]
+    },
+    {
+      "id": "partition",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.MetricReplacementPartition.toMeasured",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "core"
+      ]
+    },
+    {
+      "id": "history",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.PatchNeckHistory.toMatched",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "geometry",
+        "partition",
+        "loss_model"
+      ]
+    },
+    {
+      "id": "budget",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.patch_budget_to_matched",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "history"
+      ]
+    },
+    {
+      "id": "producer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.patch_producer_to_matched",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "budget"
+      ]
+    },
+    {
+      "id": "prior_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_thirteen",
+      "status": "PREVIOUSLY_CHECKED_CONDITIONAL",
+      "depends_on": []
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_metric_patch_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulate",
+        "atlas",
+        "producer",
+        "prior_root"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulate",
+    "atlas",
+    "density",
+    "assembly",
+    "geometry"
+  ],
+  "complete": false,
+  "kind": "Reviewed dependency summary; Lean theorem certifies sufficiency",
+  "full_actual_flow_correspondence_frozen": false
+}

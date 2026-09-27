@@ -1,0 +1,22 @@
+{
+  "exit_code": 0,
+  "targets": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.radialDirection_coe",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.radialDirection_unit",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.cylinder_extension_of_radial_leaves",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.public_of_radial_extension_frontier",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "complete": false
+}

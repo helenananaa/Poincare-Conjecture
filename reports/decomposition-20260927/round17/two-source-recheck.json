@@ -1,0 +1,34 @@
+[
+  {
+    "task": "d27r14-intrinsic-metric-comparison",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round17/sources/PoincareConjecture/ParallelImplementation/RefinedIntrinsicMetricComparison.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedIntrinsicMetricComparison.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedIntrinsicMetricComparison.intrinsic_metric_comparison",
+    "sha256": "106c24bee1d69cd0674d535d51910afc50dc9991929b5cff549ac5659d6a0203",
+    "attempt": "0f07e511-5d8a-4888-8f6a-b8c013dbcb3d",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "c72a483b6da95ad95af31198da1452a40843ba04a064b810595c2c358b3fd8fb"
+  },
+  {
+    "task": "d27r16-relative-retraction-homotopy",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round17/sources/PoincareConjecture/ParallelImplementation/RefinedRelativeRetractionHomotopy.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedRelativeRetractionHomotopy.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedRelativeRetractionHomotopy.relative_retraction_homotopy",
+    "sha256": "dec4eef2d66193a9efaea2c9a8ac581ed7099db1a2e03b89f0affa64a68fa42d",
+    "attempt": "c88260ed-3c8e-4881-bdb8-8ebdca2199f6",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "2913f27b1a6484826ddc96db22b7b7ba45a623fac81f8effe9666972905f6271"
+  }
+]

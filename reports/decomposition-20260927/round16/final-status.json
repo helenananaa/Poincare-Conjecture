@@ -1,0 +1,23 @@
+{
+  "round": 16,
+  "new_checked_declarations": 13,
+  "newly_accepted_worker_leaves": 1,
+  "accepted_local_leaves_total": 22,
+  "new_workers_launched": 2,
+  "new_task_ids": [
+    "d27r16-relative-retraction-homotopy",
+    "d27r16-sphere-energy-approximation"
+  ],
+  "new_task_last_evidence": "Both preflights exit 0; REGISTERED; ENQUEUED 2; STARTING_FINITE_BATCH",
+  "new_task_final_queue_status": "UNKNOWN: final compound read blocked",
+  "model": "gpt-6-luna",
+  "reasoning_effort": "xhigh",
+  "old_metric_comparison_last_observation": "RUNNING in initial successful read; left untouched",
+  "pre_dispatch_frozen_hashes": "PASS",
+  "final_frozen_hash_recheck": "NOT_PERFORMED",
+  "public_V1_structural_check_this_round": "BLOCKED_NOT_EXECUTED",
+  "initial_git_head": "c228980",
+  "git_integration_commit_push_performed": false,
+  "geometric_approximation_existence_proved": false,
+  "complete": false
+}

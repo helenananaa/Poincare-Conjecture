@@ -1,0 +1,33 @@
+{
+  "exit_code": 0,
+  "source_sha256": "613a5c54fc37161b5010a7ed0bba8cdc31b3a01eb88fa1fcdc28597526f10b7c",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/objects/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicSphereEnergy.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicSphereEnergy.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.sphereEnergyDensity_nonneg",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.sphereDirichletEnergy_nonneg",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.sphereEnergyDensity_local_frame",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicSphereEnergy.lean:60:38: warning: This simp argument is unused:\n  g.metricInner_add_left\n\nHint: Omit it from the simp argument list.\n  simp [map_add,\u0335 \u0335g\u0335.\u0335m\u0335e\u0335t\u0335r\u0335i\u0335c\u0335I\u0335n\u0335n\u0335e\u0335r\u0335_\u0335a\u0335d\u0335d\u0335_\u0335l\u0335e\u0335f\u0335t\u0335]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicSphereEnergy.lean:61:39: warning: This simp argument is unused:\n  g.metricInner_smul_left\n\nHint: Omit it from the simp argument list.\n  simp [map_smul,\u0335 \u0335g\u0335.\u0335m\u0335e\u0335t\u0335r\u0335i\u0335c\u0335I\u0335n\u0335n\u0335e\u0335r\u0335_\u0335s\u0335m\u0335u\u0335l\u0335_\u0335l\u0335e\u0335f\u0335t\u0335]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicSphereEnergy.lean:62:38: warning: This simp argument is unused:\n  g.metricInner_add_right\n\nHint: Omit it from the simp argument list.\n  simp [map_add,\u0335 \u0335g\u0335.\u0335m\u0335e\u0335t\u0335r\u0335i\u0335c\u0335I\u0335n\u0335n\u0335e\u0335r\u0335_\u0335a\u0335d\u0335d\u0335_\u0335r\u0335i\u0335g\u0335h\u0335t\u0335]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/sources/PoincareConjecture/ProofContract/Refinement20260927/IntrinsicSphereEnergy.lean:63:39: warning: This simp argument is unused:\n  g.metricInner_smul_right\n\nHint: Omit it from the simp argument list.\n  simp [map_smul,\u0335 \u0335g\u0335.\u0335m\u0335e\u0335t\u0335r\u0335i\u0335c\u0335I\u0335n\u0335n\u0335e\u0335r\u0335_\u0335s\u0335m\u0335u\u0335l\u0335_\u0335r\u0335i\u0335g\u0335h\u0335t\u0335]\n\nNote: This linter can be disabled with `set_option linter.unusedSimpArgs false`\n'PoincareConjecture.ProofContract.Refinement20260927.sphereEnergyDensity_nonneg' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.sphereDirichletEnergy_nonneg' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.sphereEnergyDensity_local_frame' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New source; pinned and previously checked dependencies reused"
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "task": "d27r26-c1-ambient-frame-bound",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round27/sources/PoincareConjecture/ParallelImplementation/RefinedC1AmbientFrameBound.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedC1AmbientFrameBound.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedC1AmbientFrameBound.c1_ambient_frame_bound",
+    "sha256": "18d0515edd2e17a56d52c1ab8da3abe99731fe454ee5e0e1bb4ef226903c515d",
+    "original_snapshot_sha256": "80920321bb335956f412b06d4bc146f437fd9bae0ab92881835e3e518ea248c1",
+    "coordinator_repaired": true,
+    "active_worker_source_edited": false,
+    "attempt": "afc9fc23-ae54-4d3c-9e5d-93e7ce8bca00",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "29d9e7959eef19d8a5d620a736c0eec8cf5abaa1eda66a8f0843c5090b570d68"
+  }
+]

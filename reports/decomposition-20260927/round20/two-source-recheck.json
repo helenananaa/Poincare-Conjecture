@@ -1,0 +1,34 @@
+[
+  {
+    "task": "d27r17-smooth-retraction-form",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round20/sources/PoincareConjecture/ParallelImplementation/RefinedSmoothRetractionForm.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedSmoothRetractionForm.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedSmoothRetractionForm.smooth_retraction_form",
+    "sha256": "687ff25135b46da6557135c95ab4e29d70bc5b40068de93e580d1468ba8f9c0b",
+    "attempt": "9dd04c21-ea69-4561-9937-a30eb8d012d3",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "9d2a82381a07290eae0a5fc385f01448d938c4f1ae7dd020dd96082ad5c1fcdf"
+  },
+  {
+    "task": "d27r19-tubular-inverse-assembly",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round20/sources/PoincareConjecture/ParallelImplementation/RefinedTubularInverseAssembly.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedTubularInverseAssembly.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedTubularInverseAssembly.tubular_inverse_assembly",
+    "sha256": "9d71c49408389a1e6e4bd9e70f3850a88d3e08d55598ff51755e7d4c0892ca5c",
+    "attempt": "a315ccee-4817-45e4-a0c8-91f788107ba9",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "0304db1894e50f31c52edd4f23776a94a60c1d0acb3540f11a6f891875f842ae"
+  }
+]

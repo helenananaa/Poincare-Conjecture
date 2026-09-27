@@ -1,0 +1,207 @@
+{
+  "version": 20,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_normal_frontier",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentySeven.lean",
+      "sha256": "a1eac694fd8f4f6baa10fb7ef41a01f86cc81b6f69e2e1e8c41641e211cd8b67",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_smooth_retraction_form",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.checked_tubular_inverse_assembly",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_after_twenty_seven",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/NormalTubeLeaves.lean",
+      "sha256": "bc7ae0994b151a11aa31785ef8530da283db1b1081ecb9fa66c8c747a1ffb3bc",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.normalBlock_apply",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/NormalCoordinateTube.lean",
+      "sha256": "92b8d4849e4dc4b0746e353de4969620ab7f9d03fd0f94599be9443386d24bb3",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.NormalCoordinateTube.toLocal",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.NormalCoordinateTube.toRetraction",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/NormalApproximation.lean",
+      "sha256": "a54a21425db6531d547aef8725fc27e3709f648b3a955f7aa3de8e191d578a7b",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.NormalApproximationData.toTubular",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.normalTransfer_to_tubular",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/NormalTubeRoot.lean",
+      "sha256": "22ff0b3411171b2f491f50ffdf5abbb12267d4b4e02be0b71f6572ca0d491da3",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.NormalIntrinsicProfile.toTubular",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.TubularIntrinsicProfile.toNormal",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.tubular_producer_of_normal",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_normal_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ParallelImplementation/RefinedSmoothRetractionForm.lean",
+      "sha256": "687ff25135b46da6557135c95ab4e29d70bc5b40068de93e580d1468ba8f9c0b",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedSmoothRetractionForm.smooth_retraction_form",
+      "task": "d27r17-smooth-retraction-form"
+    },
+    {
+      "file": "sources/PoincareConjecture/ParallelImplementation/RefinedTubularInverseAssembly.lean",
+      "sha256": "9d71c49408389a1e6e4bd9e70f3850a88d3e08d55598ff51755e7d4c0892ca5c",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedTubularInverseAssembly.tubular_inverse_assembly",
+      "task": "d27r19-tubular-inverse-assembly"
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/AcceptedTwentySeven.olean",
+      "sha256": "b5c7359799b0f6c2ed2d0dc6ed29e48936cec69a8474b69017dc59ba8c27de6f"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/NormalTubeLeaves.olean",
+      "sha256": "023a171f31acc06c09d9b98efc912b203a817616591d05f91a78b45b7a8df691"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/NormalCoordinateTube.olean",
+      "sha256": "aa4d31d629fa8c533cb3cfb64eaee46a01ab8eb07fc400e934a5c868e73fc5d0"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/NormalApproximation.olean",
+      "sha256": "c33eafe15807077fc7217b1c9dd1f202442060030755a1e2b60681692b006d9a"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/NormalTubeRoot.olean",
+      "sha256": "8448df293a7c2a2c49ae4d08bbbf3afe8d9fb17d00ca2f45b911588d56632427"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedSmoothRetractionForm.olean",
+      "sha256": "9d2a82381a07290eae0a5fc385f01448d938c4f1ae7dd020dd96082ad5c1fcdf"
+    },
+    {
+      "file": "objects/PoincareConjecture/ParallelImplementation/RefinedTubularInverseAssembly.olean",
+      "sha256": "0304db1894e50f31c52edd4f23776a94a60c1d0acb3540f11a6f891875f842ae"
+    }
+  ],
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/frontier.lock.json",
+      "sha256": "c4b4334f1c34903b5e095c48164045d10c158d9e0442de662ec4cdce010a559a"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/frontier.lock.json",
+      "sha256": "b1e32685916333c6cf47707f48fcf2ea7a8d726684ba58a23d3584e073fc9679"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/frontier.lock.json",
+      "sha256": "343fa87a6cda1536fb9252d158e6330e2923f8190b7919f2c274249fc1b9a9ba"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round11/frontier.lock.json",
+      "sha256": "22a7dd4e971210788136a35c6684ba6bb169c31bf6932ac020c63a4907107adf"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/frontier.lock.json",
+      "sha256": "af113a8a9c19fbd645a5595428de27500f6a70393dd5246a9b6dcba7104129df"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round13/frontier.lock.json",
+      "sha256": "aa36df81cb29dfe20354dc466cb63360f018537b4782fd9f4f127d40ca8ed2e2"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round14/frontier.lock.json",
+      "sha256": "5a3abf7f97be8754425efe60198003269c20837e1b47832c5a8659592fbcb4ee"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round15/frontier.lock.json",
+      "sha256": "84770cc13256bf0c554f90be648d14110f1d9f7c50b67ab776e6da624239974d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round16/frontier.lock.json",
+      "sha256": "b1468525696a72957ca161aa2b769ccf28e4646b0316eae8a4d8b0ab85e8a4ca"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round17/frontier.lock.json",
+      "sha256": "aaafad3283d9c0c26ecfc260f0e0ff9e206f43a60a7f25daed342cf9dc45bf28"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round19/frontier.lock.json",
+      "sha256": "a14cef8e1584492e1268ec7dc419f15215c0d2cce9cb6df04b13c308319792a8"
+    }
+  ],
+  "graph_sha256": "85368cf12d89886ae73890ebf1562bd753079357171a6ce35cad3014cd74ebe1",
+  "cards_sha256": "fadbc1a39591104b6e3281e06f35d2e5a9ce4a4a0473f070b40510597839f5da",
+  "complete": false,
+  "conditional": true,
+  "accepted_worker_total": 27,
+  "created_utc": "2026-09-27T09:54:52.531510+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

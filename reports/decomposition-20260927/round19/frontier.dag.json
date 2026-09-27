@@ -1,0 +1,105 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TubularGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "form",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.SmoothRetractionFormStatement",
+      "status": "EXISTING_TASK_PENDING",
+      "depends_on": []
+    },
+    {
+      "id": "assembly",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TubularInverseAssemblyStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "injective_neighborhood",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_compact_injective_neighborhood",
+      "status": "CHECKED_REUSE",
+      "depends_on": []
+    },
+    {
+      "id": "local_retraction",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.local_tubes_retraction_of_assembly",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "assembly",
+        "injective_neighborhood"
+      ]
+    },
+    {
+      "id": "approximation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TubularApproximationData.toRetraction",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "local_retraction",
+        "geometry"
+      ]
+    },
+    {
+      "id": "transfer",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.tubularTransfer_to_retraction",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "approximation"
+      ]
+    },
+    {
+      "id": "profile",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TubularIntrinsicProfile.toRetraction",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "transfer"
+      ]
+    },
+    {
+      "id": "prior_root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_smooth_retraction_frontier",
+      "status": "PREVIOUSLY_CHECKED_CONDITIONAL",
+      "depends_on": [
+        "form"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_tubular_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "atlas",
+        "profile",
+        "prior_root"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulation",
+    "atlas",
+    "geometry",
+    "form",
+    "assembly"
+  ],
+  "complete": false,
+  "kind": "Reviewed dependency summary; Lean root proves sufficiency",
+  "old_route_preserved": true,
+  "compact_embedding": "available checked reuse; no extra task"
+}

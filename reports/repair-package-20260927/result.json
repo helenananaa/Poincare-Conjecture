@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "observed_utc": "2026-09-27T09:35:58.745854+00:00",
+  "archive_sha256": "58a9e612688ab94e28867787ce64d799b30119fe1a541b70db4a17bf2163c344",
+  "compiled_modules": 6,
+  "audited_declarations": 15,
+  "frozen_files_rechecked": 167,
+  "frozen_files_unchanged": true,
+  "public_freeze": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "live_route": "round19 already contains repaired and stronger frozen contract",
+  "candidate_location": "/home/helenanana/projects/poincare-parallel/reports/repair-package-20260927/candidate/sources/PoincareConjecture/ProofContract/Refinement20260927/CompactTubularData.lean",
+  "lean_scope": "Downloaded candidate and four current consumer sources rebuilt; pinned dependency cache reused",
+  "new_workers_launched": 0,
+  "new_worker_leaves_accepted": 0,
+  "complete": false
+}

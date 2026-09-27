@@ -1,0 +1,132 @@
+{
+  "root": "root",
+  "nodes": [
+    {
+      "id": "triangulate",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry_data",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RicciBudgetGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "scalar_closed",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.ClosedScalarPropagationStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "initial_metric",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.global_initial_metric",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "initial_scalar",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.global_initial_scalar_bound",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "initial_data",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.metric_initialData_exists",
+      "status": "CHECKED",
+      "depends_on": [
+        "initial_metric",
+        "initial_scalar"
+      ]
+    },
+    {
+      "id": "initial_measure",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.initialMetricSlice",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "interval_growth",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.ricci_interval_volume_growth",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "scalar_closed"
+      ]
+    },
+    {
+      "id": "measured_history",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.RicciMeasuredHistory.toMeasured",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "interval_growth"
+      ]
+    },
+    {
+      "id": "sample_count",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.sampled_times_card_le",
+      "status": "CHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "uniform_budget",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.anchored_budget_to_uniform",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "geometry_data",
+        "initial_measure",
+        "measured_history",
+        "sample_count"
+      ]
+    },
+    {
+      "id": "checked_trace",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_projection_trace",
+      "status": "PREVIOUSLY_ACCEPTED_ISOLATED",
+      "depends_on": []
+    },
+    {
+      "id": "geometric_trace",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.geometric_of_ricci_budget_producer",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "initial_data",
+        "uniform_budget",
+        "checked_trace"
+      ]
+    },
+    {
+      "id": "smoothing",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.smoothing_of_finitePL_producers",
+      "status": "PREVIOUSLY_CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulate",
+        "atlas"
+      ]
+    },
+    {
+      "id": "root",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_of_ricci_budget_frontier",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "geometric_trace",
+        "smoothing"
+      ]
+    }
+  ],
+  "open_leaf_order": [
+    "triangulate",
+    "atlas",
+    "scalar_closed",
+    "geometry_data"
+  ],
+  "complete": false,
+  "same_public_V1_target": true,
+  "metric_history_topology_correspondence_frozen": false
+}

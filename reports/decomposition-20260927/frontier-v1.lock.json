@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "created_utc": "2026-09-27T00:45:18.008166+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.frontier_implies_public",
+  "target": "PoincareConjecture.ProofContract.V1.TopologicalPoincareStatement",
+  "conditional": true,
+  "complete": false,
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/Cap.lean",
+      "sha256": "0110877fe2c36dddaedf977632184d06383f5874e385b60f1ca73ca39b6828a0",
+      "checked_targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.cappedPiece_marked_complement",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.rawCut_connectedSum",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/Smoothing.lean",
+      "sha256": "88eae0653503a160202a8aa9be5e488a8f109f0d4eee8bfeef0430d9a5d2a70d",
+      "checked_targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.smoothing_of_finitePL_producers",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/Root.lean",
+      "sha256": "3b2bbd8021353a09813a2e9858de6fe4c3e3ac4ea872b6be584547ffa08d9bb2",
+      "checked_targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.rawDecomposition_to_standard",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.standard_eliminates_context",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.geometric_of_raw_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.frontier_implies_public",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/Cap.olean",
+      "sha256": "3b8144e0efb719c669e6e1a4f43c9bd7b5e9d9621cf6757820d0da7eff2052d9"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/Root.olean",
+      "sha256": "31e5090d068731446f1aa2e8f94c87d019454dcc6f1519ebaa10103e7a7165b3"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/Smoothing.olean",
+      "sha256": "585794e9cb7b01bc480568d21417daa47c7ec6dbb53938542ff5744131de19e9"
+    }
+  ],
+  "graph_sha256": "2720240c76b17acbc01c541fade061b874c1b69837cfb780969462241e24606b",
+  "cards_sha256": "5fffaa32535de732d24a8b4b3a9c7c0f6ae619bc34d3358f7be113a45e099cd5",
+  "task_sources": {
+    "d27-cap-chart": "06b1897b6d108e535313b2a9c8e3d9ade110c828e1a5440c6b4e62c27bea883b",
+    "d27-cap-complement": "12e11d0c18f9441a8deaa76925b55f170811572a855ac6749c327ae42ba7670d",
+    "d27-marked-raw-gluing": "d3149606ee0d17bc2e4bd6fbcf94d11866648fa0f44a5ada98fa2110136bc19c"
+  },
+  "all_producers_proved": false,
+  "scope": "New parent sources compiled; existing pinned dependencies and accepted-source matched caches reused. No full rebuild."
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "task": "d27r23-compact-retraction-control",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round24/sources/PoincareConjecture/ParallelImplementation/RefinedCompactRetractionControl.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedCompactRetractionControl.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCompactRetractionControl.compact_retraction_control",
+    "sha256": "f64815ceaff6d1f159d61bacc7bdd8f36ff9650d8d374921cf773e4789ac677e",
+    "attempt": "d9e2b23a-c04f-4df3-a489-ef85f134a3a1",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "b230e034d8ab73890b47112bb6b1a58ea8b303bc57ee7c1ff5d6475be8832f4a"
+  }
+]

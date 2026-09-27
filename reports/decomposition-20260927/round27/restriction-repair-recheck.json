@@ -1,0 +1,21 @@
+[
+  {
+    "task": "d27r25-cylinder-restriction-estimate",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round27/sources/PoincareConjecture/ParallelImplementation/RefinedCylinderRestrictionEstimate.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedCylinderRestrictionEstimate.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedCylinderRestrictionEstimate.cylinder_restriction_estimate",
+    "sha256": "e85179cce630bcb5f1d69150e0ddd54447ff88ccbd636276a90faa766991f2bd",
+    "original_snapshot_sha256": "e90d07a0b66a8e360ebb1b62eda83a11b3c63880cf0d8ff7528ae676492fda21",
+    "coordinator_repaired": true,
+    "active_worker_source_edited": false,
+    "attempt": "e90d7e40-ad22-4d19-ac9d-da8c9f5c7adf",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "0a521ba0d5bf568fa876490f9185c3f12ecb98e72d2e7a94f74a4080d6745983"
+  }
+]

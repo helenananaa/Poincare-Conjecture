@@ -1,0 +1,105 @@
+{
+  "version": 11,
+  "root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_width_frontier",
+  "sources": [
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/ExtinctionBarrier.lean",
+      "sha256": "5f57a17e928dfe7f17bf6d719e3d90914078426a1177b084019ec19ab4310942",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.widthPotential_mono",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.extinctionProfile_terminal_bound",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.extinctionProfile_impossible",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    },
+    {
+      "file": "sources/PoincareConjecture/ProofContract/Refinement20260927/WidthExtinctionRoot.lean",
+      "sha256": "64739d75848b54f7116e1bb465b960cd2c900836689652e66441c96d89ff057a",
+      "targets": [
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.patch_budget_events_finite",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.empty_end_of_width_comparison",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.geometric_of_width_control",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ],
+        [
+          "PoincareConjecture.ProofContract.Refinement20260927.public_of_width_frontier",
+          "propext,\n Classical.choice,\n Quot.sound"
+        ]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/ExtinctionBarrier.olean",
+      "sha256": "af113828b0321c35c98f6286bf7598e0b42d1bcfc56c96ca138ec55c42521abf"
+    },
+    {
+      "file": "objects/PoincareConjecture/ProofContract/Refinement20260927/WidthExtinctionRoot.olean",
+      "sha256": "dae636bbb61c4425b6b82be0f3753d86a001d49d5e1db29de19862fe38649aa7"
+    }
+  ],
+  "includes": [
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/frontier-v1.lock.json",
+      "sha256": "17a30604ffce86fa6734746d06b25de46f9b62e61b91294a8cb822e7e5f61e9d"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round2-frontier.lock.json",
+      "sha256": "8fcb6189ef2e314a5b9c3b133816564c6c8f0ae16e7505f723f56e98e9a3c65b"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/frontier.lock.json",
+      "sha256": "21e65c2fe52d8fb3043df170bfa7a65992a0cca9b5ae374067eba32c5115a412"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round4/frontier.lock.json",
+      "sha256": "5c82ca9a7ee527e30312c58422fa3e06624561d02e22968d7327a4d344c940b3"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/frontier.lock.json",
+      "sha256": "97bc38e1550603a28b623c4bb6826e54d488d505731ae24562d6e117fef6adb6"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round6/frontier.lock.json",
+      "sha256": "00e100e274762f3c865dafc1954f283000655d5595e7e5a1d0951dd5611a67c5"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round7/frontier.lock.json",
+      "sha256": "c9bfc208c8490620c1cf1e9503f1bf30562002f08d2e8c054abfdb37eb1d8205"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round8/frontier.lock.json",
+      "sha256": "c4b4334f1c34903b5e095c48164045d10c158d9e0442de662ec4cdce010a559a"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round9/frontier.lock.json",
+      "sha256": "b1e32685916333c6cf47707f48fcf2ea7a8d726684ba58a23d3584e073fc9679"
+    },
+    {
+      "path": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round10/frontier.lock.json",
+      "sha256": "343fa87a6cda1536fb9252d158e6330e2923f8190b7919f2c274249fc1b9a9ba"
+    }
+  ],
+  "cards_sha256": "08a64b714511fded5a19801fcf956f5c167688a78871a725c07a0e8b9066f047",
+  "graph_sha256": "0d9e766b12bce8181beb9a48c8f9349e82ac517bea73e2e5e4c7c31113e27f09",
+  "complete": false,
+  "conditional": true,
+  "created_utc": "2026-09-27T05:40:29.780826+00:00",
+  "base_commit": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "old_two_tasks": "VERIFIED in queue; metadata read blocked this turn; not independently accepted"
+}

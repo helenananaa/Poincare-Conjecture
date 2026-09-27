@@ -1,0 +1,34 @@
+[
+  {
+    "task": "d27r21-embedded-normal-frames",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round25/sources/PoincareConjecture/ParallelImplementation/RefinedEmbeddedNormalFrames.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedEmbeddedNormalFrames.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedEmbeddedNormalFrames.embedded_normal_frames",
+    "sha256": "2910345b311906f85b6a45061c750ad57c151fa6d6334b40018d1af1570eff87",
+    "attempt": "90f75dff-e685-4f76-9796-dae08c1ef469",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "ecdf76a5ef9fe3bd1c2f458fc9768bfeae5328ac112c2d95b08424d930f7dd21"
+  },
+  {
+    "task": "d27r23-ambient-endpoint-correction",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round25/sources/PoincareConjecture/ParallelImplementation/RefinedAmbientEndpointCorrection.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedAmbientEndpointCorrection.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedAmbientEndpointCorrection.ambient_endpoint_correction",
+    "sha256": "08ca85a44f8001b9e3321182180ad44ecdbe559280dc791376d6f2c0172cf7c3",
+    "attempt": "2b895034-6480-43cf-9a92-054ce3682bfa",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "df7a04496ad7fbd88189fd15362f48bfc001d0d0eccd5bd1f455bde14bab2c2d"
+  }
+]

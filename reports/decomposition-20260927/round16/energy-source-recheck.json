@@ -1,0 +1,18 @@
+[
+  {
+    "task": "d27r14-sphere-energy-continuity",
+    "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round16/sources/PoincareConjecture/ParallelImplementation/RefinedSphereEnergyContinuity.lean",
+    "relative": "PoincareConjecture/ParallelImplementation/RefinedSphereEnergyContinuity.lean",
+    "target": "PoincareConjecture.ParallelImplementation.RefinedSphereEnergyContinuity.sphere_energy_continuity",
+    "sha256": "f135c2697d9ca5ab3ac2e152cafd73e184decf7ec702a434196995929423846e",
+    "attempt": "9569ad2a-2270-4554-8b2b-595df1b8521e",
+    "source_compile_exit": 0,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "audit_exit": 0,
+    "object_sha256": "57f81fa5407d03fc2de995797f0d141fdf9f331c81712c480a7ba366bd95ceff"
+  }
+]

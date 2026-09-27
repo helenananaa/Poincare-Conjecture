@@ -1,0 +1,30 @@
+{
+  "recorded_utc": "2026-09-27T08:06:27.436846+00:00",
+  "new_checked_declarations": 15,
+  "newly_accepted_worker_leaves": 0,
+  "previous_round14_report_accepted_total": 21,
+  "new_workers_launched": 0,
+  "frozen_hashes": "PASS",
+  "public_freeze_check": {
+    "freeze_check": "PASS",
+    "baseline_mode": "trusted",
+    "frozen_files": 13,
+    "goal_nodes": 6,
+    "unbound_goals": [
+      "smoothing",
+      "geometric_trace"
+    ],
+    "bound_but_not_yet_checked": [
+      "cover",
+      "handle",
+      "sum_factors",
+      "sum_sphere"
+    ],
+    "complete": false,
+    "assembly_is_conditional": true
+  },
+  "old_workers_last_successful_observation": "Both round14 tasks RUNNING in initial reads; no refresh after blocked compound call",
+  "old_workers_restarted": false,
+  "complete": false,
+  "geometric_transfer_maps_constructed": false
+}

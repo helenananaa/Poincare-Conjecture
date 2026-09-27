@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "source_sha256": "302034af1587d36fabd8ec98e699f500902027d0b64a79cfbfb217720ce1dd9d",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/objects/PoincareConjecture/ProofContract/Refinement20260927/EmbeddedApproximation.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round21/sources/PoincareConjecture/ProofContract/Refinement20260927/EmbeddedApproximation.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.EmbeddingApproximationData.toNormal",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ],
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.embeddingTransfer_to_normal",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.EmbeddingApproximationData.toNormal' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'PoincareConjecture.ProofContract.Refinement20260927.embeddingTransfer_to_normal' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

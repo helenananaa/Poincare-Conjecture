@@ -1,0 +1,23 @@
+{
+  "observed_utc": "2026-09-27T02:07:13.383805+00:00",
+  "new_tasks": [
+    {
+      "id": "d27r4-cap-relabeling",
+      "status": "RUNNING",
+      "model": "luna",
+      "integrated_commit": null,
+      "attempt_id": "5b66d677-04e6-4d43-95f8-025ad34b79b2"
+    },
+    {
+      "id": "d27r4-finite-timeline",
+      "status": "RUNNING",
+      "model": "luna",
+      "integrated_commit": null,
+      "attempt_id": "eaa0a704-7b17-4270-9cb1-ad24e1a01be5"
+    }
+  ],
+  "model": "gpt-6-luna",
+  "effort": "xhigh",
+  "prior_round3": "VERIFIED in initial queue read; metadata read blocked, not reaccepted",
+  "complete": false
+}

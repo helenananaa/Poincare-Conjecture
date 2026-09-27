@@ -1,0 +1,156 @@
+{
+  "status": "ACCEPTED_ISOLATED_NOT_INTEGRATED",
+  "newly_accepted": [
+    {
+      "task": "d27r3-negative-half-collar",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedNegativeHalfCollar.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedNegativeHalfCollar.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedNegativeHalfCollar.negative_half_collar",
+      "sha256": "6a7dd51e1eeaa972f1e5432e8904ac25e1c20630b2fb2d47d8820fc05d2d696a",
+      "attempt": "ae8ee5e0-228f-4e0d-b02d-01fbfe2647c7",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "b1e63e444b5a335daa46e9285a4c53a3cab08cbef13a5a8ff011b0925724b554",
+      "review": "Full source read: reflection of the same collar; exact slice, seed and negative parameter preserved; consumes accepted positive-side construction."
+    },
+    {
+      "task": "d27r3-side-interior-atlas",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedSideInteriorAtlas.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedSideInteriorAtlas.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedSideInteriorAtlas.side_interior_atlas",
+      "sha256": "e529af9348e3600c23771c6ed52c889ef53d9d47ce35585b8ee8b501b1df80bd",
+      "attempt": "ddc7db29-b4fb-412d-8e93-4d29cab9022f",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "375af78827e7b38cc1b0cfce9e4a9fec99c9447ba80ebf439b7f824ffe6b77d2",
+      "review": "Full source read: boundary-deleted closure identified with the actual open subset; empty case handled; existing topological charts restricted and transported, no claim of smoothness."
+    },
+    {
+      "task": "d27r4-cap-relabeling",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedCapRelabeling.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedCapRelabeling.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedCapRelabeling.cap_relabeling",
+      "sha256": "b34da87d739d37ac3d50689dd1f5b6593b2e55c2191061bfd799c9357f81935a",
+      "attempt": "5b66d677-04e6-4d43-95f8-025ad34b79b2",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "01740e4b66e6d47b064552e4a6cd6292f8d5819b9df5f201a5bd88b54b0029b8",
+      "review": "Full source read: accepted Alexander extension; seam maps and inverse descend by Quot.lift; actual original-piece inclusion preserved; topological only."
+    },
+    {
+      "task": "d27r4-finite-timeline",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round5/sources/PoincareConjecture/ParallelImplementation/RefinedFiniteTimeline.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedFiniteTimeline.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedFiniteTimeline.finite_timeline",
+      "sha256": "72b11e98a1ed065f6c2febd363f90f44d9928785a5b6f1f40d1fce3336fda60b",
+      "attempt": "eaa0a704-7b17-4270-9cb1-ad24e1a01be5",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "fc93738142c500e8393a221a43502fe2a6c7fcc6b295d78ff018230b98a07878",
+      "review": "Full source read: sorts the finite event set, proves gap emptiness and uses induction with the same pre/post maps; no finite chain is assumed."
+    }
+  ],
+  "previously_accepted": [
+    {
+      "task": "d27-cap-chart",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapChart.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedCapChart.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedCapChart.cap_chart",
+      "sha256": "e01b991337cbd27c51a7b3b31a7eb998d5e831c91238a7a1b1d402c1244ade75",
+      "attempt": "3f03338e-54c7-49e8-95e0-b7fb9b3bac5b",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "c296153d43992ecef366e53eaf637798d514871d091a23ff50a621c9af7d9e49"
+    },
+    {
+      "task": "d27-cap-complement",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapComplement.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedCapComplement.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedCapComplement.cap_complement",
+      "sha256": "773e2a81162b00e2af90588b07bf0c2e384c15ad00d398184805b5c9bf661010",
+      "attempt": "18d20db8-dda5-4fac-8449-bfed0badf6a9",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "e35f860aed7f93475cf5505aa889927e8aaa2e2c097aa466806fcc2a027a8155"
+    },
+    {
+      "task": "d27-marked-raw-gluing",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedMarkedGluing.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedMarkedGluing.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedMarkedGluing.marked_gluing",
+      "sha256": "a26cb1ea496c8d3a3defef4a6a77e77e5148f26e2b9f1444514cfe3c40ad2aec",
+      "attempt": "b6a16cd6-8d41-4279-82e9-5993996f1125",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "a2d6a49cf42634b59c4fd17e520173f15096c821bddb3e4736109112c190dce1"
+    },
+    {
+      "task": "d27r2-cap-interior-open",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedCapInteriorOpen.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedCapInteriorOpen.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedCapInteriorOpen.cap_interior_open",
+      "sha256": "c87e91265d4a4ef62d40a08db0f7f957a3785bcc3923df2364f7de881aaebe03",
+      "attempt": "c27150ed-4ab4-45e2-a192-5d4afce45093",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "e74cedac2e6dd5b719f7a0aa09fe0bb48521dfe741acac16349513408679b56d"
+    },
+    {
+      "task": "d27r2-closed-cover-gluing",
+      "source": "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round3/sources/PoincareConjecture/ParallelImplementation/RefinedClosedCoverGluing.lean",
+      "relative": "PoincareConjecture/ParallelImplementation/RefinedClosedCoverGluing.lean",
+      "target": "PoincareConjecture.ParallelImplementation.RefinedClosedCoverGluing.closed_cover_gluing",
+      "sha256": "fb2b0fef6237c33cc8f4ac98d90a7b37330e016d1933ab836d5a609ef7b963b3",
+      "attempt": "a59be193-c03d-4f6b-afb4-a75f15331c7b",
+      "source_compile_exit": 0,
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "audit_exit": 0,
+      "object_sha256": "4612fcfbd6f73f013af4a2758241e1e6653c10e7a5120366bb3e3e3a166d1f6b"
+    }
+  ],
+  "complete": false
+}

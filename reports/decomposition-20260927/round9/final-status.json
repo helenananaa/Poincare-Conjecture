@@ -1,0 +1,23 @@
+{
+  "observed_utc": "2026-09-27T04:56:15.185557+00:00",
+  "task_status": [
+    {
+      "id": "d27r8-epsilon-neck-embedding",
+      "status": "VERIFIED",
+      "model": "luna",
+      "integrated_commit": null,
+      "attempt_id": "418281de-e792-4c17-a6b5-02dc78163f44"
+    }
+  ],
+  "newly_accepted": 1,
+  "accepted_local_leaves_total": 13,
+  "new_checked_audit_repair_declarations": 18,
+  "new_workers_launched": 0,
+  "active_proof_processes": [],
+  "frozen_hashes": "PASS",
+  "cut_choice_location_issue": "CONFIRMED_AND_REPAIRED_IN_NEW_VERSION",
+  "full_metric_map_correspondence_frozen": false,
+  "remaining_research_inputs": 3,
+  "complete": false,
+  "git_head": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5"
+}

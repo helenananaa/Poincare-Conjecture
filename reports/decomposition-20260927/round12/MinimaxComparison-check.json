@@ -1,0 +1,25 @@
+{
+  "exit_code": 0,
+  "source_sha256": "1e1b57720fa96d73f0ab569e932e6aa91f0cb8558c61c939306cc1be20b905f7",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/objects/PoincareConjecture/ProofContract/Refinement20260927/MinimaxComparison.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round12/sources/PoincareConjecture/ProofContract/Refinement20260927/MinimaxComparison.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.width_dini_of_good_sweepouts",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.width_dini_of_good_sweepouts' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New source; pinned and previously checked dependencies reused"
+}

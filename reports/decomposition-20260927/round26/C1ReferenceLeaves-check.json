@@ -1,0 +1,25 @@
+{
+  "exit_code": 0,
+  "source_sha256": "2a2ba868d27d22ef9a6732b7de501f63c5867fda250dbe69e836b1c0e443ff18",
+  "command": [
+    "/home/helenanana/projects/poincare-audit-20260917/tools/lean-4.32.1-linux/bin/lean",
+    "-j1",
+    "-DrelaxedAutoImplicit=false",
+    "-DmaxSynthPendingDepth=3",
+    "-Dbackward.isDefEq.respectTransparency=false",
+    "-DsynthInstance.maxHeartbeats=4000000",
+    "-DmaxHeartbeats=8000000",
+    "--root=/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/sources",
+    "-o",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/objects/PoincareConjecture/ProofContract/Refinement20260927/C1ReferenceLeaves.olean",
+    "/home/helenanana/projects/poincare-parallel/reports/decomposition-20260927/round26/sources/PoincareConjecture/ProofContract/Refinement20260927/C1ReferenceLeaves.lean"
+  ],
+  "axioms": [
+    [
+      "PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.continuousMap_apply",
+      "propext,\n Classical.choice,\n Quot.sound"
+    ]
+  ],
+  "output": "'PoincareConjecture.ProofContract.Refinement20260927.C1ClassRepresentative.continuousMap_apply' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "New sources checked; pinned previously checked dependencies reused"
+}

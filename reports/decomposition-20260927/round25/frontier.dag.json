@@ -1,0 +1,117 @@
+{
+  "roots": [
+    "public",
+    "conversion"
+  ],
+  "nodes": [
+    {
+      "id": "triangulation",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.TriangulationProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "atlas",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.FinitePLAtlasProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "geometry",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.AmbientGeometryProducerStatement",
+      "status": "RESEARCH",
+      "depends_on": []
+    },
+    {
+      "id": "frames",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_embedded_normal_frames",
+      "status": "ACCEPTED_WORKER_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "correction",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_ambient_endpoint_correction",
+      "status": "ACCEPTED_WORKER_RECHECKED",
+      "depends_on": []
+    },
+    {
+      "id": "retraction",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.checked_embedded_retraction",
+      "status": "CHECKED_NO_OPEN_PROOF_INPUTS",
+      "depends_on": [
+        "frames"
+      ]
+    },
+    {
+      "id": "public",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.public_after_thirty_eight",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "triangulation",
+        "atlas",
+        "geometry",
+        "frames",
+        "correction"
+      ]
+    },
+    {
+      "id": "uniform",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.UniformMollificationStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "restriction",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CylinderRestrictionEstimateStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "extension",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.CylinderCompactExtensionStatement",
+      "status": "READY",
+      "depends_on": []
+    },
+    {
+      "id": "mollifier",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.euclideanMollify_fderiv",
+      "status": "CHECKED_REUSE",
+      "depends_on": []
+    },
+    {
+      "id": "c1",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.cylinder_c1_approximation_of_leaves",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "uniform",
+        "restriction",
+        "extension",
+        "mollifier"
+      ]
+    },
+    {
+      "id": "raw",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.JointC1ApproximationData.toAmbient",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "c1"
+      ]
+    },
+    {
+      "id": "conversion",
+      "declaration": "PoincareConjecture.ProofContract.Refinement20260927.JointC1ApproximationData.toEmbedding",
+      "status": "CHECKED_CONDITIONAL",
+      "depends_on": [
+        "raw",
+        "retraction",
+        "correction"
+      ]
+    }
+  ],
+  "kind": "Reviewed dependency forest",
+  "analytic_parent": "PoincareConjecture.ProofContract.Refinement20260927.cylinder_c1_approximation_of_leaves",
+  "complete": false,
+  "new_ready_independent_count": 3,
+  "accepted_worker_total": 38,
+  "joint_c1_global_geometry_producer_wrapper_created": false
+}

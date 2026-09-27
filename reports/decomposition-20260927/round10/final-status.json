@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-27",
+  "project": "poincare-refinement-round10-20260927",
+  "launcher_pid": 36740,
+  "launcher_receipts": ["REGISTERED", "ENQUEUED 2", "STARTING_FINITE_BATCH"],
+  "tasks": [
+    {"id": "d27r10-local-patch-density", "model": "gpt-6-luna", "reasoning_effort": "xhigh", "last_evidence": "ENQUEUED_BATCH_STARTED"},
+    {"id": "d27r10-open-patch-assembly", "model": "gpt-6-luna", "reasoning_effort": "xhigh", "last_evidence": "ENQUEUED_BATCH_STARTED"}
+  ],
+  "final_live_state": "NOT_OBSERVED_STATUS_QUERY_BLOCKED",
+  "new_checked_declarations": 13,
+  "newly_accepted_local_leaves": 0,
+  "previously_accepted_local_leaves": 13,
+  "source_recompiled": "MorganTianLib.Ch02.NeckVolume.PullbackMeasure",
+  "source_compile_and_axiom_audit": "PASS",
+  "new_parent_compile_and_axiom_audits": "PASS",
+  "frozen_hash_checks_before_dispatch": "PASS",
+  "public_v1_freeze_check_this_round": "BLOCKED_NOT_EXECUTED",
+  "old_frozen_sources_modified": false,
+  "conditional_root": "PoincareConjecture.ProofContract.Refinement20260927.public_of_metric_patch_frontier",
+  "open_inputs": {"research": 3, "fixed_proof_tasks": 2},
+  "full_geometry_correspondence_frozen": false,
+  "complete": false,
+  "git_head_at_start": "c228980fc6090aeb89d8e54857a8eb1e7cfba5f5",
+  "git_integration_commit_push_requested_or_performed": false
+}
